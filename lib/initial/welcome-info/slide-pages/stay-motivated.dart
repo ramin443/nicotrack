@@ -49,7 +49,7 @@ class StayMotivated extends StatelessWidget {
                       color: nicotrackBlack1),
                   children: [
                     TextSpan(
-                      text: "You’re Not Alone. ",
+                      text: "You’re not alone. ",
                     ),
                     TextSpan(
                       text: "Celebrate",

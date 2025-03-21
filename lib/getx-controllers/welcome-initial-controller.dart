@@ -23,9 +23,19 @@ class WelcomeInitialController extends GetxController {
     update();
   }
 
-  void autoChangePage() {
-    currentPage++;
-    update();
+  void nextPage() {
+    // Move to the next page
+    if (currentPage < pages.length - 1) {
+      currentPage++;
+      pageController.animateToPage(
+        currentPage,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      // Handle the case when reaching the last page (e.g., navigate to the main screen)
+      print("Onboarding complete!");
+    }
   }
 
   Widget mainDisplay() {
@@ -104,20 +114,5 @@ class WelcomeInitialController extends GetxController {
         ),
       ],
     );
-  }
-
-  void nextPage() {
-    // Move to the next page
-    if (currentPage < pages.length - 1) {
-      currentPage++;
-      pageController.animateToPage(
-        currentPage,
-        duration: Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
-    } else {
-      // Handle the case when reaching the last page (e.g., navigate to the main screen)
-      print("Onboarding complete!");
-    }
   }
 }
