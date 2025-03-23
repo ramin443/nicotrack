@@ -44,12 +44,10 @@ class _LastSmokedState extends State<SmokeFrequency> {
                 ),
 
                 SizedBox(
-                  height: 18.h,
+                  height: 44.h,
                 ),
-                Spacer(),
                 onboardingController.cigarreteFrequencyScroll(),
-                Spacer(),
-                Spacer(),
+
               ],
             );
           }

@@ -10,6 +10,7 @@ import '../../constants/font-constants.dart';
 import '../../constants/image-constants.dart';
 import '../../getx-controllers/onboarding-controller.dart';
 import '../../screens/elements/textAutoSize.dart';
+import 'package:flutter/services.dart';
 
 class OnboardingMainSlider extends StatefulWidget {
   const OnboardingMainSlider({super.key});
@@ -46,6 +47,9 @@ class _OnboardingMainSliderState extends State<OnboardingMainSlider> {
                             ),
                             GestureDetector(
                               onTap: () {
+                                if (onboardingController.currentPage != 0) {
+                                  HapticFeedback.mediumImpact();
+                                }
                                 onboardingController.previousPage();
                               },
                               child: Container(
@@ -83,41 +87,21 @@ class _OnboardingMainSliderState extends State<OnboardingMainSlider> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      SizedBox(
-                        height: 18.h,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          onboardingController.nextPage();
-                        },
-                        child: Container(
-                          width: 346.w,
-                          height: 54.h,
-                          margin: EdgeInsets.symmetric(vertical: 24.w),
-                          decoration: BoxDecoration(
-                            color: nicotrackBlack1,
-                            borderRadius: BorderRadius.circular(30.r),
-                          ),
-                          child: Center(
-                            child: TextAutoSize(
-                              "Continue",
-                              style: TextStyle(
-                                  fontSize: 18.sp,
-                                  fontFamily: circularMedium,
-                                  color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                      TextAutoSize(
-                        "Skip",
-                        style: TextStyle(
-                            fontSize: 18.sp,
-                            decoration: TextDecoration.underline,
-                            // Underline the text
-                            fontFamily: circularMedium,
-                            color: nicotrackBlack1),
-                      ),
+                      // SizedBox(
+                      //   height: 18.h,
+                      // ),
+
+                      onboardingController.continueButton(),
+
+                      // TextAutoSize(
+                      //   "Skip",
+                      //   style: TextStyle(
+                      //       fontSize: 18.sp,
+                      //       decoration: TextDecoration.underline,
+                      //       // Underline the text
+                      //       fontFamily: circularMedium,
+                      //       color: nicotrackBlack1),
+                      // ),
                       SizedBox(
                         height: 34.h,
                       )

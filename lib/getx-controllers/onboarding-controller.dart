@@ -12,6 +12,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../constants/color-constants.dart';
 import '../../constants/font-constants.dart';
 import '../../constants/image-constants.dart';
+import 'package:flutter/services.dart';
+import 'package:nicotrack/models/emoji-Text-Pair.dart';
+import '../../../screens/elements/textAutoSize.dart';
+import 'package:nicotrack/initial/onboarding-questions/question-pages/enter-name.dart';
+import 'package:nicotrack/models/onboarding-data.dart';
 
 class OnboardingController extends GetxController {
   List<Widget> pages = [
@@ -22,17 +27,73 @@ class OnboardingController extends GetxController {
     BiggestMotivation(),
     CraveSituations(),
     HelpNeed(),
-    QuitMethod()
+    QuitMethod(),
+    EnterName(),
   ];
   final PageController pageController = PageController();
   int currentPage = 0;
+  bool thisPageDone = true;
+
+  OnboardingData onboardingFilledData= OnboardingData();
+
 
   //Page 2 variables - Cigarette frequency
-  int selectedNumber = 3; // Default selected number
-  FixedExtentScrollController listWheelController = FixedExtentScrollController(initialItem: 1);
-  final List<int> numbers = [2, 3, 4];
+  int selectedNumber1 = 2; // Default selected number
+  FixedExtentScrollController listWheelController1 =
+  FixedExtentScrollController(initialItem: 1);
+  final List<int> numbers = List.generate(15, (index) => index + 1); // 1 to 15
 
+  //Page 3 variables - Cigarette frequency
+  FixedExtentScrollController dollarController =
+  FixedExtentScrollController(initialItem: 3);
+  FixedExtentScrollController centController =
+  FixedExtentScrollController(initialItem: 0);
+  int selectedDollar = 3;
+  int selectedCent = 0;
+  List<int> dollars = List.generate(100, (index) => index); // 0 to 100
+  List<int> cents = List.generate(100, (index) => index); // 0 to 99
 
+  //Page 4 variables - Cigarette frequency
+  int selectedNumber2 = 5; // Default selected number
+  FixedExtentScrollController listWheelController2 =
+  FixedExtentScrollController(initialItem: 4);
+  final List<int> packNumbers =
+  List.generate(20, (index) => index + 1); // 1 to 15
+
+  //Page 5 variables - Cigarette frequency
+  List<int> selectedMotivationIndex = [];
+  List<EmojiTextPair> motivationPairs = [
+    EmojiTextPair(emoji: heartEmoji, text: "Health benefits"),
+    EmojiTextPair(emoji: cashEmoji, text: "Save Money"),
+    EmojiTextPair(emoji: crownEmoji, text: "Personal challenge"),
+    EmojiTextPair(emoji: peopleEmoji, text: "Family & loved ones"),
+    EmojiTextPair(emoji: xmarkEmoji, text: "Break the addiction"),
+    EmojiTextPair(emoji: rocketEmoji, text: "Other"),
+  ];
+
+  //Page 6 variables - Cigarette frequency
+  List<int> selectedcravingsIndex = [];
+  List<EmojiTextPair> craveSituationPairs = [
+    EmojiTextPair(emoji: coffeeEmoji, text: "Morning with coffee"),
+    EmojiTextPair(emoji: platesEmoji, text: "After meals"),
+    EmojiTextPair(emoji: beerEmoji, text: "When drinking alcohol"),
+    EmojiTextPair(emoji: stressedEmoji, text: "When feeling stressed"),
+    EmojiTextPair(emoji: homeEmoji, text: "Boredom or habit"),
+    EmojiTextPair(emoji: othersEmoji, text: "Other"),
+  ];
+
+  //Page 7 variables - Cigarette frequency
+  List<int> selectedHelpIndex = [];
+  List<EmojiTextPair> helpPairs = [
+    EmojiTextPair(
+        emoji: brainsoutEmoji, text: "Handling cravings & withdrawal"),
+    EmojiTextPair(emoji: mountainEmoji, text: "Sticking to my quit plan"),
+    EmojiTextPair(emoji: celebrateEmoji, text: "Support & motivation"),
+    EmojiTextPair(emoji: badge1Emoji, text: "Tracking my progress"),
+  ];
+
+  //Page 8 variables - Cigarette frequency
+  int instantQuitSelected = 0;
 
   void goToNextPage(int page) {
     currentPage = page;
@@ -69,6 +130,14 @@ class OnboardingController extends GetxController {
     }
   }
 
+  void initializeToStart() {
+    // Initialize controller to set the pre-selected item without animation
+    listWheelController2 = FixedExtentScrollController(
+      initialItem: packNumbers.indexOf(
+          selectedNumber2), // Selects the correct number without scrolling
+    );
+  }
+
   Widget topSlider() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 32.w),
@@ -101,6 +170,7 @@ class OnboardingController extends GetxController {
     return Expanded(
       child: PageView.builder(
         controller: pageController,
+        physics: NeverScrollableScrollPhysics(),
         itemCount: pages.length,
         onPageChanged: (int page) {
           goToNextPage(page);
@@ -116,36 +186,574 @@ class OnboardingController extends GetxController {
 
   Widget cigarreteFrequencyScroll() {
     return // Number Picker
-        SizedBox(
-          height: 300.h,
-      child: ListWheelScrollView.useDelegate(
-        controller: listWheelController,
-        itemExtent: 120,
-        // Spacing between items
-        perspective: 0.005,
-        diameterRatio: 5.0,
-        physics: FixedExtentScrollPhysics(),
-        onSelectedItemChanged: (index) {
-            selectedNumber = numbers[index];
-            update();
-        },
-        childDelegate: ListWheelChildBuilderDelegate(
-          builder: (context, index) {
-            bool isSelected = selectedNumber == numbers[index];
+      SizedBox(
+        height: 300.h,
+        child: ListWheelScrollView.useDelegate(
+          controller: listWheelController1,
+          itemExtent: 120,
+          // Spacing between items
+          perspective: 0.005,
+          diameterRatio: 5.0,
+          physics: FixedExtentScrollPhysics(),
+          onSelectedItemChanged: (index) {
+            HapticFeedback.mediumImpact();
+            setPageDoneTrue();
+            selectedNumber1 = numbers[index];
+            onboardingFilledData.cigarettesPerDay = numbers[index];
 
-            return AnimatedDefaultTextStyle(
-              duration: Duration(milliseconds: 300),
-              style: TextStyle(
-                fontSize:  96.sp,
-                fontFamily: circularBold,
-                color: isSelected ? Colors.deepPurple : Colors.grey.shade400,
+            update();
+          },
+          childDelegate: ListWheelChildBuilderDelegate(
+            builder: (context, index) {
+              bool isSelected = selectedNumber1 == numbers[index];
+
+              return AnimatedDefaultTextStyle(
+                duration: Duration(milliseconds: 300),
+                style: TextStyle(
+                    fontSize: 86.sp,
+                    fontFamily: circularBold,
+                    color: isSelected ? nicotrackPurple : nicotrackLightPurple),
+                child: Center(child: Text(numbers[index].toString())),
+              );
+            },
+            childCount: numbers.length,
+          ),
+        ),
+      );
+  }
+
+  Widget cigarreteFrequencyPack() {
+    return // Number Picker
+      SizedBox(
+        height: 300.h,
+        child: ListWheelScrollView.useDelegate(
+          controller: listWheelController2,
+          itemExtent: 120,
+          // Spacing between items
+          perspective: 0.005,
+          diameterRatio: 5.0,
+          physics: BouncingScrollPhysics(),
+          onSelectedItemChanged: (index) {
+            HapticFeedback.mediumImpact();
+            selectedNumber2 = packNumbers[index];
+            onboardingFilledData.numberOfCigarettesIn1Pack = packNumbers[index];
+            setPageDoneTrue();
+          },
+          childDelegate: ListWheelChildBuilderDelegate(
+            builder: (context, index) {
+              bool isSelected = selectedNumber2 == packNumbers[index];
+
+              return AnimatedDefaultTextStyle(
+                duration: Duration(milliseconds: 300),
+                style: TextStyle(
+                    fontSize: 86.sp,
+                    fontFamily: circularBold,
+                    color: isSelected ? nicotrackPurple : nicotrackLightPurple),
+                child: Center(child: Text(packNumbers[index].toString())),
+              );
+            },
+            childCount: packNumbers.length,
+          ),
+        ),
+      );
+  }
+
+  Widget biggestMotivationGrid() {
+    // Grid View for selection
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.only(left: 28.w, right: 28.w),
+        child: GridView.builder(
+          itemCount: motivationPairs.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, // Two columns
+            crossAxisSpacing: 9.w,
+            mainAxisSpacing: 9.w,
+            childAspectRatio: 1, // Adjusts box shape
+          ),
+          itemBuilder: (context, index) {
+            bool isSelected = selectedMotivationIndex.contains(index);
+
+            return GestureDetector(
+              onTap: () {
+                HapticFeedback.mediumImpact();
+                setPageDoneTrue();
+                if (selectedMotivationIndex.contains(index)) {
+                  selectedMotivationIndex.remove(index);
+                } else {
+                  selectedMotivationIndex.add(index);
+                }
+                update();
+              },
+              child: AnimatedContainer(
+                height: 176.h,
+                duration: Duration(milliseconds: 200),
+                decoration: BoxDecoration(
+                  color: isSelected ? nicotrackBlack1 : Colors.grey.shade100,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      motivationPairs[index].emoji,
+                      width: 54.w,
+                    ),
+                    SizedBox(height: 18.h),
+                    SizedBox(
+                      width: 138.w,
+                      child: TextAutoSize(
+                        motivationPairs[index].text,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 14.sp,
+                            fontFamily: circularMedium,
+                            color: isSelected ? Colors.white : nicotrackBlack1),
+                      ),
+                    )
+                  ],
+                ),
               ),
-              child: Center(child: Text(numbers[index].toString())),
             );
           },
-          childCount: numbers.length,
         ),
       ),
     );
+  }
+
+  Widget cravingsGrid() {
+    // Grid View for selection
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        child: GridView.builder(
+          itemCount: craveSituationPairs.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, // Two columns
+            crossAxisSpacing: 9.w,
+            mainAxisSpacing: 9.w,
+            childAspectRatio: 1, // Adjusts box shape
+          ),
+          itemBuilder: (context, index) {
+            bool isSelected = selectedcravingsIndex.contains(index);
+
+            return GestureDetector(
+              onTap: () {
+                HapticFeedback.mediumImpact();
+                setPageDoneTrue();
+                if (selectedcravingsIndex.contains(index)) {
+                  selectedcravingsIndex.remove(index);
+                } else {
+                  selectedcravingsIndex.add(index);
+                }
+                update();
+              },
+              child: AnimatedContainer(
+                height: 176.h,
+                duration: Duration(milliseconds: 200),
+                decoration: BoxDecoration(
+                  color: isSelected
+                      ? Colors.deepPurple.shade100
+                      : Colors.grey.shade100,
+                  borderRadius: BorderRadius.circular(16),
+                  border: isSelected
+                      ? Border.all(color: Colors.deepPurple, width: 2)
+                      : null,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      craveSituationPairs[index].emoji,
+                      width: 54.w,
+                    ),
+                    SizedBox(height: 18.h),
+                    SizedBox(
+                        width: 120.w,
+                        child: TextAutoSize(
+                          craveSituationPairs[index].text,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 14.sp,
+                              fontFamily: circularMedium,
+                              color: nicotrackBlack1),
+                        )),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget helpGrid() {
+    // Grid View for selection
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        child: GridView.builder(
+          itemCount: helpPairs.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, // Two columns
+            crossAxisSpacing: 9.w,
+            mainAxisSpacing: 9.w,
+            childAspectRatio: 1, // Adjusts box shape
+          ),
+          itemBuilder: (context, index) {
+            bool isSelected = selectedHelpIndex.contains(index);
+
+            return GestureDetector(
+              onTap: () {
+                HapticFeedback.mediumImpact();
+                setPageDoneTrue();
+                if (selectedHelpIndex.contains(index)) {
+                  selectedHelpIndex.remove(index);
+                } else {
+                  selectedHelpIndex.add(index);
+                }
+                update();
+              },
+              child: AnimatedContainer(
+                height: 176.h,
+                duration: Duration(milliseconds: 200),
+                decoration: BoxDecoration(
+                  color: isSelected
+                      ? Colors.deepPurple.shade100
+                      : Colors.grey.shade100,
+                  borderRadius: BorderRadius.circular(16),
+                  border: isSelected
+                      ? Border.all(color: Colors.deepPurple, width: 2)
+                      : null,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      helpPairs[index].emoji,
+                      width: 54.w,
+                    ),
+                    SizedBox(height: 18.h),
+                    SizedBox(
+                        width: 120.w,
+                        child: TextAutoSize(
+                          helpPairs[index].text,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 14.sp,
+                              fontFamily: circularMedium,
+                              color: nicotrackBlack1),
+                        )),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget pricePackPicker() {
+    return // Dollar Picker UI
+      SizedBox(
+        height: 328.h,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Dollar Sign - Fixed
+            TextAutoSize(
+              "\$",
+              style: TextStyle(
+                fontSize: 86.sp,
+                fontFamily: circularBold,
+                color: Color(0xffF5876F),
+              ),
+            ),
+
+            SizedBox(width: 10),
+
+            // Dollar Value Scroll
+            SizedBox(
+              width: 110.w,
+              height: 328.h,
+              child: ListWheelScrollView.useDelegate(
+                controller: dollarController,
+                itemExtent: 120.h,
+                physics: FixedExtentScrollPhysics(),
+                onSelectedItemChanged: (index) {
+                  HapticFeedback.mediumImpact();
+                  selectedDollar = dollars[index];
+                  setPageDoneTrue();
+                  update();
+                },
+                childDelegate: ListWheelChildBuilderDelegate(
+                  childCount: dollars.length,
+                  builder: (context, index) {
+                    bool isSelected = selectedDollar == dollars[index];
+                    return Center(
+                      child: TextAutoSize(
+                        dollars[index].toString(),
+                        style: TextStyle(
+                          fontSize: 86.sp,
+                          fontFamily: circularBold,
+                          color: isSelected
+                              ? Color(0xffF5876F)
+                              : Color(0xffF5876F).withOpacity(0.2),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            // Dot
+            TextAutoSize(
+              ".",
+              style: TextStyle(
+                  fontSize: 86.sp,
+                  fontFamily: circularBold,
+                  color: Color(0xffF5876F)),
+            ),
+
+            // Cents Scroll
+            SizedBox(
+              width: 110.w,
+              height: 328.h,
+              child: ListWheelScrollView.useDelegate(
+                controller: centController,
+                itemExtent: 120.h,
+                physics: FixedExtentScrollPhysics(),
+                onSelectedItemChanged: (index) {
+                  HapticFeedback.mediumImpact();
+                  selectedCent = cents[index];
+                  setPageDoneTrue();
+                  update();
+                },
+                childDelegate: ListWheelChildBuilderDelegate(
+                  childCount: cents.length,
+                  builder: (context, index) {
+                    bool isSelected = selectedCent == cents[index];
+                    String display = cents[index].toString().padLeft(2, '0');
+                    return Center(
+                      child: TextAutoSize(
+                        display,
+                        style: TextStyle(
+                          fontSize: isSelected ? 86.sp : 86.sp,
+                          fontFamily: circularBold,
+                          color: isSelected
+                              ? Color(0xffF5876F)
+                              : Color(0xffF5876F).withOpacity(0.2),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+  }
+
+  Widget quitMethodSelection() {
+    return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+                flex: 2,
+                child: GestureDetector(
+                    onTap: () {
+                      HapticFeedback.heavyImpact();
+                      setPageDoneTrue();
+                      instantQuitSelected = 1;
+                      update();
+                    },
+                    child: Container(
+                      width: 155.h,
+                      height: 235.h,
+                      decoration: BoxDecoration(
+                        color: Color(0xffF4F4F4),
+                        borderRadius: BorderRadius.circular(16.r),
+                        image: instantQuitSelected == 1
+                            ? DecorationImage(
+                          image: AssetImage(
+                              quitMethodBG), // Replace with your image path
+                          fit: BoxFit
+                              .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
+                        )
+                            : null,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            instantQuitEmoji,
+                            width: 70.w,
+                          ),
+                          SizedBox(
+                            height: 16.h,
+                          ),
+                          TextAutoSize(
+                            "Instant\nQuit",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              height: 1.2,
+                              fontSize: 18.sp,
+                              fontFamily: circularMedium,
+                              color: nicotrackBlack1,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 11.h,
+                          ),
+                          SizedBox(
+                            width: 130.w,
+                            child: TextAutoSize(
+                              "Stop immediately and use support tools",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 11.sp,
+                                height: 1.2,
+                                fontFamily: circularMedium,
+                                color: Colors.black54,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ))),
+            SizedBox(
+              width: 8.w,
+            ),
+            Expanded(
+                flex: 2,
+                child: GestureDetector(
+                    onTap: () {
+                      HapticFeedback.heavyImpact();
+                      instantQuitSelected = 2;
+                      update();
+                    },
+                    child: Container(
+                      // width: 155.h,
+                      height: 235.h,
+                      decoration: BoxDecoration(
+                          color: Color(0xffF4F4F4),
+                          image: instantQuitSelected == 2
+                              ? DecorationImage(
+                            image: AssetImage(
+                                quitMethodBG), // Replace with your image path
+                            fit: BoxFit
+                                .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
+                          )
+                              : null,
+                          borderRadius: BorderRadius.circular(16.r)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            stepdownEmoji,
+                            width: 70.w,
+                          ),
+                          SizedBox(
+                            height: 16.h,
+                          ),
+                          TextAutoSize(
+                            "Step-down Method",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              height: 1.2,
+                              fontSize: 18.sp,
+                              fontFamily: circularMedium,
+                              color: nicotrackBlack1,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 11.h,
+                          ),
+                          SizedBox(
+                            width: 130.w,
+                            child: TextAutoSize(
+                              "Gradually reduce smoking over time",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 11.sp,
+                                height: 1.2,
+                                fontFamily: circularMedium,
+                                color: Colors.black54,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ))),
+          ],
+        ));
+  }
+
+  Widget nameTextField() {
+    return TextField(
+      maxLines: 2,
+      decoration: InputDecoration(
+        hintText: "Jane Wilson",
+        hintStyle: TextStyle(
+          fontFamily: circularBold,
+          color: nicotrackPurple.withOpacity(0.21),
+          fontSize: 48.sp,
+        ),
+        border: InputBorder.none,
+        isDense: true,
+        // Reduces vertical padding
+        contentPadding: EdgeInsets.zero, // Optional: aligns with container edge
+      ),
+      cursorColor: nicotrackBlack1,
+      textAlign: TextAlign.left,
+      style: TextStyle(
+        fontFamily: circularBold,
+        fontSize: 48.sp,
+        color: nicotrackPurple,
+      ),
+    );
+  }
+
+  Widget continueButton() {
+    return GestureDetector(
+      onTap: () {
+        if (thisPageDone) {
+          HapticFeedback.mediumImpact();
+            thisPageDone = false;
+
+          nextPage();
+        }
+      },
+      child: Container(
+        width: 346.w,
+        height: 54.h,
+        decoration: BoxDecoration(
+          color: thisPageDone ? nicotrackBlack1 : nicotrackButtonLightBlack,
+          borderRadius: BorderRadius.circular(30.r),
+        ),
+        child: Center(
+          child: TextAutoSize(
+            "Continue",
+            style: TextStyle(
+                fontSize: 18.sp,
+                fontFamily: circularMedium,
+                color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void setPageDoneTrue() {
+    thisPageDone = true;
+    update();
   }
 }

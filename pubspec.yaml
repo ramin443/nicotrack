@@ -93,7 +93,28 @@ flutter:
     - assets/images/Illustration/Painter.svg
     - assets/images/Illustration/Run - Health.svg
     - assets/images/Illustration/Finances.png
-          # assets:
+    - assets/images/Emojis/badge1.png
+    - assets/images/Emojis/beer.png
+    - assets/images/Emojis/brainsout.png
+    - assets/images/Emojis/cash.png
+    - assets/images/Emojis/celebrate.png
+    - assets/images/Emojis/coffee.png
+    - assets/images/Emojis/crown.png
+    - assets/images/Emojis/heart.png
+    - assets/images/Emojis/home.png
+    - assets/images/Emojis/mountain.png
+    - assets/images/Emojis/others.png
+    - assets/images/Emojis/people.png
+    - assets/images/Emojis/plates.png
+    - assets/images/Emojis/rocket.png
+    - assets/images/Emojis/stressed.png
+    - assets/images/Emojis/xmark.png
+    - assets/images/Emojis/instantquit.png
+    - assets/images/Emojis/step down.png
+    - assets/images/button-bg/quitmethodBG.png
+
+
+      # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
