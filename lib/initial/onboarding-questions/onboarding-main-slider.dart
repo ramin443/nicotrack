@@ -2,14 +2,8 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:nicotrack/getx-controllers/welcome-initial-controller.dart';
-import 'package:nicotrack/initial/welcome-info/slide-pages/track-milestones.dart';
-import 'package:nicotrack/initial/onboarding-questions/question-pages/last-smoke.dart';
 import '../../constants/color-constants.dart';
-import '../../constants/font-constants.dart';
-import '../../constants/image-constants.dart';
 import '../../getx-controllers/onboarding-controller.dart';
-import '../../screens/elements/textAutoSize.dart';
 import 'package:flutter/services.dart';
 
 class OnboardingMainSlider extends StatefulWidget {
@@ -51,6 +45,7 @@ class _OnboardingMainSliderState extends State<OnboardingMainSlider> {
                                   HapticFeedback.mediumImpact();
                                 }
                                 onboardingController.previousPage();
+                                onboardingController.getCurrentPageStatus();
                               },
                               child: Container(
                                 height: 36.w,

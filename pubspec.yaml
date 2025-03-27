@@ -112,6 +112,11 @@ flutter:
     - assets/images/Emojis/instantquit.png
     - assets/images/Emojis/step down.png
     - assets/images/button-bg/quitmethodBG.png
+    - assets/images/button-bg/premiumBtnBG.svg
+    - assets/images/button-bg/homeMainBG.png
+    - assets/images/Emojis/biceps.png
+    - assets/images/Emojis/clap.png
+    - assets/images/Emojis/money.png
 
 
       # assets:

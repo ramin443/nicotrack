@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants/color-constants.dart';
 import '../../../constants/font-constants.dart';
-import '../../../constants/image-constants.dart';
 import '../../../screens/elements/textAutoSize.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/getx-controllers/onboarding-controller.dart';

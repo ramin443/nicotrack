@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nicotrack/initial/onboarding-questions/onboarding-main-slider.dart';
-import 'package:nicotrack/initial/splash-screen.dart';
-import 'package:nicotrack/initial/welcome-info/info-slider-main.dart';
-import 'package:nicotrack/initial/welcome-info/welcome-screen.dart';
+import 'package:nicotrack/screens/base/home.dart';
 
 void main() async{
   runApp(const MyApp());
@@ -27,7 +25,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: OnboardingMainSlider(),
+          home: Home(),
         );
       }
     );

@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:nicotrack/initial/onboarding-questions/question-pages/cost-of-pack.dart';
 import 'package:nicotrack/initial/onboarding-questions/question-pages/last-smoke.dart';
 import 'package:nicotrack/initial/onboarding-questions/question-pages/smoke-frequency.dart';
@@ -32,22 +36,19 @@ class OnboardingController extends GetxController {
   ];
   final PageController pageController = PageController();
   int currentPage = 0;
-  bool thisPageDone = true;
+  bool currentPageDoneStatus = false;
 
-  OnboardingData onboardingFilledData= OnboardingData();
-
+  OnboardingData onboardingFilledData = OnboardingData();
 
   //Page 2 variables - Cigarette frequency
   int selectedNumber1 = 2; // Default selected number
   FixedExtentScrollController listWheelController1 =
-  FixedExtentScrollController(initialItem: 1);
+      FixedExtentScrollController(initialItem: 1);
   final List<int> numbers = List.generate(15, (index) => index + 1); // 1 to 15
 
   //Page 3 variables - Cigarette frequency
-  FixedExtentScrollController dollarController =
-  FixedExtentScrollController(initialItem: 3);
-  FixedExtentScrollController centController =
-  FixedExtentScrollController(initialItem: 0);
+  late FixedExtentScrollController dollarController;
+  late FixedExtentScrollController centController;
   int selectedDollar = 3;
   int selectedCent = 0;
   List<int> dollars = List.generate(100, (index) => index); // 0 to 100
@@ -55,13 +56,13 @@ class OnboardingController extends GetxController {
 
   //Page 4 variables - Cigarette frequency
   int selectedNumber2 = 5; // Default selected number
-  FixedExtentScrollController listWheelController2 =
-  FixedExtentScrollController(initialItem: 4);
+  late FixedExtentScrollController listWheelController2;
   final List<int> packNumbers =
-  List.generate(20, (index) => index + 1); // 1 to 15
+      List.generate(20, (index) => index + 1); // 1 to 15
 
   //Page 5 variables - Cigarette frequency
   List<int> selectedMotivationIndex = [];
+  List<String> selectedMotivations = [];
   List<EmojiTextPair> motivationPairs = [
     EmojiTextPair(emoji: heartEmoji, text: "Health benefits"),
     EmojiTextPair(emoji: cashEmoji, text: "Save Money"),
@@ -104,6 +105,7 @@ class OnboardingController extends GetxController {
     // Move to the next page
     if (currentPage < pages.length - 1) {
       currentPage++;
+      getCurrentPageStatus();
       pageController.animateToPage(
         currentPage,
         duration: Duration(milliseconds: 500),
@@ -184,78 +186,101 @@ class OnboardingController extends GetxController {
     );
   }
 
-  Widget cigarreteFrequencyScroll() {
-    return // Number Picker
-      SizedBox(
-        height: 300.h,
-        child: ListWheelScrollView.useDelegate(
-          controller: listWheelController1,
-          itemExtent: 120,
-          // Spacing between items
-          perspective: 0.005,
-          diameterRatio: 5.0,
-          physics: FixedExtentScrollPhysics(),
-          onSelectedItemChanged: (index) {
-            HapticFeedback.mediumImpact();
-            setPageDoneTrue();
-            selectedNumber1 = numbers[index];
-            onboardingFilledData.cigarettesPerDay = numbers[index];
-
-            update();
+  Widget getLastSmokedDate() {
+    return Builder(builder: (context) {
+      return SizedBox(
+        height: 240.h,
+        child: CupertinoDatePicker(
+          mode: CupertinoDatePickerMode.date,
+          initialDateTime: DateTime.now(),
+          maximumDate: DateTime.now(),
+          onDateTimeChanged: (DateTime newDateTime) {
+            String formattedDate = DateFormat('yyyy-MM-dd').format(newDateTime);
+            HapticFeedback.lightImpact();
+            onboardingFilledData.lastSmokedDate = formattedDate;
+            getCurrentPageStatus();
+            // Handle the selected date
           },
-          childDelegate: ListWheelChildBuilderDelegate(
-            builder: (context, index) {
-              bool isSelected = selectedNumber1 == numbers[index];
-
-              return AnimatedDefaultTextStyle(
-                duration: Duration(milliseconds: 300),
-                style: TextStyle(
-                    fontSize: 86.sp,
-                    fontFamily: circularBold,
-                    color: isSelected ? nicotrackPurple : nicotrackLightPurple),
-                child: Center(child: Text(numbers[index].toString())),
-              );
-            },
-            childCount: numbers.length,
-          ),
         ),
       );
+    });
+  }
+
+  Widget cigarreteFrequencyScroll() {
+    return // Number Picker
+        SizedBox(
+      height: 300.h,
+      child: ListWheelScrollView.useDelegate(
+        controller: listWheelController1,
+        itemExtent: 120,
+
+        // Spacing between items
+        perspective: 0.005,
+        diameterRatio: 5.0,
+        physics: FixedExtentScrollPhysics(),
+        onSelectedItemChanged: (index) {
+          HapticFeedback.mediumImpact();
+          selectedNumber1 = numbers[index];
+          onboardingFilledData.cigarettesPerDay = numbers[index];
+          getCurrentPageStatus();
+        },
+        childDelegate: ListWheelChildBuilderDelegate(
+          builder: (context, index) {
+            bool isSelected = selectedNumber1 == numbers[index];
+
+            return AnimatedDefaultTextStyle(
+              duration: Duration(milliseconds: 300),
+              style: TextStyle(
+                  fontSize: 86.sp,
+                  fontFamily: circularBold,
+                  color: isSelected
+                      ? nicotrackPurple
+                      : nicotrackPurple.withOpacity(0.3)),
+              child: Center(child: Text(numbers[index].toString())),
+            );
+          },
+          childCount: numbers.length,
+        ),
+      ),
+    );
   }
 
   Widget cigarreteFrequencyPack() {
     return // Number Picker
-      SizedBox(
-        height: 300.h,
-        child: ListWheelScrollView.useDelegate(
-          controller: listWheelController2,
-          itemExtent: 120,
-          // Spacing between items
-          perspective: 0.005,
-          diameterRatio: 5.0,
-          physics: BouncingScrollPhysics(),
-          onSelectedItemChanged: (index) {
-            HapticFeedback.mediumImpact();
-            selectedNumber2 = packNumbers[index];
-            onboardingFilledData.numberOfCigarettesIn1Pack = packNumbers[index];
-            setPageDoneTrue();
-          },
-          childDelegate: ListWheelChildBuilderDelegate(
-            builder: (context, index) {
-              bool isSelected = selectedNumber2 == packNumbers[index];
+        SizedBox(
+      height: 300.h,
+      child: ListWheelScrollView.useDelegate(
+        controller: listWheelController2,
+        itemExtent: 120,
+        // Spacing between items
+        perspective: 0.005,
+        diameterRatio: 5.0,
+        physics: BouncingScrollPhysics(),
+        onSelectedItemChanged: (index) {
+          HapticFeedback.mediumImpact();
+          selectedNumber2 = packNumbers[index];
+          onboardingFilledData.numberOfCigarettesIn1Pack = packNumbers[index];
+          getCurrentPageStatus();
+        },
+        childDelegate: ListWheelChildBuilderDelegate(
+          builder: (context, index) {
+            bool isSelected = selectedNumber2 == packNumbers[index];
 
-              return AnimatedDefaultTextStyle(
-                duration: Duration(milliseconds: 300),
-                style: TextStyle(
-                    fontSize: 86.sp,
-                    fontFamily: circularBold,
-                    color: isSelected ? nicotrackPurple : nicotrackLightPurple),
-                child: Center(child: Text(packNumbers[index].toString())),
-              );
-            },
-            childCount: packNumbers.length,
-          ),
+            return AnimatedDefaultTextStyle(
+              duration: Duration(milliseconds: 300),
+              style: TextStyle(
+                  fontSize: 86.sp,
+                  fontFamily: circularBold,
+                  color: isSelected
+                      ? nicotrackPurple
+                      : nicotrackPurple.withOpacity(0.3)),
+              child: Center(child: Text(packNumbers[index].toString())),
+            );
+          },
+          childCount: packNumbers.length,
         ),
-      );
+      ),
+    );
   }
 
   Widget biggestMotivationGrid() {
@@ -277,13 +302,16 @@ class OnboardingController extends GetxController {
             return GestureDetector(
               onTap: () {
                 HapticFeedback.mediumImpact();
-                setPageDoneTrue();
                 if (selectedMotivationIndex.contains(index)) {
                   selectedMotivationIndex.remove(index);
+                  onboardingFilledData.biggestMotivation
+                      .remove(motivationPairs[index].text);
                 } else {
                   selectedMotivationIndex.add(index);
+                  onboardingFilledData.biggestMotivation
+                      .add(motivationPairs[index].text);
                 }
-                update();
+                getCurrentPageStatus();
               },
               child: AnimatedContainer(
                 height: 176.h,
@@ -340,13 +368,16 @@ class OnboardingController extends GetxController {
             return GestureDetector(
               onTap: () {
                 HapticFeedback.mediumImpact();
-                setPageDoneTrue();
                 if (selectedcravingsIndex.contains(index)) {
                   selectedcravingsIndex.remove(index);
+                  onboardingFilledData.craveSituations
+                      .remove(craveSituationPairs[index].text);
                 } else {
                   selectedcravingsIndex.add(index);
+                  onboardingFilledData.craveSituations
+                      .add(craveSituationPairs[index].text);
                 }
-                update();
+                getCurrentPageStatus();
               },
               child: AnimatedContainer(
                 height: 176.h,
@@ -407,13 +438,14 @@ class OnboardingController extends GetxController {
             return GestureDetector(
               onTap: () {
                 HapticFeedback.mediumImpact();
-                setPageDoneTrue();
                 if (selectedHelpIndex.contains(index)) {
                   selectedHelpIndex.remove(index);
+                  onboardingFilledData.helpNeeded.remove(helpPairs[index].text);
                 } else {
                   selectedHelpIndex.add(index);
+                  onboardingFilledData.helpNeeded.add(helpPairs[index].text);
                 }
-                update();
+                getCurrentPageStatus();
               },
               child: AnimatedContainer(
                 height: 176.h,
@@ -457,105 +489,107 @@ class OnboardingController extends GetxController {
 
   Widget pricePackPicker() {
     return // Dollar Picker UI
-      SizedBox(
-        height: 328.h,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Dollar Sign - Fixed
-            TextAutoSize(
-              "\$",
-              style: TextStyle(
+        SizedBox(
+      height: 328.h,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Dollar Sign - Fixed
+          TextAutoSize(
+            "\$",
+            style: TextStyle(
+              fontSize: 86.sp,
+              fontFamily: circularBold,
+              color: Color(0xffF35E5C),
+            ),
+          ),
+
+          SizedBox(width: 10),
+
+          // Dollar Value Scroll
+          SizedBox(
+            width: 110.w,
+            height: 328.h,
+            child: ListWheelScrollView.useDelegate(
+              controller: dollarController,
+              itemExtent: 120.h,
+              physics: FixedExtentScrollPhysics(),
+              onSelectedItemChanged: (index) {
+                HapticFeedback.mediumImpact();
+                selectedDollar = dollars[index];
+                String dollarValue = "$selectedDollar.$selectedCent";
+                onboardingFilledData.costOfAPack = dollarValue;
+                getCurrentPageStatus();
+              },
+              childDelegate: ListWheelChildBuilderDelegate(
+                childCount: dollars.length,
+                builder: (context, index) {
+                  bool isSelected = selectedDollar == dollars[index];
+                  return Center(
+                    child: TextAutoSize(
+                      dollars[index].toString(),
+                      style: TextStyle(
+                        fontSize: 86.sp,
+                        fontFamily: circularBold,
+                        color: isSelected
+                            ? Color(0xffF35E5C)
+                            : Color(0xffF35E5C).withOpacity(0.3),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+
+          // Dot
+          TextAutoSize(
+            ".",
+            style: TextStyle(
                 fontSize: 86.sp,
                 fontFamily: circularBold,
-                color: Color(0xffF5876F),
-              ),
-            ),
+                color: Color(0xffF35E5C)),
+          ),
 
-            SizedBox(width: 10),
-
-            // Dollar Value Scroll
-            SizedBox(
-              width: 110.w,
-              height: 328.h,
-              child: ListWheelScrollView.useDelegate(
-                controller: dollarController,
-                itemExtent: 120.h,
-                physics: FixedExtentScrollPhysics(),
-                onSelectedItemChanged: (index) {
-                  HapticFeedback.mediumImpact();
-                  selectedDollar = dollars[index];
-                  setPageDoneTrue();
-                  update();
-                },
-                childDelegate: ListWheelChildBuilderDelegate(
-                  childCount: dollars.length,
-                  builder: (context, index) {
-                    bool isSelected = selectedDollar == dollars[index];
-                    return Center(
-                      child: TextAutoSize(
-                        dollars[index].toString(),
-                        style: TextStyle(
-                          fontSize: 86.sp,
-                          fontFamily: circularBold,
-                          color: isSelected
-                              ? Color(0xffF5876F)
-                              : Color(0xffF5876F).withOpacity(0.2),
-                        ),
+          // Cents Scroll
+          SizedBox(
+            width: 110.w,
+            height: 328.h,
+            child: ListWheelScrollView.useDelegate(
+              controller: centController,
+              itemExtent: 120.h,
+              physics: FixedExtentScrollPhysics(),
+              onSelectedItemChanged: (index) {
+                HapticFeedback.mediumImpact();
+                selectedCent = cents[index];
+                String dollarValue = "$selectedDollar.$selectedCent";
+                onboardingFilledData.costOfAPack = dollarValue;
+                getCurrentPageStatus();
+              },
+              childDelegate: ListWheelChildBuilderDelegate(
+                childCount: cents.length,
+                builder: (context, index) {
+                  bool isSelected = selectedCent == cents[index];
+                  String display = cents[index].toString().padLeft(2, '0');
+                  return Center(
+                    child: TextAutoSize(
+                      display,
+                      style: TextStyle(
+                        fontSize: isSelected ? 86.sp : 86.sp,
+                        fontFamily: circularBold,
+                        color: isSelected
+                            ? Color(0xffF35E5C)
+                            : Color(0xffF35E5C).withOpacity(0.3),
                       ),
-                    );
-                  },
-                ),
-              ),
-            ),
-
-            // Dot
-            TextAutoSize(
-              ".",
-              style: TextStyle(
-                  fontSize: 86.sp,
-                  fontFamily: circularBold,
-                  color: Color(0xffF5876F)),
-            ),
-
-            // Cents Scroll
-            SizedBox(
-              width: 110.w,
-              height: 328.h,
-              child: ListWheelScrollView.useDelegate(
-                controller: centController,
-                itemExtent: 120.h,
-                physics: FixedExtentScrollPhysics(),
-                onSelectedItemChanged: (index) {
-                  HapticFeedback.mediumImpact();
-                  selectedCent = cents[index];
-                  setPageDoneTrue();
-                  update();
+                    ),
+                  );
                 },
-                childDelegate: ListWheelChildBuilderDelegate(
-                  childCount: cents.length,
-                  builder: (context, index) {
-                    bool isSelected = selectedCent == cents[index];
-                    String display = cents[index].toString().padLeft(2, '0');
-                    return Center(
-                      child: TextAutoSize(
-                        display,
-                        style: TextStyle(
-                          fontSize: isSelected ? 86.sp : 86.sp,
-                          fontFamily: circularBold,
-                          color: isSelected
-                              ? Color(0xffF5876F)
-                              : Color(0xffF5876F).withOpacity(0.2),
-                        ),
-                      ),
-                    );
-                  },
-                ),
               ),
             ),
-          ],
-        ),
-      );
+          ),
+        ],
+      ),
+    );
   }
 
   Widget quitMethodSelection() {
@@ -569,8 +603,8 @@ class OnboardingController extends GetxController {
                 child: GestureDetector(
                     onTap: () {
                       HapticFeedback.heavyImpact();
-                      setPageDoneTrue();
                       instantQuitSelected = 1;
+                      onboardingFilledData.quitMethod = 1;
                       update();
                     },
                     child: Container(
@@ -581,11 +615,11 @@ class OnboardingController extends GetxController {
                         borderRadius: BorderRadius.circular(16.r),
                         image: instantQuitSelected == 1
                             ? DecorationImage(
-                          image: AssetImage(
-                              quitMethodBG), // Replace with your image path
-                          fit: BoxFit
-                              .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
-                        )
+                                image: AssetImage(
+                                    quitMethodBG), // Replace with your image path
+                                fit: BoxFit
+                                    .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
+                              )
                             : null,
                       ),
                       child: Column(
@@ -646,11 +680,11 @@ class OnboardingController extends GetxController {
                           color: Color(0xffF4F4F4),
                           image: instantQuitSelected == 2
                               ? DecorationImage(
-                            image: AssetImage(
-                                quitMethodBG), // Replace with your image path
-                            fit: BoxFit
-                                .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
-                          )
+                                  image: AssetImage(
+                                      quitMethodBG), // Replace with your image path
+                                  fit: BoxFit
+                                      .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
+                                )
                               : null,
                           borderRadius: BorderRadius.circular(16.r)),
                       child: Column(
@@ -700,6 +734,10 @@ class OnboardingController extends GetxController {
   Widget nameTextField() {
     return TextField(
       maxLines: 2,
+      onChanged: (v) {
+        onboardingFilledData.name = v;
+        getCurrentPageStatus();
+      },
       decoration: InputDecoration(
         hintText: "Jane Wilson",
         hintStyle: TextStyle(
@@ -725,23 +763,26 @@ class OnboardingController extends GetxController {
   Widget continueButton() {
     return GestureDetector(
       onTap: () {
-        if (thisPageDone) {
+        if (currentPageDoneStatus) {
           HapticFeedback.mediumImpact();
-            thisPageDone = false;
-
-          nextPage();
+          if (currentPage == (pages.length - 1)) {
+          } else {
+            nextPage();
+          }
         }
       },
       child: Container(
         width: 346.w,
         height: 54.h,
         decoration: BoxDecoration(
-          color: thisPageDone ? nicotrackBlack1 : nicotrackButtonLightBlack,
+          color: currentPageDoneStatus
+              ? nicotrackBlack1
+              : nicotrackButtonLightBlack,
           borderRadius: BorderRadius.circular(30.r),
         ),
         child: Center(
           child: TextAutoSize(
-            "Continue",
+            currentPage == (pages.length - 1) ? "Finish" : "Continue",
             style: TextStyle(
                 fontSize: 18.sp,
                 fontFamily: circularMedium,
@@ -752,8 +793,126 @@ class OnboardingController extends GetxController {
     );
   }
 
-  void setPageDoneTrue() {
-    thisPageDone = true;
+  bool currentPageCompleted() {
+    switch (currentPage) {
+      case 0:
+        if (onboardingFilledData.lastSmokedDate != "") {
+          return true;
+        } else {
+          return false;
+        }
+      case 1:
+        if (onboardingFilledData.cigarettesPerDay != -1) {
+          return true;
+        } else {
+          return false;
+        }
+      case 2:
+        if (onboardingFilledData.costOfAPack != "") {
+          return true;
+        } else {
+          return false;
+        }
+      case 3:
+        if (onboardingFilledData.numberOfCigarettesIn1Pack != -1) {
+          return true;
+        } else {
+          return false;
+        }
+      case 4:
+        if (onboardingFilledData.biggestMotivation != []) {
+          return true;
+        } else {
+          return false;
+        }
+      case 5:
+        if (onboardingFilledData.craveSituations != []) {
+          return true;
+        } else {
+          return false;
+        }
+      case 6:
+        if (onboardingFilledData.helpNeeded != []) {
+          return true;
+        } else {
+          return false;
+        }
+      case 7:
+        if (onboardingFilledData.quitMethod != "") {
+          return true;
+        } else {
+          return false;
+        }
+      case 8:
+        if (onboardingFilledData.name != "") {
+          return true;
+        } else {
+          return false;
+        }
+      default:
+        return false;
+    }
+  }
+
+  void getCurrentPageStatus() {
+    switch (currentPage) {
+      case 0:
+        if (onboardingFilledData.lastSmokedDate != "") {
+          currentPageDoneStatus = true;
+        } else {
+          currentPageDoneStatus = false;
+        }
+      case 1:
+        if (onboardingFilledData.cigarettesPerDay != -1) {
+          currentPageDoneStatus = true;
+        } else {
+          currentPageDoneStatus = false;
+        }
+      case 2:
+        if (onboardingFilledData.costOfAPack != "") {
+          currentPageDoneStatus = true;
+        } else {
+          currentPageDoneStatus = false;
+        }
+      case 3:
+        if (onboardingFilledData.numberOfCigarettesIn1Pack != -1) {
+          currentPageDoneStatus = true;
+        } else {
+          currentPageDoneStatus = false;
+        }
+      case 4:
+        if (onboardingFilledData.biggestMotivation.isNotEmpty) {
+          currentPageDoneStatus = true;
+        } else {
+          currentPageDoneStatus = false;
+        }
+      case 5:
+        if (onboardingFilledData.craveSituations.isNotEmpty) {
+          currentPageDoneStatus = true;
+        } else {
+          currentPageDoneStatus = false;
+        }
+      case 6:
+        if (onboardingFilledData.helpNeeded.isNotEmpty) {
+          currentPageDoneStatus = true;
+        } else {
+          currentPageDoneStatus = false;
+        }
+      case 7:
+        if (onboardingFilledData.quitMethod != -1) {
+          currentPageDoneStatus = true;
+        } else {
+          currentPageDoneStatus = false;
+        }
+      case 8:
+        if (onboardingFilledData.name != "") {
+          currentPageDoneStatus = true;
+        } else {
+          currentPageDoneStatus = false;
+        }
+      default:
+        currentPageDoneStatus = false;
+    }
     update();
   }
 }

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants/color-constants.dart';
 import '../../../constants/font-constants.dart';
-import '../../../constants/image-constants.dart';
 import '../../../screens/elements/textAutoSize.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/getx-controllers/onboarding-controller.dart';
@@ -17,6 +15,8 @@ class OnePackContents extends StatefulWidget {
 }
 
 class _LastSmokedState extends State<OnePackContents> {
+  OnboardingController onboardingMainController =
+      Get.find<OnboardingController>();
 
   @override
   void initState() {
@@ -27,6 +27,16 @@ class _LastSmokedState extends State<OnePackContents> {
   Widget build(BuildContext context) {
     return GetBuilder<OnboardingController>(
         init: OnboardingController(),
+        initState: (v) {
+          final initialIndex = onboardingMainController.packNumbers
+              .indexOf(onboardingMainController.selectedNumber2);
+          onboardingMainController.listWheelController2 =
+              FixedExtentScrollController(
+            initialItem: initialIndex >= 0 ? initialIndex : 0,
+          );
+          onboardingMainController.listWheelController2
+              .jumpToItem(initialIndex);
+        },
         builder: (onboardingController) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,

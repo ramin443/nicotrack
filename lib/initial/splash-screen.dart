@@ -5,7 +5,6 @@ import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/constants/font-constants.dart';
 import 'package:nicotrack/constants/image-constants.dart';
 
-import '../screens/elements/textAutoSize.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

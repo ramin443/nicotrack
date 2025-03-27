@@ -1,6 +1,3 @@
-// import 'package:flutter/src/foundation/key.dart';
-// import 'package:flutter/src/widgets/container.dart';
-// import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -16,14 +13,14 @@ class TextAutoSize extends StatefulWidget {
 
   const TextAutoSize(
       String this.data, {
-        Key? key,
+        super.key,
         this.style,
         this.overflow,
         this.textAlign,
         this.maxLines,
         this.minFontSize = 12,
         this.maxFontSize = double.infinity,
-      }) : super(key: key);
+      });
 
   //const TextAutoSize({Key? key}) : super(key: key);
 

@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../screens/elements/textAutoSize.dart';
 
-import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/constants/font-constants.dart';
 import 'package:nicotrack/constants/color-constants.dart';
-import 'package:nicotrack/initial/onboarding-questions/question-pages/enter-name.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/getx-controllers/onboarding-controller.dart';
-import '../../../screens/elements/textAutoSize.dart';
 
 class EnterName extends StatefulWidget {
   const EnterName({super.key});

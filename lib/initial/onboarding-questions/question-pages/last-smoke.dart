@@ -1,19 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:nicotrack/initial/splash-screen.dart';
+import 'package:nicotrack/initial/welcome-info/welcome-screen.dart';
 import '../../../constants/color-constants.dart';
 import '../../../constants/font-constants.dart';
-import '../../../constants/image-constants.dart';
 import '../../../screens/elements/textAutoSize.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:nicotrack/getx-controllers/onboarding-controller.dart';
-import '../../../screens/elements/textAutoSize.dart';
-import 'package:get/get.dart';
-import 'package:nicotrack/getx-controllers/onboarding-controller.dart';
-import '../../../screens/elements/textAutoSize.dart';
 import 'package:intl/intl.dart';
 
 class LastSmoked extends StatefulWidget {
@@ -56,23 +50,7 @@ class _LastSmokedState extends State<LastSmoked> {
                 ),
               ),
               Spacer(),
-              Builder(builder: (context) {
-                return SizedBox(
-                  height: 240.h,
-                  child: CupertinoDatePicker(
-                    mode: CupertinoDatePickerMode.date,
-                    initialDateTime: DateTime.now(),
-                    maximumDate: DateTime.now(),
-                    onDateTimeChanged: (DateTime newDateTime) {
-                      String formattedDate = DateFormat('yyyy-MM-dd').format(newDateTime);
-                      HapticFeedback.lightImpact();
-                      onboardingController.setPageDoneTrue();
-                      onboardingController.onboardingFilledData.lastSmokedDate = formattedDate;
-                      // Handle the selected date
-                    },
-                  ),
-                );
-              }),
+              onboardingController.getLastSmokedDate(),
               Spacer(),
               Spacer(),
               Spacer(),

@@ -1,6 +1,8 @@
 String splashLogo = "assets/images/branding/splashLogo.svg";
 String fullButtonBg= "assets/images/button-bg/fullsized button.png";
 String groupedLogo= "assets/images/branding/Logogrouped.svg";
+String premiumBtnBg= "assets/images/button-bg/premiumBtnBG.svg";
+String homeMainBG= "assets/images/button-bg/homeMainBG.png";
 
 String illustration1= "assets/images/Illustration/Health - Sports.svg";
 String illustration2= "assets/images/Illustration/Painter.svg";
@@ -26,3 +28,6 @@ String xmarkEmoji= "assets/images/Emojis/xmark.png";
 String instantQuitEmoji = "assets/images/Emojis/instantquit.png";
 String stepdownEmoji = "assets/images/Emojis/step down.png";
 String quitMethodBG= "assets/images/button-bg/quitmethodBG.png";
+String bicepsEmoji= "assets/images/Emojis/biceps.png";
+String clapEmoji= "assets/images/Emojis/clap.png";
+String moneyEmoji= "assets/images/Emojis/money.png";
