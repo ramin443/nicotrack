@@ -29,6 +29,7 @@ class _HomeState extends State<Home> {
         return Scaffold(
           backgroundColor: Colors.white,
           body:  SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -88,10 +89,12 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                   SizedBox(height: 8.h,),
-                  homeController.weeklyCalendarView(),
+                  homeController.weeklyCalendarView(context),
                   SizedBox(height: 14.h,),
                   homeController.homeGridView(),
-                  SizedBox(height: 22.h,),
+                  SizedBox(height: 24.h,),
+                  homeController.dailyTasksSection(),
+                  SizedBox(height: 80.h,),
                 ],
               ),
           ),
@@ -99,4 +102,5 @@ class _HomeState extends State<Home> {
       }
     );
   }
+
 }

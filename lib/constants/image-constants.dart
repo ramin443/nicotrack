@@ -31,3 +31,6 @@ String quitMethodBG= "assets/images/button-bg/quitmethodBG.png";
 String bicepsEmoji= "assets/images/Emojis/biceps.png";
 String clapEmoji= "assets/images/Emojis/clap.png";
 String moneyEmoji= "assets/images/Emojis/money.png";
+String paperEmoji = "assets/images/Emojis/paperEmoji.png";
+String moodEmoji = "assets/images/Emojis/moodEmoji.png";
+String homePlanBg= "assets/images/button-bg/homepersonalplan.svg";

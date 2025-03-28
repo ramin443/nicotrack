@@ -39,6 +39,7 @@ dependencies:
   cupertino_back_gesture: ^0.1.0
   feather_icons: ^1.2.0
   sleek_circular_slider: ^2.0.1
+  animated_flip_counter: ^0.3.4
 
   # Utility packages
   get: ^4.6.5
@@ -105,6 +106,7 @@ flutter:
     - assets/images/Emojis/mountain.png
     - assets/images/Emojis/others.png
     - assets/images/Emojis/people.png
+    - assets/images/Emojis/people.png
     - assets/images/Emojis/plates.png
     - assets/images/Emojis/rocket.png
     - assets/images/Emojis/stressed.png
@@ -117,6 +119,9 @@ flutter:
     - assets/images/Emojis/biceps.png
     - assets/images/Emojis/clap.png
     - assets/images/Emojis/money.png
+    - assets/images/Emojis/moodEmoji.png
+    - assets/images/Emojis/paperEmoji.png
+    - assets/images/button-bg/homepersonalplan.svg
 
 
       # assets:
