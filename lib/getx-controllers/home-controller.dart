@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nicotrack/constants/quick-function-constants.dart';
@@ -202,7 +203,7 @@ class HomeController extends GetxController {
             children: [
               AnimatedFlipCounter(
                   wholeDigits: 2, // 👈 forces two digits to be shown & flip
-                  duration: Duration(seconds: 3),
+                  duration: Duration(seconds: 2),
                 value: daysSinceLastSmoked,
                 fractionDigits: 0, // No decimal
                 textStyle:TextStyle(
@@ -258,7 +259,7 @@ class HomeController extends GetxController {
               AnimatedFlipCounter(
                   prefix: isCost?'\$':'', // 👈 add dollar sign here (escaped with backslash)
                   wholeDigits: 2, // 👈 forces two digits to be shown & flip
-                  duration: Duration(seconds: 3),
+                  duration: Duration(seconds: 2),
                   value: value,
                   fractionDigits: 0, // No decimal
                   textStyle:TextStyle(
@@ -590,8 +591,39 @@ class HomeController extends GetxController {
 
   Widget peronalizedQuitRoutine(){
     return Stack(
+      alignment: Alignment.center,
       children: [
-
+        SvgPicture.asset(homePlanBg,
+          width: 260.w,
+        ),
+        SizedBox(
+          width: 260.w,
+          height: 75.h,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(width: 18.w,),
+              Image.asset(coffeeEmoji,
+                width: 48.w,
+              ),
+              SizedBox(width: 14.w,),
+              TextAutoSize('Personalized\nQuit Routine',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    height: 1.1,
+                    fontSize: 18.sp,
+                    fontFamily: circularBold,
+                    color: Colors.black87,
+                  )),
+              SizedBox(width: 11.w,),
+              Icon(FeatherIcons.chevronRight,
+              size: 26.sp,
+                color: nicotrackBlack1,
+              ),
+              SizedBox(width: 16.w,),
+            ],
+          ),
+        ),
       ],
     );
   }

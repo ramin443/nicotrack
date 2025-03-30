@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-class Progress extends StatefulWidget {
-  const Progress({super.key});
+class ProgressMain extends StatefulWidget {
+  const ProgressMain({super.key});
 
   @override
-  State<Progress> createState() => _ProgressState();
+  State<ProgressMain> createState() => _ProgressState();
 }
 
-class _ProgressState extends State<Progress> {
+class _ProgressState extends State<ProgressMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

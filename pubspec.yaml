@@ -122,6 +122,9 @@ flutter:
     - assets/images/Emojis/moodEmoji.png
     - assets/images/Emojis/paperEmoji.png
     - assets/images/button-bg/homepersonalplan.svg
+    - assets/images/icons/home-selected.svg
+    - assets/images/icons/home-unselected.svg
+    - assets/images/button-bg/planBgbtn.png
 
 
       # assets:

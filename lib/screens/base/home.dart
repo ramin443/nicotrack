@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/getx-controllers/home-controller.dart';
-
 import '../../constants/color-constants.dart';
 import '../../constants/font-constants.dart';
 import '../elements/textAutoSize.dart';
@@ -17,20 +16,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      init: HomeController(),
-      initState: (v){
-      },
-      builder: (homeController) {
-        return Scaffold(
-          backgroundColor: Colors.white,
-          body:  SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
+        init: HomeController(),
+        initState: (v) {},
+        builder: (homeController) {
+          return Scaffold(
+            backgroundColor: Colors.white,
+            body: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -43,7 +39,9 @@ class _HomeState extends State<Home> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(width: 24.w,),
+                          SizedBox(
+                            width: 24.w,
+                          ),
                           TextAutoSize(
                             "Hello,\nJack",
                             style: TextStyle(
@@ -54,7 +52,6 @@ class _HomeState extends State<Home> {
                           ),
                         ],
                       ),
-            
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -82,25 +79,36 @@ class _HomeState extends State<Home> {
                               ),
                             ],
                           ),
-                          SizedBox(width: 24.w,),
+                          SizedBox(
+                            width: 24.w,
+                          ),
                         ],
                       ),
-            
                     ],
                   ),
-                  SizedBox(height: 8.h,),
+                  SizedBox(
+                    height: 8.h,
+                  ),
                   homeController.weeklyCalendarView(context),
-                  SizedBox(height: 14.h,),
+                  SizedBox(
+                    height: 14.h,
+                  ),
                   homeController.homeGridView(),
-                  SizedBox(height: 24.h,),
+                  SizedBox(
+                    height: 28.h,
+                  ),
                   homeController.dailyTasksSection(),
-                  SizedBox(height: 80.h,),
+                  SizedBox(
+                    height: 12.h,
+                  ),
+                  homeController.peronalizedQuitRoutine(),
+                  SizedBox(
+                    height: 40.h,
+                  ),
                 ],
               ),
-          ),
-        );
-      }
-    );
+            ),
+          );
+        });
   }
-
 }
