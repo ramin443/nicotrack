@@ -46,9 +46,13 @@ dependencies:
   intl: ^0.17.0
   sqflite: ^2.2.7
   flutter_svg: ^2.0.5
-
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
 
 dev_dependencies:
+  build_runner: ^2.4.6
+  freezed: ^2.4.6
+  json_serializable: ^6.7.1
   flutter_test:
     sdk: flutter
 
@@ -125,6 +129,26 @@ flutter:
     - assets/images/icons/home-selected.svg
     - assets/images/icons/home-unselected.svg
     - assets/images/button-bg/planBgbtn.png
+    - assets/images/icons/iconPolygon.svg
+    - assets/images/award-emojis/ball.png
+    - assets/images/award-emojis/ballroll.png
+    - assets/images/award-emojis/baseball.png
+    - assets/images/award-emojis/cap.png
+    - assets/images/award-emojis/celebrate.png
+    - assets/images/award-emojis/chocolate.png
+    - assets/images/award-emojis/crown.png
+    - assets/images/award-emojis/dart arrow.png
+    - assets/images/award-emojis/golf.png
+    - assets/images/award-emojis/hat.png
+    - assets/images/award-emojis/hat2.png
+    - assets/images/award-emojis/kite.png
+    - assets/images/award-emojis/magicbowl.png
+    - assets/images/award-emojis/no1.png
+    - assets/images/award-emojis/pinata.png
+    - assets/images/award-emojis/teddy.png
+    - assets/images/award-emojis/trophy.png
+    - assets/images/award-emojis/vacay.png
+
 
 
       # assets:
