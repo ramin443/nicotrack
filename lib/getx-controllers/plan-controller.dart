@@ -71,6 +71,85 @@ class PlanController extends GetxController {
             "🏆 Huge milestone reached!",
         streakImg: chocolateImg),
   ];
+  final ScrollController scrollController = ScrollController();
+  final RxDouble scrollPosition = 0.0.obs;
+  final int initialSection;
+
+  PlanController({this.initialSection = 0});
+
+  @override
+  void onInit() {
+    super.onInit();
+    // Initialize the controller and add listeners here
+    scrollController.addListener(_scrollListener);
+    // Schedule the scroll after the layout is complete
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scrollToSectionAfterLayout(initialSection);
+    });
+  }
+
+  @override
+  void onClose() {
+    // Clean up the controller and listeners when the controller is removed
+    scrollController.removeListener(_scrollListener);
+    scrollController.dispose();
+    super.onClose();
+  }
+
+  void _scrollListener() {
+    scrollPosition.value = scrollController.offset;
+    // Your additional logic here based on the scroll position
+  }
+
+  // You can add methods to programmatically scroll to specific positions
+  void scrollToPosition(double position) {
+    scrollController.animateTo(
+      position,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  // Method to scroll to a specific section
+  void scrollToSection(int sectionIndex) {
+    double position;
+    switch (sectionIndex) {
+      case 0:
+        position = 0.0;
+        break;
+      case 1:
+        position = 300.0;
+        break;
+      case 2:
+        position = 600.0;
+        break;
+      default:
+        position = 0.0;
+    }
+
+    scrollToPosition(position);
+  }
+
+  // Method to scroll to a specific section by index
+  void scrollToSectionAfterLayout(int sectionIndex) {
+    // Fixed positions approach
+    double position;
+    switch (sectionIndex) {
+      case 0:
+        position = 0.0;
+        break;
+      case 1:
+        position = 300.0;
+        break;
+      case 2:
+        position = 600.0;
+        break;
+      default:
+        position = 0.0;
+    }
+
+    scrollToPosition(position);
+  }
 
   Widget timelineTab(String text, int index) {
     final isSelected = tabIndex == index;
@@ -101,9 +180,10 @@ class PlanController extends GetxController {
             for (int index = 0; index < timelineItems.length; index++)
               Column(
                 children: [
-                  timelineRow(timelineModelItem: timelineItems[index]),
+                  timelineRow(
+                      timelineModelItem: timelineItems[index], index: index),
                   SizedBox(
-                    height: 4.h,
+                    height: index == 0 ? 0 : 8.h,
                   ),
                   SizedBox(
                     height: 20.h,
@@ -122,11 +202,14 @@ class PlanController extends GetxController {
                                 height: 20.h,
                                 width: 2.w,
                                 decoration: BoxDecoration(
-                                  color: Color(0xffF6F4F1),
-                                  borderRadius:
-                                  index == 0? BorderRadius.only(bottomRight:
-                                  Radius.circular(22.w), bottomLeft: Radius.circular(22.w)):
-                                  BorderRadius.circular(22.w),
+                                  color: index == timelineItems.length - 1
+                                      ? Colors.transparent
+                                      : Color(0xffF6F4F1),
+                                  borderRadius: index == 0
+                                      ? BorderRadius.only(
+                                          bottomRight: Radius.circular(22.w),
+                                          bottomLeft: Radius.circular(22.w))
+                                      : BorderRadius.circular(22.w),
                                 ),
                               ),
                             ],
@@ -136,7 +219,7 @@ class PlanController extends GetxController {
                     ),
                   ),
                   SizedBox(
-                    height: 4.h,
+                    height: 8.h,
                   ),
                 ],
               )
@@ -156,121 +239,120 @@ class PlanController extends GetxController {
         );
   }
 
-  Widget timelineRow({required TimelineItemModel timelineModelItem}) {
+  Widget timelineRow(
+      {required int index, required TimelineItemModel timelineModelItem}) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment:
+            index == 0 ? CrossAxisAlignment.end : CrossAxisAlignment.center,
         children: [
-          timelineModelItem.dayNumber==0?
-              Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 40.h,
-                        width: 2.w,
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius:
-                         BorderRadius.only(topRight:
-                          Radius.circular(22.w), topLeft: Radius.circular(22.w)),
+          timelineModelItem.dayNumber == 0
+              ? Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // Changed from MainAxisAlignment.end
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 40.h,
+                          width: 2.w,
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(22.w),
+                                topLeft: Radius.circular(22.w)),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    width: 94.w,
-                    height: 40.h,
-                    decoration: BoxDecoration(
-                      color: nicotrackBlack1,
-                      borderRadius: BorderRadius.circular(26.r),
+                      ],
                     ),
-                    child: Center(
-                      child: TextAutoSize(
-                        "Start",
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          fontFamily: circularMedium,
-                          height: 1.1,
-                          color: Colors.white,
+                    Container(
+                      width: 100.w,
+                      height: 40.h,
+                      decoration: BoxDecoration(
+                        color: nicotrackBlack1,
+                        borderRadius: BorderRadius.circular(26.r),
+                      ),
+                      child: Center(
+                        child: TextAutoSize(
+                          "Start",
+                          style: TextStyle(
+                            fontSize: 15.sp,
+                            fontFamily: circularMedium,
+                            height: 1.1,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        height: 40.h,
-                        width: 2.w,
-                        decoration: BoxDecoration(
-                          color: Color(0xffF6F4F1),
-                          borderRadius:
-                          BorderRadius.only(topRight:
-                          Radius.circular(22.w), topLeft: Radius.circular(22.w)),
-                        ),
+                    // The bottom line will now be positioned at the bottom
+                    Container(
+                      height: 40.h,
+                      width: 2.w,
+                      decoration: BoxDecoration(
+                        color: Color(0xffF6F4F1),
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(22.w),
+                            topLeft: Radius.circular(22.w)),
                       ),
-                    ],
-                  ),
-                ],
-              ):
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              TextAutoSize(
-                "Day ${timelineModelItem.dayNumber}",
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontFamily: circularBold,
-                  height: 1.1,
-                  color: nicotrackBlack1,
-                ),
-              ),
-              SizedBox(
-                height: 9.h,
-              ),
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  SvgPicture.asset(
-                    iconPolygon,
-                    width: 100.w,
-                  ),
-                  Image.asset(
-                    timelineModelItem.streakImg,
-                    width: 54.w,
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 5.h,
-              ),
-              GradientText(
-                text: "Streak ${timelineModelItem.streakNumber}",
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [
-                    Color(0xff3217C3).withOpacity(0.7),
-                    Color(0xffFF4B4B)
+                    ),
+                  ],
+                )
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TextAutoSize(
+                      "Day ${timelineModelItem.dayNumber}",
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontFamily: circularBold,
+                        height: 1.1,
+                        color: nicotrackBlack1,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 9.h,
+                    ),
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          iconPolygon,
+                          width: 100.w,
+                        ),
+                        Image.asset(
+                          timelineModelItem.streakImg,
+                          width: 54.w,
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    GradientText(
+                      text: "Streak ${timelineModelItem.streakNumber}",
+                      gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [
+                          Color(0xff3217C3).withOpacity(0.7),
+                          Color(0xffFF4B4B)
+                        ],
+                      ),
+                      style: TextStyle(
+                        fontSize: 17.sp,
+                        fontFamily: circularBold,
+                        height: 1.1,
+                        color: const Color(0xFFA1A1A1),
+                      ),
+                    )
                   ],
                 ),
-                style: TextStyle(
-                  fontSize: 17.sp,
-                  fontFamily: circularBold,
-                  height: 1.1,
-                  color: const Color(0xFFA1A1A1),
-                ),
-              )
-            ],
-          ),
           Container(
             width: 222.w,
             padding: EdgeInsets.only(

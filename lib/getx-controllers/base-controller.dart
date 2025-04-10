@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/screens/base/home.dart';
+import 'package:nicotrack/screens/base/plan-alt.dart';
 import 'package:nicotrack/screens/base/plan.dart';
 import 'package:nicotrack/screens/base/settings.dart';
 
@@ -14,7 +15,7 @@ import '../screens/elements/textAutoSize.dart';
 
 class BaseController extends GetxController {
   int selectedIndex = 0;
-  List<Widget> mainPages = [Home(), Plan(), ProgressMain(), Settings()];
+  List<Widget> mainPages = [Home(), PlanAlt(), ProgressMain(), Settings()];
 
   void setCurrentIndex(index) {
     selectedIndex = index;
@@ -154,7 +155,7 @@ class BaseController extends GetxController {
             icon: Column(
               children: [
                 SizedBox(
-                  height: 8.h,
+                  height: 16.h,
                 ),
                 SvgPicture.asset(
                     selectedIndex == 0 ? homeIconSelected : homeIconUnselected,
@@ -179,7 +180,7 @@ class BaseController extends GetxController {
             icon: Column(
               children: [
                 SizedBox(
-                  height: 8.h,
+                  height: 16.h,
                 ),
                 Icon(
                   FeatherIcons.calendar,
@@ -206,7 +207,7 @@ class BaseController extends GetxController {
             icon: Column(
               children: [
                 SizedBox(
-                  height: 8.h,
+                  height: 16.h,
                 ),
                 Icon(
                   FeatherIcons.pieChart,
@@ -233,7 +234,7 @@ class BaseController extends GetxController {
             icon: Column(
               children: [
                 SizedBox(
-                  height: 8.h,
+                  height: 16.h,
                 ),
                 Icon(
                   FeatherIcons.sliders,
