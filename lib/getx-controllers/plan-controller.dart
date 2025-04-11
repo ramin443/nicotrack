@@ -1,3 +1,5 @@
+import 'package:dotted_border/dotted_border.dart';
+import 'package:dotted_line/dotted_line.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -241,178 +243,206 @@ class PlanController extends GetxController {
 
   Widget timelineRow(
       {required int index, required TimelineItemModel timelineModelItem}) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment:
-            index == 0 ? CrossAxisAlignment.end : CrossAxisAlignment.center,
-        children: [
-          timelineModelItem.dayNumber == 0
-              ? Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  // Changed from MainAxisAlignment.end
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+    return Stack(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: index == 0
+                ? CrossAxisAlignment.center
+                : CrossAxisAlignment.center,
+            children: [
+              timelineModelItem.dayNumber == 0
+                  ? Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // Changed from MainAxisAlignment.end
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 40.h,
+                              width: 2.w,
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(22.w),
+                                    topLeft: Radius.circular(22.w)),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          width: 100.w,
+                          height: 40.h,
+                          decoration: BoxDecoration(
+                            color: nicotrackBlack1,
+                            borderRadius: BorderRadius.circular(26.r),
+                          ),
+                          child: Center(
+                            child: TextAutoSize(
+                              "Start",
+                              style: TextStyle(
+                                fontSize: 15.sp,
+                                fontFamily: circularMedium,
+                                height: 1.1,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        // The bottom line will now be positioned at the bottom
                         Container(
                           height: 40.h,
                           width: 2.w,
                           decoration: BoxDecoration(
-                            color: Colors.transparent,
+                            color: Color(0xffF6F4F1),
                             borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(22.w),
                                 topLeft: Radius.circular(22.w)),
                           ),
                         ),
                       ],
-                    ),
-                    Container(
-                      width: 100.w,
-                      height: 40.h,
-                      decoration: BoxDecoration(
-                        color: nicotrackBlack1,
-                        borderRadius: BorderRadius.circular(26.r),
-                      ),
-                      child: Center(
-                        child: TextAutoSize(
-                          "Start",
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        TextAutoSize(
+                          "Day ${timelineModelItem.dayNumber}",
                           style: TextStyle(
-                            fontSize: 15.sp,
-                            fontFamily: circularMedium,
+                            fontSize: 14.sp,
+                            fontFamily: circularBold,
                             height: 1.1,
-                            color: Colors.white,
+                            color: nicotrackBlack1,
                           ),
                         ),
-                      ),
-                    ),
-                    // The bottom line will now be positioned at the bottom
-                    Container(
-                      height: 40.h,
-                      width: 2.w,
-                      decoration: BoxDecoration(
-                        color: Color(0xffF6F4F1),
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(22.w),
-                            topLeft: Radius.circular(22.w)),
-                      ),
-                    ),
-                  ],
-                )
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    TextAutoSize(
-                      "Day ${timelineModelItem.dayNumber}",
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontFamily: circularBold,
-                        height: 1.1,
-                        color: nicotrackBlack1,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 9.h,
-                    ),
-                    Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          iconPolygon,
-                          width: 100.w,
+                        SizedBox(
+                          height: 9.h,
                         ),
-                        Image.asset(
-                          timelineModelItem.streakImg,
-                          width: 54.w,
+                        Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              iconPolygon,
+                              width: 100.w,
+                            ),
+                            Image.asset(
+                              timelineModelItem.streakImg,
+                              width: 54.w,
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        GradientText(
+                          text: "Streak ${timelineModelItem.streakNumber}",
+                          gradient: LinearGradient(
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            colors: [
+                              Color(0xff3217C3).withOpacity(0.7),
+                              Color(0xffFF4B4B)
+                            ],
+                          ),
+                          style: TextStyle(
+                            fontSize: 17.sp,
+                            fontFamily: circularBold,
+                            height: 1.1,
+                            color: const Color(0xFFA1A1A1),
+                          ),
+                        )
+                      ],
+                    ),
+              Container(
+                width: 222.w,
+                padding: EdgeInsets.only(
+                    left: 16.w, right: 16.w, top: 12.h, bottom: 16.h),
+                decoration: BoxDecoration(
+                    color: Color(0xffE5DED6).withOpacity(0.34),
+                    borderRadius: BorderRadius.circular(13.r)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        TextAutoSize(
+                          "📅 ${timelineModelItem.dayDuration}",
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontFamily: circularBold,
+                            height: 1.1,
+                            color: nicotrackBlack1,
+                          ),
+                        ),
+                        Icon(
+                          FeatherIcons.arrowUpRight,
+                          color: nicotrackBlack1,
+                          size: 18.w,
                         )
                       ],
                     ),
                     SizedBox(
-                      height: 5.h,
+                      height: 12.h,
                     ),
-                    GradientText(
-                      text: "Streak ${timelineModelItem.streakNumber}",
-                      gradient: LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [
-                          Color(0xff3217C3).withOpacity(0.7),
-                          Color(0xffFF4B4B)
-                        ],
-                      ),
-                      style: TextStyle(
-                        fontSize: 17.sp,
-                        fontFamily: circularBold,
-                        height: 1.1,
-                        color: const Color(0xFFA1A1A1),
-                      ),
-                    )
-                  ],
-                ),
-          Container(
-            width: 222.w,
-            padding: EdgeInsets.only(
-                left: 16.w, right: 16.w, top: 12.h, bottom: 16.h),
-            decoration: BoxDecoration(
-                color: Color(0xffE5DED6).withOpacity(0.34),
-                borderRadius: BorderRadius.circular(13.r)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
                     TextAutoSize(
-                      "📅 ${timelineModelItem.dayDuration}",
+                      "What happens to your body",
                       style: TextStyle(
-                        fontSize: 16.sp,
-                        fontFamily: circularBold,
+                        fontSize: 14.sp,
+                        fontFamily: circularMedium,
                         height: 1.1,
+                        color: const Color(0xFFFF611D),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 6.h,
+                    ),
+                    TextAutoSize(
+                      timelineModelItem.whatHappens,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontFamily: circularBook,
+                        height: 1.2,
                         color: nicotrackBlack1,
                       ),
                     ),
-                    Icon(
-                      FeatherIcons.arrowUpRight,
-                      color: nicotrackBlack1,
-                      weight: 18.w,
-                    )
                   ],
                 ),
-                SizedBox(
-                  height: 12.h,
-                ),
-                TextAutoSize(
-                  "What happens to your body",
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontFamily: circularMedium,
-                    height: 1.1,
-                    color: const Color(0xFFFF611D),
+              )
+            ],
+          ),
+        ),
+        index == 3
+            ? Positioned.fill(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      DottedLine(
+                        direction: Axis.horizontal,
+                        lineLength: double.infinity,
+                        lineThickness: 1.0,
+                        dashLength: 4.0,
+                        dashColor: nicotrackGreen,
+                        dashGapLength: 4.0,
+                        dashGapColor: Colors.transparent,
+                      )
+                    ],
                   ),
                 ),
-                SizedBox(
-                  height: 6.h,
-                ),
-                TextAutoSize(
-                  timelineModelItem.whatHappens,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontFamily: circularBook,
-                    height: 1.2,
-                    color: nicotrackBlack1,
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
+              )
+            : SizedBox(
+                height: 0,
+              )
+      ],
     );
   }
 }
