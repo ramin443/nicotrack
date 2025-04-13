@@ -57,3 +57,34 @@ String pinataImg = "assets/images/award-emojis/pinata.png";
 String teddyImg = "assets/images/award-emojis/teddy.png";
 String trophyImg = "assets/images/award-emojis/trophy.png";
 String vacayImg = "assets/images/award-emojis/vacay.png";
+
+String cigImg = 'assets/images/mood-affection-emojis/cig.png';
+String confettiImg = 'assets/images/mood-affection-emojis/confetti.png';
+String familyImg = 'assets/images/mood-affection-emojis/family.png';
+String healthImg = 'assets/images/mood-affection-emojis/health.png';
+String heartbreakImg = 'assets/images/mood-affection-emojis/heartbreak.png';
+String sunImg = 'assets/images/mood-affection-emojis/sun.png';
+String workstressImg = 'assets/images/mood-affection-emojis/workstress.png';
+
+String angryImg = 'assets/images/mood-feeling/angry.png';
+String anxiousImg = 'assets/images/mood-feeling/anxious.png';
+String confusedImg = 'assets/images/mood-feeling/confused.png';
+String frustratedImg = 'assets/images/mood-feeling/frustrated.png';
+String happyImg = 'assets/images/mood-feeling/happy.png';
+String motivImg = 'assets/images/mood-feeling/motiv.png';
+String neutralImg = 'assets/images/mood-feeling/neutral.png';
+String partyImg = 'assets/images/mood-feeling/party.png';
+String sadImg = 'assets/images/mood-feeling/sad.png';
+String targetImg = 'assets/images/mood-feeling/target.png';
+String tiredImg = 'assets/images/mood-feeling/tired.png';
+
+String gameImg = 'assets/images/daily-Emojis/game.png';
+String iceImg = 'assets/images/daily-Emojis/ice.png';
+String meditateImg = 'assets/images/daily-Emojis/meditate.png';
+String notesImg = 'assets/images/daily-Emojis/notes.png';
+String phoneImg = 'assets/images/daily-Emojis/phone.png';
+String walkImg = 'assets/images/daily-Emojis/walk.png';
+String wavesImg = 'assets/images/daily-Emojis/waves.png';
+String fireImg= "assets/images/daily-Emojis/fire.png";
+String yesUpdateImg = 'assets/images/daily-Emojis/yesUpdate.png';
+String noUpdateImg= "assets/images/daily-Emojis/noupdate.png";

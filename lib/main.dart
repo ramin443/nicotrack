@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nicotrack/initial/onboarding-questions/onboarding-main-slider.dart';
-import 'package:nicotrack/screens/base/base.dart';
-import 'package:nicotrack/screens/base/home.dart';
+import 'package:nicotrack/screens/home/mood/mood-main-slider.dart';
 
 void main() async{
   runApp(const MyApp());
@@ -26,7 +24,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: Base(),
+          home: MoodMainSlider(),
         );
       }
     );

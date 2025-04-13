@@ -1,14 +1,11 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:nicotrack/initial/splash-screen.dart';
-import 'package:nicotrack/initial/welcome-info/welcome-screen.dart';
 import '../../../constants/color-constants.dart';
 import '../../../constants/font-constants.dart';
 import '../../../screens/elements/textAutoSize.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 import 'package:nicotrack/getx-controllers/onboarding-controller.dart';
-import 'package:intl/intl.dart';
 
 class LastSmoked extends StatefulWidget {
   const LastSmoked({super.key});

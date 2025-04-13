@@ -150,6 +150,34 @@ flutter:
     - assets/images/award-emojis/teddy.png
     - assets/images/award-emojis/trophy.png
     - assets/images/award-emojis/vacay.png
+    - assets/images/mood-affection-emojis/cig.png
+    - assets/images/mood-affection-emojis/confetti.png
+    - assets/images/mood-affection-emojis/family.png
+    - assets/images/mood-affection-emojis/health.png
+    - assets/images/mood-affection-emojis/heartbreak.png
+    - assets/images/mood-affection-emojis/sun.png
+    - assets/images/mood-affection-emojis/workstress.png
+    - assets/images/mood-feeling/angry.png
+    - assets/images/mood-feeling/anxious.png
+    - assets/images/mood-feeling/confused.png
+    - assets/images/mood-feeling/frustrated.png
+    - assets/images/mood-feeling/happy.png
+    - assets/images/mood-feeling/motiv.png
+    - assets/images/mood-feeling/neutral.png
+    - assets/images/mood-feeling/party.png
+    - assets/images/mood-feeling/sad.png
+    - assets/images/mood-feeling/target.png
+    - assets/images/mood-feeling/tired.png
+    - assets/images/daily-Emojis/game.png
+    - assets/images/daily-Emojis/ice.png
+    - assets/images/daily-Emojis/meditate.png
+    - assets/images/daily-Emojis/notes.png
+    - assets/images/daily-Emojis/phone.png
+    - assets/images/daily-Emojis/walk.png
+    - assets/images/daily-Emojis/waves.png
+    - assets/images/daily-Emojis/fire.png
+    - assets/images/daily-Emojis/yesUpdate.png
+    - assets/images/daily-Emojis/noupdate.png
 
 
 

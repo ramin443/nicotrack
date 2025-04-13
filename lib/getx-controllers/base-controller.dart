@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/screens/base/home.dart';
 import 'package:nicotrack/screens/base/plan-alt.dart';
-import 'package:nicotrack/screens/base/plan.dart';
 import 'package:nicotrack/screens/base/settings.dart';
 
 import '../constants/font-constants.dart';
