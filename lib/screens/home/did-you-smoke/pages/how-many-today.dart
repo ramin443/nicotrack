@@ -16,10 +16,23 @@ class HowManyToday extends StatefulWidget {
 }
 
 class _HowManyTodayState extends State<HowManyToday> {
+  final didYouSmokeMainController = Get.find<DidYouSmokeController>();
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DidYouSmokeController>(
         init: DidYouSmokeController(),
+        initState: (v) {
+          // Ensure the initial index matches the current selection
+          final initialIndex = didYouSmokeMainController.packNumbers
+              .indexOf(didYouSmokeMainController.selectedNumber1);
+          didYouSmokeMainController.listWheelController =
+              FixedExtentScrollController(
+            initialItem: initialIndex >= 0 ? initialIndex : 0,
+          );
+          didYouSmokeMainController.listWheelController
+              .jumpToItem(initialIndex);
+        },
         builder: (didYouSmokeController) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,

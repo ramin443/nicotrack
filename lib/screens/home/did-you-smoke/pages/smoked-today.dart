@@ -69,8 +69,7 @@ class _SmokedTodayState extends State<SmokedToday> {
               SizedBox(
                 height: 75.h,
               ),
-              // didYouSmokeController.smokedTodaySelection(),
-              didYouSmokeController.avoidNextGrid(),
+              didYouSmokeController.smokedTodaySelection(),
               SizedBox(
                 height: 54.h,
               ),

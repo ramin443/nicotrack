@@ -49,6 +49,7 @@ dependencies:
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
   dotted_border: ^2.1.0
+  confetti: ^0.8.0
   dotted_line: ^3.2.3
 
 dev_dependencies:
@@ -178,6 +179,7 @@ flutter:
     - assets/images/daily-Emojis/fire.png
     - assets/images/daily-Emojis/yesUpdate.png
     - assets/images/daily-Emojis/noupdate.png
+    - assets/images/button-bg/awardbg2.png
 
 
 

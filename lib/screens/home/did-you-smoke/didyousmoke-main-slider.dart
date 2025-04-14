@@ -61,6 +61,7 @@ class _DidYouSmokeMainSliderState extends State<DidYouSmokeMainSlider> {
                                 HapticFeedback.mediumImpact();
                               }
                               didYouSmokeController.previousPage();
+                              didYouSmokeController.getCurrentPageStatus();
                             },
                             child: Container(
                               height: 36.w,

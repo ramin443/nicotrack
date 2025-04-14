@@ -29,7 +29,7 @@ class _UpdateQuitDateState extends State<UpdateQuitDate> {
                 height: 18.h,
               ),
               SizedBox(
-                width: 247.w,
+                width: 227.w,
                 child: TextAutoSize(
                   "🗓️ Update Your Quit Date?",
                   textAlign: TextAlign.center,
@@ -44,21 +44,38 @@ class _UpdateQuitDateState extends State<UpdateQuitDate> {
                 height: 9.h,
               ),
               SizedBox(
-                width: 240.w,
-                child: TextAutoSize(
-                  "Update your quit date to today? Or treat this as a rare fluke and keep your original quit date April 7, 2025?",
+                width: 220.w,
+                child: RichText(
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      height: 1.15,
-                      fontSize: 13.sp,
-                      fontFamily: circularBook,
-                      color: Color(0xff979797)),
-                ),
+                    text: TextSpan(children: [
+                  TextSpan(
+                      text:
+                          "Update your quit date to today? Or treat this as a rare fluke and keep your original quit date ",
+                      style: TextStyle(
+                          height: 1.15,
+                          fontSize: 13.sp,
+                          fontFamily: circularBook,
+                          color: Color(0xff979797))),
+                  TextSpan(
+                      text: "April 7, 2025",
+                      style: TextStyle(
+                          height: 1.15,
+                          fontSize: 13.sp,
+                          fontFamily: circularBold,
+                          color: Colors.black87)),
+                  TextSpan(
+                      text: "?",
+                      style: TextStyle(
+                          height: 1.15,
+                          fontSize: 13.sp,
+                          fontFamily: circularBook,
+                          color: Color(0xff979797))),
+                ])),
               ),
               SizedBox(
-                height: 26.h,
+                height: 46.h,
               ),
-
+              didYouSmokeController.updateQuitDateSelection(),
               SizedBox(
                 height: 54.h,
               ),

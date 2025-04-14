@@ -131,13 +131,7 @@ class OnboardingController extends GetxController {
     }
   }
 
-  void initializeToStart() {
-    // Initialize controller to set the pre-selected item without animation
-    listWheelController2 = FixedExtentScrollController(
-      initialItem: packNumbers.indexOf(
-          selectedNumber2), // Selects the correct number without scrolling
-    );
-  }
+
 
   Widget topSlider() {
     return Padding(

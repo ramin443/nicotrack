@@ -14,13 +14,24 @@ class GradientText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: style.copyWith(
-        foreground: Paint()
-          ..shader = gradient.createShader(
-            Rect.fromLTWH(0, 0, text.length * style.fontSize!, style.fontSize!),
-          ),
+    // Use TextPainter to measure text width
+    final textPainter = TextPainter(
+      text: TextSpan(text: text, style: style),
+      textDirection: TextDirection.ltr,
+    )..layout();
+
+    final textSize = textPainter.size;
+
+    return ShaderMask(
+      shaderCallback: (bounds) {
+        return gradient.createShader(
+          Rect.fromLTWH(0, 0, textSize.width, textSize.height),
+        );
+      },
+      blendMode: BlendMode.srcIn,
+      child: Text(
+        text,
+        style: style.copyWith(color: Colors.white), // white so gradient shows
       ),
     );
   }

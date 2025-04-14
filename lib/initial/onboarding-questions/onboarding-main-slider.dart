@@ -35,43 +35,43 @@ class _OnboardingMainSliderState extends State<OnboardingMainSlider> {
                         surfaceTintColor: Colors.transparent,
                         centerTitle: false,
                         title: Row(
-                          children: [                            GestureDetector(
-                            onTap: () {
-                              if (onboardingController.currentPage != 0) {
-                                HapticFeedback.mediumImpact();
-                              }
-                              onboardingController.previousPage();
-                              onboardingController.getCurrentPageStatus();
-                            },
-                            child: Container(
-                              height: 36.w,
-                              width: 36.w,
-                              padding:
-                              EdgeInsets.only(right: 2.w, bottom: 2.w),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: onboardingController.currentPage == 0
-                                      ? Colors.black54
-                                      : nicotrackBlack1),
-                              child: Center(
-                                child: Icon(
-                                  FeatherIcons.chevronLeft,
-                                  color: Colors.white,
-                                  size: 24.w,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                if (onboardingController.currentPage != 0) {
+                                  HapticFeedback.mediumImpact();
+                                }
+                                onboardingController.previousPage();
+                                onboardingController.getCurrentPageStatus();
+                              },
+                              child: Container(
+                                height: 36.w,
+                                width: 36.w,
+                                padding:
+                                    EdgeInsets.only(right: 2.w, bottom: 2.w),
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: onboardingController.currentPage == 0
+                                        ? Colors.black54
+                                        : nicotrackBlack1),
+                                child: Center(
+                                  child: Icon(
+                                    FeatherIcons.chevronLeft,
+                                    color: Colors.white,
+                                    size: 24.w,
+                                  ),
                                 ),
                               ),
-                            ),
-                          )
+                            )
                           ],
                         ),
                       ),
                       SizedBox(
                         height: 24.h,
                       ),
-                            SizedBox(
-                              width: 14.w,
-                            ),
-
+                      SizedBox(
+                        width: 14.w,
+                      ),
                       onboardingController.topSlider(),
                       onboardingController.mainDisplay()
                     ],

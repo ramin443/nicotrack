@@ -29,7 +29,7 @@ class _NextAvoidState extends State<NextAvoid> {
                 height: 18.h,
               ),
               SizedBox(
-                width: 247.w,
+                width: 267.w,
                 child: TextAutoSize(
                   "What will you do next time to avoid ⚠️ it?",
                   textAlign: TextAlign.center,
@@ -44,7 +44,7 @@ class _NextAvoidState extends State<NextAvoid> {
               SizedBox(
                 height: 26.h,
               ),
-
+              didYouSmokeController.avoidNextGrid(),
               SizedBox(
                 height: 54.h,
               ),

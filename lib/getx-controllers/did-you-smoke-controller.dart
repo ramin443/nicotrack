@@ -1,7 +1,10 @@
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:nicotrack/models/did-you-smoke/didyouSmoke-model.dart';
+import 'package:nicotrack/screens/elements/linear-progress-bar.dart';
 import 'package:nicotrack/screens/home/did-you-smoke/pages/how-many-today.dart';
 import 'package:nicotrack/screens/home/did-you-smoke/pages/how-you-feel.dart';
 import 'package:nicotrack/screens/home/did-you-smoke/pages/next-avoid.dart';
@@ -13,13 +16,13 @@ import '../constants/color-constants.dart';
 import '../constants/font-constants.dart';
 import '../constants/image-constants.dart';
 import '../models/emoji-text-pair/emojitext-model.dart';
-import '../models/mood-model/mood-model.dart';
+import '../screens/elements/data-cubes.dart';
 import '../screens/elements/textAutoSize.dart';
 
-class DidYouSmokeController extends GetxController{
+class DidYouSmokeController extends GetxController {
   final PageController pageController = PageController();
   int currentPage = 0;
-  MoodModel moodFilledData = MoodModel();
+  DidYouSmokeModel didYouSmokeFilledData = DidYouSmokeModel();
   List<Widget> pages = [
     SmokedToday(),
     HowManyToday(),
@@ -37,10 +40,10 @@ class DidYouSmokeController extends GetxController{
   int selectedNumber1 = 5; // Default selected number
   late FixedExtentScrollController listWheelController;
   final List<int> packNumbers =
-  List.generate(20, (index) => index + 1); // 1 to 15
+      List.generate(20, (index) => index + 1); // 1 to 15
 
   //What Trigerred variables
-  int selectedTriggered = -1;
+  List<Map<String, dynamic>> selectedTriggered = [];
   List<EmojiTextModel> triggerPairs = [
     EmojiTextModel(emoji: stressedEmoji, text: "Work Stress"),
     EmojiTextModel(emoji: tiredImg, text: "Relationship"),
@@ -51,7 +54,7 @@ class DidYouSmokeController extends GetxController{
   ];
 
   //How you feel variables
-  int selectedhowYouFeelIndex = -1;
+  List<Map<String, dynamic>> selectedhowYouFeelIndex = [];
   List<EmojiTextModel> howyouFeelPairs = [
     EmojiTextModel(emoji: sadImg, text: " Guilty"),
     EmojiTextModel(emoji: frustratedImg, text: "Frustrated "),
@@ -61,7 +64,7 @@ class DidYouSmokeController extends GetxController{
   ];
 
   //Avoid Next variables
-  int selectedAvoidIndex = -1;
+  List<Map<String, dynamic>> selectedAvoidIndex = [];
   List<EmojiTextModel> nextAvoidPairs = [
     EmojiTextModel(emoji: meditateImg, text: " Use breathing exercises"),
     EmojiTextModel(emoji: gameImg, text: "Distract with a game"),
@@ -73,6 +76,7 @@ class DidYouSmokeController extends GetxController{
 
   // UpdateQuitDate variables
   bool updateQuitDate = false;
+
 
   Widget continueButton() {
     return GestureDetector(
@@ -88,33 +92,59 @@ class DidYouSmokeController extends GetxController{
       child: Container(
         width: 346.w,
         height: 54.h,
-        decoration:  currentPage == (pages.length - 1) ?
-        BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-                fullButtonBg), // Load from assets
-            fit: BoxFit
-                .cover, // Adjusts how the image fits the container
-          ),
-        ):
-        BoxDecoration(
-          color: currentPageDoneStatus
-              ? nicotrackBlack1
-              : nicotrackButtonLightBlack,
-          borderRadius: BorderRadius.circular(30.r),
-        ),
+        decoration: currentPage == (pages.length - 1)
+            ? BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(fullButtonBg), // Load from assets
+                  fit: BoxFit.cover, // Adjusts how the image fits the container
+                ),
+              )
+            : BoxDecoration(
+                color: currentPageDoneStatus
+                    ? nicotrackBlack1
+                    : nicotrackButtonLightBlack,
+                borderRadius: BorderRadius.circular(30.r),
+              ),
         child: Center(
           child: TextAutoSize(
-            currentPage == (pages.length - 1) ? "🙌 Submit" : "Continue",
+            currentPage == (pages.length - 1) ? "🏠 Finish" : "Continue",
             style: TextStyle(
                 fontSize: 18.sp,
                 fontFamily: circularBold,
-                color: currentPage == (pages.length - 1) ?nicotrackBlack1:Colors.white),
+                color: currentPage == (pages.length - 1)
+                    ? nicotrackBlack1
+                    : Colors.white),
           ),
         ),
       ),
     );
   }
+
+  Widget gotoHomeBtn() {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        width: 346.w,
+        height: 54.h,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(fullButtonBg), // Load from assets
+            fit: BoxFit.cover, // Adjusts how the image fits the container
+          ),
+        ),
+        child: Center(
+          child: TextAutoSize(
+            "🏠 Go to home",
+            style: TextStyle(
+                fontSize: 18.sp,
+                fontFamily: circularBold,
+                color: nicotrackBlack1),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget topSlider() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 32.w),
@@ -142,6 +172,7 @@ class DidYouSmokeController extends GetxController{
       ),
     );
   }
+
   Widget mainDisplay() {
     return Expanded(
       child: PageView.builder(
@@ -172,8 +203,9 @@ class DidYouSmokeController extends GetxController{
                     onTap: () {
                       HapticFeedback.heavyImpact();
                       smokedToday = true;
-                      // onboardingFilledData.quitMethod = 1;
-                      update();
+                      didYouSmokeFilledData =
+                          didYouSmokeFilledData.copyWith(hasSmokedToday: 0);
+                      getCurrentPageStatus();
                     },
                     child: Container(
                       width: 155.h,
@@ -183,11 +215,11 @@ class DidYouSmokeController extends GetxController{
                         borderRadius: BorderRadius.circular(16.r),
                         image: smokedToday
                             ? DecorationImage(
-                          image: AssetImage(
-                              quitMethodBG), // Replace with your image path
-                          fit: BoxFit
-                              .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
-                        )
+                                image: AssetImage(
+                                    quitMethodBG), // Replace with your image path
+                                fit: BoxFit
+                                    .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
+                              )
                             : null,
                       ),
                       child: Column(
@@ -229,7 +261,9 @@ class DidYouSmokeController extends GetxController{
                     onTap: () {
                       HapticFeedback.heavyImpact();
                       smokedToday = false;
-                      update();
+                      didYouSmokeFilledData =
+                          didYouSmokeFilledData.copyWith(hasSmokedToday: 1);
+                      getCurrentPageStatus();
                     },
                     child: Container(
                       // width: 155.h,
@@ -238,11 +272,11 @@ class DidYouSmokeController extends GetxController{
                           color: Color(0xffF4F4F4),
                           image: !smokedToday
                               ? DecorationImage(
-                            image: AssetImage(
-                                quitMethodBG), // Replace with your image path
-                            fit: BoxFit
-                                .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
-                          )
+                                  image: AssetImage(
+                                      quitMethodBG), // Replace with your image path
+                                  fit: BoxFit
+                                      .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
+                                )
                               : null,
                           borderRadius: BorderRadius.circular(16.r)),
                       child: Column(
@@ -272,7 +306,6 @@ class DidYouSmokeController extends GetxController{
                           SizedBox(
                             height: 11.h,
                           ),
-
                         ],
                       ),
                     ))),
@@ -282,47 +315,51 @@ class DidYouSmokeController extends GetxController{
 
   Widget cigarreteFrequencySlider() {
     return // Number Picker
-      SizedBox(
-        height: 300.h,
-        child: ListWheelScrollView.useDelegate(
-          controller: listWheelController,
-          itemExtent: 120,
-          // Spacing between items
-          perspective: 0.005,
-          diameterRatio: 5.0,
-          physics: BouncingScrollPhysics(),
-          onSelectedItemChanged: (index) {
-            HapticFeedback.mediumImpact();
-            selectedNumber1 = packNumbers[index];
-            // onboardingFilledData.numberOfCigarettesIn1Pack = packNumbers[index];
-            getCurrentPageStatus();
-          },
-          childDelegate: ListWheelChildBuilderDelegate(
-            builder: (context, index) {
-              bool isSelected = selectedNumber1 == packNumbers[index];
+        SizedBox(
+      height: 300.h,
+      child: ListWheelScrollView.useDelegate(
+        controller: listWheelController,
+        itemExtent: 120,
+        // Spacing between items
+        perspective: 0.005,
+        diameterRatio: 5.0,
+        physics: BouncingScrollPhysics(),
+        onSelectedItemChanged: (index) {
+          HapticFeedback.mediumImpact();
+          selectedNumber1 = packNumbers[index];
+          didYouSmokeFilledData =
+              didYouSmokeFilledData.copyWith(howManyCigs: selectedNumber1);
+          getCurrentPageStatus();
+        },
+        childDelegate: ListWheelChildBuilderDelegate(
+          builder: (context, index) {
+            bool isSelected = selectedNumber1 == packNumbers[index];
 
-              return AnimatedDefaultTextStyle(
-                duration: Duration(milliseconds: 300),
-                style: TextStyle(
-                    fontSize: 86.sp,
-                    fontFamily: circularBold,
-                    color: isSelected
-                        ? nicotrackPurple
-                        : nicotrackPurple.withOpacity(0.3)),
-                child: Center(child: Text(packNumbers[index].toString())),
-              );
-            },
-            childCount: packNumbers.length,
-          ),
+            return AnimatedDefaultTextStyle(
+              duration: Duration(milliseconds: 300),
+              style: TextStyle(
+                  fontSize: 86.sp,
+                  fontFamily: circularBold,
+                  color: isSelected
+                      ? nicotrackPurple
+                      : nicotrackPurple.withOpacity(0.3)),
+              child: Center(child: Text(packNumbers[index].toString())),
+            );
+          },
+          childCount: packNumbers.length,
         ),
-      );
+      ),
+    );
   }
 
   Widget whatTriggeredGrid() {
     // Grid View for selection
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.only(left: 28.w, right: 28.w,),
+        padding: EdgeInsets.only(
+          left: 28.w,
+          right: 28.w,
+        ),
         child: GridView.builder(
           itemCount: triggerPairs.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -332,16 +369,21 @@ class DidYouSmokeController extends GetxController{
             childAspectRatio: 1, // Adjusts box shape
           ),
           itemBuilder: (context, index) {
-            bool isSelected = selectedNumber1 == index;
+            bool isSelected = selectedTriggered.any(
+                (element) => (element['emoji'] == triggerPairs[index].emoji));
 
             return GestureDetector(
               onTap: () {
                 HapticFeedback.mediumImpact();
-                if (selectedNumber1 == index) {
-
+                if (selectedTriggered.any((element) =>
+                    (element['emoji'] == triggerPairs[index].emoji))) {
+                  selectedTriggered.removeWhere((elem) =>
+                      elem['emoji'] == triggerPairs[index].emoji &&
+                      elem['text'] == triggerPairs[index].text);
                 } else {
-                  selectedNumber1 = index;
-                  moodFilledData = moodFilledData.copyWith(moodAffecting: triggerPairs[index].toJson());
+                  selectedTriggered.add(triggerPairs[index].toJson());
+                  didYouSmokeFilledData = didYouSmokeFilledData.copyWith(
+                      whatTriggerred: selectedTriggered);
                 }
                 getCurrentPageStatus();
               },
@@ -389,7 +431,10 @@ class DidYouSmokeController extends GetxController{
     // Grid View for selection
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.only(left: 28.w, right: 28.w,),
+        padding: EdgeInsets.only(
+          left: 28.w,
+          right: 28.w,
+        ),
         child: GridView.builder(
           itemCount: howyouFeelPairs.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -399,16 +444,20 @@ class DidYouSmokeController extends GetxController{
             childAspectRatio: 1, // Adjusts box shape
           ),
           itemBuilder: (context, index) {
-            bool isSelected = selectedhowYouFeelIndex == index;
+            bool isSelected = selectedhowYouFeelIndex.any(
+                (element) => element["emoji"] == howyouFeelPairs[index].emoji);
 
             return GestureDetector(
               onTap: () {
                 HapticFeedback.mediumImpact();
-                if (selectedhowYouFeelIndex == index) {
-
+                if (selectedhowYouFeelIndex.any((element) =>
+                    element["emoji"] == howyouFeelPairs[index].emoji)) {
+                  selectedhowYouFeelIndex.removeWhere(
+                      (elem) => elem["emoji"] == howyouFeelPairs[index].emoji);
                 } else {
-                  selectedhowYouFeelIndex = index;
-                  moodFilledData = moodFilledData.copyWith(moodAffecting: howyouFeelPairs[index].toJson());
+                  selectedhowYouFeelIndex.add(howyouFeelPairs[index].toJson());
+                  didYouSmokeFilledData = didYouSmokeFilledData.copyWith(
+                      howYouFeel: selectedhowYouFeelIndex);
                 }
                 getCurrentPageStatus();
               },
@@ -457,7 +506,10 @@ class DidYouSmokeController extends GetxController{
     // Grid View for selection
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.only(left: 28.w, right: 28.w,),
+        padding: EdgeInsets.only(
+          left: 28.w,
+          right: 28.w,
+        ),
         child: GridView.builder(
           itemCount: nextAvoidPairs.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -467,16 +519,20 @@ class DidYouSmokeController extends GetxController{
             childAspectRatio: 1, // Adjusts box shape
           ),
           itemBuilder: (context, index) {
-            bool isSelected = selectedAvoidIndex == index;
+            bool isSelected = selectedAvoidIndex.any(
+                (element) => element["emoji"] == nextAvoidPairs[index].emoji);
 
             return GestureDetector(
               onTap: () {
                 HapticFeedback.mediumImpact();
-                if (selectedAvoidIndex == index) {
-
+                if (selectedAvoidIndex.any((element) =>
+                    element["emoji"] == nextAvoidPairs[index].emoji)) {
+                  selectedAvoidIndex.removeWhere((element) =>
+                      element["emoji"] == nextAvoidPairs[index].emoji);
                 } else {
-                  selectedAvoidIndex = index;
-                  moodFilledData = moodFilledData.copyWith(moodAffecting: nextAvoidPairs[index].toJson());
+                  selectedAvoidIndex.add(nextAvoidPairs[index].toJson());
+                  didYouSmokeFilledData = didYouSmokeFilledData.copyWith(
+                      avoidNext: selectedAvoidIndex);
                 }
                 getCurrentPageStatus();
               },
@@ -533,7 +589,9 @@ class DidYouSmokeController extends GetxController{
                     onTap: () {
                       HapticFeedback.heavyImpact();
                       updateQuitDate = true;
-                      // onboardingFilledData.quitMethod = 1;
+                      didYouSmokeFilledData =
+                          didYouSmokeFilledData.copyWith(updateQuitDate: 0);
+                      getCurrentPageStatus();
                       update();
                     },
                     child: Container(
@@ -544,11 +602,11 @@ class DidYouSmokeController extends GetxController{
                         borderRadius: BorderRadius.circular(16.r),
                         image: updateQuitDate
                             ? DecorationImage(
-                          image: AssetImage(
-                              quitMethodBG), // Replace with your image path
-                          fit: BoxFit
-                              .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
-                        )
+                                image: AssetImage(
+                                    quitMethodBG), // Replace with your image path
+                                fit: BoxFit
+                                    .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
+                              )
                             : null,
                       ),
                       child: Column(
@@ -565,18 +623,37 @@ class DidYouSmokeController extends GetxController{
                           SizedBox(
                             height: 24.h,
                           ),
-                          TextAutoSize(
-                            "Yes, update my quit date",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              height: 1.2,
-                              fontSize: 18.sp,
-                              fontFamily: circularBold,
-                              color: nicotrackBlack1,
+                          SizedBox(
+                            width: 130.w,
+                            child: TextAutoSize(
+                              "Yes, update my quit date",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                height: 1.2,
+                                fontSize: 18.sp,
+                                fontFamily: circularBold,
+                                color: nicotrackBlack1,
+                              ),
                             ),
                           ),
                           SizedBox(
-                            height: 11.h,
+                            height: 8.h,
+                          ),
+                          SizedBox(
+                            width: 145.w,
+                            child: TextAutoSize(
+                              "(Resets your smoke-free streak to Day 0)",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                height: 1.2,
+                                fontSize: 11.sp,
+                                fontFamily: circularMedium,
+                                color: Colors.black54,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8.h,
                           ),
                         ],
                       ),
@@ -590,7 +667,9 @@ class DidYouSmokeController extends GetxController{
                     onTap: () {
                       HapticFeedback.heavyImpact();
                       updateQuitDate = false;
-                      update();
+                      didYouSmokeFilledData =
+                          didYouSmokeFilledData.copyWith(updateQuitDate: 1);
+                      getCurrentPageStatus();
                     },
                     child: Container(
                       // width: 155.h,
@@ -599,11 +678,11 @@ class DidYouSmokeController extends GetxController{
                           color: Color(0xffF4F4F4),
                           image: !updateQuitDate
                               ? DecorationImage(
-                            image: AssetImage(
-                                quitMethodBG), // Replace with your image path
-                            fit: BoxFit
-                                .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
-                          )
+                                  image: AssetImage(
+                                      quitMethodBG), // Replace with your image path
+                                  fit: BoxFit
+                                      .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
+                                )
                               : null,
                           borderRadius: BorderRadius.circular(16.r)),
                       child: Column(
@@ -620,25 +699,121 @@ class DidYouSmokeController extends GetxController{
                           SizedBox(
                             height: 24.h,
                           ),
-                          TextAutoSize(
-                            "No, keep my quit date",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              height: 1.2,
-                              fontSize: 18.sp,
-                              fontFamily: circularBold,
-                              color: nicotrackBlack1,
+                          SizedBox(
+                            width: 130.w,
+                            child: TextAutoSize(
+                              "No, keep my quit date",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                height: 1.2,
+                                fontSize: 18.sp,
+                                fontFamily: circularBold,
+                                color: nicotrackBlack1,
+                              ),
                             ),
                           ),
                           SizedBox(
-                            height: 11.h,
+                            height: 8.h,
                           ),
-
+                          SizedBox(
+                            width: 145.w,
+                            child: TextAutoSize(
+                              "(This was just a one-time slip — I’m still on track!)",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                height: 1.2,
+                                fontSize: 11.sp,
+                                fontFamily: circularMedium,
+                                color: Colors.black54,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8.h,
+                          ),
                         ],
                       ),
                     ))),
           ],
         ));
+  }
+
+  Widget notSmokedTodayDataCubes() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: GridView.count(
+        shrinkWrap: true,
+        crossAxisCount: 2,
+        crossAxisSpacing: 6.w,
+        mainAxisSpacing: 6.w,
+        physics: NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.all(0),
+        childAspectRatio: 1.58,
+        children: [
+          mainCard(
+            emoji: bicepsEmoji,
+            value: '24',
+            label: 'Days since\nlast smoked',
+            backgroundColor: const Color(0xFFB0F0A1), // green-ish background
+          ),
+          statCard(
+            emoji: moneyEmoji,
+            value: 24,
+            label: 'Money saved',
+            isCost: true,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget financialGoalProgressBar() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              RichText(
+                  textAlign: TextAlign.left,
+                  text: TextSpan(
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontFamily: circularMedium,
+                        height: 1.1,
+                        color: nicotrackBlack1,
+                      ),
+                      children: [
+                        TextSpan(text: '🥅 Financial Goal: 📱 iPad '),
+                        TextSpan(
+                          text: '4%',
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontFamily: circularBold,
+                            height: 1.1,
+                            color: Color(0xff6D9C32),
+                          ),
+                        ),
+                        TextSpan(text: ' completed.'),
+                      ])),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 9.h,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 18.w),
+          child: StyledProgressBar(progress: 0.04),
+        ),
+
+        SizedBox(
+          height: 18.h,
+        ),
+      ],
+    );
   }
 
   void initializeToStart() {
@@ -648,6 +823,7 @@ class DidYouSmokeController extends GetxController{
           selectedNumber1), // Selects the correct number without scrolling
     );
   }
+
   void previousPage() {
     // Move to the next page
     if (currentPage > 0) {
@@ -678,44 +854,54 @@ class DidYouSmokeController extends GetxController{
       print("Onboarding complete!");
     }
   }
+
   void goToNextPage(int page) {
     currentPage = page;
     update();
   }
 
   void getCurrentPageStatus() {
+    print("FIlled data is ${didYouSmokeFilledData.toJson()}");
     switch (currentPage) {
       case 0:
-        if (moodFilledData.selfFeeling.isNotEmpty) {
+        if (didYouSmokeFilledData.hasSmokedToday != -1) {
           currentPageDoneStatus = true;
         } else {
           currentPageDoneStatus = false;
         }
       case 1:
-        if (moodFilledData.moodAffecting.isNotEmpty) {
+        if (didYouSmokeFilledData.howManyCigs != -1) {
           currentPageDoneStatus = true;
         } else {
           currentPageDoneStatus = false;
         }
       case 2:
-        if (moodFilledData.anyCravingToday != -1) {
+        if (didYouSmokeFilledData.whatTriggerred.isNotEmpty) {
           currentPageDoneStatus = true;
         } else {
           currentPageDoneStatus = false;
         }
       case 3:
-        if (moodFilledData.craveTiming.isNotEmpty) {
+        if (didYouSmokeFilledData.howYouFeel.isNotEmpty) {
           currentPageDoneStatus = true;
         } else {
           currentPageDoneStatus = false;
         }
       case 4:
-        currentPageDoneStatus = true;
+        if (didYouSmokeFilledData.avoidNext.isNotEmpty) {
+          currentPageDoneStatus = true;
+        } else {
+          currentPageDoneStatus = false;
+        }
+      case 5:
+        if (didYouSmokeFilledData.updateQuitDate != -1) {
+          currentPageDoneStatus = true;
+        } else {
+          currentPageDoneStatus = false;
+        }
       default:
         currentPageDoneStatus = false;
     }
     update();
   }
-
-
 }

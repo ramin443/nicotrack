@@ -88,3 +88,4 @@ String wavesImg = 'assets/images/daily-Emojis/waves.png';
 String fireImg= "assets/images/daily-Emojis/fire.png";
 String yesUpdateImg = 'assets/images/daily-Emojis/yesUpdate.png';
 String noUpdateImg= "assets/images/daily-Emojis/noupdate.png";
+String awardBg2= "assets/images/button-bg/awardbg2.png";
