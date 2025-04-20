@@ -25,6 +25,7 @@ class _PlanState extends State<Plan> {
         init: PlanController(),
         builder: (planController) {
           return Scaffold(
+           key: planController.scaffoldState,
             backgroundColor: Colors.white,
             body: SafeArea(
               child: SingleChildScrollView(
@@ -156,7 +157,7 @@ class _PlanState extends State<Plan> {
                     Column(
                       children: [
                         SizedBox(height: 24.h),
-                        planController.withdrawalTimeline(),
+                        planController.withdrawalTimeline(context),
                         SizedBox(height: 24.h),
                       ],
                     )

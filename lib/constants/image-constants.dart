@@ -89,3 +89,8 @@ String fireImg= "assets/images/daily-Emojis/fire.png";
 String yesUpdateImg = 'assets/images/daily-Emojis/yesUpdate.png';
 String noUpdateImg= "assets/images/daily-Emojis/noupdate.png";
 String awardBg2= "assets/images/button-bg/awardbg2.png";
+
+String barrenMountain= "assets/images/mountains/barrenpng.png";
+String icyMountain= "assets/images/mountains/icy.png";
+String icyVolcMountain= "assets/images/mountains/icyvolc.png";
+String volcMountain= "assets/images/mountains/volcanic.png";

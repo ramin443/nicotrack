@@ -185,7 +185,7 @@ class _PlanAltState extends State<PlanAlt> {
                       Column(
                         children: [
                           SizedBox(height: 24.h),
-                          planController.withdrawalTimeline(),
+                          planController.withdrawalTimeline(context),
                           SizedBox(height: 24.h),
                         ],
                       )

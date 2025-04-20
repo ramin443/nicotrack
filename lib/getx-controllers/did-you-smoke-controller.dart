@@ -121,27 +121,29 @@ class DidYouSmokeController extends GetxController {
   }
 
   Widget gotoHomeBtn() {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        width: 346.w,
-        height: 54.h,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(fullButtonBg), // Load from assets
-            fit: BoxFit.cover, // Adjusts how the image fits the container
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () {},
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(fullButtonBg,
+                width: 346.w,
+              ),
+               TextAutoSize(
+                    "🏠 Go to home",
+                    style: TextStyle(
+                        fontSize: 18.sp,
+                        fontFamily: circularBold,
+                        color: nicotrackBlack1),
+                  ),
+
+            ],
           ),
         ),
-        child: Center(
-          child: TextAutoSize(
-            "🏠 Go to home",
-            style: TextStyle(
-                fontSize: 18.sp,
-                fontFamily: circularBold,
-                color: nicotrackBlack1),
-          ),
-        ),
-      ),
+        SizedBox(height: 24.h,)
+      ],
     );
   }
 

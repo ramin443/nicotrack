@@ -45,12 +45,15 @@ dependencies:
   get: ^4.6.5
   intl: ^0.17.0
   sqflite: ^2.2.7
-  flutter_svg: ^2.0.5
+  flutter_svg: ^1.1.6
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
   dotted_border: ^2.1.0
   confetti: ^0.8.0
   dotted_line: ^3.2.3
+  flutter_emoji: ^2.5.1
+  cached_network_image: ^3.4.1
+
 
 dev_dependencies:
   build_runner: ^2.4.6
@@ -91,6 +94,10 @@ flutter:
     - family: CircularBold
       fonts:
         - asset: assets/fonts/CircularStd-Bold.otf
+    - family: CircularBoldItalic
+      fonts:
+        - asset: assets/fonts/circular-std-5.ttf
+
 
   assets:
     - assets/images/branding/splashLogo.svg
@@ -180,6 +187,10 @@ flutter:
     - assets/images/daily-Emojis/yesUpdate.png
     - assets/images/daily-Emojis/noupdate.png
     - assets/images/button-bg/awardbg2.png
+    - assets/images/mountains/barrenpng.png
+    - assets/images/mountains/icy.png
+    - assets/images/mountains/icyvolc.png
+    - assets/images/mountains/volcanic.png
 
 
 

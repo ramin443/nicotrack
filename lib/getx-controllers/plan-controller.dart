@@ -6,7 +6,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/constants/image-constants.dart';
+import 'package:nicotrack/constants/quick-function-constants.dart';
 import 'package:nicotrack/screens/elements/gradient-text.dart';
+import 'package:nicotrack/screens/elements/info-bottom-sheet.dart';
 
 import '../constants/font-constants.dart';
 import '../models/timeline-item-model/timelineItem-model.dart';
@@ -14,6 +16,8 @@ import '../screens/elements/textAutoSize.dart';
 
 class PlanController extends GetxController {
   int tabIndex = 0;
+  final scaffoldState = GlobalKey<ScaffoldState>();
+
   List<TimelineItemModel> timelineItems = [
     TimelineItemModel(
         dayNumber: 0,
@@ -173,7 +177,7 @@ class PlanController extends GetxController {
     );
   }
 
-  Widget withdrawalTimeline() {
+  Widget withdrawalTimeline(BuildContext context) {
     return SizedBox(
         width: double.infinity,
         child: Column(
@@ -182,7 +186,7 @@ class PlanController extends GetxController {
               Column(
                 children: [
                   timelineRow(
-                      timelineModelItem: timelineItems[index], index: index),
+                      timelineModelItem: timelineItems[index], index: index, context: context),
                   SizedBox(
                     height: index == 0 ? 0 : 8.h,
                   ),
@@ -241,7 +245,7 @@ class PlanController extends GetxController {
   }
 
   Widget timelineRow(
-      {required int index, required TimelineItemModel timelineModelItem}) {
+      {required  BuildContext context,required int index, required TimelineItemModel timelineModelItem}) {
     return Stack(
       children: [
         Padding(
@@ -357,62 +361,74 @@ class PlanController extends GetxController {
                         )
                       ],
                     ),
-              Container(
-                width: 222.w,
-                padding: EdgeInsets.only(
-                    left: 16.w, right: 16.w, top: 12.h, bottom: 16.h),
-                decoration: BoxDecoration(
-                    color: Color(0xffE5DED6).withOpacity(0.34),
-                    borderRadius: BorderRadius.circular(13.r)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        TextAutoSize(
-                          "📅 ${timelineModelItem.dayDuration}",
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontFamily: circularBold,
-                            height: 1.1,
-                            color: nicotrackBlack1,
+              GestureDetector(
+                onTap: (){
+                  openDraggableBottomSheet( context: context, index: index);
+                  // showBottomSheet(
+                  //   enableDrag: true,
+                  //   backgroundColor: Colors.transparent,
+                  //    builder:  (context){
+                  //     return InfoBottomSheet();
+                  //     }, context: context
+                  // );
+                },
+                child: Container(
+                  width: 222.w,
+                  padding: EdgeInsets.only(
+                      left: 16.w, right: 16.w, top: 12.h, bottom: 16.h),
+                  decoration: BoxDecoration(
+                      color: Color(0xffE5DED6).withOpacity(0.34),
+                      borderRadius: BorderRadius.circular(13.r)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          TextAutoSize(
+                            "📅 ${timelineModelItem.dayDuration}",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontFamily: circularBold,
+                              height: 1.1,
+                              color: nicotrackBlack1,
+                            ),
                           ),
+                          Icon(
+                            FeatherIcons.arrowUpRight,
+                            color: nicotrackBlack1,
+                            size: 18.w,
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 12.h,
+                      ),
+                      TextAutoSize(
+                        "What happens to your body",
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontFamily: circularMedium,
+                          height: 1.1,
+                          color: const Color(0xFFFF611D),
                         ),
-                        Icon(
-                          FeatherIcons.arrowUpRight,
+                      ),
+                      SizedBox(
+                        height: 6.h,
+                      ),
+                      TextAutoSize(
+                        timelineModelItem.whatHappens,
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontFamily: circularBook,
+                          height: 1.2,
                           color: nicotrackBlack1,
-                          size: 18.w,
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 12.h,
-                    ),
-                    TextAutoSize(
-                      "What happens to your body",
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontFamily: circularMedium,
-                        height: 1.1,
-                        color: const Color(0xFFFF611D),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 6.h,
-                    ),
-                    TextAutoSize(
-                      timelineModelItem.whatHappens,
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontFamily: circularBook,
-                        height: 1.2,
-                        color: nicotrackBlack1,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               )
             ],

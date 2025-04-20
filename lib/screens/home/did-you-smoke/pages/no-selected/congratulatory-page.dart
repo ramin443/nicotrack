@@ -50,127 +50,134 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
         builder: (didYouSmokeController) {
           return Scaffold(
             backgroundColor: Colors.white,
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: Align(
-              alignment: Alignment.bottomCenter,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  didYouSmokeController.gotoHomeBtn(),
-                  SizedBox(
-                    height: 12.h,
-                  )
-                ],
-              ),
-            ),
+            // floatingActionButtonLocation:
+            //     FloatingActionButtonLocation.centerDocked,
+            // floatingActionButton:
             body: Stack(
               children: [
                 SafeArea(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 24.h,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 22.0),
-                        child: AppBar(
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                          automaticallyImplyLeading: false,
-                          actions: [
-                            Container(
-                              height: 36.w,
-                              width: 36.w,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Color(0xffFF611D).withOpacity(0.20)),
-                              child: Center(
-                                child: Icon(
-                                  CupertinoIcons.xmark,
-                                  color: Color(0xffFF611D),
-                                  size: 18.sp,
-                                ),
-                              ),
-                            )
-                          ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 24.h,
                         ),
-                      ),
-                      SizedBox(
-                        height: 24.h,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Image.asset(
-                                  awardBg2,
-                                  width: 220.w,
-                                ),
-                                Image.asset(
-                                  celebrateImg,
-                                  width: 120.w,
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 14.h,
-                      ),
-                      GradientText(
-                        text: "Amazing!",
-                        gradient: LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [Color(0xff3217C3), Color(0xffFF4B4B)],
-                        ),
-                        style: TextStyle(
-                          fontSize: 26.sp,
-                          fontFamily: circularBold,
-                          height: 1.1,
-                          color: const Color(0xFFA1A1A1),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 8.h,
-                      ),
-                      SizedBox(
-                        child: RichText(
-                            textAlign: TextAlign.center,
-                            text: TextSpan(
-                                style: TextStyle(
-                                  fontSize: 22.sp,
-                                  fontFamily: circularMedium,
-                                  height: 1.1,
-                                  color: nicotrackBlack1,
-                                ),
-                                children: [
-                                  TextSpan(text: 'You’re on your '),
-                                  TextSpan(
-                                    text: '5th\n',
-                                    style: TextStyle(
-                                      fontSize: 22.sp,
-                                      fontFamily: circularBold,
-                                      height: 1.1,
-                                      color: Color(0xffFF4B4B),
-                                    ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 22.0),
+                          child: AppBar(
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                            surfaceTintColor: Colors.transparent,
+                            automaticallyImplyLeading: false,
+                            actions: [
+                              Container(
+                                height: 36.w,
+                                width: 36.w,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Color(0xffFF611D).withOpacity(0.20)),
+                                child: Center(
+                                  child: Icon(
+                                    CupertinoIcons.xmark,
+                                    color: Color(0xffFF611D),
+                                    size: 18.sp,
                                   ),
-                                  TextSpan(text: 'smoke-free day 🥳.'),
-                                ])),
-                      ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 24.h,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Image.asset(
+                                    awardBg2,
+                                    width: 220.w,
+                                  ),
+                                  Image.asset(
+                                    celebrateImg,
+                                    width: 120.w,
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 14.h,
+                        ),
+                        GradientText(
+                          text: "Amazing!",
+                          gradient: LinearGradient(
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            colors: [Color(0xff3217C3), Color(0xffFF4B4B)],
+                          ),
+                          style: TextStyle(
+                            fontSize: 26.sp,
+                            fontFamily: circularBold,
+                            height: 1.1,
+                            color: const Color(0xFFA1A1A1),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        SizedBox(
+                          child: RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                  style: TextStyle(
+                                    fontSize: 22.sp,
+                                    fontFamily: circularMedium,
+                                    height: 1.1,
+                                    color: nicotrackBlack1,
+                                  ),
+                                  children: [
+                                    TextSpan(text: 'You’re on your '),
+                                    TextSpan(
+                                      text: '5th\n',
+                                      style: TextStyle(
+                                        fontSize: 22.sp,
+                                        fontFamily: circularBold,
+                                        height: 1.1,
+                                        color: Color(0xffFF4B4B),
+                                      ),
+                                    ),
+                                    TextSpan(text: 'smoke-free day 🥳.'),
+                                  ])),
+                        ),
+                        SizedBox(
+                          height: 36.h,
+                        ),
+                        didYouSmokeController.financialGoalProgressBar(),
+                        didYouSmokeController.notSmokedTodayDataCubes(),
+                        SizedBox(
+                          height: 140.h,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      didYouSmokeController.gotoHomeBtn(),
                       SizedBox(
-                        height: 36.h,
-                      ),
-                      didYouSmokeController.financialGoalProgressBar(),
-                      didYouSmokeController.notSmokedTodayDataCubes()
+                        height: 12.h,
+                      )
                     ],
                   ),
                 ),
