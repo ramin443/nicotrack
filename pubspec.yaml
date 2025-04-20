@@ -191,6 +191,8 @@ flutter:
     - assets/images/mountains/icy.png
     - assets/images/mountains/icyvolc.png
     - assets/images/mountains/volcanic.png
+    - assets/images/button-bg/progressBgBtn.png
+    - assets/images/Emojis/progressImg.png
 
 
 

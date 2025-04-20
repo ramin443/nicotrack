@@ -9,6 +9,7 @@ import 'package:nicotrack/screens/base/settings.dart';
 
 import '../constants/font-constants.dart';
 import '../constants/image-constants.dart';
+import '../constants/quick-function-constants.dart';
 import '../screens/base/progress.dart';
 import '../screens/elements/textAutoSize.dart';
 
@@ -138,14 +139,14 @@ class BaseController extends GetxController {
         ]);
   }
 
-  Widget bottomBavBar2() {
+  Widget bottomBavBar2(BuildContext context) {
     return NavigationBar(
         backgroundColor: Colors.transparent,
         selectedIndex: selectedIndex,
         onDestinationSelected: (int index) {
           setCurrentIndex(index);
         },
-        height: 62.h,
+        height: getBottomNavHeight(context),
         // Custom height if you want to shrink it even more
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
         indicatorColor: Colors.transparent,

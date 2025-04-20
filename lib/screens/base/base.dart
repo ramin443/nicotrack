@@ -30,7 +30,7 @@ class _BaseState extends State<Base> {
                       topLeft: Radius.circular(15),
                       topRight: Radius.circular(15),
                     )),
-                child: baseController.bottomBavBar2(),
+                child: baseController.bottomBavBar2(context),
               ),
           body: baseController.mainPages[baseController.selectedIndex],
 

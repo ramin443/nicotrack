@@ -6,6 +6,7 @@ part 'withdrawal-stage-model.g.dart';
 @freezed
 class WithdrawalStageModel with _$WithdrawalStageModel {
   const factory WithdrawalStageModel({
+    @Default(0) int intensityLevel,
     required String timeAfterQuitting,
     required List<Map<String, dynamic>> whatHappens,
     required List<Map<String, dynamic>> symptoms,

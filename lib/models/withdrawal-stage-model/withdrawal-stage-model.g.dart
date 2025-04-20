@@ -9,6 +9,7 @@ part of 'withdrawal-stage-model.dart';
 _$WithdrawalStageModelImpl _$$WithdrawalStageModelImplFromJson(
         Map<String, dynamic> json) =>
     _$WithdrawalStageModelImpl(
+      intensityLevel: (json['intensityLevel'] as num?)?.toInt() ?? 0,
       timeAfterQuitting: json['timeAfterQuitting'] as String,
       whatHappens: (json['whatHappens'] as List<dynamic>)
           .map((e) => e as Map<String, dynamic>)
@@ -24,6 +25,7 @@ _$WithdrawalStageModelImpl _$$WithdrawalStageModelImplFromJson(
 Map<String, dynamic> _$$WithdrawalStageModelImplToJson(
         _$WithdrawalStageModelImpl instance) =>
     <String, dynamic>{
+      'intensityLevel': instance.intensityLevel,
       'timeAfterQuitting': instance.timeAfterQuitting,
       'whatHappens': instance.whatHappens,
       'symptoms': instance.symptoms,

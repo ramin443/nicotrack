@@ -94,3 +94,6 @@ String barrenMountain= "assets/images/mountains/barrenpng.png";
 String icyMountain= "assets/images/mountains/icy.png";
 String icyVolcMountain= "assets/images/mountains/icyvolc.png";
 String volcMountain= "assets/images/mountains/volcanic.png";
+
+String progressBGBtnImg="assets/images/button-bg/progressBgBtn.png";
+String progressImg= "assets/images/Emojis/progressImg.png";

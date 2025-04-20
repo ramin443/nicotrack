@@ -20,6 +20,7 @@ WithdrawalStageModel _$WithdrawalStageModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WithdrawalStageModel {
+  int get intensityLevel => throw _privateConstructorUsedError;
   String get timeAfterQuitting => throw _privateConstructorUsedError;
   List<Map<String, dynamic>> get whatHappens =>
       throw _privateConstructorUsedError;
@@ -44,7 +45,8 @@ abstract class $WithdrawalStageModelCopyWith<$Res> {
       _$WithdrawalStageModelCopyWithImpl<$Res, WithdrawalStageModel>;
   @useResult
   $Res call(
-      {String timeAfterQuitting,
+      {int intensityLevel,
+      String timeAfterQuitting,
       List<Map<String, dynamic>> whatHappens,
       List<Map<String, dynamic>> symptoms,
       List<Map<String, dynamic>> howToCope});
@@ -66,12 +68,17 @@ class _$WithdrawalStageModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? intensityLevel = null,
     Object? timeAfterQuitting = null,
     Object? whatHappens = null,
     Object? symptoms = null,
     Object? howToCope = null,
   }) {
     return _then(_value.copyWith(
+      intensityLevel: null == intensityLevel
+          ? _value.intensityLevel
+          : intensityLevel // ignore: cast_nullable_to_non_nullable
+              as int,
       timeAfterQuitting: null == timeAfterQuitting
           ? _value.timeAfterQuitting
           : timeAfterQuitting // ignore: cast_nullable_to_non_nullable
@@ -101,7 +108,8 @@ abstract class _$$WithdrawalStageModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String timeAfterQuitting,
+      {int intensityLevel,
+      String timeAfterQuitting,
       List<Map<String, dynamic>> whatHappens,
       List<Map<String, dynamic>> symptoms,
       List<Map<String, dynamic>> howToCope});
@@ -120,12 +128,17 @@ class __$$WithdrawalStageModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? intensityLevel = null,
     Object? timeAfterQuitting = null,
     Object? whatHappens = null,
     Object? symptoms = null,
     Object? howToCope = null,
   }) {
     return _then(_$WithdrawalStageModelImpl(
+      intensityLevel: null == intensityLevel
+          ? _value.intensityLevel
+          : intensityLevel // ignore: cast_nullable_to_non_nullable
+              as int,
       timeAfterQuitting: null == timeAfterQuitting
           ? _value.timeAfterQuitting
           : timeAfterQuitting // ignore: cast_nullable_to_non_nullable
@@ -150,7 +163,8 @@ class __$$WithdrawalStageModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WithdrawalStageModelImpl implements _WithdrawalStageModel {
   const _$WithdrawalStageModelImpl(
-      {required this.timeAfterQuitting,
+      {this.intensityLevel = 0,
+      required this.timeAfterQuitting,
       required final List<Map<String, dynamic>> whatHappens,
       required final List<Map<String, dynamic>> symptoms,
       required final List<Map<String, dynamic>> howToCope})
@@ -161,6 +175,9 @@ class _$WithdrawalStageModelImpl implements _WithdrawalStageModel {
   factory _$WithdrawalStageModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$WithdrawalStageModelImplFromJson(json);
 
+  @override
+  @JsonKey()
+  final int intensityLevel;
   @override
   final String timeAfterQuitting;
   final List<Map<String, dynamic>> _whatHappens;
@@ -189,7 +206,7 @@ class _$WithdrawalStageModelImpl implements _WithdrawalStageModel {
 
   @override
   String toString() {
-    return 'WithdrawalStageModel(timeAfterQuitting: $timeAfterQuitting, whatHappens: $whatHappens, symptoms: $symptoms, howToCope: $howToCope)';
+    return 'WithdrawalStageModel(intensityLevel: $intensityLevel, timeAfterQuitting: $timeAfterQuitting, whatHappens: $whatHappens, symptoms: $symptoms, howToCope: $howToCope)';
   }
 
   @override
@@ -197,6 +214,8 @@ class _$WithdrawalStageModelImpl implements _WithdrawalStageModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WithdrawalStageModelImpl &&
+            (identical(other.intensityLevel, intensityLevel) ||
+                other.intensityLevel == intensityLevel) &&
             (identical(other.timeAfterQuitting, timeAfterQuitting) ||
                 other.timeAfterQuitting == timeAfterQuitting) &&
             const DeepCollectionEquality()
@@ -210,6 +229,7 @@ class _$WithdrawalStageModelImpl implements _WithdrawalStageModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      intensityLevel,
       timeAfterQuitting,
       const DeepCollectionEquality().hash(_whatHappens),
       const DeepCollectionEquality().hash(_symptoms),
@@ -235,7 +255,8 @@ class _$WithdrawalStageModelImpl implements _WithdrawalStageModel {
 
 abstract class _WithdrawalStageModel implements WithdrawalStageModel {
   const factory _WithdrawalStageModel(
-          {required final String timeAfterQuitting,
+          {final int intensityLevel,
+          required final String timeAfterQuitting,
           required final List<Map<String, dynamic>> whatHappens,
           required final List<Map<String, dynamic>> symptoms,
           required final List<Map<String, dynamic>> howToCope}) =
@@ -244,6 +265,8 @@ abstract class _WithdrawalStageModel implements WithdrawalStageModel {
   factory _WithdrawalStageModel.fromJson(Map<String, dynamic> json) =
       _$WithdrawalStageModelImpl.fromJson;
 
+  @override
+  int get intensityLevel;
   @override
   String get timeAfterQuitting;
   @override

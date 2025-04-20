@@ -93,7 +93,8 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Image.asset(
-                          icyMountain,
+                          getMountainImagefromIntensity(
+                              widget.withdrawalStage.intensityLevel),
                           width: 86.w,
                         )
                       ],
@@ -130,17 +131,20 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                       ),
                     ),
                     SizedBox(
-                      height: 18.h,
+                      height: 24.h,
                     ),
                     symptomsSection(),
                     SizedBox(
-                      height: 18.h,
+                      height: 24.h,
                     ),
                     effectsonBodySection(),
                     SizedBox(
-                      height: 18.h,
+                      height: 24.h,
                     ),
-                    howtoCopeSection()
+                    howtoCopeSection(),
+                    SizedBox(
+                      height: 34.h,
+                    ),
                   ],
                 ),
               ),
@@ -178,10 +182,6 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
           height: 14.h,
         ),
         EmojiGridCards(items: widget.withdrawalStage.symptoms),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [],
-        )
       ],
     );
   }
@@ -239,10 +239,12 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                   borderRadius: BorderRadius.circular(16.r),
                   border: Border.all(color: Color(0xfff0f0f0)),
                 ),
-                padding: EdgeInsets.only(left: 10.w,
-                    // vertical: 16.h
+                padding: EdgeInsets.only(
+                  left: 10.w,
+                  // vertical: 16.h
                 ),
                 child: Row(
+                  mainAxisSize: MainAxisSize.min, // 👈 IMPORTANT: Shrink-wrap the Row
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -257,19 +259,20 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                     ),
                     SizedBox(width: 12.w),
                     SizedBox(
-                      width: 90.w,
+                      width: 120.w,
                       child: Text(
                         currentDescription,
-                        maxLines: 3,
+                        maxLines: currentDescription.length > 10 ? 3 : 1,
+                        softWrap: true, // Allows text to wrap to the next line
                         style: TextStyle(
                           fontFamily: circularMedium,
                           height: 1.1,
-                          fontSize: 13.sp,
+                          fontSize: 14.sp,
                           color: nicotrackBlack1,
                         ),
                       ),
                     ),
-                    SizedBox(width: 12.w),
+                    SizedBox(width: 8.w),
                   ],
                 ),
               );
@@ -319,7 +322,7 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                   final currentEmoji = data.emoji;
                   final currentDescription = data.text;
                   return Container(
-                    height: 118.h,
+                    height: getDynamicStageBox(context),
                     margin: EdgeInsets.only(
                         left: i == 0 ? 20.w : 8.w,
                         right: i == widget.withdrawalStage.howToCope.length - 1
@@ -332,6 +335,7 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                     ),
                     padding: EdgeInsets.symmetric(
                       horizontal: 10.w,
+
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

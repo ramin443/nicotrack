@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/models/emoji-text-pair/emojitext-model.dart';
 
 import '../models/withdrawal-stage-model/withdrawal-stage-model.dart';
@@ -19,6 +20,52 @@ double getDynamicHeightWeeklyCalendar(BuildContext context) {
   } else {
     // Default case for mid-range devices
     return 94.h;
+  }
+}
+
+double getDynamicStageBox(BuildContext context) {
+
+
+  double screenHeight = MediaQuery.of(context).size.height;
+
+  if (screenHeight <= 667) {
+    // iPhone SE (screen height is small)
+    return 168.h;
+  } else if (screenHeight >= 812) {
+    // iPhone 11 Pro / Plus / Large devices
+    return 138.h;
+  } else {
+    // Default case for mid-range devices
+    return 138.h;
+  }
+}
+double getDynamicPlanHeader(BuildContext context) {
+  double screenHeight = MediaQuery.of(context).size.height;
+
+  if (screenHeight <= 667) {
+    // iPhone SE (screen height is small)
+    return 126.h;
+  } else if (screenHeight >= 812) {
+    // iPhone 11 Pro / Plus / Large devices
+    return 106.h;
+  } else {
+    // Default case for mid-range devices
+    return 106.h;
+  }
+}
+
+double getBottomNavHeight(BuildContext context) {
+  double screenHeight = MediaQuery.of(context).size.height;
+
+  if (screenHeight <= 667) {
+    // iPhone SE (screen height is small)
+    return 82.h;
+  } else if (screenHeight >= 812) {
+    // iPhone 11 Pro / Plus / Large devices
+    return 62.h;
+  } else {
+    // Default case for mid-range devices
+    return 62.h;
   }
 }
 Color colorWithOpacityHex(Color baseColor, double opacity) {
@@ -85,6 +132,7 @@ void openDraggableBottomSheet({required BuildContext context,required int index}
 
  List<WithdrawalStageModel> withdrawalStages = [
   WithdrawalStageModel(
+    intensityLevel: 0,
     timeAfterQuitting: "0-24 Hours",
     whatHappens: [
       EmojiTextModel(emoji: "🧠", text: "Carbon monoxide exits").toJson(),
@@ -102,6 +150,7 @@ void openDraggableBottomSheet({required BuildContext context,required int index}
   ),
 
   WithdrawalStageModel(
+    intensityLevel: 0,
     timeAfterQuitting: "Day 2-3",
     whatHappens: [
       EmojiTextModel(emoji: "🧪", text: "Nicotine exits body").toJson()
@@ -120,6 +169,7 @@ void openDraggableBottomSheet({required BuildContext context,required int index}
   ),
 
   WithdrawalStageModel(
+    intensityLevel: 1,
     timeAfterQuitting: "Day 3-5",
     whatHappens: [
       EmojiTextModel(emoji: "📈", text: "Cravings peak").toJson(),
@@ -140,6 +190,7 @@ void openDraggableBottomSheet({required BuildContext context,required int index}
   ),
 
   WithdrawalStageModel(
+    intensityLevel: 2,
     timeAfterQuitting: "Day 5-10",
     whatHappens: [
       EmojiTextModel(emoji: "🫁", text: "Lung function improves").toJson(),
@@ -157,6 +208,7 @@ void openDraggableBottomSheet({required BuildContext context,required int index}
   ),
 
   WithdrawalStageModel(
+    intensityLevel: 2,
     timeAfterQuitting: "Day 10-14",
     whatHappens: [
       EmojiTextModel(emoji: "💪", text: "Circulation improves").toJson(),
@@ -173,6 +225,7 @@ void openDraggableBottomSheet({required BuildContext context,required int index}
   ),
 
   WithdrawalStageModel(
+    intensityLevel: 3,
     timeAfterQuitting: "Week 3-4",
     whatHappens: [
       EmojiTextModel(emoji: "🧠", text: "Nicotine receptors in the brain begin shutting down").toJson()
@@ -188,6 +241,7 @@ void openDraggableBottomSheet({required BuildContext context,required int index}
   ),
 
   WithdrawalStageModel(
+    intensityLevel: 3,
     timeAfterQuitting: "1 Month Smoke-Free",
     whatHappens: [
       EmojiTextModel(emoji: "🏃‍♂️", text: "Lung function improves by 30%").toJson(),
@@ -211,4 +265,19 @@ String getTwemojiImageUrlFromName(String name) {
 
   final codePoints = emojiChar.runes.map((r) => r.toRadixString(16)).join('-');
   return 'https://twemoji.maxcdn.com/v/latest/72x72/$codePoints.png';
+}
+
+String getMountainImagefromIntensity(int intensityLevel){
+  switch(intensityLevel){
+    case 0:
+      return volcMountain;
+    case 1:
+      return icyVolcMountain;
+    case 2:
+      return barrenMountain;
+    case 3:
+      return icyMountain;
+      default:
+      return volcMountain;
+  }
 }

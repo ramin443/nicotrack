@@ -8,6 +8,8 @@ import 'package:nicotrack/getx-controllers/plan-controller.dart';
 
 import '../../constants/color-constants.dart';
 import '../../constants/font-constants.dart';
+import '../../constants/quick-function-constants.dart';
+import '../elements/sliver-header-delegate.dart';
 import '../elements/textAutoSize.dart';
 
 class PlanAlt extends StatefulWidget {
@@ -43,9 +45,9 @@ class _PlanAltState extends State<PlanAlt> {
                 // Third section with sticky header
                 SliverPersistentHeader(
                   pinned: false,
-                  delegate: _SliverHeaderDelegate(
-                    minHeight: 106.h,
-                    maxHeight: 106.h,
+                  delegate: SliverHeaderDelegate(
+                    minHeight: getDynamicPlanHeader(context),
+                    maxHeight: getDynamicPlanHeader(context),
                     child: Container(
                       color: Colors.white,
                       child: Column(
@@ -196,37 +198,5 @@ class _PlanAltState extends State<PlanAlt> {
             )),
           );
         });
-  }
-}
-
-// Custom SliverPersistentHeaderDelegate for sticky headers
-class _SliverHeaderDelegate extends SliverPersistentHeaderDelegate {
-  _SliverHeaderDelegate({
-    required this.minHeight,
-    required this.maxHeight,
-    required this.child,
-  });
-
-  final double minHeight;
-  final double maxHeight;
-  final Widget child;
-
-  @override
-  double get minExtent => minHeight;
-
-  @override
-  double get maxExtent => maxHeight;
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return SizedBox.expand(child: child);
-  }
-
-  @override
-  bool shouldRebuild(_SliverHeaderDelegate oldDelegate) {
-    return maxHeight != oldDelegate.maxHeight ||
-        minHeight != oldDelegate.minHeight ||
-        child != oldDelegate.child;
   }
 }
