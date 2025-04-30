@@ -8,6 +8,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nicotrack/constants/quick-function-constants.dart';
+import 'package:nicotrack/screens/home/did-you-smoke/didyousmoke-main-slider.dart';
+import 'package:nicotrack/screens/home/mood/mood-main-slider.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 import '../constants/color-constants.dart';
@@ -284,7 +286,7 @@ class HomeController extends GetxController {
     );
   }
 
-  Widget dailyTasksSection() {
+  Widget dailyTasksSection(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 0.w),
       child: Column(
@@ -350,19 +352,33 @@ class HomeController extends GetxController {
           SizedBox(
             height: 16.w,
           ),
-          dailyTaskBox(
-              emoji: moodEmoji,
-              emojiColor: Color(0xffdfbba8).withOpacity(0.59),
-              titleTxt: 'Did you smoke today?',
-              subTitle: 'Let us know if you did 😌'),
+          GestureDetector(
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                return DidYouSmokeMainSlider();
+              }));
+            },
+            child: dailyTaskBox(
+                emoji: moodEmoji,
+                emojiColor: Color(0xffdfbba8).withOpacity(0.59),
+                titleTxt: 'Did you smoke today?',
+                subTitle: 'Let us know if you did 😌'),
+          ),
           SizedBox(
             height: 7.h,
           ),
-          dailyTaskBox(
-              emoji: paperEmoji,
-              emojiColor: Color(0xffEBE8FB).withOpacity(0.53),
-              titleTxt: 'How do you feel today?',
-              subTitle: 'Tap to tell us about your mood 📝'),
+          GestureDetector(
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                return MoodMainSlider();
+              }));
+            },
+            child: dailyTaskBox(
+                emoji: paperEmoji,
+                emojiColor: Color(0xffEBE8FB).withOpacity(0.53),
+                titleTxt: 'How do you feel today?',
+                subTitle: 'Tap to tell us about your mood 📝'),
+          ),
           SizedBox(
             height: 7.h,
           ),

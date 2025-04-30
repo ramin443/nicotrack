@@ -1,4 +1,3 @@
-import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +10,6 @@ import 'package:nicotrack/screens/home/did-you-smoke/pages/next-avoid.dart';
 import 'package:nicotrack/screens/home/did-you-smoke/pages/smoked-today.dart';
 import 'package:nicotrack/screens/home/did-you-smoke/pages/update-quit-date.dart';
 import 'package:nicotrack/screens/home/did-you-smoke/pages/what-triggered.dart';
-
 import '../constants/color-constants.dart';
 import '../constants/font-constants.dart';
 import '../constants/image-constants.dart';
@@ -77,7 +75,6 @@ class DidYouSmokeController extends GetxController {
   // UpdateQuitDate variables
   bool updateQuitDate = false;
 
-
   Widget continueButton() {
     return GestureDetector(
       onTap: () {
@@ -128,21 +125,23 @@ class DidYouSmokeController extends GetxController {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Image.asset(fullButtonBg,
+              Image.asset(
+                fullButtonBg,
                 width: 346.w,
               ),
-               TextAutoSize(
-                    "🏠 Go to home",
-                    style: TextStyle(
-                        fontSize: 18.sp,
-                        fontFamily: circularBold,
-                        color: nicotrackBlack1),
-                  ),
-
+              TextAutoSize(
+                "🏠 Go to home",
+                style: TextStyle(
+                    fontSize: 18.sp,
+                    fontFamily: circularBold,
+                    color: nicotrackBlack1),
+              ),
             ],
           ),
         ),
-        SizedBox(height: 24.h,)
+        SizedBox(
+          height: 24.h,
+        )
       ],
     );
   }
@@ -215,7 +214,7 @@ class DidYouSmokeController extends GetxController {
                       decoration: BoxDecoration(
                         color: Color(0xffF4F4F4),
                         borderRadius: BorderRadius.circular(16.r),
-                        image: smokedToday
+                        image: didYouSmokeFilledData.hasSmokedToday == 0
                             ? DecorationImage(
                                 image: AssetImage(
                                     quitMethodBG), // Replace with your image path
@@ -272,7 +271,7 @@ class DidYouSmokeController extends GetxController {
                       height: 235.h,
                       decoration: BoxDecoration(
                           color: Color(0xffF4F4F4),
-                          image: !smokedToday
+                          image: didYouSmokeFilledData.hasSmokedToday == 1
                               ? DecorationImage(
                                   image: AssetImage(
                                       quitMethodBG), // Replace with your image path
@@ -810,7 +809,6 @@ class DidYouSmokeController extends GetxController {
           padding: EdgeInsets.symmetric(horizontal: 18.w),
           child: StyledProgressBar(progress: 0.04),
         ),
-
         SizedBox(
           height: 18.h,
         ),

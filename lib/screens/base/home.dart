@@ -97,7 +97,7 @@ class _HomeState extends State<Home> {
                   SizedBox(
                     height: 28.h,
                   ),
-                  homeController.dailyTasksSection(),
+                  homeController.dailyTasksSection(context),
                   SizedBox(
                     height: 12.h,
                   ),

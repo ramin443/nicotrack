@@ -114,19 +114,6 @@ void showCustomBottomSheet({required BuildContext context, required int index}) 
 }
 
 
-void openDraggableBottomSheet({required BuildContext context,required int index}) {
-  final scaffoldState = Scaffold.of(context);
-
-  // Open the bottom sheet
-  PersistentBottomSheetController controller = scaffoldState.showBottomSheet(
-        (context) => InfoBottomSheet(withdrawalStage: withdrawalStages[index]),
-    backgroundColor: Colors.transparent, // Let inner sheet style control background
-    enableDrag: true, // This enables swipe-to-close
-  );
-
-  // Optionally store controller if you want to close it programmatically later:
-  // controller.close();
-}
 
 
 

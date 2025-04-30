@@ -57,11 +57,17 @@ class _DidYouSmokeMainSliderState extends State<DidYouSmokeMainSlider> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              if (didYouSmokeController.currentPage != 0) {
+                              if(didYouSmokeController.currentPage == 0){
                                 HapticFeedback.mediumImpact();
+                                Navigator.of(context).pop();
+                              }else{
+                                if (didYouSmokeController.currentPage != 0) {
+                                  HapticFeedback.mediumImpact();
+                                }
+                                didYouSmokeController.previousPage();
+                                didYouSmokeController.getCurrentPageStatus();
                               }
-                              didYouSmokeController.previousPage();
-                              didYouSmokeController.getCurrentPageStatus();
+
                             },
                             child: Container(
                               height: 36.w,
@@ -69,9 +75,7 @@ class _DidYouSmokeMainSliderState extends State<DidYouSmokeMainSlider> {
                               padding: EdgeInsets.only(right: 2.w, bottom: 2.w),
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: didYouSmokeController.currentPage == 0
-                                      ? Colors.black54
-                                      : nicotrackBlack1),
+                                  color: nicotrackBlack1),
                               child: Center(
                                 child: Icon(
                                   FeatherIcons.chevronLeft,

@@ -3,9 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/getx-controllers/progress-controller.dart';
 import 'package:nicotrack/screens/base/base.dart';
-import 'package:nicotrack/screens/home/did-you-smoke/didyousmoke-main-slider.dart';
-import 'package:nicotrack/screens/home/did-you-smoke/pages/no-selected/congratulatory-page.dart';
-import 'package:nicotrack/screens/home/mood/mood-main-slider.dart';
 
 void main() async{
   Get.put(ProgressController()); // now accessible globally

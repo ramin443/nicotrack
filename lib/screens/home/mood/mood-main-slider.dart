@@ -57,10 +57,15 @@ class _MoodMainSliderState extends State<MoodMainSlider> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              if (moodController.currentPage != 0) {
-                                HapticFeedback.mediumImpact();
+                              if(moodController.currentPage == 0){
+                                Navigator.of(context).pop();
+                              }else{
+                                if (moodController.currentPage != 0) {
+                                  HapticFeedback.mediumImpact();
+                                }
+                                moodController.previousPage();
                               }
-                              moodController.previousPage();
+
                             },
                             child: Container(
                               height: 36.w,
@@ -68,9 +73,7 @@ class _MoodMainSliderState extends State<MoodMainSlider> {
                               padding: EdgeInsets.only(right: 2.w, bottom: 2.w),
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: moodController.currentPage == 0
-                                      ? Colors.black54
-                                      : nicotrackBlack1),
+                                  color: nicotrackBlack1),
                               child: Center(
                                 child: Icon(
                                   FeatherIcons.chevronLeft,

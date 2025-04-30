@@ -1,0 +1,52 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nicotrack/constants/dummy-data-constants.dart';
+import 'package:nicotrack/screens/base/progress-subpages/elements/single-row-scroll-view.dart';
+
+import '../../../../constants/color-constants.dart';
+import '../../../../constants/font-constants.dart';
+
+class HealthImprovementTrend extends StatelessWidget {
+  final ScrollController scrollController;
+  const HealthImprovementTrend({super.key, required this.scrollController});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 18.w,
+            ),
+            RichText(
+                text: TextSpan(
+                    style: TextStyle(
+                        fontSize: 16.sp,
+                        fontFamily: circularMedium,
+                        height: 1.1,
+                        color: nicotrackBlack1),
+                    children: [
+                      TextSpan(
+                        text: "🍎 What’s improved ",
+                        style: TextStyle(
+                            fontSize: 16.sp,
+                            fontFamily: circularBold,
+                            height: 1.1,
+                            color: nicotrackGreen),
+                      ),
+                      TextSpan(
+                        text: "in your body",
+                      ),
+                    ])),
+          ],
+        ),
+        SizedBox(
+          height: 12.h,
+        ),
+        SingleRowScrollView(items: healthDummyData, scrollController: scrollController,)
+      ],
+    );
+  }
+}

@@ -1,8 +1,5 @@
 import 'dart:math';
-
-import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:confetti/confetti.dart';
-import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,10 +8,8 @@ import 'package:get/get.dart';
 import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/getx-controllers/did-you-smoke-controller.dart';
-
 import '../../../../../constants/font-constants.dart';
 import '../../../../elements/gradient-text.dart';
-import '../../../../elements/textAutoSize.dart';
 
 class NoSmokeCongratsPage extends StatefulWidget {
   const NoSmokeCongratsPage({super.key});

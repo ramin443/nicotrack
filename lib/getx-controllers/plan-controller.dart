@@ -460,4 +460,12 @@ class PlanController extends GetxController {
       ],
     );
   }
+  void openDraggableBottomSheet({required BuildContext context,required int index}){
+    final scaffoldstate = Scaffold.of(context);
+    scaffoldstate.showBottomSheet(
+          (context) => InfoBottomSheet(withdrawalStage: withdrawalStages[index],),
+      backgroundColor: Colors.transparent,
+      enableDrag: true,
+    );
+  }
 }

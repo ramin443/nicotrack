@@ -10,7 +10,6 @@ class EmojiGridCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int halfLength = (items.length / 2).ceil();
 
     return Column(
       children: [
