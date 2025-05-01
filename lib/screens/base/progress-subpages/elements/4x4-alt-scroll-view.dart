@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/constants/font-constants.dart';
 import 'package:nicotrack/getx-controllers/progress-controller.dart';
 import 'package:nicotrack/models/emoji-text-pair/emojitext-model.dart';
 
 import '../../../elements/textAutoSize.dart';
 
-class FourxFourScrollView extends StatefulWidget {
+class FourxFourAltScrollView extends StatefulWidget {
   final ScrollController scrollController;
   final double childAspectRatio;
   final List<EmojiTextModel> items;
 
-  const FourxFourScrollView(
+  const FourxFourAltScrollView(
       {super.key,
       required this.scrollController,
       required this.childAspectRatio,
       required this.items});
 
   @override
-  State<FourxFourScrollView> createState() => _FourxFourScrollViewState();
+  State<FourxFourAltScrollView> createState() => _FourxFourAltScrollViewState();
 }
 
-class _FourxFourScrollViewState extends State<FourxFourScrollView> {
+class _FourxFourAltScrollViewState extends State<FourxFourAltScrollView> {
   int currentPage = 0;
 
   @override
@@ -61,61 +62,32 @@ class _FourxFourScrollViewState extends State<FourxFourScrollView> {
                           padding: EdgeInsets.only(
                               left: 12.w, right: 12.w, top: 16.h, bottom: 14.w),
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                color: Color(0xfff0f0f0), width: 1.sp),
+                            color: Color(0xffF4F4F4),
                             borderRadius: BorderRadius.circular(16.r),
                           ),
-                          child: Column(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  TextAutoSize(
-                                    item.emoji,
-                                    style: TextStyle(
-                                      fontSize: 34.sp,
-                                      fontFamily: circularMedium,
-                                      height: 1.1,
-                                    ),
-                                  ),
-                                  TextAutoSize(
-                                    "14x",
-                                    style: TextStyle(
-                                      fontFamily: circularBold,
-                                      fontSize: 25.sp,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xFFFF601D),
-                                    ),
-                                  ),
-                                ],
+                              TextAutoSize(
+                                item.emoji,
+                                style: TextStyle(
+                                  fontSize: 34.sp,
+                                  fontFamily: circularMedium,
+                                  height: 1.1,
+                                ),
                               ),
-                              SizedBox(height: 4.h),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          // color: Colors.grey,
-                                          width: 120.w,
-                                          child: TextAutoSize(
-                                            item.text,
-                                            style: TextStyle(
-                                              fontSize: 13.sp,
-                                              fontFamily: circularMedium,
-                                              height: 1.2,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                              SizedBox(width: 10.w),
+                              SizedBox(
+                                // color: Colors.grey,
+                                width: 100.w,
+                                child: TextAutoSize(
+                                  item.text,
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontFamily: circularMedium,
+                                    height: 1.1,
+                                    color: Colors.black.withOpacity(0.8),
+                                  ),
                                 ),
                               ),
                             ],

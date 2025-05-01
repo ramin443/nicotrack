@@ -1,28 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/constants/font-constants.dart';
 import 'package:nicotrack/getx-controllers/progress-controller.dart';
 import 'package:nicotrack/models/emoji-text-pair/emojitext-model.dart';
 
 import '../../../elements/textAutoSize.dart';
 
-class FourxFourScrollView extends StatefulWidget {
+class OnexTwoScrollView extends StatefulWidget {
   final ScrollController scrollController;
   final double childAspectRatio;
   final List<EmojiTextModel> items;
+  final bool withPercent;
+  final int percent;
 
-  const FourxFourScrollView(
-      {super.key,
-      required this.scrollController,
-      required this.childAspectRatio,
-      required this.items});
+  const OnexTwoScrollView({
+    super.key,
+    required this.scrollController,
+    required this.childAspectRatio,
+    required this.items,
+    required this.withPercent,
+    required this.percent,
+  });
 
   @override
-  State<FourxFourScrollView> createState() => _FourxFourScrollViewState();
+  State<OnexTwoScrollView> createState() => _OnexTwoScrollViewState();
 }
 
-class _FourxFourScrollViewState extends State<FourxFourScrollView> {
+class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
   int currentPage = 0;
 
   @override
@@ -68,56 +74,45 @@ class _FourxFourScrollViewState extends State<FourxFourScrollView> {
                           ),
                           child: Column(
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  TextAutoSize(
-                                    item.emoji,
-                                    style: TextStyle(
-                                      fontSize: 34.sp,
-                                      fontFamily: circularMedium,
-                                      height: 1.1,
-                                    ),
-                                  ),
-                                  TextAutoSize(
-                                    "14x",
-                                    style: TextStyle(
-                                      fontFamily: circularBold,
-                                      fontSize: 25.sp,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xFFFF601D),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 4.h),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          // color: Colors.grey,
-                                          width: 120.w,
-                                          child: TextAutoSize(
-                                            item.text,
-                                            style: TextStyle(
-                                              fontSize: 13.sp,
-                                              fontFamily: circularMedium,
-                                              height: 1.2,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                              TextAutoSize(
+                                item.emoji,
+                                style: TextStyle(
+                                  fontSize: 52.sp,
+                                  fontFamily: circularMedium,
+                                  height: 1.1,
                                 ),
                               ),
+                              SizedBox(height: 14.h),
+                              widget.withPercent
+                                  ? RichText(
+                                      text: TextSpan(
+                                          style: TextStyle(
+                                            fontSize: 14.5.sp,
+                                            fontFamily: circularMedium,
+                                            height: 1.2,
+                                            color: Colors.black,
+                                          ),
+                                          children: [
+                                          TextSpan(text: item.text),
+                                          TextSpan(
+                                            text: "${widget.percent}",
+                                            style: TextStyle(
+                                              fontSize: 14.5.sp,
+                                              fontFamily: circularBold,
+                                              height: 1.2,
+                                              color: nicotrackGreen,
+                                            ),
+                                          ),
+                                        ]))
+                                  : TextAutoSize(
+                                      item.text,
+                                      style: TextStyle(
+                                        fontSize: 14.5.sp,
+                                        fontFamily: circularMedium,
+                                        height: 1.2,
+                                        color: Colors.black,
+                                      ),
+                                    ),
                             ],
                           ),
                         );

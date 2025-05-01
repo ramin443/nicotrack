@@ -24,7 +24,7 @@ class UpcomingHealthTrend extends StatelessWidget {
                 text: TextSpan(
                     style: TextStyle(
                         fontSize: 16.sp,
-                        fontFamily: circularMedium,
+                        fontFamily: circularBold,
                         height: 1.1,
                         color: nicotrackBlack1),
                     children: [
@@ -34,7 +34,8 @@ class UpcomingHealthTrend extends StatelessWidget {
                             fontSize: 16.sp,
                             fontFamily: circularBold,
                             height: 1.1,
-                            color: Color(0xffFF4800)),
+                            color: Color(0xffFF4800)
+                        ),
                       ),
                       TextSpan(
                         text: "body changes",

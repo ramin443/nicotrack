@@ -32,17 +32,7 @@ class _SingleRowScrollViewState extends State<SingleRowScrollView> {
     return GetBuilder<ProgressController>(
         init: ProgressController(),
         initState: (v){
-          widget.scrollController.addListener(() {
-            final offset =  widget.scrollController.offset;
-            final pageWidth = 160.w; // approximate card width + margin
-            final page = (offset / pageWidth).round();
-
-            if (page != _currentPage) {
-              setState(() {
-                _currentPage = page;
-              });
-            }
-          });
+          widget.scrollController.addListener(_onScroll);
 
           // Compute total "pages"
           WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -127,5 +117,17 @@ class _SingleRowScrollViewState extends State<SingleRowScrollView> {
             ],
           );
         });
+  }
+  void _onScroll(){
+    if (!mounted) return;
+    final offset =  widget.scrollController.offset;
+    final pageWidth = 160.w; // approximate card width + margin
+    final page = (offset / pageWidth).round();
+
+    if (page != _currentPage) {
+      setState(() {
+        _currentPage = page;
+      });
+    }
   }
 }

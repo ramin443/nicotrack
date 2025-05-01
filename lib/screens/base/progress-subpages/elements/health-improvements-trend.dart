@@ -24,7 +24,7 @@ class HealthImprovementTrend extends StatelessWidget {
                 text: TextSpan(
                     style: TextStyle(
                         fontSize: 16.sp,
-                        fontFamily: circularMedium,
+                        fontFamily: circularBold,
                         height: 1.1,
                         color: nicotrackBlack1),
                     children: [
@@ -34,7 +34,8 @@ class HealthImprovementTrend extends StatelessWidget {
                             fontSize: 16.sp,
                             fontFamily: circularBold,
                             height: 1.1,
-                            color: nicotrackGreen),
+                            color: Color(0xffFF4800)
+                        ),
                       ),
                       TextSpan(
                         text: "in your body",

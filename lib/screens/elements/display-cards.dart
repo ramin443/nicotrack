@@ -11,6 +11,7 @@ Widget mainCard({
   required String emoji,
   required int value,
   required String label,
+  required bool isCost,
   Color? backgroundColor,
 }) {
   return Container(
@@ -36,6 +37,7 @@ Widget mainCard({
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AnimatedFlipCounter(
+                prefix: isCost?'\$':'', // 👈 add dollar sign here (escaped with backslash)
                 wholeDigits: 2, // 👈 forces two digits to be shown & flip
                 duration: Duration(seconds: 2),
                 value: value,

@@ -202,7 +202,7 @@ class _ProgressState extends State<ProgressMain>
                       SizedBox(
                         height: 14.h,
                       ),
-                      progressController.progressTabContent()
+                      progressController.progressTabContent2()
                     ],
                   ),
                 )
