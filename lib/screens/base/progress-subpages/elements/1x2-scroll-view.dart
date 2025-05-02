@@ -93,9 +93,9 @@ class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
                                             color: Colors.black,
                                           ),
                                           children: [
-                                          TextSpan(text: item.text),
+                                          TextSpan(text: "${item.text}: "),
                                           TextSpan(
-                                            text: "${widget.percent}",
+                                            text: "${widget.percent}%",
                                             style: TextStyle(
                                               fontSize: 14.5.sp,
                                               fontFamily: circularBold,
@@ -122,7 +122,8 @@ class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
                 }).toList(),
               ),
             ),
-            SizedBox(
+            if (showIndicator)
+              SizedBox(
               height: 12.h,
             ),
             if (showIndicator)

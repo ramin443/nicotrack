@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/getx-controllers/progress-controller.dart';
+import 'package:nicotrack/screens/base/progress-subpages/elements/all-badges-section.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/feelings-after-cravings.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/health-improvements-trend.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/mood-trend.dart';
@@ -33,7 +34,7 @@ class _ProgressMilestonesState extends State<ProgressMilestones> {
               SizedBox(
                 height: 34.h,
               ),
-              ThingsToAvoidCraving()
+              AllBadgesSection()
             ],
           );
         }

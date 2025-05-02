@@ -22,7 +22,7 @@ class _ProgressSavingsState extends State<ProgressSavings> {
             children: [
               progressController.savingsDisplayCards(),
               SizedBox(
-                height: 34.h,
+                height: 26.h,
               ),
               FinancialGoalsSection()
             ],

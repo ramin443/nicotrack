@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/getx-controllers/progress-controller.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/feelings-after-cravings.dart';
+import 'package:nicotrack/screens/base/progress-subpages/elements/financial-goals-in-overview.dart';
+import 'package:nicotrack/screens/base/progress-subpages/elements/financial-goals-section.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/health-improvements-trend.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/mood-trend.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/symptoms-healed-from.dart';
@@ -38,6 +40,10 @@ class _ProgressOverviewState extends State<ProgressOverview> {
               height: 34.h,
             ),
             SymptomsHealedFrom(),
+            SizedBox(
+              height: 34.h,
+            ),
+            FinancialGoalsInOverview(showPercent: true, percent: 16),
             SizedBox(
               height: 34.h,
             ),
