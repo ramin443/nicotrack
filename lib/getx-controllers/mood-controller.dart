@@ -81,7 +81,7 @@ class MoodController extends GetxController {
       padding: EdgeInsets.symmetric(horizontal: 32.w),
       child: Container(
         width: 315.w,
-        height: 6.h,
+        height: 6.w,
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.08),
           borderRadius: BorderRadius.circular(24.r),
@@ -92,7 +92,7 @@ class MoodController extends GetxController {
             AnimatedContainer(
               duration: Duration(milliseconds: 200),
               width: ((currentPage) / pages.length) * 315.w,
-              height: 6.h,
+              height: 6.w,
               decoration: BoxDecoration(
                 color: nicotrackBlack1,
                 borderRadius: BorderRadius.circular(24.r),
@@ -150,7 +150,7 @@ class MoodController extends GetxController {
                 getCurrentPageStatus();
               },
               child: AnimatedContainer(
-                height: 176.h,
+                height: 176.w,
                 duration: Duration(milliseconds: 200),
                 decoration: BoxDecoration(
                   color: isSelected ? nicotrackBlack1 : Colors.transparent,
@@ -167,7 +167,7 @@ class MoodController extends GetxController {
                       howareyouFeelingPairs[index].emoji,
                       width: 38.w,
                     ),
-                    SizedBox(height: 8.h),
+                    SizedBox(height: 8.w),
                     SizedBox(
                       child: TextAutoSize(
                         howareyouFeelingPairs[index].text,
@@ -216,7 +216,7 @@ class MoodController extends GetxController {
                 getCurrentPageStatus();
               },
               child: AnimatedContainer(
-                height: 176.h,
+                height: 176.w,
                 duration: Duration(milliseconds: 200),
                 decoration: BoxDecoration(
                   color: isSelected ? nicotrackBlack1 : Colors.transparent,
@@ -233,7 +233,7 @@ class MoodController extends GetxController {
                       moodAffectingPairs[index].emoji,
                       width: 54.w,
                     ),
-                    SizedBox(height: 18.h),
+                    SizedBox(height: 18.w),
                     SizedBox(
                       width: 138.w,
                       child: TextAutoSize(
@@ -318,7 +318,7 @@ class MoodController extends GetxController {
                         ),
                       ),
                       SizedBox(
-                        height: 8.h,
+                        height: 8.w,
                       )
                     ],
                   );
@@ -355,7 +355,7 @@ class MoodController extends GetxController {
                 getCurrentPageStatus();
               },
               child: AnimatedContainer(
-                height: 176.h,
+                height: 176.w,
                 duration: Duration(milliseconds: 200),
                 decoration: BoxDecoration(
                   color: isSelected ? nicotrackBlack1 : Colors.transparent,
@@ -372,7 +372,7 @@ class MoodController extends GetxController {
                       craveTimesPairs[index].emoji,
                       width: 54.w,
                     ),
-                    SizedBox(height: 18.h),
+                    SizedBox(height: 18.w),
                     SizedBox(
                       width: 138.w,
                       child: TextAutoSize(
@@ -401,8 +401,8 @@ class MoodController extends GetxController {
         children: [
           Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
-              height: 332.h,
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.w),
+              height: 332.w,
               decoration: BoxDecoration(
                   color: Color(0xfff4f4f4),
                   borderRadius: BorderRadius.circular(16.r)),
@@ -469,7 +469,7 @@ class MoodController extends GetxController {
       },
       child: Container(
         width: 346.w,
-        height: 54.h,
+        height: 54.w,
         decoration:  currentPage == (pages.length - 1) ?
         BoxDecoration(
           image: DecorationImage(

@@ -44,7 +44,6 @@ class _FinancialGoalsInOverviewState extends State<FinancialGoalsInOverview> {
                             children: [
                               TextSpan(
                                 text: "🥅 Financial Goals",
-
                               ),
                             ])),
                   ),

@@ -57,6 +57,7 @@ String pinataImg = "assets/images/award-emojis/pinata.png";
 String teddyImg = "assets/images/award-emojis/teddy.png";
 String trophyImg = "assets/images/award-emojis/trophy.png";
 String vacayImg = "assets/images/award-emojis/vacay.png";
+String medalImg = "assets/images/award-emojis/medalImg.png";
 
 String cigImg = 'assets/images/mood-affection-emojis/cig.png';
 String confettiImg = 'assets/images/mood-affection-emojis/confetti.png';
@@ -97,3 +98,4 @@ String volcMountain= "assets/images/mountains/volcanic.png";
 
 String progressBGBtnImg="assets/images/button-bg/progressBgBtn.png";
 String progressImg= "assets/images/Emojis/progressImg.png";
+String hexaPolygon= "assets/images/button-bg/hexapolygon.png";

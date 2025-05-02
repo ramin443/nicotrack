@@ -24,7 +24,10 @@ class _ProgressSavingsState extends State<ProgressSavings> {
               SizedBox(
                 height: 26.h,
               ),
-              FinancialGoalsSection()
+              FinancialGoalsSection(),
+              SizedBox(
+                height: 26.h,
+              ),
             ],
           );
         });

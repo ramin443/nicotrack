@@ -88,7 +88,7 @@ class DidYouSmokeController extends GetxController {
       },
       child: Container(
         width: 346.w,
-        height: 54.h,
+        height: 54.w,
         decoration: currentPage == (pages.length - 1)
             ? BoxDecoration(
                 image: DecorationImage(
@@ -209,8 +209,8 @@ class DidYouSmokeController extends GetxController {
                       getCurrentPageStatus();
                     },
                     child: Container(
-                      width: 155.h,
-                      height: 235.h,
+                      width: 155.w,
+                      height: 235.w,
                       decoration: BoxDecoration(
                         color: Color(0xffF4F4F4),
                         borderRadius: BorderRadius.circular(16.r),
@@ -268,7 +268,7 @@ class DidYouSmokeController extends GetxController {
                     },
                     child: Container(
                       // width: 155.h,
-                      height: 235.h,
+                      height: 235.w,
                       decoration: BoxDecoration(
                           color: Color(0xffF4F4F4),
                           image: didYouSmokeFilledData.hasSmokedToday == 1
@@ -596,8 +596,8 @@ class DidYouSmokeController extends GetxController {
                       update();
                     },
                     child: Container(
-                      width: 155.h,
-                      height: 235.h,
+                      width: 155.w,
+                      height: 235.w,
                       decoration: BoxDecoration(
                         color: Color(0xffF4F4F4),
                         borderRadius: BorderRadius.circular(16.r),
@@ -674,7 +674,7 @@ class DidYouSmokeController extends GetxController {
                     },
                     child: Container(
                       // width: 155.h,
-                      height: 235.h,
+                      height: 235.w,
                       decoration: BoxDecoration(
                           color: Color(0xffF4F4F4),
                           image: !updateQuitDate

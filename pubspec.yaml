@@ -159,6 +159,7 @@ flutter:
     - assets/images/award-emojis/teddy.png
     - assets/images/award-emojis/trophy.png
     - assets/images/award-emojis/vacay.png
+    - assets/images/award-emojis/medalImg.png
     - assets/images/mood-affection-emojis/cig.png
     - assets/images/mood-affection-emojis/confetti.png
     - assets/images/mood-affection-emojis/family.png
@@ -194,6 +195,7 @@ flutter:
     - assets/images/mountains/volcanic.png
     - assets/images/button-bg/progressBgBtn.png
     - assets/images/Emojis/progressImg.png
+    - assets/images/button-bg/hexapolygon.png
 
 
 

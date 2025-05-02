@@ -44,61 +44,68 @@ class _ProgressState extends State<ProgressMain>
                     ],
                   ),
                 ),
-                SliverPersistentHeader(
-                  pinned: false,
-                  delegate: SliverHeaderDelegate(
-                    minHeight: 55.h,
-                    maxHeight: 55.h,
-                    child: Container(
-                      color: Colors.white,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Image.asset(
-                                    progressBGBtnImg,
-                                    width: 170.w,
-                                  ),
-                                  Positioned.fill(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          progressImg,
-                                          width: 32.w,
-                                        ),
-                                        SizedBox(
-                                          width: 12.w,
-                                        ),
-                                        TextAutoSize(
-                                          "Progress",
-                                          style: TextStyle(
-                                              fontSize: 17.sp,
-                                              fontFamily: circularBold,
-                                              height: 1.1,
-                                              color: nicotrackBlack1),
-                                        ),
-                                        SizedBox(
-                                          width: 4.w,
-                                        ),
-                                      ],
+                SliverToBoxAdapter(
+                  child: Column(
+                    children: [
+                      Container(
+                        color: Colors.white,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Image.asset(
+                                      progressBGBtnImg,
+                                      width: 170.w,
                                     ),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
+                                    Positioned.fill(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            progressImg,
+                                            width: 32.w,
+                                          ),
+                                          SizedBox(
+                                            width: 12.w,
+                                          ),
+                                          TextAutoSize(
+                                            "Progress",
+                                            style: TextStyle(
+                                                fontSize: 17.sp,
+                                                fontFamily: circularBold,
+                                                height: 1.1,
+                                                color: nicotrackBlack1),
+                                          ),
+                                          SizedBox(
+                                            width: 4.w,
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
+                // SliverPersistentHeader(
+                //   pinned: false,
+                //   delegate: SliverHeaderDelegate(
+                //     minHeight: 55.h,
+                //     maxHeight: 55.h,
+                //     child:
+                //   ),
+                // ),
                 SliverToBoxAdapter(
                   child: Column(
                     children: [

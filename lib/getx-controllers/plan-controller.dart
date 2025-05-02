@@ -188,10 +188,10 @@ class PlanController extends GetxController {
                   timelineRow(
                       timelineModelItem: timelineItems[index], index: index, context: context),
                   SizedBox(
-                    height: index == 0 ? 0 : 8.h,
+                    height: index == 0 ? 0 : 8.w,
                   ),
                   SizedBox(
-                    height: 20.h,
+                    height: 20.w,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -204,7 +204,7 @@ class PlanController extends GetxController {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                height: 20.h,
+                                height: 20.w,
                                 width: 2.w,
                                 decoration: BoxDecoration(
                                   color: index == timelineItems.length - 1
@@ -267,7 +267,7 @@ class PlanController extends GetxController {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Container(
-                              height: 40.h,
+                              height: 40.w,
                               width: 2.w,
                               decoration: BoxDecoration(
                                 color: Colors.transparent,
@@ -280,7 +280,7 @@ class PlanController extends GetxController {
                         ),
                         Container(
                           width: 100.w,
-                          height: 40.h,
+                          height: 40.w,
                           decoration: BoxDecoration(
                             color: nicotrackBlack1,
                             borderRadius: BorderRadius.circular(26.r),
@@ -299,7 +299,7 @@ class PlanController extends GetxController {
                         ),
                         // The bottom line will now be positioned at the bottom
                         Container(
-                          height: 40.h,
+                          height: 40.w,
                           width: 2.w,
                           decoration: BoxDecoration(
                             color: Color(0xffF6F4F1),
@@ -324,7 +324,7 @@ class PlanController extends GetxController {
                           ),
                         ),
                         SizedBox(
-                          height: 9.h,
+                          height: 9.w,
                         ),
                         Stack(
                           alignment: Alignment.center,
@@ -340,7 +340,7 @@ class PlanController extends GetxController {
                           ],
                         ),
                         SizedBox(
-                          height: 5.h,
+                          height: 5.w,
                         ),
                         GradientText(
                           text: "Streak ${timelineModelItem.streakNumber}",
@@ -404,7 +404,7 @@ class PlanController extends GetxController {
                         ],
                       ),
                       SizedBox(
-                        height: 12.h,
+                        height: 12.w,
                       ),
                       TextAutoSize(
                         "What happens to your body",
@@ -416,7 +416,7 @@ class PlanController extends GetxController {
                         ),
                       ),
                       SizedBox(
-                        height: 6.h,
+                        height: 6.w,
                       ),
                       TextAutoSize(
                         timelineModelItem.whatHappens,

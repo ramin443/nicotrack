@@ -51,11 +51,11 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 20.h,
+                      height: 20.w,
                     ),
                     Container(
                       width: 52.w,
-                      height: 5.h,
+                      height: 5.w,
                       decoration: BoxDecoration(
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(24.r)),
@@ -98,7 +98,7 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                       ],
                     ),
                     SizedBox(
-                      height: 16.h,
+                      height: 16.w,
                     ),
                     TextAutoSize(
                       "📅 ${widget.withdrawalStage.timeAfterQuitting}",
@@ -110,11 +110,11 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                       ),
                     ),
                     SizedBox(
-                      height: 8.h,
+                      height: 8.w,
                     ),
                     Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 9.w, vertical: 6.h),
+                          EdgeInsets.symmetric(horizontal: 9.w, vertical: 6.w),
                       decoration: BoxDecoration(
                         color: Color(0x33FF611D),
                       ),
@@ -129,19 +129,19 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                       ),
                     ),
                     SizedBox(
-                      height: 24.h,
+                      height: 26.w,
                     ),
                     symptomsSection(),
                     SizedBox(
-                      height: 24.h,
+                      height: 26.w,
                     ),
                     effectsonBodySection(),
                     SizedBox(
-                      height: 24.h,
+                      height: 26.w,
                     ),
                     howtoCopeSection(),
                     SizedBox(
-                      height: 34.h,
+                      height: 34.w,
                     ),
                   ],
                 ),
@@ -177,7 +177,7 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
               TextSpan(text: "you might feel 😵 "),
             ])),
         SizedBox(
-          height: 14.h,
+          height: 14.w,
         ),
         EmojiGridCards(items: widget.withdrawalStage.symptoms),
       ],
@@ -208,11 +208,11 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
               TextSpan(text: "to your body 💪"),
             ])),
         SizedBox(
-          height: 14.h,
+          height: 14.w,
         ),
         ConstrainedBox(
           constraints: BoxConstraints(
-            maxHeight: 78.h, // Adjust this height based on your content needs
+            maxHeight: 78.w, // Adjust this height based on your content needs
           ),
           child: ListView.builder(
             itemCount: widget.withdrawalStage.whatHappens.length,

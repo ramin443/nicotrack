@@ -32,7 +32,8 @@ class ProgressController extends GetxController {
   final PageController symptomsHealedScrollController =
       PageController(viewportFraction: 0.75);
   final PageController financialGoalsScrollController =
-  PageController(viewportFraction: 0.75);
+      PageController(viewportFraction: 0.75);
+  final ScrollController dailyStreakScrollController = ScrollController();
 
   final List<Map<String, String>> tabs = [
     {"label": "Overview", "emoji": "📋"},
@@ -60,60 +61,57 @@ class ProgressController extends GetxController {
   Widget mainDisplayCards() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 18.w),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: GridView.count(
+        shrinkWrap: true,
+        crossAxisCount: 2,
+        crossAxisSpacing: 6.w,
+        mainAxisSpacing: 6.w,
+        physics: NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.all(0),
+        childAspectRatio: 1.58,
         children: [
-          Expanded(
-            flex: 2,
-            child: mainCard(
-              emoji: bicepsEmoji,
-              value: 24,
-              label: 'Days since\nlast smoked',
-              backgroundColor: const Color(0xFFB0F0A1), isCost: false, // green-ish background
-            ),
+          mainCard(
+            emoji: bicepsEmoji,
+            value: 24,
+            label: 'Days since\nlast smoked',
+            backgroundColor: const Color(0xFFB0F0A1),
+            isCost: false, // green-ish background
           ),
-          SizedBox(
-            width: 6.w,
-          ),
-          Expanded(
-            flex: 2,
-            child: statCard(
-              emoji: moneyEmoji,
-              value: 84,
-              label: 'Money saved',
-              isCost: true,
-            ),
+          statCard(
+            emoji: moneyEmoji,
+            value: 84,
+            label: 'Money saved',
+            isCost: true,
           ),
         ],
       ),
     );
   }
+
   Widget savingsDisplayCards() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 18.w),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: GridView.count(
+        shrinkWrap: true,
+        crossAxisCount: 2,
+        crossAxisSpacing: 6.w,
+        mainAxisSpacing: 6.w,
+        physics: NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.all(0),
+        childAspectRatio: 1.58,
         children: [
-          Expanded(
-            flex: 2,
-            child: mainCard(
-              emoji: moneyEmoji,
-              value: 24,
-              label: 'Money saved',
-              backgroundColor: const Color(0xFFB0F0A1), isCost: true, // green-ish background
-            ),
+          mainCard(
+            emoji: moneyEmoji,
+            value: 24,
+            label: 'Money saved',
+            backgroundColor: const Color(0xFFB0F0A1),
+            isCost: true, // green-ish background
           ),
-          SizedBox(
-            width: 6.w,
-          ),
-          Expanded(
-            flex: 2,
-            child: statCard(
-              emoji: bicepsEmoji,
-              value: 84,
-              label: 'Days since\nlast smoked',
-              isCost: false,
-            ),
+          statCard(
+            emoji: bicepsEmoji,
+            value: 84,
+            label: 'Days since\nlast smoked',
+            isCost: false,
           ),
         ],
       ),
@@ -190,29 +188,28 @@ class ProgressController extends GetxController {
   }
 
   Widget progressTabContent2() {
-     return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          allprogressTabs[tabController.index], // Only show current tab content
-        ],
-      );
-
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        allprogressTabs[tabController.index], // Only show current tab content
+      ],
+    );
   }
 
   Widget progressTabContent() {
     return LayoutBuilder(
       builder: (context, constraints) {
         return SizedBox(
-          height: MediaQuery.of(context).size.height, // or a custom calculated height
+          height: MediaQuery.of(context)
+              .size
+              .height, // or a custom calculated height
           child: TabBarView(
             controller: tabController,
             physics: const BouncingScrollPhysics(),
             children: List.generate(tabs.length, (index) {
               return Center(
                 child: Column(
-                  children: [
-                    allprogressTabs[index]
-                  ],
+                  children: [allprogressTabs[index]],
                 ),
               );
             }),

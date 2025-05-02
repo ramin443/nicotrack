@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nicotrack/constants/image-constants.dart';
+import 'package:nicotrack/models/award-model/award-model.dart';
 import 'package:nicotrack/models/emoji-text-pair/emojitext-model.dart';
 
 import '../models/withdrawal-stage-model/withdrawal-stage-model.dart';
@@ -242,6 +243,28 @@ void showCustomBottomSheet({required BuildContext context, required int index}) 
       EmojiTextModel(emoji: "🎉", text: "Celebrate progress!").toJson()
     ],
   ),
+];
+
+
+List<AwardModel> allAwards =[
+  AwardModel(emojiImg: badge1Emoji, day: 1),
+  AwardModel(emojiImg: baseballImg, day: 3),
+  AwardModel(emojiImg: pinataImg, day: 5),
+  AwardModel(emojiImg: medalImg, day: 7),
+  AwardModel(emojiImg: kiteImg, day: 10),
+  AwardModel(emojiImg: golfImg, day: 12),
+  AwardModel(emojiImg: dartarrowImg, day: 15),
+  AwardModel(emojiImg: teddyImg, day: 18),
+  AwardModel(emojiImg: hat2Img, day: 20),
+  AwardModel(emojiImg: ballrollImg, day: 23),
+  AwardModel(emojiImg: hatImg, day: 25),
+  AwardModel(emojiImg: ballImg, day: 28),
+  AwardModel(emojiImg: chocolateImg, day: 30),
+  AwardModel(emojiImg: magicbowlImg, day: 32),
+  AwardModel(emojiImg: crownImg, day: 35),
+  AwardModel(emojiImg: vacayImg, day: 38),
+  AwardModel(emojiImg: no1Img, day: 40),
+  AwardModel(emojiImg: trophyImg, day: 42),
 ];
 
 

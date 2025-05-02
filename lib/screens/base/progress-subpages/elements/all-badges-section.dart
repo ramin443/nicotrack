@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/constants/dummy-data-constants.dart';
+import 'package:nicotrack/constants/quick-function-constants.dart';
 import 'package:nicotrack/getx-controllers/progress-controller.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/1x2-scroll-view.dart';
+import 'package:nicotrack/screens/base/progress-subpages/elements/3x-grid-view.dart';
 import '../../../../constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
 
@@ -51,7 +53,11 @@ class _AllBadgesSectionState extends State<AllBadgesSection> {
                 ],
               ),
               SizedBox(
-                height: 18.h,
+                height: 12.h,
+              ),
+               ThreexGridView(awardsList: allAwards.take(6).toList(),),
+              SizedBox(
+                height: 12.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -77,6 +83,18 @@ class _AllBadgesSectionState extends State<AllBadgesSection> {
                             ])),
                   ),
                 ],
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
+              ColorFiltered(
+                  colorFilter: ColorFilter.mode(
+                    Colors.white,
+                    BlendMode.saturation, // Removes color = grayscale
+                  ),
+                  child: ThreexGridView(awardsList: allAwards.skip(6).toList(),)),
+              SizedBox(
+                height: 12.h,
               ),
             ],
           );
