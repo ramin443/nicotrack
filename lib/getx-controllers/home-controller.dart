@@ -25,7 +25,7 @@ class HomeController extends GetxController {
   final int initialIndex = 6; // Today is the last item
   bool isQuickActionsExpanded = false;
   int daysSinceLastSmoked = 0;
-  int totalMoneySaved =0;
+  int totalMoneySaved = 0;
   int daysRegainedinLife = 0;
   int cigarettesAvoided = 0;
 
@@ -47,10 +47,10 @@ class HomeController extends GetxController {
             duration: Duration(milliseconds: 400), curve: Curves.easeOutCubic);
       }
     });
-    Future.delayed(Duration(milliseconds: 350),setDaysSinceLastSmoked);
-    Future.delayed(Duration(milliseconds: 350),setMoneySaved);
-    Future.delayed(Duration(milliseconds: 350),setDaysRegainedinLife);
-    Future.delayed(Duration(milliseconds: 350),setCigarettesAvoided);
+    Future.delayed(Duration(milliseconds: 350), setDaysSinceLastSmoked);
+    Future.delayed(Duration(milliseconds: 350), setMoneySaved);
+    Future.delayed(Duration(milliseconds: 350), setDaysRegainedinLife);
+    Future.delayed(Duration(milliseconds: 350), setCigarettesAvoided);
     HapticFeedback.mediumImpact();
   }
 
@@ -74,7 +74,7 @@ class HomeController extends GetxController {
         itemBuilder: (context, index) {
           final date = last7Days[index];
           final isSelected = index == selectedDateIndex;
-
+          bool isToday = (DateFormat.yMMMd().format(date) == DateFormat.yMMMd().format(DateTime.now()));
           return GestureDetector(
             onTap: () {
               selectedDateIndex = index;
@@ -101,7 +101,9 @@ class HomeController extends GetxController {
                         fontFamily: circularMedium,
                         color: isSelected
                             ? Colors.white
-                            : nicotrackBlack1.withOpacity(0.37)),
+                            : isToday
+                                ? nicotrackBlack1
+                                : nicotrackBlack1.withOpacity(0.37)),
                   ),
                   SizedBox(height: 2.h),
                   TextAutoSize(
@@ -112,7 +114,9 @@ class HomeController extends GetxController {
                         fontFamily: circularMedium,
                         color: isSelected
                             ? Colors.white
-                            : nicotrackBlack1.withOpacity(0.37)),
+                            : isToday
+                                ? nicotrackBlack1
+                                : nicotrackBlack1.withOpacity(0.37)),
                   ),
                   SizedBox(height: 2.h),
                   TextAutoSize(
@@ -123,7 +127,9 @@ class HomeController extends GetxController {
                         fontFamily: circularMedium,
                         color: isSelected
                             ? Colors.white
-                            : nicotrackBlack1.withOpacity(0.37)),
+                            : isToday
+                                ? nicotrackBlack1
+                                : nicotrackBlack1.withOpacity(0.37)),
                   ),
                 ],
               ),
@@ -204,16 +210,16 @@ class HomeController extends GetxController {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AnimatedFlipCounter(
-                  wholeDigits: 2, // 👈 forces two digits to be shown & flip
+                  wholeDigits: 2,
+                  // 👈 forces two digits to be shown & flip
                   duration: Duration(seconds: 2),
-                value: daysSinceLastSmoked,
-                fractionDigits: 0, // No decimal
-                textStyle:TextStyle(
-                    fontSize: 33.sp,
-                    fontFamily: circularBold,
-                    color: nicotrackBlack1)
-              ),
-
+                  value: daysSinceLastSmoked,
+                  fractionDigits: 0,
+                  // No decimal
+                  textStyle: TextStyle(
+                      fontSize: 33.sp,
+                      fontFamily: circularBold,
+                      color: nicotrackBlack1)),
               TextAutoSize(
                 label,
                 textAlign: TextAlign.right,
@@ -259,17 +265,18 @@ class HomeController extends GetxController {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AnimatedFlipCounter(
-                  prefix: isCost?'\$':'', // 👈 add dollar sign here (escaped with backslash)
-                  wholeDigits: 2, // 👈 forces two digits to be shown & flip
+                  prefix: isCost ? '\$' : '',
+                  // 👈 add dollar sign here (escaped with backslash)
+                  wholeDigits: 2,
+                  // 👈 forces two digits to be shown & flip
                   duration: Duration(seconds: 2),
                   value: value,
-                  fractionDigits: 0, // No decimal
-                  textStyle:TextStyle(
+                  fractionDigits: 0,
+                  // No decimal
+                  textStyle: TextStyle(
                       fontSize: 33.sp,
                       fontFamily: circularBold,
-                      color: nicotrackBlack1)
-              ),
-
+                      color: nicotrackBlack1)),
               TextAutoSize(
                 label,
                 textAlign: TextAlign.right,
@@ -353,8 +360,8 @@ class HomeController extends GetxController {
             height: 16.w,
           ),
           GestureDetector(
-            onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context){
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                 return DidYouSmokeMainSlider();
               }));
             },
@@ -368,8 +375,8 @@ class HomeController extends GetxController {
             height: 7.h,
           ),
           GestureDetector(
-            onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context){
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                 return MoodMainSlider();
               }));
             },
@@ -470,12 +477,15 @@ class HomeController extends GetxController {
               color: const Color(0xFFEFEFEF),
             )),
         child: ExpansionTile(
-          trailing:  AnimatedRotation(
-            turns: isQuickActionsExpanded ? 0.5 : 0.0, // 180 degrees when expanded
+          trailing: AnimatedRotation(
+            turns: isQuickActionsExpanded ? 0.5 : 0.0,
+            // 180 degrees when expanded
             duration: Duration(milliseconds: 200),
-            child: Icon(FeatherIcons.chevronDown,
-            size: 22.sp,
-            color: nicotrackBlack1,),
+            child: Icon(
+              FeatherIcons.chevronDown,
+              size: 22.sp,
+              color: nicotrackBlack1,
+            ),
           ),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(21.r)),
@@ -486,7 +496,7 @@ class HomeController extends GetxController {
           initiallyExpanded: true,
           tilePadding: EdgeInsets.only(right: 19.w, top: 6.h, bottom: 6.h),
           childrenPadding: EdgeInsets.only(bottom: 14.h),
-          onExpansionChanged: (expanded){
+          onExpansionChanged: (expanded) {
             isQuickActionsExpanded = expanded;
             update();
           },
@@ -563,40 +573,36 @@ class HomeController extends GetxController {
           ),
           children: List.generate(quickActionsList.length, (index) {
             return GestureDetector(
-              onTap: (){
-
-              },
+              onTap: () {},
               child: Container(
-                margin: EdgeInsets.only(left: 20.h,bottom: 12.sp),
+                margin: EdgeInsets.only(left: 20.h, bottom: 12.sp),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 18.w,
-                      height: 18.w,
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.black12,
-                        width: 2.sp)
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 18.w,
+                        height: 18.w,
+                        decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            shape: BoxShape.circle,
+                            border:
+                                Border.all(color: Colors.black12, width: 2.sp)),
                       ),
-                    ),
-                    SizedBox(width: 18.w,),
-
-                    SizedBox(
-                      width: 264.w,
-                      child: TextAutoSize(quickActionsList[index],
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            height: 1.1,
-                            fontSize: 13.sp,
-                            fontFamily: circularBook,
-                            color: Colors.black87,
-                          )),
-                    ),
-                  ]
-
-                ),
+                      SizedBox(
+                        width: 18.w,
+                      ),
+                      SizedBox(
+                        width: 264.w,
+                        child: TextAutoSize(quickActionsList[index],
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              height: 1.1,
+                              fontSize: 13.sp,
+                              fontFamily: circularBook,
+                              color: Colors.black87,
+                            )),
+                      ),
+                    ]),
               ),
             );
           }),
@@ -605,11 +611,12 @@ class HomeController extends GetxController {
     );
   }
 
-  Widget peronalizedQuitRoutine(){
+  Widget peronalizedQuitRoutine() {
     return Stack(
       alignment: Alignment.center,
       children: [
-        SvgPicture.asset(homePlanBg,
+        SvgPicture.asset(
+          homePlanBg,
           width: 260.w,
         ),
         SizedBox(
@@ -618,11 +625,16 @@ class HomeController extends GetxController {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(width: 18.w,),
-              Image.asset(coffeeEmoji,
+              SizedBox(
+                width: 18.w,
+              ),
+              Image.asset(
+                coffeeEmoji,
                 width: 48.w,
               ),
-              SizedBox(width: 14.w,),
+              SizedBox(
+                width: 14.w,
+              ),
               TextAutoSize('Personalized\nQuit Routine',
                   textAlign: TextAlign.left,
                   style: TextStyle(
@@ -631,33 +643,41 @@ class HomeController extends GetxController {
                     fontFamily: circularBold,
                     color: Colors.black87,
                   )),
-              SizedBox(width: 11.w,),
-              Icon(FeatherIcons.chevronRight,
-              size: 26.sp,
+              SizedBox(
+                width: 11.w,
+              ),
+              Icon(
+                FeatherIcons.chevronRight,
+                size: 26.sp,
                 color: nicotrackBlack1,
               ),
-              SizedBox(width: 16.w,),
+              SizedBox(
+                width: 16.w,
+              ),
             ],
           ),
         ),
       ],
     );
   }
-  void setDaysSinceLastSmoked(){
+
+  void setDaysSinceLastSmoked() {
     daysSinceLastSmoked = 3;
     update();
   }
-  void setMoneySaved(){
+
+  void setMoneySaved() {
     totalMoneySaved = 84;
     update();
   }
-  void setDaysRegainedinLife(){
+
+  void setDaysRegainedinLife() {
     daysRegainedinLife = 2;
     update();
   }
-  void setCigarettesAvoided(){
+
+  void setCigarettesAvoided() {
     cigarettesAvoided = 2;
     update();
   }
-
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:nicotrack/constants/quick-function-constants.dart';
 import 'package:nicotrack/models/emoji-text-pair/emojitext-model.dart';
 import 'package:nicotrack/models/withdrawal-stage-model/withdrawal-stage-model.dart';
@@ -9,6 +10,7 @@ import 'package:nicotrack/screens/elements/textAutoSize.dart';
 
 import '../../constants/color-constants.dart';
 import '../../constants/font-constants.dart';
+import '../../getx-controllers/plan-controller.dart';
 
 class InfoBottomSheet extends StatefulWidget {
   final WithdrawalStageModel withdrawalStage;
@@ -22,134 +24,144 @@ class InfoBottomSheet extends StatefulWidget {
 class _InfoBottomSheetState extends State<InfoBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Stack(
-        children: [
-          GestureDetector(
-            onTap: () => Navigator.of(context).pop(),
-            child: Container(
-              color: Colors.black.withOpacity(0.4), // Barrier color
-              height: double.infinity,
-              width: double.infinity,
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height * 0.8,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40.r),
-                      topRight: Radius.circular(40.r))),
-              child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 20.w,
-                    ),
-                    Container(
-                      width: 52.w,
-                      height: 5.w,
-                      decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(24.r)),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+    return GetBuilder<PlanController>(
+        init: PlanController(),
+        builder: (planController) {
+        return Material(
+          color: Colors.transparent,
+          child: Stack(
+            children: [
+              GestureDetector(
+                onTap: (){
+                  planController.setBottomSheetOff();
+                  Navigator.of(context).pop();
+                },
+                child: Container(
+                  // color: Colors.black.withOpacity(0.4), // Barrier color
+                  color: Colors.transparent, // Barrier color
+                  height: double.infinity,
+                  width: double.infinity,
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height * 0.8,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(40.r),
+                          topRight: Radius.circular(40.r))),
+                  child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Container(
-                            height: 36.w,
-                            width: 36.w,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Color(0xffFF611D).withOpacity(0.20)),
-                            child: Center(
-                              child: Icon(
-                                CupertinoIcons.xmark,
-                                color: Color(0xffFF611D),
-                                size: 18.sp,
+                        SizedBox(
+                          height: 20.w,
+                        ),
+                        Container(
+                          width: 52.w,
+                          height: 5.w,
+                          decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(24.r)),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                planController.setBottomSheetOff();
+                                Navigator.of(context).pop();
+                              },
+                              child: Container(
+                                height: 36.w,
+                                width: 36.w,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Color(0xffFF611D).withOpacity(0.20)),
+                                child: Center(
+                                  child: Icon(
+                                    CupertinoIcons.xmark,
+                                    color: Color(0xffFF611D),
+                                    size: 18.sp,
+                                  ),
+                                ),
                               ),
+                            ),
+                            SizedBox(
+                              width: 24.w,
+                            )
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              getMountainImagefromIntensity(
+                                  widget.withdrawalStage.intensityLevel),
+                              width: 86.w,
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 16.w,
+                        ),
+                        TextAutoSize(
+                          "📅 ${widget.withdrawalStage.timeAfterQuitting}",
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontFamily: circularBold,
+                            height: 1.1,
+                            color: nicotrackBlack1,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8.w,
+                        ),
+                        Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 9.w, vertical: 6.w),
+                          decoration: BoxDecoration(
+                            color: Color(0x33FF611D),
+                          ),
+                          child: TextAutoSize(
+                            "Current Stage",
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontFamily: circularBook,
+                              height: 1.1,
+                              color: Color(0xffFF611D),
                             ),
                           ),
                         ),
                         SizedBox(
-                          width: 24.w,
-                        )
-                      ],
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Image.asset(
-                          getMountainImagefromIntensity(
-                              widget.withdrawalStage.intensityLevel),
-                          width: 86.w,
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 16.w,
-                    ),
-                    TextAutoSize(
-                      "📅 ${widget.withdrawalStage.timeAfterQuitting}",
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontFamily: circularBold,
-                        height: 1.1,
-                        color: nicotrackBlack1,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8.w,
-                    ),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 9.w, vertical: 6.w),
-                      decoration: BoxDecoration(
-                        color: Color(0x33FF611D),
-                      ),
-                      child: TextAutoSize(
-                        "Current Stage",
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontFamily: circularBook,
-                          height: 1.1,
-                          color: Color(0xffFF611D),
+                          height: 26.w,
                         ),
-                      ),
+                        symptomsSection(),
+                        SizedBox(
+                          height: 26.w,
+                        ),
+                        effectsonBodySection(),
+                        SizedBox(
+                          height: 26.w,
+                        ),
+                        howtoCopeSection(),
+                        SizedBox(
+                          height: 34.w,
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      height: 26.w,
-                    ),
-                    symptomsSection(),
-                    SizedBox(
-                      height: 26.w,
-                    ),
-                    effectsonBodySection(),
-                    SizedBox(
-                      height: 26.w,
-                    ),
-                    howtoCopeSection(),
-                    SizedBox(
-                      height: 34.w,
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        );
+      }
     );
   }
 

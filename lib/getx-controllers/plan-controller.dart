@@ -17,6 +17,7 @@ import '../screens/elements/textAutoSize.dart';
 class PlanController extends GetxController {
   int tabIndex = 0;
   final scaffoldState = GlobalKey<ScaffoldState>();
+  bool isBottomSheetOn = false;
 
   List<TimelineItemModel> timelineItems = [
     TimelineItemModel(
@@ -460,8 +461,17 @@ class PlanController extends GetxController {
       ],
     );
   }
+  void setBottomSheetOn(){
+    isBottomSheetOn = true;
+    update();
+  }
+  void setBottomSheetOff(){
+    isBottomSheetOn = false;
+    update();
+  }
   void openDraggableBottomSheet({required BuildContext context,required int index}){
     final scaffoldstate = Scaffold.of(context);
+    setBottomSheetOn();
     scaffoldstate.showBottomSheet(
           (context) => InfoBottomSheet(withdrawalStage: withdrawalStages[index],),
       backgroundColor: Colors.transparent,
