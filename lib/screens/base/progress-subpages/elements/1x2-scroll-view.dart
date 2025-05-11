@@ -30,10 +30,12 @@ class OnexTwoScrollView extends StatefulWidget {
 
 class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
   int currentPage = 0;
-
+  EmojiTextModel addNewGoal = EmojiTextModel(emoji: '🎯', text: 'Add new goal');
   @override
   Widget build(BuildContext context) {
-    final pages = _chunkItems(widget.items, 4); // 4 items per scroll "page"
+    List<EmojiTextModel> extendedList = [...widget.items, addNewGoal];
+
+    final pages = _chunkItems(extendedList, 4); // 4 items per scroll "page"
     final showIndicator = pages.length > 1;
 
     return GetBuilder<ProgressController>(

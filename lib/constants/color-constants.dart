@@ -16,4 +16,5 @@ LinearGradient streakGradient = LinearGradient(colors: [
   Color(0xff3217C3),
   Color(0xffFF4B4B),
 ]);
-
+Color btnBGLightGrey = Color(0xffF4F4F4).withOpacity(0.67);
+Color nicotrackOrange = Color(0xffFF611D);
