@@ -9,6 +9,7 @@ import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/change-na
 import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/change-quit-date.dart';
 import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/contact-support.dart';
 import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/feedback.dart';
+import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/financial-goal.dart';
 import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/set-time.dart';
 import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/set-weekday.dart';
 import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/smokes-per-day.dart';
@@ -21,11 +22,13 @@ import '../constants/font-constants.dart';
 import '../models/emoji-text-pair/emojitext-model.dart';
 import '../screens/base/progress-subpages/elements/1x2-scroll-view.dart';
 import '../screens/base/settings-subpages/bottom-sheets/cost-per-pack.dart';
+import '../screens/base/settings-subpages/bottom-sheets/set-price.dart';
 
 class SettingsController extends GetxController {
   bool enablePushNotification = false;
   bool isdailyReminderExpanded = false;
   bool isweeklyReminderExpanded = false;
+  bool isquitTipsExpanded = false;
   final PageController financialGoalsScrollController =
       PageController(viewportFraction: 0.75);
   int currentPage = 0;
@@ -67,6 +70,18 @@ class SettingsController extends GetxController {
     'Saturday',
     'Sunday'
   ]; // 0 to 100
+
+  //Set financial goals variables
+  String selectedEmoji = '😐';
+  TextEditingController goalTitleController = TextEditingController();
+  int selectedFinGoalDollar = 150;
+  int selectedFinGoalCent = 25;
+  bool isFinGoalSet = false;
+  late FixedExtentScrollController finGoaldollarController;
+  late FixedExtentScrollController finGoalcentController;
+  List<int> finGoaldollars =
+      List.generate(101, (index) => index * 10); // 0 to 100
+  List<int> finGoalcents = List.generate(100, (index) => index); // 0 to 99
 
   Widget personalInfoSection(BuildContext context) {
     return Padding(
@@ -282,7 +297,7 @@ class SettingsController extends GetxController {
     );
   }
 
-  Widget financialGoalsSection() {
+  Widget financialGoalsSection(BuildContext context) {
     return Column(
       children: [
         Padding(
@@ -310,6 +325,9 @@ class SettingsController extends GetxController {
           childAspectRatio: 1.38,
           withPercent: false,
           percent: 16,
+          newfinancialGoalAction: () {
+            showAddFinancialGoalsBottomSheet(context);
+          },
         ),
         SizedBox(
           height: 34.w,
@@ -692,7 +710,7 @@ class SettingsController extends GetxController {
                       width: 12.w,
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         showSetTimeBottomSheet(context);
                       },
                       child: Container(
@@ -734,7 +752,7 @@ class SettingsController extends GetxController {
       ),
       child: ExpansionTile(
           trailing: AnimatedRotation(
-            turns: isdailyReminderExpanded ? 0.5 : 0.0,
+            turns: isquitTipsExpanded ? 0.5 : 0.0,
             // 180 degrees when expanded
             duration: Duration(milliseconds: 200),
             child: Icon(
@@ -753,7 +771,7 @@ class SettingsController extends GetxController {
           tilePadding: EdgeInsets.only(right: 19.w, top: 4.h, bottom: 4.h),
           childrenPadding: EdgeInsets.only(bottom: 14.h),
           onExpansionChanged: (expanded) {
-            isdailyReminderExpanded = expanded;
+            isquitTipsExpanded = expanded;
             update();
           },
           title: Row(
@@ -786,12 +804,12 @@ class SettingsController extends GetxController {
                   height: 8.w,
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     showSetTimeBottomSheet(context);
                   },
                   child: Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 13.sp, vertical: 10.sp),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 13.sp, vertical: 10.sp),
                     decoration: BoxDecoration(
                         color: nicotrackOrange.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(9.r)),
@@ -850,6 +868,19 @@ class SettingsController extends GetxController {
         // isScrollControlled: true,
         builder: (context) {
           return CostPerPackBottomSheet();
+        });
+  }
+
+  void showSetPriceBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
+        ),
+        // isScrollControlled: true,
+        builder: (context) {
+          return SetPriceBottomSheet();
         });
   }
 
@@ -915,6 +946,19 @@ class SettingsController extends GetxController {
         // isScrollControlled: true,
         builder: (context) {
           return SetWeekdayBottomSheet();
+        });
+  }
+
+  void showAddFinancialGoalsBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
+        ),
+        // isScrollControlled: true,
+        builder: (context) {
+          return FinancialGoalsBottomSheet();
         });
   }
 
@@ -1188,6 +1232,107 @@ class SettingsController extends GetxController {
     );
   }
 
+  Widget setPriceAsNeeded() {
+    return // Dollar Picker UI
+        SizedBox(
+      height: 240.w,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Dollar Sign - Fixed
+          TextAutoSize(
+            "\$",
+            style: TextStyle(
+              fontSize: 64.sp,
+              fontFamily: circularBold,
+              color: Color(0xffF35E5C),
+            ),
+          ),
+
+          // Dollar Value Scroll
+          SizedBox(
+            width: 120.w,
+            height: 240.w,
+            child: ListWheelScrollView.useDelegate(
+              controller: finGoaldollarController,
+              itemExtent: 100.w,
+              physics: FixedExtentScrollPhysics(),
+              onSelectedItemChanged: (index) {
+                HapticFeedback.mediumImpact();
+                selectedFinGoalDollar = finGoaldollars[index];
+                update();
+              },
+              childDelegate: ListWheelChildBuilderDelegate(
+                childCount: finGoaldollars.length,
+                builder: (context, index) {
+                  bool isSelected =
+                      selectedFinGoalDollar == finGoaldollars[index];
+                  return Center(
+                    child: TextAutoSize(
+                      finGoaldollars[index].toString(),
+                      style: TextStyle(
+                        fontSize: 64.sp,
+                        fontFamily: circularBold,
+                        color: isSelected
+                            ? Color(0xffF35E5C)
+                            : Color(0xffF35E5C).withOpacity(0.3),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+
+          // Dot
+          TextAutoSize(
+            ".",
+            style: TextStyle(
+                fontSize: 64.sp,
+                fontFamily: circularBold,
+                color: Color(0xffF35E5C)),
+          ),
+
+          // Cents Scroll
+          SizedBox(
+            width: 90.w,
+            height: 240.w,
+            child: ListWheelScrollView.useDelegate(
+              controller: finGoalcentController,
+              itemExtent: 100.w,
+              physics: FixedExtentScrollPhysics(),
+              onSelectedItemChanged: (index) {
+                HapticFeedback.mediumImpact();
+                selectedFinGoalCent = finGoalcents[index];
+                update();
+              },
+              childDelegate: ListWheelChildBuilderDelegate(
+                childCount: finGoalcents.length,
+                builder: (context, index) {
+                  bool isSelected = selectedFinGoalCent == finGoalcents[index];
+                  String display =
+                      finGoalcents[index].toString().padLeft(2, '0');
+                  return Center(
+                    child: TextAutoSize(
+                      display,
+                      style: TextStyle(
+                        fontSize: 64.sp,
+                        fontFamily: circularBold,
+                        color: isSelected
+                            ? Color(0xffF35E5C)
+                            : Color(0xffF35E5C).withOpacity(0.3),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget setCigsPerDay() {
     return // Dollar Picker UI
         SizedBox(
@@ -1362,6 +1507,120 @@ class SettingsController extends GetxController {
     );
   }
 
+  Widget financialGoalTextFields(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              height: 76.w,
+              width: 76.w,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.blue.withOpacity(0.1),
+              ),
+              child: Center(
+                child: TextAutoSize(
+                  selectedEmoji,
+                  style: TextStyle(
+                    fontSize: 48.sp,
+                    letterSpacing: 1.92,
+                    fontFamily: circularBook,
+                    color: nicotrackBlack1,
+                    height: 1.1,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 18.w,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            TextAutoSize(
+              'NEW FINANCIAL GOAL',
+              style: TextStyle(
+                fontSize: 12.sp,
+                letterSpacing: 1.92,
+                fontFamily: circularBook,
+                color: nicotrackBlack1,
+                height: 1.1,
+              ),
+            ),
+          ],
+        ),
+        TextField(
+          cursorColor: nicotrackBlack1,
+          decoration: InputDecoration(
+            hintText: 'e.g., Airpods pro ',
+            hintStyle: TextStyle(
+              fontSize: 24.sp,
+              fontFamily: circularBold,
+              color: Color(0xff454545).withOpacity(0.25),
+              height: 1.1,
+            ),
+            filled: true,
+            fillColor: Colors.transparent,
+            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none, // removes outline
+            ),
+          ),
+          style: TextStyle(
+            fontSize: 24.sp,
+            fontFamily: circularBold,
+            color: nicotrackBlack1,
+            height: 1.1,
+          ),
+          keyboardType: TextInputType.text,
+        ),
+        SizedBox(
+          height: 30.w,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            TextAutoSize(
+              'SET THE PRICE',
+              style: TextStyle(
+                fontSize: 12.sp,
+                letterSpacing: 1.92,
+                fontFamily: circularBook,
+                color: nicotrackBlack1,
+                height: 1.1,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 8.w,
+        ),
+        GestureDetector(
+          onTap: () {
+            showSetPriceBottomSheet(context);
+          },
+          child: TextAutoSize(
+            '\$ $selectedFinGoalDollar.$selectedFinGoalCent',
+            style: TextStyle(
+              fontSize: 24.sp,
+              fontFamily: circularBold,
+              color: isFinGoalSet? nicotrackOrange:Color(0xff454545).withOpacity(0.25),
+              height: 1.1,
+            ),
+          ),
+        ),
+        Spacer()
+      ],
+    );
+  }
+
   Widget changeNameTextFields() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -1456,5 +1715,10 @@ class SettingsController extends GetxController {
         )
       ],
     );
+  }
+
+  void setFinGoalTrue() {
+    isFinGoalSet = true;
+    update();
   }
 }

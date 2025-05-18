@@ -10,6 +10,7 @@ import '../../../../constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
 import '../../../elements/textAutoSize.dart';
 import '4x4-scroll-view.dart';
+
 class FinancialGoalsSection extends StatefulWidget {
   const FinancialGoalsSection({super.key});
 
@@ -41,22 +42,25 @@ class _FinancialGoalsSectionState extends State<FinancialGoalsSection> {
                                 height: 1.1,
                                 color: nicotrackBlack1),
                             children: [
-                              TextSpan(
-                                text: "🥅 Financial Goals",
-
-                              ),
-                            ])),
+                          TextSpan(
+                            text: "🥅 Financial Goals",
+                          ),
+                        ])),
                   ),
                 ],
               ),
-
               SizedBox(
                 height: 16.h,
               ),
               OnexTwoScrollView(
                 scrollController:
-                progressController.financialGoalsScrollController,
-                items: financialDummyData, childAspectRatio: 1.38, withPercent: false, percent: 0,),
+                    progressController.financialGoalsScrollController,
+                items: financialDummyData,
+                childAspectRatio: 1.38,
+                withPercent: false,
+                percent: 0,
+                newfinancialGoalAction: () {},
+              ),
               SizedBox(
                 height: 24.h,
               ),
@@ -64,7 +68,9 @@ class _FinancialGoalsSectionState extends State<FinancialGoalsSection> {
                 padding: EdgeInsets.symmetric(horizontal: 18.w),
                 child: Column(
                   children: [
-                    for(int index = 0; index<financialDummyData.length; index++)
+                    for (int index = 0;
+                        index < financialDummyData.length;
+                        index++)
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -79,26 +85,31 @@ class _FinancialGoalsSectionState extends State<FinancialGoalsSection> {
                                           height: 1.1,
                                           color: nicotrackBlack1),
                                       children: [
-                                        TextSpan(
-                                          text: "${financialDummyData[index].emoji} ${financialDummyData[index].text} ",
-                                        ),
-                                        TextSpan(
-                                          text: "12% ",
-                                          style: TextStyle(
-                                              fontSize: 15.sp,
-                                              fontFamily: circularBold,
-                                              height: 1.1,
-                                              color: Color(0xff6D9C32)),
-                                        ),
-                                        TextSpan(
-                                          text: "completed",
-                                        ),
-                                      ])),
+                                    TextSpan(
+                                      text:
+                                          "${financialDummyData[index].emoji} ${financialDummyData[index].text} ",
+                                    ),
+                                    TextSpan(
+                                      text: "12% ",
+                                      style: TextStyle(
+                                          fontSize: 15.sp,
+                                          fontFamily: circularBold,
+                                          height: 1.1,
+                                          color: Color(0xff6D9C32)),
+                                    ),
+                                    TextSpan(
+                                      text: "completed",
+                                    ),
+                                  ])),
                             ],
                           ),
-                          SizedBox(height: 9.h,),
+                          SizedBox(
+                            height: 9.h,
+                          ),
                           StyledProgressBar(progress: 0.12),
-                          SizedBox(height: 20.h,),
+                          SizedBox(
+                            height: 20.h,
+                          ),
                         ],
                       )
                   ],
@@ -106,7 +117,6 @@ class _FinancialGoalsSectionState extends State<FinancialGoalsSection> {
               )
             ],
           );
-        }
-    );
+        });
   }
 }

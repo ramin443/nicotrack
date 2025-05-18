@@ -45,7 +45,7 @@ class _SettingsState extends State<Settings> {
 
                   settingsController.personalInfoSection(context),
                   settingsController.pushNotificationSection(context),
-                  settingsController.financialGoalsSection(),
+                  settingsController.financialGoalsSection(context),
                   settingsController.helpandSupportSection(context),
                   settingsController.privacySection(),
 

@@ -7,15 +7,16 @@ import 'package:nicotrack/screens/base/progress-subpages/elements/1x2-scroll-vie
 import '../../../../constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
 
-
 class FinancialGoalsInOverview extends StatefulWidget {
   final bool showPercent;
   final int percent;
 
-  const FinancialGoalsInOverview({super.key,required this.showPercent,required this.percent});
+  const FinancialGoalsInOverview(
+      {super.key, required this.showPercent, required this.percent});
 
   @override
-  State<FinancialGoalsInOverview> createState() => _FinancialGoalsInOverviewState();
+  State<FinancialGoalsInOverview> createState() =>
+      _FinancialGoalsInOverviewState();
 }
 
 class _FinancialGoalsInOverviewState extends State<FinancialGoalsInOverview> {
@@ -42,27 +43,27 @@ class _FinancialGoalsInOverviewState extends State<FinancialGoalsInOverview> {
                                 height: 1.1,
                                 color: nicotrackBlack1),
                             children: [
-                              TextSpan(
-                                text: "🥅 Financial Goals",
-                              ),
-                            ])),
+                          TextSpan(
+                            text: "🥅 Financial Goals",
+                          ),
+                        ])),
                   ),
                 ],
               ),
-
               SizedBox(
                 height: 16.h,
               ),
               OnexTwoScrollView(
                 scrollController:
-                progressController.financialGoalsScrollController,
-                items: financialDummyData, childAspectRatio: 1.38, withPercent: widget.showPercent,
-                percent: widget.percent,),
-
-
+                    progressController.financialGoalsScrollController,
+                items: financialDummyData,
+                childAspectRatio: 1.38,
+                withPercent: widget.showPercent,
+                percent: widget.percent,
+                newfinancialGoalAction: () {},
+              ),
             ],
           );
-        }
-    );
+        });
   }
 }

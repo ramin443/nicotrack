@@ -14,6 +14,7 @@ class OnexTwoScrollView extends StatefulWidget {
   final List<EmojiTextModel> items;
   final bool withPercent;
   final int percent;
+  final void Function() newfinancialGoalAction;
 
   const OnexTwoScrollView({
     super.key,
@@ -22,6 +23,7 @@ class OnexTwoScrollView extends StatefulWidget {
     required this.items,
     required this.withPercent,
     required this.percent,
+    required this.newfinancialGoalAction,
   });
 
   @override
@@ -31,6 +33,7 @@ class OnexTwoScrollView extends StatefulWidget {
 class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
   int currentPage = 0;
   EmojiTextModel addNewGoal = EmojiTextModel(emoji: '🎯', text: 'Add new goal');
+
   @override
   Widget build(BuildContext context) {
     List<EmojiTextModel> extendedList = [...widget.items, addNewGoal];
@@ -65,57 +68,67 @@ class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
                       itemCount: pageItems.length,
                       itemBuilder: (context, index) {
                         final item = pageItems[index];
-                        return Container(
-                          padding: EdgeInsets.only(
-                              left: 12.w, right: 12.w, top: 16.h, bottom: 14.w),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                color: Color(0xfff0f0f0), width: 1.sp),
-                            borderRadius: BorderRadius.circular(16.r),
-                          ),
-                          child: Column(
-                            children: [
-                              TextAutoSize(
-                                item.emoji,
-                                style: TextStyle(
-                                  fontSize: 52.sp,
-                                  fontFamily: circularMedium,
-                                  height: 1.1,
+                        return GestureDetector(
+                          onTap: () {
+                            if (item.emoji == '🎯' &&
+                                item.text == 'Add new goal') {}
+                            widget.newfinancialGoalAction();
+                          },
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                left: 12.w,
+                                right: 12.w,
+                                top: 16.h,
+                                bottom: 14.w),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                  color: Color(0xfff0f0f0), width: 1.sp),
+                              borderRadius: BorderRadius.circular(16.r),
+                            ),
+                            child: Column(
+                              children: [
+                                TextAutoSize(
+                                  item.emoji,
+                                  style: TextStyle(
+                                    fontSize: 52.sp,
+                                    fontFamily: circularMedium,
+                                    height: 1.1,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 14.h),
-                              widget.withPercent
-                                  ? RichText(
-                                      text: TextSpan(
-                                          style: TextStyle(
-                                            fontSize: 14.5.sp,
-                                            fontFamily: circularMedium,
-                                            height: 1.2,
-                                            color: Colors.black,
-                                          ),
-                                          children: [
-                                          TextSpan(text: "${item.text}: "),
-                                          TextSpan(
-                                            text: "${widget.percent}%",
+                                SizedBox(height: 14.h),
+                                widget.withPercent
+                                    ? RichText(
+                                        text: TextSpan(
                                             style: TextStyle(
                                               fontSize: 14.5.sp,
-                                              fontFamily: circularBold,
+                                              fontFamily: circularMedium,
                                               height: 1.2,
-                                              color: nicotrackGreen,
+                                              color: Colors.black,
                                             ),
-                                          ),
-                                        ]))
-                                  : TextAutoSize(
-                                      item.text,
-                                      style: TextStyle(
-                                        fontSize: 14.5.sp,
-                                        fontFamily: circularMedium,
-                                        height: 1.2,
-                                        color: Colors.black,
+                                            children: [
+                                            TextSpan(text: "${item.text}: "),
+                                            TextSpan(
+                                              text: "${widget.percent}%",
+                                              style: TextStyle(
+                                                fontSize: 14.5.sp,
+                                                fontFamily: circularBold,
+                                                height: 1.2,
+                                                color: nicotrackGreen,
+                                              ),
+                                            ),
+                                          ]))
+                                    : TextAutoSize(
+                                        item.text,
+                                        style: TextStyle(
+                                          fontSize: 14.5.sp,
+                                          fontFamily: circularMedium,
+                                          height: 1.2,
+                                          color: Colors.black,
+                                        ),
                                       ),
-                                    ),
-                            ],
+                              ],
+                            ),
                           ),
                         );
                       },
@@ -126,8 +139,8 @@ class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
             ),
             if (showIndicator)
               SizedBox(
-              height: 12.h,
-            ),
+                height: 12.h,
+              ),
             if (showIndicator)
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
