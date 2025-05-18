@@ -39,6 +39,13 @@ class _SetTimeBottomSheetState extends State<SetTimeBottomSheet> {
             initialItem: initialIndex2 >= 0 ? initialIndex2 : 0,
           );
           settingsMainController.minuteController.jumpToItem(initialIndex2);
+
+          final initialIndex3 = settingsMainController.halves
+              .indexOf(settingsMainController.selectedHalf);
+          settingsMainController.amPmController= FixedExtentScrollController(
+            initialItem: initialIndex3 >= 0 ? initialIndex3 : 0,
+          );
+          settingsMainController.amPmController.jumpToItem(initialIndex3);
         },
         builder: (settingsController) {
         return Padding(

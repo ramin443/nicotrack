@@ -5,7 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/constants/image-constants.dart';
+import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/change-name.dart';
+import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/change-quit-date.dart';
+import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/contact-support.dart';
+import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/feedback.dart';
 import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/set-time.dart';
+import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/set-weekday.dart';
 import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/smokes-per-day.dart';
 import 'package:nicotrack/screens/elements/display-cards.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
@@ -26,7 +31,6 @@ class SettingsController extends GetxController {
   int currentPage = 0;
   EmojiTextModel addNewGoal = EmojiTextModel(emoji: '🎯', text: 'Add new goal');
 
-
   //Set cigs variables
   late FixedExtentScrollController smokesPerDayController;
   int selectedFreq = 8;
@@ -41,7 +45,7 @@ class SettingsController extends GetxController {
   String selectedHalf = ' AM';
   List<int> hours = List.generate(12, (index) => index); // 0 to 100
   List<int> minutes = List.generate(60, (index) => index); // 0 to 99
-  List<String> halves =[' AM',' PM']; // 0 to 99
+  List<String> halves = [' AM', ' PM']; // 0 to 99
 
   //Set price of pack variables
   late FixedExtentScrollController dollarController;
@@ -50,6 +54,19 @@ class SettingsController extends GetxController {
   int selectedCent = 0;
   List<int> dollars = List.generate(100, (index) => index); // 0 to 100
   List<int> cents = List.generate(100, (index) => index); // 0 to 99
+
+  //Set weekday variables
+  late FixedExtentScrollController weekdayController;
+  String selectedweekday = 'Monday';
+  List<String> weekdays = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ]; // 0 to 100
 
   Widget personalInfoSection(BuildContext context) {
     return Padding(
@@ -78,19 +95,29 @@ class SettingsController extends GetxController {
           SizedBox(
             height: 14.w,
           ),
-          personalInfoBox(
-              fieldName: "Name",
-              fieldValue: "Jack",
-              fieldActionName: "Edit",
-              action: () {}),
+          GestureDetector(
+            onTap: () {
+              showChangeNameBottomSheet(context);
+            },
+            child: personalInfoBox(
+                fieldName: "Name",
+                fieldValue: "Jack",
+                fieldActionName: "Edit",
+                action: () {}),
+          ),
           SizedBox(
             height: 6.w,
           ),
-          personalInfoBox(
-              fieldName: "Quit Date",
-              fieldValue: "March 25, 2025",
-              fieldActionName: "Change",
-              action: () {}),
+          GestureDetector(
+            onTap: () {
+              showChangeQuitDateBottomSheet(context);
+            },
+            child: personalInfoBox(
+                fieldName: "Quit Date",
+                fieldValue: "March 25, 2025",
+                fieldActionName: "Change",
+                action: () {}),
+          ),
           SizedBox(
             height: 18.w,
           ),
@@ -246,7 +273,7 @@ class SettingsController extends GetxController {
           SizedBox(
             height: 7.w,
           ),
-          weeklyReminderSection(),
+          weeklyReminderSection(context),
           SizedBox(
             height: 36.w,
           ),
@@ -291,7 +318,7 @@ class SettingsController extends GetxController {
     );
   }
 
-  Widget helpandSupportSection() {
+  Widget helpandSupportSection(BuildContext context) {
     return Column(
       children: [
         Padding(
@@ -317,16 +344,23 @@ class SettingsController extends GetxController {
               SizedBox(
                 height: 24.w,
               ),
-              quitTipsSection(),
-              SizedBox(
-                height: 8.w,
-              ),
-              normalInfoBox(fieldValue: "💬 Contact Support", action: () {}),
+              quitTipsSection(context),
               SizedBox(
                 height: 8.w,
               ),
               normalInfoBox(
-                  fieldValue: "📝 Give us an honest feedback", action: () {}),
+                  fieldValue: "💬 Contact Support",
+                  action: () {
+                    showContactSupportBottomSheet(context);
+                  }),
+              SizedBox(
+                height: 8.w,
+              ),
+              normalInfoBox(
+                  fieldValue: "📝 Give us an honest feedback",
+                  action: () {
+                    showFeedbackBottomSheet(context);
+                  }),
             ],
           ),
         ),
@@ -439,7 +473,7 @@ class SettingsController extends GetxController {
         childAspectRatio: 1.58,
         children: [
           GestureDetector(
-            onTap: (){
+            onTap: () {
               showSmokesPerDayBottomSheet(context);
             },
             child: statCard2(
@@ -451,7 +485,7 @@ class SettingsController extends GetxController {
             ),
           ),
           GestureDetector(
-            onTap: (){
+            onTap: () {
               showSetCostofPackBottomSheet(context);
             },
             child: statCard2(
@@ -563,7 +597,7 @@ class SettingsController extends GetxController {
     );
   }
 
-  Widget weeklyReminderSection() {
+  Widget weeklyReminderSection(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(21.r),
@@ -634,38 +668,48 @@ class SettingsController extends GetxController {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 13.sp, vertical: 10.sp),
-                      decoration: BoxDecoration(
-                          color: nicotrackOrange.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(9.r)),
-                      child: TextAutoSize('Friday',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            height: 1.1,
-                            fontSize: 16.sp,
-                            fontFamily: circularBold,
-                            color: nicotrackOrange,
-                          )),
+                    GestureDetector(
+                      onTap: () {
+                        showWeekDayBottomSheet(context);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 13.sp, vertical: 10.sp),
+                        decoration: BoxDecoration(
+                            color: nicotrackOrange.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(9.r)),
+                        child: TextAutoSize('Friday',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              height: 1.1,
+                              fontSize: 16.sp,
+                              fontFamily: circularBold,
+                              color: nicotrackOrange,
+                            )),
+                      ),
                     ),
                     SizedBox(
                       width: 12.w,
                     ),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 13.sp, vertical: 10.sp),
-                      decoration: BoxDecoration(
-                          color: nicotrackOrange.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(9.r)),
-                      child: TextAutoSize('08: 00 AM',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            height: 1.1,
-                            fontSize: 16.sp,
-                            fontFamily: circularBold,
-                            color: nicotrackOrange,
-                          )),
+                    GestureDetector(
+                      onTap: (){
+                        showSetTimeBottomSheet(context);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 13.sp, vertical: 10.sp),
+                        decoration: BoxDecoration(
+                            color: nicotrackOrange.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(9.r)),
+                        child: TextAutoSize('08: 00 AM',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              height: 1.1,
+                              fontSize: 16.sp,
+                              fontFamily: circularBold,
+                              color: nicotrackOrange,
+                            )),
+                      ),
                     ),
                   ],
                 ),
@@ -678,7 +722,7 @@ class SettingsController extends GetxController {
     );
   }
 
-  Widget quitTipsSection() {
+  Widget quitTipsSection(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(21.r),
@@ -741,20 +785,25 @@ class SettingsController extends GetxController {
                 SizedBox(
                   height: 8.w,
                 ),
-                Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 13.sp, vertical: 10.sp),
-                  decoration: BoxDecoration(
-                      color: nicotrackOrange.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(9.r)),
-                  child: TextAutoSize('08: 00 AM',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        height: 1.1,
-                        fontSize: 16.sp,
-                        fontFamily: circularBold,
-                        color: nicotrackOrange,
-                      )),
+                GestureDetector(
+                  onTap: (){
+                    showSetTimeBottomSheet(context);
+                  },
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 13.sp, vertical: 10.sp),
+                    decoration: BoxDecoration(
+                        color: nicotrackOrange.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(9.r)),
+                    child: TextAutoSize('08: 00 AM',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          height: 1.1,
+                          fontSize: 16.sp,
+                          fontFamily: circularBold,
+                          color: nicotrackOrange,
+                        )),
+                  ),
                 ),
                 SizedBox(
                   height: 8.w,
@@ -764,6 +813,7 @@ class SettingsController extends GetxController {
           ]),
     );
   }
+
   void showSmokesPerDayBottomSheet(BuildContext context) {
     showModalBottomSheet(
         context: context,
@@ -776,6 +826,7 @@ class SettingsController extends GetxController {
           return SmokesPerDayBottomSheet();
         });
   }
+
   void showSetTimeBottomSheet(BuildContext context) {
     showModalBottomSheet(
         context: context,
@@ -788,6 +839,7 @@ class SettingsController extends GetxController {
           return SetTimeBottomSheet();
         });
   }
+
   void showSetCostofPackBottomSheet(BuildContext context) {
     showModalBottomSheet(
         context: context,
@@ -801,286 +853,608 @@ class SettingsController extends GetxController {
         });
   }
 
-  Widget setTimePicker() {
-    return // Dollar Picker UI
-      SizedBox(
-        height: 240.w,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Dollar Sign - Fixed
-            // TextAutoSize(
-            //   "\$",
-            //   style: TextStyle(
-            //     fontSize: 86.sp,
-            //     fontFamily: circularBold,
-            //     color: Color(0xffF35E5C),
-            //   ),
-            // ),
-
-            // Dollar Value Scroll
-            SizedBox(
-              width: 80.w,
-              height: 240.w,
-              child: ListWheelScrollView.useDelegate(
-                controller: hourController,
-                itemExtent: 100.w,
-                physics: FixedExtentScrollPhysics(),
-                onSelectedItemChanged: (index) {
-                  HapticFeedback.mediumImpact();
-                  selectedHour = hours[index];
-                  String dollarValue = "$selectedHour.$selectedMinute";
-                  update();
-                },
-                childDelegate: ListWheelChildBuilderDelegate(
-                  childCount: hours.length,
-                  builder: (context, index) {
-                    bool isSelected = selectedHour == hours[index];
-                    return Center(
-                      child: TextAutoSize(
-                        hours[index].toString(),
-                        style: TextStyle(
-                          fontSize: 64.sp,
-                          fontFamily: circularBold,
-                          color: isSelected
-                              ? Color(0xffF35E5C)
-                              : Color(0xffF35E5C).withOpacity(0.3),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-
-            // Dot
-            TextAutoSize(
-              ":",
-              style: TextStyle(
-                  fontSize: 64.sp,
-                  fontFamily: circularBold,
-                  color: Color(0xffF35E5C)),
-            ),
-
-            // Cents Scroll
-            SizedBox(
-              width: 100.w,
-              height: 240.w,
-              child: ListWheelScrollView.useDelegate(
-                controller: minuteController,
-                itemExtent: 100.w,
-                physics: FixedExtentScrollPhysics(),
-                onSelectedItemChanged: (index) {
-                  HapticFeedback.mediumImpact();
-                  selectedMinute = minutes[index];
-                  String dollarValue = "$selectedHour.$selectedMinute";
-                  update();
-                },
-                childDelegate: ListWheelChildBuilderDelegate(
-                  childCount: minutes.length,
-                  builder: (context, index) {
-                    bool isSelected = selectedMinute == minutes[index];
-                    String display = minutes[index].toString().padLeft(2, '0');
-                    return Center(
-                      child: TextAutoSize(
-                        display,
-                        style: TextStyle(
-                          fontSize:  64.sp,
-                          fontFamily: circularBold,
-                          color: isSelected
-                              ? Color(0xffF35E5C)
-                              : Color(0xffF35E5C).withOpacity(0.3),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 90.w,
-              height: 240.w,
-              child: ListWheelScrollView.useDelegate(
-                controller: minuteController,
-                itemExtent: 100.w,
-                physics: FixedExtentScrollPhysics(),
-                onSelectedItemChanged: (index) {
-                  HapticFeedback.mediumImpact();
-                  selectedHalf = halves[index];
-                  update();
-                },
-                childDelegate: ListWheelChildBuilderDelegate(
-                  childCount: halves.length,
-                  builder: (context, index) {
-                    bool isSelected = selectedHalf == halves[index];
-                    String display = halves[index];
-                    return Center(
-                      child: TextAutoSize(
-                        display,
-                        style: TextStyle(
-                          fontSize:  64.sp,
-                          fontFamily: circularBold,
-                          color: isSelected
-                              ? Color(0xffF35E5C)
-                              : Color(0xffF35E5C).withOpacity(0.3),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ],
+  void showChangeQuitDateBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
         ),
-      );
+        // isScrollControlled: true,
+        builder: (context) {
+          return ChangeQuitDateBottomSheet();
+        });
   }
 
+  void showChangeNameBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
+        ),
+        // isScrollControlled: true,
+        builder: (context) {
+          return ChangeNameBottomSheet();
+        });
+  }
 
+  void showContactSupportBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
+        ),
+        // isScrollControlled: true,
+        builder: (context) {
+          return ContactSupportBottomSheet();
+        });
+  }
+
+  void showFeedbackBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
+        ),
+        // isScrollControlled: true,
+        builder: (context) {
+          return FeedbackBottomSheet();
+        });
+  }
+
+  void showWeekDayBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
+        ),
+        // isScrollControlled: true,
+        builder: (context) {
+          return SetWeekdayBottomSheet();
+        });
+  }
+
+  Widget setTimePicker() {
+    return // Dollar Picker UI
+        SizedBox(
+      height: 240.w,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Dollar Value Scroll
+          SizedBox(
+            width: 80.w,
+            height: 240.w,
+            child: ListWheelScrollView.useDelegate(
+              controller: hourController,
+              itemExtent: 100.w,
+              physics: FixedExtentScrollPhysics(),
+              onSelectedItemChanged: (index) {
+                HapticFeedback.mediumImpact();
+                selectedHour = hours[index];
+                String dollarValue = "$selectedHour.$selectedMinute";
+                update();
+              },
+              childDelegate: ListWheelChildBuilderDelegate(
+                childCount: hours.length,
+                builder: (context, index) {
+                  bool isSelected = selectedHour == hours[index];
+                  return Center(
+                    child: TextAutoSize(
+                      hours[index].toString(),
+                      style: TextStyle(
+                        fontSize: 64.sp,
+                        fontFamily: circularBold,
+                        color: isSelected
+                            ? Color(0xffF35E5C)
+                            : Color(0xffF35E5C).withOpacity(0.3),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+
+          // Dot
+          TextAutoSize(
+            ":",
+            style: TextStyle(
+                fontSize: 64.sp,
+                fontFamily: circularBold,
+                color: Color(0xffF35E5C)),
+          ),
+
+          // Cents Scroll
+          SizedBox(
+            width: 100.w,
+            height: 240.w,
+            child: ListWheelScrollView.useDelegate(
+              controller: minuteController,
+              itemExtent: 100.w,
+              physics: FixedExtentScrollPhysics(),
+              onSelectedItemChanged: (index) {
+                HapticFeedback.mediumImpact();
+                selectedMinute = minutes[index];
+                String dollarValue = "$selectedHour.$selectedMinute";
+                update();
+              },
+              childDelegate: ListWheelChildBuilderDelegate(
+                childCount: minutes.length,
+                builder: (context, index) {
+                  bool isSelected = selectedMinute == minutes[index];
+                  String display = minutes[index].toString().padLeft(2, '0');
+                  return Center(
+                    child: TextAutoSize(
+                      display,
+                      style: TextStyle(
+                        fontSize: 64.sp,
+                        fontFamily: circularBold,
+                        color: isSelected
+                            ? Color(0xffF35E5C)
+                            : Color(0xffF35E5C).withOpacity(0.3),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 90.w,
+            height: 240.w,
+            child: ListWheelScrollView.useDelegate(
+              controller: amPmController,
+              itemExtent: 100.w,
+              physics: FixedExtentScrollPhysics(),
+              onSelectedItemChanged: (index) {
+                HapticFeedback.mediumImpact();
+                selectedHalf = halves[index];
+                update();
+              },
+              childDelegate: ListWheelChildBuilderDelegate(
+                childCount: halves.length,
+                builder: (context, index) {
+                  bool isSelected = selectedHalf == halves[index];
+                  String display = halves[index];
+                  return Center(
+                    child: TextAutoSize(
+                      display,
+                      style: TextStyle(
+                        fontSize: 64.sp,
+                        fontFamily: circularBold,
+                        color: isSelected
+                            ? Color(0xffF35E5C)
+                            : Color(0xffF35E5C).withOpacity(0.3),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget setWeekDay() {
+    return // Dollar Picker UI
+        SizedBox(
+      height: 240.w,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Dollar Value Scroll
+          SizedBox(
+            width: 300.w,
+            height: 240.w,
+            child: ListWheelScrollView.useDelegate(
+              controller: weekdayController,
+              itemExtent: 100.w,
+              physics: FixedExtentScrollPhysics(),
+              onSelectedItemChanged: (index) {
+                HapticFeedback.mediumImpact();
+                selectedweekday = weekdays[index];
+                update();
+              },
+              childDelegate: ListWheelChildBuilderDelegate(
+                childCount: weekdays.length,
+                builder: (context, index) {
+                  bool isSelected = selectedweekday == weekdays[index];
+                  return Center(
+                    child: TextAutoSize(
+                      weekdays[index].toString(),
+                      style: TextStyle(
+                        fontSize: 48.sp,
+                        fontFamily: circularBold,
+                        color: isSelected
+                            ? Color(0xffF35E5C)
+                            : Color(0xffF35E5C).withOpacity(0.3),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget setPriceofBox() {
     return // Dollar Picker UI
-      SizedBox(
-        height: 240.w,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Dollar Sign - Fixed
-            TextAutoSize(
-              "\$",
-              style: TextStyle(
+        SizedBox(
+      height: 240.w,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Dollar Sign - Fixed
+          TextAutoSize(
+            "\$",
+            style: TextStyle(
+              fontSize: 64.sp,
+              fontFamily: circularBold,
+              color: Color(0xffF35E5C),
+            ),
+          ),
+
+          // Dollar Value Scroll
+          SizedBox(
+            width: 80.w,
+            height: 240.w,
+            child: ListWheelScrollView.useDelegate(
+              controller: dollarController,
+              itemExtent: 100.w,
+              physics: FixedExtentScrollPhysics(),
+              onSelectedItemChanged: (index) {
+                HapticFeedback.mediumImpact();
+                selectedDollar = dollars[index];
+                String dollarValue = "$selectedDollar.$selectedCent";
+                update();
+              },
+              childDelegate: ListWheelChildBuilderDelegate(
+                childCount: dollars.length,
+                builder: (context, index) {
+                  bool isSelected = selectedDollar == dollars[index];
+                  return Center(
+                    child: TextAutoSize(
+                      dollars[index].toString(),
+                      style: TextStyle(
+                        fontSize: 64.sp,
+                        fontFamily: circularBold,
+                        color: isSelected
+                            ? Color(0xffF35E5C)
+                            : Color(0xffF35E5C).withOpacity(0.3),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+
+          // Dot
+          TextAutoSize(
+            ".",
+            style: TextStyle(
                 fontSize: 64.sp,
                 fontFamily: circularBold,
-                color: Color(0xffF35E5C),
-              ),
-            ),
+                color: Color(0xffF35E5C)),
+          ),
 
-            // Dollar Value Scroll
-            SizedBox(
-              width: 80.w,
-              height: 240.w,
-              child: ListWheelScrollView.useDelegate(
-                controller: dollarController,
-                itemExtent: 100.w,
-                physics: FixedExtentScrollPhysics(),
-                onSelectedItemChanged: (index) {
-                  HapticFeedback.mediumImpact();
-                  selectedDollar = dollars[index];
-                  String dollarValue = "$selectedDollar.$selectedCent";
-                  update();
-                },
-                childDelegate: ListWheelChildBuilderDelegate(
-                  childCount: dollars.length,
-                  builder: (context, index) {
-                    bool isSelected = selectedDollar == dollars[index];
-                    return Center(
-                      child: TextAutoSize(
-                        dollars[index].toString(),
-                        style: TextStyle(
-                          fontSize: 64.sp,
-                          fontFamily: circularBold,
-                          color: isSelected
-                              ? Color(0xffF35E5C)
-                              : Color(0xffF35E5C).withOpacity(0.3),
-                        ),
+          // Cents Scroll
+          SizedBox(
+            width: 90.w,
+            height: 240.w,
+            child: ListWheelScrollView.useDelegate(
+              controller: centController,
+              itemExtent: 100.w,
+              physics: FixedExtentScrollPhysics(),
+              onSelectedItemChanged: (index) {
+                HapticFeedback.mediumImpact();
+                selectedCent = cents[index];
+                String dollarValue = "$selectedDollar.$selectedCent";
+                update();
+              },
+              childDelegate: ListWheelChildBuilderDelegate(
+                childCount: cents.length,
+                builder: (context, index) {
+                  bool isSelected = selectedCent == cents[index];
+                  String display = cents[index].toString().padLeft(2, '0');
+                  return Center(
+                    child: TextAutoSize(
+                      display,
+                      style: TextStyle(
+                        fontSize: 64.sp,
+                        fontFamily: circularBold,
+                        color: isSelected
+                            ? Color(0xffF35E5C)
+                            : Color(0xffF35E5C).withOpacity(0.3),
                       ),
-                    );
-                  },
-                ),
-              ),
-            ),
-
-            // Dot
-            TextAutoSize(
-              ".",
-              style: TextStyle(
-                  fontSize: 64.sp,
-                  fontFamily: circularBold,
-                  color: Color(0xffF35E5C)),
-            ),
-
-            // Cents Scroll
-            SizedBox(
-              width: 90.w,
-              height: 240.w,
-              child: ListWheelScrollView.useDelegate(
-                controller: centController,
-                itemExtent: 100.w,
-                physics: FixedExtentScrollPhysics(),
-                onSelectedItemChanged: (index) {
-                  HapticFeedback.mediumImpact();
-                  selectedCent = cents[index];
-                  String dollarValue = "$selectedDollar.$selectedCent";
-                  update();
+                    ),
+                  );
                 },
-                childDelegate: ListWheelChildBuilderDelegate(
-                  childCount: cents.length,
-                  builder: (context, index) {
-                    bool isSelected = selectedCent == cents[index];
-                    String display = cents[index].toString().padLeft(2, '0');
-                    return Center(
-                      child: TextAutoSize(
-                        display,
-                        style: TextStyle(
-                          fontSize:  64.sp,
-                          fontFamily: circularBold,
-                          color: isSelected
-                              ? Color(0xffF35E5C)
-                              : Color(0xffF35E5C).withOpacity(0.3),
-                        ),
-                      ),
-                    );
-                  },
-                ),
               ),
             ),
-
-          ],
-        ),
-      );
+          ),
+        ],
+      ),
+    );
   }
+
   Widget setCigsPerDay() {
     return // Dollar Picker UI
-      SizedBox(
-        height: 240.w,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-
-            // Dollar Value Scroll
-            SizedBox(
-              width: 80.w,
-              height: 240.w,
-              child: ListWheelScrollView.useDelegate(
-                controller: smokesPerDayController,
-                itemExtent: 100.w,
-                physics: FixedExtentScrollPhysics(),
-                onSelectedItemChanged: (index) {
-                  HapticFeedback.mediumImpact();
-                  selectedFreq = smokesPerDay[index];
-                  update();
-                },
-                childDelegate: ListWheelChildBuilderDelegate(
-                  childCount: smokesPerDay.length,
-                  builder: (context, index) {
-                    bool isSelected = selectedFreq == smokesPerDay[index];
-                    return Center(
-                      child: TextAutoSize(
-                        smokesPerDay[index].toString(),
-                        style: TextStyle(
-                          fontSize: 64.sp,
-                          fontFamily: circularBold,
-                          color: isSelected
-                              ? Color(0xffF35E5C)
-                              : Color(0xffF35E5C).withOpacity(0.3),
-                        ),
+        SizedBox(
+      height: 240.w,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Dollar Value Scroll
+          SizedBox(
+            width: 80.w,
+            height: 240.w,
+            child: ListWheelScrollView.useDelegate(
+              controller: smokesPerDayController,
+              itemExtent: 100.w,
+              physics: FixedExtentScrollPhysics(),
+              onSelectedItemChanged: (index) {
+                HapticFeedback.mediumImpact();
+                selectedFreq = smokesPerDay[index];
+                update();
+              },
+              childDelegate: ListWheelChildBuilderDelegate(
+                childCount: smokesPerDay.length,
+                builder: (context, index) {
+                  bool isSelected = selectedFreq == smokesPerDay[index];
+                  return Center(
+                    child: TextAutoSize(
+                      smokesPerDay[index].toString(),
+                      style: TextStyle(
+                        fontSize: 64.sp,
+                        fontFamily: circularBold,
+                        color: isSelected
+                            ? Color(0xffF35E5C)
+                            : Color(0xffF35E5C).withOpacity(0.3),
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget changeQuitDatePicker() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 300.w,
+          child: CupertinoDatePicker(
+            mode: CupertinoDatePickerMode.date,
+            initialDateTime: DateTime.now(),
+            maximumDate: DateTime.now(),
+            minimumYear: 2022,
+            maximumYear: DateTime.now().year,
+            onDateTimeChanged: (DateTime newDate) {},
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget contactSupportTextFields() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 5.w,
+            ),
+            TextAutoSize(
+              'Email Address',
+              style: TextStyle(
+                fontSize: 15.sp,
+                fontFamily: circularBook,
+                color: Color(0xff454545).withOpacity(0.6),
+                height: 1.1,
               ),
             ),
           ],
         ),
-      );
+        SizedBox(
+          height: 8.w,
+        ),
+        TextField(
+          cursorColor: nicotrackBlack1,
+          decoration: InputDecoration(
+            hintText: 'jdoe@icloud.com',
+            hintStyle: TextStyle(
+              fontSize: 15.sp,
+              fontFamily: circularBook,
+              color: Color(0xff454545).withOpacity(0.6),
+              height: 1.1,
+            ),
+            filled: true,
+            fillColor: Color(0xFFF2F2F2),
+            // light gray background
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 16.sp, vertical: 12.sp),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none, // removes outline
+            ),
+          ),
+          style: TextStyle(
+            fontSize: 15.sp,
+            fontFamily: circularBook,
+            color: nicotrackBlack1,
+            height: 1.1,
+          ),
+          keyboardType: TextInputType.emailAddress,
+        ),
+        SizedBox(
+          height: 15.w,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 5.w,
+            ),
+            TextAutoSize(
+              'Details',
+              style: TextStyle(
+                fontSize: 15.sp,
+                fontFamily: circularBook,
+                color: Color(0xff454545).withOpacity(0.6),
+                height: 1.1,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 8.w,
+        ),
+        Expanded(
+          child: TextField(
+            minLines: 9,
+            maxLines: 25,
+            cursorColor: nicotrackBlack1,
+            decoration: InputDecoration(
+              filled: true,
+              hintText: '',
+              hintStyle: TextStyle(
+                fontSize: 15.sp,
+                fontFamily: circularBook,
+                color: Color(0xff454545).withOpacity(0.6),
+                height: 1.1,
+              ),
+              fillColor: Color(0xFFF2F2F2),
+              // Light gray background
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none, // removes outline
+              ),
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            ),
+            style: TextStyle(
+              fontSize: 15.sp,
+              fontFamily: circularBook,
+              color: nicotrackBlack1,
+              height: 1.1,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget changeNameTextFields() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TextField(
+          cursorColor: nicotrackBlack1,
+          decoration: InputDecoration(
+            hintText: 'John Doe',
+            hintStyle: TextStyle(
+              fontSize: 34.sp,
+              fontFamily: circularBold,
+              color: Color(0xff454545).withOpacity(0.2),
+              height: 1.1,
+            ),
+            filled: true,
+            fillColor: Colors.transparent,
+            // light gray background
+            border: OutlineInputBorder(
+              borderSide: BorderSide.none, // removes outline
+            ),
+          ),
+          style: TextStyle(
+            fontSize: 34.sp,
+            fontFamily: circularBold,
+            color: nicotrackBlack1,
+            height: 1.1,
+          ),
+          keyboardType: TextInputType.emailAddress,
+        ),
+        SizedBox(
+          height: 15.w,
+        ),
+        Spacer(),
+      ],
+    );
+  }
+
+  Widget honestFeedbackTextFields() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 5.w,
+            ),
+            TextAutoSize(
+              'Feedback',
+              style: TextStyle(
+                fontSize: 15.sp,
+                fontFamily: circularBook,
+                color: Color(0xff454545).withOpacity(0.6),
+                height: 1.1,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 8.w,
+        ),
+        Expanded(
+          child: TextField(
+            minLines: 12,
+            maxLines: 25,
+            cursorColor: nicotrackBlack1,
+            decoration: InputDecoration(
+              filled: true,
+              hintText: '',
+              hintStyle: TextStyle(
+                fontSize: 15.sp,
+                fontFamily: circularBook,
+                color: Color(0xff454545).withOpacity(0.6),
+                height: 1.1,
+              ),
+              fillColor: Color(0xFFF2F2F2),
+              // Light gray background
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none, // removes outline
+              ),
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            ),
+            style: TextStyle(
+              fontSize: 15.sp,
+              fontFamily: circularBook,
+              color: nicotrackBlack1,
+              height: 1.1,
+            ),
+          ),
+        )
+      ],
+    );
   }
 }
