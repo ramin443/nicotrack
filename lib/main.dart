@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:nicotrack/getx-controllers/progress-controller.dart';
 import 'package:nicotrack/screens/base/base.dart';
 
-void main() async{
+import 'models/onboarding-data/onboardingData-model.dart';
+
+void main() async {
   Get.put(ProgressController()); // now accessible globally
+  await Hive
+      .initFlutter(); // This sets up Hive using the app's document directory
+  Hive.registerAdapter(OnboardingDataAdapter());
+  await Hive.openBox<OnboardingData>('onboardingData');
   runApp(const MyApp());
-  WidgetsBinding.instance.addPostFrameCallback((_) {
-  });
+  WidgetsBinding.instance.addPostFrameCallback((_) {});
 }
 
 class MyApp extends StatelessWidget {
@@ -20,22 +27,22 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: const Size(375, 812),
         builder: (context, child) {
-        return MaterialApp(
-          title: 'Nicotrack',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: Base(),
-        );
-      }
-    );
+          return MaterialApp(
+            title: 'Nicotrack',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+            ),
+            home: Base(),
+          );
+        });
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
+
   final String title;
 
   @override

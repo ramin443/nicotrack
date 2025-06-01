@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -20,6 +19,8 @@ import 'package:nicotrack/models/emoji-Text-Pair.dart';
 import '../../../screens/elements/textAutoSize.dart';
 import 'package:nicotrack/initial/onboarding-questions/question-pages/enter-name.dart';
 import 'package:nicotrack/models/onboarding-data.dart';
+
+import '../models/onboarding-data/onboardingData-model.dart';
 
 class OnboardingController extends GetxController {
   List<Widget> pages = [
@@ -131,8 +132,6 @@ class OnboardingController extends GetxController {
     }
   }
 
-
-
   Widget topSlider() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 32.w),
@@ -190,7 +189,8 @@ class OnboardingController extends GetxController {
           onDateTimeChanged: (DateTime newDateTime) {
             String formattedDate = DateFormat('yyyy-MM-dd').format(newDateTime);
             HapticFeedback.lightImpact();
-            onboardingFilledData.lastSmokedDate = formattedDate;
+            onboardingFilledData =
+                onboardingFilledData.copyWith(lastSmokedDate: formattedDate);
             getCurrentPageStatus();
             // Handle the selected date
           },
@@ -214,7 +214,8 @@ class OnboardingController extends GetxController {
         onSelectedItemChanged: (index) {
           HapticFeedback.mediumImpact();
           selectedNumber1 = numbers[index];
-          onboardingFilledData.cigarettesPerDay = numbers[index];
+          onboardingFilledData =
+              onboardingFilledData.copyWith(cigarettesPerDay: numbers[index]);
           getCurrentPageStatus();
         },
         childDelegate: ListWheelChildBuilderDelegate(
@@ -252,7 +253,8 @@ class OnboardingController extends GetxController {
         onSelectedItemChanged: (index) {
           HapticFeedback.mediumImpact();
           selectedNumber2 = packNumbers[index];
-          onboardingFilledData.numberOfCigarettesIn1Pack = packNumbers[index];
+          onboardingFilledData = onboardingFilledData.copyWith(
+              numberOfCigarettesIn1Pack: packNumbers[index]);
           getCurrentPageStatus();
         },
         childDelegate: ListWheelChildBuilderDelegate(
@@ -511,7 +513,8 @@ class OnboardingController extends GetxController {
                 HapticFeedback.mediumImpact();
                 selectedDollar = dollars[index];
                 String dollarValue = "$selectedDollar.$selectedCent";
-                onboardingFilledData.costOfAPack = dollarValue;
+                onboardingFilledData =
+                    onboardingFilledData.copyWith(costOfAPack: dollarValue);
                 getCurrentPageStatus();
               },
               childDelegate: ListWheelChildBuilderDelegate(
@@ -556,7 +559,8 @@ class OnboardingController extends GetxController {
                 HapticFeedback.mediumImpact();
                 selectedCent = cents[index];
                 String dollarValue = "$selectedDollar.$selectedCent";
-                onboardingFilledData.costOfAPack = dollarValue;
+                onboardingFilledData =
+                    onboardingFilledData.copyWith(costOfAPack: dollarValue);
                 getCurrentPageStatus();
               },
               childDelegate: ListWheelChildBuilderDelegate(
@@ -597,7 +601,8 @@ class OnboardingController extends GetxController {
                     onTap: () {
                       HapticFeedback.heavyImpact();
                       instantQuitSelected = 1;
-                      onboardingFilledData.quitMethod = 1;
+                      onboardingFilledData =
+                          onboardingFilledData.copyWith(quitMethod: 1);
                       update();
                     },
                     child: Container(
@@ -728,7 +733,7 @@ class OnboardingController extends GetxController {
     return TextField(
       maxLines: 2,
       onChanged: (v) {
-        onboardingFilledData.name = v;
+        onboardingFilledData = onboardingFilledData.copyWith(name: v);
         getCurrentPageStatus();
       },
       decoration: InputDecoration(
