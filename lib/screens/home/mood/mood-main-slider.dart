@@ -8,7 +8,8 @@ import 'package:nicotrack/getx-controllers/mood-controller.dart';
 import '../../../constants/color-constants.dart';
 
 class MoodMainSlider extends StatefulWidget {
-  const MoodMainSlider({super.key});
+  final DateTime currentDate;
+  const MoodMainSlider({super.key, required this.currentDate});
 
   @override
   State<MoodMainSlider> createState() => _MoodMainSliderState();

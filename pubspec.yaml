@@ -140,6 +140,10 @@ flutter:
     - assets/images/Emojis/money.png
     - assets/images/Emojis/moodEmoji.png
     - assets/images/Emojis/paperEmoji.png
+    - assets/images/Emojis/green_check.png
+    - assets/images/Emojis/clapping.png
+    - assets/images/Emojis/handshake.png
+    - assets/images/Emojis/kheart.png
     - assets/images/button-bg/homepersonalplan.svg
     - assets/images/icons/home-selected.svg
     - assets/images/icons/home-unselected.svg

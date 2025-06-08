@@ -18,6 +18,8 @@ import '../constants/image-constants.dart';
 import '../screens/elements/textAutoSize.dart';
 import 'package:nicotrack/models/mood-model/mood-model.dart';
 import 'package:hive/hive.dart';
+import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
+import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
 
 class HomeController extends GetxController {
   final ScrollController scrollController = ScrollController();
@@ -28,8 +30,13 @@ class HomeController extends GetxController {
   bool isQuickActionsExpanded = false;
   int daysSinceLastSmoked = 0;
   int totalMoneySaved = 0;
-  int daysRegainedinLife = 0;
+  int hoursRegainedinLife = 0;
   int cigarettesAvoided = 0;
+
+  // Add these new variables
+  int selectedYear = DateTime.now().year;
+  int selectedMonth = DateTime.now().month;
+  int selectedDay = DateTime.now().day;
 
   List<String> quickActionsList = [
     "Remove all 🚬cigarettes, 🔥 lighters & ashtrays from your home",
@@ -49,10 +56,7 @@ class HomeController extends GetxController {
             duration: Duration(milliseconds: 400), curve: Curves.easeOutCubic);
       }
     });
-    Future.delayed(Duration(milliseconds: 350), setDaysSinceLastSmoked);
-    Future.delayed(Duration(milliseconds: 350), setMoneySaved);
-    Future.delayed(Duration(milliseconds: 350), setDaysRegainedinLife);
-    Future.delayed(Duration(milliseconds: 350), setCigarettesAvoided);
+    resetHomeGridValues();
     HapticFeedback.mediumImpact();
   }
 
@@ -67,6 +71,16 @@ class HomeController extends GetxController {
   Widget weeklyCalendarView(BuildContext context) {
     final today = DateTime.now();
     last7Days = List.generate(7, (i) => today.subtract(Duration(days: 6 - i)));
+
+    if (last7Days.isNotEmpty &&
+        selectedDateIndex >= 0 &&
+        selectedDateIndex < last7Days.length) {
+      final initialSelectedDate = last7Days[selectedDateIndex];
+      selectedYear = initialSelectedDate.year;
+      selectedMonth = initialSelectedDate.month;
+      selectedDay = initialSelectedDate.day;
+    }
+
     return SizedBox(
       height: getDynamicHeightWeeklyCalendar(context),
       child: ListView.builder(
@@ -75,12 +89,20 @@ class HomeController extends GetxController {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           final date = last7Days[index];
-          final isSelected = index == selectedDateIndex;
+          final isSelected = (index == selectedDateIndex);
           bool isToday = (DateFormat.yMMMd().format(date) ==
               DateFormat.yMMMd().format(DateTime.now()));
           return GestureDetector(
             onTap: () {
               selectedDateIndex = index;
+              // When an item is tapped, 'date' here is the DateTime object for that item
+              final tappedDate = last7Days[
+                  index]; // Or simply use 'date' directly from the itemBuilder scope
+
+              selectedYear = tappedDate.year;
+              selectedMonth = tappedDate.month; // month is 1-12
+              selectedDay = tappedDate.day;
+              resetHomeGridValues();
               update();
             },
             child: Container(
@@ -169,13 +191,13 @@ class HomeController extends GetxController {
           ),
           statCard(
             emoji: heartEmoji,
-            value: daysRegainedinLife,
-            label: 'Days regained\nin life',
+            value: hoursRegainedinLife,
+            label: 'Hours regained\nin life',
             isCost: false,
           ),
           statCard(
             emoji: clapEmoji,
-            value: daysSinceLastSmoked,
+            value: cigarettesAvoided,
             label: 'Cigarettes\nnot smoked',
             isCost: false,
           ),
@@ -215,7 +237,7 @@ class HomeController extends GetxController {
               AnimatedFlipCounter(
                   wholeDigits: 2,
                   // 👈 forces two digits to be shown & flip
-                  duration: Duration(seconds: 2),
+                  duration: Duration(milliseconds: 1250),
                   value: daysSinceLastSmoked,
                   fractionDigits: 0,
                   // No decimal
@@ -272,7 +294,7 @@ class HomeController extends GetxController {
                   // 👈 add dollar sign here (escaped with backslash)
                   wholeDigits: 2,
                   // 👈 forces two digits to be shown & flip
-                  duration: Duration(seconds: 2),
+                  duration: Duration(milliseconds: 1250),
                   value: value,
                   fractionDigits: 0,
                   // No decimal
@@ -299,13 +321,25 @@ class HomeController extends GetxController {
   Widget dailyTasksSection(BuildContext context) {
     return Builder(builder: (context) {
       DateTime todayDate = DateTime.now();
-      String moodStringToday = DateFormat.yMMMd()
-          .format(DateTime(todayDate.year, todayDate.month, todayDate.day));
+      DateTime currentSelectedDateTime =
+          DateTime(selectedYear, selectedMonth, selectedDay);
+      String moodCurrentDate =
+          DateFormat.yMMMd().format(currentSelectedDateTime);
       final box = Hive.box<MoodModel>(
           'moodData'); // Specify the type of values in the box
-      MoodModel? capturedData = box.get(moodStringToday);
-      bool isMoodDone = capturedData != null;
-      print("Captured data is $capturedData");
+      MoodModel? capturedData = box.get(moodCurrentDate);
+      bool isSmokedToday = false;
+      bool isMoodDone = false;
+      if (capturedData != null) {
+        if (capturedData.selfFeeling.isNotEmpty) {
+          isMoodDone = true;
+        }
+      }
+      int moodPoints = isMoodDone ? 1 : 0;
+      int smokedPoints = isSmokedToday
+          ? 1
+          : 0; // Or based on your specific logic for this part
+      int numberofCompletedDaily = moodPoints + smokedPoints;
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 0.w),
         child: Column(
@@ -340,9 +374,9 @@ class HomeController extends GetxController {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             AnimatedContainer(
-                              duration: Duration(seconds: 2),
+                              duration: Duration(milliseconds: 400),
                               height: 8.h,
-                              width: 32.w,
+                              width: (numberofCompletedDaily / 2) * 62.w,
                               decoration: BoxDecoration(
                                 color: nicotrackGreen,
                                 borderRadius: BorderRadius.circular(22.r),
@@ -355,7 +389,7 @@ class HomeController extends GetxController {
                         width: 8.w,
                       ),
                       TextAutoSize(
-                        "1/2",
+                        "$numberofCompletedDaily/2",
                         textAlign: TextAlign.right,
                         style: TextStyle(
                             height: 1.1,
@@ -373,34 +407,45 @@ class HomeController extends GetxController {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return DidYouSmokeMainSlider();
-                }));
+                if (!isSmokedToday) {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return DidYouSmokeMainSlider();
+                  }));
+                }
               },
               child: dailyTaskBox(
-                  emoji: moodEmoji,
+                  emoji: isSmokedToday ? clappingEmoji : moodEmoji,
                   emojiColor: Color(0xffdfbba8).withOpacity(0.59),
-                  titleTxt: 'Did you smoke today?',
-                  subTitle: 'Let us know if you did 😌',
-                  isCompleted: false),
+                  titleTxt: isSmokedToday
+                      ? 'Smoking Status Logged ✅'
+                      : 'Did you smoke today?',
+                  subTitle: isSmokedToday
+                      ? 'Thanks for the update! 👍'
+                      : 'Let us know if you did 😌',
+                  isCompleted: isSmokedToday),
             ),
             SizedBox(
               height: 7.h,
             ),
             GestureDetector(
               onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return MoodMainSlider();
-                }));
+                if (!isMoodDone) {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return MoodMainSlider(currentDate: currentSelectedDateTime);
+                  }));
+                }
               },
               child: dailyTaskBox(
-                  emoji: paperEmoji,
+                  emoji: isMoodDone ? kheartEmoji : paperEmoji,
                   emojiColor: Color(0xffEBE8FB).withOpacity(0.53),
-                  titleTxt: 'How do you feel today?',
-                  subTitle: 'Tap to tell us about your mood 📝',
-                  isCompleted: false),
+                  titleTxt:
+                      isMoodDone ? 'Mood Recorded ✅' : 'How do you feel today?',
+                  subTitle: isMoodDone
+                      ? 'Your mood for today is set 📝'
+                      : 'Tap to tell us about your mood 📝',
+                  isCompleted: isMoodDone),
             ),
             SizedBox(
               height: 7.h,
@@ -441,7 +486,10 @@ class HomeController extends GetxController {
               width: 61.w,
               height: 60.w,
               decoration: BoxDecoration(
-                  color: emojiColor, borderRadius: BorderRadius.circular(11.r)),
+                  color: isCompleted
+                      ? nicotrackGreen.withOpacity(0.15)
+                      : emojiColor,
+                  borderRadius: BorderRadius.circular(11.r)),
               child: Center(
                 child: Image.asset(
                   emoji,
@@ -679,23 +727,51 @@ class HomeController extends GetxController {
     );
   }
 
-  void setDaysSinceLastSmoked() {
-    daysSinceLastSmoked = 3;
+  void resetHomeGridValues() {
+    DateTime currentDateTime =
+        DateTime(selectedYear, selectedMonth, selectedDay);
+    int unsmokedDays = 0;
+    double moneySavedsoFar = 0;
+    double hoursRegained = 0;
+    int cigarettesAvoided = 0;
+    unsmokedDays = getDaysSinceLastSmoked(currentDateTime);
+    moneySavedsoFar = getMoneySaved(currentDateTime);
+    hoursRegained = getdaysOfLifeRegained(currentDateTime);
+    cigarettesAvoided = getcigarettesNotSmoked(currentDateTime);
+
+    Future.delayed(Duration(milliseconds: 0), () {
+      setDaysSinceLastSmoked(unsmokedDays);
+    });
+    Future.delayed(Duration(milliseconds: 0), () {
+      setMoneySaved(moneySavedsoFar);
+    });
+    Future.delayed(Duration(milliseconds: 0), () {
+      setHoursRegainedinLife(hoursRegained);
+    });
+    Future.delayed(Duration(milliseconds: 0), () {
+      setCigarettesAvoided(cigarettesAvoided);
+    });
+
     update();
   }
 
-  void setMoneySaved() {
-    totalMoneySaved = 84;
+  void setDaysSinceLastSmoked(int days) {
+    daysSinceLastSmoked = days;
     update();
   }
 
-  void setDaysRegainedinLife() {
-    daysRegainedinLife = 2;
+  void setMoneySaved(double moneySaved) {
+    totalMoneySaved = moneySaved.toInt();
     update();
   }
 
-  void setCigarettesAvoided() {
-    cigarettesAvoided = 2;
+  void setHoursRegainedinLife(double hoursRegained) {
+    hoursRegainedinLife = (hoursRegained * 24).toInt();
+    update();
+  }
+
+  void setCigarettesAvoided(int noofcigs) {
+    cigarettesAvoided = noofcigs;
     update();
   }
 }

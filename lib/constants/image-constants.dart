@@ -38,6 +38,11 @@ String homeIconSelected = "assets/images/icons/home-selected.svg";
 String homeIconUnselected = "assets/images/icons/home-unselected.svg";
 String planBtnBg = "assets/images/button-bg/planBgbtn.png";
 String iconPolygon = "assets/images/icons/iconPolygon.svg";
+String greenCheckEmoji = "assets/images/Emojis/green_check.png";
+String clappingEmoji = "assets/images/Emojis/clapping.png";
+String handshakeEmoji = "assets/images/Emojis/handshake.png";
+String kheartEmoji = "assets/images/Emojis/kheart.png";
+
 
 String ballImg = "assets/images/award-emojis/ball.png";
 String ballrollImg = "assets/images/award-emojis/ballroll.png";

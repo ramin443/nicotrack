@@ -10,7 +10,6 @@ import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
 import 'package:nicotrack/screens/base/base.dart';
 import 'package:page_transition/page_transition.dart';
 
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -69,10 +68,10 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigateToBaseorHome() async {
-    final box = Hive.box<OnboardingData>('onboardingCompletedData'); // Specify the type of values in the box
+    final box = Hive.box<OnboardingData>(
+        'onboardingCompletedData'); // Specify the type of values in the box
     OnboardingData? capturedData = box.get('currentUserOnboarding');
-    print("Captured data is $capturedData");
-    if (capturedData!=null) {
+    if (capturedData != null) {
       await Future.delayed(const Duration(milliseconds: 3000));
       Navigator.pushAndRemoveUntil(
         context,
@@ -83,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen> {
           duration: const Duration(milliseconds: 1500),
           reverseDuration: const Duration(milliseconds: 1000),
         ),
-            (route) => false,
+        (route) => false,
       );
     } else {
       if (mounted) {
@@ -97,8 +96,9 @@ class _SplashScreenState extends State<SplashScreen> {
             duration: const Duration(milliseconds: 1500),
             reverseDuration: const Duration(milliseconds: 1000),
           ),
-              (route) => false,
+          (route) => false,
         );
       }
     }
-  }}
+  }
+}
