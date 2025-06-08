@@ -16,6 +16,8 @@ import '../constants/color-constants.dart';
 import '../constants/font-constants.dart';
 import '../constants/image-constants.dart';
 import '../screens/elements/textAutoSize.dart';
+import 'package:nicotrack/models/mood-model/mood-model.dart';
+import 'package:hive/hive.dart';
 
 class HomeController extends GetxController {
   final ScrollController scrollController = ScrollController();
@@ -74,7 +76,8 @@ class HomeController extends GetxController {
         itemBuilder: (context, index) {
           final date = last7Days[index];
           final isSelected = index == selectedDateIndex;
-          bool isToday = (DateFormat.yMMMd().format(date) == DateFormat.yMMMd().format(DateTime.now()));
+          bool isToday = (DateFormat.yMMMd().format(date) ==
+              DateFormat.yMMMd().format(DateTime.now()));
           return GestureDetector(
             onTap: () {
               selectedDateIndex = index;
@@ -294,112 +297,127 @@ class HomeController extends GetxController {
   }
 
   Widget dailyTasksSection(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 0.w),
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextAutoSize(
-                  "Daily Tasks",
-                  textAlign: TextAlign.right,
-                  style: TextStyle(
-                      height: 1.1,
-                      fontSize: 18.sp,
-                      fontFamily: circularBold,
-                      color: nicotrackBlack1),
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      height: 8.h,
-                      width: 62.w,
-                      margin: EdgeInsets.only(bottom: 1.h),
-                      decoration: BoxDecoration(
-                        color: nicotrackGreen.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(22.r),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          AnimatedContainer(
-                            duration: Duration(seconds: 2),
-                            height: 8.h,
-                            width: 32.w,
-                            decoration: BoxDecoration(
-                              color: nicotrackGreen,
-                              borderRadius: BorderRadius.circular(22.r),
+    return Builder(builder: (context) {
+      DateTime todayDate = DateTime.now();
+      String moodStringToday = DateFormat.yMMMd()
+          .format(DateTime(todayDate.year, todayDate.month, todayDate.day));
+      final box = Hive.box<MoodModel>(
+          'moodData'); // Specify the type of values in the box
+      MoodModel? capturedData = box.get(moodStringToday);
+      bool isMoodDone = capturedData != null;
+      print("Captured data is $capturedData");
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 0.w),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextAutoSize(
+                    "Daily Tasks",
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                        height: 1.1,
+                        fontSize: 18.sp,
+                        fontFamily: circularBold,
+                        color: nicotrackBlack1),
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        height: 8.h,
+                        width: 62.w,
+                        margin: EdgeInsets.only(bottom: 1.h),
+                        decoration: BoxDecoration(
+                          color: nicotrackGreen.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(22.r),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            AnimatedContainer(
+                              duration: Duration(seconds: 2),
+                              height: 8.h,
+                              width: 32.w,
+                              decoration: BoxDecoration(
+                                color: nicotrackGreen,
+                                borderRadius: BorderRadius.circular(22.r),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 8.w,
-                    ),
-                    TextAutoSize(
-                      "1/2",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                          height: 1.1,
-                          fontSize: 13.sp,
-                          fontFamily: circularBook,
-                          color: Color(0xff404040)),
-                    ),
-                  ],
-                )
-              ],
+                      SizedBox(
+                        width: 8.w,
+                      ),
+                      TextAutoSize(
+                        "1/2",
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                            height: 1.1,
+                            fontSize: 13.sp,
+                            fontFamily: circularBook,
+                            color: Color(0xff404040)),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: 16.w,
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return DidYouSmokeMainSlider();
-              }));
-            },
-            child: dailyTaskBox(
-                emoji: moodEmoji,
-                emojiColor: Color(0xffdfbba8).withOpacity(0.59),
-                titleTxt: 'Did you smoke today?',
-                subTitle: 'Let us know if you did 😌'),
-          ),
-          SizedBox(
-            height: 7.h,
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return MoodMainSlider();
-              }));
-            },
-            child: dailyTaskBox(
-                emoji: paperEmoji,
-                emojiColor: Color(0xffEBE8FB).withOpacity(0.53),
-                titleTxt: 'How do you feel today?',
-                subTitle: 'Tap to tell us about your mood 📝'),
-          ),
-          SizedBox(
-            height: 7.h,
-          ),
-          quickActions()
-        ],
-      ),
-    );
+            SizedBox(
+              height: 16.w,
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return DidYouSmokeMainSlider();
+                }));
+              },
+              child: dailyTaskBox(
+                  emoji: moodEmoji,
+                  emojiColor: Color(0xffdfbba8).withOpacity(0.59),
+                  titleTxt: 'Did you smoke today?',
+                  subTitle: 'Let us know if you did 😌',
+                  isCompleted: false),
+            ),
+            SizedBox(
+              height: 7.h,
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return MoodMainSlider();
+                }));
+              },
+              child: dailyTaskBox(
+                  emoji: paperEmoji,
+                  emojiColor: Color(0xffEBE8FB).withOpacity(0.53),
+                  titleTxt: 'How do you feel today?',
+                  subTitle: 'Tap to tell us about your mood 📝',
+                  isCompleted: false),
+            ),
+            SizedBox(
+              height: 7.h,
+            ),
+            quickActions()
+          ],
+        ),
+      );
+    });
   }
 
   Widget dailyTaskBox(
       {required String emoji,
       required Color emojiColor,
       required String titleTxt,
-      required String subTitle}) {
+      required String subTitle,
+      required bool isCompleted}) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Container(

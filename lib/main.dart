@@ -4,18 +4,33 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:nicotrack/getx-controllers/progress-controller.dart';
+import 'package:nicotrack/initial/splash-screen.dart';
 import 'package:nicotrack/screens/base/base.dart';
+import 'package:path_provider/path_provider.dart'
+    show getApplicationDocumentsDirectory;
 
 import 'models/onboarding-data/onboardingData-model.dart';
+import 'package:nicotrack/hive-adapters/onboarding-data-adapter.dart';
+import 'package:nicotrack/hive-adapters/did-you-smoke-adapter.dart';
+import 'package:nicotrack/hive-adapters/mood-data-adapter.dart';
+import 'package:nicotrack/models/mood-model/mood-model.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   Get.put(ProgressController()); // now accessible globally
-  await Hive
-      .initFlutter(); // This sets up Hive using the app's document directory
+  await Hive.initFlutter();
+
+  // Initialize Hive adapter(s)
   Hive.registerAdapter(OnboardingDataAdapter());
-  await Hive.openBox<OnboardingData>('onboardingData');
+  Hive.registerAdapter(DidYouSmokeAdapter());
+  Hive.registerAdapter(MoodModelAdapter());
+
+  // Open your Hive box(es)
+  await Hive.openBox<OnboardingData>('onboardingCompletedData');
+  await Hive.openBox<DidYouSmokeAdapter>('didYouSmokeData');
+  await Hive.openBox<MoodModel>('moodData');
+
   runApp(const MyApp());
-  WidgetsBinding.instance.addPostFrameCallback((_) {});
 }
 
 class MyApp extends StatelessWidget {
@@ -34,7 +49,7 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            home: Base(),
+            home: SplashScreen(),
           );
         });
   }

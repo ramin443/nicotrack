@@ -30,7 +30,7 @@ class _MoodMainSliderState extends State<MoodMainSlider> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  moodController.continueButton(),
+                  moodController.continueButton(context),
                   SizedBox(
                     height: 0.h,
                   )

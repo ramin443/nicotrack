@@ -210,7 +210,6 @@ class __$$OnboardingDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 0, adapterName: 'OnboardingDataAdapter')
 class _$OnboardingDataImpl implements _OnboardingData {
   _$OnboardingDataImpl(
       {this.lastSmokedDate = "",

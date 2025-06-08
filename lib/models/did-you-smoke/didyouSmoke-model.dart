@@ -6,7 +6,6 @@ part 'didyouSmoke-model.g.dart';
 
 @freezed
 class DidYouSmokeModel with _$DidYouSmokeModel {
-  // Define a factory constructor with required fields
   factory DidYouSmokeModel({
     @Default(-1) int hasSmokedToday,
     @Default(-1) int howManyCigs,
@@ -16,7 +15,6 @@ class DidYouSmokeModel with _$DidYouSmokeModel {
     @Default(-1) int updateQuitDate,
   }) = _DidYouSmokeModel;
 
-  // Add a factory constructor for JSON serialization
   factory DidYouSmokeModel.fromJson(Map<String, dynamic> json) =>
       _$DidYouSmokeModelFromJson(json);
 }

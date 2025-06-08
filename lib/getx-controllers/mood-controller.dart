@@ -13,6 +13,10 @@ import 'package:nicotrack/screens/home/mood/mood-reflect-note.dart';
 import '../constants/color-constants.dart';
 import '../constants/font-constants.dart';
 import '../screens/elements/textAutoSize.dart';
+import 'package:intl/intl.dart';
+import 'package:nicotrack/models/mood-model/mood-model.dart';
+import 'package:hive/hive.dart';
+import 'package:nicotrack/screens/base/base.dart';
 
 class MoodController extends GetxController {
   final PageController pageController = PageController();
@@ -27,6 +31,7 @@ class MoodController extends GetxController {
   bool currentPageDoneStatus = false;
   MoodModel moodFilledData = MoodModel();
   TextEditingController noteTextController = TextEditingController();
+
   //How you feeling variables
   int selectedFeelingsIndex = -1;
   List<EmojiTextModel> howareyouFeelingPairs = [
@@ -141,11 +146,11 @@ class MoodController extends GetxController {
             return GestureDetector(
               onTap: () {
                 HapticFeedback.mediumImpact();
-                if (selectedFeelingsIndex== index) {
-
+                if (selectedFeelingsIndex == index) {
                 } else {
                   selectedFeelingsIndex = index;
-                  moodFilledData = moodFilledData.copyWith(selfFeeling: howareyouFeelingPairs[index].toJson()) ;
+                  moodFilledData = moodFilledData.copyWith(
+                      selfFeeling: howareyouFeelingPairs[index].toJson());
                 }
                 getCurrentPageStatus();
               },
@@ -192,7 +197,10 @@ class MoodController extends GetxController {
     // Grid View for selection
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.only(left: 28.w, right: 28.w,),
+        padding: EdgeInsets.only(
+          left: 28.w,
+          right: 28.w,
+        ),
         child: GridView.builder(
           itemCount: moodAffectingPairs.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -208,10 +216,10 @@ class MoodController extends GetxController {
               onTap: () {
                 HapticFeedback.mediumImpact();
                 if (selectedMoodAffectingIndex == index) {
-
                 } else {
                   selectedMoodAffectingIndex = index;
-                  moodFilledData = moodFilledData.copyWith(moodAffecting: moodAffectingPairs[index].toJson());
+                  moodFilledData = moodFilledData.copyWith(
+                      moodAffecting: moodAffectingPairs[index].toJson());
                 }
                 getCurrentPageStatus();
               },
@@ -258,73 +266,73 @@ class MoodController extends GetxController {
   Widget anyCravingsTodayGrid() {
     // Grid View for selection
     return Padding(
-          padding: EdgeInsets.only(left: 28.w, right: 28.w),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              for (int index = 0; index < cravingPairs.length; index++)
-                Builder(builder: (context) {
-                  bool isSelected = selectedCravingIndex == index;
-                  return Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          HapticFeedback.mediumImpact();
-                          if (selectedCravingIndex == index) {
-                          } else {
-                            selectedCravingIndex = index;
-                            moodFilledData = moodFilledData.copyWith(anyCravingToday: index);
-                          }
-                          getCurrentPageStatus();
-                        },
-                        child: Container(
-                          width: 298.w,
-                          padding: EdgeInsets.symmetric(vertical: 22.w),
-                          decoration: BoxDecoration(
-                              color: isSelected
-                                  ? Colors.black87
-                                  : Color(0xffF4F4F4),
-                              borderRadius: BorderRadius.circular(16.r)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: 30.w,
-                              ),
-                              Image.asset(
-                                cravingPairs[index].emoji,
-                                width: 54.w,
-                              ),
-                              SizedBox(
-                                width: 38.w,
-                              ),
-                              SizedBox(
-                                width: 120.w,
-                                child: TextAutoSize(
-                                  cravingPairs[index].text,
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      fontSize: 18.sp,
-                                      height: 1.2,
-                                      fontFamily: circularMedium,
-                                      color: isSelected
-                                          ? Colors.white
-                                          : nicotrackBlack1),
-                                ),
-                              ),
-                            ],
+      padding: EdgeInsets.only(left: 28.w, right: 28.w),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          for (int index = 0; index < cravingPairs.length; index++)
+            Builder(builder: (context) {
+              bool isSelected = selectedCravingIndex == index;
+              return Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      HapticFeedback.mediumImpact();
+                      if (selectedCravingIndex == index) {
+                      } else {
+                        selectedCravingIndex = index;
+                        moodFilledData =
+                            moodFilledData.copyWith(anyCravingToday: index);
+                      }
+                      getCurrentPageStatus();
+                    },
+                    child: Container(
+                      width: 298.w,
+                      padding: EdgeInsets.symmetric(vertical: 22.w),
+                      decoration: BoxDecoration(
+                          color:
+                              isSelected ? Colors.black87 : Color(0xffF4F4F4),
+                          borderRadius: BorderRadius.circular(16.r)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 30.w,
                           ),
-                        ),
+                          Image.asset(
+                            cravingPairs[index].emoji,
+                            width: 54.w,
+                          ),
+                          SizedBox(
+                            width: 38.w,
+                          ),
+                          SizedBox(
+                            width: 120.w,
+                            child: TextAutoSize(
+                              cravingPairs[index].text,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  fontSize: 18.sp,
+                                  height: 1.2,
+                                  fontFamily: circularMedium,
+                                  color: isSelected
+                                      ? Colors.white
+                                      : nicotrackBlack1),
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        height: 8.w,
-                      )
-                    ],
-                  );
-                }),
-            ],
-          ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 8.w,
+                  )
+                ],
+              );
+            }),
+        ],
+      ),
     );
   }
 
@@ -350,7 +358,8 @@ class MoodController extends GetxController {
                 if (selectedCraveTimesIndex == index) {
                 } else {
                   selectedCraveTimesIndex = index;
-                  moodFilledData = moodFilledData.copyWith(craveTiming: craveTimesPairs[index].toJson());
+                  moodFilledData = moodFilledData.copyWith(
+                      craveTiming: craveTimesPairs[index].toJson());
                 }
                 getCurrentPageStatus();
               },
@@ -411,7 +420,7 @@ class MoodController extends GetxController {
                 controller: noteTextController,
                 // makes it multiline
                 keyboardType: TextInputType.multiline,
-                onChanged: (v){
+                onChanged: (v) {
                   moodFilledData = moodFilledData.copyWith(reflectionNote: v);
                   getCurrentPageStatus();
                 },
@@ -456,12 +465,13 @@ class MoodController extends GetxController {
     update();
   }
 
-  Widget continueButton() {
+  Widget continueButton(BuildContext context) {
     return GestureDetector(
       onTap: () {
         if (currentPageDoneStatus) {
           HapticFeedback.mediumImpact();
           if (currentPage == (pages.length - 1)) {
+            addDatatoHiveandNavigate(context);
           } else {
             nextPage();
           }
@@ -470,28 +480,28 @@ class MoodController extends GetxController {
       child: Container(
         width: 346.w,
         height: 54.w,
-        decoration:  currentPage == (pages.length - 1) ?
-        BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-                fullButtonBg), // Load from assets
-            fit: BoxFit
-                .cover, // Adjusts how the image fits the container
-          ),
-        ):
-        BoxDecoration(
-          color: currentPageDoneStatus
-              ? nicotrackBlack1
-              : nicotrackButtonLightBlack,
-          borderRadius: BorderRadius.circular(30.r),
-        ),
+        decoration: currentPage == (pages.length - 1)
+            ? BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(fullButtonBg), // Load from assets
+                  fit: BoxFit.cover, // Adjusts how the image fits the container
+                ),
+              )
+            : BoxDecoration(
+                color: currentPageDoneStatus
+                    ? nicotrackBlack1
+                    : nicotrackButtonLightBlack,
+                borderRadius: BorderRadius.circular(30.r),
+              ),
         child: Center(
           child: TextAutoSize(
-            currentPage == (pages.length - 1) ? "🙌 Submit" : "Continue",
+            currentPage == (pages.length - 1) ? "🙌 Finish" : "Continue",
             style: TextStyle(
                 fontSize: 18.sp,
                 fontFamily: circularBold,
-                color: currentPage == (pages.length - 1) ?nicotrackBlack1:Colors.white),
+                color: currentPage == (pages.length - 1)
+                    ? nicotrackBlack1
+                    : Colors.white),
           ),
         ),
       ),
@@ -501,6 +511,7 @@ class MoodController extends GetxController {
   void nextPage() {
     // Move to the next page
     if (currentPage < pages.length - 1) {
+      print("Mood filled data is ${moodFilledData}");
       currentPage++;
       getCurrentPageStatus();
       pageController.animateToPage(
@@ -541,10 +552,26 @@ class MoodController extends GetxController {
           currentPageDoneStatus = false;
         }
       case 4:
-          currentPageDoneStatus = true;
+        currentPageDoneStatus = true;
       default:
         currentPageDoneStatus = false;
     }
     update();
+  }
+
+  void addDatatoHiveandNavigate(BuildContext context) async {
+    DateTime todayDate = DateTime.now();
+    String moodStringToday = DateFormat.yMMMd()
+        .format(DateTime(todayDate.year, todayDate.month, todayDate.day));
+    final box = Hive.box<MoodModel>('moodData');
+    await box.put(moodStringToday, moodFilledData);
+    if (context.mounted) {
+      // Good practice: check if the widget is still in the tree
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const Base(),
+          ),
+          (route) => false);
+    }
   }
 }

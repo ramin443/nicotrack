@@ -56,6 +56,7 @@ dependencies:
   smooth_page_indicator: ^1.2.1
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  page_transition: ^2.2.1
 
 dev_dependencies:
   hive_generator: ^2.0.0
@@ -106,6 +107,7 @@ flutter:
     - assets/images/branding/splashLogo.svg
     - assets/images/button-bg/fullsized button.png
     - assets/images/branding/Logogrouped.svg
+    - assets/images/branding/splashLogo.png
     - assets/images/Illustration/Finances.svg
     - assets/images/Illustration/Health - Sports.svg
     - assets/images/Illustration/Painter.svg

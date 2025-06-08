@@ -6,7 +6,6 @@ part 'onboardingData-model.g.dart';
 
 @freezed
 class OnboardingData with _$OnboardingData {
-  @HiveType(typeId: 0, adapterName: 'OnboardingDataAdapter') // 👈 Add adapter info
   // Define a factory constructor with required fields
   factory OnboardingData({
     @Default("") String lastSmokedDate,

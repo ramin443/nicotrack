@@ -3,39 +3,6 @@
 part of 'onboardingData-model.dart';
 
 // **************************************************************************
-// TypeAdapterGenerator
-// **************************************************************************
-
-class OnboardingDataAdapter extends TypeAdapter<_$OnboardingDataImpl> {
-  @override
-  final int typeId = 0;
-
-  @override
-  _$OnboardingDataImpl read(BinaryReader reader) {
-    final numOfFields = reader.readByte();
-    final fields = <int, dynamic>{
-      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    };
-    return _$OnboardingDataImpl();
-  }
-
-  @override
-  void write(BinaryWriter writer, _$OnboardingDataImpl obj) {
-    writer.writeByte(0);
-  }
-
-  @override
-  int get hashCode => typeId.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is OnboardingDataAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
-}
-
-// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

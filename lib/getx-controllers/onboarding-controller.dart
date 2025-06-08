@@ -8,7 +8,6 @@ import 'package:nicotrack/initial/onboarding-questions/question-pages/one-pack-c
 import 'package:nicotrack/initial/onboarding-questions/question-pages/biggest-motivation.dart';
 import 'package:nicotrack/initial/onboarding-questions/question-pages/crave-situations.dart';
 import 'package:nicotrack/initial/onboarding-questions/question-pages/help-need.dart';
-import 'package:nicotrack/initial/onboarding-questions/question-pages/quit-method.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../constants/color-constants.dart';
@@ -18,9 +17,9 @@ import 'package:flutter/services.dart';
 import 'package:nicotrack/models/emoji-Text-Pair.dart';
 import '../../../screens/elements/textAutoSize.dart';
 import 'package:nicotrack/initial/onboarding-questions/question-pages/enter-name.dart';
-import 'package:nicotrack/models/onboarding-data.dart';
-
 import '../models/onboarding-data/onboardingData-model.dart';
+import '../screens/base/base.dart';
+import 'package:hive/hive.dart';
 
 class OnboardingController extends GetxController {
   List<Widget> pages = [
@@ -31,7 +30,7 @@ class OnboardingController extends GetxController {
     BiggestMotivation(),
     CraveSituations(),
     HelpNeed(),
-    QuitMethod(),
+    // QuitMethod(),
     EnterName(),
   ];
   final PageController pageController = PageController();
@@ -96,6 +95,8 @@ class OnboardingController extends GetxController {
   //Page 8 variables - Cigarette frequency
   int instantQuitSelected = 0;
 
+
+
   void goToNextPage(int page) {
     currentPage = page;
     update();
@@ -111,9 +112,6 @@ class OnboardingController extends GetxController {
         duration: Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
-    } else {
-      // Handle the case when reaching the last page (e.g., navigate to the main screen)
-      print("Onboarding complete!");
     }
   }
 
@@ -126,9 +124,6 @@ class OnboardingController extends GetxController {
         duration: Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
-    } else {
-      // Handle the case when reaching the last page (e.g., navigate to the main screen)
-      print("Onboarding complete!");
     }
   }
 
@@ -299,12 +294,17 @@ class OnboardingController extends GetxController {
                 HapticFeedback.mediumImpact();
                 if (selectedMotivationIndex.contains(index)) {
                   selectedMotivationIndex.remove(index);
-                  onboardingFilledData.biggestMotivation
-                      .remove(motivationPairs[index].text);
+                  onboardingFilledData = onboardingFilledData.copyWith(
+                      biggestMotivation: onboardingFilledData.biggestMotivation
+                          .where((e) => e != motivationPairs[index].text)
+                          .toList());
                 } else {
                   selectedMotivationIndex.add(index);
-                  onboardingFilledData.biggestMotivation
-                      .add(motivationPairs[index].text);
+                  onboardingFilledData = onboardingFilledData.copyWith(
+                      biggestMotivation: [
+                        ...onboardingFilledData.biggestMotivation,
+                        motivationPairs[index].text
+                      ]);
                 }
                 getCurrentPageStatus();
               },
@@ -365,12 +365,17 @@ class OnboardingController extends GetxController {
                 HapticFeedback.mediumImpact();
                 if (selectedcravingsIndex.contains(index)) {
                   selectedcravingsIndex.remove(index);
-                  onboardingFilledData.craveSituations
-                      .remove(craveSituationPairs[index].text);
+                  onboardingFilledData = onboardingFilledData.copyWith(
+                      craveSituations: onboardingFilledData.craveSituations
+                          .where((e) => e != craveSituationPairs[index].text)
+                          .toList());
                 } else {
                   selectedcravingsIndex.add(index);
-                  onboardingFilledData.craveSituations
-                      .add(craveSituationPairs[index].text);
+                  onboardingFilledData = onboardingFilledData.copyWith(
+                      craveSituations: [
+                        ...onboardingFilledData.craveSituations,
+                        craveSituationPairs[index].text
+                      ]);
                 }
                 getCurrentPageStatus();
               },
@@ -435,10 +440,17 @@ class OnboardingController extends GetxController {
                 HapticFeedback.mediumImpact();
                 if (selectedHelpIndex.contains(index)) {
                   selectedHelpIndex.remove(index);
-                  onboardingFilledData.helpNeeded.remove(helpPairs[index].text);
+                  onboardingFilledData = onboardingFilledData.copyWith(
+                      helpNeeded: onboardingFilledData.helpNeeded
+                          .where((e) => e != helpPairs[index].text)
+                          .toList());
                 } else {
                   selectedHelpIndex.add(index);
-                  onboardingFilledData.helpNeeded.add(helpPairs[index].text);
+                  onboardingFilledData = onboardingFilledData.copyWith(
+                      helpNeeded: [
+                        ...onboardingFilledData.helpNeeded,
+                        helpPairs[index].text
+                      ]);
                 }
                 getCurrentPageStatus();
               },
@@ -758,12 +770,21 @@ class OnboardingController extends GetxController {
     );
   }
 
-  Widget continueButton() {
+  Widget continueButton(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async{
+
         if (currentPageDoneStatus) {
           HapticFeedback.mediumImpact();
           if (currentPage == (pages.length - 1)) {
+            final box = Hive.box<OnboardingData>('onboardingCompletedData');
+            await box.put('currentUserOnboarding', onboardingFilledData); // Use a consistent key
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (context) => const Base(
+                  ),
+                ),
+                    (route) => false);
           } else {
             nextPage();
           }
@@ -836,12 +857,6 @@ class OnboardingController extends GetxController {
           return false;
         }
       case 7:
-        if (onboardingFilledData.quitMethod != "") {
-          return true;
-        } else {
-          return false;
-        }
-      case 8:
         if (onboardingFilledData.name != "") {
           return true;
         } else {
@@ -897,12 +912,6 @@ class OnboardingController extends GetxController {
           currentPageDoneStatus = false;
         }
       case 7:
-        if (onboardingFilledData.quitMethod != -1) {
-          currentPageDoneStatus = true;
-        } else {
-          currentPageDoneStatus = false;
-        }
-      case 8:
         if (onboardingFilledData.name != "") {
           currentPageDoneStatus = true;
         } else {

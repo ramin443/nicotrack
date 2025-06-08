@@ -86,7 +86,7 @@ class _OnboardingMainSliderState extends State<OnboardingMainSlider> {
                       //   height: 18.h,
                       // ),
 
-                      onboardingController.continueButton(),
+                      onboardingController.continueButton(context),
 
                       // TextAutoSize(
                       //   "Skip",

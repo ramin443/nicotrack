@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/getx-controllers/home-controller.dart';
+import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
 import '../../constants/color-constants.dart';
 import '../../constants/font-constants.dart';
 import '../elements/textAutoSize.dart';
@@ -55,29 +56,33 @@ class _HomeState extends State<Home> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Stack(
-                            alignment: Alignment.center,
-                            // Ensures everything centers by default
-                            children: [
-                              Positioned(
-                                  child: SvgPicture.asset(
-                                premiumBtnBg,
-                                width: 112.w,
-                              )),
-                              Container(
-                                padding: EdgeInsets.only(bottom: 2.h),
-                                width: 112.w,
-                                child: Center(
-                                  child: TextAutoSize(
-                                    "Premium",
-                                    style: TextStyle(
-                                        fontSize: 16.sp,
-                                        fontFamily: circularMedium,
-                                        color: nicotrackBlack1),
+                          GestureDetector(
+                            onTap: ()async{
+                            },
+                            child: Stack(
+                              alignment: Alignment.center,
+                              // Ensures everything centers by default
+                              children: [
+                                Positioned(
+                                    child: SvgPicture.asset(
+                                  premiumBtnBg,
+                                  width: 112.w,
+                                )),
+                                Container(
+                                  padding: EdgeInsets.only(bottom: 2.h),
+                                  width: 112.w,
+                                  child: Center(
+                                    child: TextAutoSize(
+                                      "Premium",
+                                      style: TextStyle(
+                                          fontSize: 16.sp,
+                                          fontFamily: circularMedium,
+                                          color: nicotrackBlack1),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                           SizedBox(
                             width: 24.w,

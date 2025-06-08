@@ -1,4 +1,4 @@
-String splashLogo = "assets/images/branding/splashLogo.svg";
+String splashLogo = "assets/images/branding/splashLogo.png";
 String fullButtonBg = "assets/images/button-bg/fullsized button.png";
 String groupedLogo = "assets/images/branding/Logogrouped.svg";
 String premiumBtnBg = "assets/images/button-bg/premiumBtnBG.svg";
