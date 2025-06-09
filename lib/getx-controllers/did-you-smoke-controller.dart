@@ -16,6 +16,9 @@ import '../constants/image-constants.dart';
 import '../models/emoji-text-pair/emojitext-model.dart';
 import '../screens/elements/data-cubes.dart';
 import '../screens/elements/textAutoSize.dart';
+import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
+import 'package:nicotrack/screens/base/base.dart';
 
 class DidYouSmokeController extends GetxController {
   final PageController pageController = PageController();
@@ -73,14 +76,15 @@ class DidYouSmokeController extends GetxController {
   ];
 
   // UpdateQuitDate variables
-  bool updateQuitDate = false;
+  int updateQuitDate = -1;
 
-  Widget continueButton() {
+  Widget continueButton(DateTime currentDateTime, BuildContext context) {
     return GestureDetector(
       onTap: () {
         if (currentPageDoneStatus) {
           HapticFeedback.mediumImpact();
           if (currentPage == (pages.length - 1)) {
+            addDatatoHiveandNavigate(currentDateTime, context);
           } else {
             nextPage();
           }
@@ -589,7 +593,7 @@ class DidYouSmokeController extends GetxController {
                 child: GestureDetector(
                     onTap: () {
                       HapticFeedback.heavyImpact();
-                      updateQuitDate = true;
+                      updateQuitDate = 0;
                       didYouSmokeFilledData =
                           didYouSmokeFilledData.copyWith(updateQuitDate: 0);
                       getCurrentPageStatus();
@@ -601,7 +605,7 @@ class DidYouSmokeController extends GetxController {
                       decoration: BoxDecoration(
                         color: Color(0xffF4F4F4),
                         borderRadius: BorderRadius.circular(16.r),
-                        image: updateQuitDate
+                        image: updateQuitDate == 0
                             ? DecorationImage(
                                 image: AssetImage(
                                     quitMethodBG), // Replace with your image path
@@ -667,7 +671,7 @@ class DidYouSmokeController extends GetxController {
                 child: GestureDetector(
                     onTap: () {
                       HapticFeedback.heavyImpact();
-                      updateQuitDate = false;
+                      updateQuitDate = 1;
                       didYouSmokeFilledData =
                           didYouSmokeFilledData.copyWith(updateQuitDate: 1);
                       getCurrentPageStatus();
@@ -677,7 +681,7 @@ class DidYouSmokeController extends GetxController {
                       height: 235.w,
                       decoration: BoxDecoration(
                           color: Color(0xffF4F4F4),
-                          image: !updateQuitDate
+                          image: updateQuitDate == 1
                               ? DecorationImage(
                                   image: AssetImage(
                                       quitMethodBG), // Replace with your image path
@@ -903,5 +907,21 @@ class DidYouSmokeController extends GetxController {
         currentPageDoneStatus = false;
     }
     update();
+  }
+
+  void addDatatoHiveandNavigate(DateTime currentDateTime, BuildContext context) async {
+    String didYouSmokeStringToday = DateFormat.yMMMd()
+        .format(currentDateTime);
+    final box = Hive.box<DidYouSmokeModel>('didYouSmokeData');
+    await box.put(didYouSmokeStringToday, didYouSmokeFilledData);
+    print("Putting the data here $didYouSmokeStringToday with data $didYouSmokeFilledData");
+    if (context.mounted) {
+      // Good practice: check if the widget is still in the tree
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const Base(),
+          ),
+              (route) => false);
+    }
   }
 }

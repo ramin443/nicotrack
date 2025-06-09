@@ -34,63 +34,68 @@ class _HomeState extends State<Home> {
                   SizedBox(
                     height: 65.h,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 24.w,
-                          ),
-                          TextAutoSize(
-                            "Hello,\nJack",
-                            style: TextStyle(
-                                height: 1.2,
-                                fontSize: 28.sp,
-                                fontFamily: circularBold,
-                                color: nicotrackBlack1),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          GestureDetector(
-                            onTap: ()async{
-                            },
-                            child: Stack(
-                              alignment: Alignment.center,
-                              // Ensures everything centers by default
-                              children: [
-                                Positioned(
-                                    child: SvgPicture.asset(
-                                  premiumBtnBg,
-                                  width: 112.w,
-                                )),
-                                Container(
-                                  padding: EdgeInsets.only(bottom: 2.h),
-                                  width: 112.w,
-                                  child: Center(
-                                    child: TextAutoSize(
-                                      "Premium",
-                                      style: TextStyle(
-                                          fontSize: 16.sp,
-                                          fontFamily: circularMedium,
-                                          color: nicotrackBlack1),
+                  Builder(builder: (context) {
+                    String fullName =
+                        homeController.currentDateOnboardingData.name;
+                    String firstName =
+                        fullName.substring(0, fullName.indexOf(" "));
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: 24.w,
+                            ),
+                            TextAutoSize(
+                              "Hello,\n${firstName}",
+                              style: TextStyle(
+                                  height: 1.2,
+                                  fontSize: 28.sp,
+                                  fontFamily: circularBold,
+                                  color: nicotrackBlack1),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            GestureDetector(
+                              onTap: () async {},
+                              child: Stack(
+                                alignment: Alignment.center,
+                                // Ensures everything centers by default
+                                children: [
+                                  Positioned(
+                                      child: SvgPicture.asset(
+                                    premiumBtnBg,
+                                    width: 112.w,
+                                  )),
+                                  Container(
+                                    padding: EdgeInsets.only(bottom: 2.h),
+                                    width: 112.w,
+                                    child: Center(
+                                      child: TextAutoSize(
+                                        "Premium",
+                                        style: TextStyle(
+                                            fontSize: 16.sp,
+                                            fontFamily: circularMedium,
+                                            color: nicotrackBlack1),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 24.w,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                            SizedBox(
+                              width: 24.w,
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  }),
                   SizedBox(
                     height: 8.h,
                   ),

@@ -20,6 +20,7 @@ import 'package:nicotrack/models/mood-model/mood-model.dart';
 import 'package:hive/hive.dart';
 import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
 import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
+import 'package:nicotrack/models/did-you-smoke/didyouSmoke-model.dart';
 
 class HomeController extends GetxController {
   final ScrollController scrollController = ScrollController();
@@ -33,7 +34,7 @@ class HomeController extends GetxController {
   int hoursRegainedinLife = 0;
   int cigarettesAvoided = 0;
 
-  // Add these new variables
+  // Date variables
   int selectedYear = DateTime.now().year;
   int selectedMonth = DateTime.now().month;
   int selectedDay = DateTime.now().day;
@@ -44,6 +45,8 @@ class HomeController extends GetxController {
     "Identify your biggest triggers 🎯 and avoid them",
     "Log ✍️ any cravings and how you overcame them"
   ];
+
+  OnboardingData currentDateOnboardingData = OnboardingData();
 
   @override
   void onInit() {
@@ -57,6 +60,7 @@ class HomeController extends GetxController {
       }
     });
     resetHomeGridValues();
+    setCurrentFilledData();
     HapticFeedback.mediumImpact();
   }
 
@@ -323,16 +327,23 @@ class HomeController extends GetxController {
       DateTime todayDate = DateTime.now();
       DateTime currentSelectedDateTime =
           DateTime(selectedYear, selectedMonth, selectedDay);
-      String moodCurrentDate =
-          DateFormat.yMMMd().format(currentSelectedDateTime);
-      final box = Hive.box<MoodModel>(
+      String currentDate = DateFormat.yMMMd().format(currentSelectedDateTime);
+      final moodBox = Hive.box<MoodModel>(
           'moodData'); // Specify the type of values in the box
-      MoodModel? capturedData = box.get(moodCurrentDate);
+      final didYouSmokebox = Hive.box<DidYouSmokeModel>(
+          'didYouSmokeData'); // Specify the type of values in the box
+      MoodModel? capturedData = moodBox.get(currentDate);
+      DidYouSmokeModel? smokedcapturedData = didYouSmokebox.get(currentDate);
       bool isSmokedToday = false;
       bool isMoodDone = false;
       if (capturedData != null) {
         if (capturedData.selfFeeling.isNotEmpty) {
           isMoodDone = true;
+        }
+      }
+      if (smokedcapturedData != null) {
+        if (smokedcapturedData.hasSmokedToday != -1) {
+          isSmokedToday = true;
         }
       }
       int moodPoints = isMoodDone ? 1 : 0;
@@ -410,7 +421,9 @@ class HomeController extends GetxController {
                 if (!isSmokedToday) {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return DidYouSmokeMainSlider();
+                    return DidYouSmokeMainSlider(
+                      currentDateTime: currentSelectedDateTime,
+                    );
                   }));
                 }
               },
@@ -418,7 +431,7 @@ class HomeController extends GetxController {
                   emoji: isSmokedToday ? clappingEmoji : moodEmoji,
                   emojiColor: Color(0xffdfbba8).withOpacity(0.59),
                   titleTxt: isSmokedToday
-                      ? 'Smoking Status Logged ✅'
+                      ? 'Smoking Status ✅'
                       : 'Did you smoke today?',
                   subTitle: isSmokedToday
                       ? 'Thanks for the update! 👍'
@@ -433,7 +446,8 @@ class HomeController extends GetxController {
                 if (!isMoodDone) {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return MoodMainSlider(currentDate: currentSelectedDateTime);
+                    return MoodMainSlider(
+                        currentDateTime: currentSelectedDateTime);
                   }));
                 }
               },
@@ -772,6 +786,17 @@ class HomeController extends GetxController {
 
   void setCigarettesAvoided(int noofcigs) {
     cigarettesAvoided = noofcigs;
+    update();
+  }
+
+  void setCurrentFilledData(){
+    DateTime currentDateTime =
+    DateTime(selectedYear, selectedMonth, selectedDay);
+    final onboardingBox = Hive.box<OnboardingData>(
+        'onboardingCompletedData'); // Specify the type of values in the box
+    OnboardingData userOnboardingData =
+        onboardingBox.get('currentUserOnboarding') ?? OnboardingData();
+    currentDateOnboardingData = userOnboardingData;
     update();
   }
 }

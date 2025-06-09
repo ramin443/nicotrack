@@ -465,13 +465,13 @@ class MoodController extends GetxController {
     update();
   }
 
-  Widget continueButton(BuildContext context) {
+  Widget continueButton(DateTime currentDateTime, BuildContext context) {
     return GestureDetector(
       onTap: () {
         if (currentPageDoneStatus) {
           HapticFeedback.mediumImpact();
           if (currentPage == (pages.length - 1)) {
-            addDatatoHiveandNavigate(context);
+            addDatatoHiveandNavigate(currentDateTime, context);
           } else {
             nextPage();
           }
@@ -559,10 +559,9 @@ class MoodController extends GetxController {
     update();
   }
 
-  void addDatatoHiveandNavigate(BuildContext context) async {
-    DateTime todayDate = DateTime.now();
+  void addDatatoHiveandNavigate(DateTime currentDateTime, BuildContext context) async {
     String moodStringToday = DateFormat.yMMMd()
-        .format(DateTime(todayDate.year, todayDate.month, todayDate.day));
+        .format(currentDateTime);
     final box = Hive.box<MoodModel>('moodData');
     await box.put(moodStringToday, moodFilledData);
     if (context.mounted) {

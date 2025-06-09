@@ -14,6 +14,8 @@ import 'package:nicotrack/hive-adapters/onboarding-data-adapter.dart';
 import 'package:nicotrack/hive-adapters/did-you-smoke-adapter.dart';
 import 'package:nicotrack/hive-adapters/mood-data-adapter.dart';
 import 'package:nicotrack/models/mood-model/mood-model.dart';
+import 'package:nicotrack/models/did-you-smoke/didyouSmoke-model.dart';
+import 'package:nicotrack/models/quick-actions-model/quickActions-model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,8 +29,9 @@ void main() async {
 
   // Open your Hive box(es)
   await Hive.openBox<OnboardingData>('onboardingCompletedData');
-  await Hive.openBox<DidYouSmokeAdapter>('didYouSmokeData');
+  await Hive.openBox<DidYouSmokeModel>('didYouSmokeData');
   await Hive.openBox<MoodModel>('moodData');
+  await Hive.openBox<QuickactionsModel>('quickActionsData');
 
   runApp(const MyApp());
 }

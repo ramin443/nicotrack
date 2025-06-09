@@ -8,7 +8,8 @@ import 'package:nicotrack/getx-controllers/did-you-smoke-controller.dart';
 import '../../../constants/color-constants.dart';
 
 class DidYouSmokeMainSlider extends StatefulWidget {
-  const DidYouSmokeMainSlider({super.key});
+  final DateTime currentDateTime;
+  const DidYouSmokeMainSlider({super.key, required this.currentDateTime});
 
   @override
   State<DidYouSmokeMainSlider> createState() => _DidYouSmokeMainSliderState();
@@ -30,7 +31,7 @@ class _DidYouSmokeMainSliderState extends State<DidYouSmokeMainSlider> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  didYouSmokeController.continueButton(),
+                  didYouSmokeController.continueButton(widget.currentDateTime, context),
                   SizedBox(
                     height: 0.h,
                   )
