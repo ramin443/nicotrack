@@ -15,7 +15,6 @@ class _ProgressSavingsState extends State<ProgressSavings> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProgressController>(
-        init: ProgressController(),
         builder: (progressController) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,

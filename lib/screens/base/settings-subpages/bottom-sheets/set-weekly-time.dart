@@ -8,35 +8,51 @@ import '../../../../constants/font-constants.dart';
 import '../../../../getx-controllers/settings-controller.dart';
 import '../../../elements/textAutoSize.dart';
 
-class CostPerPackBottomSheet extends StatefulWidget {
-  const CostPerPackBottomSheet({super.key});
+class SetWeeklyTimeBottomSheet extends StatefulWidget {
+  const SetWeeklyTimeBottomSheet({super.key});
 
   @override
-  State<CostPerPackBottomSheet> createState() => _CostPerPackBottomSheetState();
+  State<SetWeeklyTimeBottomSheet> createState() => _SetWeeklyTimeBottomSheetState();
 }
 
-class _CostPerPackBottomSheetState extends State<CostPerPackBottomSheet> {
-  SettingsController settingsMainController = Get.find<SettingsController>();
+class _SetWeeklyTimeBottomSheetState extends State<SetWeeklyTimeBottomSheet> {
+  SettingsController settingsMainController =
+  Get.find<SettingsController>();
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SettingsController>(
         init: SettingsController(),
         initState: (v) {
-          // Ensure the initial index matches the current selection
-          final initialIndex1 = settingsMainController.dollars
-              .indexOf(settingsMainController.selectedDollar);
-          settingsMainController.dollarController = FixedExtentScrollController(
-            initialItem: initialIndex1 >= 0 ? initialIndex1 : 0,
-          );
-          settingsMainController.dollarController.jumpToItem(initialIndex1);
+          // Initialize with saved weekly reminder time, fallback to 6 PM if not set
+          int weeklyHour = settingsMainController.currentNotificationsPreferences?.weeklyReminderHour ?? 6;
+          int weeklyMinute = settingsMainController.currentNotificationsPreferences?.weeklyReminderMinute ?? 0;
+          String weeklyPeriod = settingsMainController.currentNotificationsPreferences?.weeklyReminderPeriod ?? ' PM';
+          
+          // Set the UI variables to match the saved weekly reminder time
+          settingsMainController.selectedWeeklyHour = weeklyHour;
+          settingsMainController.selectedWeeklyMinute = weeklyMinute;
+          settingsMainController.selectedWeeklyHalf = weeklyPeriod;
+          
+          // Initialize controllers with saved weekly reminder time
+          final initialIndex1 = settingsMainController.hours.indexOf(weeklyHour);
+          settingsMainController.weeklyHourController =
+              FixedExtentScrollController(
+                initialItem: initialIndex1 >= 0 ? initialIndex1 : 0,
+              );
+          settingsMainController.weeklyHourController.jumpToItem(initialIndex1 >= 0 ? initialIndex1 : 0);
 
-          final initialIndex2 = settingsMainController.cents
-              .indexOf(settingsMainController.selectedCent);
-          settingsMainController.centController = FixedExtentScrollController(
+          final initialIndex2 = settingsMainController.minutes.indexOf(weeklyMinute);
+          settingsMainController.weeklyMinuteController = FixedExtentScrollController(
             initialItem: initialIndex2 >= 0 ? initialIndex2 : 0,
           );
-          settingsMainController.centController.jumpToItem(initialIndex2);
+          settingsMainController.weeklyMinuteController.jumpToItem(initialIndex2 >= 0 ? initialIndex2 : 0);
+
+          final initialIndex3 = settingsMainController.halves.indexOf(weeklyPeriod);
+          settingsMainController.weeklyAmPmController = FixedExtentScrollController(
+            initialItem: initialIndex3 >= 0 ? initialIndex3 : 0,
+          );
+          settingsMainController.weeklyAmPmController.jumpToItem(initialIndex3 >= 0 ? initialIndex3 : 0);
         },
         builder: (settingsController) {
           return Padding(
@@ -63,22 +79,23 @@ class _CostPerPackBottomSheetState extends State<CostPerPackBottomSheet> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        settingsController.selectedDollar = 4;
-                        settingsController.selectedCent = 20;
+                        settingsController.selectedWeeklyHalf = ' AM';
+                        settingsController.selectedWeeklyHour = 8;
+                        settingsController.selectedWeeklyMinute = 0;
                         Navigator.of(context).pop();
+
                       },
                       child: Container(
                         width: 36.w,
                         height: 36.w,
                         decoration: BoxDecoration(
-                            color: nicotrackOrange.withOpacity(0.2),
-                            shape: BoxShape.circle),
+                          color: nicotrackOrange.withOpacity(0.2),
+                          shape: BoxShape.circle
+                        ),
                         child: Center(
-                          child: Icon(
-                            Icons.close_rounded,
-                            size: 20.w,
-                            color: nicotrackOrange,
-                          ),
+                          child: Icon(Icons.close_rounded,
+                          size: 20.w,
+                          color: nicotrackOrange,),
                         ),
                       ),
                     ),
@@ -86,8 +103,8 @@ class _CostPerPackBottomSheetState extends State<CostPerPackBottomSheet> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         GestureDetector(
-                          onTap: () {
-                            settingsController.updateCostPerPack();
+                          onTap: (){
+                            settingsController.updateWeeklyReminderPreferences();
                             Navigator.of(context).pop();
                           },
                           child: TextAutoSize(
@@ -100,9 +117,7 @@ class _CostPerPackBottomSheetState extends State<CostPerPackBottomSheet> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: 4.w,
-                        )
+                        SizedBox(width: 4.w,)
                       ],
                     ),
                   ],
@@ -111,7 +126,7 @@ class _CostPerPackBottomSheetState extends State<CostPerPackBottomSheet> {
                   height: 4.w,
                 ),
                 TextAutoSize(
-                  '💸 Cost per pack',
+                  '🕑 Set Weekly Reminder Time',
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontFamily: circularBold,
@@ -119,7 +134,7 @@ class _CostPerPackBottomSheetState extends State<CostPerPackBottomSheet> {
                     height: 1.1,
                   ),
                 ),
-                Expanded(child: settingsController.setPriceofBox()),
+                Expanded(child: settingsController.setWeeklyTimePicker()),
                 SizedBox(
                   height: 24.w,
                 ),

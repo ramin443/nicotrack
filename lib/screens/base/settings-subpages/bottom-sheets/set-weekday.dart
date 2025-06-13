@@ -84,6 +84,7 @@ class _SetWeekdayBottomSheetState extends State<SetWeekdayBottomSheet> {
                       children: [
                         GestureDetector(
                           onTap: (){
+                            settingsController.updateWeeklyReminderPreferences();
                             Navigator.of(context).pop();
                           },
                           child: TextAutoSize(

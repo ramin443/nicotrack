@@ -74,6 +74,7 @@ class _CostPerPackBottomSheetState extends State<ChangeQuitDateBottomSheet> {
                       children: [
                         GestureDetector(
                           onTap: () {
+                            settingsController.updateQuitDate();
                             Navigator.of(context).pop();
                           },
                           child: TextAutoSize(

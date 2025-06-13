@@ -6,6 +6,7 @@ import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import '../../constants/color-constants.dart';
 import '../../constants/font-constants.dart';
 import '../../constants/image-constants.dart';
+import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
 
 Widget mainCard({
   required String emoji,
@@ -19,8 +20,7 @@ Widget mainCard({
     width: 186.w,
     padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
     decoration: BoxDecoration(
-      image:
-      DecorationImage(image: AssetImage(homeMainBG), fit: BoxFit.cover),
+      image: DecorationImage(image: AssetImage(homeMainBG), fit: BoxFit.cover),
       borderRadius: BorderRadius.circular(12),
     ),
     child: Row(
@@ -37,17 +37,18 @@ Widget mainCard({
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AnimatedFlipCounter(
-                prefix: isCost?'\$':'', // 👈 add dollar sign here (escaped with backslash)
-                wholeDigits: 2, // 👈 forces two digits to be shown & flip
+                prefix: isCost ? '\$' : '',
+                // 👈 add dollar sign here (escaped with backslash)
+                wholeDigits: 2,
+                // 👈 forces two digits to be shown & flip
                 duration: Duration(seconds: 2),
                 value: value,
-                fractionDigits: 0, // No decimal
-                textStyle:TextStyle(
+                fractionDigits: 0,
+                // No decimal
+                textStyle: TextStyle(
                     fontSize: 33.sp,
                     fontFamily: circularBold,
-                    color: nicotrackBlack1)
-            ),
-
+                    color: nicotrackBlack1)),
             TextAutoSize(
               label,
               textAlign: TextAlign.right,
@@ -93,17 +94,18 @@ Widget statCard({
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AnimatedFlipCounter(
-                prefix: isCost?'\$':'', // 👈 add dollar sign here (escaped with backslash)
-                wholeDigits: 2, // 👈 forces two digits to be shown & flip
+                prefix: isCost ? '\$' : '',
+                // 👈 add dollar sign here (escaped with backslash)
+                wholeDigits: 2,
+                // 👈 forces two digits to be shown & flip
                 duration: Duration(seconds: 2),
                 value: value,
-                fractionDigits: 0, // No decimal
-                textStyle:TextStyle(
+                fractionDigits: 0,
+                // No decimal
+                textStyle: TextStyle(
                     fontSize: 33.sp,
                     fontFamily: circularBold,
-                    color: nicotrackBlack1)
-            ),
-
+                    color: nicotrackBlack1)),
             TextAutoSize(
               label,
               textAlign: TextAlign.right,
@@ -120,23 +122,21 @@ Widget statCard({
   );
 }
 
-Widget statCard2
-    ({
+Widget statCard2({
   required String emoji,
-  required int value,
+  required double value,
   required String label,
   required bool isCost,
   Color? backgroundColor,
 }) {
   return Container(
-    height: 106.h,
+    height: 106.w,
     width: 186.w,
-    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+    padding: EdgeInsets.symmetric(horizontal: 9.w, vertical: 12.h),
     decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(12),
-      border: Border.all(color: Color(0xfff0f0f0),width: 1.w)
-    ),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Color(0xfff0f0f0), width: 1.w)),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -146,22 +146,28 @@ Widget statCard2
           width: 51.w,
         ),
         // SizedBox(width: 12.w),
+
+        Expanded(
+            flex: 2,
+            child:
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AnimatedFlipCounter(
-                prefix: isCost?'\$':'', // 👈 add dollar sign here (escaped with backslash)
-                wholeDigits: 2, // 👈 forces two digits to be shown & flip
-                duration: Duration(seconds: 2),
+                prefix: isCost ? '\$' : '',
+                // 👈 add dollar sign here (escaped with backslash)
+                wholeDigits: getWholeDigits(value),
+                fractionDigits: getFractionDigits(value),
+                // 👈 forces two digits to be shown & flip
+                duration: Duration(milliseconds: 1250),
                 value: value,
-                fractionDigits: 0, // No decimal
-                textStyle:TextStyle(
+                // No decimal
+                textStyle: TextStyle(
                     fontSize: 33.sp,
                     fontFamily: circularBold,
-                    color: nicotrackBlack1)
-            ),
-
+                    letterSpacing: 0.04,
+                    color: nicotrackBlack1)),
             TextAutoSize(
               label,
               textAlign: TextAlign.right,
@@ -172,7 +178,7 @@ Widget statCard2
                   color: nicotrackBlack1),
             ),
           ],
-        ),
+        ))
       ],
     ),
   );

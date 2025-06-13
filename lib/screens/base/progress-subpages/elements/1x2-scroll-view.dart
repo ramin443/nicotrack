@@ -14,7 +14,9 @@ class OnexTwoScrollView extends StatefulWidget {
   final List<EmojiTextModel> items;
   final bool withPercent;
   final int percent;
+  final List<int>? percentList;
   final void Function() newfinancialGoalAction;
+  final void Function(int)? onItemTap;
 
   const OnexTwoScrollView({
     super.key,
@@ -24,6 +26,8 @@ class OnexTwoScrollView extends StatefulWidget {
     required this.withPercent,
     required this.percent,
     required this.newfinancialGoalAction,
+    this.onItemTap,
+    this.percentList,
   });
 
   @override
@@ -47,7 +51,7 @@ class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
           widget.scrollController.addListener(_onScroll);
         },
         builder: (progressController) {
-          return Column(children: [
+          return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             SingleChildScrollView(
               controller: widget.scrollController,
               scrollDirection: Axis.horizontal,
@@ -70,9 +74,17 @@ class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
                         final item = pageItems[index];
                         return GestureDetector(
                           onTap: () {
-                            if (item.emoji == '🎯' &&
-                                item.text == 'Add new goal') {}
-                            widget.newfinancialGoalAction();
+                            if (item.emoji == '🎯' && item.text == 'Add new goal') {
+                              widget.newfinancialGoalAction();
+                            } else {
+                              // Calculate the actual index in the original items list
+                              int actualIndex = widget.items.indexWhere(
+                                (originalItem) => originalItem.emoji == item.emoji && originalItem.text == item.text
+                              );
+                              if (actualIndex != -1 && widget.onItemTap != null) {
+                                widget.onItemTap!(actualIndex);
+                              }
+                            }
                           },
                           child: Container(
                             padding: EdgeInsets.only(
@@ -87,6 +99,7 @@ class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
                               borderRadius: BorderRadius.circular(16.r),
                             ),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 TextAutoSize(
                                   item.emoji,
@@ -97,8 +110,12 @@ class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
                                   ),
                                 ),
                                 SizedBox(height: 14.h),
-                                widget.withPercent
-                                    ? RichText(
+                                widget.withPercent && !(item.emoji == '🎯' && item.text == 'Add new goal')
+                                    ?
+
+                                Container(
+                                  child:RichText(
+                                        textAlign: TextAlign.center,
                                         text: TextSpan(
                                             style: TextStyle(
                                               fontSize: 14.5.sp,
@@ -107,26 +124,27 @@ class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
                                               color: Colors.black,
                                             ),
                                             children: [
-                                            TextSpan(text: "${item.text}: "),
-                                            TextSpan(
-                                              text: "${widget.percent}%",
-                                              style: TextStyle(
-                                                fontSize: 14.5.sp,
-                                                fontFamily: circularBold,
-                                                height: 1.2,
-                                                color: nicotrackGreen,
+                                              TextSpan(text: "${item.text}: "),
+                                              TextSpan(
+                                                text: "${_getPercentageForItem(item, index)}%",
+                                                style: TextStyle(
+                                                  fontSize: 14.5.sp,
+                                                  fontFamily: circularBold,
+                                                  height: 1.2,
+                                                  color: nicotrackGreen,
+                                                ),
                                               ),
-                                            ),
-                                          ]))
-                                    : TextAutoSize(
+                                            ])))
+                                    : Container(child:TextAutoSize(
                                         item.text,
+                                        textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 14.5.sp,
                                           fontFamily: circularMedium,
                                           height: 1.2,
                                           color: Colors.black,
                                         ),
-                                      ),
+                                      ),)
                               ],
                             ),
                           ),
@@ -181,5 +199,24 @@ class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
         currentPage = page;
       });
     }
+  }
+
+  int _getPercentageForItem(EmojiTextModel item, int pageIndex) {
+    // If it's the "Add new goal" item, return 0
+    if (item.emoji == '🎯' && item.text == 'Add new goal') {
+      return 0;
+    }
+    
+    // Find the actual index in the original items list
+    int actualIndex = widget.items.indexWhere(
+      (originalItem) => originalItem.emoji == item.emoji && originalItem.text == item.text
+    );
+    
+    // Use individual percentages if available, otherwise use the single percent
+    if (widget.percentList != null && actualIndex >= 0 && actualIndex < widget.percentList!.length) {
+      return widget.percentList![actualIndex];
+    }
+    
+    return widget.percent;
   }
 }

@@ -22,7 +22,6 @@ class _ProgressOverviewState extends State<ProgressOverview> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProgressController>(
-      init: ProgressController(),
       builder: (progressController) {
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -43,7 +42,7 @@ class _ProgressOverviewState extends State<ProgressOverview> {
             SizedBox(
               height: 34.h,
             ),
-            FinancialGoalsInOverview(showPercent: true, percent: 16),
+            FinancialGoalsInOverview(showPercent: true, percent: progressController.getAverageFinancialGoalsCompletionPercentage()),
             SizedBox(
               height: 34.h,
             ),

@@ -13,9 +13,16 @@ import 'models/onboarding-data/onboardingData-model.dart';
 import 'package:nicotrack/hive-adapters/onboarding-data-adapter.dart';
 import 'package:nicotrack/hive-adapters/did-you-smoke-adapter.dart';
 import 'package:nicotrack/hive-adapters/mood-data-adapter.dart';
+import 'package:nicotrack/hive-adapters/quick-actions-adapter.dart';
+import 'package:nicotrack/hive-adapters/financial-goals-adapter.dart';
+import 'package:nicotrack/hive-adapters/notifications-preferences-adapter.dart';
 import 'package:nicotrack/models/mood-model/mood-model.dart';
 import 'package:nicotrack/models/did-you-smoke/didyouSmoke-model.dart';
 import 'package:nicotrack/models/quick-actions-model/quickActions-model.dart';
+import 'package:nicotrack/models/financial-goals-model/financialGoals-model.dart';
+import 'package:nicotrack/models/notifications-preferences-model/notificationsPreferences-model.dart';
+import 'package:nicotrack/services/notification-service.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,12 +33,21 @@ void main() async {
   Hive.registerAdapter(OnboardingDataAdapter());
   Hive.registerAdapter(DidYouSmokeAdapter());
   Hive.registerAdapter(MoodModelAdapter());
+  Hive.registerAdapter(QuickActionsAdapter());
+  Hive.registerAdapter(FinancialGoalsAdapter());
+  Hive.registerAdapter(NotificationsPreferencesAdapter());
 
   // Open your Hive box(es)
   await Hive.openBox<OnboardingData>('onboardingCompletedData');
   await Hive.openBox<DidYouSmokeModel>('didYouSmokeData');
   await Hive.openBox<MoodModel>('moodData');
   await Hive.openBox<QuickactionsModel>('quickActionsData');
+  await Hive.openBox<FinancialGoalsModel>('financialGoalsData');
+  await Hive.openBox<NotificationsPreferencesModel>('notificationsPreferencesData');
+
+  // Initialize timezone and notification service
+  tz.initializeTimeZones();
+  await NotificationService().initialize();
 
   runApp(const MyApp());
 }

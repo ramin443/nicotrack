@@ -79,6 +79,7 @@ class _SmokesPerDayBottomSheetState extends State<SmokesPerDayBottomSheet> {
                       children: [
                         GestureDetector(
                           onTap: () {
+                            settingsController.updateCigarettesPerDay();
                             Navigator.of(context).pop();
                           },
                           child: TextAutoSize(

@@ -21,6 +21,7 @@ int getDaysSinceLastSmoked(DateTime selectedDateTime) {
 
   return smokeFreeDays;
 }
+
 double getMoneySaved(DateTime selectedDateTime) {
   final box = Hive.box<OnboardingData>(
       'onboardingCompletedData'); // Specify the type of values in the box
@@ -82,4 +83,16 @@ int getcigarettesNotSmoked(DateTime selectedDateTime) {
   int totalCigarettesNotSmoke =
       (smokeFreeDays * userOnboardingData.cigarettesPerDay);
   return totalCigarettesNotSmoke;
+}
+
+int getWholeDigits(double value) {
+  return value < 1
+      ? 1
+      : value < 9
+          ? 1
+          : 2;
+}
+
+int getFractionDigits(double value) {
+  return value < 1 ? 2 : 0;
 }

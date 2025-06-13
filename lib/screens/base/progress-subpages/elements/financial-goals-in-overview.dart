@@ -23,7 +23,6 @@ class _FinancialGoalsInOverviewState extends State<FinancialGoalsInOverview> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProgressController>(
-        init: ProgressController(),
         builder: (progressController) {
           return Column(
             children: [
@@ -56,11 +55,17 @@ class _FinancialGoalsInOverviewState extends State<FinancialGoalsInOverview> {
               OnexTwoScrollView(
                 scrollController:
                     progressController.financialGoalsScrollController,
-                items: financialDummyData,
-                childAspectRatio: 1.38,
+                items: progressController.getUserFinancialGoalsAsEmojiTextList(),
+                childAspectRatio: 1.25,
                 withPercent: widget.showPercent,
                 percent: widget.percent,
-                newfinancialGoalAction: () {},
+                percentList: progressController.getIndividualFinancialGoalsCompletionPercentages(),
+                newfinancialGoalAction: () {
+                  progressController.showAddFinancialGoalsBottomSheet(context);
+                },
+                onItemTap: (index) {
+                  progressController.showViewEditGoalBottomSheet(context, index);
+                },
               ),
             ],
           );

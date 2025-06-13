@@ -9,6 +9,7 @@ import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/constants/quick-function-constants.dart';
 import 'package:nicotrack/screens/elements/gradient-text.dart';
 import 'package:nicotrack/screens/elements/info-bottom-sheet.dart';
+import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
 
 import '../constants/font-constants.dart';
 import '../models/timeline-item-model/timelineItem-model.dart';
@@ -92,6 +93,23 @@ class PlanController extends GetxController {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       scrollToSectionAfterLayout(initialSection);
     });
+  }
+
+  // Get current days passed since last smoke
+  int getCurrentDaysPassed() {
+    return getDaysSinceLastSmoked(DateTime.now());
+  }
+
+  // Determine which timeline item the user has reached based on days passed
+  int getCurrentTimelineIndex() {
+    int daysPassed = getCurrentDaysPassed();
+    
+    for (int i = timelineItems.length - 1; i >= 0; i--) {
+      if (daysPassed >= timelineItems[i].dayNumber) {
+        return i;
+      }
+    }
+    return 0; // Default to first item if less than 0 days
   }
 
   @override
@@ -435,7 +453,7 @@ class PlanController extends GetxController {
             ],
           ),
         ),
-        index == 3
+        _shouldShowProgressLine(index)
             ? Positioned.fill(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.w),
@@ -445,8 +463,8 @@ class PlanController extends GetxController {
                       DottedLine(
                         direction: Axis.horizontal,
                         lineLength: double.infinity,
-                        lineThickness: 1.0,
-                        dashLength: 4.0,
+                        lineThickness: 2.0,
+                        dashLength: 6.0,
                         dashColor: nicotrackGreen,
                         dashGapLength: 4.0,
                         dashGapColor: Colors.transparent,
@@ -461,6 +479,14 @@ class PlanController extends GetxController {
       ],
     );
   }
+
+  // Determine if the green progress line should be shown at this timeline index
+  bool _shouldShowProgressLine(int index) {
+    int currentIndex = getCurrentTimelineIndex();
+    // Show the line at the user's current position in the timeline
+    return index == currentIndex;
+  }
+
   void setBottomSheetOn(){
     isBottomSheetOn = true;
     update();

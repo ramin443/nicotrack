@@ -9,6 +9,7 @@ import '../../../constants/color-constants.dart';
 
 class DidYouSmokeMainSlider extends StatefulWidget {
   final DateTime currentDateTime;
+
   const DidYouSmokeMainSlider({super.key, required this.currentDateTime});
 
   @override
@@ -25,13 +26,14 @@ class _DidYouSmokeMainSliderState extends State<DidYouSmokeMainSlider> {
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.white,
             floatingActionButtonLocation:
-            FloatingActionButtonLocation.centerFloat,
+                FloatingActionButtonLocation.centerFloat,
             floatingActionButton: Align(
               alignment: Alignment.bottomCenter,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  didYouSmokeController.continueButton(widget.currentDateTime, context),
+                  didYouSmokeController.continueButton(
+                      widget.currentDateTime, context),
                   SizedBox(
                     height: 0.h,
                   )
@@ -58,17 +60,16 @@ class _DidYouSmokeMainSliderState extends State<DidYouSmokeMainSlider> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              if(didYouSmokeController.currentPage == 0){
+                              if (didYouSmokeController.currentPage == 0) {
                                 HapticFeedback.mediumImpact();
                                 Navigator.of(context).pop();
-                              }else{
+                              } else {
                                 if (didYouSmokeController.currentPage != 0) {
                                   HapticFeedback.mediumImpact();
                                 }
                                 didYouSmokeController.previousPage();
                                 didYouSmokeController.getCurrentPageStatus();
                               }
-
                             },
                             child: Container(
                               height: 36.w,

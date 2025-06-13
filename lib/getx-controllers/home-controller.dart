@@ -21,6 +21,7 @@ import 'package:hive/hive.dart';
 import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
 import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
 import 'package:nicotrack/models/did-you-smoke/didyouSmoke-model.dart';
+import 'package:nicotrack/models/quick-actions-model/quickActions-model.dart';
 
 class HomeController extends GetxController {
   final ScrollController scrollController = ScrollController();
@@ -33,7 +34,7 @@ class HomeController extends GetxController {
   int totalMoneySaved = 0;
   int hoursRegainedinLife = 0;
   int cigarettesAvoided = 0;
-
+  double animationMultiplier =1; // Default is usually 1.0
   // Date variables
   int selectedYear = DateTime.now().year;
   int selectedMonth = DateTime.now().month;
@@ -47,6 +48,7 @@ class HomeController extends GetxController {
   ];
 
   OnboardingData currentDateOnboardingData = OnboardingData();
+  QuickactionsModel quickActionsModel = QuickactionsModel();
 
   @override
   void onInit() {
@@ -61,6 +63,7 @@ class HomeController extends GetxController {
     });
     resetHomeGridValues();
     setCurrentFilledData();
+    setQuickActionsData();
     HapticFeedback.mediumImpact();
   }
 
@@ -592,9 +595,11 @@ class HomeController extends GetxController {
                   SleekCircularSlider(
                     min: 0,
                     max: 100,
-                    initialValue: 30,
+                    initialValue:
+                        (countTrueActions(quickActionsModel) / 4) * 100,
                     // value to control how much of the circle is filled
                     appearance: CircularSliderAppearance(
+                      animationEnabled: true,
                       customWidths: CustomSliderWidths(
                         trackWidth: 5.w,
                         progressBarWidth: 5.w,
@@ -608,6 +613,7 @@ class HomeController extends GetxController {
                       size: 55.w,
                       startAngle: 270,
                       angleRange: 360,
+                      animDurationMultiplier: animationMultiplier,
                       infoProperties: InfoProperties(
                         modifier: (value) => '', // Hide value text
                       ),
@@ -639,7 +645,7 @@ class HomeController extends GetxController {
                   SizedBox(
                     height: 2.h,
                   ),
-                  TextAutoSize('1/4',
+                  TextAutoSize('${countTrueActions(quickActionsModel)}/4',
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         height: 1.1,
@@ -653,37 +659,53 @@ class HomeController extends GetxController {
           ),
           children: List.generate(quickActionsList.length, (index) {
             return GestureDetector(
-              onTap: () {},
+              onTap: () {
+                toggleAction(index);
+              },
               child: Container(
-                margin: EdgeInsets.only(left: 20.h, bottom: 12.sp),
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 18.w,
-                        height: 18.w,
-                        decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            shape: BoxShape.circle,
-                            border:
-                                Border.all(color: Colors.black12, width: 2.sp)),
-                      ),
-                      SizedBox(
-                        width: 18.w,
-                      ),
-                      SizedBox(
-                        width: 264.w,
-                        child: TextAutoSize(quickActionsList[index],
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              height: 1.1,
-                              fontSize: 13.sp,
-                              fontFamily: circularBook,
-                              color: Colors.black87,
-                            )),
-                      ),
-                    ]),
-              ),
+                  margin: EdgeInsets.only(left: 20.h, bottom: 12.sp),
+                  child: Builder(builder: (context) {
+                    bool isSelected = isActionDone(index);
+                    return Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 18.w,
+                            height: 18.w,
+                            decoration: BoxDecoration(
+                                color: isSelected
+                                    ? nicotrackGreen
+                                    : Colors.transparent,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                    color: isSelected
+                                        ? nicotrackGreen
+                                        : Colors.black12,
+                                    width: 2.sp)),
+                            child: Icon(
+                              CupertinoIcons.checkmark_alt,
+                              color: isSelected
+                                  ? Colors.white
+                                  : Colors.transparent,
+                              size: 14.w,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 18.w,
+                          ),
+                          SizedBox(
+                            width: 264.w,
+                            child: TextAutoSize(quickActionsList[index],
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  height: 1.1,
+                                  fontSize: 13.sp,
+                                  fontFamily: circularBook,
+                                  color: Colors.black87,
+                                )),
+                          ),
+                        ]);
+                  })),
             );
           }),
         ),
@@ -789,14 +811,90 @@ class HomeController extends GetxController {
     update();
   }
 
-  void setCurrentFilledData(){
+  void setCurrentFilledData() {
     DateTime currentDateTime =
-    DateTime(selectedYear, selectedMonth, selectedDay);
+        DateTime(selectedYear, selectedMonth, selectedDay);
     final onboardingBox = Hive.box<OnboardingData>(
         'onboardingCompletedData'); // Specify the type of values in the box
     OnboardingData userOnboardingData =
         onboardingBox.get('currentUserOnboarding') ?? OnboardingData();
     currentDateOnboardingData = userOnboardingData;
+    update();
+  }
+
+  void setQuickActionsData() {
+    DateTime currentDateTime =
+        DateTime(selectedYear, selectedMonth, selectedDay);
+    final quickActionBox = Hive.box<QuickactionsModel>(
+        'quickActionsData'); // Specify the type of values in the box
+    QuickactionsModel quickActionsData =
+        quickActionBox.get('currentUserActions') ?? QuickactionsModel();
+    quickActionsModel = quickActionsData;
+    update();
+  }
+
+  int countTrueActions(QuickactionsModel actions) {
+    int count = 0;
+    if (actions.firstActionDone) {
+      count++;
+    }
+    if (actions.secondActionDone) {
+      count++;
+    }
+    if (actions.thirdActionDone) {
+      count++;
+    }
+    if (actions.fourthActionDone) {
+      count++;
+    }
+    return count;
+  }
+
+  void toggleAction(int actionNumber) async {
+    String quickActionsStringToday = "currentUserActions";
+    final box = Hive.box<QuickactionsModel>('quickActionsData');
+    switch (actionNumber) {
+      case 0:
+        quickActionsModel = quickActionsModel.copyWith(
+            firstActionDone: !quickActionsModel.firstActionDone);
+        await box.put(quickActionsStringToday, quickActionsModel);
+      case 1:
+        quickActionsModel = quickActionsModel.copyWith(
+            secondActionDone: !quickActionsModel.secondActionDone);
+        await box.put(quickActionsStringToday, quickActionsModel);
+      case 2:
+        quickActionsModel = quickActionsModel.copyWith(
+            thirdActionDone: !quickActionsModel.thirdActionDone);
+        await box.put(quickActionsStringToday, quickActionsModel);
+      case 3:
+        quickActionsModel = quickActionsModel.copyWith(
+            fourthActionDone: !quickActionsModel.fourthActionDone);
+        await box.put(quickActionsStringToday, quickActionsModel);
+      default:
+        quickActionsModel = quickActionsModel.copyWith(
+            firstActionDone: !quickActionsModel.firstActionDone);
+        await box.put(quickActionsStringToday, quickActionsModel);
+    }
+    setQuickActionsData();
+    update();
+  }
+
+  bool isActionDone(index) {
+    switch (index) {
+      case 0:
+        return quickActionsModel.firstActionDone;
+      case 1:
+        return quickActionsModel.secondActionDone;
+
+      case 2:
+        return quickActionsModel.thirdActionDone;
+
+      case 3:
+        return quickActionsModel.fourthActionDone;
+
+      default:
+        return quickActionsModel.firstActionDone;
+    }
     update();
   }
 }

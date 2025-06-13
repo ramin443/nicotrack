@@ -88,8 +88,4 @@ final List<EmojiTextModel> symptomsEasedOrHealedFromDummyData = [
   EmojiTextModel(emoji: "🧠", text: "Brain fog or lack of focus"),
 ];
 
-final List<EmojiTextModel> financialDummyData = [
-  EmojiTextModel(emoji: "🎧", text: "Airpods Pro Max"),
-  EmojiTextModel(emoji: "📱", text: "iPhone 16 Pro"),
-
-];
+final List<EmojiTextModel> financialDummyData = [];

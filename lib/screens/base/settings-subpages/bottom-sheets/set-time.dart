@@ -24,28 +24,35 @@ class _SetTimeBottomSheetState extends State<SetTimeBottomSheet> {
     return GetBuilder<SettingsController>(
         init: SettingsController(),
         initState: (v) {
-          // Ensure the initial index matches the current selection
-          final initialIndex1 = settingsMainController.hours
-              .indexOf(settingsMainController.selectedHour);
+          // Initialize with saved daily reminder time, fallback to 8 AM if not set
+          int dailyHour = settingsMainController.currentNotificationsPreferences?.dailyReminderHour ?? 8;
+          int dailyMinute = settingsMainController.currentNotificationsPreferences?.dailyReminderMinute ?? 0;
+          String dailyPeriod = settingsMainController.currentNotificationsPreferences?.dailyReminderPeriod ?? ' AM';
+          
+          // Set the UI variables to match the saved daily reminder time
+          settingsMainController.selectedHour = dailyHour;
+          settingsMainController.selectedMinute = dailyMinute;
+          settingsMainController.selectedHalf = dailyPeriod;
+          
+          // Initialize controllers with saved daily reminder time
+          final initialIndex1 = settingsMainController.hours.indexOf(dailyHour);
           settingsMainController.hourController =
               FixedExtentScrollController(
                 initialItem: initialIndex1 >= 0 ? initialIndex1 : 0,
               );
-          settingsMainController.hourController.jumpToItem(initialIndex1);
+          settingsMainController.hourController.jumpToItem(initialIndex1 >= 0 ? initialIndex1 : 0);
 
-          final initialIndex2 = settingsMainController.minutes
-              .indexOf(settingsMainController.selectedMinute);
+          final initialIndex2 = settingsMainController.minutes.indexOf(dailyMinute);
           settingsMainController.minuteController= FixedExtentScrollController(
             initialItem: initialIndex2 >= 0 ? initialIndex2 : 0,
           );
-          settingsMainController.minuteController.jumpToItem(initialIndex2);
+          settingsMainController.minuteController.jumpToItem(initialIndex2 >= 0 ? initialIndex2 : 0);
 
-          final initialIndex3 = settingsMainController.halves
-              .indexOf(settingsMainController.selectedHalf);
+          final initialIndex3 = settingsMainController.halves.indexOf(dailyPeriod);
           settingsMainController.amPmController= FixedExtentScrollController(
             initialItem: initialIndex3 >= 0 ? initialIndex3 : 0,
           );
-          settingsMainController.amPmController.jumpToItem(initialIndex3);
+          settingsMainController.amPmController.jumpToItem(initialIndex3 >= 0 ? initialIndex3 : 0);
         },
         builder: (settingsController) {
         return Padding(
@@ -97,6 +104,7 @@ class _SetTimeBottomSheetState extends State<SetTimeBottomSheet> {
                     children: [
                       GestureDetector(
                         onTap: (){
+                          settingsController.updateDailyReminderPreferences();
                           Navigator.of(context).pop();
                         },
                         child: TextAutoSize(

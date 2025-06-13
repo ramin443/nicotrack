@@ -22,10 +22,6 @@ class _FinancialGoalsBottomSheetState extends State<FinancialGoalsBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SettingsController>(
-        init: SettingsController(),
-        initState: (v) {
-
-        },
         builder: (settingsController) {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 18.sp),
@@ -51,8 +47,8 @@ class _FinancialGoalsBottomSheetState extends State<FinancialGoalsBottomSheet> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        settingsController.selectedDollar = 4;
-                        settingsController.selectedCent = 20;
+                        settingsController.selectedFinGoalDollar = 150;
+                        settingsController.selectedFinGoalCent = 25;
                         Navigator.of(context).pop();
                       },
                       child: Container(
@@ -75,14 +71,19 @@ class _FinancialGoalsBottomSheetState extends State<FinancialGoalsBottomSheet> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.of(context).pop();
+                            if (settingsController.isFinancialGoalFormValid()) {
+                              settingsController.addNewFinancialGoal();
+                              Navigator.of(context).pop();
+                            }
                           },
                           child: TextAutoSize(
                             'Done',
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontFamily: circularBook,
-                              color: nicotracklightBlue,
+                              color: settingsController.isFinancialGoalFormValid() 
+                                  ? nicotracklightBlue 
+                                  : nicotracklightBlue.withOpacity(0.4),
                               height: 1.1,
                             ),
                           ),

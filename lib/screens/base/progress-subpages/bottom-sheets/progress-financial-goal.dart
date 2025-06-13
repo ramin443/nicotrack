@@ -5,27 +5,23 @@ import 'package:get/get.dart';
 import 'package:nicotrack/constants/color-constants.dart';
 
 import '../../../../constants/font-constants.dart';
-import '../../../../getx-controllers/settings-controller.dart';
+import '../../../../getx-controllers/progress-controller.dart';
 import '../../../elements/textAutoSize.dart';
 
-class ChangeNameBottomSheet extends StatefulWidget {
-  const ChangeNameBottomSheet({super.key});
+class ProgressFinancialGoalsBottomSheet extends StatefulWidget {
+  const ProgressFinancialGoalsBottomSheet({super.key});
 
   @override
-  State<ChangeNameBottomSheet> createState() => _ChangeNameBottomSheetState();
+  State<ProgressFinancialGoalsBottomSheet> createState() => _ProgressFinancialGoalsBottomSheetState();
 }
 
-class _ChangeNameBottomSheetState extends State<ChangeNameBottomSheet> {
-  SettingsController settingsMainController = Get.find<SettingsController>();
+class _ProgressFinancialGoalsBottomSheetState extends State<ProgressFinancialGoalsBottomSheet> {
+  ProgressController progressMainController = Get.find<ProgressController>();
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SettingsController>(
-        init: SettingsController(),
-        initState: (v) {
-
-        },
-        builder: (settingsController) {
+    return GetBuilder<ProgressController>(
+        builder: (progressController) {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 18.sp),
             child: Column(
@@ -50,8 +46,8 @@ class _ChangeNameBottomSheetState extends State<ChangeNameBottomSheet> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        settingsController.selectedDollar = 4;
-                        settingsController.selectedCent = 20;
+                        progressController.selectedFinGoalDollar = 150;
+                        progressController.selectedFinGoalCent = 25;
                         Navigator.of(context).pop();
                       },
                       child: Container(
@@ -74,15 +70,19 @@ class _ChangeNameBottomSheetState extends State<ChangeNameBottomSheet> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            settingsController.updateUserName();
-                            Navigator.of(context).pop();
+                            if (progressController.isFinancialGoalFormValid()) {
+                              progressController.addNewFinancialGoal();
+                              Navigator.of(context).pop();
+                            }
                           },
                           child: TextAutoSize(
                             'Done',
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontFamily: circularBook,
-                              color: nicotracklightBlue,
+                              color: progressController.isFinancialGoalFormValid() 
+                                  ? nicotracklightBlue 
+                                  : nicotracklightBlue.withOpacity(0.4),
                               height: 1.1,
                             ),
                           ),
@@ -95,27 +95,14 @@ class _ChangeNameBottomSheetState extends State<ChangeNameBottomSheet> {
                   ],
                 ),
                 SizedBox(
-                  height: 16.w,
+                  height: 10.w,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    TextAutoSize(
-                      '✏️ Change Name',
-                      style: TextStyle(
-                        fontSize: 24.sp,
-                        fontFamily: circularBold,
-                        color: nicotrackBlack1,
-                        height: 1.1,
-                      ),
-                    ),
-                  ],
-                ),
+
                 SizedBox(
                   height: 15.w,
                 ),
 
-                Expanded(child: settingsController.changeNameTextFields()),
+                Expanded(child: progressController.financialGoalTextFields(context)),
                 SizedBox(
                   height: 24.w,
                 ),
