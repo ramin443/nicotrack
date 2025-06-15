@@ -389,6 +389,9 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
             ],
           ),
         ),
+        SizedBox(
+          height: 16.h,
+        ),
         OnexTwoScrollView(
           scrollController: financialGoalsScrollController,
           items: getUserFinancialGoalsAsEmojiTextList(),

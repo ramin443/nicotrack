@@ -46,8 +46,8 @@ class _ProgressFinancialGoalsBottomSheetState extends State<ProgressFinancialGoa
                   children: [
                     GestureDetector(
                       onTap: () {
-                        progressController.selectedFinGoalDollar = 150;
-                        progressController.selectedFinGoalCent = 25;
+                        progressController.selectedFinGoalDollar1 = 150;
+                        progressController.selectedFinGoalCent1 = 25;
                         Navigator.of(context).pop();
                       },
                       child: Container(
@@ -70,8 +70,8 @@ class _ProgressFinancialGoalsBottomSheetState extends State<ProgressFinancialGoa
                       children: [
                         GestureDetector(
                           onTap: () {
-                            if (progressController.isFinancialGoalFormValid()) {
-                              progressController.addNewFinancialGoal();
+                            if (progressController.isFinancialGoalFormValid1()) {
+                              progressController.addNewFinancialGoal1();
                               Navigator.of(context).pop();
                             }
                           },
@@ -80,7 +80,7 @@ class _ProgressFinancialGoalsBottomSheetState extends State<ProgressFinancialGoa
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontFamily: circularBook,
-                              color: progressController.isFinancialGoalFormValid() 
+                              color: progressController.isFinancialGoalFormValid1()
                                   ? nicotracklightBlue 
                                   : nicotracklightBlue.withOpacity(0.4),
                               height: 1.1,
@@ -102,7 +102,7 @@ class _ProgressFinancialGoalsBottomSheetState extends State<ProgressFinancialGoa
                   height: 15.w,
                 ),
 
-                Expanded(child: progressController.financialGoalTextFields(context)),
+                Expanded(child: progressController.financialGoalTextFields1(context)),
                 SizedBox(
                   height: 24.w,
                 ),

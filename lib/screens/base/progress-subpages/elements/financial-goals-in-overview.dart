@@ -61,6 +61,7 @@ class _FinancialGoalsInOverviewState extends State<FinancialGoalsInOverview> {
                 percent: widget.percent,
                 percentList: progressController.getIndividualFinancialGoalsCompletionPercentages(),
                 newfinancialGoalAction: () {
+                  print("This acvtive here");
                   progressController.showAddFinancialGoalsBottomSheet(context);
                 },
                 onItemTap: (index) {

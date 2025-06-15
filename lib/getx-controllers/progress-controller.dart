@@ -46,12 +46,18 @@ class ProgressController extends GetxController {
   // Financial Goals Variables (copied from SettingsController)
   List<FinancialGoalsModel> userFinancialGoals = [];
   String selectedEmoji = '😐';
+  String selectedEmoji1 = '😐';
   TextEditingController goalTitleController = TextEditingController();
+  TextEditingController goalTitleController1 = TextEditingController();
   int selectedFinGoalDollar = 150;
   int selectedFinGoalCent = 25;
+  int selectedFinGoalDollar1 = 150;
+  int selectedFinGoalCent1 = 25;
   bool isFinGoalSet = false;
   late FixedExtentScrollController finGoaldollarController;
   late FixedExtentScrollController finGoalcentController;
+  late FixedExtentScrollController finGoaldollarController1;
+  late FixedExtentScrollController finGoalcentController1;
   List<int> finGoaldollars = List.generate(101, (index) => index * 10); // 0 to 1000
   List<int> finGoalcents = List.generate(100, (index) => index); // 0 to 99
 
@@ -336,6 +342,11 @@ class ProgressController extends GetxController {
            goalTitleController.text.trim().isNotEmpty && 
            isFinGoalSet;
   }
+  bool isFinancialGoalFormValid1() {
+    return selectedEmoji1.isNotEmpty &&
+        goalTitleController1.text.trim().isNotEmpty &&
+        isFinGoalSet;
+  }
 
   // Add new financial goal
   void addNewFinancialGoal() async {
@@ -358,6 +369,33 @@ class ProgressController extends GetxController {
       // Reset form
       resetFinancialGoalForm();
       
+      update();
+    } catch (e) {
+      print('Error adding financial goal: $e');
+    }
+  }
+
+  // Add new financial goal
+  void addNewFinancialGoal1() async {
+    if (!isFinancialGoalFormValid1()) return;
+
+    try {
+      // Create new financial goal
+      FinancialGoalsModel newGoal = FinancialGoalsModel(
+        emoji: selectedEmoji1,
+        goalTitle: goalTitleController1.text.trim(),
+        cost: double.parse('$selectedFinGoalDollar1.$selectedFinGoalCent1'),
+      );
+
+      // Add to beginning of list
+      userFinancialGoals.insert(0, newGoal);
+
+      // Save to Hive
+      await saveFinancialGoalsToHive();
+
+      // Reset form
+      resetFinancialGoalForm();
+
       update();
     } catch (e) {
       print('Error adding financial goal: $e');
@@ -412,6 +450,10 @@ class ProgressController extends GetxController {
     selectedFinGoalDollar = 150;
     selectedFinGoalCent = 25;
     isFinGoalSet = false;
+    selectedEmoji1 = '😐';
+    goalTitleController1.clear();
+    selectedFinGoalDollar1 = 150;
+    selectedFinGoalCent1 = 25;
   }
 
   // Save financial goals to Hive
@@ -575,6 +617,74 @@ class ProgressController extends GetxController {
     );
   }
 
+  // Show emoji picker
+  void showEmojiPicker1(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+      ),
+      isScrollControlled: false,
+      builder: (context) => SizedBox(
+        height: 400.h,
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(16.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextAutoSize(
+                    'Select Emoji',
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                      fontFamily: circularBold,
+                      color: nicotrackBlack1,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Icon(
+                      Icons.close,
+                      color: nicotrackBlack1,
+                      size: 24.w,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: EmojiPicker(
+                onEmojiSelected: (category, emoji) {
+                  selectedEmoji1 = emoji.emoji;
+                  update();
+                  Navigator.pop(context);
+                },
+                config: Config(
+                  height: 256,
+                  emojiViewConfig: EmojiViewConfig(
+                    emojiSizeMax: 28.sp,
+                    backgroundColor: const Color(0xFFF2F2F2),
+                  ),
+                  skinToneConfig: const SkinToneConfig(
+                    enabled: true,
+                  ),
+                  categoryViewConfig: CategoryViewConfig(
+                    initCategory: Category.SMILEYS,
+                    indicatorColor: nicotrackOrange,
+                    iconColor: Colors.grey,
+                    iconColorSelected: nicotrackOrange,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   // Show price picker bottom sheet
   void showEditGoalPriceBottomSheet(BuildContext context) {
     // Initialize controllers for price picker
@@ -587,7 +697,8 @@ class ProgressController extends GetxController {
     finGoalcentController = FixedExtentScrollController(
       initialItem: centIndex >= 0 ? centIndex : 25 // Default to 25 cents
     );
-    
+
+
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.white,
@@ -666,6 +777,100 @@ class ProgressController extends GetxController {
                 ),
               );
             }
+          );
+        });
+  }
+  void showEditGoalPriceBottomSheet1(BuildContext context) {
+    // Initialize controllers for price picker
+    int dollarIndex = finGoaldollars.indexOf(selectedFinGoalDollar1);
+    int centIndex = finGoalcents.indexOf(selectedFinGoalCent1);
+
+    finGoaldollarController1 = FixedExtentScrollController(
+        initialItem: dollarIndex >= 0 ? dollarIndex : 15 // Default to $150
+    );
+    finGoalcentController1 = FixedExtentScrollController(
+        initialItem: centIndex >= 0 ? centIndex : 25 // Default to 25 cents
+    );
+
+
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
+        ),
+        builder: (context) {
+          return GetBuilder<ProgressController>(
+              builder: (controller) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 18.sp),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 18.w),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 4.8.w,
+                            width: 52.w,
+                            decoration: BoxDecoration(
+                                color: nicotrackBlack1,
+                                borderRadius: BorderRadius.circular(18.r)),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Container(
+                              width: 36.w,
+                              height: 36.w,
+                              decoration: BoxDecoration(
+                                  color: nicotrackOrange.withOpacity(0.2),
+                                  shape: BoxShape.circle),
+                              child: Center(
+                                child: Icon(
+                                  Icons.close_rounded,
+                                  size: 20.w,
+                                  color: nicotrackOrange,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  setFinGoalTrue();
+                                  Navigator.of(context).pop();
+                                },
+                                child: TextAutoSize(
+                                  'Done',
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontFamily: circularBook,
+                                    color: nicotracklightBlue,
+                                    height: 1.1,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 4.w)
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20.w),
+                      Expanded(child: setPriceAsNeeded1()),
+                      SizedBox(height: 24.w),
+                    ],
+                  ),
+                );
+              }
           );
         });
   }
@@ -750,6 +955,107 @@ class ProgressController extends GetxController {
                   bool isSelected = selectedFinGoalCent == finGoalcents[index];
                   String display =
                       finGoalcents[index].toString().padLeft(2, '0');
+                  return Center(
+                    child: TextAutoSize(
+                      display,
+                      style: TextStyle(
+                        fontSize: 64.sp,
+                        fontFamily: circularBold,
+                        color: isSelected
+                            ? Color(0xffF35E5C)
+                            : Color(0xffF35E5C).withOpacity(0.3),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Price picker widget
+  Widget setPriceAsNeeded1() {
+    return SizedBox(
+      height: 240.w,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Dollar Sign - Fixed
+          TextAutoSize(
+            "\$",
+            style: TextStyle(
+              fontSize: 64.sp,
+              fontFamily: circularBold,
+              color: Color(0xffF35E5C),
+            ),
+          ),
+
+          // Dollar Value Scroll
+          SizedBox(
+            width: 120.w,
+            height: 240.w,
+            child: ListWheelScrollView.useDelegate(
+              controller: finGoaldollarController1,
+              itemExtent: 100.w,
+              physics: FixedExtentScrollPhysics(),
+              onSelectedItemChanged: (index) {
+                HapticFeedback.mediumImpact();
+                selectedFinGoalDollar1 = finGoaldollars[index];
+                update();
+              },
+              childDelegate: ListWheelChildBuilderDelegate(
+                childCount: finGoaldollars.length,
+                builder: (context, index) {
+                  bool isSelected =
+                      selectedFinGoalDollar1 == finGoaldollars[index];
+                  return Center(
+                    child: TextAutoSize(
+                      finGoaldollars[index].toString(),
+                      style: TextStyle(
+                        fontSize: 64.sp,
+                        fontFamily: circularBold,
+                        color: isSelected
+                            ? Color(0xffF35E5C)
+                            : Color(0xffF35E5C).withOpacity(0.3),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+
+          // Dot
+          TextAutoSize(
+            ".",
+            style: TextStyle(
+                fontSize: 64.sp,
+                fontFamily: circularBold,
+                color: Color(0xffF35E5C)),
+          ),
+
+          // Cents Scroll
+          SizedBox(
+            width: 90.w,
+            height: 240.w,
+            child: ListWheelScrollView.useDelegate(
+              controller: finGoalcentController1,
+              itemExtent: 100.w,
+              physics: FixedExtentScrollPhysics(),
+              onSelectedItemChanged: (index) {
+                HapticFeedback.mediumImpact();
+                selectedFinGoalCent1 = finGoalcents[index];
+                update();
+              },
+              childDelegate: ListWheelChildBuilderDelegate(
+                childCount: finGoalcents.length,
+                builder: (context, index) {
+                  bool isSelected = selectedFinGoalCent1 == finGoalcents[index];
+                  String display =
+                  finGoalcents[index].toString().padLeft(2, '0');
                   return Center(
                     child: TextAutoSize(
                       display,
@@ -903,6 +1209,148 @@ class ProgressController extends GetxController {
             '\$ $selectedFinGoalDollar.$selectedFinGoalCent',
             style: TextStyle(
               fontSize: 24.sp,
+              fontFamily: circularBold,
+              color: isFinGoalSet? nicotrackOrange:Color(0xff454545).withOpacity(0.25),
+              height: 1.1,
+            ),
+          ),
+        ),
+        Spacer()
+      ],
+    );
+  }
+  Widget financialGoalTextFields1(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    showEmojiPicker1(context);
+                  },
+                  child: Container(
+                    height: 76.w,
+                    width: 76.w,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.blue.withOpacity(0.1),
+                    ),
+                    child: Center(
+                      child: TextAutoSize(
+                        selectedEmoji1,
+                        style: TextStyle(
+                          fontSize: 48.sp,
+                          letterSpacing: 1.92,
+                          fontFamily: circularBook,
+                          color: nicotrackBlack1,
+                          height: 1.1,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: GestureDetector(
+                    onTap: () {
+                      showEmojiPicker(context);
+                    },
+                    child: Container(
+                      width: 24.w,
+                      height: 24.w,
+                      decoration: BoxDecoration(
+                        color: nicotracklightBlue,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.edit,
+                        size: 14.w,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(height: 18.w),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            TextAutoSize(
+              'NEW FINANCIAL GOAL',
+              style: TextStyle(
+                fontSize: 12.sp,
+                letterSpacing: 1.92,
+                fontFamily: circularBook,
+                color: nicotrackBlack1,
+                height: 1.1,
+              ),
+            ),
+          ],
+        ),
+        TextField(
+          controller: goalTitleController1,
+          cursorColor: nicotrackBlack1,
+          onChanged: (value) {
+            update(); // Update UI when text changes for validation
+          },
+          decoration: InputDecoration(
+            hintText: 'e.g., Airpods pro ',
+            hintStyle: TextStyle(
+              fontSize: 24.sp,
+              fontFamily: circularBold,
+              color: Color(0xff454545).withOpacity(0.25),
+              height: 1.1,
+            ),
+            filled: true,
+            fillColor: Colors.transparent,
+            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none, // removes outline
+            ),
+          ),
+          style: TextStyle(
+            fontSize: 24.sp,
+            fontFamily: circularBold,
+            color: nicotrackBlack1,
+            height: 1.1,
+          ),
+          keyboardType: TextInputType.text,
+        ),
+        SizedBox(height: 30.w),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            TextAutoSize(
+              'SET THE PRICE',
+              style: TextStyle(
+                fontSize: 12.sp,
+                letterSpacing: 1.92,
+                fontFamily: circularBook,
+                color: nicotrackBlack1,
+                height: 1.1,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 8.w),
+        GestureDetector(
+          onTap: () {
+            showEditGoalPriceBottomSheet1(context);
+          },
+          child: TextAutoSize(
+            '\$ $selectedFinGoalDollar1.$selectedFinGoalCent1',
+            style: TextStyle(
+              fontSize: 28.sp,
               fontFamily: circularBold,
               color: isFinGoalSet? nicotrackOrange:Color(0xff454545).withOpacity(0.25),
               height: 1.1,

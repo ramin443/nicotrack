@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 import 'package:nicotrack/getx-controllers/progress-controller.dart';
+import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
+import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
 
 import '../../constants/color-constants.dart';
 import '../../constants/font-constants.dart';
@@ -156,48 +160,73 @@ class _ProgressState extends State<ProgressMain>
                             SizedBox(
                               width: 24.w,
                             ),
-                            RichText(
-                                text: TextSpan(
-                                    style: TextStyle(
-                                        fontSize: 16.sp,
-                                        fontFamily: circularMedium,
-                                        height: 1,
-                                        color: Colors.white),
-                                    children: [
-                                  TextSpan(
-                                    text: "14\n",
-                                    style: TextStyle(
-                                        fontSize: 36.sp,
-                                        fontFamily: circularMedium,
-                                        height: 1.1,
-                                        color: Colors.white),
-                                  ),
-                                  TextSpan(text: "days"),
-                                ]))
+                            Builder(
+                              builder: (_) {
+                                DateTime now = DateTime.now();
+                                int daysSinceLastSmoked = getDaysSinceLastSmoked(now);
+                                return RichText(
+                                    text: TextSpan(
+                                        style: TextStyle(
+                                            fontSize: 16.sp,
+                                            fontFamily: circularMedium,
+                                            height: 1,
+                                            color: Colors.white),
+                                        children: [
+                                      TextSpan(
+                                        text: "$daysSinceLastSmoked\n",
+                                        style: TextStyle(
+                                            fontSize: 36.sp,
+                                            fontFamily: circularMedium,
+                                            height: 1.1,
+                                            color: Colors.white),
+                                      ),
+                                      TextSpan(text: "days"),
+                                    ]));
+                              }
+                            )
                           ],
                         ),
                       ),
                       SizedBox(
                         height: 9.h,
                       ),
-                      RichText(
-                          text: TextSpan(
-                              style: TextStyle(
-                                  fontSize: 15.sp,
-                                  fontFamily: circularMedium,
-                                  height: 1.1,
-                                  color: nicotrackBlack1),
-                              children: [
-                            TextSpan(text: "🗓️ Quit Date: "),
-                            TextSpan(
-                              text: "Mar 13, 2025",
-                              style: TextStyle(
-                                  fontSize: 15.sp,
-                                  fontFamily: circularBold,
-                                  height: 1.1,
-                                  color: nicotrackBlack1),
-                            ),
-                          ])),
+                      Builder(
+                        builder: (_) {
+                          // Get the quit date from onboarding data
+                          final box = Hive.box<OnboardingData>('onboardingCompletedData');
+                          OnboardingData userOnboardingData = box.get('currentUserOnboarding') ?? OnboardingData();
+                          String lastSmokedDateStr = userOnboardingData.lastSmokedDate;
+                          
+                          String formattedDate = "Not set";
+                          if (lastSmokedDateStr.isNotEmpty) {
+                            try {
+                              DateTime parsedDate = DateTime.parse(lastSmokedDateStr);
+                              formattedDate = DateFormat('MMM d, yyyy').format(parsedDate);
+                            } catch (e) {
+                              formattedDate = lastSmokedDateStr;
+                            }
+                          }
+                          
+                          return RichText(
+                              text: TextSpan(
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      fontFamily: circularMedium,
+                                      height: 1.1,
+                                      color: nicotrackBlack1),
+                                  children: [
+                                TextSpan(text: "🗓️ Quit Date: "),
+                                TextSpan(
+                                  text: formattedDate,
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      fontFamily: circularBold,
+                                      height: 1.1,
+                                      color: nicotrackBlack1),
+                                ),
+                              ]));
+                        }
+                      ),
                       SizedBox(
                         height: 24.h,
                       ),
