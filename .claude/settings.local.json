@@ -3,7 +3,9 @@
     "allow": [
       "Bash(rg:*)",
       "Bash(grep:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(flutter packages pub run:*)",
+      "Bash(flutter test:*)"
     ],
     "deny": []
   }

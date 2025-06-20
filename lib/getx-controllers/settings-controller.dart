@@ -874,37 +874,80 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
             ],
           ),
           children: [
-            Column(
-              children: [
-                SizedBox(
-                  height: 8.w,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    showSetTimeBottomSheet(context);
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 13.sp, vertical: 10.sp),
-                    decoration: BoxDecoration(
-                        color: nicotrackOrange.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(9.r)),
-                    child: TextAutoSize(getFormattedDailyReminderDetailedTime(),
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          height: 1.1,
-                          fontSize: 16.sp,
-                          fontFamily: circularBold,
-                          color: nicotrackOrange,
-                        )),
-                  ),
-                ),
-                SizedBox(
-                  height: 8.w,
-                ),
-              ],
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 12.h),
+                  _buildQuitTip(1, "Stay hydrated", "Drink plenty of water to help flush nicotine from your system and reduce cravings."),
+                  SizedBox(height: 12.h),
+                  _buildQuitTip(2, "Keep your hands busy", "Use stress balls, fidget toys, or engage in activities like drawing or crafts."),
+                  SizedBox(height: 12.h),
+                  _buildQuitTip(3, "Avoid triggers", "Stay away from smoking areas, alcohol, or situations that make you want to smoke."),
+                  SizedBox(height: 12.h),
+                  _buildQuitTip(4, "Practice deep breathing", "When cravings hit, take slow, deep breaths for 3-5 minutes to relax."),
+                  SizedBox(height: 12.h),
+                  _buildQuitTip(5, "Exercise regularly", "Physical activity reduces stress, improves mood, and helps prevent weight gain."),
+                  SizedBox(height: 12.h),
+                  _buildQuitTip(6, "Reward yourself", "Celebrate milestones with non-smoking rewards like a movie, meal, or new item."),
+                  SizedBox(height: 8.h),
+                ],
+              ),
             ),
           ]),
+    );
+  }
+
+  Widget _buildQuitTip(int number, String title, String description) {
+    String getNumberEmoji(int num) {
+      switch (num) {
+        case 1: return '1️⃣';
+        case 2: return '2️⃣';
+        case 3: return '3️⃣';
+        case 4: return '4️⃣';
+        case 5: return '5️⃣';
+        case 6: return '6️⃣';
+        default: return '$num️⃣';
+      }
+    }
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextAutoSize(
+          getNumberEmoji(number),
+          style: TextStyle(
+            fontSize: 20.sp,
+          ),
+        ),
+        SizedBox(width: 12.w),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextAutoSize(
+                title,
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontFamily: circularBold,
+                  color: nicotrackBlack1,
+                ),
+              ),
+              SizedBox(height: 4.h),
+              TextAutoSize(
+                description,
+                style: TextStyle(
+                  fontSize: 13.sp,
+                  fontFamily: circularBook,
+                  color: Colors.black87,
+                  height: 1.3,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
