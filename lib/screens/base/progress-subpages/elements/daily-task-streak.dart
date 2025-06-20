@@ -3,12 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:nicotrack/screens/elements/gradient-text.dart';
 
 import '../../../../constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
 import '../../../../getx-controllers/progress-controller.dart';
+import '../../../../models/did-you-smoke/didyouSmoke-model.dart';
+import '../../../../models/mood-model/mood-model.dart';
 import '../../../elements/textAutoSize.dart';
 
 class DailyTaskStreak extends StatefulWidget {
@@ -21,8 +24,58 @@ class DailyTaskStreak extends StatefulWidget {
 }
 
 class _DailyTaskStreakState extends State<DailyTaskStreak> {
+  
+  List<bool> _getLast7DaysCompletionStatus() {
+    final moodBox = Hive.box<MoodModel>('moodData');
+    final smokingBox = Hive.box<DidYouSmokeModel>('didYouSmokeData');
+    final now = DateTime.now();
+    
+    return List.generate(7, (i) {
+      final day = now.subtract(Duration(days: 6 - i));
+      final dayString = DateFormat.yMMMd().format(day);
+      
+      // Check if user logged mood or smoking data for this day
+      final hasMoodData = moodBox.containsKey(dayString);
+      final hasSmokingData = smokingBox.containsKey(dayString);
+      
+      return hasMoodData || hasSmokingData;
+    });
+  }
+  
+  int _getThisWeekCompletedCount() {
+    final completionStatus = _getLast7DaysCompletionStatus();
+    return completionStatus.where((completed) => completed).length;
+  }
+  
+  int _getCurrentStreak() {
+    final moodBox = Hive.box<MoodModel>('moodData');
+    final smokingBox = Hive.box<DidYouSmokeModel>('didYouSmokeData');
+    final now = DateTime.now();
+    int streak = 0;
+    
+    // Count consecutive days from today backwards
+    for (int i = 0; i < 365; i++) { // Check up to a year back
+      final day = now.subtract(Duration(days: i));
+      final dayString = DateFormat.yMMMd().format(day);
+      
+      final hasMoodData = moodBox.containsKey(dayString);
+      final hasSmokingData = smokingBox.containsKey(dayString);
+      
+      if (hasMoodData || hasSmokingData) {
+        streak++;
+      } else {
+        break; // Streak is broken
+      }
+    }
+    
+    return streak;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final completionStatus = _getLast7DaysCompletionStatus();
+    final thisWeekCount = _getThisWeekCompletedCount();
+    
     return GetBuilder<ProgressController>(
         init: ProgressController(),
         initState: (v) {
@@ -93,7 +146,7 @@ class _DailyTaskStreakState extends State<DailyTaskStreak> {
                                 height: 3.h,
                               ),
                               TextAutoSize(
-                                '4 out of 7 this week',
+                                '$thisWeekCount out of 7 this week',
                                 style: TextStyle(
                                     fontSize: 14.sp,
                                     fontFamily: circularBook,
@@ -114,7 +167,7 @@ class _DailyTaskStreakState extends State<DailyTaskStreak> {
                           children: [
                             Expanded(
                               child: ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: BouncingScrollPhysics(),
                                 shrinkWrap: true,
                                   itemCount: 7,
                                   controller:
@@ -122,7 +175,7 @@ class _DailyTaskStreakState extends State<DailyTaskStreak> {
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, index) {
                                     final last7Days = getLast7WeekdayLetters();
-                                    bool isCompleted = index.isEven;
+                                    bool isCompleted = completionStatus[index];
                                     final dayLetter = last7Days[index];
                                     return Padding(
                                       padding: EdgeInsets.only(left: 12.w),
@@ -169,8 +222,8 @@ class _DailyTaskStreakState extends State<DailyTaskStreak> {
                                                     CupertinoIcons.checkmark_alt,
                                                     color: Colors.white,
                                                     size: 20.w,
-                                                  ),
-                                                )
+                                                    ),
+                                                  )
                                               : Container(
                                                   width: 38.w,
                                                   height: 38.w,
@@ -205,7 +258,7 @@ class _DailyTaskStreakState extends State<DailyTaskStreak> {
                                 end: Alignment.centerRight)),
                         child: Center(
                           child: TextAutoSize(
-                            '14',
+                            '$thisWeekCount',
                             style: TextStyle(
                                 fontSize: 48.sp,
                                 fontFamily: circularBook,

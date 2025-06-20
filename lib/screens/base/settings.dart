@@ -18,6 +18,42 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  final ScrollController _scrollController = ScrollController();
+  bool _showFloatingButton = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.offset > 200 && !_showFloatingButton) {
+      setState(() {
+        _showFloatingButton = true;
+      });
+    } else if (_scrollController.offset <= 200 && _showFloatingButton) {
+      setState(() {
+        _showFloatingButton = false;
+      });
+    }
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SettingsController>(
@@ -26,6 +62,7 @@ class _SettingsState extends State<Settings> {
           return Scaffold(
             backgroundColor: Colors.white,
             body: SingleChildScrollView(
+              controller: _scrollController,
               physics: BouncingScrollPhysics(),
               child: Column(
                 children: [
@@ -52,6 +89,18 @@ class _SettingsState extends State<Settings> {
                 ],
               ),
             ),
+            floatingActionButton: _showFloatingButton
+                ? FloatingActionButton(
+                    onPressed: _scrollToTop,
+                    backgroundColor: nicotrackBlack1,
+                    elevation: 8,
+                    child: Icon(
+                      Icons.keyboard_arrow_up,
+                      color: Colors.white,
+                      size: 28.w,
+                    ),
+                  )
+                : null,
           );
         });
   }

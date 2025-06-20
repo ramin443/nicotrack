@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/4x4-alt-scroll-view.dart';
 
 import '../../../../constants/color-constants.dart';
 import '../../../../constants/dummy-data-constants.dart';
 import '../../../../constants/font-constants.dart';
+import '../../../../constants/image-constants.dart';
 import '../../../../getx-controllers/progress-controller.dart';
+import '../../../../models/did-you-smoke/didyouSmoke-model.dart';
+import '../../../../models/emoji-text-pair/emojitext-model.dart';
+import '../../../../models/mood-model/mood-model.dart';
+import '../../../../models/onboarding-data/onboardingData-model.dart';
 import '../../../elements/textAutoSize.dart';
 
 class TopTriggersSection extends StatefulWidget {
@@ -17,6 +24,112 @@ class TopTriggersSection extends StatefulWidget {
 }
 
 class _TopTriggersSectionState extends State<TopTriggersSection> {
+  
+  List<EmojiTextModel> _getTopTriggers() {
+    Map<String, int> triggerCounts = {};
+    Map<String, String> triggerEmojis = {};
+    
+    // 1. Get onboarding crave situations
+    try {
+      final onboardingBox = Hive.box<OnboardingData>('onboardingCompletedData');
+      final onboardingData = onboardingBox.get('currentUserOnboarding');
+      
+      if (onboardingData != null && onboardingData.craveSituations.isNotEmpty) {
+        for (String situation in onboardingData.craveSituations) {
+          triggerCounts[situation] = (triggerCounts[situation] ?? 0) + 2; // Weight onboarding data higher
+          
+          // Map situation to emoji
+          switch (situation.toLowerCase()) {
+            case 'morning with coffee':
+              triggerEmojis[situation] = coffeeEmoji;
+              break;
+            case 'after meals':
+              triggerEmojis[situation] = platesEmoji;
+              break;
+            case 'when drinking alcohol':
+              triggerEmojis[situation] = beerEmoji;
+              break;
+            case 'when feeling stressed':
+              triggerEmojis[situation] = stressedEmoji;
+              break;
+            case 'boredom or habit':
+              triggerEmojis[situation] = homeEmoji;
+              break;
+            default:
+              triggerEmojis[situation] = othersEmoji;
+          }
+        }
+      }
+    } catch (e) {
+      print('Error reading onboarding data: $e');
+    }
+    
+    // 2. Get daily smoking triggers
+    try {
+      final smokingBox = Hive.box<DidYouSmokeModel>('didYouSmokeData');
+      
+      for (String key in smokingBox.keys.cast<String>()) {
+        final smokingData = smokingBox.get(key);
+        if (smokingData != null && smokingData.whatTriggerred.isNotEmpty) {
+          for (Map<String, dynamic> trigger in smokingData.whatTriggerred) {
+            String triggerText = trigger['text'] ?? 'Unknown';
+            String triggerEmoji = trigger['emoji'] ?? othersEmoji;
+            
+            triggerCounts[triggerText] = (triggerCounts[triggerText] ?? 0) + 1;
+            triggerEmojis[triggerText] = triggerEmoji;
+          }
+        }
+      }
+    } catch (e) {
+      print('Error reading smoking data: $e');
+    }
+    
+    // 3. Get mood/craving timing triggers
+    try {
+      final moodBox = Hive.box<MoodModel>('moodData');
+      
+      for (String key in moodBox.keys.cast<String>()) {
+        final moodData = moodBox.get(key);
+        if (moodData != null && moodData.craveTiming.isNotEmpty) {
+          String triggerText = moodData.craveTiming['text'] ?? 'Unknown';
+          String triggerEmoji = moodData.craveTiming['emoji'] ?? othersEmoji;
+          
+          triggerCounts[triggerText] = (triggerCounts[triggerText] ?? 0) + 1;
+          triggerEmojis[triggerText] = triggerEmoji;
+        }
+      }
+    } catch (e) {
+      print('Error reading mood data: $e');
+    }
+    
+    // 4. Sort triggers by frequency and create EmojiTextModel list
+    if (triggerCounts.isEmpty) {
+      // Return fallback data if no user data found
+      return [
+        EmojiTextModel(emoji: coffeeEmoji, text: "Morning with coffee"),
+        EmojiTextModel(emoji: stressedEmoji, text: "When feeling stressed"),
+        EmojiTextModel(emoji: platesEmoji, text: "After meals"),
+        EmojiTextModel(emoji: beerEmoji, text: "When drinking alcohol"),
+      ];
+    }
+    
+    List<MapEntry<String, int>> sortedTriggers = triggerCounts.entries.toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
+    
+    List<EmojiTextModel> topTriggers = [];
+    for (int i = 0; i < sortedTriggers.length && i < 12; i++) {
+      String triggerText = sortedTriggers[i].key;
+      String emoji = triggerEmojis[triggerText] ?? othersEmoji;
+      
+      topTriggers.add(EmojiTextModel(
+        emoji: emoji,
+        text: triggerText,
+      ));
+    }
+    
+    return topTriggers;
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProgressController>(
@@ -61,7 +174,7 @@ class _TopTriggersSectionState extends State<TopTriggersSection> {
               FourxFourAltScrollView(
                 scrollController:
                     progressController.topTriggersScrollController,
-                items: whenSmokeCravingStrikesDummyData,
+                items: _getTopTriggers(),
                 childAspectRatio: 2.6,
               ),
               SizedBox(
@@ -70,7 +183,7 @@ class _TopTriggersSectionState extends State<TopTriggersSection> {
               SizedBox(
                 width: 180.w,
                 child: TextAutoSize(
-                  "We will keep updating this as you log your daily tasks",
+                  "Based on your onboarding preferences and daily logs",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 13.sp,

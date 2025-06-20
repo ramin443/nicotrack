@@ -6,8 +6,10 @@ import 'package:nicotrack/constants/quick-function-constants.dart';
 import 'package:nicotrack/getx-controllers/progress-controller.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/1x2-scroll-view.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/3x-grid-view.dart';
+import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
 import '../../../../constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
+import '../../../../models/award-model/award-model.dart';
 
 class AllBadgesSection extends StatefulWidget {
   const AllBadgesSection({super.key});
@@ -17,8 +19,23 @@ class AllBadgesSection extends StatefulWidget {
 }
 
 class _AllBadgesSectionState extends State<AllBadgesSection> {
+  
+  List<AwardModel> _getEarnedBadges() {
+    int currentDays = getDaysSinceLastSmoked(DateTime.now());
+    return allAwards.where((badge) => badge.day <= currentDays).toList();
+  }
+  
+  List<AwardModel> _getNextMilestones() {
+    int currentDays = getDaysSinceLastSmoked(DateTime.now());
+    return allAwards.where((badge) => badge.day > currentDays).take(6).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final earnedBadges = _getEarnedBadges();
+    final nextMilestones = _getNextMilestones();
+    final currentDays = getDaysSinceLastSmoked(DateTime.now());
+    
     return GetBuilder<ProgressController>(
         init: ProgressController(),
         builder: (progressController) {
@@ -46,7 +63,7 @@ class _AllBadgesSectionState extends State<AllBadgesSection> {
                                 color: Colors.white),
                             children: [
                           TextSpan(
-                            text: "🪙  Earned Badges",
+                            text: "🪙  Earned Badges (${earnedBadges.length})",
                           ),
                         ])),
                   ),
@@ -55,7 +72,21 @@ class _AllBadgesSectionState extends State<AllBadgesSection> {
               SizedBox(
                 height: 12.h,
               ),
-               ThreexGridView(awardsList: allAwards.take(6).toList(),),
+              if (earnedBadges.isNotEmpty)
+                ThreexGridView(awardsList: earnedBadges,)
+              else
+                Container(
+                  padding: EdgeInsets.all(24.w),
+                  child: Text(
+                    "Keep going! Your first badge is at Day ${allAwards.first.day}",
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontFamily: circularMedium,
+                      color: Colors.grey,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               SizedBox(
                 height: 12.h,
               ),
@@ -87,12 +118,26 @@ class _AllBadgesSectionState extends State<AllBadgesSection> {
               SizedBox(
                 height: 12.h,
               ),
-              ColorFiltered(
-                  colorFilter: ColorFilter.mode(
-                    Colors.white,
-                    BlendMode.saturation, // Removes color = grayscale
+              if (nextMilestones.isNotEmpty)
+                ColorFiltered(
+                    colorFilter: ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.saturation, // Removes color = grayscale
+                    ),
+                    child: ThreexGridView(awardsList: nextMilestones,))
+              else
+                Container(
+                  padding: EdgeInsets.all(24.w),
+                  child: Text(
+                    "🎉 Congratulations! You've earned all available badges!",
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontFamily: circularMedium,
+                      color: Colors.grey,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  child: ThreexGridView(awardsList: allAwards.skip(6).toList(),)),
+                ),
               SizedBox(
                 height: 12.h,
               ),

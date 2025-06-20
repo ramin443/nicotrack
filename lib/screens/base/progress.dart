@@ -23,6 +23,42 @@ class ProgressMain extends StatefulWidget {
 class _ProgressState extends State<ProgressMain>
     with SingleTickerProviderStateMixin {
   final progressMainController = Get.find<ProgressController>();
+  bool _showFloatingButton = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Add scroll listener after widget is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      progressMainController.scrollController.addListener(_scrollListener);
+    });
+  }
+
+  @override
+  void dispose() {
+    progressMainController.scrollController.removeListener(_scrollListener);
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (progressMainController.scrollController.offset > 200 && !_showFloatingButton) {
+      setState(() {
+        _showFloatingButton = true;
+      });
+    } else if (progressMainController.scrollController.offset <= 200 && _showFloatingButton) {
+      setState(() {
+        _showFloatingButton = false;
+      });
+    }
+  }
+
+  void _scrollToTop() {
+    progressMainController.scrollController.animateTo(
+      0,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -244,6 +280,18 @@ class _ProgressState extends State<ProgressMain>
                 )
               ],
             )),
+            floatingActionButton: _showFloatingButton && progressController.tabController.index == 0
+                ? FloatingActionButton(
+                    onPressed: _scrollToTop,
+                    backgroundColor: nicotrackBlack1,
+                    elevation: 8,
+                    child: Icon(
+                      Icons.keyboard_arrow_up,
+                      color: Colors.white,
+                      size: 28.w,
+                    ),
+                  )
+                : null,
           );
         });
   }

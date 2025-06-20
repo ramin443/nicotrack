@@ -57,6 +57,14 @@ class _FourxFourScrollViewState extends State<FourxFourScrollView> {
                       itemCount: pageItems.length,
                       itemBuilder: (context, index) {
                         final item = pageItems[index];
+                        
+                        // Parse the text data: "Feeling|count|percentage"
+                        List<String> parts = item.text.split('|');
+                        String feeling = parts.length > 0 ? parts[0] : "Unknown";
+                        String count = parts.length > 1 ? parts[1] : "0";
+                        String percentage = parts.length > 2 ? parts[2] : "0";
+                        String displayCount = count == "0" ? "0x" : "${count}x";
+                        
                         return Container(
                           padding: EdgeInsets.only(
                               left: 12.w, right: 12.w, top: 16.h, bottom: 14.w),
@@ -72,16 +80,13 @@ class _FourxFourScrollViewState extends State<FourxFourScrollView> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  TextAutoSize(
+                                  Image.asset(
                                     item.emoji,
-                                    style: TextStyle(
-                                      fontSize: 34.sp,
-                                      fontFamily: circularMedium,
-                                      height: 1.1,
-                                    ),
+                                    width: 34.sp,
+                                    height: 34.sp,
                                   ),
                                   TextAutoSize(
-                                    "14x",
+                                    displayCount,
                                     style: TextStyle(
                                       fontFamily: circularBold,
                                       fontSize: 25.sp,
@@ -104,7 +109,7 @@ class _FourxFourScrollViewState extends State<FourxFourScrollView> {
                                           // color: Colors.grey,
                                           width: 120.w,
                                           child: TextAutoSize(
-                                            item.text,
+                                            feeling,
                                             style: TextStyle(
                                               fontSize: 13.sp,
                                               fontFamily: circularMedium,

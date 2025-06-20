@@ -12,6 +12,7 @@ import '../../../../models/emoji-text-pair/emojitext-model.dart';
 class SingleRowScrollView extends StatefulWidget {
   final List<EmojiTextModel> items;
   final ScrollController scrollController;
+
   const SingleRowScrollView({
     super.key,
     required this.items,
@@ -24,22 +25,24 @@ class SingleRowScrollView extends StatefulWidget {
 
 class _SingleRowScrollViewState extends State<SingleRowScrollView> {
   int _currentPage = 0;
-  int _totalPages = 0 ;
+  int _totalPages = 0;
+
   final progressMainController = Get.find<ProgressController>();
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProgressController>(
         init: ProgressController(),
-        initState: (v){
+        initState: (v) {
           widget.scrollController.addListener(_onScroll);
 
-          // Compute total "pages"
+          // Compute total "pages" - one page for every 2 items
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            final screenWidth = MediaQuery.of(context).size.width;
-            final visibleItems = (screenWidth / 160.w).floor();
+            if (!mounted) return;
+
             setState(() {
-              _totalPages = (widget.items.length - visibleItems + 1).clamp(1, widget.items.length);
+              // Calculate pages based on 2 items per page
+              _totalPages = ((widget.items.length + 1) / 2).ceil();
             });
           });
         },
@@ -47,7 +50,7 @@ class _SingleRowScrollViewState extends State<SingleRowScrollView> {
           return Column(
             children: [
               SingleChildScrollView(
-                controller:  widget.scrollController,
+                controller: widget.scrollController,
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: widget.items.asMap().entries.map((entry) {
@@ -62,11 +65,12 @@ class _SingleRowScrollViewState extends State<SingleRowScrollView> {
                         left: isFirst ? 16.w : 0.w,
                         right: isLast ? 16.w : 8.w,
                       ),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 10.w, vertical: 15.h),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        border: Border.all(color: Color(0xfff0f0f0), width: 1.sp),
+                        border:
+                            Border.all(color: Color(0xfff0f0f0), width: 1.sp),
                         borderRadius: BorderRadius.circular(16.r),
                       ),
                       child: Row(
@@ -81,7 +85,9 @@ class _SingleRowScrollViewState extends State<SingleRowScrollView> {
                             ),
                           ),
                           SizedBox(width: 12.w),
-                          TextAutoSize(
+                          SizedBox(
+                            width: 120.w,
+                              child: TextAutoSize(
                             item.text,
                             style: TextStyle(
                               fontSize: 14.5.sp,
@@ -89,7 +95,7 @@ class _SingleRowScrollViewState extends State<SingleRowScrollView> {
                               height: 1.1,
                               color: Color.fromRGBO(0, 0, 0, 0.76),
                             ),
-                          ),
+                          )),
                           SizedBox(width: 3.w),
                         ],
                       ),
@@ -97,7 +103,9 @@ class _SingleRowScrollViewState extends State<SingleRowScrollView> {
                   }).toList(),
                 ),
               ),
-              SizedBox(height: 12.h,),
+              SizedBox(
+                height: 12.h,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(_totalPages, (index) {
@@ -118,15 +126,37 @@ class _SingleRowScrollViewState extends State<SingleRowScrollView> {
           );
         });
   }
-  void _onScroll(){
-    if (!mounted) return;
-    final offset =  widget.scrollController.offset;
-    final pageWidth = 160.w; // approximate card width + margin
-    final page = (offset / pageWidth).round();
 
-    if (page != _currentPage) {
+  void _onScroll() {
+    if (!mounted) return;
+
+    final scrollController = widget.scrollController;
+    final offset = scrollController.offset;
+    final maxScrollExtent = scrollController.position.maxScrollExtent;
+
+    // If we can't scroll, we're on the first page
+    if (maxScrollExtent == 0) {
+      if (_currentPage != 0) {
+        setState(() {
+          _currentPage = 0;
+        });
+      }
+      return;
+    }
+
+    // Calculate which item we're looking at based on scroll position
+    final itemWidth = 160.w; // Approximate width per item including margins
+    final currentItemIndex = (offset / itemWidth).round();
+
+    // Calculate page based on 2 items per page
+    final page = (currentItemIndex / 2).floor();
+
+    // Ensure page is within bounds
+    final clampedPage = page.clamp(0, _totalPages - 1);
+
+    if (clampedPage != _currentPage) {
       setState(() {
-        _currentPage = page;
+        _currentPage = clampedPage;
       });
     }
   }

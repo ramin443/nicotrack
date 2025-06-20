@@ -68,19 +68,16 @@ class _FourxFourAltScrollViewState extends State<FourxFourAltScrollView> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              TextAutoSize(
+                              Image.asset(
                                 item.emoji,
-                                style: TextStyle(
-                                  fontSize: 34.sp,
-                                  fontFamily: circularMedium,
-                                  height: 1.1,
-                                ),
+                                width: 34.sp,
+                                height: 34.sp,
                               ),
                               SizedBox(width: 10.w),
                               SizedBox(
                                 // color: Colors.grey,
                                 width: 100.w,
-                                child: TextAutoSize(
+                                child: Text(
                                   item.text,
                                   style: TextStyle(
                                     fontSize: 14.sp,
