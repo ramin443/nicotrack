@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
-part 'quickactions-model.freezed.dart';
-part 'quickactions-model.g.dart';
+part 'quickActions-model.freezed.dart';
+part 'quickActions-model.g.dart';
 
 @freezed
 class QuickactionsModel with _$QuickactionsModel {

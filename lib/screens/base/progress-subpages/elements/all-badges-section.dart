@@ -41,9 +41,7 @@ class _AllBadgesSectionState extends State<AllBadgesSection> {
         builder: (progressController) {
           return Column(
             children: [
-              SizedBox(
-                height: 18.h,
-              ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -116,7 +114,7 @@ class _AllBadgesSectionState extends State<AllBadgesSection> {
                 ],
               ),
               SizedBox(
-                height: 12.h,
+                height: 0.w,
               ),
               if (nextMilestones.isNotEmpty)
                 ColorFiltered(
@@ -133,7 +131,7 @@ class _AllBadgesSectionState extends State<AllBadgesSection> {
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontFamily: circularMedium,
-                      color: Colors.grey,
+                      color: Colors.black,
                     ),
                     textAlign: TextAlign.center,
                   ),

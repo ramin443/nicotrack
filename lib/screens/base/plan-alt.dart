@@ -266,9 +266,9 @@ class _PlanAltState extends State<PlanAlt> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              planController.timelineTab('Timeline', 0),
+                              // planController.timelineTab('Timeline', 0),
                               SizedBox(width: 20.w),
-                              planController.timelineTab('Stage', 1),
+                              // planController.timelineTab('Stage', 1),
                             ],
                           ),
                           Column(

@@ -240,22 +240,14 @@ class _PlanState extends State<Plan> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 28.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        planController.timelineTab('Timeline', 0),
-                        SizedBox(width: 20.w),
-                        planController.timelineTab('Stage', 1),
-                      ],
-                    ),
+
                     Column(
                       children: [
-                        SizedBox(height: 24.h),
+                        SizedBox(height: 18.w),
                         planController.withdrawalTimeline(context),
-                        SizedBox(height: 34.h),
+                        SizedBox(height: 34.w),
                         AllBadgesSection(),
-                        SizedBox(height: 24.h),
+                        SizedBox(height: 24.w),
                       ],
                     )
                   ],
@@ -268,7 +260,7 @@ class _PlanState extends State<Plan> {
                     backgroundColor: nicotrackBlack1,
                     elevation: 8,
                     child: Icon(
-                      Icons.keyboard_arrow_up,
+                      Icons.abc,
                       color: Colors.white,
                       size: 28.w,
                     ),

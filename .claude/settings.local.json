@@ -5,7 +5,10 @@
       "Bash(grep:*)",
       "Bash(find:*)",
       "Bash(flutter packages pub run:*)",
-      "Bash(flutter test:*)"
+      "Bash(flutter test:*)",
+      "Bash(cat:*)",
+      "Bash(flutter pub run build_runner build:*)",
+      "Bash(ls:*)"
     ],
     "deny": []
   }

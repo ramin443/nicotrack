@@ -193,9 +193,7 @@ class _ProgressState extends State<ProgressMain>
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              width: 24.w,
-                            ),
+
                             Builder(
                               builder: (_) {
                                 DateTime now = DateTime.now();
