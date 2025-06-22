@@ -8,7 +8,9 @@
       "Bash(flutter test:*)",
       "Bash(cat:*)",
       "Bash(flutter pub run build_runner build:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(flutter doctor:*)",
+      "Bash(flutter clean:*)"
     ],
     "deny": []
   }

@@ -1971,102 +1971,54 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
   }
 
   Widget contactSupportTextFields() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 5.w,
-            ),
-            TextAutoSize(
-              'Email Address',
-              style: TextStyle(
-                fontSize: 15.sp,
-                fontFamily: circularBook,
-                color: Color(0xff454545).withOpacity(0.6),
-                height: 1.1,
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 5.w,
               ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 8.w,
-        ),
-        TextField(
-          cursorColor: nicotrackBlack1,
-          decoration: InputDecoration(
-            hintText: 'jdoe@icloud.com',
-            hintStyle: TextStyle(
-              fontSize: 15.sp,
-              fontFamily: circularBook,
-              color: Color(0xff454545).withOpacity(0.6),
-              height: 1.1,
-            ),
-            filled: true,
-            fillColor: Color(0xFFF2F2F2),
-            // light gray background
-            contentPadding:
-                EdgeInsets.symmetric(horizontal: 16.sp, vertical: 12.sp),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none, // removes outline
-            ),
-          ),
-          style: TextStyle(
-            fontSize: 15.sp,
-            fontFamily: circularBook,
-            color: nicotrackBlack1,
-            height: 1.1,
-          ),
-          keyboardType: TextInputType.emailAddress,
-        ),
-        SizedBox(
-          height: 15.w,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 5.w,
-            ),
-            TextAutoSize(
-              'Details',
-              style: TextStyle(
-                fontSize: 15.sp,
-                fontFamily: circularBook,
-                color: Color(0xff454545).withOpacity(0.6),
-                height: 1.1,
+              TextAutoSize(
+                'Email Address',
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontFamily: circularBook,
+                  color: Color(0xff454545).withOpacity(0.6),
+                  height: 1.1,
+                ),
               ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 8.w,
-        ),
-        Expanded(
-          child: TextField(
-            minLines: 9,
-            maxLines: 25,
+            ],
+          ),
+          SizedBox(
+            height: 8.w,
+          ),
+          TextField(
             cursorColor: nicotrackBlack1,
+            textInputAction: TextInputAction.done,
+            scrollPadding: EdgeInsets.only(bottom: 100.h),
+            onSubmitted: (value) {
+              FocusManager.instance.primaryFocus?.unfocus();
+            },
             decoration: InputDecoration(
-              filled: true,
-              hintText: '',
+              hintText: 'jdoe@icloud.com',
               hintStyle: TextStyle(
                 fontSize: 15.sp,
                 fontFamily: circularBook,
                 color: Color(0xff454545).withOpacity(0.6),
                 height: 1.1,
               ),
+              filled: true,
               fillColor: Color(0xFFF2F2F2),
-              // Light gray background
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 16.sp, vertical: 12.sp),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none, // removes outline
+                borderSide: BorderSide.none,
               ),
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 12, vertical: 12),
             ),
             style: TextStyle(
               fontSize: 15.sp,
@@ -2074,9 +2026,70 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
               color: nicotrackBlack1,
               height: 1.1,
             ),
+            keyboardType: TextInputType.emailAddress,
           ),
-        )
-      ],
+          SizedBox(
+            height: 15.w,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 5.w,
+              ),
+              TextAutoSize(
+                'Details',
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontFamily: circularBook,
+                  color: Color(0xff454545).withOpacity(0.6),
+                  height: 1.1,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 8.w,
+          ),
+          Container(
+            height: 200.h,
+            child: TextField(
+              maxLines: null,
+              expands: true,
+              cursorColor: nicotrackBlack1,
+              textInputAction: TextInputAction.done,
+              scrollPadding: EdgeInsets.only(bottom: 100.h),
+              onSubmitted: (value) {
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
+              decoration: InputDecoration(
+                filled: true,
+                hintText: 'Describe your issue or question...',
+                hintStyle: TextStyle(
+                  fontSize: 15.sp,
+                  fontFamily: circularBook,
+                  color: Color(0xff454545).withOpacity(0.6),
+                  height: 1.1,
+                ),
+                fillColor: Color(0xFFF2F2F2),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+              ),
+              style: TextStyle(
+                fontSize: 15.sp,
+                fontFamily: circularBook,
+                color: nicotrackBlack1,
+                height: 1.1,
+              ),
+              textAlignVertical: TextAlignVertical.top,
+            ),
+          )
+        ],
+      ),
     );
   }
 
@@ -2268,61 +2281,51 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
   }
 
   Widget honestFeedbackTextFields() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 5.w,
-            ),
-            TextAutoSize(
-              'Feedback',
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+
+          Container(
+            height: 300.h,
+            child: TextField(
+              maxLines: null,
+              expands: true,
+              cursorColor: nicotrackBlack1,
+              textInputAction: TextInputAction.done,
+              scrollPadding: EdgeInsets.only(bottom: 100.h),
+              onSubmitted: (value) {
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
+              decoration: InputDecoration(
+                filled: true,
+                hintText: 'Your Feedback...',
+                hintStyle: TextStyle(
+                  fontSize: 15.sp,
+                  fontFamily: circularBook,
+                  color: Color(0xff454545).withOpacity(0.6),
+                  height: 1.1,
+                ),
+                fillColor: Color(0xFFF2F2F2),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+              ),
               style: TextStyle(
                 fontSize: 15.sp,
                 fontFamily: circularBook,
-                color: Color(0xff454545).withOpacity(0.6),
+                color: nicotrackBlack1,
                 height: 1.1,
               ),
+              textAlignVertical: TextAlignVertical.top,
             ),
-          ],
-        ),
-        SizedBox(
-          height: 8.w,
-        ),
-        Expanded(
-          child: TextField(
-            minLines: 12,
-            maxLines: 25,
-            cursorColor: nicotrackBlack1,
-            decoration: InputDecoration(
-              filled: true,
-              hintText: '',
-              hintStyle: TextStyle(
-                fontSize: 15.sp,
-                fontFamily: circularBook,
-                color: Color(0xff454545).withOpacity(0.6),
-                height: 1.1,
-              ),
-              fillColor: Color(0xFFF2F2F2),
-              // Light gray background
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none, // removes outline
-              ),
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-            ),
-            style: TextStyle(
-              fontSize: 15.sp,
-              fontFamily: circularBook,
-              color: nicotrackBlack1,
-              height: 1.1,
-            ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 

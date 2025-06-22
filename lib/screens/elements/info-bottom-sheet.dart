@@ -153,6 +153,10 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                         SizedBox(
                           height: 34.w,
                         ),
+                        disclaimerSection(),
+                        SizedBox(
+                          height: 34.w,
+                        ),
                       ],
                     ),
                   ),
@@ -446,6 +450,210 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
         //     },
         //   ),
         // ),
+      ],
+    );
+  }
+
+  Widget disclaimerSection() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20.w),
+      padding: EdgeInsets.all(24.w),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24.r),
+        border: Border.all(
+          color: Color(0xFFE8E8E8),
+          width: 1.w,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.03),
+            blurRadius: 20,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          // Header with icon and title
+          Row(
+            children: [
+              Container(
+                width: 48.w,
+                height: 48.w,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: [
+                      nicotrackGreen.withOpacity(0.8),
+                      nicotrackGreen.withOpacity(0.6),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    "💡",
+                    style: TextStyle(fontSize: 24.sp),
+                  ),
+                ),
+              ),
+              SizedBox(width: 14.w),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Important Note",
+                      style: TextStyle(
+                        fontSize: 17.sp,
+                        fontFamily: circularBold,
+                        color: nicotrackBlack1,
+                        height: 1.1,
+                      ),
+                    ),
+                    SizedBox(height: 2.h),
+                    Text(
+                      "Individual experiences may vary",
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        fontFamily: circularBook,
+                        color: nicotrackBlack1.withOpacity(0.6),
+                        height: 1.1,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 20.h),
+          // Main disclaimer text
+          Container(
+            padding: EdgeInsets.all(18.w),
+            decoration: BoxDecoration(
+              color: Color(0xFFF8F9FA),
+              borderRadius: BorderRadius.circular(16.r),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 28.w,
+                      height: 28.w,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: nicotracklightBlue.withOpacity(0.2),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "ℹ️",
+                          style: TextStyle(fontSize: 14.sp),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 12.w),
+                    Expanded(
+                      child: Text(
+                        "These symptoms and effects on your body are approximations based on common experiences. They may vary from person to person. Everyone's quit journey is unique!",
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          fontFamily: circularBook,
+                          height: 1.4,
+                          color: nicotrackBlack1.withOpacity(0.8),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16.h),
+                // Feature highlights
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _buildFeatureItem("🎯", "Personalized", nicotrackOrange),
+                    _buildFeatureItem("📊", "Evidence-based", nicotracklightBlue),
+                    _buildFeatureItem("💪", "Supportive", Color(0xFF6BB02A)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 16.h),
+          // Motivational message
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  nicotrackGreen.withOpacity(0.1),
+                  nicotrackGreen.withOpacity(0.05),
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+              borderRadius: BorderRadius.circular(20.r),
+              border: Border.all(
+                color: nicotrackGreen.withOpacity(0.2),
+                width: 1.w,
+              ),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("✨", style: TextStyle(fontSize: 16.sp)),
+                    SizedBox(width: 6.w),
+                    Text("✨", style: TextStyle(fontSize: 16.sp)),
+                  ],
+                ),
+                SizedBox(height: 4.h),
+                Text(
+                  "Your journey is unique and valuable",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 13.sp,
+                    fontFamily: circularMedium,
+                    color: Color(0xFF6BB02A),
+                    height: 1.3,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFeatureItem(String emoji, String text, Color color) {
+    return Column(
+      children: [
+        Container(
+          width: 36.w,
+          height: 36.w,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: color.withOpacity(0.15),
+          ),
+          child: Center(
+            child: Text(emoji, style: TextStyle(fontSize: 18.sp)),
+          ),
+        ),
+        SizedBox(height: 6.h),
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: 10.sp,
+            fontFamily: circularMedium,
+            color: color,
+            height: 1.1,
+          ),
+        ),
       ],
     );
   }

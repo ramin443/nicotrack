@@ -10,6 +10,8 @@ import 'package:intl/intl.dart';
 import 'package:nicotrack/constants/quick-function-constants.dart';
 import 'package:nicotrack/screens/home/did-you-smoke/didyousmoke-main-slider.dart';
 import 'package:nicotrack/screens/home/mood/mood-main-slider.dart';
+import 'package:nicotrack/screens/mood/mood-detail-screen.dart';
+import 'package:nicotrack/screens/smoking/smoking-detail-screen.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 import '../constants/color-constants.dart';
@@ -428,6 +430,12 @@ class HomeController extends GetxController {
                       currentDateTime: currentSelectedDateTime,
                     );
                   }));
+                } else {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return SmokingDetailScreen(
+                        selectedDate: currentSelectedDateTime);
+                  }));
                 }
               },
               child: dailyTaskBox(
@@ -451,6 +459,12 @@ class HomeController extends GetxController {
                       .push(MaterialPageRoute(builder: (context) {
                     return MoodMainSlider(
                         currentDateTime: currentSelectedDateTime);
+                  }));
+                } else {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return MoodDetailScreen(
+                        selectedDate: currentSelectedDateTime);
                   }));
                 }
               },

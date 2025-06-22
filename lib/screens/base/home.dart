@@ -37,8 +37,9 @@ class _HomeState extends State<Home> {
                   Builder(builder: (context) {
                     String fullName =
                         homeController.currentDateOnboardingData.name;
-                    String firstName =
-                        fullName.substring(0, fullName.indexOf(" "));
+                    String firstName = fullName.contains(" ") 
+                        ? fullName.substring(0, fullName.indexOf(" "))
+                        : fullName;
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
