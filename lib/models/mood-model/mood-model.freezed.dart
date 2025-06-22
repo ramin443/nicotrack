@@ -21,9 +21,11 @@ MoodModel _$MoodModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$MoodModel {
   Map<String, dynamic> get selfFeeling => throw _privateConstructorUsedError;
-  Map<String, dynamic> get moodAffecting => throw _privateConstructorUsedError;
+  List<Map<String, dynamic>> get moodAffecting =>
+      throw _privateConstructorUsedError;
   int get anyCravingToday => throw _privateConstructorUsedError;
-  Map<String, dynamic> get craveTiming => throw _privateConstructorUsedError;
+  List<Map<String, dynamic>> get craveTiming =>
+      throw _privateConstructorUsedError;
   String get reflectionNote => throw _privateConstructorUsedError;
 
   /// Serializes this MoodModel to a JSON map.
@@ -43,9 +45,9 @@ abstract class $MoodModelCopyWith<$Res> {
   @useResult
   $Res call(
       {Map<String, dynamic> selfFeeling,
-      Map<String, dynamic> moodAffecting,
+      List<Map<String, dynamic>> moodAffecting,
       int anyCravingToday,
-      Map<String, dynamic> craveTiming,
+      List<Map<String, dynamic>> craveTiming,
       String reflectionNote});
 }
 
@@ -78,7 +80,7 @@ class _$MoodModelCopyWithImpl<$Res, $Val extends MoodModel>
       moodAffecting: null == moodAffecting
           ? _value.moodAffecting
           : moodAffecting // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as List<Map<String, dynamic>>,
       anyCravingToday: null == anyCravingToday
           ? _value.anyCravingToday
           : anyCravingToday // ignore: cast_nullable_to_non_nullable
@@ -86,7 +88,7 @@ class _$MoodModelCopyWithImpl<$Res, $Val extends MoodModel>
       craveTiming: null == craveTiming
           ? _value.craveTiming
           : craveTiming // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as List<Map<String, dynamic>>,
       reflectionNote: null == reflectionNote
           ? _value.reflectionNote
           : reflectionNote // ignore: cast_nullable_to_non_nullable
@@ -105,9 +107,9 @@ abstract class _$$MoodModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {Map<String, dynamic> selfFeeling,
-      Map<String, dynamic> moodAffecting,
+      List<Map<String, dynamic>> moodAffecting,
       int anyCravingToday,
-      Map<String, dynamic> craveTiming,
+      List<Map<String, dynamic>> craveTiming,
       String reflectionNote});
 }
 
@@ -138,7 +140,7 @@ class __$$MoodModelImplCopyWithImpl<$Res>
       moodAffecting: null == moodAffecting
           ? _value._moodAffecting
           : moodAffecting // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as List<Map<String, dynamic>>,
       anyCravingToday: null == anyCravingToday
           ? _value.anyCravingToday
           : anyCravingToday // ignore: cast_nullable_to_non_nullable
@@ -146,7 +148,7 @@ class __$$MoodModelImplCopyWithImpl<$Res>
       craveTiming: null == craveTiming
           ? _value._craveTiming
           : craveTiming // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as List<Map<String, dynamic>>,
       reflectionNote: null == reflectionNote
           ? _value.reflectionNote
           : reflectionNote // ignore: cast_nullable_to_non_nullable
@@ -160,9 +162,9 @@ class __$$MoodModelImplCopyWithImpl<$Res>
 class _$MoodModelImpl implements _MoodModel {
   _$MoodModelImpl(
       {final Map<String, dynamic> selfFeeling = const {},
-      final Map<String, dynamic> moodAffecting = const {},
+      final List<Map<String, dynamic>> moodAffecting = const [],
       this.anyCravingToday = -1,
-      final Map<String, dynamic> craveTiming = const {},
+      final List<Map<String, dynamic>> craveTiming = const [],
       this.reflectionNote = ""})
       : _selfFeeling = selfFeeling,
         _moodAffecting = moodAffecting,
@@ -180,25 +182,25 @@ class _$MoodModelImpl implements _MoodModel {
     return EqualUnmodifiableMapView(_selfFeeling);
   }
 
-  final Map<String, dynamic> _moodAffecting;
+  final List<Map<String, dynamic>> _moodAffecting;
   @override
   @JsonKey()
-  Map<String, dynamic> get moodAffecting {
-    if (_moodAffecting is EqualUnmodifiableMapView) return _moodAffecting;
+  List<Map<String, dynamic>> get moodAffecting {
+    if (_moodAffecting is EqualUnmodifiableListView) return _moodAffecting;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_moodAffecting);
+    return EqualUnmodifiableListView(_moodAffecting);
   }
 
   @override
   @JsonKey()
   final int anyCravingToday;
-  final Map<String, dynamic> _craveTiming;
+  final List<Map<String, dynamic>> _craveTiming;
   @override
   @JsonKey()
-  Map<String, dynamic> get craveTiming {
-    if (_craveTiming is EqualUnmodifiableMapView) return _craveTiming;
+  List<Map<String, dynamic>> get craveTiming {
+    if (_craveTiming is EqualUnmodifiableListView) return _craveTiming;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_craveTiming);
+    return EqualUnmodifiableListView(_craveTiming);
   }
 
   @override
@@ -256,9 +258,9 @@ class _$MoodModelImpl implements _MoodModel {
 abstract class _MoodModel implements MoodModel {
   factory _MoodModel(
       {final Map<String, dynamic> selfFeeling,
-      final Map<String, dynamic> moodAffecting,
+      final List<Map<String, dynamic>> moodAffecting,
       final int anyCravingToday,
-      final Map<String, dynamic> craveTiming,
+      final List<Map<String, dynamic>> craveTiming,
       final String reflectionNote}) = _$MoodModelImpl;
 
   factory _MoodModel.fromJson(Map<String, dynamic> json) =
@@ -267,11 +269,11 @@ abstract class _MoodModel implements MoodModel {
   @override
   Map<String, dynamic> get selfFeeling;
   @override
-  Map<String, dynamic> get moodAffecting;
+  List<Map<String, dynamic>> get moodAffecting;
   @override
   int get anyCravingToday;
   @override
-  Map<String, dynamic> get craveTiming;
+  List<Map<String, dynamic>> get craveTiming;
   @override
   String get reflectionNote;
 

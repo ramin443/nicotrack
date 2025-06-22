@@ -20,11 +20,25 @@ class MoodModelAdapter extends TypeAdapter<MoodModel> {
       return <String, dynamic>{}; // Default to empty map if type is wrong or data is missing
     }
 
+    // Helper to safely cast to List<Map<String, dynamic>> with backward compatibility
+    List<Map<String, dynamic>> _castListOrConvertMap(dynamic data) {
+      if (data is List) {
+        // New format: already a list
+        return data.map((item) => 
+          item is Map ? Map<String, dynamic>.from(item) : <String, dynamic>{}
+        ).toList();
+      } else if (data is Map && data.isNotEmpty) {
+        // Old format: single map, convert to list
+        return [Map<String, dynamic>.from(data)];
+      }
+      return <Map<String, dynamic>>[]; // Default to empty list
+    }
+
     return MoodModel(
       selfFeeling: _castMap(fields[0]),
-      moodAffecting: _castMap(fields[1]),
+      moodAffecting: _castListOrConvertMap(fields[1]),
       anyCravingToday: fields[2] as int? ?? -1,
-      craveTiming: _castMap(fields[3]),
+      craveTiming: _castListOrConvertMap(fields[3]),
       reflectionNote: fields[4] as String? ?? "",
     );
   }

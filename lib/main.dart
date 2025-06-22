@@ -23,6 +23,7 @@ import 'package:nicotrack/models/financial-goals-model/financialGoals-model.dart
 import 'package:nicotrack/models/notifications-preferences-model/notificationsPreferences-model.dart';
 import 'package:nicotrack/services/notification-service.dart';
 import 'package:timezone/data/latest.dart' as tz;
+import 'package:nicotrack/screens/home/did-you-smoke/pages/no-selected/congratulatory-page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

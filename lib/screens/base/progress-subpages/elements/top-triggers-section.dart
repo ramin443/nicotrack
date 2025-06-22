@@ -91,11 +91,13 @@ class _TopTriggersSectionState extends State<TopTriggersSection> {
       for (String key in moodBox.keys.cast<String>()) {
         final moodData = moodBox.get(key);
         if (moodData != null && moodData.craveTiming.isNotEmpty) {
-          String triggerText = moodData.craveTiming['text'] ?? 'Unknown';
-          String triggerEmoji = moodData.craveTiming['emoji'] ?? othersEmoji;
-          
-          triggerCounts[triggerText] = (triggerCounts[triggerText] ?? 0) + 1;
-          triggerEmojis[triggerText] = triggerEmoji;
+          for (Map<String, dynamic> craving in moodData.craveTiming) {
+            String triggerText = craving['text'] ?? 'Unknown';
+            String triggerEmoji = craving['emoji'] ?? othersEmoji;
+            
+            triggerCounts[triggerText] = (triggerCounts[triggerText] ?? 0) + 1;
+            triggerEmojis[triggerText] = triggerEmoji;
+          }
         }
       }
     } catch (e) {

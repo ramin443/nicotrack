@@ -9,9 +9,9 @@ class MoodModel with _$MoodModel {
   // Define a factory constructor with required fields
   factory MoodModel({
     @Default({}) Map<String, dynamic> selfFeeling,
-    @Default({}) Map<String, dynamic> moodAffecting,
+    @Default([]) List<Map<String, dynamic>> moodAffecting,
     @Default(-1) int anyCravingToday,
-    @Default({}) Map<String, dynamic> craveTiming,
+    @Default([]) List<Map<String, dynamic>> craveTiming,
     @Default("") String reflectionNote,
   }) = _MoodModel;
 

@@ -14,9 +14,8 @@ import '../constants/color-constants.dart';
 import '../constants/font-constants.dart';
 import '../screens/elements/textAutoSize.dart';
 import 'package:intl/intl.dart';
-import 'package:nicotrack/models/mood-model/mood-model.dart';
 import 'package:hive/hive.dart';
-import 'package:nicotrack/screens/base/base.dart';
+import 'package:nicotrack/screens/mood/mood-detail-screen.dart';
 
 class MoodController extends GetxController {
   final PageController pageController = PageController();
@@ -50,7 +49,7 @@ class MoodController extends GetxController {
   ];
 
   //Mood Affecting variables
-  int selectedMoodAffectingIndex = -1;
+  Set<int> selectedMoodAffectingIndices = <int>{};
   List<EmojiTextModel> moodAffectingPairs = [
     EmojiTextModel(emoji: workstressImg, text: "Work Stress"),
     EmojiTextModel(emoji: heartbreakImg, text: "Relationship"),
@@ -71,7 +70,7 @@ class MoodController extends GetxController {
   ];
 
   //When did you crave variables
-  int selectedCraveTimesIndex = -1;
+  Set<int> selectedCraveTimesIndices = <int>{};
   List<EmojiTextModel> craveTimesPairs = [
     EmojiTextModel(emoji: coffeeEmoji, text: "Morning with coffee"),
     EmojiTextModel(emoji: platesEmoji, text: "After meals"),
@@ -210,17 +209,26 @@ class MoodController extends GetxController {
             childAspectRatio: 1, // Adjusts box shape
           ),
           itemBuilder: (context, index) {
-            bool isSelected = selectedMoodAffectingIndex == index;
+            bool isSelected = selectedMoodAffectingIndices.contains(index);
 
             return GestureDetector(
               onTap: () {
                 HapticFeedback.mediumImpact();
-                if (selectedMoodAffectingIndex == index) {
+                if (selectedMoodAffectingIndices.contains(index)) {
+                  // Deselect if already selected
+                  selectedMoodAffectingIndices.remove(index);
                 } else {
-                  selectedMoodAffectingIndex = index;
-                  moodFilledData = moodFilledData.copyWith(
-                      moodAffecting: moodAffectingPairs[index].toJson());
+                  // Select if not selected
+                  selectedMoodAffectingIndices.add(index);
                 }
+                
+                // Update moodFilledData with all selected items
+                List<Map<String, dynamic>> selectedItems = selectedMoodAffectingIndices
+                    .map((i) => moodAffectingPairs[i].toJson())
+                    .toList();
+                moodFilledData = moodFilledData.copyWith(
+                    moodAffecting: selectedItems);
+                
                 getCurrentPageStatus();
               },
               child: AnimatedContainer(
@@ -350,17 +358,26 @@ class MoodController extends GetxController {
             childAspectRatio: 1, // Adjusts box shape
           ),
           itemBuilder: (context, index) {
-            bool isSelected = selectedCraveTimesIndex == index;
+            bool isSelected = selectedCraveTimesIndices.contains(index);
 
             return GestureDetector(
               onTap: () {
                 HapticFeedback.mediumImpact();
-                if (selectedCraveTimesIndex == index) {
+                if (selectedCraveTimesIndices.contains(index)) {
+                  // Deselect if already selected
+                  selectedCraveTimesIndices.remove(index);
                 } else {
-                  selectedCraveTimesIndex = index;
-                  moodFilledData = moodFilledData.copyWith(
-                      craveTiming: craveTimesPairs[index].toJson());
+                  // Select if not selected
+                  selectedCraveTimesIndices.add(index);
                 }
+                
+                // Update moodFilledData with all selected items
+                List<Map<String, dynamic>> selectedItems = selectedCraveTimesIndices
+                    .map((i) => craveTimesPairs[i].toJson())
+                    .toList();
+                moodFilledData = moodFilledData.copyWith(
+                    craveTiming: selectedItems);
+                
                 getCurrentPageStatus();
               },
               child: AnimatedContainer(
@@ -568,7 +585,10 @@ class MoodController extends GetxController {
       // Good practice: check if the widget is still in the tree
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => const Base(),
+            builder: (context) => MoodDetailScreen(
+              selectedDate: currentDateTime,
+              routeSource: MoodDetailRouteSource.afterMoodCompletion,
+            ),
           ),
           (route) => false);
     }

@@ -464,7 +464,8 @@ class HomeController extends GetxController {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
                     return MoodDetailScreen(
-                        selectedDate: currentSelectedDateTime);
+                        selectedDate: currentSelectedDateTime,
+                        routeSource: MoodDetailRouteSource.fromHome);
                   }));
                 }
               },

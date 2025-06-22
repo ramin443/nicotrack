@@ -10,7 +10,11 @@
       "Bash(flutter pub run build_runner build:*)",
       "Bash(ls:*)",
       "Bash(flutter doctor:*)",
-      "Bash(flutter clean:*)"
+      "Bash(flutter clean:*)",
+      "Bash(flutter analyze:*)",
+      "Bash(flutter build:*)",
+      "Bash(dart analyze:*)",
+      "Bash(dart run build_runner build:*)"
     ],
     "deny": []
   }

@@ -7,6 +7,7 @@ import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/constants/font-constants.dart';
 import 'package:nicotrack/models/did-you-smoke/didyouSmoke-model.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
+import 'package:nicotrack/screens/base/home.dart';
 
 class SmokingDetailScreen extends StatefulWidget {
   final DateTime selectedDate;
@@ -45,7 +46,15 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String formattedDate = DateFormat('EEEE, MMMM d, y').format(widget.selectedDate);
+    // Format date with smart labels like mood detail screen
+    String dateDisplay;
+    if (widget.selectedDate.isToday) {
+      dateDisplay = "Today";
+    } else if (widget.selectedDate.isYesterday) {
+      dateDisplay = "Yesterday";
+    } else {
+      dateDisplay = DateFormat('d. MMM yyyy').format(widget.selectedDate);
+    }
     
     return Scaffold(
       backgroundColor: Colors.white,
@@ -54,12 +63,9 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
           physics: BouncingScrollPhysics(),
           child: Column(
             children: [
-              // Header Section
-              _buildHeader(formattedDate),
-              
               if (isLoading)
                 Container(
-                  height: 200.h,
+                  height: MediaQuery.of(context).size.height,
                   child: Center(
                     child: CircularProgressIndicator(
                       color: nicotrackGreen,
@@ -67,11 +73,9 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
                   ),
                 )
               else if (smokingData == null)
-                _buildNoDataSection()
+                _buildNoDataSection(dateDisplay)
               else
-                _buildSmokingDataSection(),
-                
-              SizedBox(height: 24.h),
+                _buildSmokingContent(dateDisplay),
             ],
           ),
         ),
@@ -79,198 +83,207 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
     );
   }
 
-  Widget _buildHeader(String formattedDate) {
+  Widget _buildSmokingContent(String dateDisplay) {
+    bool didSmoke = smokingData!.hasSmokedToday == 0;
+    String smokingEmoji = didSmoke ? "🚬" : "🚭";
+    String smokingStatus = didSmoke ? "Smoked Today" : "Smoke-Free Day";
+    
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+      padding: EdgeInsets.symmetric(vertical: 0.w, horizontal: 20.w),
       child: Column(
         children: [
-          Row(
-            children: [
-              GestureDetector(
-                onTap: () => Get.back(),
-                child: Container(
-                  width: 44.w,
-                  height: 44.w,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.06),
-                        blurRadius: 8,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: nicotrackBlack1,
-                    size: 20.sp,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Center(
-                  child: Column(
-                    children: [
-                      TextAutoSize(
-                        "🚭 Smoking Status",
-                        style: TextStyle(
-                          fontSize: 20.sp,
-                          fontFamily: circularBold,
-                          color: nicotrackBlack1,
-                          height: 1.1,
-                        ),
-                      ),
-                      SizedBox(height: 4.h),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
-                        decoration: BoxDecoration(
-                          color: nicotrackOrange.withOpacity(0.15),
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
-                        child: TextAutoSize(
-                          "Daily Report",
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            fontFamily: circularMedium,
-                            color: nicotrackOrange,
-                            height: 1.1,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(width: 44.w), // Balance the back button
-            ],
-          ),
-          SizedBox(height: 24.h),
+          // Header with date and close button (similar to mood detail)
+          _buildHeader(dateDisplay),
+          
+          SizedBox(height: 18.w),
+          
+          // Main smoking status with large emoji
           Container(
-            width: double.infinity,
-            padding: EdgeInsets.all(24.w),
+            width: 150.w,
+            height: 150.w,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  nicotrackOrange.withOpacity(0.08),
-                  nicotrackOrange.withOpacity(0.04),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(24.r),
-              border: Border.all(
-                color: nicotrackOrange.withOpacity(0.15),
-                width: 1.w,
-              ),
+              shape: BoxShape.circle,
+              color: Color(0x192196F3),
             ),
-            child: Column(
-              children: [
-                Container(
-                  width: 76.w,
-                  height: 76.w,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: [
-                        nicotrackOrange.withOpacity(0.3),
-                        nicotrackOrange.withOpacity(0.2),
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: nicotrackOrange.withOpacity(0.1),
-                        blurRadius: 8,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Text(
-                      "🚭",
-                      style: TextStyle(fontSize: 36.sp),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16.h),
-                TextAutoSize(
-                  formattedDate,
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontFamily: circularBold,
-                    color: nicotrackBlack1,
-                    height: 1.2,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 4.h),
-                TextAutoSize(
-                  "Your smoking activity for this day",
-                  style: TextStyle(
-                    fontSize: 13.sp,
-                    fontFamily: circularBook,
-                    color: nicotrackBlack1.withOpacity(0.6),
-                    height: 1.3,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
+            child: Center(
+              child: Text(
+                smokingEmoji,
+                style: TextStyle(fontSize: 86.w),
+              ),
             ),
           ),
+          SizedBox(height: 12.w),
+          
+          // Smoking status text
+          TextAutoSize(
+            smokingStatus,
+            style: TextStyle(
+              fontSize: 28.sp,
+              fontFamily: circularBold,
+              color: nicotrackBlack1,
+            ),
+          ),
+          SizedBox(height: 25.w),
+          
+          // Sections based on smoking status
+          if (didSmoke) ...[
+            // Number of cigarettes section
+            if (smokingData!.howManyCigs != -1) ...[
+              TextAutoSize(
+                "Number of cigarettes smoked",
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontFamily: circularBook,
+                  color: nicotrackBlack1.withOpacity(0.6),
+                ),
+              ),
+              SizedBox(height: 14.h),
+              _buildCigaretteCountSection(),
+              SizedBox(height: 32.w),
+            ],
+            
+            // Triggers section
+            if (smokingData!.whatTriggerred.isNotEmpty) ...[
+              TextAutoSize(
+                "What triggered smoking",
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontFamily: circularBook,
+                  color: nicotrackBlack1.withOpacity(0.6),
+                ),
+              ),
+              SizedBox(height: 14.w),
+              _buildMultipleItemsGrid(smokingData!.whatTriggerred),
+              SizedBox(height: 32.w),
+            ],
+            
+            // Feelings section
+            if (smokingData!.howYouFeel.isNotEmpty) ...[
+              TextAutoSize(
+                "How you felt after smoking",
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontFamily: circularBook,
+                  color: nicotrackBlack1.withOpacity(0.6),
+                ),
+              ),
+              SizedBox(height: 14.w),
+              _buildMultipleItemsGrid(smokingData!.howYouFeel),
+              SizedBox(height: 32.w),
+            ],
+            
+            // Avoidance strategies section
+            if (smokingData!.avoidNext.isNotEmpty) ...[
+              TextAutoSize(
+                "Strategies to avoid next time",
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontFamily: circularBook,
+                  color: nicotrackBlack1.withOpacity(0.6),
+                ),
+              ),
+              SizedBox(height: 14.w),
+              _buildMultipleItemsGrid(smokingData!.avoidNext),
+              SizedBox(height: 32.w),
+            ],
+            
+            // Quit date decision section
+            if (smokingData!.updateQuitDate != -1) ...[
+              TextAutoSize(
+                "Quit date decision",
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontFamily: circularBook,
+                  color: nicotrackBlack1.withOpacity(0.6),
+                ),
+              ),
+              SizedBox(height: 14.w),
+              _buildQuitDateSection(),
+              SizedBox(height: 32.w),
+            ],
+          ] else ...[
+            // Smoke-free message
+            TextAutoSize(
+              "Congratulations on staying smoke-free today! Keep up the great work on your journey to better health.",
+              style: TextStyle(
+                fontSize: 15.sp,
+                fontFamily: circularBook,
+                color: nicotrackBlack1.withOpacity(0.7),
+                height: 1.5,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 32.w),
+          ],
+          
+          SizedBox(height: 60.w),
         ],
       ),
     );
   }
 
-  Widget _buildNoDataSection() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20.w),
-      padding: EdgeInsets.all(32.w),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Color(0xFFF8F9FA),
-            Color(0xFFF1F3F4),
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-        borderRadius: BorderRadius.circular(28.r),
-        border: Border.all(
-          color: nicotrackLightGrey.withOpacity(0.3),
-          width: 1.w,
+  Widget _buildHeader(String dateDisplay) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      surfaceTintColor: Colors.transparent,
+      elevation: 0,
+      centerTitle: true,
+      automaticallyImplyLeading: false,
+      title: TextAutoSize(
+        dateDisplay,
+        style: TextStyle(
+          fontSize: 18.sp,
+          fontFamily: circularMedium,
+          color: nicotrackRed,
         ),
       ),
-      child: Column(
-        children: [
-          Container(
-            width: 88.w,
-            height: 88.w,
+      actions: [
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: Container(
+            width: 36.w,
+            height: 36.w,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              gradient: LinearGradient(
-                colors: [
-                  nicotrackLightGrey.withOpacity(0.2),
-                  nicotrackLightGrey.withOpacity(0.1),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+              color: nicotrackRed.withOpacity(0.1),
+            ),
+            child: Center(
+              child: Icon(
+                Icons.close,
+                color: nicotrackRed,
+                size: 20.sp,
               ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.04),
-                  blurRadius: 8,
-                  offset: Offset(0, 2),
-                ),
-              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildNoDataSection(String dateDisplay) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 0.w, horizontal: 20.w),
+      child: Column(
+        children: [
+          // Header
+          _buildHeader(dateDisplay),
+          
+          SizedBox(height: 100.h),
+          
+          // No data content similar to mood detail screen
+          Container(
+            width: 120.w,
+            height: 120.w,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Color(0x192196F3),
             ),
             child: Center(
               child: Text(
-                "📊",
-                style: TextStyle(fontSize: 44.sp),
+                "📝",
+                style: TextStyle(fontSize: 56.sp),
               ),
             ),
           ),
@@ -278,687 +291,238 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
           TextAutoSize(
             "No Smoking Data",
             style: TextStyle(
-              fontSize: 20.sp,
+              fontSize: 24.sp,
               fontFamily: circularBold,
               color: nicotrackBlack1,
-              height: 1.1,
             ),
           ),
           SizedBox(height: 8.h),
           TextAutoSize(
-            "No smoking status was recorded for this date. Track your daily progress to build healthy habits.",
+            "No smoking status was recorded for this date",
             style: TextStyle(
               fontSize: 14.sp,
               fontFamily: circularBook,
               color: nicotrackBlack1.withOpacity(0.6),
-              height: 1.5,
             ),
             textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 20.h),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-            decoration: BoxDecoration(
-              color: nicotrackOrange.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(16.r),
-              border: Border.all(
-                color: nicotrackOrange.withOpacity(0.2),
-                width: 1.w,
-              ),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text("💪", style: TextStyle(fontSize: 16.sp)),
-                SizedBox(width: 8.w),
-                TextAutoSize(
-                  "Track daily for better insights",
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontFamily: circularMedium,
-                    color: nicotrackOrange,
-                    height: 1.1,
-                  ),
-                ),
-              ],
-            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildSmokingDataSection() {
-    bool didSmoke = smokingData!.hasSmokedToday == 0;
+  Widget _buildCigaretteCountSection() {
+    return Container(
+      width: 150.w,
+      padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 24.w),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(
+          color: Color(0xFFE8EAED),
+          width: 1.w,
+        ),
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
+            children: [
+              Text(
+                smokingData!.howManyCigs.toString(),
+                style: TextStyle(
+                  fontSize: 42.sp,
+                  fontFamily: circularBold,
+                  color: nicotrackRed,
+                  height: 1.0,
+                ),
+              ),
+              SizedBox(width: 8.w),
+              Text(
+                smokingData!.howManyCigs == 1 ? "cigarette" : "cigarettes",
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontFamily: circularMedium,
+                  color: nicotrackBlack1,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuitDateSection() {
+    bool willUpdateQuitDate = smokingData!.updateQuitDate == 0;
+    
+    return Container(
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(
+          color: Color(0xFFE8EAED),
+          width: 1.w,
+        ),
+      ),
+      child: Column(
+        children: [
+          Text(
+            willUpdateQuitDate ? "🔄" : "📌",
+            style: TextStyle(fontSize: 32.sp),
+          ),
+          SizedBox(height: 8.h),
+          TextAutoSize(
+            willUpdateQuitDate ? "Reset Quit Date" : "Keep Current Quit Date",
+            style: TextStyle(
+              fontSize: 16.sp,
+              fontFamily: circularBold,
+              color: nicotrackBlack1,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 4.h),
+          TextAutoSize(
+            willUpdateQuitDate 
+              ? "Decided to start fresh with new quit date"
+              : "Kept the original quit date for streak calculation",
+            style: TextStyle(
+              fontSize: 12.sp,
+              fontFamily: circularBook,
+              color: nicotrackBlack1.withOpacity(0.6),
+              height: 1.3,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMultipleItemsGrid(List<Map<String, dynamic>> items) {
+    final pages = _chunkItems(items, 2); // 2 items per scroll "page"
+    final showIndicator = pages.length > 1;
     
     return Column(
       children: [
-        // Smoking Status Card
-        _buildSmokingStatusCard(didSmoke),
-        
-        // Additional data only shown if user smoked
-        if (didSmoke) ...[
-          // Number of cigarettes
-          if (smokingData!.howManyCigs != -1)
-            _buildCigaretteCountCard(),
-            
-          // Triggers
-          if (smokingData!.whatTriggerred.isNotEmpty)
-            _buildListCard(
-              title: "What Triggered Smoking",
-              emoji: "⚡",
-              items: smokingData!.whatTriggerred,
-              color: nicotrackRed,
-            ),
-            
-          // Feelings
-          if (smokingData!.howYouFeel.isNotEmpty)
-            _buildListCard(
-              title: "How I Felt",
-              emoji: "💭",
-              items: smokingData!.howYouFeel,
-              color: nicotrackPurple,
-            ),
-            
-          // Avoidance strategies
-          if (smokingData!.avoidNext.isNotEmpty)
-            _buildListCard(
-              title: "How to Avoid Next Time",
-              emoji: "🛡️",
-              items: smokingData!.avoidNext,
-              color: nicotrackGreen,
-            ),
-            
-          // Quit date update
-          if (smokingData!.updateQuitDate != -1)
-            _buildQuitDateCard(),
-        ]
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: pages.map((pageItems) {
+              return Container(
+                width: MediaQuery.sizeOf(context).width - 40.w, // Account for padding
+                padding: EdgeInsets.symmetric(horizontal: 0.w),
+                child: GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, // 2 columns per page
+                    childAspectRatio: 1.5, // Fixed aspect ratio for consistent sizing
+                    crossAxisSpacing: 0.w,
+                    mainAxisSpacing: 0.h, // No vertical spacing since it's one row
+                  ),
+                  itemCount: pageItems.length,
+                  itemBuilder: (context, index) {
+                    final item = pageItems[index];
+                    return _buildInfoCard(
+                      icon: item['emoji'],
+                      text: item['text'] ?? '',
+                    );
+                  },
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+        if (showIndicator) ...[
+          SizedBox(height: 12.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(pages.length, (index) {
+              return Container(
+                margin: EdgeInsets.symmetric(horizontal: 3.w),
+                width: 6.w,
+                height: 6.w,
+                decoration: BoxDecoration(
+                  color: index == 0 ? Colors.black : Colors.black12,
+                  shape: BoxShape.circle,
+                ),
+              );
+            }),
+          ),
+        ],
       ],
     );
   }
 
-  Widget _buildSmokingStatusCard(bool didSmoke) {
-    Color cardColor = didSmoke ? nicotrackRed : nicotrackGreen;
-    String statusLabel = didSmoke ? "SMOKED" : "SMOKE-FREE";
-    
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24.r),
-        border: Border.all(
-          color: cardColor.withOpacity(0.15),
-          width: 1.5.w,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: cardColor.withOpacity(0.08),
-            blurRadius: 16,
-            offset: Offset(0, 4),
-          ),
-          BoxShadow(
-            color: Colors.black.withOpacity(0.02),
-            blurRadius: 8,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          // Header Section
-          Container(
-            padding: EdgeInsets.all(20.w),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  cardColor.withOpacity(0.06),
-                  cardColor.withOpacity(0.03),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(24.r),
-                topRight: Radius.circular(24.r),
-              ),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 52.w,
-                  height: 52.w,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: [
-                        cardColor.withOpacity(0.25),
-                        cardColor.withOpacity(0.15),
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: cardColor.withOpacity(0.1),
-                        blurRadius: 8,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Text(
-                      didSmoke ? "🚬" : "🚭",
-                      style: TextStyle(fontSize: 26.sp),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 16.w),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextAutoSize(
-                        "Smoking Status",
-                        style: TextStyle(
-                          fontSize: 17.sp,
-                          fontFamily: circularBold,
-                          color: nicotrackBlack1,
-                          height: 1.1,
-                        ),
-                      ),
-                      SizedBox(height: 4.h),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
-                        decoration: BoxDecoration(
-                          color: cardColor.withOpacity(0.15),
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        child: TextAutoSize(
-                          statusLabel,
-                          style: TextStyle(
-                            fontSize: 9.sp,
-                            fontFamily: circularBold,
-                            color: cardColor,
-                            height: 1.1,
-                            letterSpacing: 0.5,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          
-          // Content Section
-          Container(
-            padding: EdgeInsets.all(20.w),
-            child: Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(20.w),
-              decoration: BoxDecoration(
-                color: Color(0xFFFAFBFC),
-                borderRadius: BorderRadius.circular(16.r),
-                border: Border.all(
-                  color: Color(0xFFE8EAED),
-                  width: 1.w,
-                ),
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    width: 80.w,
-                    height: 80.w,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: cardColor.withOpacity(0.1),
-                          blurRadius: 12,
-                          offset: Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        didSmoke ? "🔴" : "🟢",
-                        style: TextStyle(fontSize: 40.sp),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 16.h),
-                  TextAutoSize(
-                    didSmoke ? "Smoked Today" : "Smoke-Free Day",
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                      fontFamily: circularBold,
-                      color: cardColor,
-                      height: 1.1,
-                    ),
-                  ),
-                  SizedBox(height: 6.h),
-                  TextAutoSize(
-                    didSmoke 
-                      ? "You recorded smoking activity today"
-                      : "Congratulations on staying smoke-free!",
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      fontFamily: circularBook,
-                      color: nicotrackBlack1.withOpacity(0.6),
-                      height: 1.3,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCigaretteCountCard() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24.r),
-        border: Border.all(
-          color: nicotrackOrange.withOpacity(0.15),
-          width: 1.5.w,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: nicotrackOrange.withOpacity(0.08),
-            blurRadius: 16,
-            offset: Offset(0, 4),
-          ),
-          BoxShadow(
-            color: Colors.black.withOpacity(0.02),
-            blurRadius: 8,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header Section
-          Container(
-            padding: EdgeInsets.all(20.w),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  nicotrackOrange.withOpacity(0.06),
-                  nicotrackOrange.withOpacity(0.03),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(24.r),
-                topRight: Radius.circular(24.r),
-              ),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 52.w,
-                  height: 52.w,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: [
-                        nicotrackOrange.withOpacity(0.25),
-                        nicotrackOrange.withOpacity(0.15),
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: nicotrackOrange.withOpacity(0.1),
-                        blurRadius: 8,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Text(
-                      "📊",
-                      style: TextStyle(fontSize: 26.sp),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 16.w),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextAutoSize(
-                        "Cigarette Count",
-                        style: TextStyle(
-                          fontSize: 17.sp,
-                          fontFamily: circularBold,
-                          color: nicotrackBlack1,
-                          height: 1.1,
-                        ),
-                      ),
-                      SizedBox(height: 4.h),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
-                        decoration: BoxDecoration(
-                          color: nicotrackOrange.withOpacity(0.15),
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        child: TextAutoSize(
-                          "QUANTITY",
-                          style: TextStyle(
-                            fontSize: 9.sp,
-                            fontFamily: circularBold,
-                            color: nicotrackOrange,
-                            height: 1.1,
-                            letterSpacing: 0.5,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          
-          // Content Section
-          Container(
-            padding: EdgeInsets.all(20.w),
-            child: Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(20.w),
-              decoration: BoxDecoration(
-                color: Color(0xFFFAFBFC),
-                borderRadius: BorderRadius.circular(16.r),
-                border: Border.all(
-                  color: Color(0xFFE8EAED),
-                  width: 1.w,
-                ),
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
-                    children: [
-                      Text(
-                        smokingData!.howManyCigs.toString(),
-                        style: TextStyle(
-                          fontSize: 48.sp,
-                          fontFamily: circularBold,
-                          color: nicotrackOrange,
-                          height: 1.0,
-                        ),
-                      ),
-                      SizedBox(width: 12.w),
-                      Text(
-                        smokingData!.howManyCigs == 1 ? "cigarette" : "cigarettes",
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontFamily: circularMedium,
-                          color: nicotrackBlack1,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 12.h),
-                  Row(
-                    children: [
-                      Container(
-                        width: 4.w,
-                        height: 4.w,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: nicotrackOrange,
-                        ),
-                      ),
-                      SizedBox(width: 8.w),
-                      TextAutoSize(
-                        "Recorded consumption for this day",
-                        style: TextStyle(
-                          fontSize: 11.sp,
-                          fontFamily: circularBook,
-                          color: nicotrackBlack1.withOpacity(0.5),
-                          height: 1.1,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildListCard({
-    required String title,
-    required String emoji,
-    required List<Map<String, dynamic>> items,
-    required Color color,
+  Widget _buildInfoCard({
+    required dynamic icon,
+    required String text,
   }) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
-      padding: EdgeInsets.all(20.w),
+      margin: EdgeInsets.only(right: 8.w),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20.r),
+        borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
-          color: color.withOpacity(0.2),
+          color: Color(0xFFE8EAED),
           width: 1.w,
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.02),
-            blurRadius: 10,
-            offset: Offset(0, 2),
-          ),
-        ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            children: [
-              Container(
-                width: 44.w,
-                height: 44.w,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: color.withOpacity(0.15),
+          icon.toString().startsWith('assets/')
+              ? Image.asset(
+                  icon,
+                  width: 32.w,
+                  height: 32.w,
+                  fit: BoxFit.cover,
+                )
+              : Text(
+                  icon,
+                  style: TextStyle(fontSize: 28.sp),
                 ),
-                child: Center(
-                  child: Text(
-                    emoji,
-                    style: TextStyle(fontSize: 24.sp),
-                  ),
-                ),
-              ),
-              SizedBox(width: 12.w),
-              Expanded(
-                child: TextAutoSize(
-                  title,
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontFamily: circularBold,
-                    color: nicotrackBlack1,
-                    height: 1.1,
-                  ),
-                ),
-              ),
-            ],
+          SizedBox(height: 10.w),
+          TextAutoSize(
+            text,
+            style: TextStyle(
+              height: 1.2,
+              fontSize: 14.sp,
+              fontFamily: circularMedium,
+              color: nicotrackBlack1,
+            ),
+            textAlign: TextAlign.center,
           ),
-          SizedBox(height: 16.h),
-          ...items.map((item) => Container(
-            margin: EdgeInsets.only(bottom: 8.h),
-            padding: EdgeInsets.all(12.w),
-            decoration: BoxDecoration(
-              color: color.withOpacity(0.08),
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            child: Row(
-              children: [
-                if (item['emoji'] != null) ...[
-                  Container(
-                    width: 32.w,
-                    height: 32.w,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.04),
-                          blurRadius: 6,
-                          offset: Offset(0, 1),
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: item['emoji'].toString().startsWith('assets/')
-                          ? Image.asset(
-                              item['emoji'],
-                              width: 20.w,
-                              height: 20.w,
-                              fit: BoxFit.cover,
-                            )
-                          : Text(
-                              item['emoji'],
-                              style: TextStyle(fontSize: 18.sp),
-                            ),
-                    ),
-                  ),
-                  SizedBox(width: 12.w),
-                ],
-                Expanded(
-                  child: TextAutoSize(
-                    item['text'] ?? 'No description',
-                    style: TextStyle(
-                      fontSize: 13.sp,
-                      fontFamily: circularMedium,
-                      color: nicotrackBlack1,
-                      height: 1.3,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )).toList(),
         ],
       ),
     );
   }
 
-  Widget _buildQuitDateCard() {
-    bool willUpdateQuitDate = smokingData!.updateQuitDate == 0;
-    
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
-      padding: EdgeInsets.all(20.w),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20.r),
-        border: Border.all(
-          color: willUpdateQuitDate ? nicotrackPurple.withOpacity(0.2) : nicotrackGreen.withOpacity(0.2),
-          width: 1.w,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.02),
-            blurRadius: 10,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 44.w,
-                height: 44.w,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: willUpdateQuitDate ? nicotrackPurple.withOpacity(0.15) : nicotrackGreen.withOpacity(0.15),
-                ),
-                child: Center(
-                  child: Text(
-                    "📅",
-                    style: TextStyle(fontSize: 24.sp),
-                  ),
-                ),
-              ),
-              SizedBox(width: 12.w),
-              Expanded(
-                child: TextAutoSize(
-                  "Quit Date Decision",
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontFamily: circularBold,
-                    color: nicotrackBlack1,
-                    height: 1.1,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 16.h),
-          Container(
-            width: double.infinity,
-            padding: EdgeInsets.all(16.w),
-            decoration: BoxDecoration(
-              color: willUpdateQuitDate ? nicotrackPurple.withOpacity(0.08) : nicotrackGreen.withOpacity(0.08),
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            child: Column(
-              children: [
-                Text(
-                  willUpdateQuitDate ? "🔄" : "📌",
-                  style: TextStyle(fontSize: 24.sp),
-                ),
-                SizedBox(height: 8.h),
-                TextAutoSize(
-                  willUpdateQuitDate ? "Reset Quit Date" : "Keep Current Quit Date",
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontFamily: circularBold,
-                    color: willUpdateQuitDate ? nicotrackPurple : nicotrackGreen,
-                    height: 1.1,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 4.h),
-                TextAutoSize(
-                  willUpdateQuitDate 
-                    ? "Decided to start fresh with new quit date"
-                    : "Kept the original quit date for streak calculation",
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontFamily: circularBook,
-                    color: nicotrackBlack1.withOpacity(0.7),
-                    height: 1.3,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+  List<List<Map<String, dynamic>>> _chunkItems(
+      List<Map<String, dynamic>> items, int chunkSize) {
+    List<List<Map<String, dynamic>>> chunks = [];
+    for (var i = 0; i < items.length; i += chunkSize) {
+      chunks.add(items.sublist(i, (i + chunkSize).clamp(0, items.length)));
+    }
+    return chunks;
   }
 }
+
+// Extension to check if date is today or yesterday
+extension DateTimeExtension on DateTime {
+  bool get isToday {
+    final now = DateTime.now();
+    return year == now.year && month == now.month && day == now.day;
+  }
+  
+  bool get isYesterday {
+    final yesterday = DateTime.now().subtract(Duration(days: 1));
+    return year == yesterday.year && month == yesterday.month && day == yesterday.day;
+  }
+}
+

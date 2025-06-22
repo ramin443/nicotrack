@@ -10,6 +10,7 @@ import 'package:nicotrack/screens/home/did-you-smoke/pages/next-avoid.dart';
 import 'package:nicotrack/screens/home/did-you-smoke/pages/smoked-today.dart';
 import 'package:nicotrack/screens/home/did-you-smoke/pages/update-quit-date.dart';
 import 'package:nicotrack/screens/home/did-you-smoke/pages/what-triggered.dart';
+import 'package:nicotrack/screens/home/did-you-smoke/pages/no-selected/congratulatory-page.dart';
 import '../constants/color-constants.dart';
 import '../constants/font-constants.dart';
 import '../constants/image-constants.dart';
@@ -24,6 +25,8 @@ class DidYouSmokeController extends GetxController {
   final PageController pageController = PageController();
   int currentPage = 0;
   DidYouSmokeModel didYouSmokeFilledData = DidYouSmokeModel();
+  
+  // All pages are for smoking flow only
   List<Widget> pages = [
     SmokedToday(),
     HowManyToday(),
@@ -83,7 +86,11 @@ class DidYouSmokeController extends GetxController {
       onTap: () {
         if (currentPageDoneStatus) {
           HapticFeedback.mediumImpact();
-          if (currentPage == (pages.length - 1)) {
+          
+          // If on first page and user selected smoke-free, navigate directly to congratulations
+          if (currentPage == 0 && !smokedToday) {
+            navigateToCongratsPage(currentDateTime, context);
+          } else if (currentPage == (pages.length - 1)) {
             addDatatoHiveandNavigate(currentDateTime, context);
           } else {
             nextPage();
@@ -125,7 +132,11 @@ class DidYouSmokeController extends GetxController {
     return Column(
       children: [
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            // Save smoke-free data and navigate to home
+            DateTime currentDateTime = DateTime.now();
+            addDatatoHiveandNavigate(currentDateTime, Get.context!);
+          },
           child: Stack(
             alignment: Alignment.center,
             children: [
@@ -266,8 +277,15 @@ class DidYouSmokeController extends GetxController {
                     onTap: () {
                       HapticFeedback.heavyImpact();
                       smokedToday = false;
-                      didYouSmokeFilledData =
-                          didYouSmokeFilledData.copyWith(hasSmokedToday: 1);
+                      didYouSmokeFilledData = didYouSmokeFilledData.copyWith(
+                        hasSmokedToday: 1,
+                        // Set empty/default values for smoking-related fields
+                        howManyCigs: 0,
+                        whatTriggerred: [],
+                        howYouFeel: [],
+                        avoidNext: [],
+                        updateQuitDate: 1, // Keep current quit date
+                      );
                       getCurrentPageStatus();
                     },
                     child: Container(
@@ -866,6 +884,8 @@ class DidYouSmokeController extends GetxController {
 
   void getCurrentPageStatus() {
     print("FIlled data is ${didYouSmokeFilledData.toJson()}");
+    
+    // Standard flow for all pages
     switch (currentPage) {
       case 0:
         if (didYouSmokeFilledData.hasSmokedToday != -1) {
@@ -909,12 +929,29 @@ class DidYouSmokeController extends GetxController {
     update();
   }
 
+  void navigateToCongratsPage(DateTime currentDateTime, BuildContext context) async {
+    // Save smoke-free data to Hive
+    String didYouSmokeStringToday = DateFormat.yMMMd()
+        .format(currentDateTime);
+    final box = Hive.box<DidYouSmokeModel>('didYouSmokeData');
+    await box.put(didYouSmokeStringToday, didYouSmokeFilledData);
+    print("Saving smoke-free data: $didYouSmokeStringToday with data $didYouSmokeFilledData");
+    
+    if (context.mounted) {
+      // Navigate to congratulations page
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => NoSmokeCongratsPage(),
+        ),
+      );
+    }
+  }
+
   void addDatatoHiveandNavigate(DateTime currentDateTime, BuildContext context) async {
     String didYouSmokeStringToday = DateFormat.yMMMd()
         .format(currentDateTime);
     final box = Hive.box<DidYouSmokeModel>('didYouSmokeData');
     await box.put(didYouSmokeStringToday, didYouSmokeFilledData);
-    print("Putting the data here $didYouSmokeStringToday with data $didYouSmokeFilledData");
     if (context.mounted) {
       // Good practice: check if the widget is still in the tree
       Navigator.of(context).pushAndRemoveUntil(
