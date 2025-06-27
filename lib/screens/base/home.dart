@@ -21,7 +21,12 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
         init: HomeController(),
-        initState: (v) {},
+        initState: (state) {
+          // Refresh data when the widget is initialized
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Get.find<HomeController>().resetHomeGridValues();
+          });
+        },
         builder: (homeController) {
           return Scaffold(
             backgroundColor: Colors.white,

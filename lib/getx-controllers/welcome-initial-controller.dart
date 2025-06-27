@@ -5,6 +5,7 @@ import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/initial/welcome-info/slide-pages/crush-cravings.dart';
 import 'package:nicotrack/initial/welcome-info/slide-pages/quit-plan.dart';
 import 'package:nicotrack/initial/welcome-info/slide-pages/stay-motivated.dart';
+import 'package:nicotrack/initial/onboarding-questions/onboarding-main-slider.dart';
 
 import '../initial/welcome-info/slide-pages/track-milestones.dart';
 
@@ -34,8 +35,15 @@ class WelcomeInitialController extends GetxController {
       );
     } else {
       // Handle the case when reaching the last page (e.g., navigate to the main screen)
-      print("Onboarding complete!");
+      print("Info slider complete!");
     }
+  }
+
+  void navigateToOnboarding(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => OnboardingMainSlider()),
+    );
   }
 
   Widget mainDisplay() {

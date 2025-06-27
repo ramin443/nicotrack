@@ -5,6 +5,9 @@ import 'package:nicotrack/getx-controllers/did-you-smoke-controller.dart';
 import '../../../../constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
 import '../../../elements/textAutoSize.dart';
+import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
+import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 
 class UpdateQuitDate extends StatefulWidget {
   const UpdateQuitDate({super.key});
@@ -14,6 +17,19 @@ class UpdateQuitDate extends StatefulWidget {
 }
 
 class _UpdateQuitDateState extends State<UpdateQuitDate> {
+  String getActualQuitDate() {
+    final box = Hive.box<OnboardingData>('onboardingCompletedData');
+    OnboardingData? userOnboardingData = box.get('currentUserOnboarding');
+    
+    if (userOnboardingData != null && userOnboardingData.lastSmokedDate != "") {
+      DateTime parsedDate = DateTime.parse(userOnboardingData.lastSmokedDate);
+      return DateFormat('MMMM d, yyyy').format(parsedDate);
+    }
+    
+    // Fallback to current date if no data found
+    return DateFormat('MMMM d, yyyy').format(DateTime.now());
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DidYouSmokeController>(
@@ -55,7 +71,7 @@ class _UpdateQuitDateState extends State<UpdateQuitDate> {
                           fontFamily: circularBook,
                           color: Color(0xff979797))),
                   TextSpan(
-                      text: "April 7, 2025",
+                      text: getActualQuitDate(),
                       style: TextStyle(
                           height: 1.15,
                           fontSize: 13.sp,

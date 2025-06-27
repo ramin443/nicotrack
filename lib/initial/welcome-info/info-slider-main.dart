@@ -54,25 +54,30 @@ class _InfoSliderMainState extends State<InfoSliderMain> {
                             SizedBox(
                               height: 30.h,
                             ),
-                            Container(
-                              width: 346.w,
-                              height: 54.h,
-                              margin: EdgeInsets.symmetric(vertical: 24.w),
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                      fullButtonBg), // Load from assets
-                                  fit: BoxFit
-                                      .cover, // Adjusts how the image fits the container
+                            GestureDetector(
+                              onTap: () {
+                                welcomeInitialController.navigateToOnboarding(context);
+                              },
+                              child: Container(
+                                width: 346.w,
+                                height: 54.h,
+                                margin: EdgeInsets.symmetric(vertical: 24.w),
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        fullButtonBg), // Load from assets
+                                    fit: BoxFit
+                                        .cover, // Adjusts how the image fits the container
+                                  ),
                                 ),
-                              ),
-                              child: Center(
-                                child: TextAutoSize(
-                                  "Get Started",
-                                  style: TextStyle(
-                                      fontSize: 18.sp,
-                                      fontFamily: circularBold,
-                                      color: nicotrackBlack1),
+                                child: Center(
+                                  child: TextAutoSize(
+                                    "Get Started",
+                                    style: TextStyle(
+                                        fontSize: 18.sp,
+                                        fontFamily: circularBold,
+                                        color: nicotrackBlack1),
+                                  ),
                                 ),
                               ),
                             ),
@@ -111,14 +116,19 @@ class _InfoSliderMainState extends State<InfoSliderMain> {
                                 ),
                               ),
                             ),
-                            TextAutoSize(
-                              "Skip",
-                              style: TextStyle(
-                                  fontSize: 18.sp,
-                                  decoration: TextDecoration.underline,
-                                  // Underline the text
-                                  fontFamily: circularMedium,
-                                  color: nicotrackBlack1),
+                            GestureDetector(
+                              onTap: () {
+                                welcomeInitialController.navigateToOnboarding(context);
+                              },
+                              child: TextAutoSize(
+                                "Skip",
+                                style: TextStyle(
+                                    fontSize: 18.sp,
+                                    decoration: TextDecoration.underline,
+                                    // Underline the text
+                                    fontFamily: circularMedium,
+                                    color: nicotrackBlack1),
+                              ),
                             ),
                             SizedBox(
                               height: 34.h,

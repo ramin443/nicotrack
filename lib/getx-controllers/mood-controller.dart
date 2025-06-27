@@ -235,10 +235,10 @@ class MoodController extends GetxController {
                 height: 176.w,
                 duration: Duration(milliseconds: 200),
                 decoration: BoxDecoration(
-                  color: isSelected ? nicotrackBlack1 : Colors.transparent,
+                  color: isSelected ? Colors.deepPurple.shade100 : Colors.transparent,
                   border: Border.all(
-                    color: isSelected ? nicotrackBlack1 : Color(0xffF0F0F0),
-                    width: 1.sp,
+                    color: isSelected ? Colors.deepPurple : Color(0xffF0F0F0),
+                    width: isSelected ? 2.sp : 1.sp,
                   ),
                   borderRadius: BorderRadius.circular(16),
                 ),
@@ -258,7 +258,7 @@ class MoodController extends GetxController {
                         style: TextStyle(
                             fontSize: 14.sp,
                             fontFamily: circularMedium,
-                            color: isSelected ? Colors.white : nicotrackBlack1),
+                            color: nicotrackBlack1),
                       ),
                     )
                   ],
@@ -299,8 +299,8 @@ class MoodController extends GetxController {
                       width: 298.w,
                       padding: EdgeInsets.symmetric(vertical: 22.w),
                       decoration: BoxDecoration(
-                          color:
-                              isSelected ? Colors.black87 : Color(0xffF4F4F4),
+                          color: isSelected ? Colors.deepPurple.shade100 : Color(0xffF4F4F4),
+                          border: isSelected ? Border.all(color: Colors.deepPurple, width: 2) : null,
                           borderRadius: BorderRadius.circular(16.r)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -324,9 +324,7 @@ class MoodController extends GetxController {
                                   fontSize: 18.sp,
                                   height: 1.2,
                                   fontFamily: circularMedium,
-                                  color: isSelected
-                                      ? Colors.white
-                                      : nicotrackBlack1),
+                                  color: nicotrackBlack1),
                             ),
                           ),
                         ],
@@ -384,10 +382,10 @@ class MoodController extends GetxController {
                 height: 176.w,
                 duration: Duration(milliseconds: 200),
                 decoration: BoxDecoration(
-                  color: isSelected ? nicotrackBlack1 : Colors.transparent,
+                  color: isSelected ? Colors.deepPurple.shade100 : Colors.transparent,
                   border: Border.all(
-                    color: isSelected ? nicotrackBlack1 : Color(0xffF0F0F0),
-                    width: 1.sp,
+                    color: isSelected ? Colors.deepPurple : Color(0xffF0F0F0),
+                    width: isSelected ? 2.sp : 1.sp,
                   ),
                   borderRadius: BorderRadius.circular(16),
                 ),
@@ -407,7 +405,7 @@ class MoodController extends GetxController {
                         style: TextStyle(
                             fontSize: 14.sp,
                             fontFamily: circularMedium,
-                            color: isSelected ? Colors.white : nicotrackBlack1),
+                            color: nicotrackBlack1),
                       ),
                     )
                   ],

@@ -46,11 +46,8 @@ class _LastSmokedState extends State<LastSmoked> {
                       color: nicotrackBlack1),
                 ),
               ),
-              Spacer(),
+              SizedBox(height: 60.h),
               onboardingController.getLastSmokedDate(),
-              Spacer(),
-              Spacer(),
-              Spacer(),
               Spacer(),
             ],
           );

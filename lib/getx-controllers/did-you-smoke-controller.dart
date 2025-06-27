@@ -20,6 +20,8 @@ import '../screens/elements/textAutoSize.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:nicotrack/screens/base/base.dart';
+import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
+import 'package:nicotrack/getx-controllers/home-controller.dart';
 
 class DidYouSmokeController extends GetxController {
   final PageController pageController = PageController();
@@ -414,10 +416,10 @@ class DidYouSmokeController extends GetxController {
                 height: 176.h,
                 duration: Duration(milliseconds: 200),
                 decoration: BoxDecoration(
-                  color: isSelected ? nicotrackBlack1 : Colors.transparent,
+                  color: isSelected ? Colors.deepPurple.shade100 : Colors.transparent,
                   border: Border.all(
-                    color: isSelected ? nicotrackBlack1 : Color(0xffF0F0F0),
-                    width: 1.sp,
+                    color: isSelected ? Colors.deepPurple : Color(0xffF0F0F0),
+                    width: isSelected ? 2.sp : 1.sp,
                   ),
                   borderRadius: BorderRadius.circular(16),
                 ),
@@ -437,7 +439,7 @@ class DidYouSmokeController extends GetxController {
                         style: TextStyle(
                             fontSize: 14.sp,
                             fontFamily: circularMedium,
-                            color: isSelected ? Colors.white : nicotrackBlack1),
+                            color: nicotrackBlack1),
                       ),
                     )
                   ],
@@ -488,10 +490,10 @@ class DidYouSmokeController extends GetxController {
                 height: 176.h,
                 duration: Duration(milliseconds: 200),
                 decoration: BoxDecoration(
-                  color: isSelected ? nicotrackBlack1 : Colors.transparent,
+                  color: isSelected ? Colors.deepPurple.shade100 : Colors.transparent,
                   border: Border.all(
-                    color: isSelected ? nicotrackBlack1 : Color(0xffF0F0F0),
-                    width: 1.sp,
+                    color: isSelected ? Colors.deepPurple : Color(0xffF0F0F0),
+                    width: isSelected ? 2.sp : 1.sp,
                   ),
                   borderRadius: BorderRadius.circular(16),
                 ),
@@ -512,7 +514,7 @@ class DidYouSmokeController extends GetxController {
                             fontSize: 14.sp,
                             height: 1.1,
                             fontFamily: circularMedium,
-                            color: isSelected ? Colors.white : nicotrackBlack1),
+                            color: nicotrackBlack1),
                       ),
                     )
                   ],
@@ -563,10 +565,10 @@ class DidYouSmokeController extends GetxController {
                 height: 176.h,
                 duration: Duration(milliseconds: 200),
                 decoration: BoxDecoration(
-                  color: isSelected ? nicotrackBlack1 : Colors.transparent,
+                  color: isSelected ? Colors.deepPurple.shade100 : Colors.transparent,
                   border: Border.all(
-                    color: isSelected ? nicotrackBlack1 : Color(0xffF0F0F0),
-                    width: 1.sp,
+                    color: isSelected ? Colors.deepPurple : Color(0xffF0F0F0),
+                    width: isSelected ? 2.sp : 1.sp,
                   ),
                   borderRadius: BorderRadius.circular(16),
                 ),
@@ -587,7 +589,7 @@ class DidYouSmokeController extends GetxController {
                             fontSize: 14.sp,
                             height: 1.1,
                             fontFamily: circularMedium,
-                            color: isSelected ? Colors.white : nicotrackBlack1),
+                            color: nicotrackBlack1),
                       ),
                     )
                   ],
@@ -952,7 +954,31 @@ class DidYouSmokeController extends GetxController {
         .format(currentDateTime);
     final box = Hive.box<DidYouSmokeModel>('didYouSmokeData');
     await box.put(didYouSmokeStringToday, didYouSmokeFilledData);
+    
+    // If user chose to update their quit date (0 = Yes, update my quit date)
+    if (didYouSmokeFilledData.updateQuitDate == 0) {
+      // Update the last smoked date in onboarding data
+      final onboardingBox = Hive.box<OnboardingData>('onboardingCompletedData');
+      OnboardingData? userOnboardingData = onboardingBox.get('currentUserOnboarding');
+      
+      if (userOnboardingData != null) {
+        // Update the last smoked date to today's date
+        String newQuitDate = DateFormat('yyyy-MM-dd').format(currentDateTime);
+        OnboardingData updatedData = userOnboardingData.copyWith(lastSmokedDate: newQuitDate);
+        await onboardingBox.put('currentUserOnboarding', updatedData);
+        print("Updated quit date to: $newQuitDate");
+      }
+    }
+    
     if (context.mounted) {
+      // Force refresh home controller if quit date was updated
+      if (didYouSmokeFilledData.updateQuitDate == 0) {
+        // Get the home controller if it exists and refresh its data
+        if (Get.isRegistered<HomeController>()) {
+          Get.find<HomeController>().resetHomeGridValues();
+        }
+      }
+      
       // Good practice: check if the widget is still in the tree
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(

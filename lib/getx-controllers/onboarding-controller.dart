@@ -95,6 +95,10 @@ class OnboardingController extends GetxController {
   //Page 8 variables - Cigarette frequency
   int instantQuitSelected = 0;
 
+  //Page 1 variables - Last smoke date selection
+  int selectedLastSmokeOption = -1; // 0: Today, 1: Yesterday, 2: Custom
+  DateTime selectedCustomDate = DateTime.now();
+
 
 
   void goToNextPage(int page) {
@@ -175,23 +179,253 @@ class OnboardingController extends GetxController {
 
   Widget getLastSmokedDate() {
     return Builder(builder: (context) {
-      return SizedBox(
-        height: 240.h,
-        child: CupertinoDatePicker(
-          mode: CupertinoDatePickerMode.date,
-          initialDateTime: DateTime.now(),
-          maximumDate: DateTime.now(),
-          onDateTimeChanged: (DateTime newDateTime) {
-            String formattedDate = DateFormat('yyyy-MM-dd').format(newDateTime);
-            HapticFeedback.lightImpact();
-            onboardingFilledData =
-                onboardingFilledData.copyWith(lastSmokedDate: formattedDate);
-            getCurrentPageStatus();
-            // Handle the selected date
-          },
+      List<Map<String, dynamic>> options = [
+        {'text': 'Today', 'emoji': '📅'},
+        {'text': 'Yesterday', 'emoji': '⏮️'},
+        {'text': 'Custom date', 'emoji': '🗓️'},
+      ];
+
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        child: Column(
+          children: [
+            for (int i = 0; i < options.length; i++)
+              Column(
+                children: [
+                  GestureDetector(
+                    onTap: () async {
+                      HapticFeedback.mediumImpact();
+                      selectedLastSmokeOption = i;
+                      
+                      String formattedDate;
+                      if (i == 0) { // Today
+                        formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+                      } else if (i == 1) { // Yesterday
+                        formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now().subtract(Duration(days: 1)));
+                      } else { // Custom date
+                        DateTime? pickedDate = await _showCustomDatePicker(context);
+                        if (pickedDate != null) {
+                          selectedCustomDate = pickedDate;
+                          formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                        } else {
+                          selectedLastSmokeOption = -1;
+                          update();
+                          return;
+                        }
+                      }
+                      
+                      onboardingFilledData = onboardingFilledData.copyWith(lastSmokedDate: formattedDate);
+                      getCurrentPageStatus();
+                      update();
+                    },
+                    child: AnimatedContainer(
+                      duration: Duration(milliseconds: 200),
+                      width: double.infinity,
+                      height: 80.h,
+                      decoration: BoxDecoration(
+                        color: selectedLastSmokeOption == i 
+                            ? Colors.deepPurple.shade100 
+                            : Color(0xffF4F4F4),
+                        borderRadius: BorderRadius.circular(20.r),
+                        border: selectedLastSmokeOption == i
+                            ? Border.all(color: Colors.deepPurple, width: 2.5)
+                            : Border.all(color: Colors.grey.shade200, width: 1),
+                        boxShadow: selectedLastSmokeOption == i
+                            ? [
+                                BoxShadow(
+                                  color: Colors.deepPurple.withOpacity(0.15),
+                                  blurRadius: 8,
+                                  offset: Offset(0, 4),
+                                ),
+                              ]
+                            : [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.03),
+                                  blurRadius: 4,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 48.w,
+                              height: 48.w,
+                              decoration: BoxDecoration(
+                                color: selectedLastSmokeOption == i 
+                                    ? Colors.deepPurple.withOpacity(0.2)
+                                    : Colors.white,
+                                borderRadius: BorderRadius.circular(12.r),
+                                border: Border.all(
+                                  color: selectedLastSmokeOption == i 
+                                      ? Colors.deepPurple.withOpacity(0.3)
+                                      : Colors.grey.shade200,
+                                  width: 1,
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  options[i]['emoji'],
+                                  style: TextStyle(fontSize: 24.sp),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 20.w),
+                            Expanded(
+                              child: TextAutoSize(
+                                (i == 2 && selectedLastSmokeOption == 2) 
+                                    ? DateFormat('MMM dd, yyyy').format(selectedCustomDate)
+                                    : options[i]['text'],
+                                style: TextStyle(
+                                  fontSize: 20.sp,
+                                  fontFamily: circularMedium,
+                                  color: selectedLastSmokeOption == i 
+                                      ? Colors.deepPurple.shade700
+                                      : nicotrackBlack1,
+                                  fontWeight: selectedLastSmokeOption == i 
+                                      ? FontWeight.w600 
+                                      : FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            if (selectedLastSmokeOption == i)
+                              Container(
+                                width: 24.w,
+                                height: 24.w,
+                                decoration: BoxDecoration(
+                                  color: Colors.deepPurple,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  size: 16.sp,
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  if (i < options.length - 1) SizedBox(height: 12.h),
+                ],
+              ),
+          ],
         ),
       );
     });
+  }
+
+  Future<DateTime?> _showCustomDatePicker(BuildContext context) async {
+    DateTime? pickedDate;
+    
+    await showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+      ),
+      builder: (BuildContext context) {
+        return Container(
+          height: 350.h,
+          padding: EdgeInsets.all(20.w),
+          child: Column(
+            children: [
+              Container(
+                width: 40.w,
+                height: 4.h,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(2.r),
+                ),
+              ),
+              SizedBox(height: 20.h),
+              TextAutoSize(
+                "Select Date",
+                style: TextStyle(
+                  fontSize: 20.sp,
+                  fontFamily: circularMedium,
+                  color: nicotrackBlack1,
+                ),
+              ),
+              SizedBox(height: 20.h),
+              Expanded(
+                child: CupertinoDatePicker(
+                  mode: CupertinoDatePickerMode.date,
+                  initialDateTime: selectedCustomDate,
+                  maximumDate: DateTime.now(),
+                  onDateTimeChanged: (DateTime newDateTime) {
+                    HapticFeedback.lightImpact();
+                    pickedDate = newDateTime;
+                  },
+                ),
+              ),
+              SizedBox(height: 20.h),
+              Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: 50.h,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(25.r),
+                        ),
+                        child: Center(
+                          child: TextAutoSize(
+                            "Cancel",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontFamily: circularMedium,
+                              color: nicotrackBlack1,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 10.w),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        if (pickedDate == null) {
+                          pickedDate = selectedCustomDate;
+                        }
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: 50.h,
+                        decoration: BoxDecoration(
+                          color: nicotrackBlack1,
+                          borderRadius: BorderRadius.circular(25.r),
+                        ),
+                        child: Center(
+                          child: TextAutoSize(
+                            "Confirm",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontFamily: circularMedium,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+    
+    return pickedDate;
   }
 
   Widget cigarreteFrequencyScroll() {
@@ -312,8 +546,13 @@ class OnboardingController extends GetxController {
                 height: 176.h,
                 duration: Duration(milliseconds: 200),
                 decoration: BoxDecoration(
-                  color: isSelected ? nicotrackBlack1 : Colors.grey.shade100,
+                  color: isSelected
+                      ? Colors.deepPurple.shade100
+                      : Colors.grey.shade100,
                   borderRadius: BorderRadius.circular(16),
+                  border: isSelected
+                      ? Border.all(color: Colors.deepPurple, width: 2)
+                      : null,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -331,7 +570,7 @@ class OnboardingController extends GetxController {
                         style: TextStyle(
                             fontSize: 14.sp,
                             fontFamily: circularMedium,
-                            color: isSelected ? Colors.white : nicotrackBlack1),
+                            color: nicotrackBlack1),
                       ),
                     )
                   ],
@@ -815,7 +1054,7 @@ class OnboardingController extends GetxController {
   bool currentPageCompleted() {
     switch (currentPage) {
       case 0:
-        if (onboardingFilledData.lastSmokedDate != "") {
+        if (selectedLastSmokeOption != -1 && onboardingFilledData.lastSmokedDate != "") {
           return true;
         } else {
           return false;
@@ -870,7 +1109,7 @@ class OnboardingController extends GetxController {
   void getCurrentPageStatus() {
     switch (currentPage) {
       case 0:
-        if (onboardingFilledData.lastSmokedDate != "") {
+        if (selectedLastSmokeOption != -1 && onboardingFilledData.lastSmokedDate != "") {
           currentPageDoneStatus = true;
         } else {
           currentPageDoneStatus = false;

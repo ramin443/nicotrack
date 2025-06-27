@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/constants/font-constants.dart';
 import 'package:nicotrack/constants/image-constants.dart';
-import 'package:nicotrack/initial/onboarding-questions/onboarding-main-slider.dart';
+import 'package:nicotrack/initial/welcome-info/info-slider-main.dart';
 import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
 import 'package:nicotrack/screens/base/base.dart';
 import 'package:page_transition/page_transition.dart';
@@ -90,7 +90,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushAndRemoveUntil(
           context,
           PageTransition(
-            child: const OnboardingMainSlider(),
+            child: const InfoSliderMain(),
             settings: const RouteSettings(name: 'exerciseBackdrop'),
             type: PageTransitionType.fade,
             duration: const Duration(milliseconds: 1500),
