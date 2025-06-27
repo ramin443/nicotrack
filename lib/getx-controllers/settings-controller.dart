@@ -3081,26 +3081,39 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       enableDrag: false,
       backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
-        return Container(
-          height: MediaQuery.of(context).size.height * 0.75,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(40.r),
-              topRight: Radius.circular(40.r),
-            ),
+        return AnimatedPadding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
-          child: GetBuilder<SettingsController>(
-            builder: (controller) {
-              return SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: 24.w,
-                    right: 24.w,
-                    top: 20.h,
-                    bottom: MediaQuery.of(context).viewInsets.bottom + 24.h,
-                  ),
+          duration: Duration(milliseconds: 100),
+          child: Container(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.75,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(40.r),
+                topRight: Radius.circular(40.r),
+              ),
+            ),
+            child: GetBuilder<SettingsController>(
+              builder: (controller) {
+                return LayoutBuilder(
+                  builder: (context, constraints) {
+                    return SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: constraints.minHeight,
+                        ),
+                        child: Padding(
+                    padding: EdgeInsets.only(
+                      left: 24.w,
+                      right: 24.w,
+                      top: 20.h,
+                      bottom: 24.h,
+                    ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -3384,6 +3397,17 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                           controller: controller.confirmationTextController,
                           onChanged: controller.validateConfirmationText,
                           textAlign: TextAlign.center,
+                          autofocus: false,
+                          onTap: () {
+                            // Ensure text field is visible when tapped
+                            Future.delayed(Duration(milliseconds: 300), () {
+                              Scrollable.ensureVisible(
+                                context,
+                                duration: Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                              );
+                            });
+                          },
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontFamily: circularMedium,
@@ -3491,9 +3515,13 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                       SizedBox(height: 20.h),
                     ],
                   ),
-                ),
-              );
-            },
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
           ),
         );
       },

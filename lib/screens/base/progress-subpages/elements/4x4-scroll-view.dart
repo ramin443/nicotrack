@@ -107,7 +107,7 @@ class _FourxFourScrollViewState extends State<FourxFourScrollView> {
                                       children: [
                                         SizedBox(
                                           // color: Colors.grey,
-                                          width: 120.w,
+                                          width: 140.w,
                                           child: TextAutoSize(
                                             feeling,
                                             style: TextStyle(
