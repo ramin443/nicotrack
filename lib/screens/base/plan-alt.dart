@@ -519,20 +519,6 @@ class _PlanAltState extends State<PlanAlt> {
                     )
                   ],
                 )),
-                planController.isBottomSheetOn
-                    ? GestureDetector(
-                        onTap: () {
-                          planController.setBottomSheetOff();
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          decoration: BoxDecoration(color: Colors.black54),
-                        ),
-                      )
-                    : SizedBox(
-                        height: 0,
-                      )
               ],
             ),
             floatingActionButton: _showFloatingButton
