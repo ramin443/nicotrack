@@ -33,10 +33,20 @@ import 'package:nicotrack/services/notification-service.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:nicotrack/models/financial-goals-model/financialGoals-model.dart';
 import '../screens/base/settings-subpages/bottom-sheets/view-edit-goal.dart';
+import '../screens/base/settings-subpages/bottom-sheets/privacy-policy.dart';
+import '../screens/base/settings-subpages/bottom-sheets/terms-of-use.dart';
+import 'package:nicotrack/models/mood-model/mood-model.dart';
+import 'package:nicotrack/models/did-you-smoke/didyouSmoke-model.dart';
+import 'package:nicotrack/models/quick-actions-model/quickActions-model.dart';
+import 'package:nicotrack/initial/welcome-info/info-slider-main.dart';
 
 class SettingsController extends GetxController with WidgetsBindingObserver {
   bool enablePushNotification = false;
   bool isdailyReminderExpanded = false;
+  
+  // Clear data confirmation variables
+  TextEditingController confirmationTextController = TextEditingController();
+  bool isConfirmationValid = false;
   bool isweeklyReminderExpanded = false;
   bool isquitTipsExpanded = false;
   final PageController financialGoalsScrollController =
@@ -465,7 +475,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     );
   }
 
-  Widget privacySection() {
+  Widget privacySection(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 14.w),
       child: Column(
@@ -490,7 +500,9 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
             height: 18.w,
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              showPrivacyPolicyBottomSheet(context);
+            },
             child: Container(
               width: double.infinity,
               padding: EdgeInsets.only(
@@ -520,7 +532,41 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
             height: 8.w,
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              showTermsOfUseBottomSheet(context);
+            },
+            child: Container(
+              width: double.infinity,
+              padding: EdgeInsets.only(
+                  top: 18.w, bottom: 18.w, left: 21.w, right: 14.w),
+              decoration: BoxDecoration(
+                color: nicotrackPurple.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(18.r),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RichText(
+                      text: TextSpan(
+                          style: TextStyle(
+                              fontSize: 16.sp,
+                              // Adds 2 logical pixels between each letter
+                              fontFamily: circularMedium,
+                              color: nicotrackPurple),
+                          children: [
+                        TextSpan(text: '📜 Terms of Use'),
+                      ])),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 8.w,
+          ),
+          GestureDetector(
+            onTap: () {
+              showClearDataConfirmation(context);
+            },
             child: Container(
               width: double.infinity,
               padding: EdgeInsets.only(
@@ -2963,5 +3009,520 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       update();
     }
   }
+
+  void validateConfirmationText(String text) {
+    isConfirmationValid = text.toLowerCase() == "clear my data";
+    update();
+  }
+
+  Future<void> clearAllUserData() async {
+    try {
+      // Cancel all scheduled notifications first
+      final notificationService = NotificationService();
+      await notificationService.cancelAllNotifications();
+      
+      // Clear all Hive database boxes
+      
+      // 1. Clear onboarding data
+      final onboardingBox = Hive.box<OnboardingData>('onboardingCompletedData');
+      await onboardingBox.clear();
+      
+      // 2. Clear mood tracking data
+      final moodBox = Hive.box<MoodModel>('moodData');
+      await moodBox.clear();
+      
+      // 3. Clear smoking tracking data
+      final smokeBox = Hive.box<DidYouSmokeModel>('didYouSmokeData');
+      await smokeBox.clear();
+      
+      // 4. Clear quick actions data
+      final quickActionsBox = Hive.box<QuickactionsModel>('quickActionsData');
+      await quickActionsBox.clear();
+      
+      // 5. Clear financial goals data
+      final financialGoalsBox = Hive.box<FinancialGoalsModel>('financialGoalsData');
+      await financialGoalsBox.clear();
+      
+      // 6. Clear notification preferences data
+      final notificationsBox = Hive.box<NotificationsPreferencesModel>('notificationsPreferencesData');
+      await notificationsBox.clear();
+      
+      // Reset controller state
+      enablePushNotification = false;
+      isdailyReminderExpanded = false;
+      isweeklyReminderExpanded = false;
+      isquitTipsExpanded = false;
+      currentPage = 0;
+      
+      // Reset confirmation state
+      confirmationTextController.clear();
+      isConfirmationValid = false;
+      
+      // Update the controller to reflect changes
+      update();
+      
+      print("All user data has been successfully cleared");
+      
+    } catch (e) {
+      print("Error clearing user data: $e");
+      // In production, you might want to show an error dialog to the user
+    }
+  }
+
+  void showClearDataConfirmation(BuildContext context) {
+    // Reset confirmation state
+    confirmationTextController.clear();
+    isConfirmationValid = false;
+    update();
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: false,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.75,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(40.r),
+              topRight: Radius.circular(40.r),
+            ),
+          ),
+          child: GetBuilder<SettingsController>(
+            builder: (controller) {
+              return SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: 24.w,
+                    right: 24.w,
+                    top: 20.h,
+                    bottom: MediaQuery.of(context).viewInsets.bottom + 24.h,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // Drag handle
+                      Container(
+                        width: 52.w,
+                        height: 5.h,
+                        decoration: BoxDecoration(
+                          color: nicotrackBlack1,
+                          borderRadius: BorderRadius.circular(24.r),
+                        ),
+                      ),
+                      
+                      // Close button
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Container(
+                              height: 36.w,
+                              width: 36.w,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xffFF611D).withOpacity(0.20),
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  Icons.close,
+                                  color: Color(0xffFF611D),
+                                  size: 18.sp,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 8.h),
+                      
+                      // Warning emoji circle
+                      Text('‼️',
+                            style: TextStyle(fontSize: 48.sp),
+                          ),
+
+                      SizedBox(height: 16.h),
+                      
+                      // Title
+                      Text(
+                        "Clear All Data",
+                        style: TextStyle(
+                          fontSize: 22.sp,
+                          fontFamily: circularBold,
+                          color: nicotrackBlack1,
+                          height: 1.1,
+                        ),
+                      ),
+                      SizedBox(height: 8.h),
+                      
+                      // Warning badge
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
+                        decoration: BoxDecoration(
+                          color: Color(0xffFF611D).withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(20.r),
+                        ),
+                        child: Text(
+                          "Destructive Action",
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontFamily: circularMedium,
+                            color: Color(0xffFF611D),
+                            height: 1.1,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 24.h),
+                      
+                      // Warning content box
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 0.w),
+                        padding: EdgeInsets.all(20.w),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF8F8F8),
+                          borderRadius: BorderRadius.circular(20.r),
+                        ),
+                        child: Column(
+                          children: [
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                style: TextStyle(
+                                  fontSize: 15.sp,
+                                  fontFamily: circularBook,
+                                  height: 1.4,
+                                  color: nicotrackBlack1,
+                                ),
+                                children: [
+                                  TextSpan(text: "This action "),
+                                  TextSpan(
+                                    text: "cannot be undone",
+                                    style: TextStyle(
+                                      fontFamily: circularBold,
+                                      color: Color(0xffFF611D),
+                                    ),
+                                  ),
+                                  TextSpan(text: " and will permanently delete all your "),
+                                  TextSpan(
+                                    text: "progress data",
+                                    style: TextStyle(
+                                      fontFamily: circularMedium,
+                                      color: nicotrackOrange,
+                                    ),
+                                  ),
+                                  TextSpan(text: ", mood records, smoking history, and personal settings."),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 20.h),
+                            
+                            // Data loss items
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Column(
+                                  children: [
+                                    Container(
+                                      width: 48.w,
+                                      height: 48.w,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Color(0xffFF611D).withOpacity(0.15),
+                                      ),
+                                      child: Center(
+                                        child: Text("📊", style: TextStyle(fontSize: 24.sp)),
+                                      ),
+                                    ),
+                                    SizedBox(height: 8.h),
+                                    Text(
+                                      "Progress Data",
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        fontFamily: circularMedium,
+                                        color: nicotrackBlack1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Container(
+                                      width: 48.w,
+                                      height: 48.w,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Color(0xffFF611D).withOpacity(0.15),
+                                      ),
+                                      child: Center(
+                                        child: Text("💭", style: TextStyle(fontSize: 24.sp)),
+                                      ),
+                                    ),
+                                    SizedBox(height: 8.h),
+                                    Text(
+                                      "Mood Records",
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        fontFamily: circularMedium,
+                                        color: nicotrackBlack1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Container(
+                                      width: 48.w,
+                                      height: 48.w,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Color(0xffFF611D).withOpacity(0.15),
+                                      ),
+                                      child: Center(
+                                        child: Text("⚙️", style: TextStyle(fontSize: 24.sp)),
+                                      ),
+                                    ),
+                                    SizedBox(height: 8.h),
+                                    Text(
+                                      "Settings",
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        fontFamily: circularMedium,
+                                        color: nicotrackBlack1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 24.h),
+                      
+                      // Confirmation instruction
+                      Container(
+                        padding: EdgeInsets.all(16.w),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16.r),
+                          border: Border.all(
+                            color: Color(0xFFE0E0E0),
+                            width: 1.w,
+                          ),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 32.w,
+                              height: 32.w,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: nicotrackOrange.withOpacity(0.2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "✋",
+                                  style: TextStyle(fontSize: 16.sp),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 12.w),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Confirmation Required",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontFamily: circularBold,
+                                      color: nicotrackBlack1,
+                                      height: 1.1,
+                                    ),
+                                  ),
+                                  SizedBox(height: 6.h),
+                                  Text(
+                                    "Type \"CLEAR MY DATA\" below to proceed with the deletion.",
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      fontFamily: circularBook,
+                                      height: 1.3,
+                                      color: nicotrackBlack1.withOpacity(0.7),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 16.h),
+                      
+                      // Confirmation text field
+                      Container(
+                        decoration: BoxDecoration(
+                          color: controller.isConfirmationValid 
+                              ? Color(0xffFF611D).withOpacity(0.1)
+                              : Color(0xFFF8F8F8),
+                          border: Border.all(
+                            color: controller.isConfirmationValid 
+                                ? Color(0xffFF611D)
+                                : Color(0xFFE0E0E0),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(16.r),
+                        ),
+                        child: TextField(
+                          controller: controller.confirmationTextController,
+                          onChanged: controller.validateConfirmationText,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontFamily: circularMedium,
+                            color: nicotrackBlack1,
+                          ),
+                          decoration: InputDecoration(
+                            hintText: "Type \"CLEAR MY DATA\"",
+                            hintStyle: TextStyle(
+                              fontSize: 14.sp,
+                              fontFamily: circularBook,
+                              color: Colors.grey.shade500,
+                            ),
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 20.w, 
+                              vertical: 18.h,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 28.h),
+                      
+                      // Action buttons
+                      Row(
+                        children: [
+                          // Cancel button
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                height: 54.h,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFF4F4F4),
+                                  borderRadius: BorderRadius.circular(27.r),
+                                  border: Border.all(
+                                    color: Color(0xFFE0E0E0),
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: TextAutoSize(
+                                    "Cancel",
+                                    style: TextStyle(
+                                      fontSize: 16.sp,
+                                      fontFamily: circularMedium,
+                                      color: nicotrackBlack1,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 16.w),
+                          
+                          // Clear data button
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: controller.isConfirmationValid ? () async {
+                                // Close the confirmation dialog first
+                                Navigator.pop(context);
+                                
+                                // Perform data clearing
+                                await controller.clearAllUserData();
+                                
+                                // Navigate to info screen and remove all previous routes
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const InfoSliderMain()),
+                                  (route) => false,
+                                );
+                              } : null,
+                              child: Container(
+                                height: 54.h,
+                                decoration: BoxDecoration(
+                                  color: controller.isConfirmationValid 
+                                      ? Color(0xffFF611D)
+                                      : Color(0xFFF4F4F4),
+                                  borderRadius: BorderRadius.circular(27.r),
+                                  border: Border.all(
+                                    color: controller.isConfirmationValid 
+                                        ? Color(0xffFF611D)
+                                        : Color(0xFFE0E0E0),
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: TextAutoSize(
+                                    "Clear All Data",
+                                    style: TextStyle(
+                                      fontSize: 16.sp,
+                                      fontFamily: circularMedium,
+                                      color: controller.isConfirmationValid 
+                                          ? Colors.white 
+                                          : Colors.grey.shade500,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20.h),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  void showPrivacyPolicyBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: false,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext context) {
+        return const PrivacyPolicyBottomSheet();
+      },
+    );
+  }
+
+  void showTermsOfUseBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: false,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext context) {
+        return const TermsOfUseBottomSheet();
+      },
+    );
+  }
   
 }
+  

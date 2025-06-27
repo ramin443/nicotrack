@@ -188,7 +188,7 @@ class HomeController extends GetxController {
         children: [
           mainCard(
             emoji: bicepsEmoji,
-            value: '24',
+            value: daysSinceLastSmoked.toString(),
             label: 'Days since\nlast smoked',
             backgroundColor: const Color(0xFFB0F0A1), // green-ish background
           ),
