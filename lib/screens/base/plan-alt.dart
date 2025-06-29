@@ -1,4 +1,5 @@
 import 'package:feather_icons/feather_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,43 @@ class PlanAlt extends StatefulWidget {
 
 class _PlanAltState extends State<PlanAlt> {
   bool _showFloatingButton = false;
+  bool _showCurrentPositionButton = true; // Start as visible
+  double _currentTimelinePosition = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    // Calculate initial position after the frame is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _calculateInitialPosition();
+    });
+  }
+
+  void _calculateInitialPosition() {
+    try {
+      final planController = Get.find<PlanController>();
+      final currentIndex = planController.getCurrentTimelineIndex();
+      
+      // Accurate calculation based on plan-alt.dart structure:
+      // Header section: SizedBox(12.h) + today date + SizedBox(8.h) + plan button stack + SizedBox(10.h) + 
+      // instant quit container + SizedBox(10.h) + info section + SizedBox(28.h) = ~580px
+      // Each timeline item: 
+      // - Day text (~20px) + SizedBox(9w) + icon stack (100w ≈ 100px) + SizedBox(5w) + gradient text (~20px)
+      // - Plus spacing: SizedBox(8w) + connector (20w) + SizedBox(8h) = ~160px per item
+      final headerHeight = 580.0;
+      final itemHeight = 160.0;
+      final targetPosition = headerHeight + (currentIndex * itemHeight);
+      
+      setState(() {
+        _currentTimelinePosition = targetPosition;
+      });
+    } catch (e) {
+      // Default position if calculation fails
+      setState(() {
+        _currentTimelinePosition = 580.0;
+      });
+    }
+  }
 
   void _scrollListener(ScrollController controller) {
     if (controller.offset > 200 && !_showFloatingButton) {
@@ -33,12 +71,66 @@ class _PlanAltState extends State<PlanAlt> {
         _showFloatingButton = false;
       });
     }
+    
+    // Check if user is viewing their current timeline position
+    _checkCurrentPositionVisibility(controller);
+  }
+  
+  void _checkCurrentPositionVisibility(ScrollController controller) {
+    try {
+      final planController = Get.find<PlanController>();
+      final currentIndex = planController.getCurrentTimelineIndex();
+      
+      // Use same calculation as initial position
+      final headerHeight = 580.0;
+      final itemHeight = 160.0;
+      final targetPosition = headerHeight + (currentIndex * itemHeight);
+      
+      _currentTimelinePosition = targetPosition;
+      
+      // Check if current position is visible on screen
+      final viewportHeight = MediaQuery.of(context).size.height;
+      final currentScrollOffset = controller.offset;
+      
+      // Create a buffer zone around the current position - the green dotted line area
+      final bufferZone = 80.0; // Larger buffer to account for the timeline item height
+      final isCurrentPositionVisible = (targetPosition >= (currentScrollOffset - bufferZone)) && 
+                                       (targetPosition <= (currentScrollOffset + viewportHeight + bufferZone));
+      
+      // Always show button unless we're viewing the current position
+      final shouldShowButton = !isCurrentPositionVisible;
+      
+      if (shouldShowButton != _showCurrentPositionButton) {
+        setState(() {
+          _showCurrentPositionButton = shouldShowButton;
+        });
+      }
+    } catch (e) {
+      // If controller not found, always show button
+      if (!_showCurrentPositionButton) {
+        setState(() {
+          _showCurrentPositionButton = true;
+        });
+      }
+    }
   }
 
   void _scrollToTop(ScrollController controller) {
     controller.animateTo(
       0,
       duration: Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
+  
+  void _scrollToCurrentPosition(ScrollController controller) {
+    // Calculate the viewport height to center the target position
+    final viewportHeight = MediaQuery.of(context).size.height;
+    final centeredPosition = _currentTimelinePosition - (viewportHeight / 2) + 80; // 80px offset for better centering
+    
+    controller.animateTo(
+      centeredPosition.clamp(0.0, controller.position.maxScrollExtent),
+      duration: Duration(milliseconds: 700),
       curve: Curves.easeInOut,
     );
   }
@@ -521,16 +613,61 @@ class _PlanAltState extends State<PlanAlt> {
                 )),
               ],
             ),
-            floatingActionButton: _showFloatingButton
-                ? FloatingActionButton(
-                    onPressed: () => _scrollToTop(planController.scrollController),
-                    backgroundColor: nicotrackBlack1,
-                    elevation: 8,
-                    child: Icon(
-                      Icons.keyboard_arrow_up,
-                      color: Colors.white,
-                      size: 28.w,
-                    ),
+            floatingActionButton: (_showFloatingButton || _showCurrentPositionButton)
+                ? Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      // Current position button (appears when not viewing current timeline position)
+                      AnimatedOpacity(
+                        opacity: _showCurrentPositionButton ? 1.0 : 0.0,
+                        duration: Duration(milliseconds: 300),
+                        child: AnimatedScale(
+                          scale: _showCurrentPositionButton ? 1.0 : 0.8,
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                          child: _showCurrentPositionButton
+                              ? FloatingActionButton(
+                                  onPressed: () => _scrollToCurrentPosition(planController.scrollController),
+                                  backgroundColor: nicotrackBlack1,
+                                  elevation: 8,
+                                  heroTag: "currentPosition",
+                                  child: Icon(
+                                    FeatherIcons.target,
+                                    color: Colors.white,
+                                    size: 22.w,
+                                  ),
+                                )
+                              : SizedBox.shrink(),
+                        ),
+                      ),
+                      // Add spacing only if both buttons are showing
+                      if (_showCurrentPositionButton && _showFloatingButton)
+                        SizedBox(width: 12.w),
+                      // Scroll to top button (appears when scrolled down)
+                      AnimatedOpacity(
+                        opacity: _showFloatingButton ? 1.0 : 0.0,
+                        duration: Duration(milliseconds: 300),
+                        child: AnimatedScale(
+                          scale: _showFloatingButton ? 1.0 : 0.8,
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                          child: _showFloatingButton
+                              ? FloatingActionButton(
+                                  onPressed: () => _scrollToTop(planController.scrollController),
+                                  backgroundColor: nicotrackBlack1,
+                                  elevation: 8,
+                                  heroTag: "scrollToTop",
+                                  child: Icon(
+                                    Icons.keyboard_arrow_up,
+                                    color: Colors.white,
+                                    size: 28.w,
+                                  ),
+                                )
+                              : SizedBox.shrink(),
+                        ),
+                      ),
+                    ],
                   )
                 : null,
           );

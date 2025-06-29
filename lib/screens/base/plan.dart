@@ -21,6 +21,8 @@ class Plan extends StatefulWidget {
 class _PlanState extends State<Plan> {
   final ScrollController _scrollController = ScrollController();
   bool _showFloatingButton = false;
+  bool _showCurrentPositionButton = false;
+  double _currentTimelinePosition = 0.0;
 
   @override
   void initState() {
@@ -45,12 +47,65 @@ class _PlanState extends State<Plan> {
         _showFloatingButton = false;
       });
     }
+    
+    // Check if user is viewing their current timeline position
+    _checkCurrentPositionVisibility();
+  }
+  
+  void _checkCurrentPositionVisibility() {
+    try {
+      final planController = Get.find<PlanController>();
+      final currentIndex = planController.getCurrentTimelineIndex();
+      
+      // Calculate approximate position of current timeline item
+      // Timeline starts after header content (approximately 520px) + (index * item height)
+      // Each timeline item is roughly 200px tall including spacing
+      final headerHeight = 520.0;
+      final itemHeight = 200.0;
+      final targetPosition = headerHeight + (currentIndex * itemHeight);
+      
+      _currentTimelinePosition = targetPosition;
+      
+      // Check if current position is visible on screen
+      final viewportHeight = MediaQuery.of(context).size.height;
+      final currentScrollOffset = _scrollController.offset;
+      
+      // Add buffer zone to make button appear earlier
+      final bufferZone = 100.0;
+      final isCurrentPositionVisible = (targetPosition >= (currentScrollOffset - bufferZone)) && 
+                                       (targetPosition <= (currentScrollOffset + viewportHeight + bufferZone));
+      
+      // Always show the button when scrolled past the header
+      final shouldShowButton = currentScrollOffset > 300.0 && !isCurrentPositionVisible;
+      
+      if (shouldShowButton != _showCurrentPositionButton) {
+        setState(() {
+          _showCurrentPositionButton = shouldShowButton;
+        });
+      }
+    } catch (e) {
+      // If controller not found, show button when scrolled down
+      final shouldShowButton = _scrollController.offset > 300.0;
+      if (shouldShowButton != _showCurrentPositionButton) {
+        setState(() {
+          _showCurrentPositionButton = shouldShowButton;
+        });
+      }
+    }
   }
 
   void _scrollToTop() {
     _scrollController.animateTo(
       0,
       duration: Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
+  
+  void _scrollToCurrentPosition() {
+    _scrollController.animateTo(
+      _currentTimelinePosition,
+      duration: Duration(milliseconds: 700),
       curve: Curves.easeInOut,
     );
   }
@@ -488,16 +543,40 @@ class _PlanState extends State<Plan> {
                 ),
               ),
             ),
-            floatingActionButton: _showFloatingButton
-                ? FloatingActionButton(
-                    onPressed: _scrollToTop,
-                    backgroundColor: nicotrackBlack1,
-                    elevation: 8,
-                    child: Icon(
-                      Icons.keyboard_arrow_up,
-                      color: Colors.white,
-                      size: 28.w,
-                    ),
+            floatingActionButton: (_showFloatingButton || _showCurrentPositionButton)
+                ? Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Current position button (appears when not viewing current timeline position)
+                      if (_showCurrentPositionButton)
+                        FloatingActionButton(
+                          onPressed: _scrollToCurrentPosition,
+                          backgroundColor: nicotrackPurple,
+                          elevation: 8,
+                          heroTag: "currentPosition",
+                          child: Icon(
+                            Icons.my_location,
+                            color: Colors.white,
+                            size: 24.w,
+                          ),
+                        ),
+                      // Add spacing only if both buttons are showing
+                      if (_showCurrentPositionButton && _showFloatingButton)
+                        SizedBox(height: 12.h),
+                      // Scroll to top button (appears when scrolled down)
+                      if (_showFloatingButton)
+                        FloatingActionButton(
+                          onPressed: _scrollToTop,
+                          backgroundColor: nicotrackBlack1,
+                          elevation: 8,
+                          heroTag: "scrollToTop",
+                          child: Icon(
+                            Icons.keyboard_arrow_up,
+                            color: Colors.white,
+                            size: 28.w,
+                          ),
+                        ),
+                    ],
                   )
                 : null,
           );
