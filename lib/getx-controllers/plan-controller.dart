@@ -25,58 +25,146 @@ class PlanController extends GetxController {
         dayNumber: 0,
         streakNumber: 0,
         dayDuration: "First 24 Hours",
-        whatHappens: "🫁 Carbon monoxide exits\n"
-            "🧠 Oxygen levels normalize\n"
-            "💓 Heart rate normalizes",
+        whatHappens: "💨 CO exits • 🧠 Oxygen normalizes • 💓 Heart rate drops",
         streakImg: ballImg),
     TimelineItemModel(
         dayNumber: 1,
         streakNumber: 1,
-        dayDuration: "Day 2-3",
-        whatHappens: "🧪 Nicotine exits the body\n"
-            "😖 Withdrawal symptoms\n"
-            "🌀 Cravings increase",
+        dayDuration: "Day 2",
+        whatHappens: "🧪 Nicotine drops 90% • 👃 Taste improves • 😰 Withdrawal starts",
         streakImg: ballImg),
     TimelineItemModel(
         dayNumber: 3,
         streakNumber: 3,
-        dayDuration: "Day 3-5",
-        whatHappens: "📈 Cravings peak\n"
-            "⬇️ Dopamine levels drop\n"
-            "😠 Irritability and fatigue",
+        dayDuration: "Day 3-4",
+        whatHappens: "🚫 Nicotine eliminated • 📈 Peak cravings • 🧠 Brain adjusts",
         streakImg: ballrollImg),
     TimelineItemModel(
         dayNumber: 5,
         streakNumber: 5,
-        dayDuration: "Day 5-10",
-        whatHappens: "🫁 Lung function improves\n"
-            "🤧 Coughing and mucus\n"
-            "🔥 Less frequent cravings",
+        dayDuration: "Day 5-7",
+        whatHappens: "🫁 Cilia moving • 🤧 Toxin removal • 💪 Peak withdrawal",
         streakImg: baseballImg),
     TimelineItemModel(
-        dayNumber: 10,
-        streakNumber: 10,
-        dayDuration: "Day 10-14",
-        whatHappens: "💪 Circulation improves\n"
-            "🤯 Withdrawal symptoms fade\n"
-            "🎯 Cravings more mental less physical",
+        dayNumber: 8,
+        streakNumber: 8,
+        dayDuration: "Week 1-2",
+        whatHappens: "🩸 Circulation +15% • 😮‍💨 Easier breathing • 🧠 Fog clears",
         streakImg: capImg),
     TimelineItemModel(
         dayNumber: 14,
         streakNumber: 14,
-        dayDuration: "Week 3-4",
-        whatHappens: "🧠 Brain starts reducing nicotine receptors\n"
-            "😊 Mood stabilizes\n"
-            "🔁 Fewer urges and rare cravings",
+        dayDuration: "2 Weeks",
+        whatHappens: "🫁 Lung function +5% • 🏃 Exercise easier • 😊 Mood stabilizes",
+        streakImg: medalImg),
+    TimelineItemModel(
+        dayNumber: 18,
+        streakNumber: 18,
+        dayDuration: "2.5 Weeks",
+        whatHappens: "🫁 Rapid cilia regrowth • 🌬️ Self-cleaning starts • 💪 Stamina up",
+        streakImg: teddyImg),
+    TimelineItemModel(
+        dayNumber: 21,
+        streakNumber: 21,
+        dayDuration: "3 Weeks",
+        whatHappens: "🧠 Receptors -50% • 😌 Less anxiety • 🔋 Energy boost",
         streakImg: celebrateImg),
     TimelineItemModel(
-        dayNumber: 30,
-        streakNumber: 30,
-        dayDuration: "1 Month",
-        whatHappens: "🫁 Lung function gains 30%\n"
-            "💓 Heart health improves\n"
-            "🏆 Huge milestone reached!",
+        dayNumber: 28,
+        streakNumber: 28,
+        dayDuration: "4 Weeks",
+        whatHappens: "🫁 Capacity +15% • 💓 BP stabilizes • 🎯 Cravings fade",
+        streakImg: crownImg),
+    TimelineItemModel(
+        dayNumber: 35,
+        streakNumber: 35,
+        dayDuration: "5 Weeks",
+        whatHappens: "🌬️ Infection risk drops • 🏃‍♂️ Cardio +20% • 😴 Better sleep",
         streakImg: chocolateImg),
+    TimelineItemModel(
+        dayNumber: 42,
+        streakNumber: 42,
+        dayDuration: "6 Weeks",
+        whatHappens: "👃 Sinuses clear • 💪 Strength up • ⚡ Energy doubles",
+        streakImg: trophyImg),
+    TimelineItemModel(
+        dayNumber: 50,
+        streakNumber: 50,
+        dayDuration: "7 Weeks",
+        whatHappens: "🫁 Function +25% • 🧠 Sharp focus • 🔥 Optimal metabolism",
+        streakImg: vacayImg),
+    TimelineItemModel(
+        dayNumber: 56,
+        streakNumber: 56,
+        dayDuration: "8 Weeks",
+        whatHappens: "🩸 Peak oxygen delivery • 💓 Heart +30% • 😊 Mood optimal",
+        streakImg: magicbowlImg),
+    TimelineItemModel(
+        dayNumber: 65,
+        streakNumber: 65,
+        dayDuration: "9-10 Weeks",
+        whatHappens: "🏃 Athletic baseline • 🛡️ Strong immunity • 🌟 Better skin",
+        streakImg: no1Img),
+    TimelineItemModel(
+        dayNumber: 75,
+        streakNumber: 75,
+        dayDuration: "10-11 Weeks",
+        whatHappens: "🫁 Cilia 70% restored • 😮‍💨 No breathlessness • 🧠 Peak clarity",
+        streakImg: hatImg),
+    TimelineItemModel(
+        dayNumber: 84,
+        streakNumber: 84,
+        dayDuration: "12 Weeks",
+        whatHappens: "💪 Peak muscle oxygen • 🌬️ Full lung cleaning • 🎯 Optimal cognition",
+        streakImg: dartarrowImg),
+    TimelineItemModel(
+        dayNumber: 95,
+        streakNumber: 95,
+        dayDuration: "13-14 Weeks",
+        whatHappens: "🫁 Function +40% • ❤️ Low heart risk • ⚡ Sustained energy",
+        streakImg: kiteImg),
+    TimelineItemModel(
+        dayNumber: 105,
+        streakNumber: 105,
+        dayDuration: "15 Weeks",
+        whatHappens: "🛡️ Optimal white cells • 🏃‍♀️ Fast recovery • 😴 Deep sleep",
+        streakImg: golfImg),
+    TimelineItemModel(
+        dayNumber: 112,
+        streakNumber: 112,
+        dayDuration: "16 Weeks",
+        whatHappens: "🌬️ Athletic breathing • 🧠 Full neurotransmitters • 💎 Peak repair",
+        streakImg: pinataImg),
+    TimelineItemModel(
+        dayNumber: 126,
+        streakNumber: 126,
+        dayDuration: "18 Weeks",
+        whatHappens: "🫁 Capacity +45% • 🔋 Optimal mitochondria • 🌟 Visible transformation",
+        streakImg: hat2Img),
+    TimelineItemModel(
+        dayNumber: 140,
+        streakNumber: 140,
+        dayDuration: "20 Weeks",
+        whatHappens: "💓 Peak heart efficiency • 🏃 Max VO2 • 🧬 DNA repair boost",
+        streakImg: ballrollImg),
+    TimelineItemModel(
+        dayNumber: 154,
+        streakNumber: 154,
+        dayDuration: "22 Weeks",
+        whatHappens: "🫁 Cilia 90% normal • 🛡️ Max infection resistance • ⚡ No crashes",
+        streakImg: hatImg),
+    TimelineItemModel(
+        dayNumber: 168,
+        streakNumber: 168,
+        dayDuration: "24 Weeks",
+        whatHappens: "🫁 Function +50% • 🌬️ Non-smoker breathing • 🏆 Full transformation",
+        streakImg: badge1Emoji),
+    TimelineItemModel(
+        dayNumber: 180,
+        streakNumber: 180,
+        dayDuration: "6 Months",
+        whatHappens: "✨ Complete restoration • 💪 Peak performance • 🎉 Major milestone!",
+        streakImg: dartarrowImg),
   ];
   final ScrollController scrollController = ScrollController();
   final RxDouble scrollPosition = 0.0.obs;

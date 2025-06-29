@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/getx-controllers/home-controller.dart';
 import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
+import 'package:nicotrack/screens/premium/premium-paywall-screen.dart';
 import '../../constants/color-constants.dart';
 import '../../constants/font-constants.dart';
 import '../elements/textAutoSize.dart';
@@ -68,7 +69,14 @@ class _HomeState extends State<Home> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             GestureDetector(
-                              onTap: () async {},
+                              onTap: () async {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const PremiumPaywallScreen(),
+                                  ),
+                                );
+                              },
                               child: Stack(
                                 alignment: Alignment.center,
                                 // Ensures everything centers by default
