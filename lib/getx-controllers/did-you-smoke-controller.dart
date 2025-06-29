@@ -11,6 +11,7 @@ import 'package:nicotrack/screens/home/did-you-smoke/pages/smoked-today.dart';
 import 'package:nicotrack/screens/home/did-you-smoke/pages/update-quit-date.dart';
 import 'package:nicotrack/screens/home/did-you-smoke/pages/what-triggered.dart';
 import 'package:nicotrack/screens/home/did-you-smoke/pages/no-selected/congratulatory-page.dart';
+import 'package:nicotrack/screens/smoking/smoking-detail-screen.dart';
 import '../constants/color-constants.dart';
 import '../constants/font-constants.dart';
 import '../constants/image-constants.dart';
@@ -940,10 +941,13 @@ class DidYouSmokeController extends GetxController {
     print("Saving smoke-free data: $didYouSmokeStringToday with data $didYouSmokeFilledData");
     
     if (context.mounted) {
-      // Navigate to congratulations page
-      Navigator.of(context).push(
+      // Navigate to smoking detail screen which will automatically redirect to congratulations
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => NoSmokeCongratsPage(),
+          builder: (context) => SmokingDetailScreen(
+            selectedDate: currentDateTime,
+            routeSource: SmokingDetailRouteSource.afterSmokingCompletion,
+          ),
         ),
       );
     }
@@ -979,12 +983,15 @@ class DidYouSmokeController extends GetxController {
         }
       }
       
-      // Good practice: check if the widget is still in the tree
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-            builder: (context) => const Base(),
+      // Navigate to smoking detail screen to show overview of what they said
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => SmokingDetailScreen(
+            selectedDate: currentDateTime,
+            routeSource: SmokingDetailRouteSource.afterSmokingCompletion,
           ),
-              (route) => false);
+        ),
+      );
     }
   }
 }

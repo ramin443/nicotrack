@@ -19,6 +19,7 @@ import '../../../../elements/data-cubes.dart';
 import '../../../../elements/linear-progress-bar.dart';
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
+import 'package:nicotrack/screens/base/home.dart';
 
 class NoSmokeCongratsPage extends StatefulWidget {
   const NoSmokeCongratsPage({super.key});
@@ -621,10 +622,12 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
         GestureDetector(
           onTap: () {
             // Navigate to home using the same method as close button
-            final controller = Get.find<DidYouSmokeController>();
-            DateTime currentDateTime = DateTime.now();
-            controller.addDatatoHiveandNavigate(currentDateTime, context);
-          },
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => Home(),
+              ),
+                  (route) => false,
+            );          },
           child: Stack(
             alignment: Alignment.center,
             children: [
