@@ -19,10 +19,15 @@ import '../../../../elements/data-cubes.dart';
 import '../../../../elements/linear-progress-bar.dart';
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
-import 'package:nicotrack/screens/base/home.dart';
+import 'package:nicotrack/screens/base/base.dart';
 
 class NoSmokeCongratsPage extends StatefulWidget {
-  const NoSmokeCongratsPage({super.key});
+  final DateTime selectedDate;
+  
+  const NoSmokeCongratsPage({
+    super.key,
+    required this.selectedDate,
+  });
 
   @override
   State<NoSmokeCongratsPage> createState() => _NoSmokeCongratsPageState();
@@ -73,8 +78,8 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
       if (onboardingData != null && onboardingData.lastSmokedDate.isNotEmpty) {
         print('Found onboarding data with quit date: ${onboardingData.lastSmokedDate}');
         final quitDate = DateFormat('yyyy-MM-dd').parse(onboardingData.lastSmokedDate);
-        final now = DateTime.now();
-        daysSinceQuit = now.difference(quitDate).inDays;
+        // Use selected date instead of current date
+        daysSinceQuit = widget.selectedDate.difference(quitDate).inDays;
         if (daysSinceQuit < 0) daysSinceQuit = 0; // Ensure non-negative
         print('Calculated days since quit: $daysSinceQuit');
       } else {
@@ -100,8 +105,8 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
             }
           }
           if (quitDate != null) {
-            final now = DateTime.now();
-            daysSinceQuit = now.difference(quitDate).inDays;
+            // Use selected date instead of current date
+            daysSinceQuit = widget.selectedDate.difference(quitDate).inDays;
             if (daysSinceQuit < 0) daysSinceQuit = 0;
           } else {
             daysSinceQuit = 1;
@@ -119,12 +124,13 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
   Future<void> _calculateSmokeFreeStreak() async {
     try {
       final smokingBox = await Hive.openBox<DidYouSmokeModel>('didYouSmokeData');
-      final now = DateTime.now();
+      // Use selected date instead of current date
+      final selectedDate = widget.selectedDate;
       int streak = 0;
       
-      // Count consecutive smoke-free days backwards from today
+      // Count consecutive smoke-free days backwards from selected date
       for (int i = 0; i < 365; i++) { // Check up to a year back
-        final checkDate = now.subtract(Duration(days: i));
+        final checkDate = selectedDate.subtract(Duration(days: i));
         final dateKey = DateFormat.yMMMd().format(checkDate);
         final smokingData = smokingBox.get(dateKey);
         
@@ -229,10 +235,9 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                             actions: [
                               GestureDetector(
                                 onTap: () {
-                                  // Save smoke-free data and navigate to home
+                                  // Save smoke-free data and navigate to home using selected date
                                   final controller = Get.find<DidYouSmokeController>();
-                                  DateTime currentDateTime = DateTime.now();
-                                  controller.addDatatoHiveandNavigate(currentDateTime, context);
+                                  controller.addDatatoHiveandNavigate(widget.selectedDate, context);
                                 },
                                 child: Container(
                                   height: 36.w,
@@ -621,10 +626,10 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
       children: [
         GestureDetector(
           onTap: () {
-            // Navigate to home using the same method as close button
+            // Navigate to base using the same method as close button
             Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                builder: (context) => Home(),
+                builder: (context) => Base(),
               ),
                   (route) => false,
             );          },

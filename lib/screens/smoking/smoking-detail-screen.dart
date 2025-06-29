@@ -16,8 +16,6 @@ import 'package:nicotrack/screens/elements/linear-progress-bar.dart';
 import 'package:nicotrack/models/financial-goals-model/financialGoals-model.dart';
 import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
 import 'package:animated_flip_counter/animated_flip_counter.dart';
-import 'package:nicotrack/models/award-model/award-model.dart';
-import 'package:nicotrack/constants/quick-function-constants.dart';
 
 enum SmokingDetailRouteSource {
   fromHome,
@@ -636,8 +634,8 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
       
       if (onboardingData != null && onboardingData.lastSmokedDate.isNotEmpty) {
         final quitDate = DateFormat('yyyy-MM-dd').parse(onboardingData.lastSmokedDate);
-        final now = DateTime.now();
-        daysSinceQuit = now.difference(quitDate).inDays;
+        // Use the selected date instead of current date
+        daysSinceQuit = widget.selectedDate.difference(quitDate).inDays;
         if (daysSinceQuit < 0) daysSinceQuit = 0;
       } else {
         daysSinceQuit = 1;
@@ -650,11 +648,12 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
   Future<void> _calculateSmokeFreeStreak() async {
     try {
       final smokingBox = await Hive.openBox<DidYouSmokeModel>('didYouSmokeData');
-      final now = DateTime.now();
+      // Use selected date instead of current date
+      final selectedDate = widget.selectedDate;
       int streak = 0;
       
       for (int i = 0; i < 365; i++) {
-        final checkDate = now.subtract(Duration(days: i));
+        final checkDate = selectedDate.subtract(Duration(days: i));
         final dateKey = DateFormat.yMMMd().format(checkDate);
         final smokingData = smokingBox.get(dateKey);
         
@@ -782,113 +781,6 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
   }
 
   Widget _buildSmokeFreeSection() {
-    // Check if user earned a badge today
-    final earnedBadge = _getBadgeForDay(daysSinceQuit);
-    
-    if (earnedBadge != null) {
-      // Show badge award interface
-      return _buildBadgeAwardSection(earnedBadge);
-    } else {
-      // Show regular congratulations
-      return _buildRegularCongratulationsSection();
-    }
-  }
-
-  Widget _buildBadgeAwardSection(AwardModel badge) {
-    return Column(
-      children: [
-        // Badge with hexagonal background
-        SizedBox(
-          width: double.infinity,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  // Purple hexagonal background
-                  Container(
-                    width: 220.w,
-                    height: 220.w,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          nicotrackPurple.withOpacity(0.2),
-                          nicotrackPurple.withOpacity(0.1),
-                        ],
-                      ),
-                    ),
-                    child: Image.asset(
-                      hexaPolygon,
-                      width: 220.w,
-                      color: nicotrackPurple,
-                    ),
-                  ),
-                  // Badge image
-                  Image.asset(
-                    badge.emojiImg,
-                    width: 120.w,
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
-        SizedBox(height: 14.h),
-        
-        // Congratulations text with gradient
-        GradientText(
-          text: "Congratulations,\nyou've earned your badge!",
-          gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: [nicotrackPurple, Color(0xffFF4B4B)],
-          ),
-          style: TextStyle(
-            fontSize: 24.sp,
-            fontFamily: circularBold,
-            height: 1.1,
-            color: const Color(0xFFA1A1A1),
-          ),
-        ),
-        SizedBox(height: 8.h),
-        
-        // Days since quit text
-        RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(
-            style: TextStyle(
-              fontSize: 22.sp,
-              fontFamily: circularMedium,
-              height: 1.1,
-              color: nicotrackBlack1,
-            ),
-            children: [
-              TextSpan(text: 'You\'re on your '),
-              TextSpan(
-                text: '${daysSinceQuit}${_getDaySuffix(daysSinceQuit)}\n',
-                style: TextStyle(
-                  fontSize: 22.sp,
-                  fontFamily: circularBold,
-                  height: 1.1,
-                  color: nicotrackPurple,
-                ),
-              ),
-              TextSpan(text: daysSinceQuit == 1 ? 'smoke-free day 🥳' : 'smoke-free day 🥳'),
-            ],
-          ),
-        ),
-        SizedBox(height: 36.h),
-        
-        // Financial goal progress bar
-        _buildFinancialGoalProgressBar(),
-      ],
-    );
-  }
-
-  Widget _buildRegularCongratulationsSection() {
     return Column(
       children: [
         // Award background with celebrate image
@@ -965,14 +857,6 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
     );
   }
 
-  // Check if current day has earned a badge
-  AwardModel? _getBadgeForDay(int day) {
-    try {
-      return allAwards.firstWhere((award) => award.day == day);
-    } catch (e) {
-      return null; // No badge for this day
-    }
-  }
 
   String _getDaySuffix(int day) {
     if (day <= 0) return 'th';

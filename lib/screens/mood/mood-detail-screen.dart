@@ -7,7 +7,7 @@ import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/constants/font-constants.dart';
 import 'package:nicotrack/models/mood-model/mood-model.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
-import 'package:nicotrack/screens/base/home.dart';
+import 'package:nicotrack/screens/base/base.dart';
 
 enum MoodDetailRouteSource {
   fromHome,
@@ -63,10 +63,10 @@ class _MoodDetailScreenState extends State<MoodDetailScreen> {
         Navigator.of(context).pop();
         break;
       case MoodDetailRouteSource.afterMoodCompletion:
-        // Coming after completing mood - navigate back to home
+        // Coming after completing mood - navigate back to base
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => Home(),
+            builder: (context) => Base(),
           ),
           (route) => false,
         );
