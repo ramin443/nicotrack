@@ -317,7 +317,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                                         color: Color(0xffFF4B4B),
                                       ),
                                     ),
-                                    TextSpan(text: daysSinceQuit == 1 ? 'smoke-free day 🥳.' : 'smoke-free days 🥳.'),
+                                    TextSpan(text: daysSinceQuit == 1 ? 'smoke-free day 🥳.' : 'smoke-free day 🥳.'),
                                   ])),
                         ),
                         SizedBox(

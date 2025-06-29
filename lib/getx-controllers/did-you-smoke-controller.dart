@@ -941,13 +941,10 @@ class DidYouSmokeController extends GetxController {
     print("Saving smoke-free data: $didYouSmokeStringToday with data $didYouSmokeFilledData");
     
     if (context.mounted) {
-      // Navigate to smoking detail screen which will automatically redirect to congratulations
+      // Navigate directly to congratulations page for smoke-free days after questionnaire completion
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => SmokingDetailScreen(
-            selectedDate: currentDateTime,
-            routeSource: SmokingDetailRouteSource.afterSmokingCompletion,
-          ),
+          builder: (context) => NoSmokeCongratsPage(),
         ),
       );
     }

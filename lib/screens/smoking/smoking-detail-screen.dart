@@ -1,14 +1,21 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
+import 'package:confetti/confetti.dart';
 import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/constants/font-constants.dart';
 import 'package:nicotrack/models/did-you-smoke/didyouSmoke-model.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
-import 'package:nicotrack/screens/home/did-you-smoke/pages/no-selected/congratulatory-page.dart';
 import 'package:nicotrack/screens/base/base.dart';
+import 'package:nicotrack/constants/image-constants.dart';
+import 'package:nicotrack/screens/elements/gradient-text.dart';
+import 'package:nicotrack/screens/elements/linear-progress-bar.dart';
+import 'package:nicotrack/models/financial-goals-model/financialGoals-model.dart';
+import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
+import 'package:animated_flip_counter/animated_flip_counter.dart';
 
 enum SmokingDetailRouteSource {
   fromHome,
@@ -35,11 +42,37 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
   int currentTriggersPage = 0;
   int currentFeelingsPage = 0;
   int currentAvoidancePage = 0;
+  
+  // Congratulations section data
+  int daysSinceQuit = 0;
+  int smokeFreeStreak = 0;
+  double moneySaved = 0.0;
+  FinancialGoalsModel? topFinancialGoal;
+  double goalProgress = 0.0;
+  
+  // Confetti controller
+  ConfettiController controllerTopCenter = ConfettiController(duration: const Duration(milliseconds: 2000));
+  List<Color> confettiColor = [
+    const Color(0xff2fb5ff),
+    const Color(0xffad46ff),
+    const Color(0xffff723d),
+    const Color(0xffdd00c0),
+    const Color(0xffff3400),
+    const Color(0xffCBF1E5),
+    const Color(0xffffdd0e),
+  ];
 
   @override
   void initState() {
     super.initState();
     _loadSmokingData();
+    _loadCongratsData();
+  }
+  
+  @override
+  void dispose() {
+    controllerTopCenter.dispose();
+    super.dispose();
   }
 
   Future<void> _loadSmokingData() async {
@@ -51,6 +84,11 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
         smokingData = box.get(dateKey);
         isLoading = false;
       });
+      
+      // Start confetti if it's a smoke-free day
+      if (smokingData != null && smokingData!.hasSmokedToday == 1) {
+        _startConfetti();
+      }
     } catch (e) {
       setState(() {
         isLoading = false;
@@ -98,28 +136,74 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
       );
     }
     
-    // Check if it's a smoke-free day and show congratulations page
-    if (smokingData!.hasSmokedToday == 1) {
-      // Navigate to congratulations page for smoke-free days
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => NoSmokeCongratsPage(),
-            ),
-          );
-        }
-      });
-      return Container(); // Return empty container while navigating
-    }
+    // No automatic redirect - show the combined view for all cases
     
-    // Show smoking details for days when user smoked
+    // Show combined view with smoking details and congratulations
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: _buildSmokingContent(),
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  _buildSmokingContent(),
+                  // Only add extra space if Go to home button is shown (smoke-free days)
+                  if (smokingData != null && smokingData!.hasSmokedToday == 1)
+                    SizedBox(height: 100.h)
+                  else
+                    SizedBox(height: 60.h),
+                ],
+              ),
+            ),
+            // Only show Go to home button for smoke-free days
+            if (smokingData != null && smokingData!.hasSmokedToday == 1)
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    _buildGoToHomeButton(),
+                    SizedBox(height: 12.h),
+                  ],
+                ),
+              ),
+            // Confetti widgets for smoke-free days (lighter intensity)
+            if (smokingData != null && smokingData!.hasSmokedToday == 1) ...[
+              Align(
+                alignment: Alignment.topCenter,
+                child: ConfettiWidget(
+                  minimumSize: const Size(4, 1),
+                  maximumSize: const Size(8, 2),
+                  colors: confettiColor,
+                  confettiController: controllerTopCenter,
+                  blastDirection: pi / 2,
+                  maxBlastForce: 0.25,  // Reduced from 0.45
+                  minBlastForce: 0.2,   // Reduced from 0.4
+                  emissionFrequency: 0.15,  // Reduced from 0.4
+                  numberOfParticles: 80,    // Reduced from 240
+                  gravity: 0.18,  // Slightly increased for faster fall
+                ),
+              ),
+              Align(
+                alignment: Alignment.topCenter,
+                child: ConfettiWidget(
+                  minimumSize: const Size(3, 3),
+                  maximumSize: const Size(8, 8),
+                  colors: confettiColor,
+                  confettiController: controllerTopCenter,
+                  blastDirection: pi / 2,
+                  maxBlastForce: 0.25,  // Reduced from 0.45
+                  minBlastForce: 0.05,  // Reduced from 0.1
+                  emissionFrequency: 0.15,  // Reduced from 0.4
+                  numberOfParticles: 60,    // Reduced from 240
+                  gravity: 0.18,
+                  createParticlePath: _drawCircle,
+                ),
+              ),
+            ],
+          ],
         ),
       ),
     );
@@ -150,55 +234,21 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
           
           SizedBox(height: 32.h),
           
-          // Cigarette count circle with large number
-          if (smokingData!.howManyCigs > 0) ...[
-            Container(
-              width: 160.w,
-              height: 160.w,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color(0xffFFE4D9),
-              ),
-              child: Center(
-                child: TextAutoSize(
-                  smokingData!.howManyCigs.toString(),
-                  style: TextStyle(
-                    fontSize: 85.sp,
-                    fontFamily: circularMedium,
-                    color: Color(0xffFF611D),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 24.h),
-            RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                style: TextStyle(
-                  fontSize: 22.w,
-                  fontFamily: circularBold,
-                  color: nicotrackBlack1,
-                  height: 1.1
-                ),
-                children: [
-                  TextSpan(text: "This is how many "),
-                  TextSpan(
-                    text: "🚬\ncigarettes",
-                    style: TextStyle(
-                      color: Color(0xffFF611D),
-                      fontSize: 22.w,
-                      fontFamily: circularBold,
-                    ),
-                  ),
-                  TextSpan(text: " you smoked today"),
-                ],
-              ),
-            ),
-            SizedBox(height: 40.h),
+          // Show content based on smoking status
+          if (smokingData!.hasSmokedToday == 0) ...[
+            // Smoking day content
+            _buildCigaretteCountSection(),
+          ] else ...[
+            // Smoke-free day content 
+            _buildSmokeFreeSection(),
           ],
           
-          // Triggers section
-          if (smokingData!.whatTriggerred.isNotEmpty) ...[
+          SizedBox(height: 40.h),
+          
+          // Show smoking details only for smoking days
+          if (smokingData!.hasSmokedToday == 0) ...[
+            // Triggers section
+            if (smokingData!.whatTriggerred.isNotEmpty) ...[
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               TextAutoSize(
                 "This is what triggered your craving",
@@ -262,6 +312,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
               (page) => setState(() => currentAvoidancePage = page),
             ),
             SizedBox(height: 32.h),
+          ],
           ],
           
           SizedBox(height: 60.h),
@@ -334,7 +385,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
                 child: _buildStatusButton(
                   icon: '👎',
                   text: 'Yes',
-                  isSelected: true, // Always true for smoking days
+                  isSelected: smokingData!.hasSmokedToday == 0, // 0 means smoked
                 ),
               ),
               SizedBox(width: 6.w),
@@ -342,7 +393,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
                 child: _buildStatusButton(
                   icon: '👍',
                   text: 'No',
-                  isSelected: false, // Always false for smoking days
+                  isSelected: smokingData!.hasSmokedToday == 1, // 1 means didn't smoke
                 ),
               ),
             ],
@@ -564,6 +615,479 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
       chunks.add(items.sublist(i, (i + chunkSize).clamp(0, items.length)));
     }
     return chunks;
+  }
+
+  Future<void> _loadCongratsData() async {
+    await _calculateDaysSinceQuit();
+    await _calculateSmokeFreeStreak();
+    await _calculateMoneySaved();
+    await _loadTopFinancialGoal();
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  Future<void> _calculateDaysSinceQuit() async {
+    try {
+      final onboardingBox = await Hive.openBox<OnboardingData>('onboardingCompletedData');
+      final onboardingData = onboardingBox.get('currentUserOnboarding');
+      
+      if (onboardingData != null && onboardingData.lastSmokedDate.isNotEmpty) {
+        final quitDate = DateFormat('yyyy-MM-dd').parse(onboardingData.lastSmokedDate);
+        final now = DateTime.now();
+        daysSinceQuit = now.difference(quitDate).inDays;
+        if (daysSinceQuit < 0) daysSinceQuit = 0;
+      } else {
+        daysSinceQuit = 1;
+      }
+    } catch (e) {
+      daysSinceQuit = 1;
+    }
+  }
+
+  Future<void> _calculateSmokeFreeStreak() async {
+    try {
+      final smokingBox = await Hive.openBox<DidYouSmokeModel>('didYouSmokeData');
+      final now = DateTime.now();
+      int streak = 0;
+      
+      for (int i = 0; i < 365; i++) {
+        final checkDate = now.subtract(Duration(days: i));
+        final dateKey = DateFormat.yMMMd().format(checkDate);
+        final smokingData = smokingBox.get(dateKey);
+        
+        if (smokingData == null) {
+          if (i == 0) {
+            streak++;
+          } else {
+            break;
+          }
+        } else if (smokingData.hasSmokedToday == 1) {
+          streak++;
+        } else {
+          break;
+        }
+      }
+      
+      smokeFreeStreak = streak;
+    } catch (e) {
+      smokeFreeStreak = 1;
+    }
+  }
+
+  Future<void> _calculateMoneySaved() async {
+    try {
+      final onboardingBox = await Hive.openBox<OnboardingData>('onboardingCompletedData');
+      final onboardingData = onboardingBox.get('currentUserOnboarding');
+      
+      if (onboardingData != null) {
+        final costPerPack = double.tryParse(onboardingData.costOfAPack) ?? 0.0;
+        final cigsPerPack = onboardingData.numberOfCigarettesIn1Pack;
+        final cigsPerDay = onboardingData.cigarettesPerDay;
+        
+        if (costPerPack > 0 && cigsPerPack > 0 && cigsPerDay > 0) {
+          final costPerCig = costPerPack / cigsPerPack;
+          final dailyCost = costPerCig * cigsPerDay;
+          moneySaved = dailyCost * daysSinceQuit;
+        }
+      }
+    } catch (e) {
+      moneySaved = 0.0;
+    }
+  }
+
+  Future<void> _loadTopFinancialGoal() async {
+    try {
+      final goalsBox = Hive.box<FinancialGoalsModel>('financialGoalsData');
+      final goals = goalsBox.values.toList();
+      
+      if (goals.isNotEmpty) {
+        topFinancialGoal = goals.first;
+        
+        if (topFinancialGoal != null && topFinancialGoal!.cost > 0) {
+          goalProgress = (moneySaved / topFinancialGoal!.cost).clamp(0.0, 1.0);
+        }
+      } else {
+        topFinancialGoal = null;
+      }
+    } catch (e) {
+      topFinancialGoal = null;
+    }
+  }
+
+  Widget _buildCigaretteCountSection() {
+    if (smokingData!.howManyCigs <= 0) return Container();
+    
+    // Determine the date text
+    String dateText;
+    if (widget.selectedDate.isToday) {
+      dateText = "today";
+    } else if (widget.selectedDate.isYesterday) {
+      dateText = "yesterday";
+    } else {
+      // Format as "June 25th, 2025"
+      final day = widget.selectedDate.day;
+      final suffix = _getDaySuffix(day);
+      dateText = "on \n${DateFormat('MMMM d').format(widget.selectedDate)}$suffix, ${widget.selectedDate.year}";
+    }
+    
+    return Column(
+      children: [
+        Container(
+          width: 160.w,
+          height: 160.w,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Color(0xffFFE4D9),
+          ),
+          child: Center(
+            child: TextAutoSize(
+              smokingData!.howManyCigs.toString(),
+              style: TextStyle(
+                fontSize: 85.sp,
+                fontFamily: circularMedium,
+                color: Color(0xffFF611D),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 24.h),
+        RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(
+            style: TextStyle(
+              fontSize: 22.w,
+              fontFamily: circularBold,
+              color: nicotrackBlack1,
+              height: 1.1
+            ),
+            children: [
+              TextSpan(text: "This is how many "),
+              TextSpan(
+                text: "🚬\ncigarettes",
+                style: TextStyle(
+                  color: Color(0xffFF611D),
+                  fontSize: 22.w,
+                  fontFamily: circularBold,
+                ),
+              ),
+              TextSpan(text: " you smoked $dateText"),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSmokeFreeSection() {
+    return Column(
+      children: [
+        // Award background with celebrate image
+        SizedBox(
+          width: double.infinity,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    awardBg2,
+                    width: 220.w,
+                  ),
+                  Image.asset(
+                    celebrateImg,
+                    width: 120.w,
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 14.h),
+        
+        // Amazing text with gradient
+        GradientText(
+          text: "Amazing!",
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [Color(0xff3217C3), Color(0xffFF4B4B)],
+          ),
+          style: TextStyle(
+            fontSize: 26.sp,
+            fontFamily: circularBold,
+            height: 1.1,
+            color: const Color(0xFFA1A1A1),
+          ),
+        ),
+        SizedBox(height: 8.h),
+        
+        // Days since quit text
+        RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(
+            style: TextStyle(
+              fontSize: 22.sp,
+              fontFamily: circularMedium,
+              height: 1.1,
+              color: nicotrackBlack1,
+            ),
+            children: [
+              TextSpan(text: 'You\'re on your '),
+              TextSpan(
+                text: '${daysSinceQuit}${_getDaySuffix(daysSinceQuit)}\n',
+                style: TextStyle(
+                  fontSize: 22.sp,
+                  fontFamily: circularBold,
+                  height: 1.1,
+                  color: Color(0xffFF4B4B),
+                ),
+              ),
+              TextSpan(text: daysSinceQuit == 1 ? 'smoke-free day 🥳.' : 'smoke-free day 🥳.'),
+            ],
+          ),
+        ),
+        SizedBox(height: 36.h),
+        
+        // Financial goal progress bar
+        _buildFinancialGoalProgressBar(),
+      ],
+    );
+  }
+
+  String _getDaySuffix(int day) {
+    if (day <= 0) return 'th';
+    if (day >= 11 && day <= 13) {
+      return 'th';
+    }
+    switch (day % 10) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
+    }
+  }
+
+  Widget _buildFinancialGoalProgressBar() {
+    if (topFinancialGoal == null) {
+      return SizedBox.shrink();
+    }
+
+    final progressPercentage = (goalProgress * 100).round();
+    
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                child: RichText(
+                    textAlign: TextAlign.left,
+                    text: TextSpan(
+                        style: TextStyle(
+                          fontSize: 15.sp,
+                          fontFamily: circularMedium,
+                          height: 1.1,
+                          color: nicotrackBlack1,
+                        ),
+                        children: [
+                          TextSpan(text: '🥅 Financial Goal: \n${topFinancialGoal!.emoji} ${topFinancialGoal!.goalTitle} '),
+                          TextSpan(
+                            text: '$progressPercentage%',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              fontFamily: circularBold,
+                              height: 1.1,
+                              color: Color(0xff6D9C32),
+                            ),
+                          ),
+                          TextSpan(text: ' completed.'),
+                        ])),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 9.h),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 18.w),
+          child: StyledProgressBar(progress: goalProgress),
+        ),
+        SizedBox(height: 18.h),
+      ],
+    );
+  }
+
+  Widget _buildDataCubes() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 0.w),
+      child: GridView.count(
+        shrinkWrap: true,
+        crossAxisCount: 2,
+        crossAxisSpacing: 6.w,
+        mainAxisSpacing: 6.w,
+        physics: NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.all(0),
+        childAspectRatio: 1.58,
+        children: [
+          _buildDaysCard(),
+          _buildMoneySavedCard(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDaysCard() {
+    return Container(
+      width: 186.w,
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage(homeMainBG), fit: BoxFit.cover),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset(
+            bicepsEmoji,
+            width: 51.w,
+          ),
+          SizedBox(width: 12.w),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AnimatedFlipCounter(
+                wholeDigits: daysSinceQuit.toString().length > 2 ? daysSinceQuit.toString().length : 2,
+                duration: Duration(seconds: 2),
+                value: daysSinceQuit,
+                fractionDigits: 0,
+                textStyle: TextStyle(
+                  fontSize: 33.sp,
+                  fontFamily: circularBold,
+                  color: nicotrackBlack1
+                )
+              ),
+              TextAutoSize(
+                'Days since\nlast smoked',
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  height: 1.1,
+                  fontSize: 12.5.sp,
+                  fontFamily: circularMedium,
+                  color: nicotrackBlack1
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMoneySavedCard() {
+    final moneyValue = moneySaved.round();
+    return Container(
+      width: 186.w,
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF4F4F4),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset(
+            moneyEmoji,
+            width: 51.w,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AnimatedFlipCounter(
+                prefix: '\$',
+                wholeDigits: moneyValue.toString().length > 2 ? moneyValue.toString().length : 2,
+                duration: Duration(seconds: 2),
+                value: moneyValue,
+                fractionDigits: 0,
+                textStyle: TextStyle(
+                  fontSize: 33.sp,
+                  fontFamily: circularBold,
+                  color: nicotrackBlack1
+                )
+              ),
+              TextAutoSize(
+                'Money saved',
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  height: 1.1,
+                  fontSize: 12.5.sp,
+                  fontFamily: circularMedium,
+                  color: nicotrackBlack1
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+  
+  Widget _buildGoToHomeButton() {
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () {
+            // Navigate to home using the same method as close button
+            _handleCloseNavigation();
+          },
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(
+                fullButtonBg,
+                width: 346.w,
+              ),
+              Text(
+                "🏠 Go to home",
+                style: TextStyle(
+                    fontSize: 18.sp,
+                    fontFamily: circularBold,
+                    color: nicotrackBlack1),
+              ),
+            ],
+          ),
+        ),
+
+      ],
+    );
+  }
+  
+  void _startConfetti() {
+    // Start confetti immediately when screen loads
+    Future.delayed(const Duration(milliseconds: 300), () {
+      controllerTopCenter.play();
+      HapticFeedback.heavyImpact();
+    });
+  }
+  
+  Path _drawCircle(Size size) {
+    final path = Path();
+    path.addOval(Rect.fromCircle(
+      center: const Offset(0, 0),
+      radius: size.width / 2,
+    ));
+    return path;
   }
 }
 
