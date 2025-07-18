@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/constants/font-constants.dart';
 import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
+import 'package:nicotrack/constants/color-constants.dart';
 
 class PremiumPaywallScreen extends StatefulWidget {
   const PremiumPaywallScreen({super.key});
@@ -15,35 +14,112 @@ class PremiumPaywallScreen extends StatefulWidget {
 }
 
 class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
-  int selectedPlan = 1; // 0: Monthly, 1: Yearly, 2: Lifetime
+  int selectedPlan = 0; // 0: Annual, 1: Monthly, 2: Lifetime
+  final PageController _pageController = PageController();
+  int _currentFeaturePage = 0;
+
+  final List<Map<String, dynamic>> _features = [
+    {
+      "emoji": "📊",
+      "title": "Advanced",
+      "subtitle": "Analytics",
+      "description": "Get detailed insights into your quitting progress"
+    },
+    {
+      "emoji": "🎯",
+      "title": "Unlimited",
+      "subtitle": "Goals",
+      "description": "Set multiple personalized goals for your journey"
+    },
+    {
+      "emoji": "🏆",
+      "title": "Complete",
+      "subtitle": "Badges",
+      "description": "Access to all achievement badges and rewards"
+    },
+    {
+      "emoji": "✍️",
+      "title": "Unlimited Quit",
+      "subtitle": "Changes",
+      "description": "Change your quit method anytime without limits"
+    },
+    {
+      "emoji": "📅",
+      "title": "Full Timeline",
+      "subtitle": "Access",
+      "description": "View complete timeline of your quitting journey"
+    },
+    {
+      "emoji": "✅",
+      "title": "Unlimited",
+      "subtitle": "Daily Tasks",
+      "description": "Access to all daily tasks and activities"
+    },
+  ];
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
+      body: SingleChildScrollView(
+        child:
+        Stack(
           children: [
-            // Header with close button
-            _buildHeader(),
-            
-            // Main content - no scrolling, fit everything on screen
-            Expanded(
+        Column(
+          children: [
+            // Top section with background image
+            Container(
+              height: 240.w,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(premiumBGImg),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: SafeArea(
+                child: Column(
+                  children: [
+                    _buildHeader(),
+                    _buildHeroSection(),
+                  ],
+                ),
+              ),
+            ),
+
+            // Bottom section with white background
+            Container(
+              color: Colors.white,
               child: Column(
                 children: [
-                  _buildPremiumTitle(),
-                  SizedBox(height: 12.h),
-                  _buildFeatures(),
-                  SizedBox(height: 16.h),
-                  _buildSubscriptionPlans(),
+                  _buildBenefitsSection(),
+                  _buildFeatureSlider(),
+                  _buildPlanSection(),
+                  _buildFooterLinks(),
+                  SizedBox(height: 60.w,)
                 ],
               ),
             ),
-            
-            // Bottom CTA
-            _buildBottomCTA(),
           ],
         ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                _buildContinueButton(),
+
+              ],
+            )
+            ,
+          )
+
+          ]),
       ),
     );
   }
@@ -52,30 +128,21 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          SizedBox(width: 40.w), // Spacer
-          TextAutoSize(
-            "💜 Upgrade to Premium",
-            style: TextStyle(
-              fontSize: 18.sp,
-              fontFamily: circularBold,
-              color: nicotrackBlack1,
-            ),
-          ),
           GestureDetector(
             onTap: () => Navigator.pop(context),
             child: Container(
               width: 40.w,
               height: 40.w,
               decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.1),
+                color: Colors.white.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(20.r),
               ),
               child: Icon(
                 Icons.close,
                 size: 20.sp,
-                color: nicotrackBlack1,
+                color: Colors.white,
               ),
             ),
           ),
@@ -84,103 +151,21 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
     );
   }
 
-  Widget _buildPremiumTitle() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: Column(
-        children: [
-          TextAutoSize(
-            "🚀 Unlock Your Complete Quit Journey",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20.sp,
-              fontFamily: circularBold,
-              color: nicotrackPurple,
-            ),
-          ),
-          SizedBox(height: 4.h),
-          TextAutoSize(
-            "💜 Get advanced features & personalized insights",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontFamily: circularBook,
-              color: Colors.grey[600],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFeatures() {
-    final features = [
-      {"icon": "📊", "title": "Advanced\nAnalytics"},
-      {"icon": "🎯", "title": "Unlimited\nGoals"},
-      {"icon": "🏆", "title": "Complete\nBadges"},
-      {"icon": "⚡", "title": "Smart\nActions"},
-      {"icon": "🔔", "title": "Custom\nNotifications"},
-      {"icon": "📚", "title": "Expert\nGuidance"},
-    ];
-    
+  Widget _buildHeroSection() {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextAutoSize(
-              "💜 Premium Features",
+              "Unlock\nNicotrack Premium",
+              textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 18.sp,
+                height: 1.1,
+                fontSize: 32.sp,
                 fontFamily: circularBold,
-                color: nicotrackBlack1,
-              ),
-            ),
-            SizedBox(height: 16.h),
-            Expanded(
-              child: GridView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1.4,
-                  crossAxisSpacing: 12.w,
-                  mainAxisSpacing: 12.h,
-                ),
-                itemCount: features.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: EdgeInsets.all(12.w),
-                    decoration: BoxDecoration(
-                      color: nicotrackPurple.withOpacity(0.08),
-                      borderRadius: BorderRadius.circular(16.r),
-                      border: Border.all(
-                        color: nicotrackPurple.withOpacity(0.2),
-                        width: 1.5,
-                      ),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextAutoSize(
-                          features[index]["icon"]!,
-                          style: TextStyle(fontSize: 24.sp),
-                        ),
-                        SizedBox(height: 8.h),
-                        TextAutoSize(
-                          features[index]["title"]!,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            fontFamily: circularBold,
-                            color: nicotrackBlack1,
-                            height: 1.2,
-                          ),
-                          maxLines: 2,
-                        ),
-                      ],
-                    ),
-                  );
-                },
+                color: Colors.white,
               ),
             ),
           ],
@@ -189,256 +174,437 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
     );
   }
 
+  Widget _buildBenefitsSection() {
+    return Container(
+      width: 310.w,
+      padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 26.w),
+      child: Column(
+        children: [
+          RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                  style: TextStyle(
+                    height: 1.1,
+                    fontSize: 17.sp,
+                    fontFamily: circularBook,
+                    color: Colors.black87,
+                  ),
+                  children: [
+                    TextSpan(
+                        text: "Enjoy these benefits freely "
+                            "when you get on the "),
+                    TextSpan(
+                      text: "premium plan",
+                      style: TextStyle(
+                        height: 1.1,
+                        fontSize: 17.sp,
+                        fontFamily: circularBold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ])),
+        ],
+      ),
+    );
+  }
 
-  Widget _buildSubscriptionPlans() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child: TextAutoSize(
-            "💳 Choose Your Plan",
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontFamily: circularBold,
-              color: nicotrackBlack1,
+  Widget _buildFeatureSlider() {
+    // Split features into pages of 3
+    final pageCount = (_features.length / 3).ceil();
+
+    return Container(
+      height: 120.w,
+      margin: EdgeInsets.symmetric(vertical: 20.h),
+      child: Column(
+        children: [
+          Expanded(
+            child: PageView.builder(
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  _currentFeaturePage = index;
+                });
+              },
+              itemCount: pageCount,
+              itemBuilder: (context, pageIndex) {
+                final startIndex = pageIndex * 3;
+                final endIndex = (startIndex + 3).clamp(0, _features.length);
+                final pageFeatures = _features.sublist(startIndex, endIndex);
+
+                return Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: pageFeatures.map((feature) {
+                      return Expanded(
+                        flex: 3,
+                        child: Container(
+                          height: 104.w,
+                          width: 110.w,
+                          margin: EdgeInsets.only(
+                              right: pageIndex == endIndex ? 0 : 8.w),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.r),
+                              border: Border.all(
+                                  color: Color(0xfff1f1f1), width: 1.sp)),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Center(
+                                child: TextAutoSize(
+                                  feature["emoji"],
+                                  style: TextStyle(
+                                    fontSize: 24.sp,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 12.w),
+                              TextAutoSize(
+                                feature["title"],
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  height: 1.1,
+                                  fontFamily: circularBold,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              TextAutoSize(
+                                feature["subtitle"],
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  fontFamily: circularBold,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                );
+              },
             ),
           ),
-        ),
-        SizedBox(height: 8.h),
-        Container(
-          height: 100.h,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
+          SizedBox(height: 10.w),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(pageCount, (index) {
+              return AnimatedContainer(
+                duration: Duration(milliseconds: 300),
+                margin: EdgeInsets.only(right: 4.w),
+                width: _currentFeaturePage == index ? 20.w : 5.w,
+                height: 5.w,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4.r),
+                  color: _currentFeaturePage == index
+                      ? Colors.black87
+                      : Colors.grey.withOpacity(0.3),
+                ),
+              );
+            }),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPlanSection() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      child: Column(
+        children: [
+          SizedBox(height: 8.w),
+          TextAutoSize(
+            "Choose your plan",
+            style: TextStyle(
+              fontSize: 18.sp,
+              fontFamily: circularBold,
+              color: Colors.black87,
+            ),
+          ),
+          SizedBox(height: 12.w),
+          Row(
             children: [
-              _buildHorizontalPlan(0, "📅 Monthly", "\$6.99", "per month", null, false),
-              SizedBox(width: 12.w),
-              _buildHorizontalPlan(1, "🎯 Yearly", "\$39.99", "per year", "Save 52%", true),
-              SizedBox(width: 12.w),
-              _buildHorizontalPlan(2, "💜 Lifetime", "\$79.99", "one-time", "Best Value", false),
+              _buildPlanCard(0, "Annual", "\$39.99", "🎉Save 50%", true),
+              SizedBox(width: 8.w),
+              _buildPlanCard(1, "Monthly", "\$6.99", "per month", false),
+              SizedBox(width: 8.w),
+              _buildPlanCard(2, "Lifetime", "\$79.99", "one-time", false),
+            ],
+          ),
+          SizedBox(height: 20.w),
+          SizedBox(
+            width: 320.w,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextAutoSize(
+                  "📱 Cancel anytime",
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontFamily: circularBook,
+                    color: Colors.grey[600],
+                  ),
+                ),
+                SizedBox(height: 0.w),
+                TextAutoSize(
+                  "🧧 Costs less than cigarettes in 2 weeks",
+                  maxLines: 2,
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontFamily: circularBook,
+                    color: Colors.grey[600],
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPlanCard(
+      int index, String title, String price, String subtitle, bool isPopular) {
+    final isSelected = selectedPlan == index;
+
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            selectedPlan = index;
+          });
+        },
+        child: Container(
+          height: 150.w,
+          decoration: BoxDecoration(
+            color: isSelected ? Colors.black : Colors.white,
+            borderRadius: BorderRadius.circular(12.r),
+            border: Border.all(
+              color: isSelected ? Colors.black : Colors.grey[300]!,
+              width: 1,
+            ),
+          ),
+          child: Stack(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(height: 18.w),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextAutoSize(
+                        title,
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          fontFamily: circularMedium,
+                          color: isSelected ? Colors.white : Colors.black87,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 12.w),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextAutoSize(
+                        price,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 22.sp,
+                          fontFamily: circularBold,
+                          color: (index == 0
+                              ? nicotrackGreen
+                              : (index == 1 ? Colors.red : Colors.red)),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextAutoSize(
+                        subtitle,
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          fontFamily: circularBook,
+                          color: isSelected ? Colors.white : Colors.grey[600],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 4.w),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  if (index == 0) ...[
+                    SizedBox(height: 4.w),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      TextAutoSize(
+                        "Billed annually",
+                        style: TextStyle(
+                          fontSize: 10.sp,
+                          fontFamily: circularBook,
+                          color: isSelected
+                              ? Colors.white.withOpacity(0.7)
+                              : Colors.grey[600],
+                        ),
+                      )
+                    ])
+                  ],
+                  if (index == 1) ...[
+                    SizedBox(height: 4.w),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      TextAutoSize(
+                        "Billed monthly",
+                        style: TextStyle(
+                          fontSize: 10.sp,
+                          fontFamily: circularBook,
+                          color: isSelected
+                              ? Colors.white.withOpacity(0.7)
+                              : Colors.grey[600],
+                        ),
+                      ),
+                    ])
+                  ],
+                  if (index == 2) ...[
+                    SizedBox(height: 4.w),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      TextAutoSize(
+                        "Billed once",
+                        style: TextStyle(
+                          fontSize: 10.sp,
+                          fontFamily: circularBook,
+                          color: isSelected
+                              ? Colors.white.withOpacity(0.7)
+                              : Colors.grey[600],
+                        ),
+                      ),
+                    ])
+                  ],
+                  SizedBox(
+                    height: 12.w,
+                  )
+                ],
+              ),
+              isSelected
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 14.w,
+                          height: 14.w,
+                          margin: EdgeInsets.only(top: 6.w, right: 6.w),
+                          decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              border:
+                                  Border.all(color: Colors.white, width: 3.sp),
+                              shape: BoxShape.circle),
+                        )
+                      ],
+                    )
+                  : SizedBox.shrink()
             ],
           ),
         ),
-      ],
-    );
-  }
-
-  Widget _buildHorizontalPlan(int index, String title, String price, String period, String? savings, bool isPopular) {
-    final isSelected = selectedPlan == index;
-    
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedPlan = index;
-        });
-      },
-      child: Container(
-        width: 120.w,
-        padding: EdgeInsets.all(12.w),
-        decoration: BoxDecoration(
-          color: isSelected ? nicotrackPurple.withOpacity(0.1) : Colors.white,
-          border: Border.all(
-            color: isSelected ? nicotrackPurple : Colors.grey.withOpacity(0.3),
-            width: isSelected ? 2 : 1,
-          ),
-          borderRadius: BorderRadius.circular(12.r),
-        ),
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            // Main content
-            Padding(
-              padding: EdgeInsets.only(top: isPopular ? 12.h : 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextAutoSize(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 13.sp,
-                      fontFamily: circularBold,
-                      color: nicotrackBlack1,
-                    ),
-                  ),
-                  SizedBox(height: 4.h),
-                  TextAutoSize(
-                    price,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontFamily: circularBold,
-                      color: nicotrackPurple,
-                    ),
-                  ),
-                  TextAutoSize(
-                    period,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 10.sp,
-                      fontFamily: circularBook,
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                  if (savings != null) ...[
-                    SizedBox(height: 2.h),
-                    TextAutoSize(
-                      savings,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 9.sp,
-                        fontFamily: circularMedium,
-                        color: nicotrackPurple,
-                      ),
-                    ),
-                  ],
-                  // Selected indicator
-                  if (isSelected) ...[
-                    SizedBox(height: 4.h),
-                    Container(
-                      width: 16.w,
-                      height: 16.w,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: nicotrackPurple,
-                      ),
-                      child: Icon(
-                        Icons.check,
-                        size: 10.sp,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ],
-              ),
-            ),
-            // Popular badge positioned outside
-            if (isPopular)
-              Positioned(
-                top: -8.h,
-                left: 0,
-                right: 0,
-                child: Center(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
-                    decoration: BoxDecoration(
-                      color: nicotrackPurple,
-                      borderRadius: BorderRadius.circular(10.r),
-                    ),
-                    child: TextAutoSize(
-                      "POPULAR",
-                      style: TextStyle(
-                        fontSize: 8.sp,
-                        fontFamily: circularBold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-          ],
-        ),
       ),
     );
   }
 
-
-  Widget _buildBottomCTA() {
+  Widget _buildContinueButton() {
     return Container(
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            offset: Offset(0, -1),
-            blurRadius: 5,
-            color: Colors.black.withOpacity(0.05),
+      padding: EdgeInsets.all(20.w),
+      child: GestureDetector(
+        onTap: _handleSubscribe,
+        child: Container(
+          width: double.infinity,
+          height: 50.h,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(25.r),
           ),
-        ],
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Subscribe button
-          GestureDetector(
-            onTap: _handleSubscribe,
-            child: Container(
-              width: double.infinity,
-              height: 45.h,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [
-                    nicotrackPurple,
-                    nicotrackPurple.withOpacity(0.8),
-                  ],
-                ),
-                borderRadius: BorderRadius.circular(22.r),
-              ),
-              child: Center(
-                child: TextAutoSize(
-                  _getSubscribeButtonText(),
-                  style: TextStyle(
-                    fontSize: 15.sp,
-                    fontFamily: circularBold,
-                    color: Colors.white,
-                  ),
-                ),
+          child: Center(
+            child: TextAutoSize(
+              "Continue",
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontFamily: circularBold,
+                color: Colors.white,
               ),
             ),
           ),
-          
-          SizedBox(height: 8.h),
-          
-          // Compact info
-          TextAutoSize(
-            "📱 Cancel anytime • 💜 Less than cigarettes in ${_getComparisonText()}",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 11.sp,
-              fontFamily: circularBook,
-              color: Colors.grey[600],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFooterLinks() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          GestureDetector(
+            onTap: () {
+              // Handle restore purchase
+            },
+            child: TextAutoSize(
+              "Restore purchase",
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontFamily: circularBook,
+                color: Colors.black87,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              // Handle terms of use
+            },
+            child: TextAutoSize(
+              "Terms of use",
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontFamily: circularBook,
+                color: Colors.black87,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              // Handle privacy policy
+            },
+            child: TextAutoSize(
+              "Privacy Policy",
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontFamily: circularBook,
+                color: Colors.black87,
+                decoration: TextDecoration.underline,
+              ),
             ),
           ),
         ],
       ),
     );
-  }
-
-  String _getSubscribeButtonText() {
-    switch (selectedPlan) {
-      case 0:
-        return "🚀 Start Monthly Subscription";
-      case 1:
-        return "🎯 Start Yearly Subscription";
-      case 2:
-        return "💜 Get Lifetime Access";
-      default:
-        return "✨ Subscribe Now";
-    }
-  }
-
-  String _getComparisonText() {
-    switch (selectedPlan) {
-      case 0:
-        return "2 days";
-      case 1:
-        return "1 week";
-      case 2:
-        return "2 weeks";
-      default:
-        return "a few days";
-    }
   }
 
   void _handleSubscribe() {
     // TODO: Implement subscription logic
-    String planType = ["Monthly", "Yearly", "Lifetime"][selectedPlan];
+    String planType = ["Annual", "Monthly", "Lifetime"][selectedPlan];
     print("User selected: $planType plan");
-    
+
     // Show success message for now
     Get.snackbar(
       "Coming Soon",

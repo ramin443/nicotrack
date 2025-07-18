@@ -284,7 +284,7 @@ class _PlanAltState extends State<PlanAlt> {
                                 backgroundColor: Colors.transparent,
                                 builder: (BuildContext context) {
                                   return Container(
-                                    height: MediaQuery.of(context).size.height * 0.7,
+                                    height: MediaQuery.of(context).size.height * 0.85,
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.only(

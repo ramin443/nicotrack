@@ -79,7 +79,7 @@ class PremiumController extends GetxController {
       "Success!",
       "Premium subscription activated",
       backgroundColor: Get.theme.primaryColor,
-      colorText: Get.theme.onPrimaryColor,
+      colorText: Get.theme.primaryColor,
     );
     
     // Set premium status to true
