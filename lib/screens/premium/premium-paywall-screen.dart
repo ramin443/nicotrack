@@ -67,10 +67,11 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child:
+      body:
         Stack(
           children: [
+            SingleChildScrollView(
+        child:
         Column(
           children: [
             // Top section with background image
@@ -101,26 +102,28 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
                   _buildFeatureSlider(),
                   _buildPlanSection(),
                   _buildFooterLinks(),
-                  SizedBox(height: 60.w,)
+                  SizedBox(height: 120.w,)
                 ],
               ),
             ),
           ],
-        ),
+        )),
           Align(
             alignment: Alignment.bottomCenter,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 _buildContinueButton(),
-
+                SizedBox(
+                  height: 24.w,
+                )
               ],
             )
             ,
           )
 
           ]),
-      ),
+
     );
   }
 
@@ -328,7 +331,7 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
           SizedBox(height: 12.w),
           Row(
             children: [
-              _buildPlanCard(0, "Annual", "\$39.99", "🎉Save 50%", true),
+              _buildPlanCard(0, "Annual", "\$39.99", "🎉Best Deal", true),
               SizedBox(width: 8.w),
               _buildPlanCard(1, "Monthly", "\$6.99", "per month", false),
               SizedBox(width: 8.w),

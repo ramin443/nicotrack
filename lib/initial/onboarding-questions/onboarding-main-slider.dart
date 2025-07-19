@@ -98,7 +98,7 @@ class _OnboardingMainSliderState extends State<OnboardingMainSlider> {
                       //       color: nicotrackBlack1),
                       // ),
                       SizedBox(
-                        height: 34.h,
+                        height: 34.w,
                       )
                     ],
                   ),
