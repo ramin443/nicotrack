@@ -1,4 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../services/purchase-service.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nicotrack/constants/color-constants.dart';
 
 class PremiumController extends GetxController {
   // Premium status
@@ -25,7 +29,7 @@ class PremiumController extends GetxController {
     },
     2: {
       "title": "Lifetime",
-      "price": "\$79.99", 
+      "price": "\$99.99", 
       "period": "one-time",
       "savings": "Best Value",
       "isPopular": false,
@@ -70,25 +74,86 @@ class PremiumController extends GetxController {
     selectedPlan.value = planIndex;
   }
 
-  void subscribeToPremium(int planIndex) {
-    // TODO: Implement actual subscription logic with payment processing
-    print("Starting subscription for plan: ${subscriptionPlans[planIndex]?["title"]}");
+  void subscribeToPremium(int planIndex, BuildContext context) async {
+    // Use PurchaseService to handle the actual purchase
+    final purchaseService = PurchaseService();
     
-    // For now, just show success message
-    Get.snackbar(
-      "Success!",
-      "Premium subscription activated",
-      backgroundColor: Get.theme.primaryColor,
-      colorText: Get.theme.primaryColor,
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            strokeWidth: 2.w,
+            backgroundColor: Colors.black,
+          ),
+        );
+      },
     );
     
-    // Set premium status to true
-    isPremium.value = true;
+    try {
+      bool success = await purchaseService.purchaseProduct(planIndex);
+      Navigator.pop(context); // Close loading dialog
+      
+      if (!success) {
+        print("Purchase failed for plan: ${subscriptionPlans[planIndex]?["title"]}");
+      }
+      // The purchase service will handle success/error messages and update isPremium
+    } catch (e) {
+      Navigator.pop(context); // Close loading dialog
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Purchase failed. Please try again."),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
-  void restorePurchases() {
-    // TODO: Implement restore purchases logic
-    print("Restoring purchases...");
+  void restorePurchases(BuildContext context) async {
+    // Use PurchaseService to restore purchases
+    final purchaseService = PurchaseService();
+    
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+    
+    try {
+      await purchaseService.restorePurchases();
+      Navigator.pop(context); // Close loading dialog
+      
+      // Show message based on whether purchases were restored
+      if (isPremium.value) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Purchases restored successfully"),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("No previous purchases to restore"),
+            backgroundColor: Colors.grey,
+          ),
+        );
+      }
+    } catch (e) {
+      Navigator.pop(context); // Close loading dialog
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Failed to restore purchases. Please try again."),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
   // Check if user has access to premium features

@@ -5,6 +5,7 @@ import 'package:nicotrack/constants/font-constants.dart';
 import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import 'package:nicotrack/constants/color-constants.dart';
+import 'package:nicotrack/getx-controllers/premium-controller.dart';
 
 class PremiumPaywallScreen extends StatefulWidget {
   const PremiumPaywallScreen({super.key});
@@ -14,9 +15,16 @@ class PremiumPaywallScreen extends StatefulWidget {
 }
 
 class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
-  int selectedPlan = 0; // 0: Annual, 1: Monthly, 2: Lifetime
+  late int selectedPlan;
   final PageController _pageController = PageController();
   int _currentFeaturePage = 0;
+  final PremiumController _premiumController = Get.find<PremiumController>();
+  
+  @override
+  void initState() {
+    super.initState();
+    selectedPlan = _premiumController.selectedPlan.value;
+  }
 
   final List<Map<String, dynamic>> _features = [
     {
@@ -331,11 +339,26 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
           SizedBox(height: 12.w),
           Row(
             children: [
-              _buildPlanCard(0, "Annual", "\$39.99", "🎉Best Deal", true),
+              _buildPlanCard(
+                  1,
+                  _premiumController.subscriptionPlans[1]!['title'],
+                  _premiumController.subscriptionPlans[1]!['price'],
+                  _premiumController.subscriptionPlans[1]!['savings'] ?? "🎉Best Deal",
+                  _premiumController.subscriptionPlans[1]!['isPopular']),
               SizedBox(width: 8.w),
-              _buildPlanCard(1, "Monthly", "\$6.99", "per month", false),
+              _buildPlanCard(
+                  0,
+                  _premiumController.subscriptionPlans[0]!['title'],
+                  _premiumController.subscriptionPlans[0]!['price'],
+                  _premiumController.subscriptionPlans[0]!['period'],
+                  _premiumController.subscriptionPlans[0]!['isPopular']),
               SizedBox(width: 8.w),
-              _buildPlanCard(2, "Lifetime", "\$79.99", "one-time", false),
+              _buildPlanCard(
+                  2,
+                  _premiumController.subscriptionPlans[2]!['title'],
+                  _premiumController.subscriptionPlans[2]!['price'],
+                  _premiumController.subscriptionPlans[2]!['period'],
+                  _premiumController.subscriptionPlans[2]!['isPopular']),
             ],
           ),
           SizedBox(height: 20.w),
@@ -379,6 +402,7 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
         onTap: () {
           setState(() {
             selectedPlan = index;
+            _premiumController.selectPlan(index);
           });
         },
         child: Container(
@@ -421,9 +445,7 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
                         style: TextStyle(
                           fontSize: 22.sp,
                           fontFamily: circularBold,
-                          color: (index == 0
-                              ? nicotrackGreen
-                              : (index == 1 ? Colors.red : Colors.red)),
+                          color: (index == 0 || index == 2) ? nicotrackRed:nicotrackGreen,
                         ),
                       ),
                     ],
@@ -559,6 +581,7 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
           GestureDetector(
             onTap: () {
               // Handle restore purchase
+              _premiumController.restorePurchases(context);
             },
             child: TextAutoSize(
               "Restore purchase",
@@ -604,17 +627,7 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
   }
 
   void _handleSubscribe() {
-    // TODO: Implement subscription logic
-    String planType = ["Annual", "Monthly", "Lifetime"][selectedPlan];
-    print("User selected: $planType plan");
-
-    // Show success message for now
-    Get.snackbar(
-      "Coming Soon",
-      "Subscription for $planType plan will be implemented",
-      backgroundColor: Color(0xffFF4800),
-      colorText: Colors.white,
-      snackPosition: SnackPosition.BOTTOM,
-    );
+    // Use the premium controller to handle subscription
+    _premiumController.subscribeToPremium(selectedPlan, context);
   }
 }

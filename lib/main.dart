@@ -22,12 +22,16 @@ import 'package:nicotrack/models/quick-actions-model/quickActions-model.dart';
 import 'package:nicotrack/models/financial-goals-model/financialGoals-model.dart';
 import 'package:nicotrack/models/notifications-preferences-model/notificationsPreferences-model.dart';
 import 'package:nicotrack/services/notification-service.dart';
+import 'package:nicotrack/services/purchase-service.dart';
+import 'package:nicotrack/services/premium-persistence-service.dart';
+import 'package:nicotrack/getx-controllers/premium-controller.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:nicotrack/screens/home/did-you-smoke/pages/no-selected/congratulatory-page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Get.put(ProgressController()); // now accessible globally
+  Get.put(PremiumController()); // Initialize premium controller
   await Hive.initFlutter();
 
   // Initialize Hive adapter(s)
@@ -49,6 +53,12 @@ void main() async {
   // Initialize timezone and notification service
   tz.initializeTimeZones();
   await NotificationService().initialize();
+  
+  // Initialize premium persistence
+  await PremiumPersistenceService.initialize();
+  
+  // Initialize purchase service
+  await PurchaseService().initialize();
 
   runApp(const MyApp());
 }
