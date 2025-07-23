@@ -13,7 +13,9 @@ import '../../../elements/textAutoSize.dart';
 import '4x4-scroll-view.dart';
 
 class FinancialGoalsSection extends StatefulWidget {
-  const FinancialGoalsSection({super.key});
+  final bool isUserPremium;
+  
+  const FinancialGoalsSection({super.key, required this.isUserPremium});
 
   @override
   State<FinancialGoalsSection> createState() => _FinancialGoalsSectionState();
@@ -69,6 +71,7 @@ class _FinancialGoalsSectionState extends State<FinancialGoalsSection> {
                       onItemTap: (index) {
                         progressController.showViewEditGoalBottomSheet(context, index);
                       },
+                      isUserPremium: widget.isUserPremium,
                     ),
                     if (userGoals.isNotEmpty) SizedBox(height: 24.h),
                     if (userGoals.isNotEmpty)

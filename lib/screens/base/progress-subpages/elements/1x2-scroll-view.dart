@@ -5,6 +5,8 @@ import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/constants/font-constants.dart';
 import 'package:nicotrack/getx-controllers/progress-controller.dart';
 import 'package:nicotrack/models/emoji-text-pair/emojitext-model.dart';
+import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
+import 'package:nicotrack/screens/premium/premium-paywall-screen.dart';
 
 import '../../../elements/textAutoSize.dart';
 
@@ -17,6 +19,7 @@ class OnexTwoScrollView extends StatefulWidget {
   final List<int>? percentList;
   final void Function() newfinancialGoalAction;
   final void Function(int)? onItemTap;
+  final bool isUserPremium;
 
   const OnexTwoScrollView({
     super.key,
@@ -28,6 +31,7 @@ class OnexTwoScrollView extends StatefulWidget {
     required this.newfinancialGoalAction,
     this.onItemTap,
     this.percentList,
+    required this.isUserPremium,
   });
 
   @override
@@ -75,7 +79,16 @@ class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
                         return GestureDetector(
                           onTap: () {
                             if (item.emoji == '🎯' && item.text == 'Add new goal') {
-                              widget.newfinancialGoalAction();
+                              // Check if user is premium for "Add new goal"
+                              if (!widget.isUserPremium) {
+                                // Navigate to premium screen
+                                Navigator.of(context)
+                                    .push(MaterialPageRoute(builder: (context) {
+                                  return const PremiumPaywallScreen();
+                                }));
+                              } else {
+                                widget.newfinancialGoalAction();
+                              }
                             } else {
                               // Calculate the actual index in the original items list
                               int actualIndex = widget.items.indexWhere(
@@ -86,68 +99,82 @@ class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
                               }
                             }
                           },
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: 12.w,
-                                right: 12.w,
-                                top: 16.h,
-                                bottom: 14.w),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(
-                                  color: Color(0xfff0f0f0), width: 1.sp),
-                              borderRadius: BorderRadius.circular(16.r),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextAutoSize(
-                                  item.emoji,
-                                  style: TextStyle(
-                                    fontSize: 52.sp,
-                                    fontFamily: circularMedium,
-                                    height: 1.1,
-                                  ),
-                                ),
-                                SizedBox(height: 14.h),
-                                widget.withPercent && !(item.emoji == '🎯' && item.text == 'Add new goal')
-                                    ?
-
-                                Container(
-                                  child:RichText(
-                                        textAlign: TextAlign.center,
-                                        text: TextSpan(
-                                            style: TextStyle(
-                                              fontSize: 14.5.sp,
-                                              fontFamily: circularMedium,
-                                              height: 1.2,
-                                              color: Colors.black,
-                                            ),
-                                            children: [
-                                              TextSpan(text: "${item.text}: "),
-                                              TextSpan(
-                                                text: "${_getPercentageForItem(item, index)}%",
-                                                style: TextStyle(
-                                                  fontSize: 14.5.sp,
-                                                  fontFamily: circularBold,
-                                                  height: 1.2,
-                                                  color: nicotrackGreen,
-                                                ),
-                                              ),
-                                            ])))
-                                    : Container(child:TextAutoSize(
-                                        item.text,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14.5.sp,
-                                          fontFamily: circularMedium,
-                                          height: 1.2,
-                                          color: Colors.black,
+                          child:
+                              Stack(
+                                children: [
+                                  Positioned.fill(child: Container(
+                                    padding: EdgeInsets.only(
+                                        left: 12.w,
+                                        right: 12.w,
+                                        top: 16.h,
+                                        bottom: 14.w),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                          color: Color(0xfff0f0f0), width: 1.sp),
+                                      borderRadius: BorderRadius.circular(16.r),
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        TextAutoSize(
+                                          item.emoji,
+                                          style: TextStyle(
+                                            fontSize: 52.sp,
+                                            fontFamily: circularMedium,
+                                            height: 1.1,
+                                          ),
                                         ),
-                                      ),)
-                              ],
-                            ),
-                          ),
+                                        SizedBox(height: 14.h),
+                                        widget.withPercent && !(item.emoji == '🎯' && item.text == 'Add new goal')
+                                            ?
+
+                                        Container(
+                                            child:RichText(
+                                                textAlign: TextAlign.center,
+                                                text: TextSpan(
+                                                    style: TextStyle(
+                                                      fontSize: 14.5.sp,
+                                                      fontFamily: circularMedium,
+                                                      height: 1.2,
+                                                      color: Colors.black,
+                                                    ),
+                                                    children: [
+                                                      TextSpan(text: "${item.text}: "),
+                                                      TextSpan(
+                                                        text: "${_getPercentageForItem(item, index)}%",
+                                                        style: TextStyle(
+                                                          fontSize: 14.5.sp,
+                                                          fontFamily: circularBold,
+                                                          height: 1.2,
+                                                          color: nicotrackGreen,
+                                                        ),
+                                                      ),
+                                                    ])))
+                                            : Container(child:TextAutoSize(
+                                          item.text,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 14.5.sp,
+                                            fontFamily: circularMedium,
+                                            height: 1.2,
+                                            color: Colors.black,
+                                          ),
+                                        ),)
+                                      ],
+                                    ),
+                                  ),),
+                                  // Show lock for "Add new goal" if user is not premium
+                                  (item.emoji == '🎯' && item.text == 'Add new goal' && !widget.isUserPremium)
+                                      ? Positioned(
+                                          top: 10.w,
+                                          right: 10.w,
+                                          child: smallLockBox(),
+                                        )
+                                      : SizedBox.shrink(),
+                                ],
+                              )
+
                         );
                       },
                     ),

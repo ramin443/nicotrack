@@ -12,7 +12,9 @@ import 'package:nicotrack/screens/base/progress-subpages/elements/things-to-avoi
 import 'package:nicotrack/screens/base/progress-subpages/elements/top-triggers-section.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/upcoming-body-trends.dart';
 class ProgressOverview extends StatefulWidget {
-  const ProgressOverview({super.key});
+  final bool isUserPremium;
+  
+  const ProgressOverview({super.key, required this.isUserPremium});
 
   @override
   State<ProgressOverview> createState() => _ProgressOverviewState();
@@ -42,7 +44,7 @@ class _ProgressOverviewState extends State<ProgressOverview> {
             SizedBox(
               height: 34.h,
             ),
-            FinancialGoalsInOverview(showPercent: true, percent: progressController.getAverageFinancialGoalsCompletionPercentage()),
+            FinancialGoalsInOverview(showPercent: true, percent: progressController.getAverageFinancialGoalsCompletionPercentage(), isUserPremium: widget.isUserPremium),
             SizedBox(
               height: 34.h,
             ),

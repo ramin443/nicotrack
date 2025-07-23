@@ -77,13 +77,15 @@ class ProgressController extends GetxController {
     {"date": "April 23, 2025", "emoji": "🤤"},
     {"date": "April 22, 2025", "emoji": "🏆"},
   ];
-  List<Widget> allprogressTabs = [
-    ProgressOverview(),
-    ProgressHealth(),
-    ProgressSavings(),
-    ProgressCravings(),
-    ProgressMilestones()
-  ];
+  List<Widget> getAllProgressTabs(bool isUserPremium) {
+    return [
+      ProgressOverview(isUserPremium: isUserPremium),
+      ProgressHealth(),
+      ProgressSavings(isUserPremium: isUserPremium),
+      ProgressCravings(),
+      ProgressMilestones()
+    ];
+  }
 
   @override
   void onInit() {
@@ -232,7 +234,8 @@ class ProgressController extends GetxController {
     );
   }
 
-  Widget progressTabContent2() {
+  Widget progressTabContent2({required bool isUserPremium}) {
+    final allprogressTabs = getAllProgressTabs(isUserPremium);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -241,7 +244,8 @@ class ProgressController extends GetxController {
     );
   }
 
-  Widget progressTabContent() {
+  Widget progressTabContent({required bool isUserPremium}) {
+    final allprogressTabs = getAllProgressTabs(isUserPremium);
     return LayoutBuilder(
       builder: (context, constraints) {
         return SizedBox(

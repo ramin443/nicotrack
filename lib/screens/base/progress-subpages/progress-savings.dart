@@ -5,7 +5,9 @@ import 'package:nicotrack/getx-controllers/progress-controller.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/financial-goals-section.dart';
 
 class ProgressSavings extends StatefulWidget {
-  const ProgressSavings({super.key});
+  final bool isUserPremium;
+  
+  const ProgressSavings({super.key, required this.isUserPremium});
 
   @override
   State<ProgressSavings> createState() => _ProgressSavingsState();
@@ -23,7 +25,7 @@ class _ProgressSavingsState extends State<ProgressSavings> {
               SizedBox(
                 height: 26.h,
               ),
-              FinancialGoalsSection(),
+              FinancialGoalsSection(isUserPremium: widget.isUserPremium),
               SizedBox(
                 height: 26.h,
               ),

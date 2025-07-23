@@ -379,7 +379,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     );
   }
 
-  Widget financialGoalsSection(BuildContext context) {
+  Widget financialGoalsSection({required BuildContext context, required bool isUserPremium}) {
     return Column(
       children: [
         Padding(
@@ -416,6 +416,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           onItemTap: (index) {
             showViewEditGoalBottomSheet(context, index);
           },
+          isUserPremium: isUserPremium,
         ),
         SizedBox(
           height: 34.w,

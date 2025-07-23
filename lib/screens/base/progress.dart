@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:nicotrack/getx-controllers/progress-controller.dart';
+import 'package:nicotrack/getx-controllers/premium-controller.dart';
 import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
 import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
 
@@ -23,6 +24,7 @@ class ProgressMain extends StatefulWidget {
 class _ProgressState extends State<ProgressMain>
     with SingleTickerProviderStateMixin {
   final progressMainController = Get.find<ProgressController>();
+  final premiumController = Get.find<PremiumController>();
   bool _showFloatingButton = false;
 
   @override
@@ -272,7 +274,7 @@ class _ProgressState extends State<ProgressMain>
                       SizedBox(
                         height: 14.h,
                       ),
-                      progressController.progressTabContent2()
+                      progressController.progressTabContent2(isUserPremium: premiumController.isPremium.value)
                     ],
                   ),
                 )

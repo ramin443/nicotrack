@@ -101,7 +101,7 @@ class _SettingsState extends State<Settings> {
                               ),
                         settingsController.personalInfoSection(context:context, isUserPremium: premiumController.isPremium.value),
                         settingsController.pushNotificationSection(context),
-                        settingsController.financialGoalsSection(context),
+                        settingsController.financialGoalsSection(context: context, isUserPremium: premiumController.isPremium.value),
                         settingsController.helpandSupportSection(context),
                         settingsController.privacySection(context),
                       ],

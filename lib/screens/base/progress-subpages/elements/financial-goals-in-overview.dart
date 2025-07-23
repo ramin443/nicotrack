@@ -10,9 +10,10 @@ import '../../../../constants/font-constants.dart';
 class FinancialGoalsInOverview extends StatefulWidget {
   final bool showPercent;
   final int percent;
+  final bool isUserPremium;
 
   const FinancialGoalsInOverview(
-      {super.key, required this.showPercent, required this.percent});
+      {super.key, required this.showPercent, required this.percent, required this.isUserPremium});
 
   @override
   State<FinancialGoalsInOverview> createState() =>
@@ -67,6 +68,7 @@ class _FinancialGoalsInOverviewState extends State<FinancialGoalsInOverview> {
                 onItemTap: (index) {
                   progressController.showViewEditGoalBottomSheet(context, index);
                 },
+                isUserPremium: widget.isUserPremium,
               ),
             ],
           );
