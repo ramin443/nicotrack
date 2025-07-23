@@ -339,7 +339,7 @@ class _PlanAltState extends State<PlanAlt> {
                                             height: 86.w,
                                             decoration: BoxDecoration(
                                               shape: BoxShape.circle,
-                                              color: nicotrackLightGreen.withOpacity(0.2),
+                                              color: nicotrackRed.withOpacity(0.2),
                                             ),
                                             child: Center(
                                               child: Text(
@@ -362,7 +362,7 @@ class _PlanAltState extends State<PlanAlt> {
                                           Container(
                                             padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
                                             decoration: BoxDecoration(
-                                              color: nicotrackGreen.withOpacity(0.15),
+                                              color: nicotrackOrange.withOpacity(0.15),
                                               borderRadius: BorderRadius.circular(20.r),
                                             ),
                                             child: Text(
@@ -370,7 +370,7 @@ class _PlanAltState extends State<PlanAlt> {
                                               style: TextStyle(
                                                 fontSize: 13.sp,
                                                 fontFamily: circularMedium,
-                                                color: nicotrackGreen,
+                                                color: nicotrackOrange,
                                                 height: 1.1,
                                               ),
                                             ),
@@ -381,7 +381,7 @@ class _PlanAltState extends State<PlanAlt> {
                                             margin: EdgeInsets.symmetric(horizontal: 20.w),
                                             padding: EdgeInsets.all(20.w),
                                             decoration: BoxDecoration(
-                                              color: Color(0xFFF8F8F8),
+                                              color: Colors.black87,
                                               borderRadius: BorderRadius.circular(20.r),
                                             ),
                                             child: Column(
@@ -393,7 +393,7 @@ class _PlanAltState extends State<PlanAlt> {
                                                       fontSize: 15.sp,
                                                       fontFamily: circularBook,
                                                       height: 1.4,
-                                                      color: nicotrackBlack1,
+                                                      color: Colors.white,
                                                     ),
                                                     children: [
                                                       TextSpan(text: "This plan is "),
@@ -427,7 +427,7 @@ class _PlanAltState extends State<PlanAlt> {
                                                           height: 48.w,
                                                           decoration: BoxDecoration(
                                                             shape: BoxShape.circle,
-                                                            color: nicotrackOrange.withOpacity(0.15),
+                                                            color: nicotrackOrange.withOpacity(0.3),
                                                           ),
                                                           child: Center(
                                                             child: Text("🎯", style: TextStyle(fontSize: 24.sp)),
@@ -439,7 +439,7 @@ class _PlanAltState extends State<PlanAlt> {
                                                           style: TextStyle(
                                                             fontSize: 12.sp,
                                                             fontFamily: circularMedium,
-                                                            color: nicotrackBlack1,
+                                                            color: Colors.white,
                                                           ),
                                                         ),
                                                       ],
@@ -451,7 +451,7 @@ class _PlanAltState extends State<PlanAlt> {
                                                           height: 48.w,
                                                           decoration: BoxDecoration(
                                                             shape: BoxShape.circle,
-                                                            color: nicotracklightBlue.withOpacity(0.15),
+                                                            color: nicotracklightBlue.withOpacity(0.3),
                                                           ),
                                                           child: Center(
                                                             child: Text("🏆", style: TextStyle(fontSize: 24.sp)),
@@ -463,7 +463,7 @@ class _PlanAltState extends State<PlanAlt> {
                                                           style: TextStyle(
                                                             fontSize: 12.sp,
                                                             fontFamily: circularMedium,
-                                                            color: nicotrackBlack1,
+                                                            color: Colors.white,
                                                           ),
                                                         ),
                                                       ],
@@ -475,7 +475,7 @@ class _PlanAltState extends State<PlanAlt> {
                                                           height: 48.w,
                                                           decoration: BoxDecoration(
                                                             shape: BoxShape.circle,
-                                                            color: nicotrackPurple.withOpacity(0.15),
+                                                            color: nicotrackPurple.withOpacity(0.3),
                                                           ),
                                                           child: Center(
                                                             child: Text("💪", style: TextStyle(fontSize: 24.sp)),
@@ -487,7 +487,7 @@ class _PlanAltState extends State<PlanAlt> {
                                                           style: TextStyle(
                                                             fontSize: 12.sp,
                                                             fontFamily: circularMedium,
-                                                            color: nicotrackBlack1,
+                                                            color: Colors.white,
                                                           ),
                                                         ),
                                                       ],
