@@ -9,6 +9,8 @@ import 'package:nicotrack/screens/base/progress-subpages/elements/financial-goal
 
 import '../../constants/color-constants.dart';
 import '../elements/textAutoSize.dart';
+import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
+import 'package:nicotrack/getx-controllers/premium-controller.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -59,49 +61,66 @@ class _SettingsState extends State<Settings> {
     return GetBuilder<SettingsController>(
         init: SettingsController(),
         builder: (settingsController) {
-          return Scaffold(
-            backgroundColor: Colors.white,
-            body: SingleChildScrollView(
-              controller: _scrollController,
-              physics: BouncingScrollPhysics(),
-              child: Column(
-                children: [
-                  AppBar(
-                    backgroundColor: Colors.white,
-                    elevation: 0,
-                    surfaceTintColor: Colors.white,
-                    centerTitle: false,
-                    title: TextAutoSize(
-                      "📋 Settings",
-                      style: TextStyle(
-                          fontSize: 32.sp,
-                          fontFamily: circularBold,
-                          color: nicotrackBlack1),
+          return GetBuilder<PremiumController>(
+              init: PremiumController(),
+              builder: (premiumController) {
+                return Scaffold(
+                  backgroundColor: Colors.white,
+                  body: SingleChildScrollView(
+                    controller: _scrollController,
+                    physics: BouncingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        AppBar(
+                          backgroundColor: Colors.white,
+                          elevation: 0,
+                          surfaceTintColor: Colors.white,
+                          centerTitle: false,
+                          title: TextAutoSize(
+                            "📋 Settings",
+                            style: TextStyle(
+                                fontSize: 32.sp,
+                                fontFamily: circularBold,
+                                color: nicotrackBlack1),
+                          ),
+                        ),
+                        premiumController.isPremium.value
+                            ? SizedBox.shrink()
+                            : Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 14.w,
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 14.w),
+                                    child: premiumBox(context),
+                                  ),
+                                ],
+                              ),
+                        settingsController.personalInfoSection(context:context, isUserPremium: premiumController.isPremium.value),
+                        settingsController.pushNotificationSection(context),
+                        settingsController.financialGoalsSection(context),
+                        settingsController.helpandSupportSection(context),
+                        settingsController.privacySection(context),
+                      ],
                     ),
                   ),
-
-                  settingsController.personalInfoSection(context),
-                  settingsController.pushNotificationSection(context),
-                  settingsController.financialGoalsSection(context),
-                  settingsController.helpandSupportSection(context),
-                  settingsController.privacySection(context),
-
-                ],
-              ),
-            ),
-            floatingActionButton: _showFloatingButton
-                ? FloatingActionButton(
-                    onPressed: _scrollToTop,
-                    backgroundColor: nicotrackBlack1,
-                    elevation: 8,
-                    child: Icon(
-                      Icons.keyboard_arrow_up,
-                      color: Colors.white,
-                      size: 28.w,
-                    ),
-                  )
-                : null,
-          );
+                  floatingActionButton: _showFloatingButton
+                      ? FloatingActionButton(
+                          onPressed: _scrollToTop,
+                          backgroundColor: nicotrackBlack1,
+                          elevation: 8,
+                          child: Icon(
+                            Icons.keyboard_arrow_up,
+                            color: Colors.white,
+                            size: 28.w,
+                          ),
+                        )
+                      : null,
+                );
+              });
         });
   }
 }

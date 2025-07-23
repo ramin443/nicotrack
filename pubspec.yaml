@@ -119,6 +119,9 @@ flutter:
     - family: CircularBoldItalic
       fonts:
         - asset: assets/fonts/circular-std-5.ttf
+    - family: RecoletaBold
+      fonts:
+        - asset: assets/fonts/Recoleta-Bold.ttf
 
 
   assets:
@@ -220,7 +223,9 @@ flutter:
     - assets/images/mountains/icyvolc.png
     - assets/images/mountains/volcanic.png
     - assets/images/button-bg/progressBgBtn.png
+    - assets/images/button-bg/nicopro.png
     - assets/images/Emojis/progressImg.png
+    - assets/images/Emojis/lockimg.png
     - assets/images/button-bg/hexapolygon.png
     - assets/images/branding/premiumBG.png
     - assets/icons/app_icon.png

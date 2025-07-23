@@ -105,3 +105,5 @@ String progressBGBtnImg="assets/images/button-bg/progressBgBtn.png";
 String progressImg= "assets/images/Emojis/progressImg.png";
 String hexaPolygon= "assets/images/button-bg/hexapolygon.png";
 String premiumBGImg= "assets/images/branding/premiumBG.png";
+String nicopro= 'assets/images/button-bg/nicopro.png';
+String lockImg= 'assets/images/Emojis/lockimg.png';

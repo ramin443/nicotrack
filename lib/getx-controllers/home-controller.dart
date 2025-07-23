@@ -13,6 +13,8 @@ import 'package:nicotrack/screens/home/mood/mood-main-slider.dart';
 import 'package:nicotrack/screens/mood/mood-detail-screen.dart';
 import 'package:nicotrack/screens/smoking/smoking-detail-screen.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
+import 'package:nicotrack/screens/premium/premium-paywall-screen.dart';
 
 import '../constants/color-constants.dart';
 import '../constants/font-constants.dart';
@@ -25,6 +27,8 @@ import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
 import 'package:nicotrack/models/did-you-smoke/didyouSmoke-model.dart';
 import 'package:nicotrack/models/quick-actions-model/quickActions-model.dart';
 
+enum DailyTaskType { mood, smoking }
+
 class HomeController extends GetxController {
   final ScrollController scrollController = ScrollController();
   final double itemWidth = 70;
@@ -36,7 +40,7 @@ class HomeController extends GetxController {
   int totalMoneySaved = 0;
   int hoursRegainedinLife = 0;
   int cigarettesAvoided = 0;
-  double animationMultiplier =1; // Default is usually 1.0
+  double animationMultiplier = 1; // Default is usually 1.0
   // Date variables
   int selectedYear = DateTime.now().year;
   int selectedMonth = DateTime.now().month;
@@ -327,7 +331,8 @@ class HomeController extends GetxController {
     );
   }
 
-  Widget dailyTasksSection(BuildContext context) {
+  Widget dailyTasksSection(
+      {required BuildContext context, required bool isUserPremium}) {
     return Builder(builder: (context) {
       DateTime todayDate = DateTime.now();
       DateTime currentSelectedDateTime =
@@ -423,6 +428,7 @@ class HomeController extends GetxController {
             ),
             GestureDetector(
               onTap: () {
+                // Smoking task is always available (no lock), so proceed normally
                 if (!isSmokedToday) {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
@@ -447,26 +453,40 @@ class HomeController extends GetxController {
                   subTitle: isSmokedToday
                       ? 'Thanks for the update! 👍'
                       : 'Let us know if you did 😌',
-                  isCompleted: isSmokedToday),
+                  isCompleted: isSmokedToday,
+                  isUserPremium: isUserPremium,
+                  taskType: DailyTaskType.smoking),
             ),
             SizedBox(
               height: 7.h,
             ),
             GestureDetector(
               onTap: () {
-                if (!isMoodDone) {
+                // Check if lock should be shown (not premium user for mood task)
+                bool shouldShowLock = !isUserPremium;
+                
+                if (shouldShowLock) {
+                  // Navigate to premium screen
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return MoodMainSlider(
-                        currentDateTime: currentSelectedDateTime);
+                    return const PremiumPaywallScreen();
                   }));
                 } else {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return MoodDetailScreen(
-                        selectedDate: currentSelectedDateTime,
-                        routeSource: MoodDetailRouteSource.fromHome);
-                  }));
+                  // Normal behavior
+                  if (!isMoodDone) {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return MoodMainSlider(
+                          currentDateTime: currentSelectedDateTime);
+                    }));
+                  } else {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return MoodDetailScreen(
+                          selectedDate: currentSelectedDateTime,
+                          routeSource: MoodDetailRouteSource.fromHome);
+                    }));
+                  }
                 }
               },
               child: dailyTaskBox(
@@ -477,7 +497,9 @@ class HomeController extends GetxController {
                   subTitle: isMoodDone
                       ? 'Your mood for today is set 📝'
                       : 'Tap to tell us about your mood 📝',
-                  isCompleted: isMoodDone),
+                  isCompleted: isMoodDone,
+                  isUserPremium: isUserPremium,
+                  taskType: DailyTaskType.mood),
             ),
             SizedBox(
               height: 7.h,
@@ -494,74 +516,82 @@ class HomeController extends GetxController {
       required Color emojiColor,
       required String titleTxt,
       required String subTitle,
-      required bool isCompleted}) {
+      required bool isCompleted,
+      required bool isUserPremium,
+      required DailyTaskType taskType}) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Container(
-        // height: 86.h,
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(vertical: 12.w),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(21.r),
-            border: Border.all(
-              width: 1,
-              color: const Color(0xFFEFEFEF),
-            )),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Stack(
           children: [
-            SizedBox(
-              width: 12.w,
-            ),
             Container(
-              width: 61.w,
-              height: 60.w,
+              // height: 86.h,
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(vertical: 12.w),
               decoration: BoxDecoration(
-                  color: isCompleted
-                      ? nicotrackGreen.withOpacity(0.15)
-                      : emojiColor,
-                  borderRadius: BorderRadius.circular(11.r)),
-              child: Center(
-                child: Image.asset(
-                  emoji,
-                  width: 34.w,
-                ),
+                  borderRadius: BorderRadius.circular(21.r),
+                  border: Border.all(
+                    width: 1,
+                    color: const Color(0xFFEFEFEF),
+                  )),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Container(
+                    width: 61.w,
+                    height: 60.w,
+                    decoration: BoxDecoration(
+                        color: isCompleted
+                            ? nicotrackGreen.withOpacity(0.15)
+                            : emojiColor,
+                        borderRadius: BorderRadius.circular(11.r)),
+                    child: Center(
+                      child: Image.asset(
+                        emoji,
+                        width: 34.w,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 15.w,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextAutoSize(
+                        titleTxt,
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                            height: 1.1,
+                            fontSize: 15.sp,
+                            fontFamily: circularBold,
+                            color: Colors.black.withOpacity(0.76)),
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      TextAutoSize(subTitle,
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            height: 1.1,
+                            fontSize: 14.sp,
+                            fontFamily: circularBook,
+                            color: Color(0xffBCB6D8),
+                          )),
+                    ],
+                  )
+                ],
               ),
             ),
-            SizedBox(
-              width: 15.w,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextAutoSize(
-                  titleTxt,
-                  textAlign: TextAlign.right,
-                  style: TextStyle(
-                      height: 1.1,
-                      fontSize: 15.sp,
-                      fontFamily: circularBold,
-                      color: Colors.black.withOpacity(0.76)),
-                ),
-                SizedBox(
-                  height: 2.h,
-                ),
-                TextAutoSize(subTitle,
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                      height: 1.1,
-                      fontSize: 14.sp,
-                      fontFamily: circularBook,
-                      color: Color(0xffBCB6D8),
-                    )),
-              ],
-            )
+            isUserPremium || taskType == DailyTaskType.smoking
+                ? SizedBox.shrink()
+                : Positioned(top: 10.w, right: 10.w, child: smallLockBox())
           ],
-        ),
-      ),
-    );
+        ));
   }
 
   Widget quickActions() {
