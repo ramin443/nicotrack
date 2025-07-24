@@ -97,14 +97,16 @@ Widget smallLockBox() {
 
 Widget contentLockBox() {
   return Container(
-    padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 15.w),
+    width: 200.w,
+    height: 48.w,
+    // padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 15.w),
     decoration: BoxDecoration(
       color: Colors.black,
-      borderRadius: BorderRadius.circular(14.r),
+      borderRadius: BorderRadius.circular(30.r),
     ),
     child: Center(
       child: TextAutoSize(
-        '🔒 Get Pro to unlock',
+        '🔒 Get Pro to unlock ',
         style: TextStyle(
           fontSize: 16.sp,
           fontFamily: circularMedium,

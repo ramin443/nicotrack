@@ -1,20 +1,24 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/4x4-alt-scroll-view.dart';
+import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
 
 import '../../../../constants/color-constants.dart';
 import '../../../../constants/dummy-data-constants.dart';
 import '../../../../constants/font-constants.dart';
 import '../../../../constants/image-constants.dart';
 import '../../../../getx-controllers/progress-controller.dart';
+import '../../../../getx-controllers/premium-controller.dart';
 import '../../../../models/did-you-smoke/didyouSmoke-model.dart';
 import '../../../../models/emoji-text-pair/emojitext-model.dart';
 import '../../../../models/mood-model/mood-model.dart';
 import '../../../../models/onboarding-data/onboardingData-model.dart';
 import '../../../elements/textAutoSize.dart';
+import '../../../premium/premium-paywall-screen.dart';
 
 class TopTriggersSection extends StatefulWidget {
   const TopTriggersSection({super.key});
@@ -137,7 +141,10 @@ class _TopTriggersSectionState extends State<TopTriggersSection> {
     return GetBuilder<ProgressController>(
         init: ProgressController(),
         builder: (progressController) {
-          return Column(
+          return GetBuilder<PremiumController>(
+              init: PremiumController(),
+              builder: (premiumController) {
+                return Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -173,12 +180,37 @@ class _TopTriggersSectionState extends State<TopTriggersSection> {
               SizedBox(
                 height: 16.h,
               ),
-              FourxFourAltScrollView(
-                scrollController:
+              Stack(
+                children: [
+                  FourxFourAltScrollView(
+                    scrollController:
                     progressController.topTriggersScrollController,
-                items: _getTopTriggers(),
-                childAspectRatio: 2.6,
+                    items: _getTopTriggers(),
+                    childAspectRatio: 2.6,
+                  ),
+                  if (!premiumController.isPremium.value)
+                    Positioned.fill(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return const PremiumPaywallScreen();
+                          }));
+                        },
+                        child: ClipRect(
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                            child: Container(
+                              color: Colors.white.withOpacity(0.1),
+                              child: Center(child: contentLockBox(),),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
               ),
+
               SizedBox(
                 height: 12.h,
               ),
@@ -196,6 +228,7 @@ class _TopTriggersSectionState extends State<TopTriggersSection> {
               )
             ],
           );
+              });
         });
   }
 }

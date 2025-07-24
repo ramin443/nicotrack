@@ -33,8 +33,7 @@ class _HomeState extends State<Home> {
         builder: (homeController) {
           return GetBuilder<PremiumController>(
               init: PremiumController(),
-              initState: (state) {
-              },
+              initState: (state) {},
               builder: (premiumController) {
                 return Scaffold(
                   backgroundColor: Colors.white,
@@ -92,7 +91,7 @@ class _HomeState extends State<Home> {
                                         Positioned(
                                             child: SvgPicture.asset(
                                           premiumBtnBg,
-                                          width: 112.w,
+                                          width: 102.w,
                                         )),
                                         Container(
                                           padding: EdgeInsets.only(bottom: 2.h),
@@ -102,7 +101,7 @@ class _HomeState extends State<Home> {
                                               "Get Pro",
                                               style: TextStyle(
                                                   fontSize: 16.sp,
-                                                  fontFamily: circularMedium,
+                                                  fontFamily: recoletaBold,
                                                   color: nicotrackBlack1),
                                             ),
                                           ),
@@ -126,25 +125,27 @@ class _HomeState extends State<Home> {
                           height: 14.w,
                         ),
                         homeController.homeGridView(),
-                        premiumController.isPremium.value?
-                        SizedBox.shrink():
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 12.w,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 14.w),
-                              child: premiumBox(context),
-                            ),
-                          ],
-                        ),
-
+                        premiumController.isPremium.value
+                            ? SizedBox.shrink()
+                            : Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 12.w,
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 14.w),
+                                    child: premiumBox(context),
+                                  ),
+                                ],
+                              ),
                         SizedBox(
                           height: 28.w,
                         ),
-                        homeController.dailyTasksSection(context: context, isUserPremium: premiumController.isPremium.value),
+                        homeController.dailyTasksSection(
+                            context: context,
+                            isUserPremium: premiumController.isPremium.value),
                         SizedBox(
                           height: 12.w,
                         ),
