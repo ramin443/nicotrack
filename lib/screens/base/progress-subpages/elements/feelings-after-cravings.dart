@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -6,13 +7,16 @@ import 'package:intl/intl.dart';
 import 'package:nicotrack/constants/dummy-data-constants.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/4x4-scroll-view.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
+import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
 
 import '../../../../constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
 import '../../../../constants/image-constants.dart';
 import '../../../../getx-controllers/progress-controller.dart';
+import '../../../../getx-controllers/premium-controller.dart';
 import '../../../../models/emoji-text-pair/emojitext-model.dart';
 import '../../../../models/mood-model/mood-model.dart';
+import '../../../premium/premium-paywall-screen.dart';
 
 class FeelingsAfterCravings extends StatefulWidget {
   const FeelingsAfterCravings({super.key});
@@ -103,7 +107,10 @@ class _FeelingsAfterCravingsState extends State<FeelingsAfterCravings> {
     return GetBuilder<ProgressController>(
         init: ProgressController(),
         builder: (progressController) {
-          return Column(
+          return GetBuilder<PremiumController>(
+              init: PremiumController(),
+              builder: (premiumController) {
+                return Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -139,10 +146,34 @@ class _FeelingsAfterCravingsState extends State<FeelingsAfterCravings> {
               SizedBox(
                 height: 16.h,
               ),
-              FourxFourScrollView(
-                  scrollController:
-                      progressController.cravingFeelingsScrollController,
-                  items: _getFeelingsAfterCravings(), childAspectRatio: 1.9,),
+              Stack(
+                children: [
+                  FourxFourScrollView(
+                      scrollController:
+                          progressController.cravingFeelingsScrollController,
+                      items: _getFeelingsAfterCravings(), childAspectRatio: 1.9,),
+                  if (!premiumController.isPremium.value)
+                    Positioned.fill(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return const PremiumPaywallScreen();
+                          }));
+                        },
+                        child: ClipRect(
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                            child: Container(
+                              color: Colors.white.withOpacity(0.1),
+                              child: Center(child: contentLockBox(),),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
               SizedBox(
                 height: 12.h,
               ),
@@ -160,6 +191,7 @@ class _FeelingsAfterCravingsState extends State<FeelingsAfterCravings> {
               )
             ],
           );
+              });
         });
   }
 }

@@ -1,12 +1,17 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:nicotrack/constants/dummy-data-constants.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/single-row-scroll-view.dart';
+import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
 
 import '../../../../constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
+import '../../../../getx-controllers/premium-controller.dart';
 import '../../../../models/emoji-text-pair/emojitext-model.dart';
 import '../../../../utility-functions/home-grid-calculations.dart';
+import '../../../premium/premium-paywall-screen.dart';
 
 class UpcomingHealthTrend extends StatefulWidget {
   final ScrollController scrollController;
@@ -145,7 +150,10 @@ class _UpcomingHealthTrendState extends State<UpcomingHealthTrend> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return GetBuilder<PremiumController>(
+        init: PremiumController(),
+        builder: (premiumController) {
+          return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -179,8 +187,33 @@ class _UpcomingHealthTrendState extends State<UpcomingHealthTrend> {
         SizedBox(
           height: 12.h,
         ),
-        SingleRowScrollView(items: _getUpcomingBodyChanges(), scrollController: widget.scrollController,)
+        Stack(
+          children: [
+            SingleRowScrollView(items: _getUpcomingBodyChanges(), scrollController: widget.scrollController,),
+            if (!premiumController.isPremium.value)
+              Positioned.fill(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return const PremiumPaywallScreen();
+                    }));
+                  },
+                  child: ClipRect(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                      child: Container(
+                        color: Colors.white.withOpacity(0.1),
+                        child: Center(child: contentLockBox(),),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        )
       ],
     );
+        });
   }
 }
