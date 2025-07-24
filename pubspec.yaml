@@ -122,6 +122,9 @@ flutter:
     - family: RecoletaBold
       fonts:
         - asset: assets/fonts/Recoleta-Bold.ttf
+    - family: RecoletaSemiBold
+      fonts:
+        - asset: assets/fonts/Recoleta-SemiBold.ttf
 
 
   assets:

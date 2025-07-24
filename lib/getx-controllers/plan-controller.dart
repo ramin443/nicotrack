@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
@@ -9,11 +10,14 @@ import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/constants/quick-function-constants.dart';
 import 'package:nicotrack/screens/elements/gradient-text.dart';
 import 'package:nicotrack/screens/elements/info-bottom-sheet.dart';
+import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
 import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
 
 import '../constants/font-constants.dart';
 import '../models/timeline-item-model/timelineItem-model.dart';
 import '../screens/elements/textAutoSize.dart';
+import '../screens/premium/premium-paywall-screen.dart';
+import 'premium-controller.dart';
 
 class PlanController extends GetxController {
   int tabIndex = 0;
@@ -31,13 +35,15 @@ class PlanController extends GetxController {
         dayNumber: 1,
         streakNumber: 1,
         dayDuration: "Day 2",
-        whatHappens: "🧪 Nicotine drops 90% • 👃 Taste improves • 😰 Withdrawal starts",
+        whatHappens:
+            "🧪 Nicotine drops 90% • 👃 Taste improves • 😰 Withdrawal starts",
         streakImg: ballImg),
     TimelineItemModel(
         dayNumber: 3,
         streakNumber: 3,
         dayDuration: "Day 3-4",
-        whatHappens: "🚫 Nicotine eliminated • 📈 Peak cravings • 🧠 Brain adjusts",
+        whatHappens:
+            "🚫 Nicotine eliminated • 📈 Peak cravings • 🧠 Brain adjusts",
         streakImg: ballrollImg),
     TimelineItemModel(
         dayNumber: 5,
@@ -49,19 +55,22 @@ class PlanController extends GetxController {
         dayNumber: 8,
         streakNumber: 8,
         dayDuration: "Week 1-2",
-        whatHappens: "🩸 Circulation +15% • 😮‍💨 Easier breathing • 🧠 Fog clears",
+        whatHappens:
+            "🩸 Circulation +15% • 😮‍💨 Easier breathing • 🧠 Fog clears",
         streakImg: capImg),
     TimelineItemModel(
         dayNumber: 14,
         streakNumber: 14,
         dayDuration: "2 Weeks",
-        whatHappens: "🫁 Lung function +5% • 🏃 Exercise easier • 😊 Mood stabilizes",
+        whatHappens:
+            "🫁 Lung function +5% • 🏃 Exercise easier • 😊 Mood stabilizes",
         streakImg: medalImg),
     TimelineItemModel(
         dayNumber: 18,
         streakNumber: 18,
         dayDuration: "2.5 Weeks",
-        whatHappens: "🫁 Rapid cilia regrowth • 🌬️ Self-cleaning starts • 💪 Stamina up",
+        whatHappens:
+            "🫁 Rapid cilia regrowth • 🌬️ Self-cleaning starts • 💪 Stamina up",
         streakImg: teddyImg),
     TimelineItemModel(
         dayNumber: 21,
@@ -79,7 +88,8 @@ class PlanController extends GetxController {
         dayNumber: 35,
         streakNumber: 35,
         dayDuration: "5 Weeks",
-        whatHappens: "🌬️ Infection risk drops • 🏃‍♂️ Cardio +20% • 😴 Better sleep",
+        whatHappens:
+            "🌬️ Infection risk drops • 🏃‍♂️ Cardio +20% • 😴 Better sleep",
         streakImg: chocolateImg),
     TimelineItemModel(
         dayNumber: 42,
@@ -91,79 +101,92 @@ class PlanController extends GetxController {
         dayNumber: 50,
         streakNumber: 50,
         dayDuration: "7 Weeks",
-        whatHappens: "🫁 Function +25% • 🧠 Sharp focus • 🔥 Optimal metabolism",
+        whatHappens:
+            "🫁 Function +25% • 🧠 Sharp focus • 🔥 Optimal metabolism",
         streakImg: vacayImg),
     TimelineItemModel(
         dayNumber: 56,
         streakNumber: 56,
         dayDuration: "8 Weeks",
-        whatHappens: "🩸 Peak oxygen delivery • 💓 Heart +30% • 😊 Mood optimal",
+        whatHappens:
+            "🩸 Peak oxygen delivery • 💓 Heart +30% • 😊 Mood optimal",
         streakImg: magicbowlImg),
     TimelineItemModel(
         dayNumber: 65,
         streakNumber: 65,
         dayDuration: "9-10 Weeks",
-        whatHappens: "🏃 Athletic baseline • 🛡️ Strong immunity • 🌟 Better skin",
+        whatHappens:
+            "🏃 Athletic baseline • 🛡️ Strong immunity • 🌟 Better skin",
         streakImg: no1Img),
     TimelineItemModel(
         dayNumber: 75,
         streakNumber: 75,
         dayDuration: "10-11 Weeks",
-        whatHappens: "🫁 Cilia 70% restored • 😮‍💨 No breathlessness • 🧠 Peak clarity",
+        whatHappens:
+            "🫁 Cilia 70% restored • 😮‍💨 No breathlessness • 🧠 Peak clarity",
         streakImg: hatImg),
     TimelineItemModel(
         dayNumber: 84,
         streakNumber: 84,
         dayDuration: "12 Weeks",
-        whatHappens: "💪 Peak muscle oxygen • 🌬️ Full lung cleaning • 🎯 Optimal cognition",
+        whatHappens:
+            "💪 Peak muscle oxygen • 🌬️ Full lung cleaning • 🎯 Optimal cognition",
         streakImg: dartarrowImg),
     TimelineItemModel(
         dayNumber: 95,
         streakNumber: 95,
         dayDuration: "13-14 Weeks",
-        whatHappens: "🫁 Function +40% • ❤️ Low heart risk • ⚡ Sustained energy",
+        whatHappens:
+            "🫁 Function +40% • ❤️ Low heart risk • ⚡ Sustained energy",
         streakImg: kiteImg),
     TimelineItemModel(
         dayNumber: 105,
         streakNumber: 105,
         dayDuration: "15 Weeks",
-        whatHappens: "🛡️ Optimal white cells • 🏃‍♀️ Fast recovery • 😴 Deep sleep",
+        whatHappens:
+            "🛡️ Optimal white cells • 🏃‍♀️ Fast recovery • 😴 Deep sleep",
         streakImg: golfImg),
     TimelineItemModel(
         dayNumber: 112,
         streakNumber: 112,
         dayDuration: "16 Weeks",
-        whatHappens: "🌬️ Athletic breathing • 🧠 Full neurotransmitters • 💎 Peak repair",
+        whatHappens:
+            "🌬️ Athletic breathing • 🧠 Full neurotransmitters • 💎 Peak repair",
         streakImg: pinataImg),
     TimelineItemModel(
         dayNumber: 126,
         streakNumber: 126,
         dayDuration: "18 Weeks",
-        whatHappens: "🫁 Capacity +45% • 🔋 Optimal mitochondria • 🌟 Visible transformation",
+        whatHappens:
+            "🫁 Capacity +45% • 🔋 Optimal mitochondria • 🌟 Visible transformation",
         streakImg: hat2Img),
     TimelineItemModel(
         dayNumber: 140,
         streakNumber: 140,
         dayDuration: "20 Weeks",
-        whatHappens: "💓 Peak heart efficiency • 🏃 Max VO2 • 🧬 DNA repair boost",
+        whatHappens:
+            "💓 Peak heart efficiency • 🏃 Max VO2 • 🧬 DNA repair boost",
         streakImg: ballrollImg),
     TimelineItemModel(
         dayNumber: 154,
         streakNumber: 154,
         dayDuration: "22 Weeks",
-        whatHappens: "🫁 Cilia 90% normal • 🛡️ Max infection resistance • ⚡ No crashes",
+        whatHappens:
+            "🫁 Cilia 90% normal • 🛡️ Max infection resistance • ⚡ No crashes",
         streakImg: hatImg),
     TimelineItemModel(
         dayNumber: 168,
         streakNumber: 168,
         dayDuration: "24 Weeks",
-        whatHappens: "🫁 Function +50% • 🌬️ Non-smoker breathing • 🏆 Full transformation",
+        whatHappens:
+            "🫁 Function +50% • 🌬️ Non-smoker breathing • 🏆 Full transformation",
         streakImg: badge1Emoji),
     TimelineItemModel(
         dayNumber: 180,
         streakNumber: 180,
         dayDuration: "6 Months",
-        whatHappens: "✨ Complete restoration • 💪 Peak performance • 🎉 Major milestone!",
+        whatHappens:
+            "✨ Complete restoration • 💪 Peak performance • 🎉 Major milestone!",
         streakImg: dartarrowImg),
   ];
   final ScrollController scrollController = ScrollController();
@@ -191,7 +214,7 @@ class PlanController extends GetxController {
   // Determine which timeline item the user has reached based on days passed
   int getCurrentTimelineIndex() {
     int daysPassed = getCurrentDaysPassed();
-    
+
     for (int i = timelineItems.length - 1; i >= 0; i--) {
       if (daysPassed >= timelineItems[i].dayNumber) {
         return i;
@@ -285,74 +308,140 @@ class PlanController extends GetxController {
   }
 
   Widget withdrawalTimeline(BuildContext context) {
-    return SizedBox(
-        width: double.infinity,
-        child: Column(
-          children: [
-            for (int index = 0; index < timelineItems.length; index++)
-              Column(
-                children: [
-                  timelineRow(
-                      timelineModelItem: timelineItems[index], index: index, context: context),
-                  SizedBox(
-                    height: index == 0 ? 0 : 8.w,
-                  ),
-                  SizedBox(
-                    height: 20.w,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 20.w,
-                        ),
-                        SizedBox(
-                          width: 100.w,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 20.w,
-                                width: 2.w,
-                                decoration: BoxDecoration(
-                                  color: index == timelineItems.length - 1
-                                      ? Colors.transparent
-                                      : Color(0xffF6F4F1),
-                                  borderRadius: index == 0
-                                      ? BorderRadius.only(
-                                          bottomRight: Radius.circular(22.w),
-                                          bottomLeft: Radius.circular(22.w))
-                                      : BorderRadius.circular(22.w),
-                                ),
+    return GetBuilder<PremiumController>(
+        init: PremiumController(),
+        builder: (premiumController) {
+          return Stack(
+            children: [
+              SizedBox(
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      for (int index = 0; index < timelineItems.length; index++)
+                        Column(
+                          children: [
+                            timelineRow(
+                                timelineModelItem: timelineItems[index],
+                                index: index,
+                                context: context),
+                            SizedBox(
+                              height: index == 0 ? 0 : 8.w,
+                            ),
+                            SizedBox(
+                              height: 20.w,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: 20.w,
+                                  ),
+                                  SizedBox(
+                                    width: 100.w,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          height: 20.w,
+                                          width: 2.w,
+                                          decoration: BoxDecoration(
+                                            color: index ==
+                                                    timelineItems.length - 1
+                                                ? Colors.transparent
+                                                : Color(0xffF6F4F1),
+                                            borderRadius: index == 0
+                                                ? BorderRadius.only(
+                                                    bottomRight:
+                                                        Radius.circular(22.w),
+                                                    bottomLeft:
+                                                        Radius.circular(22.w))
+                                                : BorderRadius.circular(22.w),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                          ],
                         )
-                      ],
+                    ],
+                  )),
+              // Calendar lock overlay covering all except first two rows
+              if (!premiumController.isPremium.value)
+                Positioned(
+                  top: 320.w,
+                  // Skip first two rows completely
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return const PremiumPaywallScreen();
+                      }));
+                    },
+                    child: ClipRect(
+                      child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              for (int i = 0; i < 5; i++)
+                                Column(
+                                  children: [
+                                    i == 0
+                                        ? SizedBox(
+                                            height: 80.w,
+                                          )
+                                        : SizedBox.shrink(),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color:
+                                        Colors.white.withValues(alpha: 0.1),
+                                      ),
+                                      child: Center(
+                                        child: calendarLock(),
+                                      ),
+
+                                    ),
+                                    i == 4
+                                        ? SizedBox(
+                                      height: 80.w,
+                                    )
+                                        : SizedBox.shrink(),
+                                  ],
+                                )
+                            ],
+                          )),
                     ),
                   ),
-                  SizedBox(
-                    height: 8.h,
-                  ),
-                ],
-              )
-          ],
-        )
+                ),
+            ],
+          );
+        });
 
-        // Expanded(
-        //   child: ListView.builder(
-        //     padding: EdgeInsets.symmetric(horizontal: 20.w),
-        //       scrollDirection: Axis.vertical,
-        //       shrinkWrap: true,
-        //       itemCount: timelineItems.length,
-        //       itemBuilder: (context, index) {
-        //         return timelineRow(timelineModelItem: timelineItems[index]);
-        //       }),
-        // )
-        );
+    // Expanded(
+    //   child: ListView.builder(
+    //     padding: EdgeInsets.symmetric(horizontal: 20.w),
+    //       scrollDirection: Axis.vertical,
+    //       shrinkWrap: true,
+    //       itemCount: timelineItems.length,
+    //       itemBuilder: (context, index) {
+    //         return timelineRow(timelineModelItem: timelineItems[index]);
+    //       }),
+    // )
   }
 
   Widget timelineRow(
-      {required  BuildContext context,required int index, required TimelineItemModel timelineModelItem}) {
+      {required BuildContext context,
+      required int index,
+      required TimelineItemModel timelineModelItem}) {
     return Stack(
       children: [
         Padding(
@@ -469,8 +558,8 @@ class PlanController extends GetxController {
                       ],
                     ),
               GestureDetector(
-                onTap: (){
-                  openDraggableBottomSheet( context: context, index: index);
+                onTap: () {
+                  openDraggableBottomSheet(context: context, index: index);
                   // showBottomSheet(
                   //   enableDrag: true,
                   //   backgroundColor: Colors.transparent,
@@ -575,15 +664,18 @@ class PlanController extends GetxController {
     return index == currentIndex;
   }
 
-  void setBottomSheetOn(){
+  void setBottomSheetOn() {
     isBottomSheetOn = true;
     update();
   }
-  void setBottomSheetOff(){
+
+  void setBottomSheetOff() {
     isBottomSheetOn = false;
     update();
   }
-  void openDraggableBottomSheet({required BuildContext context,required int index}){
+
+  void openDraggableBottomSheet(
+      {required BuildContext context, required int index}) {
     setBottomSheetOn();
     showModalBottomSheet(
       context: context,

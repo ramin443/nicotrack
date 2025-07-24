@@ -4,3 +4,4 @@ String circularBook= "CircularBook";
 String circularLight= "CircularLight";
 String circularBoldItalic= "CircularBoldItalic";
 String recoletaBold = "RecoletaBold";
+String recoletaSemiBold = 'RecoletaSemiBold';

@@ -116,3 +116,52 @@ Widget contentLockBox() {
     ),
   );
 }
+
+Widget calendarLock() {
+  return Container(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          width: 124.w,
+          height: 124.w,
+          decoration:BoxDecoration(
+            color: nicotrackBlack1,
+            borderRadius: BorderRadius.circular(30.r)
+          ),
+          child: Center(
+            child: Image.asset(
+              lockImg,
+              width: 52.w,
+            ),
+          )
+        ),
+
+        SizedBox(
+          height: 7.w,
+        ),
+        Container(
+          width: 120.w,
+          height: 48.w,
+          // padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 15.w),
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(30.r),
+          ),
+          child: Center(
+            child: TextAutoSize(
+              '✨ Get Pro ',
+              style: TextStyle(
+                fontSize: 17.sp,
+                fontFamily: recoletaSemiBold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        )
+
+      ],
+    ),
+  );
+}

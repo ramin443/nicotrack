@@ -43,11 +43,13 @@ class _ProgressState extends State<ProgressMain>
   }
 
   void _scrollListener() {
-    if (progressMainController.scrollController.offset > 200 && !_showFloatingButton) {
+    if (progressMainController.scrollController.offset > 200 &&
+        !_showFloatingButton) {
       setState(() {
         _showFloatingButton = true;
       });
-    } else if (progressMainController.scrollController.offset <= 200 && _showFloatingButton) {
+    } else if (progressMainController.scrollController.offset <= 200 &&
+        _showFloatingButton) {
       setState(() {
         _showFloatingButton = false;
       });
@@ -107,7 +109,7 @@ class _ProgressState extends State<ProgressMain>
                                     Positioned.fill(
                                       child: Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                            MainAxisAlignment.center,
                                         children: [
                                           Image.asset(
                                             progressImg,
@@ -195,74 +197,76 @@ class _ProgressState extends State<ProgressMain>
                                 ),
                               ],
                             ),
-
-                            Builder(
-                              builder: (_) {
-                                DateTime now = DateTime.now();
-                                int daysSinceLastSmoked = getDaysSinceLastSmoked(now);
-                                return RichText(
-                                    text: TextSpan(
-                                        style: TextStyle(
-                                            fontSize: 16.sp,
-                                            fontFamily: circularMedium,
-                                            height: 1,
-                                            color: Colors.white),
-                                        children: [
-                                      TextSpan(
-                                        text: "$daysSinceLastSmoked\n",
-                                        style: TextStyle(
-                                            fontSize: 36.sp,
-                                            fontFamily: circularMedium,
-                                            height: 1.1,
-                                            color: Colors.white),
-                                      ),
-                                      TextSpan(text: "days"),
-                                    ]));
-                              }
-                            )
+                            Builder(builder: (_) {
+                              DateTime now = DateTime.now();
+                              int daysSinceLastSmoked =
+                                  getDaysSinceLastSmoked(now);
+                              return RichText(
+                                  text: TextSpan(
+                                      style: TextStyle(
+                                          fontSize: 16.sp,
+                                          fontFamily: circularMedium,
+                                          height: 1,
+                                          color: Colors.white),
+                                      children: [
+                                    TextSpan(
+                                      text: "$daysSinceLastSmoked\n",
+                                      style: TextStyle(
+                                          fontSize: 36.sp,
+                                          fontFamily: circularMedium,
+                                          height: 1.1,
+                                          color: Colors.white),
+                                    ),
+                                    TextSpan(text: "days"),
+                                  ]));
+                            })
                           ],
                         ),
                       ),
                       SizedBox(
                         height: 9.h,
                       ),
-                      Builder(
-                        builder: (_) {
-                          // Get the quit date from onboarding data
-                          final box = Hive.box<OnboardingData>('onboardingCompletedData');
-                          OnboardingData userOnboardingData = box.get('currentUserOnboarding') ?? OnboardingData();
-                          String lastSmokedDateStr = userOnboardingData.lastSmokedDate;
-                          
-                          String formattedDate = "Not set";
-                          if (lastSmokedDateStr.isNotEmpty) {
-                            try {
-                              DateTime parsedDate = DateTime.parse(lastSmokedDateStr);
-                              formattedDate = DateFormat('MMM d, yyyy').format(parsedDate);
-                            } catch (e) {
-                              formattedDate = lastSmokedDateStr;
-                            }
+                      Builder(builder: (_) {
+                        // Get the quit date from onboarding data
+                        final box =
+                            Hive.box<OnboardingData>('onboardingCompletedData');
+                        OnboardingData userOnboardingData =
+                            box.get('currentUserOnboarding') ??
+                                OnboardingData();
+                        String lastSmokedDateStr =
+                            userOnboardingData.lastSmokedDate;
+
+                        String formattedDate = "Not set";
+                        if (lastSmokedDateStr.isNotEmpty) {
+                          try {
+                            DateTime parsedDate =
+                                DateTime.parse(lastSmokedDateStr);
+                            formattedDate =
+                                DateFormat('MMM d, yyyy').format(parsedDate);
+                          } catch (e) {
+                            formattedDate = lastSmokedDateStr;
                           }
-                          
-                          return RichText(
-                              text: TextSpan(
-                                  style: TextStyle(
-                                      fontSize: 15.sp,
-                                      fontFamily: circularMedium,
-                                      height: 1.1,
-                                      color: nicotrackBlack1),
-                                  children: [
-                                TextSpan(text: "🗓️ Quit Date: "),
-                                TextSpan(
-                                  text: formattedDate,
-                                  style: TextStyle(
-                                      fontSize: 15.sp,
-                                      fontFamily: circularBold,
-                                      height: 1.1,
-                                      color: nicotrackBlack1),
-                                ),
-                              ]));
                         }
-                      ),
+
+                        return RichText(
+                            text: TextSpan(
+                                style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontFamily: circularMedium,
+                                    height: 1.1,
+                                    color: nicotrackBlack1),
+                                children: [
+                              TextSpan(text: "🗓️ Quit Date: "),
+                              TextSpan(
+                                text: formattedDate,
+                                style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontFamily: circularBold,
+                                    height: 1.1,
+                                    color: nicotrackBlack1),
+                              ),
+                            ]));
+                      }),
                       SizedBox(
                         height: 24.h,
                       ),
@@ -274,13 +278,15 @@ class _ProgressState extends State<ProgressMain>
                       SizedBox(
                         height: 14.h,
                       ),
-                      progressController.progressTabContent2(isUserPremium: premiumController.isPremium.value)
+                      progressController.progressTabContent2(
+                          isUserPremium: premiumController.isPremium.value)
                     ],
                   ),
                 )
               ],
             )),
-            floatingActionButton: _showFloatingButton && progressController.tabController.index == 0
+            floatingActionButton: _showFloatingButton &&
+                    progressController.tabController.index == 0
                 ? FloatingActionButton(
                     onPressed: _scrollToTop,
                     backgroundColor: nicotrackBlack1,
