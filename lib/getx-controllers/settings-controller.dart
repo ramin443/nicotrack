@@ -226,37 +226,34 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           SizedBox(
             height: 10.w,
           ),
-          GetBuilder<AppPreferencesController>(
-            builder: (appPrefsController) {
-              return GestureDetector(
-                onTap: () {
-                  showChangeCurrencyBottomSheet(context);
-                },
-                child: personalInfoBox(
-                    fieldName: "Currency",
-                    fieldValue: "${appPrefsController.currencySymbol} ${appPrefsController.currencyCode}",
-                    fieldActionName: "Change",
-                    action: () {}),
-              );
-            }
-          ),
+          GetBuilder<AppPreferencesController>(builder: (appPrefsController) {
+            return GestureDetector(
+              onTap: () {
+                showChangeCurrencyBottomSheet(context);
+              },
+              child: personalInfoBox(
+                  fieldName: "Currency",
+                  fieldValue:
+                      "${appPrefsController.currencySymbol} ${appPrefsController.currencyCode}",
+                  fieldActionName: "Change",
+                  action: () {}),
+            );
+          }),
           SizedBox(
             height: 6.w,
           ),
-          GetBuilder<AppPreferencesController>(
-            builder: (appPrefsController) {
-              return GestureDetector(
-                onTap: () {
-                  showChangeLanguageBottomSheet(context);
-                },
-                child: personalInfoBox(
-                    fieldName: "Language",
-                    fieldValue: appPrefsController.languageName,
-                    fieldActionName: "Change",
-                    action: () {}),
-              );
-            }
-          ),
+          GetBuilder<AppPreferencesController>(builder: (appPrefsController) {
+            return GestureDetector(
+              onTap: () {
+                showChangeLanguageBottomSheet(context);
+              },
+              child: personalInfoBox(
+                  fieldName: "Language",
+                  fieldValue: appPrefsController.languageName,
+                  fieldActionName: "Change",
+                  action: () {}),
+            );
+          }),
           SizedBox(
             height: 10.w,
           ),
@@ -416,7 +413,8 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     );
   }
 
-  Widget financialGoalsSection({required BuildContext context, required bool isUserPremium}) {
+  Widget financialGoalsSection(
+      {required BuildContext context, required bool isUserPremium}) {
     return Column(
       children: [
         Padding(
@@ -1363,6 +1361,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.white,
+        isScrollControlled: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
         ),
@@ -1376,6 +1375,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.white,
+        isScrollControlled: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
         ),
@@ -1402,6 +1402,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.white,
+        isScrollControlled: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
         ),
@@ -1431,7 +1432,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
         ),
-        isScrollControlled: false,
+        isScrollControlled: true,
         builder: (context) {
           return ViewEditGoalBottomSheet(
             goal: userFinancialGoals[goalIndex],
@@ -2182,7 +2183,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
             height: 8.w,
           ),
           Container(
-            height: 200.h,
+            height: 260.w,
             child: TextField(
               maxLines: null,
               expands: true,
@@ -2360,7 +2361,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           child: TextAutoSize(
             '${Get.find<AppPreferencesController>().currencySymbol} $selectedFinGoalDollar.$selectedFinGoalCent',
             style: TextStyle(
-              fontSize: 24.sp,
+              fontSize: 48.sp,
               fontFamily: circularBold,
               color: isFinGoalSet
                   ? nicotrackOrange

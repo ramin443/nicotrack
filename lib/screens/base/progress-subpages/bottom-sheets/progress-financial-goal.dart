@@ -12,17 +12,21 @@ class ProgressFinancialGoalsBottomSheet extends StatefulWidget {
   const ProgressFinancialGoalsBottomSheet({super.key});
 
   @override
-  State<ProgressFinancialGoalsBottomSheet> createState() => _ProgressFinancialGoalsBottomSheetState();
+  State<ProgressFinancialGoalsBottomSheet> createState() =>
+      _ProgressFinancialGoalsBottomSheetState();
 }
 
-class _ProgressFinancialGoalsBottomSheetState extends State<ProgressFinancialGoalsBottomSheet> {
+class _ProgressFinancialGoalsBottomSheetState
+    extends State<ProgressFinancialGoalsBottomSheet> {
   ProgressController progressMainController = Get.find<ProgressController>();
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ProgressController>(
-        builder: (progressController) {
-          return Padding(
+    return GetBuilder<ProgressController>(builder: (progressController) {
+      return Container(
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height * 0.75,
+          child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 18.sp),
             child: Column(
               children: [
@@ -70,7 +74,8 @@ class _ProgressFinancialGoalsBottomSheetState extends State<ProgressFinancialGoa
                       children: [
                         GestureDetector(
                           onTap: () {
-                            if (progressController.isFinancialGoalFormValid1()) {
+                            if (progressController
+                                .isFinancialGoalFormValid1()) {
                               progressController.addNewFinancialGoal1();
                               Navigator.of(context).pop();
                             }
@@ -80,9 +85,10 @@ class _ProgressFinancialGoalsBottomSheetState extends State<ProgressFinancialGoa
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontFamily: circularBook,
-                              color: progressController.isFinancialGoalFormValid1()
-                                  ? nicotracklightBlue 
-                                  : nicotracklightBlue.withOpacity(0.4),
+                              color:
+                                  progressController.isFinancialGoalFormValid1()
+                                      ? nicotracklightBlue
+                                      : nicotracklightBlue.withOpacity(0.4),
                               height: 1.1,
                             ),
                           ),
@@ -97,18 +103,18 @@ class _ProgressFinancialGoalsBottomSheetState extends State<ProgressFinancialGoa
                 SizedBox(
                   height: 10.w,
                 ),
-
                 SizedBox(
                   height: 15.w,
                 ),
-
-                Expanded(child: progressController.financialGoalTextFields1(context)),
+                Expanded(
+                    child:
+                        progressController.financialGoalTextFields1(context)),
                 SizedBox(
                   height: 24.w,
                 ),
               ],
             ),
-          );
-        });
+          ));
+    });
   }
 }

@@ -30,105 +30,106 @@ class _ViewEditGoalBottomSheetState extends State<ViewEditGoalBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SettingsController>(
-        builder: (settingsController) {
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18.sp),
-            child: Column(
+    return GetBuilder<SettingsController>(builder: (settingsController) {
+      return Container(
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height * 0.75,
+          child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 18.sp),
+        child: Column(
+          children: [
+            SizedBox(height: 18.w),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 18.w),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 4.8.w,
-                      width: 52.w,
-                      decoration: BoxDecoration(
-                          color: nicotrackBlack1,
-                          borderRadius: BorderRadius.circular(18.r)),
-                    ),
-                  ],
+                Container(
+                  height: 4.8.w,
+                  width: 52.w,
+                  decoration: BoxDecoration(
+                      color: nicotrackBlack1,
+                      borderRadius: BorderRadius.circular(18.r)),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Container(
-                          width: 36.w,
-                          height: 36.w,
-                          decoration: BoxDecoration(
-                              color: nicotrackOrange.withOpacity(0.2),
-                              shape: BoxShape.circle),
-                          child: Center(
-                            child: Icon(
-                              Icons.close_rounded,
-                              size: 20.w,
-                              color: nicotrackOrange,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 12.w),
-                      GestureDetector(
-                        onTap: () {
-                          _showDeleteConfirmation(context, settingsController);
-                        },
-                        child: Container(
-                          width: 36.w,
-                          height: 36.w,
-                          decoration: BoxDecoration(
-                              color: nicotrackOrange.withOpacity(0.2),
-                              shape: BoxShape.circle),
-                          child: Center(
-                            child: Icon(
-                              Icons.delete_outline,
-                              size: 20.w,
-                              color: nicotrackOrange,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ]),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            if (settingsController.isFinancialGoalFormValid1()) {
-                              settingsController
-                                  .updateFinancialGoal(widget.goalIndex);
-                              Navigator.of(context).pop();
-                            }
-                          },
-                          child: TextAutoSize(
-                            'Save',
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              fontFamily: circularBook,
-                              color:
-                                  settingsController.isFinancialGoalFormValid1()
-                                      ? nicotracklightBlue
-                                      : nicotracklightBlue.withOpacity(0.4),
-                              height: 1.1,
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 4.w),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: 25.w),
-                _buildEditableGoalFields(context, settingsController),
-                SizedBox(height: 24.w),
               ],
             ),
-          );
-        });
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      width: 36.w,
+                      height: 36.w,
+                      decoration: BoxDecoration(
+                          color: nicotrackOrange.withOpacity(0.2),
+                          shape: BoxShape.circle),
+                      child: Center(
+                        child: Icon(
+                          Icons.close_rounded,
+                          size: 20.w,
+                          color: nicotrackOrange,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 12.w),
+                  GestureDetector(
+                    onTap: () {
+                      _showDeleteConfirmation(context, settingsController);
+                    },
+                    child: Container(
+                      width: 36.w,
+                      height: 36.w,
+                      decoration: BoxDecoration(
+                          color: nicotrackOrange.withOpacity(0.2),
+                          shape: BoxShape.circle),
+                      child: Center(
+                        child: Icon(
+                          Icons.delete_outline,
+                          size: 20.w,
+                          color: nicotrackOrange,
+                        ),
+                      ),
+                    ),
+                  ),
+                ]),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        if (settingsController.isFinancialGoalFormValid1()) {
+                          settingsController
+                              .updateFinancialGoal(widget.goalIndex);
+                          Navigator.of(context).pop();
+                        }
+                      },
+                      child: TextAutoSize(
+                        'Save',
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontFamily: circularBook,
+                          color: settingsController.isFinancialGoalFormValid1()
+                              ? nicotracklightBlue
+                              : nicotracklightBlue.withOpacity(0.4),
+                          height: 1.1,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 4.w),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 25.w),
+            _buildEditableGoalFields(context, settingsController),
+            SizedBox(height: 24.w),
+          ],
+        ),
+      ));
+    });
   }
 
   Widget _buildEditableGoalFields(
@@ -255,6 +256,7 @@ class _ViewEditGoalBottomSheetState extends State<ViewEditGoalBottomSheet> {
             ),
           ],
         ),
+        SizedBox(height: 6.w,),
         GestureDetector(
           onTap: () {
             controller.showEditGoalPriceBottomSheet1(context);
@@ -262,7 +264,7 @@ class _ViewEditGoalBottomSheetState extends State<ViewEditGoalBottomSheet> {
           child: TextAutoSize(
             '${Get.find<AppPreferencesController>().currencySymbol} ${controller.selectedFinGoalDollar1}.${controller.selectedFinGoalCent1.toString().padLeft(2, '0')}',
             style: TextStyle(
-              fontSize: 36.sp,
+              fontSize: 48.sp,
               fontFamily: circularBold,
               color: controller.isFinGoalSet
                   ? nicotrackOrange

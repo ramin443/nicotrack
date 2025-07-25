@@ -518,7 +518,7 @@ class ProgressController extends GetxController {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
         ),
-        isScrollControlled: false,
+        isScrollControlled: true,
         builder: (context) {
           return ProgressFinancialGoalsBottomSheet();
         });
@@ -545,7 +545,7 @@ class ProgressController extends GetxController {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
         ),
-        isScrollControlled: false,
+        isScrollControlled: true,
         builder: (context) {
           return ProgressViewEditGoalBottomSheet(
             goal: userFinancialGoals[goalIndex],
@@ -1213,7 +1213,7 @@ class ProgressController extends GetxController {
           child: TextAutoSize(
             '${Get.find<AppPreferencesController>().currencySymbol} $selectedFinGoalDollar.$selectedFinGoalCent',
             style: TextStyle(
-              fontSize: 24.sp,
+              fontSize: 48.sp,
               fontFamily: circularBold,
               color: isFinGoalSet? nicotrackOrange:Color(0xff454545).withOpacity(0.25),
               height: 1.1,
@@ -1285,7 +1285,7 @@ class ProgressController extends GetxController {
             ),
           ],
         ),
-        SizedBox(height: 18.w),
+        SizedBox(height: 28.w),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -1355,7 +1355,7 @@ class ProgressController extends GetxController {
           child: TextAutoSize(
             '${Get.find<AppPreferencesController>().currencySymbol} $selectedFinGoalDollar1.$selectedFinGoalCent1',
             style: TextStyle(
-              fontSize: 28.sp,
+              fontSize: 48.sp,
               fontFamily: circularBold,
               color: isFinGoalSet? nicotrackOrange:Color(0xff454545).withOpacity(0.25),
               height: 1.1,

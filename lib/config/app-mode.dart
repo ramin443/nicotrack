@@ -17,7 +17,7 @@ class AppModeConfig {
   /// Set to:
   /// - AppMode.production for normal app behavior
   /// - AppMode.dev to force full premium features
-  static const AppMode appMode = AppMode.production;
+  static const AppMode appMode = AppMode.dev;
   
   /// Check if app is in dev mode
   static bool get isDevMode => appMode == AppMode.dev;

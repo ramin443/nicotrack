@@ -25,14 +25,17 @@ class ProgressViewEditGoalBottomSheet extends StatefulWidget {
       _ProgressViewEditGoalBottomSheetState();
 }
 
-class _ProgressViewEditGoalBottomSheetState extends State<ProgressViewEditGoalBottomSheet> {
+class _ProgressViewEditGoalBottomSheetState
+    extends State<ProgressViewEditGoalBottomSheet> {
   ProgressController progressMainController = Get.find<ProgressController>();
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ProgressController>(
-        builder: (progressController) {
-          return Padding(
+    return GetBuilder<ProgressController>(builder: (progressController) {
+      return Container(
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height * 0.75,
+          child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 18.sp),
             child: Column(
               children: [
@@ -127,8 +130,8 @@ class _ProgressViewEditGoalBottomSheetState extends State<ProgressViewEditGoalBo
                 SizedBox(height: 24.w),
               ],
             ),
-          );
-        });
+          ));
+    });
   }
 
   Widget _buildEditableGoalFields(
@@ -193,7 +196,7 @@ class _ProgressViewEditGoalBottomSheetState extends State<ProgressViewEditGoalBo
             ),
           ],
         ),
-        SizedBox(height: 18.w),
+        SizedBox(height: 28.w),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -255,6 +258,7 @@ class _ProgressViewEditGoalBottomSheetState extends State<ProgressViewEditGoalBo
             ),
           ],
         ),
+        SizedBox(height: 8.w,),
         GestureDetector(
           onTap: () {
             controller.showEditGoalPriceBottomSheet(context);
@@ -262,7 +266,7 @@ class _ProgressViewEditGoalBottomSheetState extends State<ProgressViewEditGoalBo
           child: TextAutoSize(
             '${Get.find<AppPreferencesController>().currencySymbol} ${controller.selectedFinGoalDollar}.${controller.selectedFinGoalCent.toString().padLeft(2, '0')}',
             style: TextStyle(
-              fontSize: 36.sp,
+              fontSize: 48.sp,
               fontFamily: circularBold,
               color: controller.isFinGoalSet
                   ? nicotrackOrange

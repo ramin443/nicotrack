@@ -1,4 +1,3 @@
-
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +12,8 @@ class FinancialGoalsBottomSheet extends StatefulWidget {
   const FinancialGoalsBottomSheet({super.key});
 
   @override
-  State<FinancialGoalsBottomSheet> createState() => _FinancialGoalsBottomSheetState();
+  State<FinancialGoalsBottomSheet> createState() =>
+      _FinancialGoalsBottomSheetState();
 }
 
 class _FinancialGoalsBottomSheetState extends State<FinancialGoalsBottomSheet> {
@@ -21,9 +21,11 @@ class _FinancialGoalsBottomSheetState extends State<FinancialGoalsBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SettingsController>(
-        builder: (settingsController) {
-          return Padding(
+    return GetBuilder<SettingsController>(builder: (settingsController) {
+      return Container(
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height * 0.7,
+          child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 18.sp),
             child: Column(
               children: [
@@ -81,9 +83,10 @@ class _FinancialGoalsBottomSheetState extends State<FinancialGoalsBottomSheet> {
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontFamily: circularBook,
-                              color: settingsController.isFinancialGoalFormValid() 
-                                  ? nicotracklightBlue 
-                                  : nicotracklightBlue.withOpacity(0.4),
+                              color:
+                                  settingsController.isFinancialGoalFormValid()
+                                      ? nicotracklightBlue
+                                      : nicotracklightBlue.withOpacity(0.4),
                               height: 1.1,
                             ),
                           ),
@@ -98,18 +101,17 @@ class _FinancialGoalsBottomSheetState extends State<FinancialGoalsBottomSheet> {
                 SizedBox(
                   height: 10.w,
                 ),
-
                 SizedBox(
                   height: 15.w,
                 ),
-
-                Expanded(child: settingsController.financialGoalTextFields(context)),
+                Expanded(
+                    child: settingsController.financialGoalTextFields(context)),
                 SizedBox(
                   height: 24.w,
                 ),
               ],
             ),
-          );
-        });
+          ));
+    });
   }
 }

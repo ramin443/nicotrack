@@ -24,111 +24,114 @@ class _FeedbackBottomSheetState extends State<FeedbackBottomSheet> {
         init: SettingsController(),
         initState: (v) {},
         builder: (settingsController) {
-          return Padding(
-            padding: EdgeInsets.only(
-              left: 18.sp,
-              right: 18.sp,
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(
-                    height: 18.w,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+          return Container(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.75,
+              child: Padding(
+                padding: EdgeInsets.only(
+                  left: 18.sp,
+                  right: 18.sp,
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Container(
-                        height: 4.8.w,
-                        width: 52.w,
-                        decoration: BoxDecoration(
-                            color: nicotrackBlack1,
-                            borderRadius: BorderRadius.circular(18.r)),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          settingsController.selectedDollar = 4;
-                          settingsController.selectedCent = 20;
-                          Navigator.of(context).pop();
-                        },
-                        child: Container(
-                          width: 36.w,
-                          height: 36.w,
-                          decoration: BoxDecoration(
-                              color: nicotrackOrange.withOpacity(0.2),
-                              shape: BoxShape.circle),
-                          child: Center(
-                            child: Icon(
-                              Icons.close_rounded,
-                              size: 20.w,
-                              color: nicotrackOrange,
-                            ),
-                          ),
-                        ),
+                      SizedBox(
+                        height: 18.w,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 4.8.w,
+                            width: 52.w,
+                            decoration: BoxDecoration(
+                                color: nicotrackBlack1,
+                                borderRadius: BorderRadius.circular(18.r)),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GestureDetector(
                             onTap: () {
+                              settingsController.selectedDollar = 4;
+                              settingsController.selectedCent = 20;
                               Navigator.of(context).pop();
                             },
-                            child: TextAutoSize(
-                              'Done',
-                              style: TextStyle(
-                                fontSize: 16.sp,
-                                fontFamily: circularBook,
-                                color: nicotracklightBlue,
-                                height: 1.1,
+                            child: Container(
+                              width: 36.w,
+                              height: 36.w,
+                              decoration: BoxDecoration(
+                                  color: nicotrackOrange.withOpacity(0.2),
+                                  shape: BoxShape.circle),
+                              child: Center(
+                                child: Icon(
+                                  Icons.close_rounded,
+                                  size: 20.w,
+                                  color: nicotrackOrange,
+                                ),
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: 4.w,
-                          )
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: TextAutoSize(
+                                  'Done',
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontFamily: circularBook,
+                                    color: nicotracklightBlue,
+                                    height: 1.1,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 4.w,
+                              )
+                            ],
+                          ),
                         ],
                       ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10.w,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextAutoSize(
-                        '📝 Your honest feedback',
-                        style: TextStyle(
-                          fontSize: 24.sp,
-                          fontFamily: circularBold,
-                          color: nicotrackBlack1,
-                          height: 1.1,
-                        ),
+                      SizedBox(
+                        height: 10.w,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextAutoSize(
+                            '📝 Your honest feedback',
+                            style: TextStyle(
+                              fontSize: 24.sp,
+                              fontFamily: circularBold,
+                              color: nicotrackBlack1,
+                              height: 1.1,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 25.w,
+                      ),
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        child: settingsController.honestFeedbackTextFields(),
+                      ),
+                      SizedBox(
+                        height: 24.w,
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 25.w,
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.5,
-                    child: settingsController.honestFeedbackTextFields(),
-                  ),
-                  SizedBox(
-                    height: 24.w,
-                  ),
-                ],
-              ),
-            ),
-          );
+                ),
+              ));
         });
   }
 }
