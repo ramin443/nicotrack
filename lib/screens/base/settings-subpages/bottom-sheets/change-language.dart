@@ -34,7 +34,6 @@ class _ChangeLanguageBottomSheetState extends State<ChangeLanguageBottomSheet> {
     {'code': 'ja_JP', 'name': 'Japanese', 'flag': '🇯🇵'},
     {'code': 'ko_KR', 'name': 'Korean', 'flag': '🇰🇷'},
     {'code': 'hi_IN', 'name': 'Hindi', 'flag': '🇮🇳'},
-    {'code': 'ar_SA', 'name': 'Arabic', 'flag': '🇸🇦'},
     {'code': 'nl_NL', 'name': 'Dutch', 'flag': '🇳🇱'},
   ];
 
