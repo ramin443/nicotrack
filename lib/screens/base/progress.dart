@@ -279,7 +279,7 @@ class _ProgressState extends State<ProgressMain>
                         height: 14.h,
                       ),
                       progressController.progressTabContent2(
-                          isUserPremium: premiumController.isPremium.value)
+                          isUserPremium: premiumController.effectivePremiumStatus)
                     ],
                   ),
                 )

@@ -125,7 +125,7 @@ class _HomeState extends State<Home> {
                           height: 14.w,
                         ),
                         homeController.homeGridView(),
-                        premiumController.isPremium.value
+                        premiumController.effectivePremiumStatus
                             ? SizedBox.shrink()
                             : Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -145,7 +145,7 @@ class _HomeState extends State<Home> {
                         ),
                         homeController.dailyTasksSection(
                             context: context,
-                            isUserPremium: premiumController.isPremium.value),
+                            isUserPremium: premiumController.effectivePremiumStatus),
                         SizedBox(
                           height: 12.w,
                         ),

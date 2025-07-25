@@ -188,7 +188,7 @@ class _TopTriggersSectionState extends State<TopTriggersSection> {
                     items: _getTopTriggers(),
                     childAspectRatio: 2.6,
                   ),
-                  if (!premiumController.isPremium.value)
+                  if (!premiumController.effectivePremiumStatus)
                     Positioned.fill(
                       child: GestureDetector(
                         onTap: () {

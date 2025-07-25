@@ -85,7 +85,7 @@ class _SettingsState extends State<Settings> {
                                 color: nicotrackBlack1),
                           ),
                         ),
-                        premiumController.isPremium.value
+                        premiumController.effectivePremiumStatus
                             ? SizedBox.shrink()
                             : Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -100,9 +100,9 @@ class _SettingsState extends State<Settings> {
                                   ),
                                 ],
                               ),
-                        settingsController.personalInfoSection(context:context, isUserPremium: premiumController.isPremium.value),
+                        settingsController.personalInfoSection(context:context, isUserPremium: premiumController.effectivePremiumStatus),
                         settingsController.pushNotificationSection(context),
-                        settingsController.financialGoalsSection(context: context, isUserPremium: premiumController.isPremium.value),
+                        settingsController.financialGoalsSection(context: context, isUserPremium: premiumController.effectivePremiumStatus),
                         settingsController.helpandSupportSection(context),
                         settingsController.privacySection(context),
                       ],

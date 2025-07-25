@@ -152,7 +152,7 @@ class _FeelingsAfterCravingsState extends State<FeelingsAfterCravings> {
                       scrollController:
                           progressController.cravingFeelingsScrollController,
                       items: _getFeelingsAfterCravings(), childAspectRatio: 1.9,),
-                  if (!premiumController.isPremium.value)
+                  if (!premiumController.effectivePremiumStatus)
                     Positioned.fill(
                       child: GestureDetector(
                         onTap: () {

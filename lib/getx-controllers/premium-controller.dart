@@ -3,10 +3,21 @@ import 'package:get/get.dart';
 import '../services/purchase-service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nicotrack/constants/color-constants.dart';
+import '../config/app-mode.dart';
 
 class PremiumController extends GetxController {
   // Premium status
   RxBool isPremium = false.obs;
+  
+  // Get effective premium status (checks app mode)
+  bool get effectivePremiumStatus {
+    // If in dev mode, always return true (full premium)
+    if (AppModeConfig.shouldForcePremium) {
+      return true;
+    }
+    // Otherwise, return actual premium status
+    return isPremium.value;
+  }
   
   // Selected subscription plan
   RxInt selectedPlan = 1.obs; // 0: Monthly, 1: Yearly, 2: Lifetime
@@ -158,7 +169,7 @@ class PremiumController extends GetxController {
 
   // Check if user has access to premium features
   bool hasFeatureAccess(String feature) {
-    return isPremium.value;
+    return effectivePremiumStatus;
   }
 
   // Get subscription button text based on selected plan

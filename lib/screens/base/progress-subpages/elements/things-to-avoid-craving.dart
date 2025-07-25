@@ -148,7 +148,7 @@ class _ThingsToAvoidCravingState extends State<ThingsToAvoidCraving> {
                     scrollController:
                     progressController.avoidCravingsScrollController,
                     items: _getAvoidanceStrategies(), childAspectRatio: 1.65,),
-                if (!premiumController.isPremium.value)
+                if (!premiumController.effectivePremiumStatus)
                   Positioned.fill(
                     child: GestureDetector(
                       onTap: () {

@@ -160,7 +160,7 @@ class _SymptomsHealedFromState extends State<SymptomsHealedFrom> {
                     items: _getSymptomsEasedOrHealed(),
                     childAspectRatio: 2.2,
                   ),
-                  if (!premiumController.isPremium.value)
+                  if (!premiumController.effectivePremiumStatus)
                     Positioned.fill(
                       child: GestureDetector(
                         onTap: () {

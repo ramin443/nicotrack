@@ -190,7 +190,7 @@ class _UpcomingHealthTrendState extends State<UpcomingHealthTrend> {
         Stack(
           children: [
             SingleRowScrollView(items: _getUpcomingBodyChanges(), scrollController: widget.scrollController,),
-            if (!premiumController.isPremium.value)
+            if (!premiumController.effectivePremiumStatus)
               Positioned.fill(
                 child: GestureDetector(
                   onTap: () {

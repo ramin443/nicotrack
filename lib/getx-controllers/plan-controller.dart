@@ -372,7 +372,7 @@ class PlanController extends GetxController {
                     ],
                   )),
               // Calendar lock overlay covering all except first two rows
-              if (!premiumController.isPremium.value)
+              if (!premiumController.effectivePremiumStatus)
                 Positioned(
                   top: 320.w,
                   // Skip first two rows completely
