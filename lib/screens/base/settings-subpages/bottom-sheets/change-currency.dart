@@ -137,13 +137,11 @@ class _ChangeCurrencyBottomSheetState extends State<ChangeCurrencyBottomSheet> {
                     height: 1.1,
                   ),
                 ),
-                SizedBox(
-                  height: 28.w,
-                ),
+
                 Expanded(
                   child: CupertinoPicker(
                     scrollController: currencyController,
-                    itemExtent: 50.h,
+                    itemExtent: 60.w,
                     onSelectedItemChanged: (index) {
                       selectedCurrencyIndex = index;
                     },
@@ -152,7 +150,7 @@ class _ChangeCurrencyBottomSheetState extends State<ChangeCurrencyBottomSheet> {
                         child: TextAutoSize(
                           '${currency['symbol']} ${currency['name']} (${currency['code']})',
                           style: TextStyle(
-                            fontSize: 18.sp,
+                            fontSize: 22.sp,
                             fontFamily: circularMedium,
                             color: nicotrackBlack1,
                           ),

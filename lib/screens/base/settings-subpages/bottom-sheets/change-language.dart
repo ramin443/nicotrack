@@ -143,7 +143,7 @@ class _ChangeLanguageBottomSheetState extends State<ChangeLanguageBottomSheet> {
                 Expanded(
                   child: CupertinoPicker(
                     scrollController: languageController,
-                    itemExtent: 50.h,
+                    itemExtent: 60.w,
                     onSelectedItemChanged: (index) {
                       selectedLanguageIndex = index;
                     },
@@ -152,7 +152,7 @@ class _ChangeLanguageBottomSheetState extends State<ChangeLanguageBottomSheet> {
                         child: TextAutoSize(
                           '${language['flag']} ${language['name']}',
                           style: TextStyle(
-                            fontSize: 18.sp,
+                            fontSize: 22.sp,
                             fontFamily: circularMedium,
                             color: nicotrackBlack1,
                           ),
