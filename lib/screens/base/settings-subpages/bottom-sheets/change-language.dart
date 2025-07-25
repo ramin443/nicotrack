@@ -136,9 +136,7 @@ class _ChangeLanguageBottomSheetState extends State<ChangeLanguageBottomSheet> {
                     height: 1.1,
                   ),
                 ),
-                SizedBox(
-                  height: 28.w,
-                ),
+
                 Expanded(
                   child: CupertinoPicker(
                     scrollController: languageController,

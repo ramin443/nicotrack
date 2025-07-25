@@ -23,6 +23,10 @@ import 'package:intl/intl.dart';
 import 'package:nicotrack/screens/base/base.dart';
 import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
 import 'package:nicotrack/getx-controllers/home-controller.dart';
+import 'package:nicotrack/getx-controllers/premium-controller.dart';
+import 'package:nicotrack/screens/premium/premium-paywall-screen.dart';
+import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
+import 'dart:ui';
 
 class DidYouSmokeController extends GetxController {
   final PageController pageController = PageController();
@@ -603,165 +607,190 @@ class DidYouSmokeController extends GetxController {
     );
   }
 
-  Widget updateQuitDateSelection() {
-    return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-                flex: 2,
-                child: GestureDetector(
-                    onTap: () {
-                      HapticFeedback.heavyImpact();
-                      updateQuitDate = 0;
-                      didYouSmokeFilledData =
-                          didYouSmokeFilledData.copyWith(updateQuitDate: 0);
-                      getCurrentPageStatus();
-                      update();
-                    },
-                    child: Container(
-                      width: 155.w,
-                      height: 235.w,
-                      decoration: BoxDecoration(
-                        color: Color(0xffF4F4F4),
-                        borderRadius: BorderRadius.circular(16.r),
-                        image: updateQuitDate == 0
-                            ? DecorationImage(
-                                image: AssetImage(
-                                    quitMethodBG), // Replace with your image path
-                                fit: BoxFit
-                                    .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
-                              )
-                            : null,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+  Widget updateQuitDateSelection(BuildContext context) {
+    return GetBuilder<PremiumController>(
+        init: PremiumController(),
+        builder: (premiumController) {
+          return Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                      flex: 2,
+                      child: Stack(
                         children: [
-                          SizedBox(
-                            height: 18.h,
-                          ),
-                          Image.asset(
-                            yesUpdateImg,
-                            width: 70.w,
-                          ),
-                          SizedBox(
-                            height: 24.h,
-                          ),
-                          SizedBox(
-                            width: 130.w,
-                            child: TextAutoSize(
-                              "Yes, update my quit date",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                height: 1.2,
-                                fontSize: 18.sp,
-                                fontFamily: circularBold,
-                                color: nicotrackBlack1,
-                              ),
+                          GestureDetector(
+                              onTap: () {
+                                if (premiumController.effectivePremiumStatus) {
+                                  HapticFeedback.heavyImpact();
+                                  updateQuitDate = 0;
+                                  didYouSmokeFilledData =
+                                      didYouSmokeFilledData.copyWith(updateQuitDate: 0);
+                                  getCurrentPageStatus();
+                                  update();
+                                } else {
+                                  // Navigate to premium paywall
+                                  HapticFeedback.mediumImpact();
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => const PremiumPaywallScreen(),
+                                    ),
+                                  );
+                                }
+                              },
+                              child: Container(
+                                width: 155.w,
+                                height: 235.w,
+                                decoration: BoxDecoration(
+                                  color: Color(0xffF4F4F4),
+                                  borderRadius: BorderRadius.circular(16.r),
+                                  image: updateQuitDate == 0 && premiumController.effectivePremiumStatus
+                                      ? DecorationImage(
+                                          image: AssetImage(
+                                              quitMethodBG), // Replace with your image path
+                                          fit: BoxFit
+                                              .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
+                                        )
+                                      : null,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 18.h,
+                                    ),
+                                    Image.asset(
+                                      yesUpdateImg,
+                                      width: 70.w,
+                                    ),
+                                    SizedBox(
+                                      height: 24.h,
+                                    ),
+                                    SizedBox(
+                                      width: 130.w,
+                                      child: TextAutoSize(
+                                        "Yes, update my quit date",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          height: 1.2,
+                                          fontSize: 18.sp,
+                                          fontFamily: circularBold,
+                                          color: nicotrackBlack1,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 8.h,
+                                    ),
+                                    SizedBox(
+                                      width: 145.w,
+                                      child: TextAutoSize(
+                                        "(Resets your smoke-free streak to Day 0)",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          height: 1.2,
+                                          fontSize: 11.sp,
+                                          fontFamily: circularMedium,
+                                          color: Colors.black54,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 8.h,
+                                    ),
+                                  ],
+                                ),
+                              )),
+                          // Premium lock widget
+                          if (!premiumController.effectivePremiumStatus)
+                            Positioned(
+                              top: 8.w,
+                              right: 12.w,
+                              child: smallLockBox(),
                             ),
-                          ),
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          SizedBox(
-                            width: 145.w,
-                            child: TextAutoSize(
-                              "(Resets your smoke-free streak to Day 0)",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                height: 1.2,
-                                fontSize: 11.sp,
-                                fontFamily: circularMedium,
-                                color: Colors.black54,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8.h,
-                          ),
                         ],
-                      ),
-                    ))),
-            SizedBox(
-              width: 8.w,
-            ),
-            Expanded(
-                flex: 2,
-                child: GestureDetector(
-                    onTap: () {
-                      HapticFeedback.heavyImpact();
-                      updateQuitDate = 1;
-                      didYouSmokeFilledData =
-                          didYouSmokeFilledData.copyWith(updateQuitDate: 1);
-                      getCurrentPageStatus();
-                    },
-                    child: Container(
-                      // width: 155.h,
-                      height: 235.w,
-                      decoration: BoxDecoration(
-                          color: Color(0xffF4F4F4),
-                          image: updateQuitDate == 1
-                              ? DecorationImage(
-                                  image: AssetImage(
-                                      quitMethodBG), // Replace with your image path
-                                  fit: BoxFit
-                                      .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
-                                )
-                              : null,
-                          borderRadius: BorderRadius.circular(16.r)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 18.h,
-                          ),
-                          Image.asset(
-                            noUpdateImg,
-                            width: 70.w,
-                          ),
-                          SizedBox(
-                            height: 24.h,
-                          ),
-                          SizedBox(
-                            width: 130.w,
-                            child: TextAutoSize(
-                              "No, keep my quit date",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                height: 1.2,
-                                fontSize: 18.sp,
-                                fontFamily: circularBold,
-                                color: nicotrackBlack1,
-                              ),
+                      )),
+                  SizedBox(
+                    width: 8.w,
+                  ),
+                  Expanded(
+                      flex: 2,
+                      child: GestureDetector(
+                          onTap: () {
+                            HapticFeedback.heavyImpact();
+                            updateQuitDate = 1;
+                            didYouSmokeFilledData =
+                                didYouSmokeFilledData.copyWith(updateQuitDate: 1);
+                            getCurrentPageStatus();
+                          },
+                          child: Container(
+                            // width: 155.h,
+                            height: 235.w,
+                            decoration: BoxDecoration(
+                                color: Color(0xffF4F4F4),
+                                image: updateQuitDate == 1
+                                    ? DecorationImage(
+                                        image: AssetImage(
+                                            quitMethodBG), // Replace with your image path
+                                        fit: BoxFit
+                                            .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
+                                      )
+                                    : null,
+                                borderRadius: BorderRadius.circular(16.r)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 18.h,
+                                ),
+                                Image.asset(
+                                  noUpdateImg,
+                                  width: 70.w,
+                                ),
+                                SizedBox(
+                                  height: 24.h,
+                                ),
+                                SizedBox(
+                                  width: 130.w,
+                                  child: TextAutoSize(
+                                    "No, keep my quit date",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      height: 1.2,
+                                      fontSize: 18.sp,
+                                      fontFamily: circularBold,
+                                      color: nicotrackBlack1,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 8.h,
+                                ),
+                                SizedBox(
+                                  width: 145.w,
+                                  child: TextAutoSize(
+                                    "(This was just a one-time slip — I'm still on track!)",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      height: 1.2,
+                                      fontSize: 11.sp,
+                                      fontFamily: circularMedium,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 8.h,
+                                ),
+                              ],
                             ),
-                          ),
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          SizedBox(
-                            width: 145.w,
-                            child: TextAutoSize(
-                              "(This was just a one-time slip — I’m still on track!)",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                height: 1.2,
-                                fontSize: 11.sp,
-                                fontFamily: circularMedium,
-                                color: Colors.black54,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                        ],
-                      ),
-                    ))),
-          ],
-        ));
+                          ))),
+                ],
+              ));
+        });
   }
 
   Widget notSmokedTodayDataCubes() {

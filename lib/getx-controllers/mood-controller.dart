@@ -31,7 +31,7 @@ class MoodController extends GetxController {
   bool currentPageDoneStatus = false;
   MoodModel moodFilledData = MoodModel();
   TextEditingController noteTextController = TextEditingController();
-  
+
   @override
   void onInit() {
     super.onInit();
@@ -93,10 +93,14 @@ class MoodController extends GetxController {
     if (moodFilledData.anyCravingToday == 2) {
       // User selected "No cravings at all" - remove the crave times page
       pages = [
-        _basePagesTemplate[0], // MoodFeeling
-        _basePagesTemplate[1], // MoodAffecting  
-        _basePagesTemplate[2], // MoodCravings
-        _basePagesTemplate[4], // MoodReflectTimes (skip index 3 which is MoodCraveTimes)
+        _basePagesTemplate[0],
+        // MoodFeeling
+        _basePagesTemplate[1],
+        // MoodAffecting
+        _basePagesTemplate[2],
+        // MoodCravings
+        _basePagesTemplate[4],
+        // MoodReflectTimes (skip index 3 which is MoodCraveTimes)
       ];
     } else {
       // User had cravings - include all pages
@@ -108,11 +112,11 @@ class MoodController extends GetxController {
   double _getProgressWidth() {
     // Simple progress calculation based on current active pages
     if (pages.isEmpty) return 0.0;
-    
+
     double progress = (currentPage + 1) / pages.length;
     // Ensure progress doesn't exceed 1.0
     progress = progress.clamp(0.0, 1.0);
-    
+
     // Calculate width and ensure it doesn't exceed container width
     double calculatedWidth = progress * 315.w;
     return calculatedWidth.clamp(0.0, 315.w);
@@ -258,21 +262,24 @@ class MoodController extends GetxController {
                   // Select if not selected
                   selectedMoodAffectingIndices.add(index);
                 }
-                
+
                 // Update moodFilledData with all selected items
-                List<Map<String, dynamic>> selectedItems = selectedMoodAffectingIndices
-                    .map((i) => moodAffectingPairs[i].toJson())
-                    .toList();
-                moodFilledData = moodFilledData.copyWith(
-                    moodAffecting: selectedItems);
-                
+                List<Map<String, dynamic>> selectedItems =
+                    selectedMoodAffectingIndices
+                        .map((i) => moodAffectingPairs[i].toJson())
+                        .toList();
+                moodFilledData =
+                    moodFilledData.copyWith(moodAffecting: selectedItems);
+
                 getCurrentPageStatus();
               },
               child: AnimatedContainer(
                 height: 176.w,
                 duration: Duration(milliseconds: 200),
                 decoration: BoxDecoration(
-                  color: isSelected ? Colors.deepPurple.shade100 : Colors.transparent,
+                  color: isSelected
+                      ? Colors.deepPurple.shade100
+                      : Colors.transparent,
                   border: Border.all(
                     color: isSelected ? Colors.deepPurple : Color(0xffF0F0F0),
                     width: isSelected ? 2.sp : 1.sp,
@@ -329,14 +336,15 @@ class MoodController extends GetxController {
                         selectedCravingIndex = index;
                         moodFilledData =
                             moodFilledData.copyWith(anyCravingToday: index);
-                        
+
                         // If user selected "No cravings at all", set empty craving timing
                         if (index == 2) {
-                          moodFilledData = moodFilledData.copyWith(craveTiming: []);
+                          moodFilledData =
+                              moodFilledData.copyWith(craveTiming: []);
                           // Also clear any previously selected crave times
                           selectedCraveTimesIndices.clear();
                         }
-                        
+
                         // Rebuild pages based on craving selection
                         _rebuildPagesBasedOnCravingSelection();
                       }
@@ -346,8 +354,12 @@ class MoodController extends GetxController {
                       width: 298.w,
                       padding: EdgeInsets.symmetric(vertical: 22.w),
                       decoration: BoxDecoration(
-                          color: isSelected ? Colors.deepPurple.shade100 : Color(0xffF4F4F4),
-                          border: isSelected ? Border.all(color: Colors.deepPurple, width: 2) : null,
+                          color: isSelected
+                              ? Colors.deepPurple.shade100
+                              : Color(0xffF4F4F4),
+                          border: isSelected
+                              ? Border.all(color: Colors.deepPurple, width: 2)
+                              : null,
                           borderRadius: BorderRadius.circular(16.r)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -415,21 +427,24 @@ class MoodController extends GetxController {
                   // Select if not selected
                   selectedCraveTimesIndices.add(index);
                 }
-                
+
                 // Update moodFilledData with all selected items
-                List<Map<String, dynamic>> selectedItems = selectedCraveTimesIndices
-                    .map((i) => craveTimesPairs[i].toJson())
-                    .toList();
-                moodFilledData = moodFilledData.copyWith(
-                    craveTiming: selectedItems);
-                
+                List<Map<String, dynamic>> selectedItems =
+                    selectedCraveTimesIndices
+                        .map((i) => craveTimesPairs[i].toJson())
+                        .toList();
+                moodFilledData =
+                    moodFilledData.copyWith(craveTiming: selectedItems);
+
                 getCurrentPageStatus();
               },
               child: AnimatedContainer(
                 height: 176.w,
                 duration: Duration(milliseconds: 200),
                 decoration: BoxDecoration(
-                  color: isSelected ? Colors.deepPurple.shade100 : Colors.transparent,
+                  color: isSelected
+                      ? Colors.deepPurple.shade100
+                      : Colors.transparent,
                   border: Border.all(
                     color: isSelected ? Colors.deepPurple : Color(0xffF0F0F0),
                     width: isSelected ? 2.sp : 1.sp,
@@ -591,7 +606,7 @@ class MoodController extends GetxController {
     // Check completion status based on current page type rather than index
     if (currentPage < pages.length) {
       Widget currentPageWidget = pages[currentPage];
-      
+
       if (currentPageWidget is MoodFeeling) {
         currentPageDoneStatus = moodFilledData.selfFeeling.isNotEmpty;
       } else if (currentPageWidget is MoodAffecting) {
@@ -611,9 +626,9 @@ class MoodController extends GetxController {
     update();
   }
 
-  void addDatatoHiveandNavigate(DateTime currentDateTime, BuildContext context) async {
-    String moodStringToday = DateFormat.yMMMd()
-        .format(currentDateTime);
+  void addDatatoHiveandNavigate(
+      DateTime currentDateTime, BuildContext context) async {
+    String moodStringToday = DateFormat.yMMMd().format(currentDateTime);
     final box = Hive.box<MoodModel>('moodData');
     await box.put(moodStringToday, moodFilledData);
     if (context.mounted) {

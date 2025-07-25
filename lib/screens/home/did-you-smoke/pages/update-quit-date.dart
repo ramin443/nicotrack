@@ -89,7 +89,7 @@ class _UpdateQuitDateState extends State<UpdateQuitDate> {
               SizedBox(
                 height: 46.h,
               ),
-              didYouSmokeController.updateQuitDateSelection(),
+              didYouSmokeController.updateQuitDateSelection(context),
               SizedBox(
                 height: 54.h,
               ),
