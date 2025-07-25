@@ -20,16 +20,24 @@ import 'package:nicotrack/screens/mood/mood-detail-screen.dart';
 class MoodController extends GetxController {
   final PageController pageController = PageController();
   int currentPage = 0;
-  List<Widget> pages = [
+  List<Widget> _basePagesTemplate = [
     MoodFeeling(),
     MoodAffecting(),
     MoodCravings(),
     MoodCraveTimes(),
     MoodReflectTimes()
   ];
+  List<Widget> pages = [];
   bool currentPageDoneStatus = false;
   MoodModel moodFilledData = MoodModel();
   TextEditingController noteTextController = TextEditingController();
+  
+  @override
+  void onInit() {
+    super.onInit();
+    // Initialize with basic pages - will be updated dynamically
+    pages = List.from(_basePagesTemplate);
+  }
 
   //How you feeling variables
   int selectedFeelingsIndex = -1;
@@ -80,6 +88,36 @@ class MoodController extends GetxController {
     EmojiTextModel(emoji: othersEmoji, text: "Other"),
   ];
 
+  void _rebuildPagesBasedOnCravingSelection() {
+    // Rebuild pages list based on whether user had cravings or not
+    if (moodFilledData.anyCravingToday == 2) {
+      // User selected "No cravings at all" - remove the crave times page
+      pages = [
+        _basePagesTemplate[0], // MoodFeeling
+        _basePagesTemplate[1], // MoodAffecting  
+        _basePagesTemplate[2], // MoodCravings
+        _basePagesTemplate[4], // MoodReflectTimes (skip index 3 which is MoodCraveTimes)
+      ];
+    } else {
+      // User had cravings - include all pages
+      pages = List.from(_basePagesTemplate);
+    }
+    update();
+  }
+
+  double _getProgressWidth() {
+    // Simple progress calculation based on current active pages
+    if (pages.isEmpty) return 0.0;
+    
+    double progress = (currentPage + 1) / pages.length;
+    // Ensure progress doesn't exceed 1.0
+    progress = progress.clamp(0.0, 1.0);
+    
+    // Calculate width and ensure it doesn't exceed container width
+    double calculatedWidth = progress * 315.w;
+    return calculatedWidth.clamp(0.0, 315.w);
+  }
+
   Widget topSlider() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 32.w),
@@ -90,12 +128,11 @@ class MoodController extends GetxController {
           color: Colors.black.withOpacity(0.08),
           borderRadius: BorderRadius.circular(24.r),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+        child: Stack(
           children: [
             AnimatedContainer(
               duration: Duration(milliseconds: 200),
-              width: ((currentPage) / pages.length) * 315.w,
+              width: _getProgressWidth(),
               height: 6.w,
               decoration: BoxDecoration(
                 color: nicotrackBlack1,
@@ -292,6 +329,16 @@ class MoodController extends GetxController {
                         selectedCravingIndex = index;
                         moodFilledData =
                             moodFilledData.copyWith(anyCravingToday: index);
+                        
+                        // If user selected "No cravings at all", set empty craving timing
+                        if (index == 2) {
+                          moodFilledData = moodFilledData.copyWith(craveTiming: []);
+                          // Also clear any previously selected crave times
+                          selectedCraveTimesIndices.clear();
+                        }
+                        
+                        // Rebuild pages based on craving selection
+                        _rebuildPagesBasedOnCravingSelection();
                       }
                       getCurrentPageStatus();
                     },
@@ -461,7 +508,7 @@ class MoodController extends GetxController {
   }
 
   void previousPage() {
-    // Move to the next page
+    // Move to the previous page
     if (currentPage > 0) {
       currentPage--;
       pageController.animateToPage(
@@ -470,8 +517,8 @@ class MoodController extends GetxController {
         curve: Curves.easeInOut,
       );
     } else {
-      // Handle the case when reaching the last page (e.g., navigate to the main screen)
-      print("Onboarding complete!");
+      // Handle the case when reaching the first page
+      print("At first page!");
     }
   }
 
@@ -541,35 +588,25 @@ class MoodController extends GetxController {
   }
 
   void getCurrentPageStatus() {
-    switch (currentPage) {
-      case 0:
-        if (moodFilledData.selfFeeling.isNotEmpty) {
-          currentPageDoneStatus = true;
-        } else {
-          currentPageDoneStatus = false;
-        }
-      case 1:
-        if (moodFilledData.moodAffecting.isNotEmpty) {
-          currentPageDoneStatus = true;
-        } else {
-          currentPageDoneStatus = false;
-        }
-      case 2:
-        if (moodFilledData.anyCravingToday != -1) {
-          currentPageDoneStatus = true;
-        } else {
-          currentPageDoneStatus = false;
-        }
-      case 3:
-        if (moodFilledData.craveTiming.isNotEmpty) {
-          currentPageDoneStatus = true;
-        } else {
-          currentPageDoneStatus = false;
-        }
-      case 4:
-        currentPageDoneStatus = true;
-      default:
+    // Check completion status based on current page type rather than index
+    if (currentPage < pages.length) {
+      Widget currentPageWidget = pages[currentPage];
+      
+      if (currentPageWidget is MoodFeeling) {
+        currentPageDoneStatus = moodFilledData.selfFeeling.isNotEmpty;
+      } else if (currentPageWidget is MoodAffecting) {
+        currentPageDoneStatus = moodFilledData.moodAffecting.isNotEmpty;
+      } else if (currentPageWidget is MoodCravings) {
+        currentPageDoneStatus = moodFilledData.anyCravingToday != -1;
+      } else if (currentPageWidget is MoodCraveTimes) {
+        currentPageDoneStatus = moodFilledData.craveTiming.isNotEmpty;
+      } else if (currentPageWidget is MoodReflectTimes) {
+        currentPageDoneStatus = true; // Note page is always considered complete
+      } else {
         currentPageDoneStatus = false;
+      }
+    } else {
+      currentPageDoneStatus = false;
     }
     update();
   }

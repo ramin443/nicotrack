@@ -194,21 +194,20 @@ class _MoodDetailScreenState extends State<MoodDetailScreen> {
           ],
 
 
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            TextAutoSize(
-              'This is when you craved most',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 15.sp,
-                fontFamily: circularBook,
-                color: nicotrackBlack1.withOpacity(0.6),
-              ),
-            ),
-          ]),
-          SizedBox(height: 14.w),
-
-          // Craving timing section
+          // Only show craving timing section if user had cravings and timing data exists
           if (craveTiming.isNotEmpty) ...[
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              TextAutoSize(
+                'This is when you craved most',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontFamily: circularBook,
+                  color: nicotrackBlack1.withOpacity(0.6),
+                ),
+              ),
+            ]),
+            SizedBox(height: 14.w),
             _buildMultipleItemsGrid(
               craveTiming,
               currentCraveTimingPage,
