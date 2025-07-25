@@ -148,14 +148,14 @@ class _MoodTrendRowState extends State<MoodTrendRow> {
           final String dateKey = DateFormat.yMMMd().format(date);
           final MoodModel? moodData = moodBox.get(dateKey);
           
-          String emoji = "❌"; // Default to X mark
+          String emoji = "📭"; // Default to X mark
           
           if (moodData != null && moodData.selfFeeling.isNotEmpty) {
             // Extract emoji from selfFeeling map
             try {
-              emoji = moodData.selfFeeling['emoji'] ?? "❌";
+              emoji = moodData.selfFeeling['emoji'] ?? "📭";
             } catch (e) {
-              emoji = "❌";
+              emoji = "📭";
             }
           }
 
@@ -204,10 +204,10 @@ class _MoodTrendRowState extends State<MoodTrendRow> {
                               Container(
                                 padding: EdgeInsets.all(12.sp),
                                 decoration: BoxDecoration(
-                                  color: emoji == "❌" ? Color(0xffFFE5E5) : Color(0xffE9ECCC),
+                                  color: emoji == "📭" ? Colors.redAccent.withOpacity(0.22) : Color(0xffE9ECCC),
                                   shape: BoxShape.circle,
                                 ),
-                                child: emoji == "❌" 
+                                child: emoji == "📭"
                                   ? Text(
                                       emoji,
                                       style: TextStyle(

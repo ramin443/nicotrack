@@ -6,6 +6,8 @@ import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import '../../constants/color-constants.dart';
 import '../../constants/font-constants.dart';
 import '../../constants/image-constants.dart';
+import 'package:get/get.dart';
+import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 
 Widget mainCard({
   required String emoji,
@@ -90,7 +92,7 @@ Widget statCard({
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AnimatedFlipCounter(
-                prefix: isCost?'\$':'', // 👈 add dollar sign here (escaped with backslash)
+                prefix: isCost ? Get.find<AppPreferencesController>().currencySymbol : '', // 👈 add currency symbol dynamically
                 wholeDigits: 2, // 👈 forces two digits to be shown & flip
                 duration: Duration(seconds: 2),
                 value: value,

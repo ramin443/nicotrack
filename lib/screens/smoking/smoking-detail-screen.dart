@@ -16,6 +16,8 @@ import 'package:nicotrack/screens/elements/linear-progress-bar.dart';
 import 'package:nicotrack/models/financial-goals-model/financialGoals-model.dart';
 import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
 import 'package:animated_flip_counter/animated_flip_counter.dart';
+import 'package:get/get.dart';
+import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 
 enum SmokingDetailRouteSource {
   fromHome,
@@ -1017,7 +1019,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AnimatedFlipCounter(
-                prefix: '\$',
+                prefix: Get.find<AppPreferencesController>().currencySymbol,
                 wholeDigits: moneyValue.toString().length > 2 ? moneyValue.toString().length : 2,
                 duration: Duration(seconds: 2),
                 value: moneyValue,

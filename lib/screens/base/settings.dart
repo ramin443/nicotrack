@@ -71,6 +71,7 @@ class _SettingsState extends State<Settings> {
                     physics: BouncingScrollPhysics(),
                     child: Column(
                       children: [
+                        SizedBox(height: 20.w,),
                         AppBar(
                           backgroundColor: Colors.white,
                           elevation: 0,

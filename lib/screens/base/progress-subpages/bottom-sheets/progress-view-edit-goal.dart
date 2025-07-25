@@ -8,6 +8,7 @@ import 'package:nicotrack/models/financial-goals-model/financialGoals-model.dart
 import '../../../../constants/font-constants.dart';
 import '../../../../getx-controllers/progress-controller.dart';
 import '../../../elements/textAutoSize.dart';
+import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 
 class ProgressViewEditGoalBottomSheet extends StatefulWidget {
   final FinancialGoalsModel goal;
@@ -259,7 +260,7 @@ class _ProgressViewEditGoalBottomSheetState extends State<ProgressViewEditGoalBo
             controller.showEditGoalPriceBottomSheet(context);
           },
           child: TextAutoSize(
-            '\$ ${controller.selectedFinGoalDollar}.${controller.selectedFinGoalCent.toString().padLeft(2, '0')}',
+            '${Get.find<AppPreferencesController>().currencySymbol} ${controller.selectedFinGoalDollar}.${controller.selectedFinGoalCent.toString().padLeft(2, '0')}',
             style: TextStyle(
               fontSize: 36.sp,
               fontFamily: circularBold,

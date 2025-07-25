@@ -7,6 +7,8 @@ import '../../constants/color-constants.dart';
 import '../../constants/font-constants.dart';
 import '../../constants/image-constants.dart';
 import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
+import 'package:get/get.dart';
+import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 
 Widget mainCard({
   required String emoji,
@@ -37,7 +39,7 @@ Widget mainCard({
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AnimatedFlipCounter(
-                prefix: isCost ? '\$' : '',
+                prefix: isCost ? Get.find<AppPreferencesController>().currencySymbol : '',
                 // 👈 add dollar sign here (escaped with backslash)
                 wholeDigits: 2,
                 // 👈 forces two digits to be shown & flip
@@ -94,7 +96,7 @@ Widget statCard({
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AnimatedFlipCounter(
-                prefix: isCost ? '\$' : '',
+                prefix: isCost ? Get.find<AppPreferencesController>().currencySymbol : '',
                 // 👈 add dollar sign here (escaped with backslash)
                 wholeDigits: 2,
                 // 👈 forces two digits to be shown & flip
@@ -155,7 +157,7 @@ Widget statCard2({
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AnimatedFlipCounter(
-                prefix: isCost ? '\$' : '',
+                prefix: isCost ? Get.find<AppPreferencesController>().currencySymbol : '',
                 // 👈 add dollar sign here (escaped with backslash)
                 wholeDigits: getWholeDigits(value),
                 fractionDigits: getFractionDigits(value),

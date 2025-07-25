@@ -37,10 +37,13 @@ import 'package:nicotrack/models/financial-goals-model/financialGoals-model.dart
 import '../screens/base/settings-subpages/bottom-sheets/view-edit-goal.dart';
 import '../screens/base/settings-subpages/bottom-sheets/privacy-policy.dart';
 import '../screens/base/settings-subpages/bottom-sheets/terms-of-use.dart';
+import '../screens/base/settings-subpages/bottom-sheets/change-currency.dart';
+import '../screens/base/settings-subpages/bottom-sheets/change-language.dart';
 import 'package:nicotrack/models/mood-model/mood-model.dart';
 import 'package:nicotrack/models/did-you-smoke/didyouSmoke-model.dart';
 import 'package:nicotrack/models/quick-actions-model/quickActions-model.dart';
 import 'package:nicotrack/initial/welcome-info/info-slider-main.dart';
+import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 
 class SettingsController extends GetxController with WidgetsBindingObserver {
   bool enablePushNotification = false;
@@ -220,6 +223,40 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           ),
           userSelectedDisplayCards(
               context: context, isUserPremium: isUserPremium),
+          SizedBox(
+            height: 10.w,
+          ),
+          GetBuilder<AppPreferencesController>(
+            builder: (appPrefsController) {
+              return GestureDetector(
+                onTap: () {
+                  showChangeCurrencyBottomSheet(context);
+                },
+                child: personalInfoBox(
+                    fieldName: "Currency",
+                    fieldValue: "${appPrefsController.currencySymbol} ${appPrefsController.currencyCode}",
+                    fieldActionName: "Change",
+                    action: () {}),
+              );
+            }
+          ),
+          SizedBox(
+            height: 6.w,
+          ),
+          GetBuilder<AppPreferencesController>(
+            builder: (appPrefsController) {
+              return GestureDetector(
+                onTap: () {
+                  showChangeLanguageBottomSheet(context);
+                },
+                child: personalInfoBox(
+                    fieldName: "Language",
+                    fieldValue: appPrefsController.languageName,
+                    fieldActionName: "Change",
+                    action: () {}),
+              );
+            }
+          ),
           SizedBox(
             height: 10.w,
           ),
@@ -1703,7 +1740,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
         children: [
           // Dollar Sign - Fixed
           TextAutoSize(
-            "\$",
+            Get.find<AppPreferencesController>().currencySymbol,
             style: TextStyle(
               fontSize: 64.sp,
               fontFamily: circularBold,
@@ -1804,7 +1841,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
         children: [
           // Dollar Sign - Fixed
           TextAutoSize(
-            "\$",
+            Get.find<AppPreferencesController>().currencySymbol,
             style: TextStyle(
               fontSize: 64.sp,
               fontFamily: circularBold,
@@ -1905,7 +1942,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
         children: [
           // Dollar Sign - Fixed
           TextAutoSize(
-            "\$",
+            Get.find<AppPreferencesController>().currencySymbol,
             style: TextStyle(
               fontSize: 64.sp,
               fontFamily: circularBold,
@@ -2321,7 +2358,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
             showSetPriceBottomSheet(context);
           },
           child: TextAutoSize(
-            '\$ $selectedFinGoalDollar.$selectedFinGoalCent',
+            '${Get.find<AppPreferencesController>().currencySymbol} $selectedFinGoalDollar.$selectedFinGoalCent',
             style: TextStyle(
               fontSize: 24.sp,
               fontFamily: circularBold,
@@ -3652,6 +3689,32 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
         return const TermsOfUseBottomSheet();
+      },
+    );
+  }
+
+  void showChangeCurrencyBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
+      ),
+      builder: (BuildContext context) {
+        return const ChangeCurrencyBottomSheet();
+      },
+    );
+  }
+
+  void showChangeLanguageBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
+      ),
+      builder: (BuildContext context) {
+        return const ChangeLanguageBottomSheet();
       },
     );
   }

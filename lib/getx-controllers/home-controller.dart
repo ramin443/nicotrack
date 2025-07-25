@@ -26,6 +26,7 @@ import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
 import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
 import 'package:nicotrack/models/did-you-smoke/didyouSmoke-model.dart';
 import 'package:nicotrack/models/quick-actions-model/quickActions-model.dart';
+import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 
 enum DailyTaskType { mood, smoking }
 
@@ -303,8 +304,8 @@ class HomeController extends GetxController {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AnimatedFlipCounter(
-                  prefix: isCost ? '\$' : '',
-                  // 👈 add dollar sign here (escaped with backslash)
+                  prefix: isCost ? Get.find<AppPreferencesController>().currencySymbol : '',
+                  // 👈 add currency symbol dynamically
                   wholeDigits: 2,
                   // 👈 forces two digits to be shown & flip
                   duration: Duration(milliseconds: 1250),

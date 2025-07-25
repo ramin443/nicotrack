@@ -17,6 +17,7 @@ import 'package:nicotrack/screens/base/progress-subpages/bottom-sheets/progress-
 import 'package:hive/hive.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/services.dart';
+import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 
 import '../constants/color-constants.dart';
 import '../constants/dummy-data-constants.dart';
@@ -888,7 +889,7 @@ class ProgressController extends GetxController {
         children: [
           // Dollar Sign - Fixed
           TextAutoSize(
-            "\$",
+            Get.find<AppPreferencesController>().currencySymbol,
             style: TextStyle(
               fontSize: 64.sp,
               fontFamily: circularBold,
@@ -989,7 +990,7 @@ class ProgressController extends GetxController {
         children: [
           // Dollar Sign - Fixed
           TextAutoSize(
-            "\$",
+            Get.find<AppPreferencesController>().currencySymbol,
             style: TextStyle(
               fontSize: 64.sp,
               fontFamily: circularBold,
@@ -1210,7 +1211,7 @@ class ProgressController extends GetxController {
             showEditGoalPriceBottomSheet(context);
           },
           child: TextAutoSize(
-            '\$ $selectedFinGoalDollar.$selectedFinGoalCent',
+            '${Get.find<AppPreferencesController>().currencySymbol} $selectedFinGoalDollar.$selectedFinGoalCent',
             style: TextStyle(
               fontSize: 24.sp,
               fontFamily: circularBold,
@@ -1352,7 +1353,7 @@ class ProgressController extends GetxController {
             showEditGoalPriceBottomSheet1(context);
           },
           child: TextAutoSize(
-            '\$ $selectedFinGoalDollar1.$selectedFinGoalCent1',
+            '${Get.find<AppPreferencesController>().currencySymbol} $selectedFinGoalDollar1.$selectedFinGoalCent1',
             style: TextStyle(
               fontSize: 28.sp,
               fontFamily: circularBold,

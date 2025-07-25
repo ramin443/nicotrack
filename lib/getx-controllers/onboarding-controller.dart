@@ -20,6 +20,7 @@ import 'package:nicotrack/initial/onboarding-questions/question-pages/enter-name
 import '../models/onboarding-data/onboardingData-model.dart';
 import '../screens/base/base.dart';
 import 'package:hive/hive.dart';
+import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 
 class OnboardingController extends GetxController {
   List<Widget> pages = [
@@ -742,7 +743,7 @@ class OnboardingController extends GetxController {
         children: [
           // Dollar Sign - Fixed
           TextAutoSize(
-            "\$",
+            Get.find<AppPreferencesController>().currencySymbol,
             style: TextStyle(
               fontSize: 86.sp,
               fontFamily: circularBold,

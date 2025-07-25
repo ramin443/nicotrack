@@ -25,6 +25,8 @@ import 'package:nicotrack/services/notification-service.dart';
 import 'package:nicotrack/services/purchase-service.dart';
 import 'package:nicotrack/services/premium-persistence-service.dart';
 import 'package:nicotrack/getx-controllers/premium-controller.dart';
+import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
+import 'package:nicotrack/models/app-preferences-model/appPreferences-model.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:nicotrack/screens/home/did-you-smoke/pages/no-selected/congratulatory-page.dart';
 
@@ -41,6 +43,7 @@ void main() async {
   Hive.registerAdapter(QuickActionsAdapter());
   Hive.registerAdapter(FinancialGoalsAdapter());
   Hive.registerAdapter(NotificationsPreferencesAdapter());
+  Hive.registerAdapter(AppPreferencesModelAdapter());
 
   // Open your Hive box(es)
   await Hive.openBox<OnboardingData>('onboardingCompletedData');
@@ -49,6 +52,7 @@ void main() async {
   await Hive.openBox<QuickactionsModel>('quickActionsData');
   await Hive.openBox<FinancialGoalsModel>('financialGoalsData');
   await Hive.openBox<NotificationsPreferencesModel>('notificationsPreferencesData');
+  await Hive.openBox<AppPreferencesModel>('appPreferences');
 
   // Initialize timezone and notification service
   tz.initializeTimeZones();
@@ -59,6 +63,9 @@ void main() async {
   
   // Initialize purchase service
   await PurchaseService().initialize();
+  
+  // Initialize app preferences controller after Hive is ready
+  Get.put(AppPreferencesController()); // Initialize app preferences controller
 
   runApp(const MyApp());
 }

@@ -20,6 +20,7 @@ import '../../../../elements/linear-progress-bar.dart';
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import 'package:nicotrack/screens/base/base.dart';
+import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 
 class NoSmokeCongratsPage extends StatefulWidget {
   final DateTime selectedDate;
@@ -593,7 +594,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AnimatedFlipCounter(
-                prefix: '\$',
+                prefix: Get.find<AppPreferencesController>().currencySymbol,
                 wholeDigits: moneyValue.toString().length > 2 ? moneyValue.toString().length : 2,
                 duration: Duration(seconds: 2),
                 value: moneyValue,
