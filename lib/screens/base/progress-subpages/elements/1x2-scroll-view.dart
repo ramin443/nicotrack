@@ -122,7 +122,7 @@ class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
                                           style: TextStyle(
                                             fontSize: 52.sp,
                                             fontFamily: circularMedium,
-                                            height: 1.1,
+                                            height: 1.05,
                                           ),
                                         ),
                                         SizedBox(height: 14.h),

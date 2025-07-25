@@ -28,6 +28,7 @@ import '../screens/base/settings-subpages/bottom-sheets/cost-per-pack.dart';
 import '../screens/base/settings-subpages/bottom-sheets/set-price.dart';
 import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
 import 'package:hive/hive.dart';
+import 'package:nicotrack/getx-controllers/progress-controller.dart';
 import 'package:nicotrack/utility-functions/date-functions.dart';
 import 'package:nicotrack/models/notifications-preferences-model/notificationsPreferences-model.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -2504,6 +2505,11 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       // Save to Hive
       await saveFinancialGoalsToHive();
 
+      // Refresh ProgressController to sync data
+      if (Get.isRegistered<ProgressController>()) {
+        Get.find<ProgressController>().refreshFinancialGoals();
+      }
+
       // Reset form
       resetFinancialGoalForm();
 
@@ -2532,6 +2538,11 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       // Save to Hive
       await saveFinancialGoalsToHive();
 
+      // Refresh ProgressController to sync data
+      if (Get.isRegistered<ProgressController>()) {
+        Get.find<ProgressController>().refreshFinancialGoals();
+      }
+
       update();
     } catch (e) {
       print('Error updating financial goal: $e');
@@ -2548,6 +2559,11 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
 
       // Save to Hive
       await saveFinancialGoalsToHive();
+
+      // Refresh ProgressController to sync data
+      if (Get.isRegistered<ProgressController>()) {
+        Get.find<ProgressController>().refreshFinancialGoals();
+      }
 
       update();
     } catch (e) {

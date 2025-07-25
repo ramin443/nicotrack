@@ -18,6 +18,7 @@ import 'package:hive/hive.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/services.dart';
 import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
+import 'package:nicotrack/getx-controllers/settings-controller.dart';
 
 import '../constants/color-constants.dart';
 import '../constants/dummy-data-constants.dart';
@@ -371,6 +372,11 @@ class ProgressController extends GetxController {
       // Save to Hive
       await saveFinancialGoalsToHive();
       
+      // Refresh SettingsController to sync data
+      if (Get.isRegistered<SettingsController>()) {
+        Get.find<SettingsController>().loadFinancialGoalsFromHive();
+      }
+      
       // Reset form
       resetFinancialGoalForm();
       
@@ -425,6 +431,11 @@ class ProgressController extends GetxController {
       // Save to Hive
       await saveFinancialGoalsToHive();
       
+      // Refresh SettingsController to sync data
+      if (Get.isRegistered<SettingsController>()) {
+        Get.find<SettingsController>().loadFinancialGoalsFromHive();
+      }
+      
       update();
     } catch (e) {
       print('Error updating financial goal: $e');
@@ -441,6 +452,11 @@ class ProgressController extends GetxController {
       
       // Save to Hive
       await saveFinancialGoalsToHive();
+      
+      // Refresh SettingsController to sync data
+      if (Get.isRegistered<SettingsController>()) {
+        Get.find<SettingsController>().loadFinancialGoalsFromHive();
+      }
       
       update();
     } catch (e) {
@@ -503,6 +519,11 @@ class ProgressController extends GetxController {
     } catch (e) {
       print('Error loading financial goals: $e');
     }
+  }
+
+  // Method to refresh financial goals data (callable from other controllers)
+  void refreshFinancialGoals() {
+    loadFinancialGoalsFromHive();
   }
 
   void setFinGoalTrue() {
