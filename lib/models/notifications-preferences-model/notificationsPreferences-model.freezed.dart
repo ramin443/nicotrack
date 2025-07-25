@@ -21,8 +21,10 @@ NotificationsPreferencesModel _$NotificationsPreferencesModelFromJson(
 
 /// @nodoc
 mixin _$NotificationsPreferencesModel {
-  bool get pushNotificationsActivated =>
-      throw _privateConstructorUsedError; // Daily reminder time stored as separate components (following app's pattern)
+  bool get pushNotificationsActivated => throw _privateConstructorUsedError;
+  bool get manuallyDisabled =>
+      throw _privateConstructorUsedError; // Track if user manually turned off notifications in settings
+// Daily reminder time stored as separate components (following app's pattern)
   int get dailyReminderHour =>
       throw _privateConstructorUsedError; // 0-11 for 12-hour format
   int get dailyReminderMinute => throw _privateConstructorUsedError; // 0-59
@@ -56,6 +58,7 @@ abstract class $NotificationsPreferencesModelCopyWith<$Res> {
   @useResult
   $Res call(
       {bool pushNotificationsActivated,
+      bool manuallyDisabled,
       int dailyReminderHour,
       int dailyReminderMinute,
       String dailyReminderPeriod,
@@ -82,6 +85,7 @@ class _$NotificationsPreferencesModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? pushNotificationsActivated = null,
+    Object? manuallyDisabled = null,
     Object? dailyReminderHour = null,
     Object? dailyReminderMinute = null,
     Object? dailyReminderPeriod = null,
@@ -94,6 +98,10 @@ class _$NotificationsPreferencesModelCopyWithImpl<$Res,
       pushNotificationsActivated: null == pushNotificationsActivated
           ? _value.pushNotificationsActivated
           : pushNotificationsActivated // ignore: cast_nullable_to_non_nullable
+              as bool,
+      manuallyDisabled: null == manuallyDisabled
+          ? _value.manuallyDisabled
+          : manuallyDisabled // ignore: cast_nullable_to_non_nullable
               as bool,
       dailyReminderHour: null == dailyReminderHour
           ? _value.dailyReminderHour
@@ -138,6 +146,7 @@ abstract class _$$NotificationsPreferencesModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool pushNotificationsActivated,
+      bool manuallyDisabled,
       int dailyReminderHour,
       int dailyReminderMinute,
       String dailyReminderPeriod,
@@ -163,6 +172,7 @@ class __$$NotificationsPreferencesModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? pushNotificationsActivated = null,
+    Object? manuallyDisabled = null,
     Object? dailyReminderHour = null,
     Object? dailyReminderMinute = null,
     Object? dailyReminderPeriod = null,
@@ -175,6 +185,10 @@ class __$$NotificationsPreferencesModelImplCopyWithImpl<$Res>
       pushNotificationsActivated: null == pushNotificationsActivated
           ? _value.pushNotificationsActivated
           : pushNotificationsActivated // ignore: cast_nullable_to_non_nullable
+              as bool,
+      manuallyDisabled: null == manuallyDisabled
+          ? _value.manuallyDisabled
+          : manuallyDisabled // ignore: cast_nullable_to_non_nullable
               as bool,
       dailyReminderHour: null == dailyReminderHour
           ? _value.dailyReminderHour
@@ -214,6 +228,7 @@ class _$NotificationsPreferencesModelImpl
     implements _NotificationsPreferencesModel {
   _$NotificationsPreferencesModelImpl(
       {this.pushNotificationsActivated = false,
+      this.manuallyDisabled = false,
       this.dailyReminderHour = 8,
       this.dailyReminderMinute = 0,
       this.dailyReminderPeriod = " AM",
@@ -229,6 +244,10 @@ class _$NotificationsPreferencesModelImpl
   @override
   @JsonKey()
   final bool pushNotificationsActivated;
+  @override
+  @JsonKey()
+  final bool manuallyDisabled;
+// Track if user manually turned off notifications in settings
 // Daily reminder time stored as separate components (following app's pattern)
   @override
   @JsonKey()
@@ -261,7 +280,7 @@ class _$NotificationsPreferencesModelImpl
 
   @override
   String toString() {
-    return 'NotificationsPreferencesModel(pushNotificationsActivated: $pushNotificationsActivated, dailyReminderHour: $dailyReminderHour, dailyReminderMinute: $dailyReminderMinute, dailyReminderPeriod: $dailyReminderPeriod, weeklyReminderDay: $weeklyReminderDay, weeklyReminderHour: $weeklyReminderHour, weeklyReminderMinute: $weeklyReminderMinute, weeklyReminderPeriod: $weeklyReminderPeriod)';
+    return 'NotificationsPreferencesModel(pushNotificationsActivated: $pushNotificationsActivated, manuallyDisabled: $manuallyDisabled, dailyReminderHour: $dailyReminderHour, dailyReminderMinute: $dailyReminderMinute, dailyReminderPeriod: $dailyReminderPeriod, weeklyReminderDay: $weeklyReminderDay, weeklyReminderHour: $weeklyReminderHour, weeklyReminderMinute: $weeklyReminderMinute, weeklyReminderPeriod: $weeklyReminderPeriod)';
   }
 
   @override
@@ -273,6 +292,8 @@ class _$NotificationsPreferencesModelImpl
                     pushNotificationsActivated) ||
                 other.pushNotificationsActivated ==
                     pushNotificationsActivated) &&
+            (identical(other.manuallyDisabled, manuallyDisabled) ||
+                other.manuallyDisabled == manuallyDisabled) &&
             (identical(other.dailyReminderHour, dailyReminderHour) ||
                 other.dailyReminderHour == dailyReminderHour) &&
             (identical(other.dailyReminderMinute, dailyReminderMinute) ||
@@ -294,6 +315,7 @@ class _$NotificationsPreferencesModelImpl
   int get hashCode => Object.hash(
       runtimeType,
       pushNotificationsActivated,
+      manuallyDisabled,
       dailyReminderHour,
       dailyReminderMinute,
       dailyReminderPeriod,
@@ -324,6 +346,7 @@ abstract class _NotificationsPreferencesModel
     implements NotificationsPreferencesModel {
   factory _NotificationsPreferencesModel(
       {final bool pushNotificationsActivated,
+      final bool manuallyDisabled,
       final int dailyReminderHour,
       final int dailyReminderMinute,
       final String dailyReminderPeriod,
@@ -336,8 +359,11 @@ abstract class _NotificationsPreferencesModel
       _$NotificationsPreferencesModelImpl.fromJson;
 
   @override
+  bool get pushNotificationsActivated;
+  @override
   bool
-      get pushNotificationsActivated; // Daily reminder time stored as separate components (following app's pattern)
+      get manuallyDisabled; // Track if user manually turned off notifications in settings
+// Daily reminder time stored as separate components (following app's pattern)
   @override
   int get dailyReminderHour; // 0-11 for 12-hour format
   @override

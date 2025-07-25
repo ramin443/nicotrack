@@ -381,7 +381,7 @@ class _PlanAltState extends State<PlanAlt> {
                                             margin: EdgeInsets.symmetric(horizontal: 20.w),
                                             padding: EdgeInsets.all(20.w),
                                             decoration: BoxDecoration(
-                                              color: Colors.black87,
+                                              color: Colors.black,
                                               borderRadius: BorderRadius.circular(20.r),
                                             ),
                                             child: Column(

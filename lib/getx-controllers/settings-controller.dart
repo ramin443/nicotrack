@@ -3033,14 +3033,22 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
 
   void checkAndSyncNotificationPermission() async {
     try {
-      if (enablePushNotification) {
-        // If user wants notifications, check if permission is still granted
-        bool hasPermission = await checkNotificationPermission();
-        if (!hasPermission) {
-          // Permission was revoked, turn off user preference
-          enablePushNotification = false;
-          updateNotificationPreferences();
-        }
+      // Check current system permission
+      bool hasPermission = await checkNotificationPermission();
+      bool wasManuallyDisabled = currentNotificationsPreferences?.manuallyDisabled ?? false;
+      
+      if (hasPermission && !wasManuallyDisabled && !enablePushNotification) {
+        // System permission is granted, user hasn't manually disabled, but switch is off - auto-enable
+        enablePushNotification = true;
+        currentNotificationsPreferences = currentNotificationsPreferences?.copyWith(
+          pushNotificationsActivated: true,
+          manuallyDisabled: false,
+        );
+        updateNotificationPreferences();
+      } else if (!hasPermission && enablePushNotification && !wasManuallyDisabled) {
+        // Permission was revoked and user hadn't manually disabled - turn off
+        enablePushNotification = false;
+        updateNotificationPreferences();
       }
     } catch (e) {
       print('Permission sync error: $e');
@@ -3052,11 +3060,23 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     try {
       // Check actual system permission status
       bool hasSystemPermission = await checkNotificationPermission();
-
-      // Only turn OFF the switch if user wants notifications but permission is denied
-      if (!hasSystemPermission && enablePushNotification) {
-        // System permission is denied but user wants notifications - turn switch off
+      
+      // Check if user manually disabled notifications
+      bool wasManuallyDisabled = currentNotificationsPreferences?.manuallyDisabled ?? false;
+      
+      if (hasSystemPermission && !wasManuallyDisabled) {
+        // System permission is granted and user hasn't manually disabled - auto-enable
+        enablePushNotification = true;
+        currentNotificationsPreferences = currentNotificationsPreferences?.copyWith(
+          pushNotificationsActivated: true,
+          manuallyDisabled: false,
+        );
+        await updateNotificationPreferences();
+        update();
+      } else if (!hasSystemPermission || wasManuallyDisabled) {
+        // Either system permission denied OR user manually disabled - keep off
         enablePushNotification = false;
+        // Don't change manuallyDisabled flag here - preserve user's manual choice
         await updateNotificationPreferences();
         update();
       }
@@ -3091,8 +3111,12 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           bool permissionGranted = await requestNotificationPermission();
 
           if (permissionGranted) {
-            // Permission granted, enable notifications
+            // Permission granted, enable notifications and clear manual disable flag
             enablePushNotification = true;
+            currentNotificationsPreferences = currentNotificationsPreferences?.copyWith(
+              pushNotificationsActivated: true,
+              manuallyDisabled: false,
+            );
             await updateNotificationPreferences();
           } else {
             // Permission denied, keep switch off and automatically open settings
@@ -3102,13 +3126,21 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
             openAppSettings();
           }
         } else {
-          // Permission already granted
+          // Permission already granted, enable notifications and clear manual disable flag
           enablePushNotification = true;
+          currentNotificationsPreferences = currentNotificationsPreferences?.copyWith(
+            pushNotificationsActivated: true,
+            manuallyDisabled: false,
+          );
           await updateNotificationPreferences();
         }
       } else {
-        // User wants to disable notifications
+        // User manually wants to disable notifications
         enablePushNotification = false;
+        currentNotificationsPreferences = currentNotificationsPreferences?.copyWith(
+          pushNotificationsActivated: false,
+          manuallyDisabled: true, // Mark as manually disabled
+        );
         await updateNotificationPreferences();
       }
     } catch (e, stackTrace) {

@@ -11,6 +11,7 @@ _$NotificationsPreferencesModelImpl
         _$NotificationsPreferencesModelImpl(
           pushNotificationsActivated:
               json['pushNotificationsActivated'] as bool? ?? false,
+          manuallyDisabled: json['manuallyDisabled'] as bool? ?? false,
           dailyReminderHour: (json['dailyReminderHour'] as num?)?.toInt() ?? 8,
           dailyReminderMinute:
               (json['dailyReminderMinute'] as num?)?.toInt() ?? 0,
@@ -28,6 +29,7 @@ Map<String, dynamic> _$$NotificationsPreferencesModelImplToJson(
         _$NotificationsPreferencesModelImpl instance) =>
     <String, dynamic>{
       'pushNotificationsActivated': instance.pushNotificationsActivated,
+      'manuallyDisabled': instance.manuallyDisabled,
       'dailyReminderHour': instance.dailyReminderHour,
       'dailyReminderMinute': instance.dailyReminderMinute,
       'dailyReminderPeriod': instance.dailyReminderPeriod,

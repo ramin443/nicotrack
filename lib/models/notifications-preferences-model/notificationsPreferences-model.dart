@@ -9,6 +9,7 @@ class NotificationsPreferencesModel with _$NotificationsPreferencesModel {
   // Define a factory constructor with required fields
   factory NotificationsPreferencesModel({
     @Default(false) bool pushNotificationsActivated,
+    @Default(false) bool manuallyDisabled, // Track if user manually turned off notifications in settings
     // Daily reminder time stored as separate components (following app's pattern)
     @Default(8) int dailyReminderHour, // 0-11 for 12-hour format
     @Default(0) int dailyReminderMinute, // 0-59
