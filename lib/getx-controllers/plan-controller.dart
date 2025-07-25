@@ -380,6 +380,7 @@ class PlanController extends GetxController {
                   right: 0,
                   bottom: 0,
                   child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
                     onTap: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
