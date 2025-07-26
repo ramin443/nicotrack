@@ -18,7 +18,8 @@
       "Bash(mkdir:*)",
       "Bash(mv:*)",
       "Bash(git checkout:*)",
-      "Bash(flutter:*)"
+      "Bash(flutter:*)",
+      "Bash(cp:*)"
     ],
     "deny": []
   }

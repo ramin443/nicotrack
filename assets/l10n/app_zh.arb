@@ -1,0 +1,383 @@
+{
+  "@@locale": "zh_CN",
+  
+  "app_name": "Nicotrack",
+  "welcome_title": "欢迎使用\nNicotrack",
+  "start_journey_button": "开始您的戒烟之旅",
+  
+  "track_milestones_title": "追踪您的进展\n和里程碑",
+  "track_milestones_description": "每一个无烟的日子都让您更接近健康的生活。通过Nicotrack看看您已经走了多远",
+  "crush_cravings_title": "战胜您的烟瘾",
+  "crush_cravings_description": "我们知道烟瘾很强烈。Nicotrack通过分散注意力模式和烟瘾记录等工具帮助您管理它们。",
+  "stay_motivated_title": "保持动力并保持联系",
+  "stay_motivated_description": "您并不孤单。用成就徽章庆祝每个里程碑，并与其他戒烟者建立联系。",
+  "quit_plan_title": "您的个性化戒烟计划",
+  "quit_plan_feature_1": "⚡ 选择您的戒烟方法 – 立即戒烟或逐步减少方法",
+  "quit_plan_feature_2": "🔗 与Apple Health同步 – 追踪呼吸、心率等方面的改善",
+  
+  "enter_name_subtitle": "最后一步，😅",
+  "enter_name_title": "我们应该怎么称呼您？",
+  "name_placeholder": "张三",
+  
+  "onboarding_last_smoke_question": "您最后一次抽🚬香烟是什么时候？",
+  "onboarding_last_smoke_today": "今天",
+  "onboarding_last_smoke_yesterday": "昨天",
+  "onboarding_last_smoke_custom": "自定义日期",
+  
+  "onboarding_smoke_frequency_question": "您每天抽多少支🚬香烟？",
+  "onboarding_pack_cost_question": "您的一包香烟价格💰是多少？",
+  "onboarding_pack_contents_question": "一包里有多少支🚬香烟？",
+  "onboarding_biggest_motivation_question": "您戒烟的最大动机💪是什么？",
+  "onboarding_help_need_question": "您最需要什么帮助🙂？",
+  "onboarding_crave_situations_question": "什么情况下您最想抽烟😥？",
+  "onboarding_quit_method_question": "您想如何❌戒烟？",
+  "onboarding_quit_method_subtitle": "请选择一种。您也可以稍后更改",
+  
+  "motivation_health": "健康益处",
+  "motivation_money": "节省金钱",
+  "motivation_challenge": "个人挑战",
+  "motivation_family": "家人和亲人",
+  "motivation_addiction": "摆脱成瘾",
+  "motivation_other": "其他",
+  
+  "craving_coffee": "早晨喝咖啡时",
+  "craving_meals": "饭后",
+  "craving_alcohol": "喝酒时",
+  "craving_stress": "感到压力时",
+  "craving_boredom": "无聊或习惯",
+  "craving_other": "其他",
+  
+  "help_cravings": "处理烟瘾和戒断症状",
+  "help_plan": "坚持我的戒烟计划",
+  "help_support": "支持和动力",
+  "help_tracking": "追踪我的进展",
+  
+  "instant_quit": "立即\n戒烟",
+  "instant_quit_description": "立即停止并使用支持工具",
+  "stepdown_method": "逐步减少法",
+  "stepdown_description": "随着时间的推移逐渐减少吸烟",
+  
+  "select_date": "选择日期",
+  "cancel": "取消",
+  "confirm": "确认",
+  "continue": "继续",
+  "finish": "完成",
+  
+  "nav_home": "首页",
+  "nav_plan": "计划",
+  "nav_progress": "进展",
+  "nav_settings": "设置",
+  
+  "settings_title": "📋 设置",
+  "personal_info_section": "个人信息",
+  "push_notifications_section": "推送通知",
+  "financial_goals_section": "财务目标",
+  "help_support_section": "帮助和支持",
+  "privacy_section": "隐私",
+  
+  "field_name": "姓名",
+  "field_quit_date": "戒烟日期",
+  "field_currency": "货币",
+  "field_language": "语言",
+  "action_edit": "编辑",
+  "action_change": "更改",
+  
+  "daily_reminder": "🔔 每日提醒",
+  "weekly_summary": "🗓️ 每周总结",
+  "quit_tips": "💡 戒烟小贴士",
+  
+  "contact_support": "💬 联系支持",
+  "give_feedback": "📝 给我们诚实的反馈",
+  
+  "tip_1_title": "保持水分",
+  "tip_1_description": "多喝水有助于从体内排出尼古丁并减少烟瘾。",
+  "tip_2_title": "让双手忙起来",
+  "tip_2_description": "使用压力球、指尖陀螺或参与绘画或手工艺等活动。",
+  "tip_3_title": "避免诱因",
+  "tip_3_description": "远离吸烟区、酒精或让您想抽烟的情况。",
+  "tip_4_title": "练习深呼吸",
+  "tip_4_description": "当烟瘾来袭时，缓慢深呼吸3-5分钟来放松。",
+  "tip_5_title": "定期锻炼",
+  "tip_5_description": "体育活动可以减少压力，改善情绪，并有助于防止体重增加。",
+  "tip_6_title": "奖励自己",
+  "tip_6_description": "用非吸烟奖励庆祝里程碑，如看电影、用餐或购买新物品。",
+  
+  "clear_all_data": "清除所有数据",
+  "destructive_action": "破坏性操作",
+  "clear_data_warning": "此操作无法撤销，将永久删除您的所有进度数据、情绪记录、吸烟历史和个人设置。",
+  "progress_data": "进度数据",
+  "mood_records": "情绪记录",
+  "settings_data": "设置",
+  "confirmation_required": "需要确认",
+  "clear_data_instruction": "在下方输入"清除我的数据"以继续删除。",
+  "clear_data_placeholder": "输入"清除我的数据"",
+  
+  "overview_tab": "📋 概览",
+  "health_tab": "🧠 健康",
+  "savings_tab": "🪙 节省",
+  "cravings_tab": "🤤 烟瘾",
+  "milestones_tab": "🏆 里程碑",
+  
+  "quit_date_label": "🗓️ 戒烟日期：",
+  "days_suffix": "天",
+  "mood_label": "🌤️️ 情绪 ",
+  
+  "premium_title": "解锁\nNicotrack高级版",
+  "premium_description": "当您获得高级计划时，可以免费享受这些好处",
+  "choose_plan": "选择您的计划",
+  "continue_button": "继续",
+  
+  "advanced_analytics": "高级分析",
+  "advanced_analytics_desc": "获得戒烟进展的详细洞察",
+  "unlimited_goals": "无限目标",
+  "unlimited_goals_desc": "为您的旅程设置多个个性化目标",
+  "complete_badges": "完整徽章",
+  "complete_badges_desc": "访问所有成就徽章和奖励",
+  "unlimited_quit_changes": "无限戒烟更改",
+  "unlimited_quit_changes_desc": "随时无限制地更改您的戒烟方法",
+  "full_timeline_access": "完整时间线访问",
+  "full_timeline_access_desc": "查看您戒烟之旅的完整时间线",
+  "unlimited_daily_tasks": "无限日常任务",
+  "unlimited_daily_tasks_desc": "访问所有日常任务和活动",
+  
+  "cancel_anytime": "📱 随时取消",
+  "costs_less": "🧧 比两周的香烟费用更便宜",
+  "billed_annually": "按年计费",
+  "billed_monthly": "按月计费",
+  "billed_once": "一次性计费",
+  
+  "restore_purchase": "恢复购买",
+  "terms_of_use": "使用条款",
+  "privacy_policy": "隐私政策",
+  
+  "today_date_prefix": "今天 • ",
+  "personalized_quit_routine": "个性化戒烟例程",
+  "instant_quit_plan": "立即戒烟计划",
+  "your_quit_journey": "您的戒烟之旅",
+  "personalized_plan": "个性化计划",
+  "plan_description": "此计划专门为您设计，帮助您成功戒烟。遵循时间线了解在您的旅程中会遇到什么。",
+  "track_progress": "追踪进展",
+  "earn_badges": "获得徽章",
+  "stay_strong": "保持坚强",
+  "important_note": "重要提示",
+  "timeline_disclaimer": "症状和效果因人而异。此时间线显示常见经历，但您的旅程是独特的！",
+  "info_button": "信息",
+  
+  "happy": "快乐",
+  "neutral": "中性",
+  "sad": "悲伤",
+  "angry": "愤怒",
+  "anxious": "焦虑",
+  "confident": "自信",
+  "tired": "疲倦",
+  "frustrated": "沮丧",
+  "excited": "兴奋",
+  "confused": "困惑",
+  "motivated": "有动力",
+  "other": "其他",
+  
+  "work_stress": "工作压力",
+  "relationship": "人际关系",
+  "family": "家庭",
+  "health": "健康 ",
+  "craving_episode": "烟瘾发作",
+  "feeling_proud": "感到自豪",
+  "chill_day": "只是轻松的一天",
+  
+  "strong_cravings": "是的，\n强烈的",
+  "mild_cravings": "是的，\n轻微的",
+  "no_cravings": "完全没有烟瘾",
+  
+  "reflection_placeholder": "写点什么... 💬 (可选)",
+  "mood_finish": "🙌 完成",
+  
+  "today": "今天",
+  "yesterday": "昨天",
+  "trigger_title": "这是触发您烟瘾的原因",
+  "feeling_title": "这是它让您的感受",
+  "avoid_title": "这是您标记的\n下次避免烟瘾要做的事",
+  "smoke_question": "您今天抽烟了吗？",
+  "no_smoking_data": "无吸烟数据",
+  "no_smoking_recorded": "此日期未记录吸烟状态",
+  "amazing_text": "太棒了！",
+  "cigarettes_count": "这是您抽的🚬\n香烟数量",
+  "smoke_free_day": "您正在过无烟日 🥳。",
+  "financial_goal_progress": "🥅 财务目标：\n{emoji} {title} 已完成。",
+  "@financial_goal_progress": {
+    "placeholders": {
+      "emoji": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "go_home": "🏠 回到首页",
+  
+  "oxygen_increase": "氧气水平\n增加",
+  "blood_pressure": "血压\n正常化",
+  "lung_function": "肺功能\n改善",
+  "heart_rate": "心率\n稳定",
+  "sleep_quality": "睡眠质量\n提高",
+  
+  "feeling_sad_guilty": "悲伤或内疚",
+  "feeling_neutral": "中性",
+  "feeling_tired": "疲倦",
+  "feeling_proud": "自豪",
+  "feeling_dizzy": "头晕",
+  
+  "deep_breathing": "练习深呼吸",
+  "go_walk": "去散步",
+  "call_friend": "给朋友打电话",
+  "listen_music": "听音乐",
+  "wash_hands": "洗手",
+  "write_journal": "写日记",
+  "read_pages": "读几页书",
+  "chew_gum": "嚼口香糖或吃零食",
+  "watch_video": "看短视频",
+  "solve_puzzle": "解决快速拼图",
+  "play_pet": "和宠物玩",
+  "do_chore": "做快速家务",
+  "photo_walk": "拍照散步",
+  "mobile_game": "玩手机游戏",
+  "relaxing_shower": "洗个放松的澡",
+  
+  "morning_coffee": "早晨喝咖啡后",
+  "while_working": "工作时",
+  "feeling_stressed": "感到压力时",
+  "drinking_alcohol": "喝酒时",
+  "during_commute": "通勤时",
+  "after_eating": "刚吃完饭",
+  "scrolling_phone": "刷手机时",
+  "after_argument": "争吵后",
+  "feeling_anxious": "感到焦虑时",
+  "work_break": "工作休息时",
+  "evening_time": "晚上",
+  "watching_tv": "看电视时",
+  "stepping_outside": "出门时",
+  "others_smoking": "别人吸烟时",
+  "feeling_bored": "无聊或无事可做时",
+  
+  "shortness_breath": "呼吸急促",
+  "dizziness": "头晕或头重脚轻",
+  "persistent_cough": "持续咳嗽",
+  "nausea": "恶心或胃部不适",
+  "fatigue": "疲劳或精力不足",
+  "chest_tightness": "胸部紧迫感",
+  "excessive_sweating": "过度出汗",
+  "headaches": "头痛",
+  "irritability": "易怒或情绪波动",
+  "trouble_sleeping": "睡眠困难",
+  "dry_mouth": "口干或喉咙干",
+  "heavy_breathing": "走路时呼吸沉重",
+  "heart_palpitations": "心悸",
+  "shaky_hands": "手颤抖",
+  "brain_fog": "大脑迷雾或注意力不集中",
+  
+  "edit": "编辑",
+  "change": "更改",
+  "save": "保存",
+  "delete": "删除",
+  "add_new_goal": "添加新目标",
+  
+  "morning": "早晨",
+  "afternoon": "下午",
+  "evening": "晚上",
+  "night": "深夜",
+  
+  "monday": "星期一",
+  "tuesday": "星期二",
+  "wednesday": "星期三",
+  "thursday": "星期四",
+  "friday": "星期五",
+  "saturday": "星期六",
+  "sunday": "星期日",
+  
+  "best_deal": "🎉最优惠",
+  "monthly": "月付",
+  "yearly": "年付",
+  "lifetime": "终身",
+  
+  "home_hello": "您好，\n{name}",
+  "@home_hello": {
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "张三"
+      }
+    }
+  },
+  "home_get_pro": "获取专业版",
+  "home_personalized_quit_routine": "个性化戒烟例程",
+  
+  "quick_action_remove_cigarettes": "从家中移除所有🚬香烟、🔥打火机和烟灰缸",
+  "quick_action_replace_habit": "用新习惯替代🚬吸烟（例如：嚼口香糖、🫁深呼吸）",
+  "quick_action_identify_triggers": "识别您最大的诱因🎯并避免它们",
+  "quick_action_log_cravings": "记录✍️任何烟瘾以及您如何克服它们",
+  
+  "mood_how_feeling_today": "您今天感觉如何？ ❤️",
+  "mood_any_cravings_today": "您今天有烟瘾🥴吗？",
+  "mood_what_affecting": "这是影响您情绪的因素",
+  "mood_did_cravings": "您有烟瘾吗？",
+  "mood_cravings_yes": "是的",
+  "mood_cravings_no": "没有",
+  "mood_nothing_here": "这里没有内容",
+  "mood_no_recorded": "没有记录情绪",
+  "mood_no_data_captured": "此日期没有捕获情绪数据",
+  
+  "smoking_did_smoke_today": "您今天\n抽烟🚬了吗？",
+  "smoking_honesty_policy": "诚实是最好的政策 😉",
+  "smoking_how_feel": "这让您感觉😔如何？",
+  "smoking_what_triggered": "什么触发了您今天抽烟🚬？",
+  "smoking_how_many_today": "您今天抽了多少支🚬香烟？",
+  
+  "progress_title": "进展",
+  "progress_current_streak": "当前\n连续记录",
+  "progress_days": "天",
+  "progress_quit_date": "🗓️ 戒烟日期：",
+  "progress_not_set": "未设置",
+  "progress_mood_trend": "🌤️️ 情绪趋势",
+  
+  "progress_label_days_since": "距离上次\n吸烟天数",
+  "progress_label_money_saved": "节省的金钱",
+  
+  "settings_change_name": "✏️ 更改姓名",
+  "settings_done": "完成",
+  
+  "plan_today": "今天 • {date}",
+  "@plan_today": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "1月15日"
+      }
+    }
+  },
+  
+  "privacy_policy_title": "隐私政策",
+  "privacy_your_matters": "您的隐私很重要",
+  "privacy_last_updated": "最后更新：{date}",
+  "@privacy_last_updated": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "2024年12月"
+      }
+    }
+  },
+  "privacy_transparency": "我们相信对如何处理您的个人信息保持完全透明。",
+  "privacy_first_design": "隐私优先设计",
+  "privacy_first_description": "Nicotrack以您的隐私为最高优先级设计。您的所有个人数据都保留在您的设备上，永远不会传输到外部服务器。",
+  "privacy_promise": "🌟 您的隐私是我们的承诺",
+  "privacy_commitment": "Nicotrack致力于帮助您戒烟，同时保持您的个人旅程完全私密和安全。",
+  
+  "skip": "跳过",
+  "yes": "是",
+  "no": "否",
+  "back": "返回",
+  "next": "下一步",
+  "ok": "确定",
+  "close": "关闭",
+  "done": "完成"
+}

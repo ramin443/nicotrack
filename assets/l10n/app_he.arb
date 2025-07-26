@@ -1,0 +1,383 @@
+{
+  "@@locale": "he_IL",
+  
+  "app_name": "Nicotrack",
+  "welcome_title": "Welcome to\nNicotrack",
+  "start_journey_button": "Start your journey",
+  
+  "track_milestones_title": "Track your progress\n& milestones",
+  "track_milestones_description": "Every smoke-free day brings you closer to a healthier life. See how far you've come with Nicotrack",
+  "crush_cravings_title": "Crush your cravings",
+  "crush_cravings_description": "We know cravings hit hard. Nicotrack helps manage them with tools like distraction mode and craving logs.",
+  "stay_motivated_title": "Stay motivated and connected",
+  "stay_motivated_description": "You're not alone. Celebrate every milestone with achievement badges and connect with others quitting.",
+  "quit_plan_title": "Your personalized Quit plan",
+  "quit_plan_feature_1": "⚡ Choose Your Quit Method – Instant quit or step-down approach",
+  "quit_plan_feature_2": "🔗 Sync with Apple Health – Track improvements in breathing, heart rate, and more",
+  
+  "enter_name_subtitle": "One last step, 😅",
+  "enter_name_title": "What should we call you?",
+  "name_placeholder": "Jane Wilson",
+  
+  "onboarding_last_smoke_question": "When was the last time you smoked a 🚬 cigarette?",
+  "onboarding_last_smoke_today": "Today",
+  "onboarding_last_smoke_yesterday": "Yesterday",
+  "onboarding_last_smoke_custom": "Custom date",
+  
+  "onboarding_smoke_frequency_question": "How many 🚬 cigarettes did you consume per day?",
+  "onboarding_pack_cost_question": "How much does your pack of cigarette 💰cost?",
+  "onboarding_pack_contents_question": "How many 🚬 cigarettes are there in one pack?",
+  "onboarding_biggest_motivation_question": "What is your biggest motivation 💪 for quitting?",
+  "onboarding_help_need_question": "What do you need the most help 🙂 with?",
+  "onboarding_crave_situations_question": "What situations make you crave cigarettes 😥 the most?",
+  "onboarding_quit_method_question": "How do you want to ❌ quit smoking?",
+  "onboarding_quit_method_subtitle": "Please select one. You can change this later too",
+  
+  "motivation_health": "Health benefits",
+  "motivation_money": "Save Money",
+  "motivation_challenge": "Personal challenge",
+  "motivation_family": "Family & loved ones",
+  "motivation_addiction": "Break the addiction",
+  "motivation_other": "Other",
+  
+  "craving_coffee": "Morning with coffee",
+  "craving_meals": "After meals",
+  "craving_alcohol": "When drinking alcohol",
+  "craving_stress": "When feeling stressed",
+  "craving_boredom": "Boredom or habit",
+  "craving_other": "Other",
+  
+  "help_cravings": "Handling cravings & withdrawal",
+  "help_plan": "Sticking to my quit plan",
+  "help_support": "Support & motivation",
+  "help_tracking": "Tracking my progress",
+  
+  "instant_quit": "Instant\nQuit",
+  "instant_quit_description": "Stop immediately and use support tools",
+  "stepdown_method": "Step-down Method",
+  "stepdown_description": "Gradually reduce smoking over time",
+  
+  "select_date": "Select Date",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "continue": "Continue",
+  "finish": "Finish",
+  
+  "nav_home": "Home",
+  "nav_plan": "Plan",
+  "nav_progress": "Progress",
+  "nav_settings": "Settings",
+  
+  "settings_title": "📋 Settings",
+  "personal_info_section": "PERSONAL INFO",
+  "push_notifications_section": "PUSH NOTIFICATIONS",
+  "financial_goals_section": "FINANCIAL GOALS",
+  "help_support_section": "HELP & SUPPORT",
+  "privacy_section": "PRIVACY",
+  
+  "field_name": "Name",
+  "field_quit_date": "Quit Date",
+  "field_currency": "Currency",
+  "field_language": "Language",
+  "action_edit": "Edit",
+  "action_change": "Change",
+  
+  "daily_reminder": "🔔 Daily Reminder",
+  "weekly_summary": "🗓️ Weekly summary",
+  "quit_tips": "💡 Quit Tips",
+  
+  "contact_support": "💬 Contact Support",
+  "give_feedback": "📝 Give us an honest feedback",
+  
+  "tip_1_title": "Stay hydrated",
+  "tip_1_description": "Drink plenty of water to help flush nicotine from your system and reduce cravings.",
+  "tip_2_title": "Keep your hands busy",
+  "tip_2_description": "Use stress balls, fidget toys, or engage in activities like drawing or crafts.",
+  "tip_3_title": "Avoid triggers",
+  "tip_3_description": "Stay away from smoking areas, alcohol, or situations that make you want to smoke.",
+  "tip_4_title": "Practice deep breathing",
+  "tip_4_description": "When cravings hit, take slow, deep breaths for 3-5 minutes to relax.",
+  "tip_5_title": "Exercise regularly",
+  "tip_5_description": "Physical activity reduces stress, improves mood, and helps prevent weight gain.",
+  "tip_6_title": "Reward yourself",
+  "tip_6_description": "Celebrate milestones with non-smoking rewards like a movie, meal, or new item.",
+  
+  "clear_all_data": "Clear All Data",
+  "destructive_action": "Destructive Action",
+  "clear_data_warning": "This action cannot be undone and will permanently delete all your progress data, mood records, smoking history, and personal settings.",
+  "progress_data": "Progress Data",
+  "mood_records": "Mood Records",
+  "settings_data": "Settings",
+  "confirmation_required": "Confirmation Required",
+  "clear_data_instruction": "Type \"CLEAR MY DATA\" below to proceed with the deletion.",
+  "clear_data_placeholder": "Type \"CLEAR MY DATA\"",
+  
+  "overview_tab": "📋 Overview",
+  "health_tab": "🧠 Health",
+  "savings_tab": "🪙 Savings",
+  "cravings_tab": "🤤 Cravings",
+  "milestones_tab": "🏆 Milestones",
+  
+  "quit_date_label": "🗓️ Quit Date: ",
+  "days_suffix": "days",
+  "mood_label": "🌤️️ Mood ",
+  
+  "premium_title": "Unlock\nNicotrack Premium",
+  "premium_description": "Enjoy these benefits freely when you get on the premium plan",
+  "choose_plan": "Choose your plan",
+  "continue_button": "Continue",
+  
+  "advanced_analytics": "Advanced Analytics",
+  "advanced_analytics_desc": "Get detailed insights into your quitting progress",
+  "unlimited_goals": "Unlimited Goals",
+  "unlimited_goals_desc": "Set multiple personalized goals for your journey",
+  "complete_badges": "Complete Badges",
+  "complete_badges_desc": "Access to all achievement badges and rewards",
+  "unlimited_quit_changes": "Unlimited Quit Changes",
+  "unlimited_quit_changes_desc": "Change your quit method anytime without limits",
+  "full_timeline_access": "Full Timeline Access",
+  "full_timeline_access_desc": "View complete timeline of your quitting journey",
+  "unlimited_daily_tasks": "Unlimited Daily Tasks",
+  "unlimited_daily_tasks_desc": "Access to all daily tasks and activities",
+  
+  "cancel_anytime": "📱 Cancel anytime",
+  "costs_less": "🧧 Costs less than cigarettes in 2 weeks",
+  "billed_annually": "Billed annually",
+  "billed_monthly": "Billed monthly",
+  "billed_once": "Billed once",
+  
+  "restore_purchase": "Restore purchase",
+  "terms_of_use": "Terms of use",
+  "privacy_policy": "Privacy Policy",
+  
+  "today_date_prefix": "Today • ",
+  "personalized_quit_routine": "Personalized Quit Routine",
+  "instant_quit_plan": "Instant Quit Plan",
+  "your_quit_journey": "Your Quit Journey",
+  "personalized_plan": "Personalized Plan",
+  "plan_description": "This plan is designed specifically for you to help you successfully quit smoking. Follow the timeline to understand what to expect during your journey.",
+  "track_progress": "Track Progress",
+  "earn_badges": "Earn Badges",
+  "stay_strong": "Stay Strong",
+  "important_note": "Important Note",
+  "timeline_disclaimer": "Symptoms and effects vary from person to person. This timeline shows common experiences, but your journey is unique!",
+  "info_button": "Info",
+  
+  "happy": "Happy",
+  "neutral": "Neutral",
+  "sad": "Sad",
+  "angry": "Angry",
+  "anxious": "Anxious",
+  "confident": "Confident",
+  "tired": "Tired",
+  "frustrated": "Frustrated",
+  "excited": "Excited",
+  "confused": "Confused",
+  "motivated": "Motivated",
+  "other": "Other",
+  
+  "work_stress": "Work Stress",
+  "relationship": "Relationship",
+  "family": "Family",
+  "health": "Health ",
+  "craving_episode": "Craving Episode",
+  "feeling_proud": "Feeling Proud",
+  "chill_day": "Just a chill day",
+  
+  "strong_cravings": "Yes,\nstrong ones",
+  "mild_cravings": "Yes,\nmild",
+  "no_cravings": "No cravings at all",
+  
+  "reflection_placeholder": "Write something... 💬 (optional)",
+  "mood_finish": "🙌 Finish",
+  
+  "today": "Today",
+  "yesterday": "Yesterday",
+  "trigger_title": "This is what triggered your craving",
+  "feeling_title": "This is what it made you feel",
+  "avoid_title": "This is what you marked\nyou would do next to avoid craving",
+  "smoke_question": "Did you smoke today?",
+  "no_smoking_data": "No Smoking Data",
+  "no_smoking_recorded": "No smoking status was recorded for this date",
+  "amazing_text": "Amazing!",
+  "cigarettes_count": "This is how many 🚬\ncigarettes you smoked",
+  "smoke_free_day": "You're on your smoke-free day 🥳.",
+  "financial_goal_progress": "🥅 Financial Goal: \n{emoji} {title} completed.",
+  "@financial_goal_progress": {
+    "placeholders": {
+      "emoji": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "go_home": "🏠 Go to home",
+  
+  "oxygen_increase": "Oxygen levels\nincrease",
+  "blood_pressure": "Blood pressure\nnormalizes",
+  "lung_function": "Lung function\nimproves",
+  "heart_rate": "Heart rate\nstabilizes",
+  "sleep_quality": "Sleep quality\nenhances",
+  
+  "feeling_sad_guilty": "Sad or Guilty",
+  "feeling_neutral": "Neutral",
+  "feeling_tired": "Tired",
+  "feeling_proud": "Proud",
+  "feeling_dizzy": "Dizzy",
+  
+  "deep_breathing": "Practice deep breathing",
+  "go_walk": "Go for a walk",
+  "call_friend": "Call a friend",
+  "listen_music": "Listen to music",
+  "wash_hands": "Wash your hands",
+  "write_journal": "Write in a journal",
+  "read_pages": "Read a few pages",
+  "chew_gum": "Chew gum or snack",
+  "watch_video": "Watch a short video",
+  "solve_puzzle": "Solve a quick puzzle",
+  "play_pet": "Play with a pet",
+  "do_chore": "Do a quick chore",
+  "photo_walk": "Take a photo walk",
+  "mobile_game": "Play a mobile game",
+  "relaxing_shower": "Take a relaxing shower",
+  
+  "morning_coffee": "Morning after coffee",
+  "while_working": "While working",
+  "feeling_stressed": "When feeling stressed",
+  "drinking_alcohol": "When drinking alcohol",
+  "during_commute": "During commute",
+  "after_eating": "Right after eating",
+  "scrolling_phone": "While scrolling on phone",
+  "after_argument": "After an argument",
+  "feeling_anxious": "When feeling anxious",
+  "work_break": "During a break at work",
+  "evening_time": "In the evening",
+  "watching_tv": "While watching TV",
+  "stepping_outside": "Stepping outside",
+  "others_smoking": "When others are smoking",
+  "feeling_bored": "When bored or doing nothing",
+  
+  "shortness_breath": "Shortness of breath",
+  "dizziness": "Dizziness or lightheadedness",
+  "persistent_cough": "Persistent coughing",
+  "nausea": "Nausea or upset stomach",
+  "fatigue": "Fatigue or low energy",
+  "chest_tightness": "Tightness in chest",
+  "excessive_sweating": "Excessive sweating",
+  "headaches": "Headaches",
+  "irritability": "Irritability or mood swings",
+  "trouble_sleeping": "Trouble sleeping",
+  "dry_mouth": "Dry mouth or throat",
+  "heavy_breathing": "Heavy breathing while walking",
+  "heart_palpitations": "Heart palpitations",
+  "shaky_hands": "Shaky hands",
+  "brain_fog": "Brain fog or lack of focus",
+  
+  "edit": "Edit",
+  "change": "Change",
+  "save": "Save",
+  "delete": "Delete",
+  "add_new_goal": "Add new goal",
+  
+  "morning": "Morning",
+  "afternoon": "Afternoon",
+  "evening": "Evening",
+  "night": "Night",
+  
+  "monday": "Monday",
+  "tuesday": "Tuesday",
+  "wednesday": "Wednesday",
+  "thursday": "Thursday",
+  "friday": "Friday",
+  "saturday": "Saturday",
+  "sunday": "Sunday",
+  
+  "best_deal": "🎉Best Deal",
+  "monthly": "Monthly",
+  "yearly": "Yearly",
+  "lifetime": "Lifetime",
+  
+  "home_hello": "Hello,\n{name}",
+  "@home_hello": {
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "John"
+      }
+    }
+  },
+  "home_get_pro": "Get Pro",
+  "home_personalized_quit_routine": "Personalized Quit Routine",
+  
+  "quick_action_remove_cigarettes": "Remove all 🚬cigarettes, 🔥 lighters & ashtrays from your home",
+  "quick_action_replace_habit": "Replace 🚬 smoking with a new habit(e.g., chewing gum, 🫁 deep breathing)",
+  "quick_action_identify_triggers": "Identify your biggest triggers 🎯 and avoid them",
+  "quick_action_log_cravings": "Log ✍️ any cravings and how you overcame them",
+  
+  "mood_how_feeling_today": "How are you feeling today? ❤️",
+  "mood_any_cravings_today": "Did you have any cravings 🥴 today?",
+  "mood_what_affecting": "This is what's affecting your mood",
+  "mood_did_cravings": "Did you have any cravings?",
+  "mood_cravings_yes": "Yes",
+  "mood_cravings_no": "No",
+  "mood_nothing_here": "Nothing here",
+  "mood_no_recorded": "No Mood Recorded",
+  "mood_no_data_captured": "No mood data was captured for this date",
+  
+  "smoking_did_smoke_today": "Did you\nsmoke 🚬 today?",
+  "smoking_honesty_policy": "Honesty is the best policy 😉",
+  "smoking_how_feel": "How did it 😔 make you feel?",
+  "smoking_what_triggered": "What triggered you smoking 🚬 today?",
+  "smoking_how_many_today": "How many 🚬 cigarettes did you consume today?",
+  
+  "progress_title": "Progress",
+  "progress_current_streak": "Current\nStreak",
+  "progress_days": "days",
+  "progress_quit_date": "🗓️ Quit Date: ",
+  "progress_not_set": "Not set",
+  "progress_mood_trend": "🌤️️ Mood trend",
+  
+  "progress_label_days_since": "Days since\nlast smoked",
+  "progress_label_money_saved": "Money saved",
+  
+  "settings_change_name": "✏️ Change Name",
+  "settings_done": "Done",
+  
+  "plan_today": "Today • {date}",
+  "@plan_today": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "Jan 15"
+      }
+    }
+  },
+  
+  "privacy_policy_title": "Privacy Policy",
+  "privacy_your_matters": "Your Privacy Matters",
+  "privacy_last_updated": "Last Updated: {date}",
+  "@privacy_last_updated": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "December 2024"
+      }
+    }
+  },
+  "privacy_transparency": "We believe in complete transparency about how we handle your personal information.",
+  "privacy_first_design": "Privacy-First Design",
+  "privacy_first_description": "Nicotrack is designed with your privacy as the top priority. All your personal data stays on your device and is never transmitted to external servers.",
+  "privacy_promise": "🌟 Your Privacy is Our Promise",
+  "privacy_commitment": "Nicotrack is committed to helping you quit smoking while keeping your personal journey completely private and secure.",
+  
+  "skip": "Skip",
+  "yes": "Yes",
+  "no": "No",
+  "back": "Back",
+  "next": "Next",
+  "ok": "OK",
+  "close": "Close",
+  "done": "Done"
+}

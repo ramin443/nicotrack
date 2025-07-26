@@ -1,0 +1,383 @@
+{
+  "@@locale": "it_IT",
+  
+  "app_name": "Nicotrack",
+  "welcome_title": "Benvenuto in\nNicotrack",
+  "start_journey_button": "Inizia il tuo percorso",
+  
+  "track_milestones_title": "Monitora i tuoi progressi\ne traguardi",
+  "track_milestones_description": "Ogni giorno senza fumo ti avvicina a una vita più sana. Scopri quanto sei andato lontano con Nicotrack",
+  "crush_cravings_title": "Sconfiggi le tue voglie",
+  "crush_cravings_description": "Sappiamo che le voglie sono forti. Nicotrack ti aiuta a gestirle con strumenti come la modalità distrazione e i registri delle voglie.",
+  "stay_motivated_title": "Rimani motivato e connesso",
+  "stay_motivated_description": "Non sei solo. Celebra ogni traguardo con i badge di successo e connettiti con altri che stanno smettendo.",
+  "quit_plan_title": "Il tuo piano personalizzato per smettere",
+  "quit_plan_feature_1": "⚡ Scegli il tuo metodo per smettere – Smettere subito o approccio graduale",
+  "quit_plan_feature_2": "🔗 Sincronizza con Apple Health – Monitora i miglioramenti nella respirazione, frequenza cardiaca e altro",
+  
+  "enter_name_subtitle": "Un ultimo passo, 😅",
+  "enter_name_title": "Come possiamo chiamarti?",
+  "name_placeholder": "Mario Rossi",
+  
+  "onboarding_last_smoke_question": "Quando hai fumato l'ultima 🚬 sigaretta?",
+  "onboarding_last_smoke_today": "Oggi",
+  "onboarding_last_smoke_yesterday": "Ieri",
+  "onboarding_last_smoke_custom": "Data personalizzata",
+  
+  "onboarding_smoke_frequency_question": "Quante 🚬 sigarette fumavi al giorno?",
+  "onboarding_pack_cost_question": "Quanto costa il tuo pacchetto di sigarette 💰?",
+  "onboarding_pack_contents_question": "Quante 🚬 sigarette ci sono in un pacchetto?",
+  "onboarding_biggest_motivation_question": "Qual è la tua motivazione più grande 💪 per smettere?",
+  "onboarding_help_need_question": "Di cosa hai più bisogno di aiuto 🙂?",
+  "onboarding_crave_situations_question": "Quali situazioni ti fanno desiderare di più le sigarette 😥?",
+  "onboarding_quit_method_question": "Come vuoi ❌ smettere di fumare?",
+  "onboarding_quit_method_subtitle": "Seleziona una opzione. Puoi cambiarla anche dopo",
+  
+  "motivation_health": "Benefici per la salute",
+  "motivation_money": "Risparmiare denaro",
+  "motivation_challenge": "Sfida personale",
+  "motivation_family": "Famiglia e cari",
+  "motivation_addiction": "Rompere la dipendenza",
+  "motivation_other": "Altro",
+  
+  "craving_coffee": "Mattina con il caffè",
+  "craving_meals": "Dopo i pasti",
+  "craving_alcohol": "Quando bevo alcol",
+  "craving_stress": "Quando mi sento stressato",
+  "craving_boredom": "Noia o abitudine",
+  "craving_other": "Altro",
+  
+  "help_cravings": "Gestire le voglie e l'astinenza",
+  "help_plan": "Attenermi al mio piano per smettere",
+  "help_support": "Supporto e motivazione",
+  "help_tracking": "Monitorare i miei progressi",
+  
+  "instant_quit": "Smettere\nSubito",
+  "instant_quit_description": "Smetti immediatamente e usa gli strumenti di supporto",
+  "stepdown_method": "Metodo Graduale",
+  "stepdown_description": "Riduci gradualmente il fumo nel tempo",
+  
+  "select_date": "Seleziona data",
+  "cancel": "Annulla",
+  "confirm": "Conferma",
+  "continue": "Continua",
+  "finish": "Fine",
+  
+  "nav_home": "Home",
+  "nav_plan": "Piano",
+  "nav_progress": "Progressi",
+  "nav_settings": "Impostazioni",
+  
+  "settings_title": "📋 Impostazioni",
+  "personal_info_section": "INFORMAZIONI PERSONALI",
+  "push_notifications_section": "NOTIFICHE PUSH",
+  "financial_goals_section": "OBIETTIVI FINANZIARI",
+  "help_support_section": "AIUTO E SUPPORTO",
+  "privacy_section": "PRIVACY",
+  
+  "field_name": "Nome",
+  "field_quit_date": "Data di cessazione",
+  "field_currency": "Valuta",
+  "field_language": "Lingua",
+  "action_edit": "Modifica",
+  "action_change": "Cambia",
+  
+  "daily_reminder": "🔔 Promemoria giornaliero",
+  "weekly_summary": "🗓️ Riepilogo settimanale",
+  "quit_tips": "💡 Consigli per smettere",
+  
+  "contact_support": "💬 Contatta il supporto",
+  "give_feedback": "📝 Dacci un feedback onesto",
+  
+  "tip_1_title": "Mantieniti idratato",
+  "tip_1_description": "Bevi molta acqua per aiutare a eliminare la nicotina dal tuo sistema e ridurre le voglie.",
+  "tip_2_title": "Tieni le mani occupate",
+  "tip_2_description": "Usa palline antistress, fidget toy o impegnati in attività come disegnare o fare lavori manuali.",
+  "tip_3_title": "Evita i fattori scatenanti",
+  "tip_3_description": "Stai lontano dalle aree fumatori, dall'alcol o dalle situazioni che ti fanno venire voglia di fumare.",
+  "tip_4_title": "Pratica la respirazione profonda",
+  "tip_4_description": "Quando arrivano le voglie, fai respiri lenti e profondi per 3-5 minuti per rilassarti.",
+  "tip_5_title": "Fai esercizio regolarmente",
+  "tip_5_description": "L'attività fisica riduce lo stress, migliora l'umore e aiuta a prevenire l'aumento di peso.",
+  "tip_6_title": "Premiati",
+  "tip_6_description": "Celebra i traguardi con premi non legati al fumo come un film, un pasto o un nuovo oggetto.",
+  
+  "clear_all_data": "Cancella tutti i dati",
+  "destructive_action": "Azione distruttiva",
+  "clear_data_warning": "Questa azione non può essere annullata e cancellerà permanentemente tutti i tuoi dati di progresso, registri dell'umore, cronologia del fumo e impostazioni personali.",
+  "progress_data": "Dati di progresso",
+  "mood_records": "Registri dell'umore",
+  "settings_data": "Impostazioni",
+  "confirmation_required": "Conferma richiesta",
+  "clear_data_instruction": "Digita \"CANCELLA I MIEI DATI\" qui sotto per procedere con l'eliminazione.",
+  "clear_data_placeholder": "Digita \"CANCELLA I MIEI DATI\"",
+  
+  "overview_tab": "📋 Panoramica",
+  "health_tab": "🧠 Salute",
+  "savings_tab": "🪙 Risparmi",
+  "cravings_tab": "🤤 Voglie",
+  "milestones_tab": "🏆 Traguardi",
+  
+  "quit_date_label": "🗓️ Data di cessazione: ",
+  "days_suffix": "giorni",
+  "mood_label": "🌤️️ Umore ",
+  
+  "premium_title": "Sblocca\nNicotrack Premium",
+  "premium_description": "Goditi questi vantaggi liberamente quando ottieni il piano premium",
+  "choose_plan": "Scegli il tuo piano",
+  "continue_button": "Continua",
+  
+  "advanced_analytics": "Analisi avanzate",
+  "advanced_analytics_desc": "Ottieni informazioni dettagliate sui tuoi progressi per smettere",
+  "unlimited_goals": "Obiettivi illimitati",
+  "unlimited_goals_desc": "Imposta più obiettivi personalizzati per il tuo percorso",
+  "complete_badges": "Badge completi",
+  "complete_badges_desc": "Accesso a tutti i badge di successo e premi",
+  "unlimited_quit_changes": "Cambi illimitati del metodo",
+  "unlimited_quit_changes_desc": "Cambia il tuo metodo per smettere in qualsiasi momento senza limiti",
+  "full_timeline_access": "Accesso completo alla timeline",
+  "full_timeline_access_desc": "Visualizza la timeline completa del tuo percorso per smettere",
+  "unlimited_daily_tasks": "Attività giornaliere illimitate",
+  "unlimited_daily_tasks_desc": "Accesso a tutte le attività e attività giornaliere",
+  
+  "cancel_anytime": "📱 Cancella in qualsiasi momento",
+  "costs_less": "🧧 Costa meno delle sigarette in 2 settimane",
+  "billed_annually": "Fatturato annualmente",
+  "billed_monthly": "Fatturato mensilmente",
+  "billed_once": "Fatturato una volta",
+  
+  "restore_purchase": "Ripristina acquisto",
+  "terms_of_use": "Termini di utilizzo",
+  "privacy_policy": "Politica sulla privacy",
+  
+  "today_date_prefix": "Oggi • ",
+  "personalized_quit_routine": "Routine personalizzata per smettere",
+  "instant_quit_plan": "Piano per smettere subito",
+  "your_quit_journey": "Il tuo percorso per smettere",
+  "personalized_plan": "Piano personalizzato",
+  "plan_description": "Questo piano è progettato specificamente per te per aiutarti a smettere di fumare con successo. Segui la timeline per capire cosa aspettarti durante il tuo percorso.",
+  "track_progress": "Monitora i progressi",
+  "earn_badges": "Guadagna badge",
+  "stay_strong": "Rimani forte",
+  "important_note": "Nota importante",
+  "timeline_disclaimer": "I sintomi e gli effetti variano da persona a persona. Questa timeline mostra esperienze comuni, ma il tuo percorso è unico!",
+  "info_button": "Info",
+  
+  "happy": "Felice",
+  "neutral": "Neutrale",
+  "sad": "Triste",
+  "angry": "Arrabbiato",
+  "anxious": "Ansioso",
+  "confident": "Fiducioso",
+  "tired": "Stanco",
+  "frustrated": "Frustrato",
+  "excited": "Eccitato",
+  "confused": "Confuso",
+  "motivated": "Motivato",
+  "other": "Altro",
+  
+  "work_stress": "Stress da lavoro",
+  "relationship": "Relazione",
+  "family": "Famiglia",
+  "health": "Salute ",
+  "craving_episode": "Episodio di voglia",
+  "feeling_proud": "Sentirsi orgoglioso",
+  "chill_day": "Solo un giorno tranquillo",
+  
+  "strong_cravings": "Sì,\nforti",
+  "mild_cravings": "Sì,\nlievi",
+  "no_cravings": "Nessuna voglia",
+  
+  "reflection_placeholder": "Scrivi qualcosa... 💬 (opzionale)",
+  "mood_finish": "🙌 Fine",
+  
+  "today": "Oggi",
+  "yesterday": "Ieri",
+  "trigger_title": "Questo è ciò che ha scatenato la tua voglia",
+  "feeling_title": "Questo è come ti ha fatto sentire",
+  "avoid_title": "Questo è ciò che hai segnato\nche faresti per evitare la voglia",
+  "smoke_question": "Hai fumato oggi?",
+  "no_smoking_data": "Nessun dato sul fumo",
+  "no_smoking_recorded": "Nessuno stato di fumo è stato registrato per questa data",
+  "amazing_text": "Fantastico!",
+  "cigarettes_count": "Questo è il numero di 🚬\nsigarette che hai fumato",
+  "smoke_free_day": "Sei al tuo giorno senza fumo 🥳.",
+  "financial_goal_progress": "🥅 Obiettivo finanziario: \n{emoji} {title} completato.",
+  "@financial_goal_progress": {
+    "placeholders": {
+      "emoji": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "go_home": "🏠 Vai alla home",
+  
+  "oxygen_increase": "I livelli di ossigeno\naumentano",
+  "blood_pressure": "La pressione sanguigna\nsi normalizza",
+  "lung_function": "La funzione polmonare\nmigliora",
+  "heart_rate": "La frequenza cardiaca\nsi stabilizza",
+  "sleep_quality": "La qualità del sonno\nmigliora",
+  
+  "feeling_sad_guilty": "Triste o colpevole",
+  "feeling_neutral": "Neutrale",
+  "feeling_tired": "Stanco",
+  "feeling_proud": "Orgoglioso",
+  "feeling_dizzy": "Vertigini",
+  
+  "deep_breathing": "Pratica la respirazione profonda",
+  "go_walk": "Vai a fare una passeggiata",
+  "call_friend": "Chiama un amico",
+  "listen_music": "Ascolta musica",
+  "wash_hands": "Lavati le mani",
+  "write_journal": "Scrivi in un diario",
+  "read_pages": "Leggi alcune pagine",
+  "chew_gum": "Mastica gomma o fai uno spuntino",
+  "watch_video": "Guarda un breve video",
+  "solve_puzzle": "Risolvi un puzzle veloce",
+  "play_pet": "Gioca con un animale domestico",
+  "do_chore": "Fai una faccenda veloce",
+  "photo_walk": "Fai una passeggiata fotografica",
+  "mobile_game": "Gioca a un gioco mobile",
+  "relaxing_shower": "Fai una doccia rilassante",
+  
+  "morning_coffee": "Mattina dopo il caffè",
+  "while_working": "Mentre lavoro",
+  "feeling_stressed": "Quando mi sento stressato",
+  "drinking_alcohol": "Quando bevo alcol",
+  "during_commute": "Durante il tragitto",
+  "after_eating": "Subito dopo aver mangiato",
+  "scrolling_phone": "Mentre scorro sul telefono",
+  "after_argument": "Dopo una discussione",
+  "feeling_anxious": "Quando mi sento ansioso",
+  "work_break": "Durante una pausa al lavoro",
+  "evening_time": "La sera",
+  "watching_tv": "Mentre guardo la TV",
+  "stepping_outside": "Uscendo fuori",
+  "others_smoking": "Quando altri fumano",
+  "feeling_bored": "Quando sono annoiato o non faccio nulla",
+  
+  "shortness_breath": "Mancanza di respiro",
+  "dizziness": "Vertigini o stordimento",
+  "persistent_cough": "Tosse persistente",
+  "nausea": "Nausea o mal di stomaco",
+  "fatigue": "Fatica o poca energia",
+  "chest_tightness": "Oppressione al petto",
+  "excessive_sweating": "Sudorazione eccessiva",
+  "headaches": "Mal di testa",
+  "irritability": "Irritabilità o sbalzi d'umore",
+  "trouble_sleeping": "Problemi di sonno",
+  "dry_mouth": "Bocca o gola secca",
+  "heavy_breathing": "Respiro pesante mentre cammino",
+  "heart_palpitations": "Palpitazioni cardiache",
+  "shaky_hands": "Mani tremanti",
+  "brain_fog": "Nebbia mentale o mancanza di concentrazione",
+  
+  "edit": "Modifica",
+  "change": "Cambia",
+  "save": "Salva",
+  "delete": "Elimina",
+  "add_new_goal": "Aggiungi nuovo obiettivo",
+  
+  "morning": "Mattina",
+  "afternoon": "Pomeriggio",
+  "evening": "Sera",
+  "night": "Notte",
+  
+  "monday": "Lunedì",
+  "tuesday": "Martedì",
+  "wednesday": "Mercoledì",
+  "thursday": "Giovedì",
+  "friday": "Venerdì",
+  "saturday": "Sabato",
+  "sunday": "Domenica",
+  
+  "best_deal": "🎉Miglior offerta",
+  "monthly": "Mensile",
+  "yearly": "Annuale",
+  "lifetime": "A vita",
+  
+  "home_hello": "Ciao,\n{name}",
+  "@home_hello": {
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Mario"
+      }
+    }
+  },
+  "home_get_pro": "Ottieni Pro",
+  "home_personalized_quit_routine": "Routine personalizzata per smettere",
+  
+  "quick_action_remove_cigarettes": "Rimuovi tutte le 🚬sigarette, 🔥 accendini e posacenere da casa tua",
+  "quick_action_replace_habit": "Sostituisci il 🚬 fumo con una nuova abitudine (es. masticare gomma, 🫁 respirazione profonda)",
+  "quick_action_identify_triggers": "Identifica i tuoi fattori scatenanti più grandi 🎯 ed evitali",
+  "quick_action_log_cravings": "Registra ✍️ qualsiasi voglia e come l'hai superata",
+  
+  "mood_how_feeling_today": "Come ti senti oggi? ❤️",
+  "mood_any_cravings_today": "Hai avuto voglie 🥴 oggi?",
+  "mood_what_affecting": "Questo è ciò che sta influenzando il tuo umore",
+  "mood_did_cravings": "Hai avuto voglie?",
+  "mood_cravings_yes": "Sì",
+  "mood_cravings_no": "No",
+  "mood_nothing_here": "Niente qui",
+  "mood_no_recorded": "Nessun umore registrato",
+  "mood_no_data_captured": "Nessun dato sull'umore è stato catturato per questa data",
+  
+  "smoking_did_smoke_today": "Hai\nfumato 🚬 oggi?",
+  "smoking_honesty_policy": "L'onestà è la migliore politica 😉",
+  "smoking_how_feel": "Come ti ha fatto sentire 😔?",
+  "smoking_what_triggered": "Cosa ti ha spinto a fumare 🚬 oggi?",
+  "smoking_how_many_today": "Quante 🚬 sigarette hai consumato oggi?",
+  
+  "progress_title": "Progressi",
+  "progress_current_streak": "Serie\nAttuale",
+  "progress_days": "giorni",
+  "progress_quit_date": "🗓️ Data di cessazione: ",
+  "progress_not_set": "Non impostata",
+  "progress_mood_trend": "🌤️️ Trend dell'umore",
+  
+  "progress_label_days_since": "Giorni dall'\nultima sigaretta",
+  "progress_label_money_saved": "Denaro risparmiato",
+  
+  "settings_change_name": "✏️ Cambia nome",
+  "settings_done": "Fatto",
+  
+  "plan_today": "Oggi • {date}",
+  "@plan_today": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "15 Gen"
+      }
+    }
+  },
+  
+  "privacy_policy_title": "Politica sulla privacy",
+  "privacy_your_matters": "La tua privacy è importante",
+  "privacy_last_updated": "Ultimo aggiornamento: {date}",
+  "@privacy_last_updated": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "Dicembre 2024"
+      }
+    }
+  },
+  "privacy_transparency": "Crediamo nella completa trasparenza su come gestiamo le tue informazioni personali.",
+  "privacy_first_design": "Design privacy-first",
+  "privacy_first_description": "Nicotrack è progettato con la tua privacy come priorità assoluta. Tutti i tuoi dati personali rimangono sul tuo dispositivo e non vengono mai trasmessi a server esterni.",
+  "privacy_promise": "🌟 La tua privacy è la nostra promessa",
+  "privacy_commitment": "Nicotrack si impegna ad aiutarti a smettere di fumare mantenendo il tuo percorso personale completamente privato e sicuro.",
+  
+  "skip": "Salta",
+  "yes": "Sì",
+  "no": "No",
+  "back": "Indietro",
+  "next": "Avanti",
+  "ok": "OK",
+  "close": "Chiudi",
+  "done": "Fatto"
+}

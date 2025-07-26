@@ -1,0 +1,383 @@
+{
+  "@@locale": "nl_NL",
+  
+  "app_name": "Nicotrack",
+  "welcome_title": "Welkom bij\nNicotrack",
+  "start_journey_button": "Begin je reis",
+  
+  "track_milestones_title": "Volg je voortgang\n& mijlpalen",
+  "track_milestones_description": "Elke rookvrije dag brengt je dichter bij een gezonder leven. Zie hoe ver je bent gekomen met Nicotrack",
+  "crush_cravings_title": "Overwin je verlangen",
+  "crush_cravings_description": "We weten dat het verlangen hevig is. Nicotrack helpt je deze te beheersen met tools zoals afleidingsmodus en verlangen-logs.",
+  "stay_motivated_title": "Blijf gemotiveerd en verbonden",
+  "stay_motivated_description": "Je bent niet alleen. Vier elke mijlpaal met prestatiebadges en maak contact met anderen die stoppen.",
+  "quit_plan_title": "Je gepersonaliseerde stopplan",
+  "quit_plan_feature_1": "⚡ Kies je stopmethode – Direct stoppen of geleidelijke aanpak",
+  "quit_plan_feature_2": "🔗 Synchroniseer met Apple Health – Volg verbeteringen in ademhaling, hartslag en meer",
+  
+  "enter_name_subtitle": "Nog één laatste stap, 😅",
+  "enter_name_title": "Hoe mogen we je noemen?",
+  "name_placeholder": "Jan de Vries",
+  
+  "onboarding_last_smoke_question": "Wanneer heb je voor het laatst een 🚬 sigaret gerookt?",
+  "onboarding_last_smoke_today": "Vandaag",
+  "onboarding_last_smoke_yesterday": "Gisteren",
+  "onboarding_last_smoke_custom": "Aangepaste datum",
+  
+  "onboarding_smoke_frequency_question": "Hoeveel 🚬 sigaretten rookte je per dag?",
+  "onboarding_pack_cost_question": "Hoeveel kost je pakje sigaretten 💰?",
+  "onboarding_pack_contents_question": "Hoeveel 🚬 sigaretten zitten er in één pakje?",
+  "onboarding_biggest_motivation_question": "Wat is je grootste motivatie 💪 om te stoppen?",
+  "onboarding_help_need_question": "Waar heb je de meeste hulp 🙂 bij nodig?",
+  "onboarding_crave_situations_question": "In welke situaties verlang je het meest naar sigaretten 😥?",
+  "onboarding_quit_method_question": "Hoe wil je stoppen ❌ met roken?",
+  "onboarding_quit_method_subtitle": "Selecteer er één. Je kunt dit later ook wijzigen",
+  
+  "motivation_health": "Gezondheidsvoordelen",
+  "motivation_money": "Geld besparen",
+  "motivation_challenge": "Persoonlijke uitdaging",
+  "motivation_family": "Familie & geliefden",
+  "motivation_addiction": "De verslaving doorbreken",
+  "motivation_other": "Anders",
+  
+  "craving_coffee": "'s Ochtends met koffie",
+  "craving_meals": "Na het eten",
+  "craving_alcohol": "Bij het drinken van alcohol",
+  "craving_stress": "Bij stress",
+  "craving_boredom": "Verveling of gewoonte",
+  "craving_other": "Anders",
+  
+  "help_cravings": "Omgaan met verlangen & ontwenning",
+  "help_plan": "Vasthouden aan mijn stopplan",
+  "help_support": "Ondersteuning & motivatie",
+  "help_tracking": "Mijn voortgang bijhouden",
+  
+  "instant_quit": "Direct\nStoppen",
+  "instant_quit_description": "Stop onmiddellijk en gebruik ondersteunende tools",
+  "stepdown_method": "Afbouwmethode",
+  "stepdown_description": "Verminder het roken geleidelijk",
+  
+  "select_date": "Selecteer datum",
+  "cancel": "Annuleren",
+  "confirm": "Bevestigen",
+  "continue": "Doorgaan",
+  "finish": "Voltooien",
+  
+  "nav_home": "Home",
+  "nav_plan": "Plan",
+  "nav_progress": "Voortgang",
+  "nav_settings": "Instellingen",
+  
+  "settings_title": "📋 Instellingen",
+  "personal_info_section": "PERSOONLIJKE INFORMATIE",
+  "push_notifications_section": "PUSH MELDINGEN",
+  "financial_goals_section": "FINANCIËLE DOELEN",
+  "help_support_section": "HULP & ONDERSTEUNING",
+  "privacy_section": "PRIVACY",
+  
+  "field_name": "Naam",
+  "field_quit_date": "Stopdatum",
+  "field_currency": "Valuta",
+  "field_language": "Taal",
+  "action_edit": "Bewerken",
+  "action_change": "Wijzigen",
+  
+  "daily_reminder": "🔔 Dagelijkse herinnering",
+  "weekly_summary": "🗓️ Wekelijkse samenvatting",
+  "quit_tips": "💡 Stoptips",
+  
+  "contact_support": "💬 Contact met ondersteuning",
+  "give_feedback": "📝 Geef ons eerlijke feedback",
+  
+  "tip_1_title": "Blijf gehydrateerd",
+  "tip_1_description": "Drink veel water om nicotine uit je systeem te spoelen en het verlangen te verminderen.",
+  "tip_2_title": "Houd je handen bezig",
+  "tip_2_description": "Gebruik stressballen, fidget toys of doe activiteiten zoals tekenen of knutselen.",
+  "tip_3_title": "Vermijd triggers",
+  "tip_3_description": "Blijf weg van rookgebieden, alcohol of situaties die je doen verlangen naar een sigaret.",
+  "tip_4_title": "Oefen diepe ademhaling",
+  "tip_4_description": "Wanneer het verlangen toeslaat, adem dan 3-5 minuten langzaam en diep om te ontspannen.",
+  "tip_5_title": "Sport regelmatig",
+  "tip_5_description": "Fysieke activiteit vermindert stress, verbetert de stemming en helpt gewichtstoename te voorkomen.",
+  "tip_6_title": "Beloon jezelf",
+  "tip_6_description": "Vier mijlpalen met niet-roken beloningen zoals een film, maaltijd of nieuw item.",
+  
+  "clear_all_data": "Alle gegevens wissen",
+  "destructive_action": "Destructieve actie",
+  "clear_data_warning": "Deze actie kan niet ongedaan worden gemaakt en zal permanent al je voortgangsgegevens, stemmingsrecords, rookgeschiedenis en persoonlijke instellingen verwijderen.",
+  "progress_data": "Voortgangsgegevens",
+  "mood_records": "Stemmingsrecords",
+  "settings_data": "Instellingen",
+  "confirmation_required": "Bevestiging vereist",
+  "clear_data_instruction": "Typ \"WIS MIJN GEGEVENS\" hieronder om door te gaan met verwijderen.",
+  "clear_data_placeholder": "Typ \"WIS MIJN GEGEVENS\"",
+  
+  "overview_tab": "📋 Overzicht",
+  "health_tab": "🧠 Gezondheid",
+  "savings_tab": "🪙 Besparingen",
+  "cravings_tab": "🤤 Verlangen",
+  "milestones_tab": "🏆 Mijlpalen",
+  
+  "quit_date_label": "🗓️ Stopdatum: ",
+  "days_suffix": "dagen",
+  "mood_label": "🌤️️ Stemming ",
+  
+  "premium_title": "Ontgrendel\nNicotrack Premium",
+  "premium_description": "Geniet vrijelijk van deze voordelen wanneer je het premium plan neemt",
+  "choose_plan": "Kies je plan",
+  "continue_button": "Doorgaan",
+  
+  "advanced_analytics": "Geavanceerde analyses",
+  "advanced_analytics_desc": "Krijg gedetailleerde inzichten in je stopvoortgang",
+  "unlimited_goals": "Onbeperkte doelen",
+  "unlimited_goals_desc": "Stel meerdere gepersonaliseerde doelen voor je reis",
+  "complete_badges": "Complete badges",
+  "complete_badges_desc": "Toegang tot alle prestatiesbadges en beloningen",
+  "unlimited_quit_changes": "Onbeperkte stopmethode wijzigingen",
+  "unlimited_quit_changes_desc": "Wijzig je stopmethode op elk moment zonder limieten",
+  "full_timeline_access": "Volledige tijdlijn toegang",
+  "full_timeline_access_desc": "Bekijk de complete tijdlijn van je stopreis",
+  "unlimited_daily_tasks": "Onbeperkte dagelijkse taken",
+  "unlimited_daily_tasks_desc": "Toegang tot alle dagelijkse taken en activiteiten",
+  
+  "cancel_anytime": "📱 Altijd opzegbaar",
+  "costs_less": "🧧 Kost minder dan sigaretten in 2 weken",
+  "billed_annually": "Jaarlijks gefactureerd",
+  "billed_monthly": "Maandelijks gefactureerd",
+  "billed_once": "Eenmalig gefactureerd",
+  
+  "restore_purchase": "Aankoop herstellen",
+  "terms_of_use": "Gebruiksvoorwaarden",
+  "privacy_policy": "Privacybeleid",
+  
+  "today_date_prefix": "Vandaag • ",
+  "personalized_quit_routine": "Gepersonaliseerde stoproutine",
+  "instant_quit_plan": "Direct stopplan",
+  "your_quit_journey": "Jouw stopreis",
+  "personalized_plan": "Gepersonaliseerd plan",
+  "plan_description": "Dit plan is speciaal voor jou ontworpen om je te helpen succesvol te stoppen met roken. Volg de tijdlijn om te begrijpen wat je kunt verwachten tijdens je reis.",
+  "track_progress": "Voortgang bijhouden",
+  "earn_badges": "Badges verdienen",
+  "stay_strong": "Blijf sterk",
+  "important_note": "Belangrijke opmerking",
+  "timeline_disclaimer": "Symptomen en effecten variëren per persoon. Deze tijdlijn toont veelvoorkomende ervaringen, maar jouw reis is uniek!",
+  "info_button": "Info",
+  
+  "happy": "Blij",
+  "neutral": "Neutraal",
+  "sad": "Verdrietig",
+  "angry": "Boos",
+  "anxious": "Angstig",
+  "confident": "Zelfverzekerd",
+  "tired": "Moe",
+  "frustrated": "Gefrustreerd",
+  "excited": "Opgewonden",
+  "confused": "Verward",
+  "motivated": "Gemotiveerd",
+  "other": "Anders",
+  
+  "work_stress": "Werkstress",
+  "relationship": "Relatie",
+  "family": "Familie",
+  "health": "Gezondheid ",
+  "craving_episode": "Verlangen-episode",
+  "feeling_proud": "Trots voelen",
+  "chill_day": "Gewoon een relaxte dag",
+  
+  "strong_cravings": "Ja,\nsterke",
+  "mild_cravings": "Ja,\nmilde",
+  "no_cravings": "Helemaal geen verlangen",
+  
+  "reflection_placeholder": "Schrijf iets... 💬 (optioneel)",
+  "mood_finish": "🙌 Klaar",
+  
+  "today": "Vandaag",
+  "yesterday": "Gisteren",
+  "trigger_title": "Dit triggerde je verlangen",
+  "feeling_title": "Dit liet het je voelen",
+  "avoid_title": "Dit heb je gemarkeerd als\nwat je hierna zou doen om verlangen te vermijden",
+  "smoke_question": "Heb je vandaag gerookt?",
+  "no_smoking_data": "Geen rookgegevens",
+  "no_smoking_recorded": "Er is geen rookstatus opgenomen voor deze datum",
+  "amazing_text": "Geweldig!",
+  "cigarettes_count": "Dit is hoeveel 🚬\nsigaretten je hebt gerookt",
+  "smoke_free_day": "Je bent op je rookvrije dag 🥳.",
+  "financial_goal_progress": "🥅 Financieel doel: \n{emoji} {title} voltooid.",
+  "@financial_goal_progress": {
+    "placeholders": {
+      "emoji": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "go_home": "🏠 Ga naar home",
+  
+  "oxygen_increase": "Zuurstofniveaus\nstijgen",
+  "blood_pressure": "Bloeddruk\nnormaliseert",
+  "lung_function": "Longfunctie\nverbetert",
+  "heart_rate": "Hartslag\nstabiliseert",
+  "sleep_quality": "Slaapkwaliteit\nverbetert",
+  
+  "feeling_sad_guilty": "Verdrietig of schuldig",
+  "feeling_neutral": "Neutraal",
+  "feeling_tired": "Moe",
+  "feeling_proud": "Trots",
+  "feeling_dizzy": "Duizelig",
+  
+  "deep_breathing": "Oefen diepe ademhaling",
+  "go_walk": "Ga wandelen",
+  "call_friend": "Bel een vriend",
+  "listen_music": "Luister naar muziek",
+  "wash_hands": "Was je handen",
+  "write_journal": "Schrijf in een dagboek",
+  "read_pages": "Lees een paar pagina's",
+  "chew_gum": "Kauw kauwgom of snack",
+  "watch_video": "Bekijk een korte video",
+  "solve_puzzle": "Los een snelle puzzel op",
+  "play_pet": "Speel met een huisdier",
+  "do_chore": "Doe een snelle klus",
+  "photo_walk": "Maak een fotowaneling",
+  "mobile_game": "Speel een mobiel spel",
+  "relaxing_shower": "Neem een ontspannende douche",
+  
+  "morning_coffee": "'s Ochtends na de koffie",
+  "while_working": "Tijdens het werk",
+  "feeling_stressed": "Bij stress",
+  "drinking_alcohol": "Bij het drinken van alcohol",
+  "during_commute": "Tijdens het woon-werkverkeer",
+  "after_eating": "Direct na het eten",
+  "scrolling_phone": "Tijdens het scrollen op telefoon",
+  "after_argument": "Na een ruzie",
+  "feeling_anxious": "Bij angst",
+  "work_break": "Tijdens een pauze op het werk",
+  "evening_time": "'s Avonds",
+  "watching_tv": "Tijdens het tv kijken",
+  "stepping_outside": "Bij het naar buiten gaan",
+  "others_smoking": "Wanneer anderen roken",
+  "feeling_bored": "Bij verveling of niets te doen",
+  
+  "shortness_breath": "Kortademigheid",
+  "dizziness": "Duizeligheid of licht in het hoofd",
+  "persistent_cough": "Aanhoudend hoesten",
+  "nausea": "Misselijkheid of maagklachten",
+  "fatigue": "Vermoeidheid of weinig energie",
+  "chest_tightness": "Beklemmend gevoel op de borst",
+  "excessive_sweating": "Overmatig zweten",
+  "headaches": "Hoofdpijn",
+  "irritability": "Prikkelbaarheid of stemmingswisselingen",
+  "trouble_sleeping": "Slaapproblemen",
+  "dry_mouth": "Droge mond of keel",
+  "heavy_breathing": "Zwaar ademen tijdens het lopen",
+  "heart_palpitations": "Hartkloppingen",
+  "shaky_hands": "Trillende handen",
+  "brain_fog": "Wazig denken of gebrek aan focus",
+  
+  "edit": "Bewerken",
+  "change": "Wijzigen",
+  "save": "Opslaan",
+  "delete": "Verwijderen",
+  "add_new_goal": "Nieuw doel toevoegen",
+  
+  "morning": "Ochtend",
+  "afternoon": "Middag",
+  "evening": "Avond",
+  "night": "Nacht",
+  
+  "monday": "Maandag",
+  "tuesday": "Dinsdag",
+  "wednesday": "Woensdag",
+  "thursday": "Donderdag",
+  "friday": "Vrijdag",
+  "saturday": "Zaterdag",
+  "sunday": "Zondag",
+  
+  "best_deal": "🎉Beste deal",
+  "monthly": "Maandelijks",
+  "yearly": "Jaarlijks",
+  "lifetime": "Levenslang",
+  
+  "home_hello": "Hallo,\n{name}",
+  "@home_hello": {
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Jan"
+      }
+    }
+  },
+  "home_get_pro": "Word Pro",
+  "home_personalized_quit_routine": "Gepersonaliseerde stoproutine",
+  
+  "quick_action_remove_cigarettes": "Verwijder alle 🚬sigaretten, 🔥 aanstekers & asbakken uit je huis",
+  "quick_action_replace_habit": "Vervang 🚬 roken door een nieuwe gewoonte (bijv. kauwgom kauen, 🫁 diepe ademhaling)",
+  "quick_action_identify_triggers": "Identificeer je grootste triggers 🎯 en vermijd ze",
+  "quick_action_log_cravings": "Log ✍️ elk verlangen en hoe je het hebt overwonnen",
+  
+  "mood_how_feeling_today": "Hoe voel je je vandaag? ❤️",
+  "mood_any_cravings_today": "Had je vandaag verlangen 🥴?",
+  "mood_what_affecting": "Dit beïnvloedt je stemming",
+  "mood_did_cravings": "Had je verlangen?",
+  "mood_cravings_yes": "Ja",
+  "mood_cravings_no": "Nee",
+  "mood_nothing_here": "Niets hier",
+  "mood_no_recorded": "Geen stemming vastgelegd",
+  "mood_no_data_captured": "Er zijn geen stemmingsgegevens vastgelegd voor deze datum",
+  
+  "smoking_did_smoke_today": "Heb je vandaag\n🚬 gerookt?",
+  "smoking_honesty_policy": "Eerlijkheid is het beste beleid 😉",
+  "smoking_how_feel": "Hoe voelde het je 😔?",
+  "smoking_what_triggered": "Wat triggerde je om vandaag te roken 🚬?",
+  "smoking_how_many_today": "Hoeveel 🚬 sigaretten heb je vandaag gerookt?",
+  
+  "progress_title": "Voortgang",
+  "progress_current_streak": "Huidige\nReeks",
+  "progress_days": "dagen",
+  "progress_quit_date": "🗓️ Stopdatum: ",
+  "progress_not_set": "Niet ingesteld",
+  "progress_mood_trend": "🌤️️ Stemmingstrend",
+  
+  "progress_label_days_since": "Dagen sinds\nlaatste sigaret",
+  "progress_label_money_saved": "Geld bespaard",
+  
+  "settings_change_name": "✏️ Naam wijzigen",
+  "settings_done": "Klaar",
+  
+  "plan_today": "Vandaag • {date}",
+  "@plan_today": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "15 jan"
+      }
+    }
+  },
+  
+  "privacy_policy_title": "Privacybeleid",
+  "privacy_your_matters": "Je privacy is belangrijk",
+  "privacy_last_updated": "Laatst bijgewerkt: {date}",
+  "@privacy_last_updated": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "December 2024"
+      }
+    }
+  },
+  "privacy_transparency": "We geloven in volledige transparantie over hoe we met je persoonlijke informatie omgaan.",
+  "privacy_first_design": "Privacy-first ontwerp",
+  "privacy_first_description": "Nicotrack is ontworpen met jouw privacy als topprioriteit. Al je persoonlijke gegevens blijven op je apparaat en worden nooit naar externe servers verzonden.",
+  "privacy_promise": "🌟 Je privacy is onze belofte",
+  "privacy_commitment": "Nicotrack is toegewijd om je te helpen stoppen met roken terwijl je persoonlijke reis volledig privé en veilig blijft.",
+  
+  "skip": "Overslaan",
+  "yes": "Ja",
+  "no": "Nee",
+  "back": "Terug",
+  "next": "Volgende",
+  "ok": "OK",
+  "close": "Sluiten",
+  "done": "Klaar"
+}

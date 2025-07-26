@@ -1,0 +1,383 @@
+{
+  "@@locale": "pt_BR",
+  
+  "app_name": "Nicotrack",
+  "welcome_title": "Bem-vindo ao\nNicotrack",
+  "start_journey_button": "Comece sua jornada",
+  
+  "track_milestones_title": "Acompanhe seu progresso\ne marcos",
+  "track_milestones_description": "Cada dia sem fumar te aproxima de uma vida mais saudável. Veja o quanto você já progrediu com o Nicotrack",
+  "crush_cravings_title": "Vença seus desejos",
+  "crush_cravings_description": "Sabemos que os desejos são intensos. O Nicotrack ajuda a gerenciá-los com ferramentas como modo de distração e registros de desejos.",
+  "stay_motivated_title": "Mantenha-se motivado e conectado",
+  "stay_motivated_description": "Você não está sozinho. Celebre cada marco com emblemas de conquista e conecte-se com outros que estão parando.",
+  "quit_plan_title": "Seu plano personalizado para parar",
+  "quit_plan_feature_1": "⚡ Escolha seu método para parar – Parada imediata ou abordagem gradual",
+  "quit_plan_feature_2": "🔗 Sincronize com Apple Health – Acompanhe melhorias na respiração, frequência cardíaca e mais",
+  
+  "enter_name_subtitle": "Um último passo, 😅",
+  "enter_name_title": "Como devemos te chamar?",
+  "name_placeholder": "João Silva",
+  
+  "onboarding_last_smoke_question": "Quando foi a última vez que você fumou um 🚬 cigarro?",
+  "onboarding_last_smoke_today": "Hoje",
+  "onboarding_last_smoke_yesterday": "Ontem",
+  "onboarding_last_smoke_custom": "Data personalizada",
+  
+  "onboarding_smoke_frequency_question": "Quantos 🚬 cigarros você fumava por dia?",
+  "onboarding_pack_cost_question": "Quanto custa seu maço de cigarros 💰?",
+  "onboarding_pack_contents_question": "Quantos 🚬 cigarros há em um maço?",
+  "onboarding_biggest_motivation_question": "Qual é sua maior motivação 💪 para parar?",
+  "onboarding_help_need_question": "Com o que você mais precisa de ajuda 🙂?",
+  "onboarding_crave_situations_question": "Quais situações fazem você desejar cigarros 😥 mais?",
+  "onboarding_quit_method_question": "Como você quer ❌ parar de fumar?",
+  "onboarding_quit_method_subtitle": "Por favor, selecione uma. Você pode mudar isso depois também",
+  
+  "motivation_health": "Benefícios para a saúde",
+  "motivation_money": "Economizar dinheiro",
+  "motivation_challenge": "Desafio pessoal",
+  "motivation_family": "Família e entes queridos",
+  "motivation_addiction": "Quebrar o vício",
+  "motivation_other": "Outro",
+  
+  "craving_coffee": "Manhã com café",
+  "craving_meals": "Após as refeições",
+  "craving_alcohol": "Ao beber álcool",
+  "craving_stress": "Quando estou estressado",
+  "craving_boredom": "Tédio ou hábito",
+  "craving_other": "Outro",
+  
+  "help_cravings": "Lidando com desejos e abstinência",
+  "help_plan": "Aderindo ao meu plano para parar",
+  "help_support": "Apoio e motivação",
+  "help_tracking": "Acompanhando meu progresso",
+  
+  "instant_quit": "Parada\nImediata",
+  "instant_quit_description": "Pare imediatamente e use ferramentas de apoio",
+  "stepdown_method": "Método Gradual",
+  "stepdown_description": "Reduza gradualmente o fumo ao longo do tempo",
+  
+  "select_date": "Selecionar data",
+  "cancel": "Cancelar",
+  "confirm": "Confirmar",
+  "continue": "Continuar",
+  "finish": "Finalizar",
+  
+  "nav_home": "Início",
+  "nav_plan": "Plano",
+  "nav_progress": "Progresso",
+  "nav_settings": "Configurações",
+  
+  "settings_title": "📋 Configurações",
+  "personal_info_section": "INFORMAÇÕES PESSOAIS",
+  "push_notifications_section": "NOTIFICAÇÕES PUSH",
+  "financial_goals_section": "METAS FINANCEIRAS",
+  "help_support_section": "AJUDA E SUPORTE",
+  "privacy_section": "PRIVACIDADE",
+  
+  "field_name": "Nome",
+  "field_quit_date": "Data de parada",
+  "field_currency": "Moeda",
+  "field_language": "Idioma",
+  "action_edit": "Editar",
+  "action_change": "Alterar",
+  
+  "daily_reminder": "🔔 Lembrete diário",
+  "weekly_summary": "🗓️ Resumo semanal",
+  "quit_tips": "💡 Dicas para parar",
+  
+  "contact_support": "💬 Contatar suporte",
+  "give_feedback": "📝 Dê-nos um feedback honesto",
+  
+  "tip_1_title": "Mantenha-se hidratado",
+  "tip_1_description": "Beba bastante água para ajudar a eliminar a nicotina do seu sistema e reduzir os desejos.",
+  "tip_2_title": "Mantenha suas mãos ocupadas",
+  "tip_2_description": "Use bolas antiestresse, fidget toys ou envolva-se em atividades como desenhar ou artesanato.",
+  "tip_3_title": "Evite gatilhos",
+  "tip_3_description": "Fique longe de áreas de fumantes, álcool ou situações que te fazem querer fumar.",
+  "tip_4_title": "Pratique respiração profunda",
+  "tip_4_description": "Quando os desejos chegarem, respire lenta e profundamente por 3-5 minutos para relaxar.",
+  "tip_5_title": "Exercite-se regularmente",
+  "tip_5_description": "A atividade física reduz o estresse, melhora o humor e ajuda a prevenir o ganho de peso.",
+  "tip_6_title": "Recompense-se",
+  "tip_6_description": "Celebre marcos com recompensas sem fumo como um filme, refeição ou item novo.",
+  
+  "clear_all_data": "Apagar todos os dados",
+  "destructive_action": "Ação destrutiva",
+  "clear_data_warning": "Esta ação não pode ser desfeita e apagará permanentemente todos os seus dados de progresso, registros de humor, histórico de fumo e configurações pessoais.",
+  "progress_data": "Dados de progresso",
+  "mood_records": "Registros de humor",
+  "settings_data": "Configurações",
+  "confirmation_required": "Confirmação necessária",
+  "clear_data_instruction": "Digite \"APAGAR MEUS DADOS\" abaixo para prosseguir com a exclusão.",
+  "clear_data_placeholder": "Digite \"APAGAR MEUS DADOS\"",
+  
+  "overview_tab": "📋 Visão geral",
+  "health_tab": "🧠 Saúde",
+  "savings_tab": "🪙 Economias",
+  "cravings_tab": "🤤 Desejos",
+  "milestones_tab": "🏆 Marcos",
+  
+  "quit_date_label": "🗓️ Data de parada: ",
+  "days_suffix": "dias",
+  "mood_label": "🌤️️ Humor ",
+  
+  "premium_title": "Desbloqueie\nNicotrack Premium",
+  "premium_description": "Aproveite esses benefícios livremente quando você adquirir o plano premium",
+  "choose_plan": "Escolha seu plano",
+  "continue_button": "Continuar",
+  
+  "advanced_analytics": "Análises avançadas",
+  "advanced_analytics_desc": "Obtenha insights detalhados sobre seu progresso para parar",
+  "unlimited_goals": "Metas ilimitadas",
+  "unlimited_goals_desc": "Defina múltiplas metas personalizadas para sua jornada",
+  "complete_badges": "Emblemas completos",
+  "complete_badges_desc": "Acesso a todos os emblemas de conquista e recompensas",
+  "unlimited_quit_changes": "Mudanças ilimitadas de método",
+  "unlimited_quit_changes_desc": "Mude seu método para parar a qualquer momento sem limites",
+  "full_timeline_access": "Acesso completo à linha do tempo",
+  "full_timeline_access_desc": "Veja a linha do tempo completa da sua jornada para parar",
+  "unlimited_daily_tasks": "Tarefas diárias ilimitadas",
+  "unlimited_daily_tasks_desc": "Acesso a todas as tarefas e atividades diárias",
+  
+  "cancel_anytime": "📱 Cancele a qualquer momento",
+  "costs_less": "🧧 Custa menos que cigarros em 2 semanas",
+  "billed_annually": "Cobrado anualmente",
+  "billed_monthly": "Cobrado mensalmente",
+  "billed_once": "Cobrado uma vez",
+  
+  "restore_purchase": "Restaurar compra",
+  "terms_of_use": "Termos de uso",
+  "privacy_policy": "Política de privacidade",
+  
+  "today_date_prefix": "Hoje • ",
+  "personalized_quit_routine": "Rotina personalizada para parar",
+  "instant_quit_plan": "Plano de parada imediata",
+  "your_quit_journey": "Sua jornada para parar",
+  "personalized_plan": "Plano personalizado",
+  "plan_description": "Este plano foi projetado especificamente para você ajudá-lo a parar de fumar com sucesso. Siga a linha do tempo para entender o que esperar durante sua jornada.",
+  "track_progress": "Acompanhar progresso",
+  "earn_badges": "Ganhar emblemas",
+  "stay_strong": "Mantenha-se forte",
+  "important_note": "Nota importante",
+  "timeline_disclaimer": "Sintomas e efeitos variam de pessoa para pessoa. Esta linha do tempo mostra experiências comuns, mas sua jornada é única!",
+  "info_button": "Info",
+  
+  "happy": "Feliz",
+  "neutral": "Neutro",
+  "sad": "Triste",
+  "angry": "Irritado",
+  "anxious": "Ansioso",
+  "confident": "Confiante",
+  "tired": "Cansado",
+  "frustrated": "Frustrado",
+  "excited": "Animado",
+  "confused": "Confuso",
+  "motivated": "Motivado",
+  "other": "Outro",
+  
+  "work_stress": "Estresse no trabalho",
+  "relationship": "Relacionamento",
+  "family": "Família",
+  "health": "Saúde ",
+  "craving_episode": "Episódio de desejo",
+  "feeling_proud": "Sentindo orgulho",
+  "chill_day": "Apenas um dia tranquilo",
+  
+  "strong_cravings": "Sim,\nfortes",
+  "mild_cravings": "Sim,\nleves",
+  "no_cravings": "Nenhum desejo",
+  
+  "reflection_placeholder": "Escreva algo... 💬 (opcional)",
+  "mood_finish": "🙌 Finalizar",
+  
+  "today": "Hoje",
+  "yesterday": "Ontem",
+  "trigger_title": "Isso é o que desencadeou seu desejo",
+  "feeling_title": "Isso é como te fez sentir",
+  "avoid_title": "Isso é o que você marcou\nque faria em seguida para evitar o desejo",
+  "smoke_question": "Você fumou hoje?",
+  "no_smoking_data": "Sem dados de fumo",
+  "no_smoking_recorded": "Nenhum status de fumo foi registrado para esta data",
+  "amazing_text": "Incrível!",
+  "cigarettes_count": "Esta é a quantidade de 🚬\ncigarros que você fumou",
+  "smoke_free_day": "Você está em seu dia livre de fumo 🥳.",
+  "financial_goal_progress": "🥅 Meta financeira: \n{emoji} {title} concluída.",
+  "@financial_goal_progress": {
+    "placeholders": {
+      "emoji": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "go_home": "🏠 Ir para início",
+  
+  "oxygen_increase": "Níveis de oxigênio\naumentam",
+  "blood_pressure": "Pressão arterial\nnormaliza",
+  "lung_function": "Função pulmonar\nmelhora",
+  "heart_rate": "Frequência cardíaca\nestabiliza",
+  "sleep_quality": "Qualidade do sono\nmelhora",
+  
+  "feeling_sad_guilty": "Triste ou culpado",
+  "feeling_neutral": "Neutro",
+  "feeling_tired": "Cansado",
+  "feeling_proud": "Orgulhoso",
+  "feeling_dizzy": "Tonto",
+  
+  "deep_breathing": "Pratique respiração profunda",
+  "go_walk": "Vá caminhar",
+  "call_friend": "Ligue para um amigo",
+  "listen_music": "Escute música",
+  "wash_hands": "Lave suas mãos",
+  "write_journal": "Escreva em um diário",
+  "read_pages": "Leia algumas páginas",
+  "chew_gum": "Masque chiclete ou coma um lanche",
+  "watch_video": "Assista um vídeo curto",
+  "solve_puzzle": "Resolva um quebra-cabeça rápido",
+  "play_pet": "Brinque com um pet",
+  "do_chore": "Faça uma tarefa rápida",
+  "photo_walk": "Faça uma caminhada fotográfica",
+  "mobile_game": "Jogue um jogo no celular",
+  "relaxing_shower": "Tome um banho relaxante",
+  
+  "morning_coffee": "Manhã após o café",
+  "while_working": "Enquanto trabalha",
+  "feeling_stressed": "Quando sinto estresse",
+  "drinking_alcohol": "Ao beber álcool",
+  "during_commute": "Durante o trajeto",
+  "after_eating": "Logo após comer",
+  "scrolling_phone": "Ao rolar no celular",
+  "after_argument": "Após uma discussão",
+  "feeling_anxious": "Quando sinto ansiedade",
+  "work_break": "Durante uma pausa no trabalho",
+  "evening_time": "À noite",
+  "watching_tv": "Assistindo TV",
+  "stepping_outside": "Ao sair",
+  "others_smoking": "Quando outros estão fumando",
+  "feeling_bored": "Quando entediado ou sem fazer nada",
+  
+  "shortness_breath": "Falta de ar",
+  "dizziness": "Tontura ou vertigem",
+  "persistent_cough": "Tosse persistente",
+  "nausea": "Náusea ou mal-estar estomacal",
+  "fatigue": "Fadiga ou baixa energia",
+  "chest_tightness": "Aperto no peito",
+  "excessive_sweating": "Suor excessivo",
+  "headaches": "Dores de cabeça",
+  "irritability": "Irritabilidade ou mudanças de humor",
+  "trouble_sleeping": "Problemas para dormir",
+  "dry_mouth": "Boca ou garganta seca",
+  "heavy_breathing": "Respiração pesada ao caminhar",
+  "heart_palpitations": "Palpitações cardíacas",
+  "shaky_hands": "Mãos trêmulas",
+  "brain_fog": "Névoa mental ou falta de foco",
+  
+  "edit": "Editar",
+  "change": "Alterar",
+  "save": "Salvar",
+  "delete": "Excluir",
+  "add_new_goal": "Adicionar nova meta",
+  
+  "morning": "Manhã",
+  "afternoon": "Tarde",
+  "evening": "Noite",
+  "night": "Madrugada",
+  
+  "monday": "Segunda-feira",
+  "tuesday": "Terça-feira",
+  "wednesday": "Quarta-feira",
+  "thursday": "Quinta-feira",
+  "friday": "Sexta-feira",
+  "saturday": "Sábado",
+  "sunday": "Domingo",
+  
+  "best_deal": "🎉Melhor oferta",
+  "monthly": "Mensal",
+  "yearly": "Anual",
+  "lifetime": "Vitalício",
+  
+  "home_hello": "Olá,\n{name}",
+  "@home_hello": {
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "João"
+      }
+    }
+  },
+  "home_get_pro": "Obter Pro",
+  "home_personalized_quit_routine": "Rotina personalizada para parar",
+  
+  "quick_action_remove_cigarettes": "Remova todos os 🚬cigarros, 🔥 isqueiros e cinzeiros de sua casa",
+  "quick_action_replace_habit": "Substitua o 🚬 fumo por um novo hábito (ex: mascar chiclete, 🫁 respiração profunda)",
+  "quick_action_identify_triggers": "Identifique seus maiores gatilhos 🎯 e evite-os",
+  "quick_action_log_cravings": "Registre ✍️ quaisquer desejos e como você os superou",
+  
+  "mood_how_feeling_today": "Como você está se sentindo hoje? ❤️",
+  "mood_any_cravings_today": "Você teve algum desejo 🥴 hoje?",
+  "mood_what_affecting": "Isso é o que está afetando seu humor",
+  "mood_did_cravings": "Você teve algum desejo?",
+  "mood_cravings_yes": "Sim",
+  "mood_cravings_no": "Não",
+  "mood_nothing_here": "Nada aqui",
+  "mood_no_recorded": "Nenhum humor registrado",
+  "mood_no_data_captured": "Nenhum dado de humor foi capturado para esta data",
+  
+  "smoking_did_smoke_today": "Você\nfumou 🚬 hoje?",
+  "smoking_honesty_policy": "Honestidade é a melhor política 😉",
+  "smoking_how_feel": "Como isso te fez sentir 😔?",
+  "smoking_what_triggered": "O que te levou a fumar 🚬 hoje?",
+  "smoking_how_many_today": "Quantos 🚬 cigarros você fumou hoje?",
+  
+  "progress_title": "Progresso",
+  "progress_current_streak": "Sequência\nAtual",
+  "progress_days": "dias",
+  "progress_quit_date": "🗓️ Data de parada: ",
+  "progress_not_set": "Não definida",
+  "progress_mood_trend": "🌤️️ Tendência de humor",
+  
+  "progress_label_days_since": "Dias desde o\núltimo cigarro",
+  "progress_label_money_saved": "Dinheiro economizado",
+  
+  "settings_change_name": "✏️ Alterar nome",
+  "settings_done": "Pronto",
+  
+  "plan_today": "Hoje • {date}",
+  "@plan_today": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "15 de Jan"
+      }
+    }
+  },
+  
+  "privacy_policy_title": "Política de privacidade",
+  "privacy_your_matters": "Sua privacidade importa",
+  "privacy_last_updated": "Última atualização: {date}",
+  "@privacy_last_updated": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "Dezembro 2024"
+      }
+    }
+  },
+  "privacy_transparency": "Acreditamos em total transparência sobre como lidamos com suas informações pessoais.",
+  "privacy_first_design": "Design com privacidade em primeiro lugar",
+  "privacy_first_description": "O Nicotrack foi projetado com sua privacidade como prioridade máxima. Todos os seus dados pessoais permanecem em seu dispositivo e nunca são transmitidos para servidores externos.",
+  "privacy_promise": "🌟 Sua privacidade é nossa promessa",
+  "privacy_commitment": "O Nicotrack está comprometido em ajudá-lo a parar de fumar enquanto mantém sua jornada pessoal completamente privada e segura.",
+  
+  "skip": "Pular",
+  "yes": "Sim",
+  "no": "Não",
+  "back": "Voltar",
+  "next": "Próximo",
+  "ok": "OK",
+  "close": "Fechar",
+  "done": "Pronto"
+}

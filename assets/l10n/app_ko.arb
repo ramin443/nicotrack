@@ -1,0 +1,383 @@
+{
+  "@@locale": "ko_KR",
+  
+  "app_name": "Nicotrack",
+  "welcome_title": "Nicotrack에\n오신 것을 환영합니다",
+  "start_journey_button": "여정을 시작하세요",
+  
+  "track_milestones_title": "진행 상황과\n마일스톤 추적",
+  "track_milestones_description": "금연하는 매일이 더 건강한 삶으로 가까워집니다. Nicotrack으로 얼마나 왔는지 확인하세요",
+  "crush_cravings_title": "갈망을 극복하세요",
+  "crush_cravings_description": "갈망은 강합니다. Nicotrack은 주의 분산 모드와 갈망 기록 같은 도구로 관리를 도와드립니다.",
+  "stay_motivated_title": "동기부여를 유지하고 연결하세요",
+  "stay_motivated_description": "당신은 혼자가 아닙니다. 성취 배지로 마일스톤을 축하하고 금연하는 다른 사람들과 연결하세요.",
+  "quit_plan_title": "당신만의 맞춤형 금연 계획",
+  "quit_plan_feature_1": "⚡ 금연 방법 선택 – 즉시 금연 또는 단계적 접근",
+  "quit_plan_feature_2": "🔗 Apple Health와 동기화 – 호흡, 심박수 등의 개선 추적",
+  
+  "enter_name_subtitle": "마지막 단계입니다, 😅",
+  "enter_name_title": "어떻게 불러드릴까요?",
+  "name_placeholder": "홍길동",
+  
+  "onboarding_last_smoke_question": "마지막으로 🚬 담배를 피운 것이 언제인가요?",
+  "onboarding_last_smoke_today": "오늘",
+  "onboarding_last_smoke_yesterday": "어제",
+  "onboarding_last_smoke_custom": "사용자 지정 날짜",
+  
+  "onboarding_smoke_frequency_question": "하루에 🚬 담배를 몇 개비 피우셨나요?",
+  "onboarding_pack_cost_question": "담배 한 갑의 가격은 얼마💰인가요?",
+  "onboarding_pack_contents_question": "한 갑에 🚬 담배가 몇 개비 들어있나요?",
+  "onboarding_biggest_motivation_question": "금연하는 가장 큰 동기💪는 무엇인가요?",
+  "onboarding_help_need_question": "무엇에 가장 도움이 필요🙂하신가요?",
+  "onboarding_crave_situations_question": "어떤 상황에서 담배가 가장 당기나요😥?",
+  "onboarding_quit_method_question": "어떻게 금연❌하고 싶으신가요?",
+  "onboarding_quit_method_subtitle": "하나를 선택해주세요. 나중에 변경할 수도 있습니다",
+  
+  "motivation_health": "건강상의 이점",
+  "motivation_money": "돈 절약",
+  "motivation_challenge": "개인적인 도전",
+  "motivation_family": "가족과 사랑하는 사람들",
+  "motivation_addiction": "중독에서 벗어나기",
+  "motivation_other": "기타",
+  
+  "craving_coffee": "아침 커피와 함께",
+  "craving_meals": "식사 후",
+  "craving_alcohol": "술을 마실 때",
+  "craving_stress": "스트레스를 받을 때",
+  "craving_boredom": "지루함이나 습관",
+  "craving_other": "기타",
+  
+  "help_cravings": "갈망과 금단 증상 다루기",
+  "help_plan": "금연 계획 지키기",
+  "help_support": "지원과 동기부여",
+  "help_tracking": "진행 상황 추적",
+  
+  "instant_quit": "즉시\n금연",
+  "instant_quit_description": "즉시 중단하고 지원 도구 사용",
+  "stepdown_method": "단계적 방법",
+  "stepdown_description": "시간을 두고 점진적으로 흡연 줄이기",
+  
+  "select_date": "날짜 선택",
+  "cancel": "취소",
+  "confirm": "확인",
+  "continue": "계속",
+  "finish": "완료",
+  
+  "nav_home": "홈",
+  "nav_plan": "계획",
+  "nav_progress": "진행 상황",
+  "nav_settings": "설정",
+  
+  "settings_title": "📋 설정",
+  "personal_info_section": "개인 정보",
+  "push_notifications_section": "푸시 알림",
+  "financial_goals_section": "재무 목표",
+  "help_support_section": "도움말 및 지원",
+  "privacy_section": "개인정보 보호",
+  
+  "field_name": "이름",
+  "field_quit_date": "금연 날짜",
+  "field_currency": "통화",
+  "field_language": "언어",
+  "action_edit": "편집",
+  "action_change": "변경",
+  
+  "daily_reminder": "🔔 일일 알림",
+  "weekly_summary": "🗓️ 주간 요약",
+  "quit_tips": "💡 금연 팁",
+  
+  "contact_support": "💬 지원팀 문의",
+  "give_feedback": "📝 솔직한 피드백을 주세요",
+  
+  "tip_1_title": "수분 유지하기",
+  "tip_1_description": "물을 많이 마셔서 체내 니코틴을 배출하고 갈망을 줄이세요.",
+  "tip_2_title": "손을 바쁘게 하기",
+  "tip_2_description": "스트레스 볼, 피젯 토이를 사용하거나 그림 그리기, 공예 같은 활동을 하세요.",
+  "tip_3_title": "유발 요인 피하기",
+  "tip_3_description": "흡연 구역, 술, 담배를 피우고 싶게 만드는 상황을 피하세요.",
+  "tip_4_title": "심호흡 연습하기",
+  "tip_4_description": "갈망이 올 때, 3-5분간 천천히 깊게 숨을 쉬며 긴장을 푸세요.",
+  "tip_5_title": "규칙적으로 운동하기",
+  "tip_5_description": "신체 활동은 스트레스를 줄이고 기분을 개선하며 체중 증가를 예방합니다.",
+  "tip_6_title": "자신에게 보상하기",
+  "tip_6_description": "영화, 식사, 새 물건 같은 비흡연 보상으로 마일스톤을 축하하세요.",
+  
+  "clear_all_data": "모든 데이터 삭제",
+  "destructive_action": "파괴적인 작업",
+  "clear_data_warning": "이 작업은 되돌릴 수 없으며 모든 진행 데이터, 기분 기록, 흡연 기록 및 개인 설정을 영구적으로 삭제합니다.",
+  "progress_data": "진행 데이터",
+  "mood_records": "기분 기록",
+  "settings_data": "설정",
+  "confirmation_required": "확인 필요",
+  "clear_data_instruction": "삭제를 진행하려면 아래에 \"내 데이터 삭제\"를 입력하세요.",
+  "clear_data_placeholder": "\"내 데이터 삭제\" 입력",
+  
+  "overview_tab": "📋 개요",
+  "health_tab": "🧠 건강",
+  "savings_tab": "🪙 절약",
+  "cravings_tab": "🤤 갈망",
+  "milestones_tab": "🏆 마일스톤",
+  
+  "quit_date_label": "🗓️ 금연 날짜: ",
+  "days_suffix": "일",
+  "mood_label": "🌤️️ 기분 ",
+  
+  "premium_title": "Nicotrack 프리미엄\n잠금 해제",
+  "premium_description": "프리미엄 플랜에 가입하면 이러한 혜택을 자유롭게 즐길 수 있습니다",
+  "choose_plan": "플랜 선택",
+  "continue_button": "계속",
+  
+  "advanced_analytics": "고급 분석",
+  "advanced_analytics_desc": "금연 진행 상황에 대한 자세한 통찰력 얻기",
+  "unlimited_goals": "무제한 목표",
+  "unlimited_goals_desc": "여정을 위한 여러 개인화된 목표 설정",
+  "complete_badges": "완전한 배지",
+  "complete_badges_desc": "모든 성취 배지 및 보상에 대한 액세스",
+  "unlimited_quit_changes": "무제한 금연 변경",
+  "unlimited_quit_changes_desc": "제한 없이 언제든지 금연 방법 변경",
+  "full_timeline_access": "전체 타임라인 액세스",
+  "full_timeline_access_desc": "금연 여정의 전체 타임라인 보기",
+  "unlimited_daily_tasks": "무제한 일일 작업",
+  "unlimited_daily_tasks_desc": "모든 일일 작업 및 활동에 대한 액세스",
+  
+  "cancel_anytime": "📱 언제든지 취소 가능",
+  "costs_less": "🧧 2주간의 담배보다 저렴",
+  "billed_annually": "연간 청구",
+  "billed_monthly": "월간 청구",
+  "billed_once": "일회성 청구",
+  
+  "restore_purchase": "구매 복원",
+  "terms_of_use": "이용 약관",
+  "privacy_policy": "개인정보 처리방침",
+  
+  "today_date_prefix": "오늘 • ",
+  "personalized_quit_routine": "맞춤형 금연 루틴",
+  "instant_quit_plan": "즉시 금연 계획",
+  "your_quit_journey": "당신의 금연 여정",
+  "personalized_plan": "맞춤형 계획",
+  "plan_description": "이 계획은 당신이 성공적으로 금연할 수 있도록 특별히 설계되었습니다. 타임라인을 따라 여정 중 무엇을 기대할 수 있는지 이해하세요.",
+  "track_progress": "진행 상황 추적",
+  "earn_badges": "배지 획득",
+  "stay_strong": "강해지세요",
+  "important_note": "중요 사항",
+  "timeline_disclaimer": "증상과 효과는 사람마다 다릅니다. 이 타임라인은 일반적인 경험을 보여주지만, 당신의 여정은 독특합니다!",
+  "info_button": "정보",
+  
+  "happy": "행복",
+  "neutral": "보통",
+  "sad": "슬픔",
+  "angry": "화남",
+  "anxious": "불안",
+  "confident": "자신감",
+  "tired": "피곤",
+  "frustrated": "좌절",
+  "excited": "흥분",
+  "confused": "혼란",
+  "motivated": "동기부여됨",
+  "other": "기타",
+  
+  "work_stress": "업무 스트레스",
+  "relationship": "인간관계",
+  "family": "가족",
+  "health": "건강 ",
+  "craving_episode": "갈망 에피소드",
+  "feeling_proud": "자랑스러움을 느낌",
+  "chill_day": "그냥 편안한 하루",
+  
+  "strong_cravings": "예,\n강한",
+  "mild_cravings": "예,\n약한",
+  "no_cravings": "전혀 갈망 없음",
+  
+  "reflection_placeholder": "무언가 적어보세요... 💬 (선택사항)",
+  "mood_finish": "🙌 완료",
+  
+  "today": "오늘",
+  "yesterday": "어제",
+  "trigger_title": "이것이 당신의 갈망을 유발했습니다",
+  "feeling_title": "이것이 당신을 느끼게 했습니다",
+  "avoid_title": "갈망을 피하기 위해\n다음에 할 일로 표시한 것",
+  "smoke_question": "오늘 담배를 피우셨나요?",
+  "no_smoking_data": "흡연 데이터 없음",
+  "no_smoking_recorded": "이 날짜에 대한 흡연 상태가 기록되지 않았습니다",
+  "amazing_text": "놀라워요!",
+  "cigarettes_count": "이것은 당신이 피운 🚬\n담배의 개수입니다",
+  "smoke_free_day": "금연일을 맞이하고 있습니다 🥳.",
+  "financial_goal_progress": "🥅 재무 목표: \n{emoji} {title} 완료.",
+  "@financial_goal_progress": {
+    "placeholders": {
+      "emoji": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "go_home": "🏠 홈으로 가기",
+  
+  "oxygen_increase": "산소 수준\n증가",
+  "blood_pressure": "혈압\n정상화",
+  "lung_function": "폐 기능\n개선",
+  "heart_rate": "심박수\n안정화",
+  "sleep_quality": "수면의 질\n향상",
+  
+  "feeling_sad_guilty": "슬프거나 죄책감",
+  "feeling_neutral": "보통",
+  "feeling_tired": "피곤함",
+  "feeling_proud": "자랑스러움",
+  "feeling_dizzy": "어지러움",
+  
+  "deep_breathing": "심호흡 연습하기",
+  "go_walk": "산책하러 가기",
+  "call_friend": "친구에게 전화하기",
+  "listen_music": "음악 듣기",
+  "wash_hands": "손 씻기",
+  "write_journal": "일기 쓰기",
+  "read_pages": "몇 페이지 읽기",
+  "chew_gum": "껌 씹거나 간식 먹기",
+  "watch_video": "짧은 동영상 보기",
+  "solve_puzzle": "빠른 퍼즐 풀기",
+  "play_pet": "반려동물과 놀기",
+  "do_chore": "간단한 집안일 하기",
+  "photo_walk": "사진 산책하기",
+  "mobile_game": "모바일 게임하기",
+  "relaxing_shower": "편안한 샤워하기",
+  
+  "morning_coffee": "아침 커피 후",
+  "while_working": "일하는 동안",
+  "feeling_stressed": "스트레스를 받을 때",
+  "drinking_alcohol": "술을 마실 때",
+  "during_commute": "통근 중",
+  "after_eating": "식사 직후",
+  "scrolling_phone": "휴대폰 스크롤 중",
+  "after_argument": "다툰 후",
+  "feeling_anxious": "불안할 때",
+  "work_break": "직장에서 휴식 중",
+  "evening_time": "저녁 시간",
+  "watching_tv": "TV 시청 중",
+  "stepping_outside": "밖으로 나갈 때",
+  "others_smoking": "다른 사람들이 흡연할 때",
+  "feeling_bored": "지루하거나 아무것도 하지 않을 때",
+  
+  "shortness_breath": "호흡 곤란",
+  "dizziness": "어지러움이나 현기증",
+  "persistent_cough": "지속적인 기침",
+  "nausea": "메스꺼움이나 위장 장애",
+  "fatigue": "피로나 저에너지",
+  "chest_tightness": "가슴 조임",
+  "excessive_sweating": "과도한 땀",
+  "headaches": "두통",
+  "irritability": "짜증이나 기분 변화",
+  "trouble_sleeping": "수면 장애",
+  "dry_mouth": "입이나 목의 건조함",
+  "heavy_breathing": "걸을 때 숨이 참",
+  "heart_palpitations": "심장 두근거림",
+  "shaky_hands": "손 떨림",
+  "brain_fog": "머리가 멍하거나 집중력 부족",
+  
+  "edit": "편집",
+  "change": "변경",
+  "save": "저장",
+  "delete": "삭제",
+  "add_new_goal": "새 목표 추가",
+  
+  "morning": "아침",
+  "afternoon": "오후",
+  "evening": "저녁",
+  "night": "밤",
+  
+  "monday": "월요일",
+  "tuesday": "화요일",
+  "wednesday": "수요일",
+  "thursday": "목요일",
+  "friday": "금요일",
+  "saturday": "토요일",
+  "sunday": "일요일",
+  
+  "best_deal": "🎉최고의 거래",
+  "monthly": "월간",
+  "yearly": "연간",
+  "lifetime": "평생",
+  
+  "home_hello": "안녕하세요,\n{name}님",
+  "@home_hello": {
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "길동"
+      }
+    }
+  },
+  "home_get_pro": "프로 구매",
+  "home_personalized_quit_routine": "맞춤형 금연 루틴",
+  
+  "quick_action_remove_cigarettes": "집에서 모든 🚬담배, 🔥 라이터 및 재떨이 제거하기",
+  "quick_action_replace_habit": "🚬 흡연을 새로운 습관으로 대체하기 (예: 껌 씹기, 🫁 심호흡)",
+  "quick_action_identify_triggers": "가장 큰 유발 요인 🎯을 파악하고 피하기",
+  "quick_action_log_cravings": "갈망과 그것을 어떻게 극복했는지 기록✍️하기",
+  
+  "mood_how_feeling_today": "오늘 기분이 어떠신가요? ❤️",
+  "mood_any_cravings_today": "오늘 갈망 🥴이 있었나요?",
+  "mood_what_affecting": "이것이 당신의 기분에 영향을 미치고 있습니다",
+  "mood_did_cravings": "갈망이 있었나요?",
+  "mood_cravings_yes": "예",
+  "mood_cravings_no": "아니오",
+  "mood_nothing_here": "여기에는 아무것도 없습니다",
+  "mood_no_recorded": "기록된 기분 없음",
+  "mood_no_data_captured": "이 날짜에 대한 기분 데이터가 캡처되지 않았습니다",
+  
+  "smoking_did_smoke_today": "오늘\n🚬 담배를 피우셨나요?",
+  "smoking_honesty_policy": "정직이 최선의 정책입니다 😉",
+  "smoking_how_feel": "어떤 기분이 들게 했나요 😔?",
+  "smoking_what_triggered": "오늘 🚬 담배를 피우게 한 원인은 무엇인가요?",
+  "smoking_how_many_today": "오늘 🚬 담배를 몇 개비 피우셨나요?",
+  
+  "progress_title": "진행 상황",
+  "progress_current_streak": "현재\n연속 기록",
+  "progress_days": "일",
+  "progress_quit_date": "🗓️ 금연 날짜: ",
+  "progress_not_set": "설정되지 않음",
+  "progress_mood_trend": "🌤️️ 기분 추세",
+  
+  "progress_label_days_since": "마지막 흡연 이후\n일수",
+  "progress_label_money_saved": "절약한 돈",
+  
+  "settings_change_name": "✏️ 이름 변경",
+  "settings_done": "완료",
+  
+  "plan_today": "오늘 • {date}",
+  "@plan_today": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "1월 15일"
+      }
+    }
+  },
+  
+  "privacy_policy_title": "개인정보 처리방침",
+  "privacy_your_matters": "당신의 개인정보는 중요합니다",
+  "privacy_last_updated": "최종 업데이트: {date}",
+  "@privacy_last_updated": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "2024년 12월"
+      }
+    }
+  },
+  "privacy_transparency": "우리는 당신의 개인 정보를 어떻게 처리하는지에 대해 완전한 투명성을 믿습니다.",
+  "privacy_first_design": "개인정보 우선 설계",
+  "privacy_first_description": "Nicotrack은 당신의 개인정보를 최우선으로 설계되었습니다. 모든 개인 데이터는 기기에 남아 있으며 외부 서버로 전송되지 않습니다.",
+  "privacy_promise": "🌟 당신의 개인정보는 우리의 약속입니다",
+  "privacy_commitment": "Nicotrack은 당신의 개인적인 여정을 완전히 비공개이고 안전하게 유지하면서 금연을 돕는 데 전념하고 있습니다.",
+  
+  "skip": "건너뛰기",
+  "yes": "예",
+  "no": "아니오",
+  "back": "뒤로",
+  "next": "다음",
+  "ok": "확인",
+  "close": "닫기",
+  "done": "완료"
+}
