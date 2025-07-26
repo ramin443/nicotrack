@@ -339,8 +339,8 @@
   "progress_not_set": "Не установлено",
   "progress_mood_trend": "🌤️️ Тренд настроения",
   
-  "progress_label_days_since": "Дней с момента\nпоследнего курения",
-  "progress_label_money_saved": "Сэкономленные деньги",
+  "progress_label_days_since": "Дни без курения",
+  "progress_label_money_saved": "Деньги сэкономлены",
   
   "settings_change_name": "✏️ Изменить имя",
   "settings_done": "Готово",

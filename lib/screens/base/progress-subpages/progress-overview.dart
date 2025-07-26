@@ -11,6 +11,7 @@ import 'package:nicotrack/screens/base/progress-subpages/elements/symptoms-heale
 import 'package:nicotrack/screens/base/progress-subpages/elements/things-to-avoid-craving.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/top-triggers-section.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/upcoming-body-trends.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 class ProgressOverview extends StatefulWidget {
   final bool isUserPremium;
   
@@ -28,7 +29,7 @@ class _ProgressOverviewState extends State<ProgressOverview> {
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            progressController.mainDisplayCards(),
+            progressController.mainDisplayCards(context),
             SizedBox(
               height: 34.h,
             ),

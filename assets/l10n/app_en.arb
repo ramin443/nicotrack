@@ -339,8 +339,8 @@
   "progress_not_set": "Not set",
   "progress_mood_trend": "🌤️️ Mood trend",
   
-  "progress_label_days_since": "Days since\nlast smoked",
-  "progress_label_money_saved": "Money saved",
+  "progress_label_days_since": "Days\nsmoke-free",
+  "progress_label_money_saved": "Money\nsaved",
   
   "settings_change_name": "✏️ Change Name",
   "settings_done": "Done",

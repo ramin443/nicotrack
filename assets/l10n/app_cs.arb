@@ -339,8 +339,8 @@
   "progress_not_set": "Nenastaveno",
   "progress_mood_trend": "🌤️️ Trend nálady",
   
-  "progress_label_days_since": "Dní od\nposledního kouření",
-  "progress_label_money_saved": "Ušetřené peníze",
+  "progress_label_days_since": "Dny bez kouření",
+  "progress_label_money_saved": "Ušetřeno peněz",
   
   "settings_change_name": "✏️ Změnit jméno",
   "settings_done": "Hotovo",

@@ -339,8 +339,8 @@
   "progress_not_set": "未設定",
   "progress_mood_trend": "🌤️️ 気分の傾向",
   
-  "progress_label_days_since": "最後に吸ってから\nの日数",
-  "progress_label_money_saved": "節約したお金",
+  "progress_label_days_since": "禁煙\n日数",
+  "progress_label_money_saved": "節約\n金額",
   
   "settings_change_name": "✏️ 名前を変更",
   "settings_done": "完了",

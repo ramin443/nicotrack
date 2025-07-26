@@ -339,8 +339,8 @@
   "progress_not_set": "Nincs beállítva",
   "progress_mood_trend": "🌤️️ Hangulati trend",
   
-  "progress_label_days_since": "Napok az utolsó\ndohányzás óta",
-  "progress_label_money_saved": "Megtakarított pénz",
+  "progress_label_days_since": "Napok",
+  "progress_label_money_saved": "Pénz megtakarítva",
   
   "settings_change_name": "✏️ Név módosítása",
   "settings_done": "Kész",

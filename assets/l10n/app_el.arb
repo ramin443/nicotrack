@@ -339,8 +339,8 @@
   "progress_not_set": "Δεν έχει οριστεί",
   "progress_mood_trend": "🌤️️ Τάση διάθεσης",
   
-  "progress_label_days_since": "Ημέρες από το\nτελευταίο κάπνισμα",
-  "progress_label_money_saved": "Χρήματα που εξοικονομήθηκαν",
+  "progress_label_days_since": "Ημέρες χωρίς κάπνισμα",
+  "progress_label_money_saved": "Χρήματα",
   
   "settings_change_name": "✏️ Αλλαγή ονόματος",
   "settings_done": "Τέλος",

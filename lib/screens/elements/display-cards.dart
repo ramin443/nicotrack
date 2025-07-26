@@ -18,7 +18,7 @@ Widget mainCard({
   Color? backgroundColor,
 }) {
   return Container(
-    height: 106.h,
+    height: 106.w,
     width: 186.w,
     padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
     decoration: BoxDecoration(
@@ -31,64 +31,7 @@ Widget mainCard({
       children: [
         Image.asset(
           emoji,
-          width: 51.w,
-        ),
-        SizedBox(width: 12.w),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AnimatedFlipCounter(
-                prefix: isCost ? Get.find<AppPreferencesController>().currencySymbol : '',
-                // 👈 add dollar sign here (escaped with backslash)
-                wholeDigits: 2,
-                // 👈 forces two digits to be shown & flip
-                duration: Duration(seconds: 2),
-                value: value,
-                fractionDigits: 0,
-                // No decimal
-                textStyle: TextStyle(
-                    fontSize: 33.sp,
-                    fontFamily: circularBold,
-                    color: nicotrackBlack1)),
-            TextAutoSize(
-              label,
-              textAlign: TextAlign.right,
-              style: TextStyle(
-                  height: 1.1,
-                  fontSize: 12.5.sp,
-                  fontFamily: circularMedium,
-                  color: nicotrackBlack1),
-            ),
-          ],
-        ),
-      ],
-    ),
-  );
-}
-
-Widget statCard({
-  required String emoji,
-  required int value,
-  required String label,
-  required bool isCost,
-  Color? backgroundColor,
-}) {
-  return Container(
-    height: 106.h,
-    width: 186.w,
-    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-    decoration: BoxDecoration(
-      color: const Color(0xFFF4F4F4),
-      borderRadius: BorderRadius.circular(12),
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Image.asset(
-          emoji,
-          width: 51.w,
+          width: 48.w,
         ),
         // SizedBox(width: 12.w),
         Column(
@@ -108,7 +51,70 @@ Widget statCard({
                     fontSize: 33.sp,
                     fontFamily: circularBold,
                     color: nicotrackBlack1)),
-            TextAutoSize(
+            SizedBox(
+              width: 90.w,
+              child: TextAutoSize(
+                label,
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                    height: 1.1,
+                    fontSize: 12.5.sp,
+                    fontFamily: circularMedium,
+                    color: nicotrackBlack1),
+              ),
+            )
+
+          ],
+        ),
+      ],
+    ),
+  );
+}
+
+Widget statCard({
+  required String emoji,
+  required int value,
+  required String label,
+  required bool isCost,
+  Color? backgroundColor,
+}) {
+  return Container(
+    height: 106.w,
+    width: 186.w,
+    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+    decoration: BoxDecoration(
+      color: const Color(0xFFF4F4F4),
+      borderRadius: BorderRadius.circular(12),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Image.asset(
+          emoji,
+          width: 48.w,
+        ),
+        // SizedBox(width: 12.w),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AnimatedFlipCounter(
+                prefix: isCost ? Get.find<AppPreferencesController>().currencySymbol : '',
+                // 👈 add dollar sign here (escaped with backslash)
+                wholeDigits: 2,
+                // 👈 forces two digits to be shown & flip
+                duration: Duration(seconds: 2),
+                value: value,
+                fractionDigits: 0,
+                // No decimal
+                textStyle: TextStyle(
+                    fontSize: 33.sp,
+                    fontFamily: circularBold,
+                    color: nicotrackBlack1)),
+            SizedBox(
+              width: 90.w,
+              child: TextAutoSize(
               label,
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -116,7 +122,7 @@ Widget statCard({
                   fontSize: 12.5.sp,
                   fontFamily: circularMedium,
                   color: nicotrackBlack1),
-            ),
+            )),
           ],
         ),
       ],

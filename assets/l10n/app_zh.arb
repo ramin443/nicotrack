@@ -339,8 +339,8 @@
   "progress_not_set": "未设置",
   "progress_mood_trend": "🌤️️ 情绪趋势",
   
-  "progress_label_days_since": "距离上次\n吸烟天数",
-  "progress_label_money_saved": "节省的金钱",
+  "progress_label_days_since": "戒烟\n天数",
+  "progress_label_money_saved": "节省\n金钱",
   
   "settings_change_name": "✏️ 更改姓名",
   "settings_done": "完成",

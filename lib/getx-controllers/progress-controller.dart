@@ -18,6 +18,7 @@ import 'package:hive/hive.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/services.dart';
 import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 import 'package:nicotrack/getx-controllers/settings-controller.dart';
 
 import '../constants/color-constants.dart';
@@ -65,12 +66,29 @@ class ProgressController extends GetxController {
 
 
   final List<Map<String, String>> tabs = [
-    {"label": "Overview", "emoji": "📋"},
-    {"label": "Health", "emoji": "🧠"},
-    {"label": "Savings", "emoji": "🪙"},
-    {"label": "Cravings", "emoji": "🤤"},
-    {"label": "Milestones", "emoji": "🏆"},
+    {"key": "overview", "emoji": "📋"},
+    {"key": "health", "emoji": "🧠"},
+    {"key": "savings", "emoji": "🪙"},
+    {"key": "cravings", "emoji": "🤤"},
+    {"key": "milestones", "emoji": "🏆"},
   ];
+  
+  String getTabLabel(BuildContext context, int index) {
+    switch (tabs[index]["key"]) {
+      case "overview":
+        return context.l10n.overview_tab.replaceAll(tabs[index]["emoji"]!, '').trim();
+      case "health":
+        return context.l10n.health_tab.replaceAll(tabs[index]["emoji"]!, '').trim();
+      case "savings":
+        return context.l10n.savings_tab.replaceAll(tabs[index]["emoji"]!, '').trim();
+      case "cravings":
+        return context.l10n.cravings_tab.replaceAll(tabs[index]["emoji"]!, '').trim();
+      case "milestones":
+        return context.l10n.milestones_tab.replaceAll(tabs[index]["emoji"]!, '').trim();
+      default:
+        return "";
+    }
+  }
 
   final List<Map<String, String>> moodHistory = [
     {"date": "April 27, 2025", "emoji": "📋"},
@@ -99,7 +117,7 @@ class ProgressController extends GetxController {
     finGoalcentController = FixedExtentScrollController(initialItem: 25); // Default to 25 cents
   }
 
-  Widget mainDisplayCards() {
+  Widget mainDisplayCards(BuildContext context) {
     DateTime now = DateTime.now();
     int daysSinceLastSmoked = getDaysSinceLastSmoked(now);
     double moneySaved = getMoneySaved(now);
@@ -118,14 +136,14 @@ class ProgressController extends GetxController {
           mainCard(
             emoji: bicepsEmoji,
             value: daysSinceLastSmoked,
-            label: 'Days since\nlast smoked',
+            label: context.l10n.progress_label_days_since,
             backgroundColor: const Color(0xFFB0F0A1),
             isCost: false, // green-ish background
           ),
           statCard(
             emoji: moneyEmoji,
             value: moneySaved.round(),
-            label: 'Money saved',
+            label: context.l10n.progress_label_money_saved,
             isCost: true,
           ),
         ],
@@ -167,7 +185,7 @@ class ProgressController extends GetxController {
     );
   }
 
-  Widget progressTabs() {
+  Widget progressTabs(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       controller: tabScrollController,
@@ -219,7 +237,7 @@ class ProgressController extends GetxController {
                   ),
                   SizedBox(width: 6.w),
                   TextAutoSize(
-                    tabs[index]["label"]!,
+                    getTabLabel(context, index),
                     style: TextStyle(
                         fontSize: 15.sp,
                         fontFamily: circularBold,

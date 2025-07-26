@@ -339,8 +339,8 @@
   "progress_not_set": "Ayarlanmadı",
   "progress_mood_trend": "🌤️️ Ruh hali trendi",
   
-  "progress_label_days_since": "Son sigara içişinden\nbu yana geçen gün",
-  "progress_label_money_saved": "Tasarruf edilen para",
+  "progress_label_days_since": "Gün sigarasız",
+  "progress_label_money_saved": "Para tasarrufu",
   
   "settings_change_name": "✏️ İsim değiştir",
   "settings_done": "Tamam",

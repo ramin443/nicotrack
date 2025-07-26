@@ -339,8 +339,8 @@
   "progress_not_set": "설정되지 않음",
   "progress_mood_trend": "🌤️️ 기분 추세",
   
-  "progress_label_days_since": "마지막 흡연 이후\n일수",
-  "progress_label_money_saved": "절약한 돈",
+  "progress_label_days_since": "금연\n일수",
+  "progress_label_money_saved": "절약\n금액",
   
   "settings_change_name": "✏️ 이름 변경",
   "settings_done": "완료",

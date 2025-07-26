@@ -7,6 +7,7 @@ import 'package:nicotrack/getx-controllers/progress-controller.dart';
 import 'package:nicotrack/getx-controllers/premium-controller.dart';
 import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
 import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 import '../../constants/color-constants.dart';
 import '../../constants/font-constants.dart';
@@ -119,7 +120,7 @@ class _ProgressState extends State<ProgressMain>
                                             width: 12.w,
                                           ),
                                           TextAutoSize(
-                                            "Progress",
+                                            context.l10n.progress_title,
                                             style: TextStyle(
                                                 fontSize: 17.sp,
                                                 fontFamily: circularBold,
@@ -159,7 +160,7 @@ class _ProgressState extends State<ProgressMain>
                         decoration: BoxDecoration(color: nicotrackBlack1),
                       ),
                       Container(
-                        width: 190.w,
+                        width: 210.w,
                         padding: EdgeInsets.only(
                             left: 18.h, right: 22.h, top: 8.h, bottom: 16.h),
                         decoration: BoxDecoration(
@@ -186,7 +187,7 @@ class _ProgressState extends State<ProgressMain>
                                       width: 8.w,
                                     ),
                                     TextAutoSize(
-                                      "Current\nStreak",
+                                      context.l10n.progress_current_streak,
                                       style: TextStyle(
                                           fontSize: 15.sp,
                                           fontFamily: circularMedium,
@@ -202,6 +203,7 @@ class _ProgressState extends State<ProgressMain>
                               int daysSinceLastSmoked =
                                   getDaysSinceLastSmoked(now);
                               return RichText(
+                                textAlign: TextAlign.right,
                                   text: TextSpan(
                                       style: TextStyle(
                                           fontSize: 16.sp,
@@ -217,7 +219,7 @@ class _ProgressState extends State<ProgressMain>
                                           height: 1.1,
                                           color: Colors.white),
                                     ),
-                                    TextSpan(text: "days"),
+                                    TextSpan(text: context.l10n.progress_days),
                                   ]));
                             })
                           ],
@@ -236,7 +238,7 @@ class _ProgressState extends State<ProgressMain>
                         String lastSmokedDateStr =
                             userOnboardingData.lastSmokedDate;
 
-                        String formattedDate = "Not set";
+                        String formattedDate = context.l10n.progress_not_set;
                         if (lastSmokedDateStr.isNotEmpty) {
                           try {
                             DateTime parsedDate =
@@ -256,7 +258,7 @@ class _ProgressState extends State<ProgressMain>
                                     height: 1.1,
                                     color: nicotrackBlack1),
                                 children: [
-                              TextSpan(text: "🗓️ Quit Date: "),
+                              TextSpan(text: context.l10n.progress_quit_date),
                               TextSpan(
                                 text: formattedDate,
                                 style: TextStyle(
@@ -274,7 +276,7 @@ class _ProgressState extends State<ProgressMain>
                       // SizedBox(
                       //   height: 16.h,
                       // ),
-                      progressController.progressTabs(),
+                      progressController.progressTabs(context),
                       SizedBox(
                         height: 14.h,
                       ),

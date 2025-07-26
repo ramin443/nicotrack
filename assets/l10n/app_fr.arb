@@ -321,8 +321,8 @@
   "progress_not_set": "Non défini",
   "progress_mood_trend": "🌤️️ Tendance de l'humeur",
   
-  "progress_label_days_since": "Jours depuis\nla dernière cigarette",
-  "progress_label_money_saved": "Argent économisé",
+  "progress_label_days_since": "Jours\nsans fumer",
+  "progress_label_money_saved": "Argent\néconomisé",
   
   "settings_change_name": "✏️ Changer le nom",
   "settings_done": "Terminé",

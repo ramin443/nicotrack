@@ -9,6 +9,7 @@ import '../../../../constants/dummy-data-constants.dart';
 import '../../../../constants/font-constants.dart';
 import '../../../../getx-controllers/progress-controller.dart';
 import '../../../../models/mood-model/mood-model.dart';
+import '../../../../extensions/app_localizations_extension.dart';
 
 class MoodTrendRow extends StatefulWidget {
   const MoodTrendRow({super.key});
@@ -50,26 +51,14 @@ class _MoodTrendRowState extends State<MoodTrendRow> {
                   SizedBox(
                     width: 18.w,
                   ),
-                  RichText(
-                      text: TextSpan(
-                          style: TextStyle(
-                              fontSize: 16.sp,
-                              fontFamily: circularBold,
-                              height: 1.1,
-                              color: nicotrackBlack1),
-                          children: [
-                        TextSpan(
-                          text: "🌤️️ Mood ",
-                          style: TextStyle(
-                              fontSize: 16.sp,
-                              fontFamily: circularBold,
-                              height: 1.1,
-                              color: Color(0xffFF9900)),
-                        ),
-                        TextSpan(
-                          text: "trend",
-                        ),
-                      ])),
+                  Text(
+                    context.l10n.progress_mood_trend,
+                    style: TextStyle(
+                        fontSize: 16.sp,
+                        fontFamily: circularBold,
+                        height: 1.1,
+                        color: nicotrackBlack1),
+                  ),
                 ],
               ),
               SizedBox(
