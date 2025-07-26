@@ -13,6 +13,7 @@ import '../../../../getx-controllers/premium-controller.dart';
 import '../../../../models/emoji-text-pair/emojitext-model.dart';
 import '../../../../utility-functions/home-grid-calculations.dart';
 import '../../../premium/premium-paywall-screen.dart';
+import '../../../../extensions/app_localizations_extension.dart';
 
 class HealthImprovementTrend extends StatefulWidget {
   final ScrollController scrollController;
@@ -139,7 +140,7 @@ class _HealthImprovementTrendState extends State<HealthImprovementTrend> {
                         color: nicotrackBlack1),
                     children: [
                       TextSpan(
-                        text: "🍎 What’s improved ",
+                        text: context.l10n.health_prefix,
                         style: TextStyle(
                             fontSize: 16.sp,
                             fontFamily: circularBold,
@@ -148,7 +149,7 @@ class _HealthImprovementTrendState extends State<HealthImprovementTrend> {
                         ),
                       ),
                       TextSpan(
-                        text: "in your body",
+                        text: context.l10n.health_suffix,
                       ),
                     ])),
           ],

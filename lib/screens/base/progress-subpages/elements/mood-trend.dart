@@ -119,6 +119,27 @@ class _MoodTrendRowState extends State<MoodTrendRow> {
     }
   }
 
+  String _getLocalizedDayName(BuildContext context, DateTime date) {
+    switch (date.weekday) {
+      case DateTime.monday:
+        return context.l10n.monday.substring(0, 3); // Mon
+      case DateTime.tuesday:
+        return context.l10n.tuesday.substring(0, 3); // Tue
+      case DateTime.wednesday:
+        return context.l10n.wednesday.substring(0, 3); // Wed
+      case DateTime.thursday:
+        return context.l10n.thursday.substring(0, 3); // Thu
+      case DateTime.friday:
+        return context.l10n.friday.substring(0, 3); // Fri
+      case DateTime.saturday:
+        return context.l10n.saturday.substring(0, 3); // Sat
+      case DateTime.sunday:
+        return context.l10n.sunday.substring(0, 3); // Sun
+      default:
+        return DateFormat.E().format(date); // Fallback
+    }
+  }
+
   Widget moodHistoryRow() {
     final List<DateTime> dates = getMoodDates();
     final moodBox = Hive.box<MoodModel>('moodData');
@@ -220,7 +241,7 @@ class _MoodTrendRowState extends State<MoodTrendRow> {
                     ),
                     SizedBox(height: 12.sp),
                     Text(
-                      DateFormat.E().format(date), // e.g. Mon, Tue
+                      _getLocalizedDayName(context, date),
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontFamily: circularMedium,

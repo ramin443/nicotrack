@@ -213,6 +213,8 @@
       }
     }
   },
+  "financial_goals_title": "🥅 Φινανσιακοί στόχοι",
+  "goal_completed": "ολοκληρώθηκε",
   "go_home": "🏠 Πηγαίνετε στην αρχική",
   
   "oxygen_increase": "Τα επίπεδα οξυγόνου\nαυξάνονται",
@@ -341,6 +343,13 @@
   
   "progress_label_days_since": "Ημέρες χωρίς κάπνισμα",
   "progress_label_money_saved": "Χρήματα",
+  "top_triggers_title": "📈 Κύριοι παράγοντες",
+  "triggers_subtitle": "Βασισμένο σε προτιμήσεις και ημερήσια αρχεία",
+  "top_prefix": "📈 Κύριοι ",
+  "triggers_word": "παράγοντες",
+  "symptoms_title": "📈 Συμπτώματα που επουλώθηκαν",
+  "health_improvements_title": "🍎 Τι βελτιώθηκε στο σώμα σας",
+  "upcoming_changes_title": "🔮 Επερχόμενες αλλαγές",
   
   "settings_change_name": "✏️ Αλλαγή ονόματος",
   "settings_done": "Τέλος",
@@ -379,5 +388,20 @@
   "next": "Επόμενο",
   "ok": "Εντάξει",
   "close": "Κλείσιμο",
-  "done": "Τέλος"
+  "done": "Τέλος",
+
+  "symptoms_prefix": "📈 Συμπτώματα ",
+  "symptoms_suffix": "που ανακουφίστηκαν και θεραπεύτηκαν",
+  "health_prefix": "🍎 Αυτό που βελτιώθηκε ",
+  "health_suffix": "στο σώμα σας",
+  "upcoming_prefix": "🔮 Επερχόμενες ",
+  "upcoming_suffix": "αλλαγές στο σώμα",
+  "feelings_prefix": "⚡ Πώς ",
+  "feelings_suffix": "αισθανθήκατε μετά τις επιθυμίες",
+  "feelings_subtitle": "Βασισμένο στα ημερολόγια διάθεσης κατά τη διάρκεια των επιθυμιών",
+  "avoid_prefix": "🛡️ Τι θα κάνατε για να ",
+  "avoid_suffix": "αποφύγετε τις επιθυμίες;",
+  "avoid_subtitle": "Βασισμένο στις στρατηγικές αποφυγής από τα ημερολόγια καπνίσματος",
+  
+  "tap_to_modify_info": "Πατήστε για να τροποποιήσετε αυτές τις πληροφορίες"
 }

@@ -12,6 +12,7 @@ import '../../../../getx-controllers/premium-controller.dart';
 import '../../../../models/emoji-text-pair/emojitext-model.dart';
 import '../../../../utility-functions/home-grid-calculations.dart';
 import '../../../premium/premium-paywall-screen.dart';
+import '../../../../extensions/app_localizations_extension.dart';
 
 class UpcomingHealthTrend extends StatefulWidget {
   final ScrollController scrollController;
@@ -170,7 +171,7 @@ class _UpcomingHealthTrendState extends State<UpcomingHealthTrend> {
                         color: nicotrackBlack1),
                     children: [
                       TextSpan(
-                        text: "🔮 Upcoming ",
+                        text: context.l10n.upcoming_prefix,
                         style: TextStyle(
                             fontSize: 16.sp,
                             fontFamily: circularBold,
@@ -179,7 +180,7 @@ class _UpcomingHealthTrendState extends State<UpcomingHealthTrend> {
                         ),
                       ),
                       TextSpan(
-                        text: "body changes",
+                        text: context.l10n.upcoming_suffix,
                       ),
                     ])),
           ],

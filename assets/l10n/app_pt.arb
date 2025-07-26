@@ -379,5 +379,23 @@
   "next": "Próximo",
   "ok": "OK",
   "close": "Fechar",
-  "done": "Pronto"
+  "done": "Pronto",
+
+  "top_prefix": "📈 Principais ",
+  "triggers_word": "gatilhos",
+  "symptoms_prefix": "📈 Sintomas ",
+  "symptoms_suffix": "aliviados e curados",
+  "health_prefix": "🍎 O que melhorou ",
+  "health_suffix": "no seu corpo",
+  "upcoming_prefix": "🔮 Próximas ",
+  "upcoming_suffix": "mudanças corporais",
+  "triggers_subtitle": "Com base em suas preferências de integração e registros diários",
+  "feelings_prefix": "⚡ Como você se ",
+  "feelings_suffix": "sentiu após os desejos",
+  "feelings_subtitle": "Baseado nos seus registros de humor durante os desejos",
+  "avoid_prefix": "🛡️ O que você faria para ",
+  "avoid_suffix": "evitar desejos?",
+  "avoid_subtitle": "Baseado nas suas estratégias de prevenção dos registros de fumo",
+  
+  "tap_to_modify_info": "Toque para modificar esta informação"
 }

@@ -379,5 +379,23 @@
   "next": "次へ",
   "ok": "OK",
   "close": "閉じる",
-  "done": "完了"
+  "done": "完了",
+
+  "top_prefix": "📈 主な ",
+  "triggers_word": "トリガー",
+  "symptoms_prefix": "📈 症状 ",
+  "symptoms_suffix": "緩和され治癒した",
+  "health_prefix": "🍎 改善された ",
+  "health_suffix": "あなたの体",
+  "upcoming_prefix": "🔮 今後の ",
+  "upcoming_suffix": "体の変化",
+  "triggers_subtitle": "オンボーディングの設定と日々の記録に基づいて",
+  "feelings_prefix": "⚡ 渇望後に ",
+  "feelings_suffix": "感じたこと",
+  "feelings_subtitle": "渇望中の気分記録に基づく",
+  "avoid_prefix": "🛡️ 渇望を ",
+  "avoid_suffix": "避けるために何をしますか？",
+  "avoid_subtitle": "喫煙記録からの回避戦略に基づく",
+  
+  "tap_to_modify_info": "タップしてこの情報を変更"
 }

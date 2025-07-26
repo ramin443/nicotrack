@@ -19,7 +19,8 @@
       "Bash(mv:*)",
       "Bash(git checkout:*)",
       "Bash(flutter:*)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(python3:*)"
     ],
     "deny": []
   }

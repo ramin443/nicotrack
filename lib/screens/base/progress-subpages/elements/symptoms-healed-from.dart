@@ -15,6 +15,7 @@ import '../../../../models/emoji-text-pair/emojitext-model.dart';
 import '../../../../utility-functions/home-grid-calculations.dart';
 import '../../../elements/textAutoSize.dart';
 import '../../../premium/premium-paywall-screen.dart';
+import '../../../../extensions/app_localizations_extension.dart';
 
 class SymptomsHealedFrom extends StatefulWidget {
   const SymptomsHealedFrom({super.key});
@@ -135,10 +136,15 @@ class _SymptomsHealedFromState extends State<SymptomsHealedFrom> {
                                 color: const Color(0xFFFF611D)),
                             children: [
                               TextSpan(
-                                text: "📈 Symptoms ",
+                                text: context.l10n.symptoms_prefix,
+                                style: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontFamily: circularBold,
+                                    height: 1.1,
+                                    color: const Color(0xFFFF611D)),
                               ),
                               TextSpan(
-                                text: "eased & healed from",
+                                text: context.l10n.symptoms_suffix,
                                 style: TextStyle(
                                     fontSize: 16.sp,
                                     fontFamily: circularBold,

@@ -213,6 +213,8 @@
       }
     }
   },
+  "financial_goals_title": "🥅 Cele finansowe",
+  "goal_completed": "ukończono",
   "go_home": "🏠 Idź do domu",
   
   "oxygen_increase": "Poziomy tlenu\nwzrastają",
@@ -379,5 +381,23 @@
   "next": "Dalej",
   "ok": "OK",
   "close": "Zamknij",
-  "done": "Gotowe"
+  "done": "Gotowe",
+
+  "top_prefix": "📈 Główne ",
+  "triggers_word": "wyzwalacze",
+  "symptoms_prefix": "📈 Objawy ",
+  "symptoms_suffix": "złagodzone i wyleczone",
+  "health_prefix": "🍎 Co się poprawiło ",
+  "health_suffix": "w twoim ciele",
+  "upcoming_prefix": "🔮 Nadchodzące ",
+  "upcoming_suffix": "zmiany w ciele",
+  "triggers_subtitle": "W oparciu o twoje preferencje onboardingu i dzienne logi",
+  "feelings_prefix": "⚡ Jak się ",
+  "feelings_suffix": "czułeś po chęciach",
+  "feelings_subtitle": "Na podstawie dzienników nastroju podczas chęci",
+  "avoid_prefix": "🛡️ Co byś zrobił, aby ",
+  "avoid_suffix": "uniknąć chęci?",
+  "avoid_subtitle": "Na podstawie strategii unikania z dzienników palenia",
+  
+  "tap_to_modify_info": "Dotknij, aby zmodyfikować te informacje"
 }

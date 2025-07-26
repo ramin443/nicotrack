@@ -379,5 +379,23 @@
   "next": "다음",
   "ok": "확인",
   "close": "닫기",
-  "done": "완료"
+  "done": "완료",
+
+  "top_prefix": "📈 주요 ",
+  "triggers_word": "방아쇠",
+  "symptoms_prefix": "📈 증상 ",
+  "symptoms_suffix": "완화되고 치유됨",
+  "health_prefix": "🍎 개선된 것 ",
+  "health_suffix": "당신의 몸",
+  "upcoming_prefix": "🔮 다가오는 ",
+  "upcoming_suffix": "신체 변화",
+  "triggers_subtitle": "온보딩 설정과 일일 기록을 바탕으로",
+  "feelings_prefix": "⚡ 갈망 후 ",
+  "feelings_suffix": "느낀 감정",
+  "feelings_subtitle": "갈망 중 기분 기록을 바탕으로",
+  "avoid_prefix": "🛡️ 갈망을 ",
+  "avoid_suffix": "피하기 위해 무엇을 하시겠습니까?",
+  "avoid_subtitle": "흡연 기록의 회피 전략을 바탕으로",
+  
+  "tap_to_modify_info": "이 정보를 수정하려면 탭하세요"
 }

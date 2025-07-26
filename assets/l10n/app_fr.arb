@@ -345,5 +345,23 @@
   "next": "Suivant",
   "ok": "OK",
   "close": "Fermer",
-  "done": "Terminé"
+  "done": "Terminé",
+
+  "top_prefix": "📈 Principaux ",
+  "triggers_word": "déclencheurs",
+  "symptoms_prefix": "📈 Symptômes ",
+  "symptoms_suffix": "apaisés et guéris",
+  "health_prefix": "🍎 Ce qui s'est amélioré ",
+  "health_suffix": "dans votre corps",
+  "upcoming_prefix": "🔮 Prochains ",
+  "upcoming_suffix": "changements corporels",
+  "triggers_subtitle": "Basé sur vos préférences d'intégration et vos journaux quotidiens",
+  "feelings_prefix": "⚡ Comment vous vous êtes ",
+  "feelings_suffix": "senti après les envies",
+  "feelings_subtitle": "Basé sur vos journaux d'humeur pendant les envies",
+  "avoid_prefix": "🛡️ Ce que vous feriez pour ",
+  "avoid_suffix": "éviter les envies?",
+  "avoid_subtitle": "Basé sur vos stratégies d'évitement des journaux de tabac",
+  
+  "tap_to_modify_info": "Touchez pour modifier cette information"
 }

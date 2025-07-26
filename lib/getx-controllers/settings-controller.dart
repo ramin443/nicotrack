@@ -263,7 +263,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextAutoSize(
-                'Tap to modify this information',
+                context.l10n.tap_to_modify_info,
                 style: TextStyle(
                     fontSize: 13.sp,
                     fontFamily: circularBook,

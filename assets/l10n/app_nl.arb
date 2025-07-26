@@ -379,5 +379,23 @@
   "next": "Volgende",
   "ok": "OK",
   "close": "Sluiten",
-  "done": "Klaar"
+  "done": "Klaar",
+
+  "top_prefix": "📈 Top ",
+  "triggers_word": "triggers",
+  "symptoms_prefix": "📈 Symptomen ",
+  "symptoms_suffix": "verlicht en genezen",
+  "health_prefix": "🍎 Wat is verbeterd ",
+  "health_suffix": "in je lichaam",
+  "upcoming_prefix": "🔮 Komende ",
+  "upcoming_suffix": "lichaamsveranderingen",
+  "triggers_subtitle": "Gebaseerd op je onboarding voorkeuren en dagelijkse logs",
+  "feelings_prefix": "⚡ Hoe je je ",
+  "feelings_suffix": "voelde na trek",
+  "feelings_subtitle": "Gebaseerd op je stemmingslogboek tijdens trek",
+  "avoid_prefix": "🛡️ Wat zou je doen om ",
+  "avoid_suffix": "trek te vermijden?",
+  "avoid_subtitle": "Gebaseerd op je vermijdingsstrategieën uit rooklogboeken",
+  
+  "tap_to_modify_info": "Tik om deze informatie te wijzigen"
 }

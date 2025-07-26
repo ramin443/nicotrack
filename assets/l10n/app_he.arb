@@ -379,5 +379,23 @@
   "next": "הבא",
   "ok": "אישור",
   "close": "סגירה",
-  "done": "סיום"
+  "done": "סיום",
+
+  "top_prefix": "📈 עיקריים ",
+  "triggers_word": "מפעילים",
+  "symptoms_prefix": "📈 תסמינים ",
+  "symptoms_suffix": "שהקלו ונרפאו",
+  "health_prefix": "🍎 מה שהשתפר ",
+  "health_suffix": "בגוף שלכם",
+  "upcoming_prefix": "🔮 שינויים קרובים ",
+  "upcoming_suffix": "בגוף",
+  "triggers_subtitle": "על בסיס העדפות ההכרות שלכם ויומני היומי",
+  "feelings_prefix": "⚡ איך הרגשתם ",
+  "feelings_suffix": "אחרי התשוקה",
+  "feelings_subtitle": "על בסיס יומני מצב הרוח בזמן התשוקה",
+  "avoid_prefix": "🛡️ מה תעשו כדי ",
+  "avoid_suffix": "להימנע מתשוקה?",
+  "avoid_subtitle": "על בסיס אסטרטגיות ההימנעות מיומני העישון",
+  
+  "tap_to_modify_info": "הקישו כדי לשנות את המידע הזה"
 }

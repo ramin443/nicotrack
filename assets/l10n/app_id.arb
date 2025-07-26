@@ -213,6 +213,8 @@
       }
     }
   },
+  "financial_goals_title": "🥅 Tujuan keuangan",
+  "goal_completed": "selesai",
   "go_home": "🏠 Kembali ke beranda",
   
   "oxygen_increase": "Tingkat oksigen\nmeningkat",
@@ -379,5 +381,23 @@
   "next": "Selanjutnya",
   "ok": "OK",
   "close": "Tutup",
-  "done": "Selesai"
+  "done": "Selesai",
+
+  "top_prefix": "📈 Pemicu utama ",
+  "triggers_word": "pemicu",
+  "symptoms_prefix": "📈 Gejala ",
+  "symptoms_suffix": "yang mereda dan sembuh",
+  "health_prefix": "🍎 Apa yang membaik ",
+  "health_suffix": "dalam tubuh Anda",
+  "upcoming_prefix": "🔮 Perubahan tubuh ",
+  "upcoming_suffix": "yang akan datang",
+  "triggers_subtitle": "Berdasarkan preferensi onboarding dan catatan harian Anda",
+  "feelings_prefix": "⚡ Bagaimana perasaan Anda ",
+  "feelings_suffix": "setelah keinginan merokok",
+  "feelings_subtitle": "Berdasarkan catatan suasana hati Anda selama keinginan merokok",
+  "avoid_prefix": "🛡️ Apa yang akan Anda lakukan untuk ",
+  "avoid_suffix": "menghindari keinginan merokok?",
+  "avoid_subtitle": "Berdasarkan strategi penghindaran dari catatan merokok Anda",
+  
+  "tap_to_modify_info": "Ketuk untuk mengubah informasi ini"
 }

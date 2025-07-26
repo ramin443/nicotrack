@@ -203,6 +203,8 @@
   "cigarettes_count": "Así es como muchos 🚬\ncigarrillos fumaste",
   "smoke_free_day": "Estás en tu día libre de humo 🥳.",
   "financial_goal_progress": "🥅 Objetivo financiero: \n{emoji} {title} completado.",
+  "financial_goals_title": "🥅 Objetivos financieros",
+  "goal_completed": "completado",
   "go_home": "🏠 Ir a inicio",
   
   "oxygen_increase": "Los niveles de oxígeno\naumentan",
@@ -323,6 +325,8 @@
   
   "progress_label_days_since": "Días\nsin fumar",
   "progress_label_money_saved": "Dinero\nahorrado",
+  "top_triggers_title": "📈 Principales desencadenantes",
+  "triggers_subtitle": "Basado en sus preferencias y registros diarios",
   
   "settings_change_name": "✏️ Cambiar nombre",
   "settings_done": "Hecho",
@@ -345,5 +349,22 @@
   "next": "Siguiente",
   "ok": "OK",
   "close": "Cerrar",
-  "done": "Hecho"
+  "done": "Hecho",
+
+  "top_prefix": "📈 Principales ",
+  "triggers_word": "desencadenantes",
+  "symptoms_prefix": "📈 Síntomas ",
+  "symptoms_suffix": "aliviados y sanados",
+  "health_prefix": "🍎 Lo que mejoró ",
+  "health_suffix": "en tu cuerpo",
+  "upcoming_prefix": "🔮 Próximos ",
+  "upcoming_suffix": "cambios corporales",
+  "feelings_prefix": "⚡ Cómo te ",
+  "feelings_suffix": "sentiste después de los antojos",
+  "feelings_subtitle": "Basado en tus registros de estado de ánimo durante los antojos",
+  "avoid_prefix": "🛡️ Lo que harías para ",
+  "avoid_suffix": "evitar antojos?",
+  "avoid_subtitle": "Basado en tus estrategias de evitación de los registros de fumar",
+  
+  "tap_to_modify_info": "Toca para modificar esta información"
 }

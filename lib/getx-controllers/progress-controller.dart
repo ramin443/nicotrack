@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../extensions/app_localizations_extension.dart';
 import 'package:intl/intl.dart';
 import 'package:nicotrack/screens/base/progress-subpages/progress-cravings.dart';
 import 'package:nicotrack/screens/base/progress-subpages/progress-health.dart';
@@ -151,7 +152,7 @@ class ProgressController extends GetxController {
     );
   }
 
-  Widget savingsDisplayCards() {
+  Widget savingsDisplayCards(BuildContext context) {
     DateTime now = DateTime.now();
     int daysSinceLastSmoked = getDaysSinceLastSmoked(now);
     double moneySaved = getMoneySaved(now);
@@ -170,14 +171,14 @@ class ProgressController extends GetxController {
           mainCard(
             emoji: moneyEmoji,
             value: moneySaved.round(),
-            label: 'Money saved',
+            label: context.l10n.progress_label_money_saved,
             backgroundColor: const Color(0xFFB0F0A1),
             isCost: true, // green-ish background
           ),
           statCard(
             emoji: bicepsEmoji,
             value: daysSinceLastSmoked,
-            label: 'Days since\nlast smoked',
+            label: context.l10n.progress_label_days_since,
             isCost: false,
           ),
         ],

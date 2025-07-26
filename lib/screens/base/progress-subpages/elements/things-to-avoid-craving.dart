@@ -17,6 +17,7 @@ import '../../../../models/emoji-text-pair/emojitext-model.dart';
 import '../../../elements/textAutoSize.dart';
 import '../../../premium/premium-paywall-screen.dart';
 import '4x4-scroll-view.dart';
+import '../../../../extensions/app_localizations_extension.dart';
 class ThingsToAvoidCraving extends StatefulWidget {
   const ThingsToAvoidCraving({super.key});
 
@@ -123,11 +124,11 @@ class _ThingsToAvoidCravingState extends State<ThingsToAvoidCraving> {
                               color: nicotrackBlack1),
                           children: [
                             TextSpan(
-                              text: "🛡️ What you would do to ",
+                              text: context.l10n.avoid_prefix,
 
                             ),
                             TextSpan(
-                              text: "avoid cravings?",
+                              text: context.l10n.avoid_suffix,
                               style: TextStyle(
                                   fontSize: 16.sp,
                                   fontFamily: circularBold,
@@ -176,7 +177,7 @@ class _ThingsToAvoidCravingState extends State<ThingsToAvoidCraving> {
             SizedBox(
               width: 180.w,
               child: TextAutoSize(
-                "Based on your avoidance strategies from smoking logs",
+                context.l10n.avoid_subtitle,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 13.sp,

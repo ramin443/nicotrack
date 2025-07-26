@@ -213,6 +213,8 @@
       }
     }
   },
+  "financial_goals_title": "🥅 Pénzügyi célok",
+  "goal_completed": "teljesítve",
   "go_home": "🏠 Főoldalra",
   
   "oxygen_increase": "Oxigénszint\nemelkedik",
@@ -341,6 +343,8 @@
   
   "progress_label_days_since": "Napok",
   "progress_label_money_saved": "Pénz megtakarítva",
+  "top_triggers_title": "📈 Fő kiváltó okok",
+  "triggers_subtitle": "A beállítási preferenciák és napi naplók alapján",
   
   "settings_change_name": "✏️ Név módosítása",
   "settings_done": "Kész",
@@ -379,5 +383,22 @@
   "next": "Következő",
   "ok": "OK",
   "close": "Bezárás",
-  "done": "Kész"
+  "done": "Kész",
+
+  "top_prefix": "📈 Fő ",
+  "triggers_word": "kiváltó okok",
+  "symptoms_prefix": "📈 Tünetek ",
+  "symptoms_suffix": "enyhultek és gyogyították",
+  "health_prefix": "🍎 Mi javult ",
+  "health_suffix": "a testében",
+  "upcoming_prefix": "🔮 Közelgő ",
+  "upcoming_suffix": "testi változások",
+  "feelings_prefix": "⚡ Hogyan érezte magát ",
+  "feelings_suffix": "a vágyak után",
+  "feelings_subtitle": "A vágyak alatti hangulati naplói alapján",
+  "avoid_prefix": "🛡️ Mit tenne, hogy ",
+  "avoid_suffix": "elkerülje a vágyakat?",
+  "avoid_subtitle": "A dohányzási naplókból származó elkerülési stratégiák alapján",
+  
+  "tap_to_modify_info": "Koppintson az információ módosításához"
 }

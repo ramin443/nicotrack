@@ -213,6 +213,8 @@
       }
     }
   },
+  "financial_goals_title": "🥅 Financial Goals",
+  "goal_completed": "completed",
   "go_home": "🏠 Go to home",
   
   "oxygen_increase": "Oxygen levels\nincrease",
@@ -341,6 +343,19 @@
   
   "progress_label_days_since": "Days\nsmoke-free",
   "progress_label_money_saved": "Money\nsaved",
+  "top_triggers_title": "📈 Top triggers",
+  "top_prefix": "📈 Top ",
+  "triggers_word": "triggers",
+  "symptoms_title": "📈 Symptoms eased & healed from",
+  "health_improvements_title": "🍎 What's improved in your body",
+  "upcoming_changes_title": "🔮 Upcoming body changes",
+  "symptoms_prefix": "📈 Symptoms ",
+  "symptoms_suffix": "eased & healed from",
+  "health_prefix": "🍎 What's improved ",
+  "health_suffix": "in your body",
+  "upcoming_prefix": "🔮 Upcoming ",
+  "upcoming_suffix": "body changes",
+  "triggers_subtitle": "Based on your onboarding preferences and daily logs",
   
   "settings_change_name": "✏️ Change Name",
   "settings_done": "Done",
@@ -379,5 +394,14 @@
   "next": "Next",
   "ok": "OK",
   "close": "Close",
-  "done": "Done"
+  "done": "Done",
+  
+  "feelings_prefix": "⚡ How you ",
+  "feelings_suffix": "felt after cravings",
+  "feelings_subtitle": "Based on your mood logs during cravings",
+  "avoid_prefix": "🛡️ What you would do to ",
+  "avoid_suffix": "avoid cravings?",
+  "avoid_subtitle": "Based on your avoidance strategies from smoking logs",
+  
+  "tap_to_modify_info": "Tap to modify this information"
 }

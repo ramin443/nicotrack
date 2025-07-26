@@ -213,6 +213,8 @@
       }
     }
   },
+  "financial_goals_title": "🥅 Obiective financiare",
+  "goal_completed": "finalizat",
   "go_home": "🏠 Mergeți acasă",
   
   "oxygen_increase": "Nivelurile de oxigen\ncresc",
@@ -379,5 +381,23 @@
   "next": "Următorul",
   "ok": "OK",
   "close": "Închideți",
-  "done": "Gata"
+  "done": "Gata",
+
+  "top_prefix": "📈 Principale ",
+  "triggers_word": "declansatori",
+  "symptoms_prefix": "📈 Simptome ",
+  "symptoms_suffix": "ameliorate si vindecate",
+  "health_prefix": "🍎 Ce s-a imbunatatit ",
+  "health_suffix": "in corpul vostru",
+  "upcoming_prefix": "🔮 Viitoare ",
+  "upcoming_suffix": "schimbari corporale",
+  "triggers_subtitle": "Bazat pe preferințele dumneavoastră de onboarding și înregistrările zilnice",
+  "feelings_prefix": "⚡ Cum v-ati ",
+  "feelings_suffix": "simtit dupa pofte",
+  "feelings_subtitle": "Pe baza inregistrarilor voastre de stare dupa pofte",
+  "avoid_prefix": "🛡️ Ce ati face pentru a ",
+  "avoid_suffix": "evita poftele?",
+  "avoid_subtitle": "Pe baza strategiilor voastre de evitare din inregistrarile de fumat",
+  
+  "tap_to_modify_info": "Apăsați pentru a modifica aceste informații"
 }

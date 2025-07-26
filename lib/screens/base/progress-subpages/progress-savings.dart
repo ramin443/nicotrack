@@ -21,7 +21,7 @@ class _ProgressSavingsState extends State<ProgressSavings> {
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              progressController.savingsDisplayCards(),
+              progressController.savingsDisplayCards(context),
               SizedBox(
                 height: 26.h,
               ),

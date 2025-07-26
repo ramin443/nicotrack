@@ -17,6 +17,7 @@ import '../../../../getx-controllers/premium-controller.dart';
 import '../../../../models/emoji-text-pair/emojitext-model.dart';
 import '../../../../models/mood-model/mood-model.dart';
 import '../../../premium/premium-paywall-screen.dart';
+import '../../../../extensions/app_localizations_extension.dart';
 
 class FeelingsAfterCravings extends StatefulWidget {
   const FeelingsAfterCravings({super.key});
@@ -129,7 +130,7 @@ class _FeelingsAfterCravingsState extends State<FeelingsAfterCravings> {
                                 color: nicotrackBlack1),
                             children: [
                           TextSpan(
-                            text: "⚡ How you ",
+                            text: context.l10n.feelings_prefix,
                             style: TextStyle(
                                 fontSize: 16.sp,
                                 fontFamily: circularBold,
@@ -137,7 +138,7 @@ class _FeelingsAfterCravingsState extends State<FeelingsAfterCravings> {
                                 color: const Color(0xFF6D9C32)),
                           ),
                           TextSpan(
-                            text: "felt after cravings",
+                            text: context.l10n.feelings_suffix,
                           ),
                         ])),
                   ),
@@ -180,7 +181,7 @@ class _FeelingsAfterCravingsState extends State<FeelingsAfterCravings> {
               SizedBox(
                 width: 180.w,
                 child: TextAutoSize(
-                  "Based on your mood logs during cravings",
+                  context.l10n.feelings_subtitle,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 13.sp,

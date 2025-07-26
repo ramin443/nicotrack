@@ -6,6 +6,7 @@ import 'package:nicotrack/getx-controllers/progress-controller.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/1x2-scroll-view.dart';
 import '../../../../constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
+import '../../../../extensions/app_localizations_extension.dart';
 
 class FinancialGoalsInOverview extends StatefulWidget {
   final bool showPercent;
@@ -44,7 +45,7 @@ class _FinancialGoalsInOverviewState extends State<FinancialGoalsInOverview> {
                                 color: nicotrackBlack1),
                             children: [
                           TextSpan(
-                            text: "🥅 Financial Goals",
+                            text: context.l10n.financial_goals_title,
                           ),
                         ])),
                   ),

@@ -379,5 +379,23 @@
   "next": "下一步",
   "ok": "确定",
   "close": "关闭",
-  "done": "完成"
+  "done": "完成",
+
+  "top_prefix": "📈 主要 ",
+  "triggers_word": "触发因素",
+  "symptoms_prefix": "📈 症状 ",
+  "symptoms_suffix": "缓解并治愈",
+  "health_prefix": "🍎 改善了 ",
+  "health_suffix": "您的身体",
+  "upcoming_prefix": "🔮 即将到来的 ",
+  "upcoming_suffix": "身体变化",
+  "triggers_subtitle": "基于您的入门偏好和每日记录",
+  "feelings_prefix": "⚡ 渴望后你 ",
+  "feelings_suffix": "的感受",
+  "feelings_subtitle": "基于您在渴望期间的情绪记录",
+  "avoid_prefix": "🛡️ 您会做什么来 ",
+  "avoid_suffix": "避免渴望？",
+  "avoid_subtitle": "基于您在吸烟记录中的避免策略",
+  
+  "tap_to_modify_info": "点击修改此信息"
 }

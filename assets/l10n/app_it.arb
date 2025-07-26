@@ -379,5 +379,23 @@
   "next": "Avanti",
   "ok": "OK",
   "close": "Chiudi",
-  "done": "Fatto"
+  "done": "Fatto",
+
+  "top_prefix": "📈 Principali ",
+  "triggers_word": "fattori scatenanti",
+  "symptoms_prefix": "📈 Sintomi ",
+  "symptoms_suffix": "alleviati e guariti",
+  "health_prefix": "🍎 Cosa è migliorato ",
+  "health_suffix": "nel tuo corpo",
+  "upcoming_prefix": "🔮 Prossimi ",
+  "upcoming_suffix": "cambiamenti del corpo",
+  "triggers_subtitle": "Basato sulle tue preferenze di onboarding e registri giornalieri",
+  "feelings_prefix": "⚡ Come ti sei ",
+  "feelings_suffix": "sentito dopo le voglie",
+  "feelings_subtitle": "Basato sui tuoi registri dell'umore durante le voglie",
+  "avoid_prefix": "🛡️ Cosa faresti per ",
+  "avoid_suffix": "evitare le voglie?",
+  "avoid_subtitle": "Basato sulle tue strategie di evitamento dai registri del fumo",
+  
+  "tap_to_modify_info": "Tocca per modificare queste informazioni"
 }

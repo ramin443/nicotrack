@@ -213,6 +213,8 @@
       }
     }
   },
+  "financial_goals_title": "🥅 Finanční cíle",
+  "goal_completed": "dokončeno",
   "go_home": "🏠 Jít domů",
   
   "oxygen_increase": "Hladiny kyslíku\nse zvyšují",
@@ -341,6 +343,8 @@
   
   "progress_label_days_since": "Dny bez kouření",
   "progress_label_money_saved": "Ušetřeno peněz",
+  "top_triggers_title": "📈 Hlavní spouštěče",
+  "triggers_subtitle": "Na základě vašich předvoleb a denních záznamů",
   
   "settings_change_name": "✏️ Změnit jméno",
   "settings_done": "Hotovo",
@@ -379,5 +383,22 @@
   "next": "Další",
   "ok": "OK",
   "close": "Zavřít",
-  "done": "Hotovo"
+  "done": "Hotovo",
+
+  "top_prefix": "📈 Hlavní ",
+  "triggers_word": "spouštěče",
+  "symptoms_prefix": "📈 Příznaky ",
+  "symptoms_suffix": "zmírněny a vyléčeny",
+  "health_prefix": "🍎 Co se zlepšilo ",
+  "health_suffix": "ve vašem těle",
+  "upcoming_prefix": "🔮 Nadcházející ",
+  "upcoming_suffix": "tělesné změny",
+  "feelings_prefix": "⚡ Jak jste se ",
+  "feelings_suffix": "cítili po touhách",
+  "feelings_subtitle": "Na základě vašich záznamů nálady během touh",
+  "avoid_prefix": "🛡️ Co byste dělali, abyste ",
+  "avoid_suffix": "předešli touhám?",
+  "avoid_subtitle": "Na základě vašich strategií vyhnutí se z záznamů kouření",
+  
+  "tap_to_modify_info": "Klepněte pro úpravu těchto informací"
 }

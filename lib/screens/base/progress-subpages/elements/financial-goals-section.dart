@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../../../../../extensions/app_localizations_extension.dart';
 import 'package:nicotrack/constants/dummy-data-constants.dart';
 import 'package:nicotrack/getx-controllers/progress-controller.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/1x2-scroll-view.dart';
@@ -49,7 +50,7 @@ class _FinancialGoalsSectionState extends State<FinancialGoalsSection> {
                                       color: nicotrackBlack1),
                                   children: [
                                 TextSpan(
-                                  text: "🥅 Financial Goals",
+                                  text: context.l10n.financial_goals_title,
                                 ),
                               ])),
                         ),
@@ -86,6 +87,7 @@ class _FinancialGoalsSectionState extends State<FinancialGoalsSection> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
+                                      SizedBox(width: 300.w,child:
                                       RichText(
                                           text: TextSpan(
                                               style: TextStyle(
@@ -94,32 +96,33 @@ class _FinancialGoalsSectionState extends State<FinancialGoalsSection> {
                                                   height: 1.1,
                                                   color: nicotrackBlack1),
                                               children: [
-                                            TextSpan(
-                                              text:
+                                                TextSpan(
+                                                  text:
                                                   "${userGoals[index].emoji} ${userGoals[index].goalTitle} ",
-                                            ),
-                                            TextSpan(
-                                              text: "${((moneySaved / userGoals[index].cost) * 100).clamp(0, 100).toInt()}% ",
-                                              style: TextStyle(
-                                                  fontSize: 15.sp,
-                                                  fontFamily: circularBold,
-                                                  height: 1.1,
-                                                  color: Color(0xff6D9C32)),
-                                            ),
-                                            TextSpan(
-                                              text: "completed",
-                                            ),
-                                          ])),
+                                                ),
+                                                TextSpan(
+                                                  text: "${((moneySaved / userGoals[index].cost) * 100).clamp(0, 100).toInt()}% ",
+                                                  style: TextStyle(
+                                                      fontSize: 15.sp,
+                                                      fontFamily: circularBold,
+                                                      height: 1.1,
+                                                      color: Color(0xff6D9C32)),
+                                                ),
+                                                TextSpan(
+                                                  text: context.l10n.goal_completed,
+                                                ),
+                                              ])),)
+
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 9.h,
+                                    height: 9.w,
                                   ),
                                   StyledProgressBar(
                                     progress: (moneySaved / userGoals[index].cost).clamp(0.0, 1.0),
                                   ),
                                   SizedBox(
-                                    height: 20.h,
+                                    height: 20.w,
                                   ),
                                 ],
                               )

@@ -213,6 +213,8 @@
       }
     }
   },
+  "financial_goals_title": "🥅 Mali hedefler",
+  "goal_completed": "tamamlandı",
   "go_home": "🏠 Ana sayfaya git",
   
   "oxygen_increase": "Oksijen seviyeleri\nartıyor",
@@ -379,5 +381,23 @@
   "next": "İleri",
   "ok": "Tamam",
   "close": "Kapat",
-  "done": "Tamam"
+  "done": "Tamam",
+
+  "top_prefix": "📈 En çok ",
+  "triggers_word": "tetikleyiciler",
+  "symptoms_prefix": "📈 Belirtiler ",
+  "symptoms_suffix": "hafifletildi ve iyileşti",
+  "health_prefix": "🍎 Ne iyileşti ",
+  "health_suffix": "vücudunuzda",
+  "upcoming_prefix": "🔮 Yaklaşan ",
+  "upcoming_suffix": "vücut değişiklikleri",
+  "triggers_subtitle": "Başlangıç tercihleriniz ve günlük kayıtlarınıza dayanarak",
+  "feelings_prefix": "⚡ İsteklerden sonra nasıl ",
+  "feelings_suffix": "hissettiniz",
+  "feelings_subtitle": "Istek sırasındaki ruh hali kayıtlarınıza dayalı",
+  "avoid_prefix": "🛡️ İstekleri ",
+  "avoid_suffix": "kaçınmak için ne yaparıdınız?",
+  "avoid_subtitle": "Sigara kayıtlarınızdaki kaçınma stratejilerinize dayalı",
+  
+  "tap_to_modify_info": "Bu bilgiyi değiştirmek için dokunun"
 }

@@ -345,5 +345,23 @@
   "next": "Weiter",
   "ok": "OK",
   "close": "Schließen",
-  "done": "Fertig"
+  "done": "Fertig",
+
+  "top_prefix": "📈 Häufigste ",
+  "triggers_word": "Auslöser",
+  "symptoms_prefix": "📈 Symptome ",
+  "symptoms_suffix": "gelindert und geheilt",
+  "health_prefix": "🍎 Was sich verbessert hat ",
+  "health_suffix": "in deinem Körper",
+  "upcoming_prefix": "🔮 Kommende ",
+  "upcoming_suffix": "Körperveränderungen",
+  "triggers_subtitle": "Basierend auf deinen Onboarding-Präferenzen und täglichen Protokollen",
+  "feelings_prefix": "⚡ Wie du dich ",
+  "feelings_suffix": "nach dem Verlangen gefühlt hast",
+  "feelings_subtitle": "Basierend auf deinen Stimmungsprotokollen während des Verlangens",
+  "avoid_prefix": "🛡️ Was du tun würdest, um ",
+  "avoid_suffix": "Verlangen zu vermeiden?",
+  "avoid_subtitle": "Basierend auf deinen Vermeidungsstrategien aus den Rauchprotokollen",
+  
+  "tap_to_modify_info": "Tippen, um diese Information zu ändern"
 }

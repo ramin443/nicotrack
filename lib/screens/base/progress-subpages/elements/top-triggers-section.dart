@@ -19,6 +19,7 @@ import '../../../../models/mood-model/mood-model.dart';
 import '../../../../models/onboarding-data/onboardingData-model.dart';
 import '../../../elements/textAutoSize.dart';
 import '../../../premium/premium-paywall-screen.dart';
+import '../../../../extensions/app_localizations_extension.dart';
 
 class TopTriggersSection extends StatefulWidget {
   const TopTriggersSection({super.key});
@@ -163,10 +164,10 @@ class _TopTriggersSectionState extends State<TopTriggersSection> {
                                 color: nicotrackBlack1),
                             children: [
                           TextSpan(
-                            text: "📈 Top ",
+                            text: context.l10n.top_prefix,
                           ),
                           TextSpan(
-                            text: "triggers",
+                            text: context.l10n.triggers_word,
                             style: TextStyle(
                                 fontSize: 16.sp,
                                 fontFamily: circularBold,
@@ -217,7 +218,7 @@ class _TopTriggersSectionState extends State<TopTriggersSection> {
               SizedBox(
                 width: 180.w,
                 child: TextAutoSize(
-                  "Based on your onboarding preferences and daily logs",
+                  context.l10n.triggers_subtitle,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 13.sp,
