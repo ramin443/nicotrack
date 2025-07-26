@@ -1,5 +1,5 @@
 {
-  "@@locale": "zh_CN",
+  "@@locale": "zh",
   
   "app_name": "Nicotrack",
   "welcome_title": "欢迎使用\nNicotrack",
@@ -109,8 +109,8 @@
   "mood_records": "情绪记录",
   "settings_data": "设置",
   "confirmation_required": "需要确认",
-  "clear_data_instruction": "在下方输入"清除我的数据"以继续删除。",
-  "clear_data_placeholder": "输入"清除我的数据"",
+  "clear_data_instruction": "在下方输入\\\"清除我的数据\\\"以继续删除。",
+  "clear_data_placeholder": "输入\\\"清除我的数据\\\"",
   
   "overview_tab": "📋 概览",
   "health_tab": "🧠 健康",
