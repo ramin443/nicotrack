@@ -10,6 +10,7 @@ import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
 import '../../../../constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
 import '../../../../models/award-model/award-model.dart';
+import '../../../../extensions/app_localizations_extension.dart';
 
 class AllBadgesSection extends StatefulWidget {
   const AllBadgesSection({super.key});
@@ -61,7 +62,7 @@ class _AllBadgesSectionState extends State<AllBadgesSection> {
                                 color: Colors.white),
                             children: [
                           TextSpan(
-                            text: "🪙  Earned Badges (${earnedBadges.length})",
+                            text: "🪙  ${context.l10n.earned_badges_title} (${earnedBadges.length})",
                           ),
                         ])),
                   ),
@@ -76,7 +77,7 @@ class _AllBadgesSectionState extends State<AllBadgesSection> {
                 Container(
                   padding: EdgeInsets.all(24.w),
                   child: Text(
-                    "Keep going! Your first badge is at Day ${allAwards.first.day}",
+                    context.l10n.first_badge_message(allAwards.first.day.toString()),
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontFamily: circularMedium,
@@ -107,7 +108,7 @@ class _AllBadgesSectionState extends State<AllBadgesSection> {
                                 color: Colors.white),
                             children: [
                               TextSpan(
-                                text: "📆  Next Milestones",
+                                text: "📆  ${context.l10n.next_milestones_title}",
                               ),
                             ])),
                   ),
@@ -127,7 +128,7 @@ class _AllBadgesSectionState extends State<AllBadgesSection> {
                 Container(
                   padding: EdgeInsets.all(24.w),
                   child: Text(
-                    "🎉 Congratulations! You've earned all available badges!",
+                    context.l10n.all_badges_earned_message,
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontFamily: circularMedium,

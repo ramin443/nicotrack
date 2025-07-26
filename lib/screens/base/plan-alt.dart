@@ -13,6 +13,7 @@ import '../../constants/font-constants.dart';
 import '../../constants/quick-function-constants.dart';
 import '../elements/sliver-header-delegate.dart';
 import '../elements/textAutoSize.dart';
+import '../../extensions/app_localizations_extension.dart';
 
 class PlanAlt extends StatefulWidget {
   const PlanAlt({super.key});
@@ -39,17 +40,17 @@ class _PlanAltState extends State<PlanAlt> {
     try {
       final planController = Get.find<PlanController>();
       final currentIndex = planController.getCurrentTimelineIndex();
-      
+
       // Accurate calculation based on plan-alt.dart structure:
-      // Header section: SizedBox(12.h) + today date + SizedBox(8.h) + plan button stack + SizedBox(10.h) + 
+      // Header section: SizedBox(12.h) + today date + SizedBox(8.h) + plan button stack + SizedBox(10.h) +
       // instant quit container + SizedBox(10.h) + info section + SizedBox(28.h) = ~580px
-      // Each timeline item: 
+      // Each timeline item:
       // - Day text (~20px) + SizedBox(9w) + icon stack (100w ≈ 100px) + SizedBox(5w) + gradient text (~20px)
       // - Plus spacing: SizedBox(8w) + connector (20w) + SizedBox(8h) = ~160px per item
       final headerHeight = 580.0;
       final itemHeight = 160.0;
       final targetPosition = headerHeight + (currentIndex * itemHeight);
-      
+
       setState(() {
         _currentTimelinePosition = targetPosition;
       });
@@ -71,35 +72,38 @@ class _PlanAltState extends State<PlanAlt> {
         _showFloatingButton = false;
       });
     }
-    
+
     // Check if user is viewing their current timeline position
     _checkCurrentPositionVisibility(controller);
   }
-  
+
   void _checkCurrentPositionVisibility(ScrollController controller) {
     try {
       final planController = Get.find<PlanController>();
       final currentIndex = planController.getCurrentTimelineIndex();
-      
+
       // Use same calculation as initial position
       final headerHeight = 580.0;
       final itemHeight = 160.0;
       final targetPosition = headerHeight + (currentIndex * itemHeight);
-      
+
       _currentTimelinePosition = targetPosition;
-      
+
       // Check if current position is visible on screen
       final viewportHeight = MediaQuery.of(context).size.height;
       final currentScrollOffset = controller.offset;
-      
+
       // Create a buffer zone around the current position - the green dotted line area
-      final bufferZone = 80.0; // Larger buffer to account for the timeline item height
-      final isCurrentPositionVisible = (targetPosition >= (currentScrollOffset - bufferZone)) && 
-                                       (targetPosition <= (currentScrollOffset + viewportHeight + bufferZone));
-      
+      final bufferZone =
+          80.0; // Larger buffer to account for the timeline item height
+      final isCurrentPositionVisible =
+          (targetPosition >= (currentScrollOffset - bufferZone)) &&
+              (targetPosition <=
+                  (currentScrollOffset + viewportHeight + bufferZone));
+
       // Always show button unless we're viewing the current position
       final shouldShowButton = !isCurrentPositionVisible;
-      
+
       if (shouldShowButton != _showCurrentPositionButton) {
         setState(() {
           _showCurrentPositionButton = shouldShowButton;
@@ -122,12 +126,14 @@ class _PlanAltState extends State<PlanAlt> {
       curve: Curves.easeInOut,
     );
   }
-  
+
   void _scrollToCurrentPosition(ScrollController controller) {
     // Calculate the viewport height to center the target position
     final viewportHeight = MediaQuery.of(context).size.height;
-    final centeredPosition = _currentTimelinePosition - (viewportHeight / 2) + 80; // 80px offset for better centering
-    
+    final centeredPosition = _currentTimelinePosition -
+        (viewportHeight / 2) +
+        80; // 80px offset for better centering
+
     controller.animateTo(
       centeredPosition.clamp(0.0, controller.position.maxScrollExtent),
       duration: Duration(milliseconds: 700),
@@ -137,14 +143,18 @@ class _PlanAltState extends State<PlanAlt> {
 
   @override
   Widget build(BuildContext context) {
-    String todayDate = DateFormat('MMMM d, y').format(DateTime.now());
+    String todayDate =
+        DateFormat('MMMM d, y', Localizations.localeOf(context).languageCode)
+            .format(DateTime.now());
     return GetBuilder<PlanController>(
         init: PlanController(),
         builder: (planController) {
           // Add scroll listener
-          planController.scrollController.removeListener(() => _scrollListener(planController.scrollController));
-          planController.scrollController.addListener(() => _scrollListener(planController.scrollController));
-          
+          planController.scrollController.removeListener(
+              () => _scrollListener(planController.scrollController));
+          planController.scrollController.addListener(
+              () => _scrollListener(planController.scrollController));
+
           return Scaffold(
             backgroundColor: Colors.white,
             body: Stack(
@@ -178,7 +188,7 @@ class _PlanAltState extends State<PlanAlt> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   TextAutoSize(
-                                    "Today • $todayDate",
+                                    context.l10n.plan_today(todayDate),
                                     style: TextStyle(
                                         fontSize: 14.sp,
                                         fontFamily: circularBook,
@@ -213,7 +223,8 @@ class _PlanAltState extends State<PlanAlt> {
                                           SizedBox(
                                             width: 120.w,
                                             child: TextAutoSize(
-                                              "Personalized Quit Routine",
+                                              context.l10n
+                                                  .personalized_quit_routine,
                                               style: TextStyle(
                                                   fontSize: 19.sp,
                                                   fontFamily: circularBold,
@@ -261,14 +272,17 @@ class _PlanAltState extends State<PlanAlt> {
                                 SizedBox(
                                   width: 10.w,
                                 ),
-                                TextAutoSize(
-                                  "Instant Quit Plan",
-                                  style: TextStyle(
-                                      fontSize: 16.sp,
-                                      fontFamily: circularMedium,
-                                      height: 1.1,
-                                      color: Colors.white),
-                                ),
+                                SizedBox(
+                                  width: 130.w,
+                                  child: TextAutoSize(
+                                    context.l10n.instant_quit_plan,
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontFamily: circularMedium,
+                                        height: 1.1,
+                                        color: Colors.white),
+                                  ),
+                                )
                               ],
                             ),
                           ),
@@ -284,7 +298,8 @@ class _PlanAltState extends State<PlanAlt> {
                                 backgroundColor: Colors.transparent,
                                 builder: (BuildContext context) {
                                   return Container(
-                                    height: MediaQuery.of(context).size.height * 0.85,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.85,
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.only(
@@ -302,11 +317,13 @@ class _PlanAltState extends State<PlanAlt> {
                                             height: 5.w,
                                             decoration: BoxDecoration(
                                               color: Colors.black,
-                                              borderRadius: BorderRadius.circular(24.r),
+                                              borderRadius:
+                                                  BorderRadius.circular(24.r),
                                             ),
                                           ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
                                             children: [
                                               GestureDetector(
                                                 onTap: () {
@@ -317,7 +334,8 @@ class _PlanAltState extends State<PlanAlt> {
                                                   width: 36.w,
                                                   decoration: BoxDecoration(
                                                       shape: BoxShape.circle,
-                                                      color: Color(0xffFF611D).withOpacity(0.20)),
+                                                      color: Color(0xffFF611D)
+                                                          .withOpacity(0.20)),
                                                   child: Center(
                                                     child: Icon(
                                                       Icons.close,
@@ -339,18 +357,20 @@ class _PlanAltState extends State<PlanAlt> {
                                             height: 86.w,
                                             decoration: BoxDecoration(
                                               shape: BoxShape.circle,
-                                              color: nicotrackRed.withOpacity(0.2),
+                                              color:
+                                                  nicotrackRed.withOpacity(0.2),
                                             ),
                                             child: Center(
                                               child: Text(
                                                 "📋",
-                                                style: TextStyle(fontSize: 48.sp),
+                                                style:
+                                                    TextStyle(fontSize: 48.sp),
                                               ),
                                             ),
                                           ),
                                           SizedBox(height: 16.h),
                                           Text(
-                                            "Your Quit Journey",
+                                            context.l10n.your_quit_journey,
                                             style: TextStyle(
                                               fontSize: 22.sp,
                                               fontFamily: circularBold,
@@ -360,13 +380,17 @@ class _PlanAltState extends State<PlanAlt> {
                                           ),
                                           SizedBox(height: 8.h),
                                           Container(
-                                            padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 14.w,
+                                                vertical: 6.h),
                                             decoration: BoxDecoration(
-                                              color: nicotrackOrange.withOpacity(0.15),
-                                              borderRadius: BorderRadius.circular(20.r),
+                                              color: nicotrackOrange
+                                                  .withOpacity(0.15),
+                                              borderRadius:
+                                                  BorderRadius.circular(20.r),
                                             ),
                                             child: Text(
-                                              "Personalized Plan",
+                                              context.l10n.personalized_plan,
                                               style: TextStyle(
                                                 fontSize: 13.sp,
                                                 fontFamily: circularMedium,
@@ -378,11 +402,13 @@ class _PlanAltState extends State<PlanAlt> {
                                           SizedBox(height: 24.h),
                                           // Main Content
                                           Container(
-                                            margin: EdgeInsets.symmetric(horizontal: 20.w),
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 20.w),
                                             padding: EdgeInsets.all(20.w),
                                             decoration: BoxDecoration(
                                               color: Colors.black,
-                                              borderRadius: BorderRadius.circular(20.r),
+                                              borderRadius:
+                                                  BorderRadius.circular(20.r),
                                             ),
                                             child: Column(
                                               children: [
@@ -396,52 +422,58 @@ class _PlanAltState extends State<PlanAlt> {
                                                       color: Colors.white,
                                                     ),
                                                     children: [
-                                                      TextSpan(text: "This plan is "),
                                                       TextSpan(
-                                                        text: "designed specifically for you",
-                                                        style: TextStyle(
-                                                          fontFamily: circularBold,
-                                                          color: nicotrackGreen,
-                                                        ),
-                                                      ),
-                                                      TextSpan(text: " to help you successfully quit smoking. Follow the "),
-                                                      TextSpan(
-                                                        text: "timeline",
-                                                        style: TextStyle(
-                                                          fontFamily: circularMedium,
-                                                          color: nicotrackOrange,
-                                                        ),
-                                                      ),
-                                                      TextSpan(text: " to understand what to expect during your journey."),
+                                                          text: context.l10n
+                                                              .plan_description),
                                                     ],
                                                   ),
                                                 ),
                                                 SizedBox(height: 20.h),
                                                 Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
                                                   children: [
                                                     Column(
                                                       children: [
                                                         Container(
                                                           width: 48.w,
                                                           height: 48.w,
-                                                          decoration: BoxDecoration(
-                                                            shape: BoxShape.circle,
-                                                            color: nicotrackOrange.withOpacity(0.3),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            shape:
+                                                                BoxShape.circle,
+                                                            color:
+                                                                nicotrackOrange
+                                                                    .withOpacity(
+                                                                        0.3),
                                                           ),
                                                           child: Center(
-                                                            child: Text("🎯", style: TextStyle(fontSize: 24.sp)),
+                                                            child: Text("🎯",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        24.sp)),
                                                           ),
                                                         ),
-                                                        SizedBox(height: 8.h),
-                                                        Text(
-                                                          "Track Progress",
-                                                          style: TextStyle(
-                                                            fontSize: 12.sp,
-                                                            fontFamily: circularMedium,
-                                                            color: Colors.white,
+                                                        SizedBox(height: 8.w),
+                                                        SizedBox(
+                                                          width: 75.w,
+                                                          height: 28.w,
+                                                          child: Text(
+                                                            context.l10n
+                                                                .track_progress,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: TextStyle(
+                                                              fontSize: 12.sp,
+                                                              height: 1.2,
+                                                              fontFamily:
+                                                                  circularMedium,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
                                                           ),
-                                                        ),
+                                                        )
                                                       ],
                                                     ),
                                                     Column(
@@ -449,23 +481,41 @@ class _PlanAltState extends State<PlanAlt> {
                                                         Container(
                                                           width: 48.w,
                                                           height: 48.w,
-                                                          decoration: BoxDecoration(
-                                                            shape: BoxShape.circle,
-                                                            color: nicotracklightBlue.withOpacity(0.3),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            shape:
+                                                                BoxShape.circle,
+                                                            color:
+                                                                nicotracklightBlue
+                                                                    .withOpacity(
+                                                                        0.3),
                                                           ),
                                                           child: Center(
-                                                            child: Text("🏆", style: TextStyle(fontSize: 24.sp)),
+                                                            child: Text("🏆",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        24.sp)),
                                                           ),
                                                         ),
                                                         SizedBox(height: 8.h),
-                                                        Text(
-                                                          "Earn Badges",
-                                                          style: TextStyle(
-                                                            fontSize: 12.sp,
-                                                            fontFamily: circularMedium,
-                                                            color: Colors.white,
+                                                        SizedBox(
+                                                          width: 75.w,
+                                                          height: 28.w,
+                                                          child: Text(
+                                                            context.l10n
+                                                                .earn_badges,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: TextStyle(
+                                                              height: 1.2,
+                                                              fontSize: 12.sp,
+                                                              fontFamily:
+                                                                  circularMedium,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
                                                           ),
-                                                        ),
+                                                        )
                                                       ],
                                                     ),
                                                     Column(
@@ -473,23 +523,41 @@ class _PlanAltState extends State<PlanAlt> {
                                                         Container(
                                                           width: 48.w,
                                                           height: 48.w,
-                                                          decoration: BoxDecoration(
-                                                            shape: BoxShape.circle,
-                                                            color: nicotrackPurple.withOpacity(0.3),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            shape:
+                                                                BoxShape.circle,
+                                                            color:
+                                                                nicotrackPurple
+                                                                    .withOpacity(
+                                                                        0.3),
                                                           ),
                                                           child: Center(
-                                                            child: Text("💪", style: TextStyle(fontSize: 24.sp)),
+                                                            child: Text("💪",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        24.sp)),
                                                           ),
                                                         ),
                                                         SizedBox(height: 8.h),
-                                                        Text(
-                                                          "Stay Strong",
-                                                          style: TextStyle(
-                                                            fontSize: 12.sp,
-                                                            fontFamily: circularMedium,
-                                                            color: Colors.white,
+                                                        SizedBox(
+                                                          width: 75.w,
+                                                          height: 28.w,
+                                                          child: Text(
+                                                            context.l10n
+                                                                .stay_strong,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: TextStyle(
+                                                              height: 1.2,
+                                                              fontSize: 12.sp,
+                                                              fontFamily:
+                                                                  circularMedium,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
                                                           ),
-                                                        ),
+                                                        )
                                                       ],
                                                     ),
                                                   ],
@@ -500,55 +568,68 @@ class _PlanAltState extends State<PlanAlt> {
                                           SizedBox(height: 20.h),
                                           // Disclaimer Section
                                           Container(
-                                            margin: EdgeInsets.symmetric(horizontal: 20.w),
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 20.w),
                                             padding: EdgeInsets.all(16.w),
                                             decoration: BoxDecoration(
                                               color: Colors.white,
-                                              borderRadius: BorderRadius.circular(16.r),
+                                              borderRadius:
+                                                  BorderRadius.circular(16.r),
                                               border: Border.all(
                                                 color: Color(0xFFE0E0E0),
                                                 width: 1.w,
                                               ),
                                             ),
                                             child: Row(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Container(
                                                   width: 32.w,
                                                   height: 32.w,
                                                   decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
-                                                    color: nicotrackLightGreen.withOpacity(0.3),
+                                                    color: nicotrackLightGreen
+                                                        .withOpacity(0.3),
                                                   ),
                                                   child: Center(
                                                     child: Text(
                                                       "💡",
-                                                      style: TextStyle(fontSize: 16.sp),
+                                                      style: TextStyle(
+                                                          fontSize: 16.sp),
                                                     ),
                                                   ),
                                                 ),
                                                 SizedBox(width: 12.w),
                                                 Expanded(
                                                   child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Text(
-                                                        "Important Note",
+                                                        context.l10n
+                                                            .important_note,
                                                         style: TextStyle(
                                                           fontSize: 14.sp,
-                                                          fontFamily: circularBold,
-                                                          color: nicotrackBlack1,
+                                                          fontFamily:
+                                                              circularBold,
+                                                          color:
+                                                              nicotrackBlack1,
                                                           height: 1.1,
                                                         ),
                                                       ),
                                                       SizedBox(height: 6.h),
                                                       Text(
-                                                        "Symptoms and effects vary from person to person. This timeline shows common experiences, but your journey is unique!",
+                                                        context.l10n
+                                                            .timeline_disclaimer,
                                                         style: TextStyle(
                                                           fontSize: 12.sp,
-                                                          fontFamily: circularBook,
+                                                          fontFamily:
+                                                              circularBook,
                                                           height: 1.3,
-                                                          color: nicotrackBlack1.withOpacity(0.7),
+                                                          color: nicotrackBlack1
+                                                              .withOpacity(0.7),
                                                         ),
                                                       ),
                                                     ],
@@ -577,7 +658,7 @@ class _PlanAltState extends State<PlanAlt> {
                                   width: 8.w,
                                 ),
                                 TextAutoSize(
-                                  "Info",
+                                  context.l10n.info_button,
                                   style: TextStyle(
                                     fontSize: 15.sp,
                                     fontFamily: circularBook,
@@ -613,63 +694,66 @@ class _PlanAltState extends State<PlanAlt> {
                 )),
               ],
             ),
-            floatingActionButton: (_showFloatingButton || _showCurrentPositionButton)
-                ? Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      // Current position button (appears when not viewing current timeline position)
-                      AnimatedOpacity(
-                        opacity: _showCurrentPositionButton ? 1.0 : 0.0,
-                        duration: Duration(milliseconds: 300),
-                        child: AnimatedScale(
-                          scale: _showCurrentPositionButton ? 1.0 : 0.8,
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                          child: _showCurrentPositionButton
-                              ? FloatingActionButton(
-                                  onPressed: () => _scrollToCurrentPosition(planController.scrollController),
-                                  backgroundColor: nicotrackBlack1,
-                                  elevation: 8,
-                                  heroTag: "currentPosition",
-                                  child: Icon(
-                                    FeatherIcons.target,
-                                    color: Colors.white,
-                                    size: 22.w,
-                                  ),
-                                )
-                              : SizedBox.shrink(),
-                        ),
-                      ),
-                      // Add spacing only if both buttons are showing
-                      if (_showCurrentPositionButton && _showFloatingButton)
-                        SizedBox(width: 12.w),
-                      // Scroll to top button (appears when scrolled down)
-                      AnimatedOpacity(
-                        opacity: _showFloatingButton ? 1.0 : 0.0,
-                        duration: Duration(milliseconds: 300),
-                        child: AnimatedScale(
-                          scale: _showFloatingButton ? 1.0 : 0.8,
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                          child: _showFloatingButton
-                              ? FloatingActionButton(
-                                  onPressed: () => _scrollToTop(planController.scrollController),
-                                  backgroundColor: nicotrackBlack1,
-                                  elevation: 8,
-                                  heroTag: "scrollToTop",
-                                  child: Icon(
-                                    Icons.keyboard_arrow_up,
-                                    color: Colors.white,
-                                    size: 28.w,
-                                  ),
-                                )
-                              : SizedBox.shrink(),
-                        ),
-                      ),
-                    ],
-                  )
-                : null,
+            floatingActionButton:
+                (_showFloatingButton || _showCurrentPositionButton)
+                    ? Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          // Current position button (appears when not viewing current timeline position)
+                          AnimatedOpacity(
+                            opacity: _showCurrentPositionButton ? 1.0 : 0.0,
+                            duration: Duration(milliseconds: 300),
+                            child: AnimatedScale(
+                              scale: _showCurrentPositionButton ? 1.0 : 0.8,
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
+                              child: _showCurrentPositionButton
+                                  ? FloatingActionButton(
+                                      onPressed: () => _scrollToCurrentPosition(
+                                          planController.scrollController),
+                                      backgroundColor: nicotrackBlack1,
+                                      elevation: 8,
+                                      heroTag: "currentPosition",
+                                      child: Icon(
+                                        FeatherIcons.target,
+                                        color: Colors.white,
+                                        size: 22.w,
+                                      ),
+                                    )
+                                  : SizedBox.shrink(),
+                            ),
+                          ),
+                          // Add spacing only if both buttons are showing
+                          if (_showCurrentPositionButton && _showFloatingButton)
+                            SizedBox(width: 12.w),
+                          // Scroll to top button (appears when scrolled down)
+                          AnimatedOpacity(
+                            opacity: _showFloatingButton ? 1.0 : 0.0,
+                            duration: Duration(milliseconds: 300),
+                            child: AnimatedScale(
+                              scale: _showFloatingButton ? 1.0 : 0.8,
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
+                              child: _showFloatingButton
+                                  ? FloatingActionButton(
+                                      onPressed: () => _scrollToTop(
+                                          planController.scrollController),
+                                      backgroundColor: nicotrackBlack1,
+                                      elevation: 8,
+                                      heroTag: "scrollToTop",
+                                      child: Icon(
+                                        Icons.keyboard_arrow_up,
+                                        color: Colors.white,
+                                        size: 28.w,
+                                      ),
+                                    )
+                                  : SizedBox.shrink(),
+                            ),
+                          ),
+                        ],
+                      )
+                    : null,
           );
         });
   }

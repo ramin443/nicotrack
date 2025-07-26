@@ -151,7 +151,7 @@
   "privacy_policy": "Politica de confidențialitate",
   
   "today_date_prefix": "Astăzi • ",
-  "personalized_quit_routine": "Rutină personalizată de renunțare",
+  "personalized_quit_routine": "Plan Renunțare",
   "instant_quit_plan": "Plan de renunțare instantanee",
   "your_quit_journey": "Călătoria voastră de renunțare",
   "personalized_plan": "Plan personalizat",
@@ -343,6 +343,10 @@
   
   "progress_label_days_since": "Zile fără fumat",
   "progress_label_money_saved": "Bani economisiți",
+  "top_triggers_title": "📈 Principalii factori declanșatori",
+  "symptoms_title": "📈 Simptome ameliorate și vindecate",
+  "health_improvements_title": "🍎 Ce s-a îmbunătățit în corpul vostru",
+  "upcoming_changes_title": "🔮 Schimbări corporale viitoare",
   
   "settings_change_name": "✏️ Schimbați numele",
   "settings_done": "Gata",
@@ -399,5 +403,40 @@
   "avoid_suffix": "evita poftele?",
   "avoid_subtitle": "Pe baza strategiilor voastre de evitare din inregistrarile de fumat",
   
-  "tap_to_modify_info": "Apăsați pentru a modifica aceste informații"
+  "tap_to_modify_info": "Apăsați pentru a modifica aceste informații",
+
+  "start_label": "Începe",
+  "earned_badges_title": "Insigne Câștigate",
+  "next_milestones_title": "Următoarele Jaloane",
+  "first_badge_message": "Continuați! Prima voastră insignă este în ziua {day}",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "Ziua {day}",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "Serie {streak}",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 Felicitări! Ați câștigat toate insignele disponibile!"
 }

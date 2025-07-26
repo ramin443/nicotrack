@@ -151,7 +151,7 @@
   "privacy_policy": "プライバシーポリシー",
   
   "today_date_prefix": "今日 • ",
-  "personalized_quit_routine": "パーソナライズされた禁煙ルーティン",
+  "personalized_quit_routine": "禁煙プラン",
   "instant_quit_plan": "即座禁煙プラン",
   "your_quit_journey": "あなたの禁煙の旅",
   "personalized_plan": "パーソナライズされたプラン",
@@ -213,6 +213,8 @@
       }
     }
   },
+  "financial_goals_title": "🥅 財務目標",
+  "goal_completed": "達成",
   "go_home": "🏠 ホームへ行く",
   
   "oxygen_increase": "酸素レベルが\n増加",
@@ -341,6 +343,10 @@
   
   "progress_label_days_since": "禁煙\n日数",
   "progress_label_money_saved": "節約\n金額",
+  "top_triggers_title": "📈 主なトリガー",
+  "symptoms_title": "📈 緊和・治療された症状",
+  "health_improvements_title": "🍎 体の改善点",
+  "upcoming_changes_title": "🔮 今後の体の変化",
   
   "settings_change_name": "✏️ 名前を変更",
   "settings_done": "完了",
@@ -397,5 +403,40 @@
   "avoid_suffix": "避けるために何をしますか？",
   "avoid_subtitle": "喫煙記録からの回避戦略に基づく",
   
-  "tap_to_modify_info": "タップしてこの情報を変更"
+  "tap_to_modify_info": "タップしてこの情報を変更",
+
+  "start_label": "開始",
+  "earned_badges_title": "獲得したバッジ",
+  "next_milestones_title": "次のマイルストーン",
+  "first_badge_message": "頑張って！最初のバッジは{day}日目です",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "{day}日目",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "連続{streak}日",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 おめでとうございます！利用可能なバッジをすべて獲得しました！"
 }

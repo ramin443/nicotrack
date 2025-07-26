@@ -151,7 +151,7 @@
   "privacy_policy": "Datenschutzrichtlinie",
   
   "today_date_prefix": "Heute • ",
-  "personalized_quit_routine": "Personalisierte Aufhör-Routine",
+  "personalized_quit_routine": "Aufhör-Plan",
   "instant_quit_plan": "Sofortiger Aufhör-Plan",
   "your_quit_journey": "Deine Aufhör-Reise",
   "personalized_plan": "Personalisierter Plan",
@@ -203,6 +203,8 @@
   "cigarettes_count": "So viele 🚬\nZigaretten hast du geraucht",
   "smoke_free_day": "Du bist an deinem rauchfreien Tag 🥳.",
   "financial_goal_progress": "🥅 Finanzielles Ziel: \n{emoji} {title} abgeschlossen.",
+  "financial_goals_title": "🥅 Finanzielle Ziele",
+  "goal_completed": "abgeschlossen",
   "go_home": "🏠 Zur Startseite",
   
   "oxygen_increase": "Sauerstoffwerte\nsteigen",
@@ -323,11 +325,23 @@
   
   "progress_label_days_since": "Tage\nrauchfrei",
   "progress_label_money_saved": "Geld\ngespart",
+  "top_triggers_title": "📈 Häufigste Auslöser",
+  "symptoms_title": "📈 Gelinderte und geheilte Symptome",
+  "health_improvements_title": "🍎 Was sich in deinem Körper verbessert hat",
+  "upcoming_changes_title": "🔮 Kommende Körperveränderungen",
   
   "settings_change_name": "✏️ Name ändern",
   "settings_done": "Fertig",
   
   "plan_today": "Heute • {date}",
+  "@plan_today": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "Jan 15"
+      }
+    }
+  },
   
   "privacy_policy_title": "Datenschutzrichtlinie",
   "privacy_your_matters": "Dein Datenschutz ist wichtig",
@@ -363,5 +377,40 @@
   "avoid_suffix": "Verlangen zu vermeiden?",
   "avoid_subtitle": "Basierend auf deinen Vermeidungsstrategien aus den Rauchprotokollen",
   
-  "tap_to_modify_info": "Tippen, um diese Information zu ändern"
+  "tap_to_modify_info": "Tippen, um diese Information zu ändern",
+
+  "start_label": "Starten",
+  "earned_badges_title": "Erhaltene Abzeichen",
+  "next_milestones_title": "Nächste Meilensteine",
+  "first_badge_message": "Weiter so! Dein erstes Abzeichen ist an Tag {day}",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "Tag {day}",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "Serie {streak}",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 Glückwunsch! Du hast alle verfügbaren Abzeichen erhalten!"
 }

@@ -12,6 +12,7 @@ import 'package:nicotrack/screens/elements/gradient-text.dart';
 import 'package:nicotrack/screens/elements/info-bottom-sheet.dart';
 import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
 import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
+import '../extensions/app_localizations_extension.dart';
 
 import '../constants/font-constants.dart';
 import '../models/timeline-item-model/timelineItem-model.dart';
@@ -404,17 +405,16 @@ class PlanController extends GetxController {
                                     Container(
                                       decoration: BoxDecoration(
                                         color:
-                                        Colors.white.withValues(alpha: 0.1),
+                                            Colors.white.withValues(alpha: 0.1),
                                       ),
                                       child: Center(
                                         child: calendarLock(),
                                       ),
-
                                     ),
                                     i == 4
                                         ? SizedBox(
-                                      height: 80.w,
-                                    )
+                                            height: 80.w,
+                                          )
                                         : SizedBox.shrink(),
                                   ],
                                 )
@@ -484,7 +484,7 @@ class PlanController extends GetxController {
                           ),
                           child: Center(
                             child: TextAutoSize(
-                              "Start",
+                              context.l10n.start_label,
                               style: TextStyle(
                                 fontSize: 15.sp,
                                 fontFamily: circularMedium,
@@ -512,7 +512,8 @@ class PlanController extends GetxController {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         TextAutoSize(
-                          "Day ${timelineModelItem.dayNumber}",
+                          context.l10n.day_number(
+                              timelineModelItem.dayNumber.toString()),
                           style: TextStyle(
                             fontSize: 14.sp,
                             fontFamily: circularBold,
@@ -540,7 +541,8 @@ class PlanController extends GetxController {
                           height: 5.w,
                         ),
                         GradientText(
-                          text: "Streak ${timelineModelItem.streakNumber}",
+                          text: context.l10n.streak_number(
+                              timelineModelItem.streakNumber.toString()),
                           gradient: LinearGradient(
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
@@ -561,13 +563,6 @@ class PlanController extends GetxController {
               GestureDetector(
                 onTap: () {
                   openDraggableBottomSheet(context: context, index: index);
-                  // showBottomSheet(
-                  //   enableDrag: true,
-                  //   backgroundColor: Colors.transparent,
-                  //    builder:  (context){
-                  //     return InfoBottomSheet();
-                  //     }, context: context
-                  // );
                 },
                 child: Container(
                   width: 222.w,

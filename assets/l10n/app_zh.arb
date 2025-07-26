@@ -151,7 +151,7 @@
   "privacy_policy": "隐私政策",
   
   "today_date_prefix": "今天 • ",
-  "personalized_quit_routine": "个性化戒烟例程",
+  "personalized_quit_routine": "戒烟计划",
   "instant_quit_plan": "立即戒烟计划",
   "your_quit_journey": "您的戒烟之旅",
   "personalized_plan": "个性化计划",
@@ -213,6 +213,8 @@
       }
     }
   },
+  "financial_goals_title": "🥅 财务目标",
+  "goal_completed": "已完成",
   "go_home": "🏠 回到首页",
   
   "oxygen_increase": "氧气水平\n增加",
@@ -341,6 +343,10 @@
   
   "progress_label_days_since": "戒烟\n天数",
   "progress_label_money_saved": "节省\n金钱",
+  "top_triggers_title": "📈 主要触发因素",
+  "symptoms_title": "📈 缓解和治愈的症状",
+  "health_improvements_title": "🍎 您身体的改善",
+  "upcoming_changes_title": "🔮 即将到来的身体变化",
   
   "settings_change_name": "✏️ 更改姓名",
   "settings_done": "完成",
@@ -397,5 +403,40 @@
   "avoid_suffix": "避免渴望？",
   "avoid_subtitle": "基于您在吸烟记录中的避免策略",
   
-  "tap_to_modify_info": "点击修改此信息"
+  "tap_to_modify_info": "点击修改此信息",
+
+  "start_label": "开始",
+  "earned_badges_title": "已获得徽章",
+  "next_milestones_title": "下一个里程碑",
+  "first_badge_message": "继续努力！您的第一个徽章在第{day}天",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "第{day}天",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "连续{streak}天",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 恭喜！您已经获得了所有可用的徽章！"
 }

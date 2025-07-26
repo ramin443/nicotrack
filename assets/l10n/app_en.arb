@@ -403,5 +403,40 @@
   "avoid_suffix": "avoid cravings?",
   "avoid_subtitle": "Based on your avoidance strategies from smoking logs",
   
-  "tap_to_modify_info": "Tap to modify this information"
+  "tap_to_modify_info": "Tap to modify this information",
+
+  "start_label": "Start",
+  "earned_badges_title": "Earned Badges",
+  "next_milestones_title": "Next Milestones",
+  "first_badge_message": "Keep going! Your first badge is at Day {day}",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "Day {day}",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "Streak {streak}",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 Congratulations! You've earned all available badges!"
 }

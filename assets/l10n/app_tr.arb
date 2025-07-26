@@ -151,7 +151,7 @@
   "privacy_policy": "Gizlilik politikası",
   
   "today_date_prefix": "Bugün • ",
-  "personalized_quit_routine": "Kişiselleştirilmiş bırakma rutini",
+  "personalized_quit_routine": "Bırakma Planı",
   "instant_quit_plan": "Anında bırakma planı",
   "your_quit_journey": "Bırakma yolculuğunuz",
   "personalized_plan": "Kişiselleştirilmiş plan",
@@ -343,6 +343,10 @@
   
   "progress_label_days_since": "Gün sigarasız",
   "progress_label_money_saved": "Para tasarrufu",
+  "top_triggers_title": "📈 En önemli tetikleyiciler",
+  "symptoms_title": "📈 Hafiflenen ve iyileşen semptomlar",
+  "health_improvements_title": "🍎 Vücudunuzda iyileşen şeyler",
+  "upcoming_changes_title": "🔮 Yaklaşan vücut değişiklikleri",
   
   "settings_change_name": "✏️ İsim değiştir",
   "settings_done": "Tamam",
@@ -399,5 +403,40 @@
   "avoid_suffix": "kaçınmak için ne yaparıdınız?",
   "avoid_subtitle": "Sigara kayıtlarınızdaki kaçınma stratejilerinize dayalı",
   
-  "tap_to_modify_info": "Bu bilgiyi değiştirmek için dokunun"
+  "tap_to_modify_info": "Bu bilgiyi değiştirmek için dokunun",
+
+  "start_label": "Başla",
+  "earned_badges_title": "Kazanılan Rozetler",
+  "next_milestones_title": "Sonraki Kilometre Taşları",
+  "first_badge_message": "Devam et! İlk rozetin {day}. günde",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "Gün {day}",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "Seri {streak}",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 Tebrikler! Mevcut tüm rozetleri kazandınız!"
 }

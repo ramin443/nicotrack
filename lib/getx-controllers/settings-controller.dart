@@ -262,13 +262,19 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextAutoSize(
-                context.l10n.tap_to_modify_info,
-                style: TextStyle(
-                    fontSize: 13.sp,
-                    fontFamily: circularBook,
-                    color: Color(0xFFC8C8C8)),
-              ),
+              SizedBox(
+                width: 300.w,
+                child: TextAutoSize(
+                  context.l10n.tap_to_modify_info,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 13.sp,
+                      height: 1.1,
+                      fontFamily: circularBook,
+                      color: Color(0xFFC8C8C8)),
+                ),
+              )
+
             ],
           ),
           SizedBox(

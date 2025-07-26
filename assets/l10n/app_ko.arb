@@ -151,7 +151,7 @@
   "privacy_policy": "개인정보 처리방침",
   
   "today_date_prefix": "오늘 • ",
-  "personalized_quit_routine": "맞춤형 금연 루틴",
+  "personalized_quit_routine": "금연 계획",
   "instant_quit_plan": "즉시 금연 계획",
   "your_quit_journey": "당신의 금연 여정",
   "personalized_plan": "맞춤형 계획",
@@ -213,6 +213,8 @@
       }
     }
   },
+  "financial_goals_title": "🥅 재무 목표",
+  "goal_completed": "완료",
   "go_home": "🏠 홈으로 가기",
   
   "oxygen_increase": "산소 수준\n증가",
@@ -341,6 +343,10 @@
   
   "progress_label_days_since": "금연\n일수",
   "progress_label_money_saved": "절약\n금액",
+  "top_triggers_title": "📈 주요 방아쇠",
+  "symptoms_title": "📈 완화되고 치유된 증상",
+  "health_improvements_title": "🍎 당신의 머리에서 개선된 것",
+  "upcoming_changes_title": "🔮 예정된 신체 변화",
   
   "settings_change_name": "✏️ 이름 변경",
   "settings_done": "완료",
@@ -397,5 +403,40 @@
   "avoid_suffix": "피하기 위해 무엇을 하시겠습니까?",
   "avoid_subtitle": "흡연 기록의 회피 전략을 바탕으로",
   
-  "tap_to_modify_info": "이 정보를 수정하려면 탭하세요"
+  "tap_to_modify_info": "이 정보를 수정하려면 탭하세요",
+
+  "start_label": "시작",
+  "earned_badges_title": "획득한 배지",
+  "next_milestones_title": "다음 이정표",
+  "first_badge_message": "계속하세요! 첫 번째 배지는 {day}일째입니다",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "{day}일째",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "연속 {streak}일",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 축하합니다! 사용 가능한 모든 배지를 획득했습니다!"
 }

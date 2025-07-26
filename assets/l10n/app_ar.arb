@@ -151,7 +151,7 @@
   "privacy_policy": "سياسة الخصوصية",
   
   "today_date_prefix": "اليوم • ",
-  "personalized_quit_routine": "روتين إقلاع شخصي",
+  "personalized_quit_routine": "خطة الإقلاع",
   "instant_quit_plan": "خطة الإقلاع الفوري",
   "your_quit_journey": "رحلة الإقلاع الخاصة بك",
   "personalized_plan": "خطة شخصية",
@@ -213,6 +213,8 @@
       }
     }
   },
+  "financial_goals_title": "🥅 الأهداف المالية",
+  "goal_completed": "مكتمل",
   "go_home": "🏠 اذهب للرئيسية",
   
   "oxygen_increase": "مستويات الأكسجين\nتزداد",
@@ -341,6 +343,10 @@
   
   "progress_label_days_since": "الأيام منذ\nآخر تدخين",
   "progress_label_money_saved": "المال المحفوظ",
+  "top_triggers_title": "📈 أهم المحفزات",
+  "symptoms_title": "📈 الأعراض المخففة والمشفية",
+  "health_improvements_title": "🍎 ما تحسن في جسمك",
+  "upcoming_changes_title": "🔮 التغييرات الجسدية القادمة",
   
   "settings_change_name": "✏️ تغيير الاسم",
   "settings_done": "تم",
@@ -397,5 +403,40 @@
   "avoid_suffix": "تجنب الرغبة؟",
   "avoid_subtitle": "بناءً على استراتيجيات التجنب من سجلات التدخين",
   
-  "tap_to_modify_info": "اضغط لتعديل هذه المعلومات"
+  "tap_to_modify_info": "اضغط لتعديل هذه المعلومات",
+
+  "start_label": "ابدأ",
+  "earned_badges_title": "الشارات المكتسبة",
+  "next_milestones_title": "المراحل التالية",
+  "first_badge_message": "استمر! شارتك الأولى في اليوم {day}",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "اليوم {day}",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "السلسلة {streak}",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 مبروك! لقد حصلت على جميع الشارات المتاحة!"
 }

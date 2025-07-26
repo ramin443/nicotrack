@@ -151,7 +151,7 @@
   "privacy_policy": "Polityka prywatności",
   
   "today_date_prefix": "Dzisiaj • ",
-  "personalized_quit_routine": "Spersonalizowana rutyna rzucania",
+  "personalized_quit_routine": "Plan Rzucania",
   "instant_quit_plan": "Plan natychmiastowego rzucenia",
   "your_quit_journey": "Twoja podróż rzucania",
   "personalized_plan": "Spersonalizowany plan",
@@ -343,6 +343,10 @@
   
   "progress_label_days_since": "Dni bez palenia",
   "progress_label_money_saved": "Pieniądze zaoszczędzone",
+  "top_triggers_title": "📈 Główne wyzwalacze",
+  "symptoms_title": "📈 Łagodzone i wyleczone objawy",
+  "health_improvements_title": "🍎 Co poprawiło się w twoim ciele",
+  "upcoming_changes_title": "🔮 Nadchodzące zmiany w ciele",
   
   "settings_change_name": "✏️ Zmień imię",
   "settings_done": "Gotowe",
@@ -399,5 +403,40 @@
   "avoid_suffix": "uniknąć chęci?",
   "avoid_subtitle": "Na podstawie strategii unikania z dzienników palenia",
   
-  "tap_to_modify_info": "Dotknij, aby zmodyfikować te informacje"
+  "tap_to_modify_info": "Dotknij, aby zmodyfikować te informacje",
+
+  "start_label": "Rozpocznij",
+  "earned_badges_title": "Zdobyte Odznaki",
+  "next_milestones_title": "Następne Kamienie Milowe",
+  "first_badge_message": "Kontynuuj! Twoja pierwsza odznaka jest w dniu {day}",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "Dzień {day}",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "Seria {streak}",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 Gratulacje! Zdobyłeś wszystkie dostępne odznaki!"
 }

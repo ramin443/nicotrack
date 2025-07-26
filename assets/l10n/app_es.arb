@@ -151,8 +151,8 @@
   "privacy_policy": "Política de privacidad",
   
   "today_date_prefix": "Hoy • ",
-  "personalized_quit_routine": "Rutina personalizada para dejar de fumar",
-  "instant_quit_plan": "Plan de dejar instantáneamente",
+  "personalized_quit_routine": "Plan Dejar",
+  "instant_quit_plan": "Salida instantánea",
   "your_quit_journey": "Tu viaje para dejar de fumar",
   "personalized_plan": "Plan personalizado",
   "plan_description": "Este plan está diseñado específicamente para ti para ayudarte a dejar de fumar exitosamente. Sigue la cronología para entender qué esperar durante tu viaje.",
@@ -326,12 +326,23 @@
   "progress_label_days_since": "Días\nsin fumar",
   "progress_label_money_saved": "Dinero\nahorrado",
   "top_triggers_title": "📈 Principales desencadenantes",
+  "symptoms_title": "📈 Síntomas aliviados y sanados",
+  "health_improvements_title": "🍎 Lo que mejoró en tu cuerpo",
+  "upcoming_changes_title": "🔮 Próximos cambios corporales",
   "triggers_subtitle": "Basado en sus preferencias y registros diarios",
   
   "settings_change_name": "✏️ Cambiar nombre",
   "settings_done": "Hecho",
   
   "plan_today": "Hoy • {date}",
+  "@plan_today": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "Jan 15"
+      }
+    }
+  },
   
   "privacy_policy_title": "Política de privacidad",
   "privacy_your_matters": "Tu privacidad importa",
@@ -366,5 +377,40 @@
   "avoid_suffix": "evitar antojos?",
   "avoid_subtitle": "Basado en tus estrategias de evitación de los registros de fumar",
   
-  "tap_to_modify_info": "Toca para modificar esta información"
+  "tap_to_modify_info": "Toca para modificar esta información",
+
+  "start_label": "Iniciar",
+  "earned_badges_title": "Insignias Obtenidas",
+  "next_milestones_title": "Próximos Hitos",
+  "first_badge_message": "¡Sigue así! Tu primera insignia está en el día {day}",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "Día {day}",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "Racha {streak}",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 ¡Felicidades! ¡Has ganado todas las insignias disponibles!"
 }

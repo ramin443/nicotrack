@@ -151,7 +151,7 @@
   "privacy_policy": "Zásady ochrany osobních údajů",
   
   "today_date_prefix": "Dnes • ",
-  "personalized_quit_routine": "Personalizovaná rutina odvykání",
+  "personalized_quit_routine": "Plán Odvykání",
   "instant_quit_plan": "Plán okamžitého přestání",
   "your_quit_journey": "Vaše cesta odvykání",
   "personalized_plan": "Personalizovaný plán",
@@ -344,6 +344,9 @@
   "progress_label_days_since": "Dny bez kouření",
   "progress_label_money_saved": "Ušetřeno peněz",
   "top_triggers_title": "📈 Hlavní spouštěče",
+  "symptoms_title": "📈 Příznaky zmírněné a vyléčené",
+  "health_improvements_title": "🍎 Co se zlepšilo ve vašem těle",
+  "upcoming_changes_title": "🔮 Nadcházející tělesné změny",
   "triggers_subtitle": "Na základě vašich předvoleb a denních záznamů",
   
   "settings_change_name": "✏️ Změnit jméno",
@@ -400,5 +403,40 @@
   "avoid_suffix": "předešli touhám?",
   "avoid_subtitle": "Na základě vašich strategií vyhnutí se z záznamů kouření",
   
-  "tap_to_modify_info": "Klepněte pro úpravu těchto informací"
+  "tap_to_modify_info": "Klepněte pro úpravu těchto informací",
+
+  "start_label": "Začít",
+  "earned_badges_title": "Získané odznaky",
+  "next_milestones_title": "Další milníky",
+  "first_badge_message": "Pokračujte! Váš první odznak je na dni {day}",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "Den {day}",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "Série {streak}",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 Gratulujeme! Získali jste všechny dostupné odznaky!"
 }

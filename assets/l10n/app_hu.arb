@@ -151,7 +151,7 @@
   "privacy_policy": "Adatvédelmi irányelvek",
   
   "today_date_prefix": "Ma • ",
-  "personalized_quit_routine": "Személyre szabott leszokási rutin",
+  "personalized_quit_routine": "Leszokás Terv",
   "instant_quit_plan": "Azonnali leszokási terv",
   "your_quit_journey": "Az Ön leszokási útja",
   "personalized_plan": "Személyre szabott terv",
@@ -344,6 +344,9 @@
   "progress_label_days_since": "Napok",
   "progress_label_money_saved": "Pénz megtakarítva",
   "top_triggers_title": "📈 Fő kiváltó okok",
+  "symptoms_title": "📈 Enyhült és gyógyult tünetek",
+  "health_improvements_title": "🍎 Mi javult a testében",
+  "upcoming_changes_title": "🔮 Közelgő testi változások",
   "triggers_subtitle": "A beállítási preferenciák és napi naplók alapján",
   
   "settings_change_name": "✏️ Név módosítása",
@@ -400,5 +403,40 @@
   "avoid_suffix": "elkerülje a vágyakat?",
   "avoid_subtitle": "A dohányzási naplókból származó elkerülési stratégiák alapján",
   
-  "tap_to_modify_info": "Koppintson az információ módosításához"
+  "tap_to_modify_info": "Koppintson az információ módosításához",
+
+  "start_label": "Kezdés",
+  "earned_badges_title": "Megszerzett Jelvények",
+  "next_milestones_title": "Következő Mérföldkövek",
+  "first_badge_message": "Folytasd! Az első jelvényed a {day}. napon van",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "{day}. nap",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "Sorozat {streak}",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 Gratulálunk! Megszerezte az összes elérhető jelvényt!"
 }

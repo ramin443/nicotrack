@@ -151,7 +151,7 @@
   "privacy_policy": "Kebijakan Privasi",
   
   "today_date_prefix": "Hari ini • ",
-  "personalized_quit_routine": "Rutinitas Berhenti Personal",
+  "personalized_quit_routine": "Rencana Berhenti",
   "instant_quit_plan": "Rencana Berhenti Instan",
   "your_quit_journey": "Perjalanan Berhenti Anda",
   "personalized_plan": "Rencana Personal",
@@ -343,6 +343,10 @@
   
   "progress_label_days_since": "Hari tanpa rokok",
   "progress_label_money_saved": "Uang dihemat",
+  "top_triggers_title": "📈 Pemicu utama",
+  "symptoms_title": "📈 Gejala yang mereda dan sembuh",
+  "health_improvements_title": "🍎 Yang membaik dalam tubuh Anda",
+  "upcoming_changes_title": "🔮 Perubahan tubuh yang akan datang",
   
   "settings_change_name": "✏️ Ubah Nama",
   "settings_done": "Selesai",
@@ -399,5 +403,40 @@
   "avoid_suffix": "menghindari keinginan merokok?",
   "avoid_subtitle": "Berdasarkan strategi penghindaran dari catatan merokok Anda",
   
-  "tap_to_modify_info": "Ketuk untuk mengubah informasi ini"
+  "tap_to_modify_info": "Ketuk untuk mengubah informasi ini",
+
+  "start_label": "Mulai",
+  "earned_badges_title": "Lencana yang Diperoleh",
+  "next_milestones_title": "Pencapaian Selanjutnya",
+  "first_badge_message": "Terus lanjutkan! Lencana pertama Anda ada di Hari {day}",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "Hari {day}",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "Berturut-turut {streak}",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 Selamat! Anda telah meraih semua lencana yang tersedia!"
 }

@@ -151,7 +151,7 @@
   "privacy_policy": "Politique de confidentialité",
   
   "today_date_prefix": "Aujourd'hui • ",
-  "personalized_quit_routine": "Routine d'arrêt personnalisée",
+  "personalized_quit_routine": "Plan Arrêt",
   "instant_quit_plan": "Plan d'arrêt immédiat",
   "your_quit_journey": "Votre parcours d'arrêt",
   "personalized_plan": "Plan personnalisé",
@@ -203,6 +203,8 @@
   "cigarettes_count": "Voici combien de 🚬\ncigarettes vous avez fumées",
   "smoke_free_day": "Vous êtes dans votre journée sans tabac 🥳.",
   "financial_goal_progress": "🥅 Objectif financier : \n{emoji} {title} terminé.",
+  "financial_goals_title": "🥅 Objectifs financiers",
+  "goal_completed": "terminé",
   "go_home": "🏠 Aller à l'accueil",
   
   "oxygen_increase": "Les niveaux d'oxygène\naugmentent",
@@ -323,11 +325,23 @@
   
   "progress_label_days_since": "Jours\nsans fumer",
   "progress_label_money_saved": "Argent\néconomisé",
+  "top_triggers_title": "📈 Principaux déclencheurs",
+  "symptoms_title": "📈 Symptômes apaisés et guéris",
+  "health_improvements_title": "🍎 Ce qui s'est amélioré dans votre corps",
+  "upcoming_changes_title": "🔮 Prochains changements corporels",
   
   "settings_change_name": "✏️ Changer le nom",
   "settings_done": "Terminé",
   
   "plan_today": "Aujourd'hui • {date}",
+  "@plan_today": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "Jan 15"
+      }
+    }
+  },
   
   "privacy_policy_title": "Politique de confidentialité",
   "privacy_your_matters": "Votre confidentialité compte",
@@ -363,5 +377,40 @@
   "avoid_suffix": "éviter les envies?",
   "avoid_subtitle": "Basé sur vos stratégies d'évitement des journaux de tabac",
   
-  "tap_to_modify_info": "Touchez pour modifier cette information"
+  "tap_to_modify_info": "Touchez pour modifier cette information",
+
+  "start_label": "Commencer",
+  "earned_badges_title": "Badges Obtenus",
+  "next_milestones_title": "Prochaines Étapes",
+  "first_badge_message": "Continuez ! Votre premier badge est au jour {day}",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "Jour {day}",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "Série {streak}",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 Félicitations ! Vous avez gagné tous les badges disponibles !"
 }

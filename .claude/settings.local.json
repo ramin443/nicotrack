@@ -20,7 +20,13 @@
       "Bash(git checkout:*)",
       "Bash(flutter:*)",
       "Bash(cp:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(for file in app_*.arb)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(for key in \"personalized_quit_routine\" \"instant_quit_plan\" \"your_quit_journey\" \"personalized_plan\" \"plan_description\" \"track_progress\" \"earn_badges\" \"stay_strong\" \"important_note\" \"timeline_disclaimer\" \"info_button\" \"plan_today\")",
+      "Bash(do grep -q \"\"\"$key\"\":\" \"$file\")",
+      "Bash(echo:*)",
+      "Bash(done)"
     ],
     "deny": []
   }

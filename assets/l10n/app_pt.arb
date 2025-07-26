@@ -151,7 +151,7 @@
   "privacy_policy": "Política de privacidade",
   
   "today_date_prefix": "Hoje • ",
-  "personalized_quit_routine": "Rotina personalizada para parar",
+  "personalized_quit_routine": "Plano Parar",
   "instant_quit_plan": "Plano de parada imediata",
   "your_quit_journey": "Sua jornada para parar",
   "personalized_plan": "Plano personalizado",
@@ -213,6 +213,8 @@
       }
     }
   },
+  "financial_goals_title": "🥅 Metas financeiras",
+  "goal_completed": "concluído",
   "go_home": "🏠 Ir para início",
   
   "oxygen_increase": "Níveis de oxigênio\naumentam",
@@ -341,6 +343,10 @@
   
   "progress_label_days_since": "Dias\nsem fumar",
   "progress_label_money_saved": "Dinheiro\npoupado",
+  "top_triggers_title": "📈 Principais gatilhos",
+  "symptoms_title": "📈 Sintomas aliviados e curados",
+  "health_improvements_title": "🍎 O que melhorou no seu corpo",
+  "upcoming_changes_title": "🔮 Próximas mudanças corporais",
   
   "settings_change_name": "✏️ Alterar nome",
   "settings_done": "Pronto",
@@ -397,5 +403,40 @@
   "avoid_suffix": "evitar desejos?",
   "avoid_subtitle": "Baseado nas suas estratégias de prevenção dos registros de fumo",
   
-  "tap_to_modify_info": "Toque para modificar esta informação"
+  "tap_to_modify_info": "Toque para modificar esta informação",
+
+  "start_label": "Iniciar",
+  "earned_badges_title": "Distintivos Conquistados",
+  "next_milestones_title": "Próximos Marcos",
+  "first_badge_message": "Continue! Seu primeiro distintivo está no dia {day}",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "Dia {day}",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "Sequência {streak}",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 Parabéns! Você ganhou todas as medalhas disponíveis!"
 }

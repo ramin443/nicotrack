@@ -5,6 +5,7 @@ import 'package:nicotrack/models/award-model/award-model.dart';
 
 import '../../../../constants/image-constants.dart';
 import '../../../elements/gradient-text.dart';
+import '../../../../extensions/app_localizations_extension.dart';
 class ThreexGridView extends StatefulWidget {
   final List<AwardModel> awardsList;
   const ThreexGridView({super.key, required this.awardsList});
@@ -46,7 +47,7 @@ class _ThreexGridViewState extends State<ThreexGridView> {
             ),
             SizedBox(height: 8),
             GradientText(
-              text: "Day ${item.day}",
+              text: context.l10n.day_number(item.day.toString()),
               gradient: LinearGradient(
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,

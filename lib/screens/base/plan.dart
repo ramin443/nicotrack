@@ -10,6 +10,7 @@ import 'package:nicotrack/screens/base/progress-subpages/elements/all-badges-sec
 import '../../constants/color-constants.dart';
 import '../../constants/font-constants.dart';
 import '../elements/textAutoSize.dart';
+import '../../extensions/app_localizations_extension.dart';
 
 class Plan extends StatefulWidget {
   const Plan({super.key});
@@ -112,7 +113,7 @@ class _PlanState extends State<Plan> {
 
   @override
   Widget build(BuildContext context) {
-    String todayDate = DateFormat('MMMM d, y').format(DateTime.now());
+    String todayDate = DateFormat('MMMM d, y', Localizations.localeOf(context).languageCode).format(DateTime.now());
     return GetBuilder<PlanController>(
         init: PlanController(),
         builder: (planController) {
@@ -134,7 +135,7 @@ class _PlanState extends State<Plan> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextAutoSize(
-                          "Today • $todayDate",
+                          context.l10n.plan_today(todayDate),
                           style: TextStyle(
                               fontSize: 14.sp,
                               fontFamily: circularBook,
@@ -165,7 +166,7 @@ class _PlanState extends State<Plan> {
                             SizedBox(
                               width: 120.w,
                               child: TextAutoSize(
-                                "Personalized Quit Routine",
+                                context.l10n.personalized_quit_routine,
                                 style: TextStyle(
                                     fontSize: 19.sp,
                                     fontFamily: circularBold,
@@ -203,7 +204,7 @@ class _PlanState extends State<Plan> {
                             width: 10.w,
                           ),
                           TextAutoSize(
-                            "Instant Quit Plan",
+                            context.l10n.instant_quit_plan,
                             style: TextStyle(
                                 fontSize: 16.sp,
                                 fontFamily: circularMedium,
@@ -291,7 +292,7 @@ class _PlanState extends State<Plan> {
                                     ),
                                     SizedBox(height: 16.h),
                                     Text(
-                                      "Your Quit Journey",
+                                      context.l10n.your_quit_journey,
                                       style: TextStyle(
                                         fontSize: 22.sp,
                                         fontFamily: circularBold,
@@ -307,7 +308,7 @@ class _PlanState extends State<Plan> {
                                         borderRadius: BorderRadius.circular(20.r),
                                       ),
                                       child: Text(
-                                        "Personalized Plan",
+                                        context.l10n.personalized_plan,
                                         style: TextStyle(
                                           fontSize: 13.sp,
                                           fontFamily: circularMedium,
@@ -337,23 +338,7 @@ class _PlanState extends State<Plan> {
                                                 color: nicotrackBlack1,
                                               ),
                                               children: [
-                                                TextSpan(text: "This plan is "),
-                                                TextSpan(
-                                                  text: "designed specifically for you",
-                                                  style: TextStyle(
-                                                    fontFamily: circularBold,
-                                                    color: nicotrackGreen,
-                                                  ),
-                                                ),
-                                                TextSpan(text: " to help you successfully quit smoking. Follow the "),
-                                                TextSpan(
-                                                  text: "timeline",
-                                                  style: TextStyle(
-                                                    fontFamily: circularMedium,
-                                                    color: nicotrackOrange,
-                                                  ),
-                                                ),
-                                                TextSpan(text: " to understand what to expect during your journey."),
+                                                TextSpan(text: context.l10n.plan_description),
                                               ],
                                             ),
                                           ),
@@ -376,7 +361,7 @@ class _PlanState extends State<Plan> {
                                                   ),
                                                   SizedBox(height: 8.h),
                                                   Text(
-                                                    "Track Progress",
+                                                    context.l10n.track_progress,
                                                     style: TextStyle(
                                                       fontSize: 12.sp,
                                                       fontFamily: circularMedium,
@@ -400,7 +385,7 @@ class _PlanState extends State<Plan> {
                                                   ),
                                                   SizedBox(height: 8.h),
                                                   Text(
-                                                    "Earn Badges",
+                                                    context.l10n.earn_badges,
                                                     style: TextStyle(
                                                       fontSize: 12.sp,
                                                       fontFamily: circularMedium,
@@ -424,7 +409,7 @@ class _PlanState extends State<Plan> {
                                                   ),
                                                   SizedBox(height: 8.h),
                                                   Text(
-                                                    "Stay Strong",
+                                                    context.l10n.stay_strong,
                                                     style: TextStyle(
                                                       fontSize: 12.sp,
                                                       fontFamily: circularMedium,
@@ -474,7 +459,7 @@ class _PlanState extends State<Plan> {
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "Important Note",
+                                                  context.l10n.important_note,
                                                   style: TextStyle(
                                                     fontSize: 14.sp,
                                                     fontFamily: circularBold,
@@ -484,7 +469,7 @@ class _PlanState extends State<Plan> {
                                                 ),
                                                 SizedBox(height: 6.h),
                                                 Text(
-                                                  "Symptoms and effects vary from person to person. This timeline shows common experiences, but your journey is unique!",
+                                                  context.l10n.timeline_disclaimer,
                                                   style: TextStyle(
                                                     fontSize: 12.sp,
                                                     fontFamily: circularBook,
@@ -518,7 +503,7 @@ class _PlanState extends State<Plan> {
                             width: 8.w,
                           ),
                           TextAutoSize(
-                            "Info",
+                            context.l10n.info_button,
                             style: TextStyle(
                               fontSize: 15.sp,
                               fontFamily: circularBook,

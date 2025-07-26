@@ -151,7 +151,7 @@
   "privacy_policy": "Privacybeleid",
   
   "today_date_prefix": "Vandaag • ",
-  "personalized_quit_routine": "Gepersonaliseerde stoproutine",
+  "personalized_quit_routine": "Stop Routine",
   "instant_quit_plan": "Direct stopplan",
   "your_quit_journey": "Jouw stopreis",
   "personalized_plan": "Gepersonaliseerd plan",
@@ -213,6 +213,8 @@
       }
     }
   },
+  "financial_goals_title": "🥅 Financiële doelen",
+  "goal_completed": "voltooid",
   "go_home": "🏠 Ga naar home",
   
   "oxygen_increase": "Zuurstofniveaus\nstijgen",
@@ -341,6 +343,10 @@
   
   "progress_label_days_since": "Dagen sinds\nlaatste sigaret",
   "progress_label_money_saved": "Geld bespaard",
+  "top_triggers_title": "📈 Belangrijkste triggers",
+  "symptoms_title": "📈 Verlichte en genezen symptomen",
+  "health_improvements_title": "🍎 Wat er verbeterd is in je lichaam",
+  "upcoming_changes_title": "🔮 Aankomende lichaamsveranderingen",
   
   "settings_change_name": "✏️ Naam wijzigen",
   "settings_done": "Klaar",
@@ -397,5 +403,40 @@
   "avoid_suffix": "trek te vermijden?",
   "avoid_subtitle": "Gebaseerd op je vermijdingsstrategieën uit rooklogboeken",
   
-  "tap_to_modify_info": "Tik om deze informatie te wijzigen"
+  "tap_to_modify_info": "Tik om deze informatie te wijzigen",
+
+  "start_label": "Start",
+  "earned_badges_title": "Verdiende Badges",
+  "next_milestones_title": "Volgende Mijlpalen",
+  "first_badge_message": "Ga door! Je eerste badge is op dag {day}",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "Dag {day}",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "Reeks {streak}",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 Gefeliciteerd! Je hebt alle beschikbare badges verdiend!"
 }

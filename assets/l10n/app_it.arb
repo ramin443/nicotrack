@@ -151,7 +151,7 @@
   "privacy_policy": "Politica sulla privacy",
   
   "today_date_prefix": "Oggi • ",
-  "personalized_quit_routine": "Routine personalizzata per smettere",
+  "personalized_quit_routine": "Piano Stop",
   "instant_quit_plan": "Piano per smettere subito",
   "your_quit_journey": "Il tuo percorso per smettere",
   "personalized_plan": "Piano personalizzato",
@@ -213,6 +213,8 @@
       }
     }
   },
+  "financial_goals_title": "🥅 Obiettivi finanziari",
+  "goal_completed": "completato",
   "go_home": "🏠 Vai alla home",
   
   "oxygen_increase": "I livelli di ossigeno\naumentano",
@@ -341,6 +343,10 @@
   
   "progress_label_days_since": "Giorni\nsenza fumo",
   "progress_label_money_saved": "Denaro\nrisparmiato",
+  "top_triggers_title": "📈 Principali fattori scatenanti",
+  "symptoms_title": "📈 Sintomi alleviati e guariti",
+  "health_improvements_title": "🍎 Cosa è migliorato nel tuo corpo",
+  "upcoming_changes_title": "🔮 Prossimi cambiamenti corporei",
   
   "settings_change_name": "✏️ Cambia nome",
   "settings_done": "Fatto",
@@ -397,5 +403,40 @@
   "avoid_suffix": "evitare le voglie?",
   "avoid_subtitle": "Basato sulle tue strategie di evitamento dai registri del fumo",
   
-  "tap_to_modify_info": "Tocca per modificare queste informazioni"
+  "tap_to_modify_info": "Tocca per modificare queste informazioni",
+
+  "start_label": "Inizia",
+  "earned_badges_title": "Badge Ottenuti",
+  "next_milestones_title": "Prossimi Traguardi",
+  "first_badge_message": "Continua così! Il tuo primo badge è al giorno {day}",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "Giorno {day}",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "Serie {streak}",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 Congratulazioni! Hai ottenuto tutti i badge disponibili!"
 }

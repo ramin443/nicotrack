@@ -151,7 +151,7 @@
   "privacy_policy": "מדיניות פרטיות",
   
   "today_date_prefix": "היום • ",
-  "personalized_quit_routine": "שגרת הפסקה מותאמת אישית",
+  "personalized_quit_routine": "תוכנית הפסקה",
   "instant_quit_plan": "תוכנית הפסקה מיידית",
   "your_quit_journey": "מסע ההפסקה שלכם",
   "personalized_plan": "תוכנית מותאמת אישית",
@@ -213,6 +213,8 @@
       }
     }
   },
+  "financial_goals_title": "🥅 מטרות כספיות",
+  "goal_completed": "הושלם",
   "go_home": "🏠 חזרו הביתה",
   
   "oxygen_increase": "רמות חמצן\nעולות",
@@ -341,6 +343,10 @@
   
   "progress_label_days_since": "ימים מאז\nעישון אחרון",
   "progress_label_money_saved": "כסף שנחסך",
+  "top_triggers_title": "📈 המגרים העיקריים",
+  "symptoms_title": "📈 תסמינים שהקלו ונרפאו",
+  "health_improvements_title": "🍎 מה שהשתפר בגוף שלכם",
+  "upcoming_changes_title": "🔮 שינויים גופניים צפויים",
   
   "settings_change_name": "✏️ שינוי שם",
   "settings_done": "סיום",
@@ -397,5 +403,40 @@
   "avoid_suffix": "להימנע מתשוקה?",
   "avoid_subtitle": "על בסיס אסטרטגיות ההימנעות מיומני העישון",
   
-  "tap_to_modify_info": "הקישו כדי לשנות את המידע הזה"
+  "tap_to_modify_info": "הקישו כדי לשנות את המידע הזה",
+
+  "start_label": "התחל",
+  "earned_badges_title": "תגים שהורווחו",
+  "next_milestones_title": "אבני דרך הבאות",
+  "first_badge_message": "המשיכו! התג הראשון שלכם הוא ביום {day}",
+  "@first_badge_message": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "day_number": "יום {day}",
+  "@day_number": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "streak_number": "רצף {streak}",
+  "@streak_number": {
+    "placeholders": {
+      "streak": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+
+  "all_badges_earned_message": "🎉 מזל טוב! זכית בכל התגים הזמינים!"
 }
