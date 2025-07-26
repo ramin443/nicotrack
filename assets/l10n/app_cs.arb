@@ -60,7 +60,7 @@
   "select_date": "Vyberte datum",
   "cancel": "Zrušit",
   "confirm": "Potvrdit",
-  "continue": "Pokračovat",
+  "continueButton": "Pokračovat",
   "finish": "Dokončit",
   
   "nav_home": "Domů",

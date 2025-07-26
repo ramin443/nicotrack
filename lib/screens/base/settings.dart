@@ -6,6 +6,7 @@ import 'package:nicotrack/constants/font-constants.dart';
 import 'package:nicotrack/getx-controllers/settings-controller.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/financial-goals-in-overview.dart';
 import 'package:nicotrack/screens/base/progress-subpages/elements/financial-goals-section.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../constants/color-constants.dart';
 import '../elements/textAutoSize.dart';
@@ -78,7 +79,7 @@ class _SettingsState extends State<Settings> {
                           surfaceTintColor: Colors.white,
                           centerTitle: false,
                           title: TextAutoSize(
-                            "📋 Settings",
+                            AppLocalizations.of(context)!.settings_title,
                             style: TextStyle(
                                 fontSize: 32.sp,
                                 fontFamily: circularBold,

@@ -60,7 +60,7 @@
   "select_date": "בחרו תאריך",
   "cancel": "ביטול",
   "confirm": "אישור",
-  "continue": "המשך",
+  "continueButton": "המשך",
   "finish": "סיום",
   
   "nav_home": "בית",

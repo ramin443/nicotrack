@@ -60,7 +60,7 @@
   "select_date": "Επιλέξτε ημερομηνία",
   "cancel": "Ακύρωση",
   "confirm": "Επιβεβαίωση",
-  "continue": "Συνέχεια",
+  "continueButton": "Συνέχεια",
   "finish": "Τέλος",
   
   "nav_home": "Αρχική",

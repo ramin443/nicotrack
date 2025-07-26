@@ -60,7 +60,7 @@
   "select_date": "Tarih seçin",
   "cancel": "İptal",
   "confirm": "Onayla",
-  "continue": "Devam et",
+  "continueButton": "Devam et",
   "finish": "Bitir",
   
   "nav_home": "Ana sayfa",

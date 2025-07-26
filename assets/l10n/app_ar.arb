@@ -60,7 +60,7 @@
   "select_date": "اختر التاريخ",
   "cancel": "إلغاء",
   "confirm": "تأكيد",
-  "continue": "متابعة",
+  "continueButton": "متابعة",
   "finish": "إنهاء",
   
   "nav_home": "الرئيسية",

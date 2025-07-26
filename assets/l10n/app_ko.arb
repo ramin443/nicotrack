@@ -60,7 +60,7 @@
   "select_date": "날짜 선택",
   "cancel": "취소",
   "confirm": "확인",
-  "continue": "계속",
+  "continueButton": "계속",
   "finish": "완료",
   
   "nav_home": "홈",

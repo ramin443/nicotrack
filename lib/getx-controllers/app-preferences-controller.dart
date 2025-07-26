@@ -62,6 +62,9 @@ class AppPreferencesController extends GetxController {
       );
       await AppPreferencesService.updatePreferences(_preferences);
       update();
+      
+      // Force rebuild of the entire app to apply new locale
+      Get.forceAppUpdate();
     } catch (e) {
       print('Error updating language: $e');
     }

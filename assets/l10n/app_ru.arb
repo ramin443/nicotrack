@@ -60,7 +60,7 @@
   "select_date": "Выберите дату",
   "cancel": "Отмена",
   "confirm": "Подтвердить",
-  "continue": "Продолжить",
+  "continueButton": "Продолжить",
   "finish": "Завершить",
   
   "nav_home": "Главная",

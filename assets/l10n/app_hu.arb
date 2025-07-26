@@ -60,7 +60,7 @@
   "select_date": "Dátum kiválasztása",
   "cancel": "Mégse",
   "confirm": "Megerősítés",
-  "continue": "Folytatás",
+  "continueButton": "Folytatás",
   "finish": "Befejezés",
   
   "nav_home": "Főoldal",

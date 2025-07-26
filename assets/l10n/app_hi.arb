@@ -60,7 +60,7 @@
   "select_date": "दिनांक चुनें",
   "cancel": "रद्द करें",
   "confirm": "पुष्टि करें",
-  "continue": "जारी रखें",
+  "continueButton": "जारी रखें",
   "finish": "समाप्त करें",
   
   "nav_home": "होम",

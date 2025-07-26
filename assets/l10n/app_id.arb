@@ -60,7 +60,7 @@
   "select_date": "Pilih Tanggal",
   "cancel": "Batal",
   "confirm": "Konfirmasi",
-  "continue": "Lanjutkan",
+  "continueButton": "Lanjutkan",
   "finish": "Selesai",
   
   "nav_home": "Beranda",

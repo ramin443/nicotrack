@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/constants/color-constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../constants/font-constants.dart';
 import '../../../../getx-controllers/settings-controller.dart';
@@ -24,17 +25,27 @@ class _ChangeLanguageBottomSheetState extends State<ChangeLanguageBottomSheet> {
   int selectedLanguageIndex = 0;
 
   final List<Map<String, String>> supportedLanguages = [
-    {'code': 'en_US', 'name': 'English', 'flag': '🇺🇸'},
-    {'code': 'es_ES', 'name': 'Spanish', 'flag': '🇪🇸'},
-    {'code': 'fr_FR', 'name': 'French', 'flag': '🇫🇷'},
-    {'code': 'de_DE', 'name': 'German', 'flag': '🇩🇪'},
-    {'code': 'it_IT', 'name': 'Italian', 'flag': '🇮🇹'},
-    {'code': 'pt_BR', 'name': 'Portuguese', 'flag': '🇧🇷'},
-    {'code': 'zh_CN', 'name': 'Chinese', 'flag': '🇨🇳'},
-    {'code': 'ja_JP', 'name': 'Japanese', 'flag': '🇯🇵'},
-    {'code': 'ko_KR', 'name': 'Korean', 'flag': '🇰🇷'},
-    {'code': 'hi_IN', 'name': 'Hindi', 'flag': '🇮🇳'},
-    {'code': 'nl_NL', 'name': 'Dutch', 'flag': '🇳🇱'},
+    {'code': 'en', 'name': 'English', 'flag': '🇺🇸'},
+    {'code': 'es', 'name': 'Spanish', 'flag': '🇪🇸'},
+    {'code': 'fr', 'name': 'French', 'flag': '🇫🇷'},
+    {'code': 'de', 'name': 'German', 'flag': '🇩🇪'},
+    {'code': 'it', 'name': 'Italian', 'flag': '🇮🇹'},
+    {'code': 'pt', 'name': 'Portuguese', 'flag': '🇧🇷'},
+    {'code': 'zh', 'name': 'Chinese', 'flag': '🇨🇳'},
+    {'code': 'ja', 'name': 'Japanese', 'flag': '🇯🇵'},
+    {'code': 'ko', 'name': 'Korean', 'flag': '🇰🇷'},
+    {'code': 'hi', 'name': 'Hindi', 'flag': '🇮🇳'},
+    {'code': 'nl', 'name': 'Dutch', 'flag': '🇳🇱'},
+    {'code': 'ar', 'name': 'Arabic', 'flag': '🇸🇦'},
+    {'code': 'cs', 'name': 'Czech', 'flag': '🇨🇿'},
+    {'code': 'el', 'name': 'Greek', 'flag': '🇬🇷'},
+    {'code': 'he', 'name': 'Hebrew', 'flag': '🇮🇱'},
+    {'code': 'hu', 'name': 'Hungarian', 'flag': '🇭🇺'},
+    {'code': 'id', 'name': 'Indonesian', 'flag': '🇮🇩'},
+    {'code': 'pl', 'name': 'Polish', 'flag': '🇵🇱'},
+    {'code': 'ro', 'name': 'Romanian', 'flag': '🇷🇴'},
+    {'code': 'ru', 'name': 'Russian', 'flag': '🇷🇺'},
+    {'code': 'tr', 'name': 'Turkish', 'flag': '🇹🇷'},
   ];
 
   @override
@@ -108,7 +119,7 @@ class _ChangeLanguageBottomSheetState extends State<ChangeLanguageBottomSheet> {
                             Navigator.of(context).pop();
                           },
                           child: TextAutoSize(
-                            'Done',
+                            AppLocalizations.of(context)!.done,
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontFamily: circularBook,

@@ -60,7 +60,7 @@
   "select_date": "Selecteer datum",
   "cancel": "Annuleren",
   "confirm": "Bevestigen",
-  "continue": "Doorgaan",
+  "continueButton": "Doorgaan",
   "finish": "Voltooien",
   
   "nav_home": "Home",

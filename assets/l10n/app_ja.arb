@@ -60,7 +60,7 @@
   "select_date": "日付を選択",
   "cancel": "キャンセル",
   "confirm": "確認",
-  "continue": "続ける",
+  "continueButton": "続ける",
   "finish": "完了",
   
   "nav_home": "ホーム",

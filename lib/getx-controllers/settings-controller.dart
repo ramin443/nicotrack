@@ -18,6 +18,7 @@ import 'package:nicotrack/screens/elements/display-cards.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
 import 'package:nicotrack/screens/premium/premium-paywall-screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../constants/color-constants.dart';
 import '../constants/dummy-data-constants.dart';
@@ -182,7 +183,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 width: 4.w,
               ),
               TextAutoSize(
-                "PERSONAL INFO",
+                AppLocalizations.of(context)!.personal_info_section,
                 style: TextStyle(
                     fontSize: 13.sp,
                     letterSpacing: 2.0,
@@ -200,9 +201,9 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
               showChangeNameBottomSheet(context);
             },
             child: personalInfoBox(
-                fieldName: "Name",
+                fieldName: AppLocalizations.of(context)!.field_name,
                 fieldValue: currentDateOnboardingData.name,
-                fieldActionName: "Edit",
+                fieldActionName: AppLocalizations.of(context)!.action_edit,
                 action: () {}),
           ),
           SizedBox(
@@ -213,10 +214,10 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
               showChangeQuitDateBottomSheet(context);
             },
             child: personalInfoBox(
-                fieldName: "Quit Date",
+                fieldName: AppLocalizations.of(context)!.field_quit_date,
                 fieldValue: convertDatetoUsableFormat(
                     currentDateOnboardingData.lastSmokedDate),
-                fieldActionName: "Change",
+                fieldActionName: AppLocalizations.of(context)!.action_change,
                 action: () {}),
           ),
           SizedBox(
@@ -233,10 +234,10 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 showChangeCurrencyBottomSheet(context);
               },
               child: personalInfoBox(
-                  fieldName: "Currency",
+                  fieldName: AppLocalizations.of(context)!.field_currency,
                   fieldValue:
                       "${appPrefsController.currencySymbol} ${appPrefsController.currencyCode}",
-                  fieldActionName: "Change",
+                  fieldActionName: AppLocalizations.of(context)!.action_change,
                   action: () {}),
             );
           }),
@@ -249,9 +250,9 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 showChangeLanguageBottomSheet(context);
               },
               child: personalInfoBox(
-                  fieldName: "Language",
+                  fieldName: AppLocalizations.of(context)!.field_language,
                   fieldValue: appPrefsController.languageName,
-                  fieldActionName: "Change",
+                  fieldActionName: AppLocalizations.of(context)!.action_change,
                   action: () {}),
             );
           }),
@@ -294,23 +295,26 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          RichText(
-              text: TextSpan(
-                  style: TextStyle(
-                      fontSize: 16.sp,
-                      // Adds 2 logical pixels between each letter
-                      fontFamily: circularMedium,
-                      color: nicotrackBlack1),
-                  children: [
-                TextSpan(text: "$fieldName: "),
-                TextSpan(
-                  text: fieldValue,
-                  style: TextStyle(
-                      fontSize: 16.sp,
-                      fontFamily: circularBold,
-                      color: nicotrackBlack1),
-                ),
-              ])),
+          SizedBox(
+            width: 175.w,
+            child: RichText(
+                text: TextSpan(
+                    style: TextStyle(
+                        fontSize: 16.sp,
+                        // Adds 2 logical pixels between each letter
+                        fontFamily: circularMedium,
+                        color: nicotrackBlack1),
+                    children: [
+                  TextSpan(text: "$fieldName: "),
+                  TextSpan(
+                    text: fieldValue,
+                    style: TextStyle(
+                        fontSize: 16.sp,
+                        fontFamily: circularBold,
+                        color: nicotrackBlack1),
+                  ),
+                ])),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -351,16 +355,20 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            RichText(
-                text: TextSpan(
-                    style: TextStyle(
-                        fontSize: 16.sp,
-                        // Adds 2 logical pixels between each letter
-                        fontFamily: circularMedium,
-                        color: nicotrackBlack1),
-                    children: [
-                  TextSpan(text: fieldValue),
-                ])),
+            SizedBox(
+              width: 240.w,
+              child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                      style: TextStyle(
+                          fontSize: 16.sp,
+                          // Adds 2 logical pixels between each letter
+                          fontFamily: circularMedium,
+                          color: nicotrackBlack1),
+                      children: [
+                        TextSpan(text: fieldValue),
+                      ])),
+            )
           ],
         ),
       ),
@@ -381,7 +389,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                     width: 4.w,
                   ),
                   TextAutoSize(
-                    "PUSH NOTIFICATIONS",
+                    AppLocalizations.of(context)!.push_notifications_section,
                     style: TextStyle(
                         fontSize: 13.sp,
                         letterSpacing: 2.0,
@@ -426,7 +434,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 width: 4.w,
               ),
               TextAutoSize(
-                "FINANCIAL GOALS",
+                AppLocalizations.of(context)!.financial_goals_section,
                 style: TextStyle(
                     fontSize: 13.sp,
                     letterSpacing: 2.0,
@@ -474,7 +482,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                     width: 4.w,
                   ),
                   TextAutoSize(
-                    "HELP & SUPPORT",
+                    AppLocalizations.of(context)!.help_support_section,
                     style: TextStyle(
                         fontSize: 13.sp,
                         letterSpacing: 2.0,
@@ -492,7 +500,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 height: 8.w,
               ),
               normalInfoBox(
-                  fieldValue: "💬 Contact Support",
+                  fieldValue: AppLocalizations.of(context)!.contact_support,
                   action: () {
                     showContactSupportBottomSheet(context);
                   }),
@@ -500,7 +508,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 height: 8.w,
               ),
               normalInfoBox(
-                  fieldValue: "📝 Give us an honest feedback",
+                  fieldValue: AppLocalizations.of(context)!.give_feedback,
                   action: () {
                     showFeedbackBottomSheet(context);
                   }),
@@ -525,7 +533,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 width: 4.w,
               ),
               TextAutoSize(
-                "PRIVACY",
+                AppLocalizations.of(context)!.privacy_section,
                 style: TextStyle(
                     fontSize: 13.sp,
                     letterSpacing: 2.0,
@@ -751,14 +759,18 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                   SizedBox(
                     width: 18.w,
                   ),
-                  TextAutoSize('🔔 Daily Reminder',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        height: 1.1,
-                        fontSize: 16.sp,
-                        fontFamily: circularMedium,
-                        color: nicotrackBlack1,
-                      )),
+                  SizedBox(
+                    width: 220.w,
+                    child: TextAutoSize(
+                        AppLocalizations.of(context)!.daily_reminder,
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          height: 1.1,
+                          fontSize: 16.sp,
+                          fontFamily: circularMedium,
+                          color: nicotrackBlack1,
+                        )),
+                  )
                 ],
               ),
               TextAutoSize(getFormattedDailyReminderTime(),
@@ -848,14 +860,18 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                   SizedBox(
                     width: 18.w,
                   ),
-                  TextAutoSize('🗓️ Weekly summary',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        height: 1.1,
-                        fontSize: 16.sp,
-                        fontFamily: circularMedium,
-                        color: nicotrackBlack1,
-                      )),
+                  SizedBox(
+                    width: 175.w,
+                    child: TextAutoSize(
+                        AppLocalizations.of(context)!.weekly_summary,
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          height: 1.1,
+                          fontSize: 16.sp,
+                          fontFamily: circularMedium,
+                          color: nicotrackBlack1,
+                        )),
+                  )
                 ],
               ),
               TextAutoSize(getFormattedWeeklyReminderTime(),
@@ -982,14 +998,17 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 size: 20.sp,
                 color: Colors.transparent,
               ),
-              TextAutoSize('💡 Quit Tips',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    height: 1.1,
-                    fontSize: 16.sp,
-                    fontFamily: circularMedium,
-                    color: nicotrackBlack1,
-                  )),
+              SizedBox(
+                width: 250.w,
+                child: TextAutoSize(AppLocalizations.of(context)!.quit_tips,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      height: 1.1,
+                      fontSize: 16.sp,
+                      fontFamily: circularMedium,
+                      color: nicotrackBlack1,
+                    )),
+              )
             ],
           ),
           children: [
@@ -3051,17 +3070,21 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     try {
       // Check current system permission
       bool hasPermission = await checkNotificationPermission();
-      bool wasManuallyDisabled = currentNotificationsPreferences?.manuallyDisabled ?? false;
-      
+      bool wasManuallyDisabled =
+          currentNotificationsPreferences?.manuallyDisabled ?? false;
+
       if (hasPermission && !wasManuallyDisabled && !enablePushNotification) {
         // System permission is granted, user hasn't manually disabled, but switch is off - auto-enable
         enablePushNotification = true;
-        currentNotificationsPreferences = currentNotificationsPreferences?.copyWith(
+        currentNotificationsPreferences =
+            currentNotificationsPreferences?.copyWith(
           pushNotificationsActivated: true,
           manuallyDisabled: false,
         );
         updateNotificationPreferences();
-      } else if (!hasPermission && enablePushNotification && !wasManuallyDisabled) {
+      } else if (!hasPermission &&
+          enablePushNotification &&
+          !wasManuallyDisabled) {
         // Permission was revoked and user hadn't manually disabled - turn off
         enablePushNotification = false;
         updateNotificationPreferences();
@@ -3076,14 +3099,16 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     try {
       // Check actual system permission status
       bool hasSystemPermission = await checkNotificationPermission();
-      
+
       // Check if user manually disabled notifications
-      bool wasManuallyDisabled = currentNotificationsPreferences?.manuallyDisabled ?? false;
-      
+      bool wasManuallyDisabled =
+          currentNotificationsPreferences?.manuallyDisabled ?? false;
+
       if (hasSystemPermission && !wasManuallyDisabled) {
         // System permission is granted and user hasn't manually disabled - auto-enable
         enablePushNotification = true;
-        currentNotificationsPreferences = currentNotificationsPreferences?.copyWith(
+        currentNotificationsPreferences =
+            currentNotificationsPreferences?.copyWith(
           pushNotificationsActivated: true,
           manuallyDisabled: false,
         );
@@ -3129,7 +3154,8 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           if (permissionGranted) {
             // Permission granted, enable notifications and clear manual disable flag
             enablePushNotification = true;
-            currentNotificationsPreferences = currentNotificationsPreferences?.copyWith(
+            currentNotificationsPreferences =
+                currentNotificationsPreferences?.copyWith(
               pushNotificationsActivated: true,
               manuallyDisabled: false,
             );
@@ -3144,7 +3170,8 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
         } else {
           // Permission already granted, enable notifications and clear manual disable flag
           enablePushNotification = true;
-          currentNotificationsPreferences = currentNotificationsPreferences?.copyWith(
+          currentNotificationsPreferences =
+              currentNotificationsPreferences?.copyWith(
             pushNotificationsActivated: true,
             manuallyDisabled: false,
           );
@@ -3153,7 +3180,8 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       } else {
         // User manually wants to disable notifications
         enablePushNotification = false;
-        currentNotificationsPreferences = currentNotificationsPreferences?.copyWith(
+        currentNotificationsPreferences =
+            currentNotificationsPreferences?.copyWith(
           pushNotificationsActivated: false,
           manuallyDisabled: true, // Mark as manually disabled
         );

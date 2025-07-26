@@ -8,6 +8,7 @@ import 'package:nicotrack/initial/splash-screen.dart';
 import 'package:nicotrack/screens/base/base.dart';
 import 'package:path_provider/path_provider.dart'
     show getApplicationDocumentsDirectory;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'models/onboarding-data/onboardingData-model.dart';
 import 'package:nicotrack/hive-adapters/onboarding-data-adapter.dart';
@@ -76,19 +77,37 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-        designSize: const Size(375, 812),
-        builder: (context, child) {
-          return MaterialApp(
-            title: 'Nicotrack',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-              useMaterial3: true,
-            ),
-            home: SplashScreen(),
-          );
-        });
+    return GetBuilder<AppPreferencesController>(
+      builder: (appPrefsController) {
+        // Parse locale from stored preference
+        Locale? appLocale;
+        if (appPrefsController.isInitialized && appPrefsController.locale.isNotEmpty) {
+          try {
+            // The locale is stored as language code only (e.g., 'en', 'es')
+            appLocale = Locale(appPrefsController.locale);
+          } catch (e) {
+            print('Error parsing locale: $e');
+          }
+        }
+
+        return ScreenUtilInit(
+            designSize: const Size(375, 812),
+            builder: (context, child) {
+              return MaterialApp(
+                title: 'Nicotrack',
+                debugShowCheckedModeBanner: false,
+                theme: ThemeData(
+                  colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                  useMaterial3: true,
+                ),
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+                locale: appLocale,
+                home: SplashScreen(),
+              );
+            });
+      }
+    );
   }
 }
 

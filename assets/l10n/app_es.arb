@@ -60,7 +60,7 @@
   "select_date": "Seleccionar fecha",
   "cancel": "Cancelar",
   "confirm": "Confirmar",
-  "continue": "Continuar",
+  "continueButton": "Continuar",
   "finish": "Terminar",
   
   "nav_home": "Inicio",
