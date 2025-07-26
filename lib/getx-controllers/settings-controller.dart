@@ -18,7 +18,7 @@ import 'package:nicotrack/screens/elements/display-cards.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
 import 'package:nicotrack/screens/premium/premium-paywall-screen.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 import '../constants/color-constants.dart';
 import '../constants/dummy-data-constants.dart';
@@ -183,7 +183,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 width: 4.w,
               ),
               TextAutoSize(
-                AppLocalizations.of(context)!.personal_info_section,
+                context.l10n.personal_info_section,
                 style: TextStyle(
                     fontSize: 13.sp,
                     letterSpacing: 2.0,
@@ -201,9 +201,9 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
               showChangeNameBottomSheet(context);
             },
             child: personalInfoBox(
-                fieldName: AppLocalizations.of(context)!.field_name,
+                fieldName: context.l10n.field_name,
                 fieldValue: currentDateOnboardingData.name,
-                fieldActionName: AppLocalizations.of(context)!.action_edit,
+                fieldActionName: context.l10n.action_edit,
                 action: () {}),
           ),
           SizedBox(
@@ -214,10 +214,10 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
               showChangeQuitDateBottomSheet(context);
             },
             child: personalInfoBox(
-                fieldName: AppLocalizations.of(context)!.field_quit_date,
+                fieldName: context.l10n.field_quit_date,
                 fieldValue: convertDatetoUsableFormat(
                     currentDateOnboardingData.lastSmokedDate),
-                fieldActionName: AppLocalizations.of(context)!.action_change,
+                fieldActionName: context.l10n.action_change,
                 action: () {}),
           ),
           SizedBox(
@@ -234,10 +234,10 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 showChangeCurrencyBottomSheet(context);
               },
               child: personalInfoBox(
-                  fieldName: AppLocalizations.of(context)!.field_currency,
+                  fieldName: context.l10n.field_currency,
                   fieldValue:
                       "${appPrefsController.currencySymbol} ${appPrefsController.currencyCode}",
-                  fieldActionName: AppLocalizations.of(context)!.action_change,
+                  fieldActionName: context.l10n.action_change,
                   action: () {}),
             );
           }),
@@ -250,9 +250,9 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 showChangeLanguageBottomSheet(context);
               },
               child: personalInfoBox(
-                  fieldName: AppLocalizations.of(context)!.field_language,
+                  fieldName: context.l10n.field_language,
                   fieldValue: appPrefsController.languageName,
-                  fieldActionName: AppLocalizations.of(context)!.action_change,
+                  fieldActionName: context.l10n.action_change,
                   action: () {}),
             );
           }),
@@ -389,7 +389,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                     width: 4.w,
                   ),
                   TextAutoSize(
-                    AppLocalizations.of(context)!.push_notifications_section,
+                    context.l10n.push_notifications_section,
                     style: TextStyle(
                         fontSize: 13.sp,
                         letterSpacing: 2.0,
@@ -434,7 +434,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 width: 4.w,
               ),
               TextAutoSize(
-                AppLocalizations.of(context)!.financial_goals_section,
+                context.l10n.financial_goals_section,
                 style: TextStyle(
                     fontSize: 13.sp,
                     letterSpacing: 2.0,
@@ -482,7 +482,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                     width: 4.w,
                   ),
                   TextAutoSize(
-                    AppLocalizations.of(context)!.help_support_section,
+                    context.l10n.help_support_section,
                     style: TextStyle(
                         fontSize: 13.sp,
                         letterSpacing: 2.0,
@@ -500,7 +500,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 height: 8.w,
               ),
               normalInfoBox(
-                  fieldValue: AppLocalizations.of(context)!.contact_support,
+                  fieldValue: context.l10n.contact_support,
                   action: () {
                     showContactSupportBottomSheet(context);
                   }),
@@ -508,7 +508,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 height: 8.w,
               ),
               normalInfoBox(
-                  fieldValue: AppLocalizations.of(context)!.give_feedback,
+                  fieldValue: context.l10n.give_feedback,
                   action: () {
                     showFeedbackBottomSheet(context);
                   }),
@@ -533,7 +533,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 width: 4.w,
               ),
               TextAutoSize(
-                AppLocalizations.of(context)!.privacy_section,
+                context.l10n.privacy_section,
                 style: TextStyle(
                     fontSize: 13.sp,
                     letterSpacing: 2.0,
@@ -762,7 +762,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                   SizedBox(
                     width: 220.w,
                     child: TextAutoSize(
-                        AppLocalizations.of(context)!.daily_reminder,
+                        context.l10n.daily_reminder,
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           height: 1.1,
@@ -863,7 +863,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                   SizedBox(
                     width: 175.w,
                     child: TextAutoSize(
-                        AppLocalizations.of(context)!.weekly_summary,
+                        context.l10n.weekly_summary,
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           height: 1.1,
@@ -1000,7 +1000,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
               ),
               SizedBox(
                 width: 250.w,
-                child: TextAutoSize(AppLocalizations.of(context)!.quit_tips,
+                child: TextAutoSize(context.l10n.quit_tips,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       height: 1.1,
