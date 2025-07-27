@@ -43,7 +43,11 @@
       "Bash(for:*)",
       "Bash(do echo \"Processing $file...\")",
       "Bash(if ! grep -q \"withdrawal_happens_co_exits\" \"$file\")",
-      "Bash(then echo \"Missing translations in $file\")"
+      "Bash(then echo \"Missing translations in $file\")",
+      "Bash(do)",
+      "Bash(if [ \"$file\" != \"/Users/raminudash/StudioProjects/Nicotrack/assets/l10n/app_en.arb\" ])",
+      "Bash(then)",
+      "Bash(sed:*)"
     ],
     "deny": []
   }

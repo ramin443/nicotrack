@@ -4,13 +4,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/getx-controllers/home-controller.dart';
-import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
 import 'package:nicotrack/screens/premium/premium-paywall-screen.dart';
 import '../../constants/color-constants.dart';
 import '../../constants/font-constants.dart';
 import '../elements/textAutoSize.dart';
 import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
 import 'package:nicotrack/getx-controllers/premium-controller.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
                                     width: 24.w,
                                   ),
                                   TextAutoSize(
-                                    "Hello,\n${firstName}",
+                                    context.l10n.home_hello(firstName),
                                     style: TextStyle(
                                         height: 1.2,
                                         fontSize: 28.sp,
@@ -98,7 +98,7 @@ class _HomeState extends State<Home> {
                                           width: 112.w,
                                           child: Center(
                                             child: TextAutoSize(
-                                              "Get Pro",
+                                              context.l10n.home_get_pro,
                                               style: TextStyle(
                                                   fontSize: 16.sp,
                                                   fontFamily: recoletaBold,
@@ -124,7 +124,13 @@ class _HomeState extends State<Home> {
                         SizedBox(
                           height: 14.w,
                         ),
-                        homeController.homeGridView(),
+                        homeController.homeGridView(
+                          context: context,
+                          daysSinceLabel: context.l10n.home_days_since_last_smoked,
+                          moneySavedLabel: context.l10n.home_money_saved,
+                          hoursRegainedLabel: context.l10n.home_hours_regained,
+                          cigarettesNotSmokedLabel: context.l10n.home_cigarettes_not_smoked,
+                        ),
                         premiumController.effectivePremiumStatus
                             ? SizedBox.shrink()
                             : Column(
@@ -144,12 +150,26 @@ class _HomeState extends State<Home> {
                           height: 28.w,
                         ),
                         homeController.dailyTasksSection(
-                            context: context,
-                            isUserPremium: premiumController.effectivePremiumStatus),
+                          context: context,
+                          isUserPremium: premiumController.effectivePremiumStatus,
+                          dailyTasksLabel: context.l10n.home_daily_tasks,
+                          smokingStatusDone: context.l10n.home_smoking_status_done,
+                          didYouSmokeToday: context.l10n.home_did_you_smoke_today,
+                          thanksForUpdate: context.l10n.home_thanks_for_update,
+                          letUsKnow: context.l10n.home_let_us_know,
+                          moodRecorded: context.l10n.home_mood_recorded,
+                          howDoYouFeel: context.l10n.home_how_do_you_feel,
+                          moodSet: context.l10n.home_mood_set,
+                          tapToTellMood: context.l10n.home_tap_to_tell_mood,
+                          quickActionsLabel: context.l10n.home_quick_actions,
+                        ),
                         SizedBox(
                           height: 12.w,
                         ),
-                        homeController.peronalizedQuitRoutine(),
+                        homeController.personalizedQuitRoutine(
+                          context: context,
+                          label: context.l10n.home_personalized_quit_routine,
+                        ),
                         SizedBox(
                           height: 40.w,
                         ),

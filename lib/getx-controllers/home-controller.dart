@@ -27,6 +27,7 @@ import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
 import 'package:nicotrack/models/did-you-smoke/didyouSmoke-model.dart';
 import 'package:nicotrack/models/quick-actions-model/quickActions-model.dart';
 import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 enum DailyTaskType { mood, smoking }
 
@@ -47,12 +48,8 @@ class HomeController extends GetxController {
   int selectedMonth = DateTime.now().month;
   int selectedDay = DateTime.now().day;
 
-  List<String> quickActionsList = [
-    "Remove all 🚬cigarettes, 🔥 lighters & ashtrays from your home",
-    "Replace 🚬 smoking with a new habit(e.g., chewing gum, 🫁 deep breathing)",
-    "Identify your biggest triggers 🎯 and avoid them",
-    "Log ✍️ any cravings and how you overcame them"
-  ];
+  // Quick actions list will be populated from translations
+  List<String> quickActionsList = [];
 
   OnboardingData currentDateOnboardingData = OnboardingData();
   QuickactionsModel quickActionsModel = QuickactionsModel();
@@ -72,6 +69,15 @@ class HomeController extends GetxController {
     setCurrentFilledData();
     setQuickActionsData();
     HapticFeedback.mediumImpact();
+  }
+
+  void initializeQuickActions(BuildContext context) {
+    quickActionsList = [
+      context.l10n.quick_action_remove_cigarettes,
+      context.l10n.quick_action_replace_habit,
+      context.l10n.quick_action_identify_triggers,
+      context.l10n.quick_action_log_cravings,
+    ];
   }
 
   void initializeCalendar() {
@@ -179,7 +185,13 @@ class HomeController extends GetxController {
     );
   }
 
-  Widget homeGridView() {
+  Widget homeGridView({
+    required BuildContext context,
+    required String daysSinceLabel,
+    required String moneySavedLabel,
+    required String hoursRegainedLabel,
+    required String cigarettesNotSmokedLabel,
+  }) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: GridView.count(
@@ -192,27 +204,31 @@ class HomeController extends GetxController {
         childAspectRatio: 1.58,
         children: [
           mainCard(
+            context: context,
             emoji: bicepsEmoji,
             value: daysSinceLastSmoked.toString(),
-            label: 'Days since\nlast smoked',
+            label: daysSinceLabel,
             backgroundColor: const Color(0xFFB0F0A1), // green-ish background
           ),
           statCard(
+            context: context,
             emoji: moneyEmoji,
             value: totalMoneySaved,
-            label: 'Money saved',
+            label: moneySavedLabel,
             isCost: true,
           ),
           statCard(
+            context: context,
             emoji: heartEmoji,
             value: hoursRegainedinLife,
-            label: 'Hours regained\nin life',
+            label: hoursRegainedLabel,
             isCost: false,
           ),
           statCard(
+            context: context,
             emoji: clapEmoji,
             value: cigarettesAvoided,
-            label: 'Cigarettes\nnot smoked',
+            label: cigarettesNotSmokedLabel,
             isCost: false,
           ),
         ],
@@ -221,6 +237,7 @@ class HomeController extends GetxController {
   }
 
   Widget mainCard({
+    required BuildContext context,
     required String emoji,
     required String value,
     required String label,
@@ -241,7 +258,7 @@ class HomeController extends GetxController {
         children: [
           Image.asset(
             emoji,
-            width: 51.w,
+            width: 48.w,
           ),
           SizedBox(width: 12.w),
           Column(
@@ -259,15 +276,19 @@ class HomeController extends GetxController {
                       fontSize: 33.sp,
                       fontFamily: circularBold,
                       color: nicotrackBlack1)),
-              TextAutoSize(
-                label,
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                    height: 1.1,
-                    fontSize: 12.5.sp,
-                    fontFamily: circularMedium,
-                    color: nicotrackBlack1),
-              ),
+              SizedBox(
+                width: 80.w,
+                child: TextAutoSize(
+                  label,
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                      height: 1.1,
+                      fontSize: 12.5.sp,
+                      fontFamily: circularMedium,
+                      color: nicotrackBlack1),
+                ),
+              )
+
             ],
           ),
         ],
@@ -276,6 +297,7 @@ class HomeController extends GetxController {
   }
 
   Widget statCard({
+    required BuildContext context,
     required String emoji,
     required int value,
     required String label,
@@ -296,7 +318,7 @@ class HomeController extends GetxController {
         children: [
           Image.asset(
             emoji,
-            width: 51.w,
+            width: 48.w,
           ),
           // SizedBox(width: 12.w),
           Column(
@@ -316,15 +338,19 @@ class HomeController extends GetxController {
                       fontSize: 33.sp,
                       fontFamily: circularBold,
                       color: nicotrackBlack1)),
-              TextAutoSize(
-                label,
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                    height: 1.1,
-                    fontSize: 12.5.sp,
-                    fontFamily: circularMedium,
-                    color: nicotrackBlack1),
-              ),
+              SizedBox(
+                width: 90.w,
+                child: TextAutoSize(
+                  label,
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                      height: 1.1,
+                      fontSize: 12.5.sp,
+                      fontFamily: circularMedium,
+                      color: nicotrackBlack1),
+                ),
+              )
+
             ],
           ),
         ],
@@ -332,8 +358,24 @@ class HomeController extends GetxController {
     );
   }
 
-  Widget dailyTasksSection(
-      {required BuildContext context, required bool isUserPremium}) {
+  Widget dailyTasksSection({
+    required BuildContext context,
+    required bool isUserPremium,
+    required String dailyTasksLabel,
+    required String smokingStatusDone,
+    required String didYouSmokeToday,
+    required String thanksForUpdate,
+    required String letUsKnow,
+    required String moodRecorded,
+    required String howDoYouFeel,
+    required String moodSet,
+    required String tapToTellMood,
+    required String quickActionsLabel,
+  }) {
+    // Initialize quick actions with translations
+    if (quickActionsList.isEmpty) {
+      initializeQuickActions(context);
+    }
     return Builder(builder: (context) {
       DateTime todayDate = DateTime.now();
       DateTime currentSelectedDateTime =
@@ -372,7 +414,7 @@ class HomeController extends GetxController {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextAutoSize(
-                    "Daily Tasks",
+                    dailyTasksLabel,
                     textAlign: TextAlign.right,
                     style: TextStyle(
                         height: 1.1,
@@ -449,11 +491,11 @@ class HomeController extends GetxController {
                   emoji: isSmokedToday ? clappingEmoji : moodEmoji,
                   emojiColor: Color(0xffdfbba8).withOpacity(0.59),
                   titleTxt: isSmokedToday
-                      ? 'Smoking Status ✅'
-                      : 'Did you smoke today?',
+                      ? smokingStatusDone
+                      : didYouSmokeToday,
                   subTitle: isSmokedToday
-                      ? 'Thanks for the update! 👍'
-                      : 'Let us know if you did 😌',
+                      ? thanksForUpdate
+                      : letUsKnow,
                   isCompleted: isSmokedToday,
                   isUserPremium: isUserPremium,
                   taskType: DailyTaskType.smoking),
@@ -494,10 +536,10 @@ class HomeController extends GetxController {
                   emoji: isMoodDone ? kheartEmoji : paperEmoji,
                   emojiColor: Color(0xffEBE8FB).withOpacity(0.53),
                   titleTxt:
-                      isMoodDone ? 'Mood Recorded ✅' : 'How do you feel today?',
+                      isMoodDone ? moodRecorded : howDoYouFeel,
                   subTitle: isMoodDone
-                      ? 'Your mood for today is set 📝'
-                      : 'Tap to tell us about your mood 📝',
+                      ? moodSet
+                      : tapToTellMood,
                   isCompleted: isMoodDone,
                   isUserPremium: isUserPremium,
                   taskType: DailyTaskType.mood),
@@ -505,7 +547,10 @@ class HomeController extends GetxController {
             SizedBox(
               height: 7.h,
             ),
-            quickActions()
+            quickActions(
+              context: context,
+              label: quickActionsLabel,
+            )
           ],
         ),
       );
@@ -575,14 +620,18 @@ class HomeController extends GetxController {
                       SizedBox(
                         height: 2.h,
                       ),
-                      TextAutoSize(subTitle,
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            height: 1.1,
-                            fontSize: 14.sp,
-                            fontFamily: circularBook,
-                            color: Color(0xffBCB6D8),
-                          )),
+                      SizedBox(
+                        width: 200.w,
+                        child: TextAutoSize(subTitle,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              height: 1.1,
+                              fontSize: 14.sp,
+                              fontFamily: circularBook,
+                              color: Color(0xffBCB6D8),
+                            )),
+                      )
+
                     ],
                   )
                 ],
@@ -595,7 +644,10 @@ class HomeController extends GetxController {
         ));
   }
 
-  Widget quickActions() {
+  Widget quickActions({
+    required BuildContext context,
+    required String label,
+  }) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Container(
@@ -680,7 +732,7 @@ class HomeController extends GetxController {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextAutoSize('Quick Actions',
+                  TextAutoSize(label,
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         height: 1.1,
@@ -759,7 +811,10 @@ class HomeController extends GetxController {
     );
   }
 
-  Widget peronalizedQuitRoutine() {
+  Widget personalizedQuitRoutine({
+    required BuildContext context,
+    required String label,
+  }) {
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -783,14 +838,18 @@ class HomeController extends GetxController {
               SizedBox(
                 width: 14.w,
               ),
-              TextAutoSize('Personalized\nQuit Routine',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    height: 1.1,
-                    fontSize: 18.sp,
-                    fontFamily: circularBold,
-                    color: Colors.black87,
-                  )),
+              SizedBox(
+                width: 125.w,
+                child: TextAutoSize(label,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      height: 1.1,
+                      fontSize: 18.sp,
+                      fontFamily: circularBold,
+                      color: Colors.black87,
+                    )),
+              ),
+
               SizedBox(
                 width: 11.w,
               ),

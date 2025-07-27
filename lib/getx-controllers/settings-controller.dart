@@ -684,7 +684,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                     emoji: cigImg,
                     value:
                         currentDateOnboardingData.cigarettesPerDay.toDouble(),
-                    label: 'Cigarettes\nper day',
+                    label: context.l10n.field_cigarettes_per_day,
                     backgroundColor: const Color(0xFFB0F0A1),
                     isCost: false, // green-ish background
                   ),
@@ -710,7 +710,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                   statCard2(
                     emoji: moneyEmoji,
                     value: double.parse(currentDateOnboardingData.costOfAPack),
-                    label: 'Cost per\npack',
+                    label: context.l10n.field_cost_per_pack,
                     isCost: true,
                   ),
                   isUserPremium
