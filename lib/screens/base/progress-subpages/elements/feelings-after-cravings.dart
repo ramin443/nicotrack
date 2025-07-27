@@ -176,10 +176,10 @@ class _FeelingsAfterCravingsState extends State<FeelingsAfterCravings> {
                 ],
               ),
               SizedBox(
-                height: 12.h,
+                height: 6.w,
               ),
               SizedBox(
-                width: 180.w,
+                width: double.infinity,
                 child: TextAutoSize(
                   context.l10n.feelings_subtitle,
                   textAlign: TextAlign.center,

@@ -31,38 +31,41 @@ class _ProgressOverviewState extends State<ProgressOverview> {
           children: [
             progressController.mainDisplayCards(context),
             SizedBox(
-              height: 34.h,
+              height: 34.w,
             ),
             MoodTrendRow(),
             SizedBox(
-              height: 34.h,
+              height: 34.w,
             ),
             TopTriggersSection(),
             SizedBox(
-              height: 34.h,
+              height: 34.w,
             ),
             SymptomsHealedFrom(),
             SizedBox(
-              height: 34.h,
+              height: 34.w,
             ),
             FinancialGoalsInOverview(showPercent: true, percent: progressController.getAverageFinancialGoalsCompletionPercentage(), isUserPremium: widget.isUserPremium),
             SizedBox(
-              height: 34.h,
+              height: 34.w,
             ),
             HealthImprovementTrend(scrollController: progressController.healthScrollViewController,
             ),
             SizedBox(
-              height: 34.h,
+              height: 34.w,
             ),
             UpcomingHealthTrend(scrollController: progressController.upcominghealthscrollController,),
             SizedBox(
-              height: 34.h,
+              height: 34.w,
             ),
             FeelingsAfterCravings(),
             SizedBox(
-              height: 34.h,
+              height: 34.w,
             ),
-            ThingsToAvoidCraving()
+            ThingsToAvoidCraving(),
+            SizedBox(
+              height: 80.w,
+            ),
           ],
         );
       }

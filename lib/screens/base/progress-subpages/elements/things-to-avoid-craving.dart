@@ -172,10 +172,10 @@ class _ThingsToAvoidCravingState extends State<ThingsToAvoidCraving> {
               ],
             ),
             SizedBox(
-              height: 12.h,
+              height: 6.w,
             ),
             SizedBox(
-              width: 180.w,
+              width: double.infinity,
               child: TextAutoSize(
                 context.l10n.avoid_subtitle,
                 textAlign: TextAlign.center,
