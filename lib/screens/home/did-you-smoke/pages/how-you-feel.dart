@@ -29,7 +29,7 @@ class _HowYouFeelState extends State<HowYouFeel> {
                 height: 18.h,
               ),
               SizedBox(
-                width: 247.w,
+                width: 267.w,
                 child: TextAutoSize(
                   context.l10n.how_did_it_make_feel,
                   textAlign: TextAlign.center,

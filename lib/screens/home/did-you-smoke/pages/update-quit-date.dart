@@ -59,7 +59,7 @@ class _UpdateQuitDateState extends State<UpdateQuitDate> {
                 height: 9.h,
               ),
               SizedBox(
-                width: 220.w,
+                width:  double.infinity,
                 child: RichText(
                   textAlign: TextAlign.center,
                     text: TextSpan(children: [

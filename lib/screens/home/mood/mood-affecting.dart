@@ -6,6 +6,7 @@ import 'package:nicotrack/getx-controllers/mood-controller.dart';
 import '../../../constants/color-constants.dart';
 import '../../../constants/font-constants.dart';
 import '../../elements/textAutoSize.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class MoodAffecting extends StatefulWidget {
   const MoodAffecting({super.key});
@@ -30,7 +31,7 @@ class _MoodAffectingState extends State<MoodAffecting> {
               SizedBox(
                 width: 257.w,
                 child: TextAutoSize(
-                  "What’s affecting your mood 😶‍🌫️ today?",
+                  context.l10n.mood_whats_affecting,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       height: 1.15,
@@ -42,7 +43,7 @@ class _MoodAffectingState extends State<MoodAffecting> {
               SizedBox(
                 height: 26.h,
               ),
-              moodController.moodAffectingGrid(),
+              moodController.moodAffectingGrid(context),
               SizedBox(
                 height: 94.h,
               ),

@@ -364,6 +364,47 @@
   "mood_nothing_here": "لا شيء هنا",
   "mood_no_recorded": "لا يوجد مزاج مسجل",
   "mood_no_data_captured": "لم يتم تسجيل بيانات مزاج لهذا التاريخ",
+  "mood_when_crave_cigarettes": "متى اشتهيت السجائر 😥 اليوم؟",
+  "mood_whats_affecting": "ما الذي يؤثر على مزاجك 😶‍🌫️ اليوم؟",
+  "mood_want_reflect": "تريد أن تتأمل أكثر قليلاً 🗒️؟",
+  "mood_write_something": "اكتب شيئاً... 💬 (اختياري)",
+  "mood_today": "اليوم",
+  "mood_yesterday": "أمس",
+  "mood_continue": "متابعة",
+  "mood_finish": "🙌 إنهاء",
+  
+  "mood_feeling_happy": "سعيد",
+  "mood_feeling_neutral": "محايد",
+  "mood_feeling_sad": "حزين",
+  "mood_feeling_angry": "غاضب",
+  "mood_feeling_anxious": "قلق",
+  "mood_feeling_confident": "واثق",
+  "mood_feeling_tired": "متعب",
+  "mood_feeling_frustrated": "محبط",
+  "mood_feeling_excited": "متحمس",
+  "mood_feeling_confused": "مرتبك",
+  "mood_feeling_motivated": "متحفز",
+  "mood_feeling_other": "آخر",
+  
+  "mood_affecting_work_stress": "ضغط العمل",
+  "mood_affecting_relationship": "العلاقات",
+  "mood_affecting_family": "العائلة",
+  "mood_affecting_health": "الصحة",
+  "mood_affecting_craving_episode": "نوبة رغبة شديدة",
+  "mood_affecting_feeling_proud": "الشعور بالفخر",
+  "mood_affecting_chill_day": "مجرد يوم هادئ",
+  "mood_affecting_other": "آخر",
+  
+  "mood_cravings_strong": "نعم،\nقوية",
+  "mood_cravings_mild": "نعم،\nخفيفة",
+  "mood_cravings_none": "لا توجد رغبة شديدة على الإطلاق",
+  
+  "mood_crave_time_morning_coffee": "صباح مع القهوة",
+  "mood_crave_time_after_meals": "بعد الوجبات",
+  "mood_crave_time_drinking_alcohol": "عند شرب الكحول",
+  "mood_crave_time_feeling_stressed": "عند الشعور بالتوتر",
+  "mood_crave_time_boredom_habit": "الملل أو العادة",
+  "mood_crave_time_other": "آخر",
   
   "smoking_did_smoke_today": "هل\nدخنت 🚬 اليوم؟",
   "smoking_honesty_policy": "الصدق هو أفضل سياسة 😉",

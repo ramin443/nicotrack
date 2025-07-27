@@ -6,6 +6,7 @@ import 'package:nicotrack/getx-controllers/mood-controller.dart';
 import '../../../constants/color-constants.dart';
 import '../../../constants/font-constants.dart';
 import '../../elements/textAutoSize.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class MoodCraveTimes extends StatefulWidget {
   const MoodCraveTimes({super.key});
@@ -30,7 +31,7 @@ class _MoodCraveTimesState extends State<MoodCraveTimes> {
               SizedBox(
                 width: 247.w,
                 child: TextAutoSize(
-                  "When did you crave cigarettes 😥 today?",
+                  context.l10n.mood_when_crave_cigarettes,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       height: 1.15,
@@ -42,7 +43,7 @@ class _MoodCraveTimesState extends State<MoodCraveTimes> {
               SizedBox(
                 height: 26.h,
               ),
-              moodController.craveTimesGrid(),
+              moodController.craveTimesGrid(context),
               SizedBox(
                 height: 54.h,
               ),

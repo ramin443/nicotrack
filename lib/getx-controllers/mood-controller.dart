@@ -16,6 +16,7 @@ import '../screens/elements/textAutoSize.dart';
 import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
 import 'package:nicotrack/screens/mood/mood-detail-screen.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class MoodController extends GetxController {
   final PageController pageController = PageController();
@@ -41,51 +42,51 @@ class MoodController extends GetxController {
 
   //How you feeling variables
   int selectedFeelingsIndex = -1;
-  List<EmojiTextModel> howareyouFeelingPairs = [
-    EmojiTextModel(emoji: happyImg, text: "Happy"),
-    EmojiTextModel(emoji: neutralImg, text: "Neutral"),
-    EmojiTextModel(emoji: sadImg, text: "Sad"),
-    EmojiTextModel(emoji: angryImg, text: "Angry"),
-    EmojiTextModel(emoji: anxiousImg, text: "Anxious"),
-    EmojiTextModel(emoji: motivImg, text: "Confident"),
-    EmojiTextModel(emoji: tiredImg, text: "Tired"),
-    EmojiTextModel(emoji: frustratedImg, text: "Frustrated"),
-    EmojiTextModel(emoji: partyImg, text: "Excited"),
-    EmojiTextModel(emoji: confusedImg, text: "Confused"),
-    EmojiTextModel(emoji: targetImg, text: "Motivated"),
-    EmojiTextModel(emoji: othersEmoji, text: "Other"),
+  List<EmojiTextModel> getHowYouFeelingPairs(BuildContext context) => [
+    EmojiTextModel(emoji: happyImg, text: context.l10n.mood_feeling_happy),
+    EmojiTextModel(emoji: neutralImg, text: context.l10n.mood_feeling_neutral),
+    EmojiTextModel(emoji: sadImg, text: context.l10n.mood_feeling_sad),
+    EmojiTextModel(emoji: angryImg, text: context.l10n.mood_feeling_angry),
+    EmojiTextModel(emoji: anxiousImg, text: context.l10n.mood_feeling_anxious),
+    EmojiTextModel(emoji: motivImg, text: context.l10n.mood_feeling_confident),
+    EmojiTextModel(emoji: tiredImg, text: context.l10n.mood_feeling_tired),
+    EmojiTextModel(emoji: frustratedImg, text: context.l10n.mood_feeling_frustrated),
+    EmojiTextModel(emoji: partyImg, text: context.l10n.mood_feeling_excited),
+    EmojiTextModel(emoji: confusedImg, text: context.l10n.mood_feeling_confused),
+    EmojiTextModel(emoji: targetImg, text: context.l10n.mood_feeling_motivated),
+    EmojiTextModel(emoji: othersEmoji, text: context.l10n.mood_feeling_other),
   ];
 
   //Mood Affecting variables
   Set<int> selectedMoodAffectingIndices = <int>{};
-  List<EmojiTextModel> moodAffectingPairs = [
-    EmojiTextModel(emoji: workstressImg, text: "Work Stress"),
-    EmojiTextModel(emoji: heartbreakImg, text: "Relationship"),
-    EmojiTextModel(emoji: familyImg, text: "Family"),
-    EmojiTextModel(emoji: healthImg, text: "Health "),
-    EmojiTextModel(emoji: cigImg, text: "Craving Episode"),
-    EmojiTextModel(emoji: confettiImg, text: "Feeling Proud"),
-    EmojiTextModel(emoji: sunImg, text: "Just a chill day"),
-    EmojiTextModel(emoji: xmarkEmoji, text: "Other"),
+  List<EmojiTextModel> getMoodAffectingPairs(BuildContext context) => [
+    EmojiTextModel(emoji: workstressImg, text: context.l10n.mood_affecting_work_stress),
+    EmojiTextModel(emoji: heartbreakImg, text: context.l10n.mood_affecting_relationship),
+    EmojiTextModel(emoji: familyImg, text: context.l10n.mood_affecting_family),
+    EmojiTextModel(emoji: healthImg, text: context.l10n.mood_affecting_health),
+    EmojiTextModel(emoji: cigImg, text: context.l10n.mood_affecting_craving_episode),
+    EmojiTextModel(emoji: confettiImg, text: context.l10n.mood_affecting_feeling_proud),
+    EmojiTextModel(emoji: sunImg, text: context.l10n.mood_affecting_chill_day),
+    EmojiTextModel(emoji: xmarkEmoji, text: context.l10n.mood_affecting_other),
   ];
 
   //Any cravings variables
   int selectedCravingIndex = -1;
-  List<EmojiTextModel> cravingPairs = [
-    EmojiTextModel(emoji: fireImg, text: "Yes,\nstrong ones"),
-    EmojiTextModel(emoji: wavesImg, text: "Yes,\nmild"),
-    EmojiTextModel(emoji: iceImg, text: "No cravings at all"),
+  List<EmojiTextModel> getCravingPairs(BuildContext context) => [
+    EmojiTextModel(emoji: fireImg, text: context.l10n.mood_cravings_strong),
+    EmojiTextModel(emoji: wavesImg, text: context.l10n.mood_cravings_mild),
+    EmojiTextModel(emoji: iceImg, text: context.l10n.mood_cravings_none),
   ];
 
   //When did you crave variables
   Set<int> selectedCraveTimesIndices = <int>{};
-  List<EmojiTextModel> craveTimesPairs = [
-    EmojiTextModel(emoji: coffeeEmoji, text: "Morning with coffee"),
-    EmojiTextModel(emoji: platesEmoji, text: "After meals"),
-    EmojiTextModel(emoji: beerEmoji, text: "When drinking alcohol"),
-    EmojiTextModel(emoji: stressedEmoji, text: "When feeling stressed"),
-    EmojiTextModel(emoji: homeEmoji, text: "Boredom or habit"),
-    EmojiTextModel(emoji: othersEmoji, text: "Other"),
+  List<EmojiTextModel> getCraveTimesPairs(BuildContext context) => [
+    EmojiTextModel(emoji: coffeeEmoji, text: context.l10n.mood_crave_time_morning_coffee),
+    EmojiTextModel(emoji: platesEmoji, text: context.l10n.mood_crave_time_after_meals),
+    EmojiTextModel(emoji: beerEmoji, text: context.l10n.mood_crave_time_drinking_alcohol),
+    EmojiTextModel(emoji: stressedEmoji, text: context.l10n.mood_crave_time_feeling_stressed),
+    EmojiTextModel(emoji: homeEmoji, text: context.l10n.mood_crave_time_boredom_habit),
+    EmojiTextModel(emoji: othersEmoji, text: context.l10n.mood_crave_time_other),
   ];
 
   void _rebuildPagesBasedOnCravingSelection() {
@@ -167,13 +168,14 @@ class MoodController extends GetxController {
     );
   }
 
-  Widget moodFeelingsGrid() {
+  Widget moodFeelingsGrid(BuildContext context) {
     // Grid View for selection
+    final feelingsList = getHowYouFeelingPairs(context);
     return Expanded(
       child: Padding(
         padding: EdgeInsets.only(left: 28.w, right: 28.w),
         child: GridView.builder(
-          itemCount: howareyouFeelingPairs.length,
+          itemCount: feelingsList.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3, // Two columns
             crossAxisSpacing: 9.w,
@@ -189,8 +191,9 @@ class MoodController extends GetxController {
                 if (selectedFeelingsIndex == index) {
                 } else {
                   selectedFeelingsIndex = index;
+                  final feelingsList = getHowYouFeelingPairs(context);
                   moodFilledData = moodFilledData.copyWith(
-                      selfFeeling: howareyouFeelingPairs[index].toJson());
+                      selfFeeling: feelingsList[index].toJson());
                 }
                 getCurrentPageStatus();
               },
@@ -209,13 +212,13 @@ class MoodController extends GetxController {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      howareyouFeelingPairs[index].emoji,
+                      feelingsList[index].emoji,
                       width: 38.w,
                     ),
                     SizedBox(height: 8.w),
                     SizedBox(
                       child: TextAutoSize(
-                        howareyouFeelingPairs[index].text,
+                        feelingsList[index].text,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 13.sp,
@@ -233,8 +236,9 @@ class MoodController extends GetxController {
     );
   }
 
-  Widget moodAffectingGrid() {
+  Widget moodAffectingGrid(BuildContext context) {
     // Grid View for selection
+    final affectingList = getMoodAffectingPairs(context);
     return Expanded(
       child: Padding(
         padding: EdgeInsets.only(
@@ -242,7 +246,7 @@ class MoodController extends GetxController {
           right: 28.w,
         ),
         child: GridView.builder(
-          itemCount: moodAffectingPairs.length,
+          itemCount: affectingList.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, // Two columns
             crossAxisSpacing: 9.w,
@@ -264,9 +268,10 @@ class MoodController extends GetxController {
                 }
 
                 // Update moodFilledData with all selected items
+                final affectingList = getMoodAffectingPairs(context);
                 List<Map<String, dynamic>> selectedItems =
                     selectedMoodAffectingIndices
-                        .map((i) => moodAffectingPairs[i].toJson())
+                        .map((i) => affectingList[i].toJson())
                         .toList();
                 moodFilledData =
                     moodFilledData.copyWith(moodAffecting: selectedItems);
@@ -290,14 +295,14 @@ class MoodController extends GetxController {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      moodAffectingPairs[index].emoji,
+                      affectingList[index].emoji,
                       width: 54.w,
                     ),
                     SizedBox(height: 18.w),
                     SizedBox(
                       width: 138.w,
                       child: TextAutoSize(
-                        moodAffectingPairs[index].text,
+                        affectingList[index].text,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 14.sp,
@@ -315,15 +320,16 @@ class MoodController extends GetxController {
     );
   }
 
-  Widget anyCravingsTodayGrid() {
+  Widget anyCravingsTodayGrid(BuildContext context) {
     // Grid View for selection
+    final cravingsList = getCravingPairs(context);
     return Padding(
       padding: EdgeInsets.only(left: 28.w, right: 28.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          for (int index = 0; index < cravingPairs.length; index++)
+          for (int index = 0; index < cravingsList.length; index++)
             Builder(builder: (context) {
               bool isSelected = selectedCravingIndex == index;
               return Column(
@@ -368,7 +374,7 @@ class MoodController extends GetxController {
                             width: 30.w,
                           ),
                           Image.asset(
-                            cravingPairs[index].emoji,
+                            cravingsList[index].emoji,
                             width: 54.w,
                           ),
                           SizedBox(
@@ -377,7 +383,7 @@ class MoodController extends GetxController {
                           SizedBox(
                             width: 120.w,
                             child: TextAutoSize(
-                              cravingPairs[index].text,
+                              cravingsList[index].text,
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   fontSize: 18.sp,
@@ -401,13 +407,14 @@ class MoodController extends GetxController {
     );
   }
 
-  Widget craveTimesGrid() {
+  Widget craveTimesGrid(BuildContext context) {
     // Grid View for selection
+    final craveTimesList = getCraveTimesPairs(context);
     return Expanded(
       child: Padding(
         padding: EdgeInsets.only(left: 28.w, right: 28.w),
         child: GridView.builder(
-          itemCount: craveTimesPairs.length,
+          itemCount: craveTimesList.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, // Two columns
             crossAxisSpacing: 9.w,
@@ -429,9 +436,10 @@ class MoodController extends GetxController {
                 }
 
                 // Update moodFilledData with all selected items
+                final craveTimesList = getCraveTimesPairs(context);
                 List<Map<String, dynamic>> selectedItems =
                     selectedCraveTimesIndices
-                        .map((i) => craveTimesPairs[i].toJson())
+                        .map((i) => craveTimesList[i].toJson())
                         .toList();
                 moodFilledData =
                     moodFilledData.copyWith(craveTiming: selectedItems);
@@ -455,14 +463,14 @@ class MoodController extends GetxController {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      craveTimesPairs[index].emoji,
+                      craveTimesList[index].emoji,
                       width: 54.w,
                     ),
                     SizedBox(height: 18.w),
                     SizedBox(
                       width: 138.w,
                       child: TextAutoSize(
-                        craveTimesPairs[index].text,
+                        craveTimesList[index].text,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 14.sp,
@@ -480,7 +488,7 @@ class MoodController extends GetxController {
     );
   }
 
-  Widget quickNoteTextField() {
+  Widget quickNoteTextField(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 18.w),
       child: Column(
@@ -503,7 +511,7 @@ class MoodController extends GetxController {
                 },
                 textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
-                  hintText: "Write something... 💬 (optional)",
+                  hintText: context.l10n.mood_write_something,
                   border: InputBorder.none,
                   hintStyle: TextStyle(
                     fontSize: 14.sp,
@@ -572,7 +580,7 @@ class MoodController extends GetxController {
               ),
         child: Center(
           child: TextAutoSize(
-            currentPage == (pages.length - 1) ? "🙌 Finish" : "Continue",
+            currentPage == (pages.length - 1) ? context.l10n.mood_finish : context.l10n.mood_continue,
             style: TextStyle(
                 fontSize: 18.sp,
                 fontFamily: circularBold,

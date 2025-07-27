@@ -6,6 +6,7 @@ import 'package:nicotrack/getx-controllers/mood-controller.dart';
 import '../../../constants/color-constants.dart';
 import '../../../constants/font-constants.dart';
 import '../../elements/textAutoSize.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class MoodFeeling extends StatefulWidget {
   const MoodFeeling({super.key});
@@ -30,7 +31,7 @@ class _MoodFeelingState extends State<MoodFeeling> {
               SizedBox(
                 width: 207.w,
                 child: TextAutoSize(
-                  "How are you feeling today? ❤️ ",
+                  context.l10n.mood_how_feeling_today,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       height: 1.15,
@@ -42,7 +43,7 @@ class _MoodFeelingState extends State<MoodFeeling> {
               SizedBox(
                 height: 26.h,
               ),
-              moodController.moodFeelingsGrid(),
+              moodController.moodFeelingsGrid(context),
               // moodController.anyCravingsTodayGrid(),
               // moodController.quickNoteTextField(),
             ],

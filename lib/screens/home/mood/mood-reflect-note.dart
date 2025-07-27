@@ -6,6 +6,7 @@ import 'package:nicotrack/getx-controllers/mood-controller.dart';
 import '../../../constants/color-constants.dart';
 import '../../../constants/font-constants.dart';
 import '../../elements/textAutoSize.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class MoodReflectTimes extends StatefulWidget {
   const MoodReflectTimes({super.key});
@@ -32,7 +33,7 @@ class _MoodReflectTimesState extends State<MoodReflectTimes> {
               child: SizedBox(
                 width: 207.w,
                 child: TextAutoSize(
-                  "Want to reflect a bit more 🗒️?",
+                  context.l10n.mood_want_reflect,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     height: 1.15,
@@ -44,7 +45,7 @@ class _MoodReflectTimesState extends State<MoodReflectTimes> {
               ),
             ),
             SizedBox(height: 26.h),
-            moodController.quickNoteTextField(),
+            moodController.quickNoteTextField(context),
           ],
         );
       },

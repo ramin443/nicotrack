@@ -261,18 +261,22 @@ class DidYouSmokeController extends GetxController {
                             width: 70.w,
                           ),
                           SizedBox(
-                            height: 24.h,
+                            height: 24.w,
                           ),
-                          TextAutoSize(
-                            context.l10n.yes_smoked_today,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              height: 1.2,
-                              fontSize: 18.sp,
-                              fontFamily: circularBold,
-                              color: nicotrackBlack1,
+                          SizedBox(
+                            width: 100.w,
+                            child: TextAutoSize(
+                              context.l10n.yes_smoked_today,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                height: 1.2,
+                                fontSize: 18.sp,
+                                fontFamily: circularBold,
+                                color: nicotrackBlack1,
+                              ),
                             ),
                           ),
+
                           SizedBox(
                             height: 11.h,
                           ),
@@ -325,9 +329,10 @@ class DidYouSmokeController extends GetxController {
                             width: 70.w,
                           ),
                           SizedBox(
-                            height: 24.h,
+                            height: 24.w,
                           ),
-                          TextAutoSize(
+                          SizedBox(width: 120.w,
+                          child: TextAutoSize(
                             context.l10n.no_stayed_smoke_free,
                             textAlign: TextAlign.center,
                             style: TextStyle(
@@ -336,7 +341,8 @@ class DidYouSmokeController extends GetxController {
                               fontFamily: circularBold,
                               color: nicotrackBlack1,
                             ),
-                          ),
+                          ),)
+                          ,
                           SizedBox(
                             height: 11.h,
                           ),

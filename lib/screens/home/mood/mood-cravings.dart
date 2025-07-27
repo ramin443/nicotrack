@@ -6,6 +6,7 @@ import 'package:nicotrack/getx-controllers/mood-controller.dart';
 import '../../../constants/color-constants.dart';
 import '../../../constants/font-constants.dart';
 import '../../elements/textAutoSize.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class MoodCravings extends StatefulWidget {
   const MoodCravings({super.key});
@@ -30,7 +31,7 @@ class _MoodCravingsState extends State<MoodCravings> {
               SizedBox(
                 width: 227.w,
                 child: TextAutoSize(
-                  "Did you have any cravings 🥴 today?",
+                  context.l10n.mood_any_cravings_today,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       height: 1.15,
@@ -40,7 +41,7 @@ class _MoodCravingsState extends State<MoodCravings> {
                 ),
               ),
               Spacer(),
-              moodController.anyCravingsTodayGrid(),
+              moodController.anyCravingsTodayGrid(context),
               Spacer(),
               Spacer(),
               Spacer(),
