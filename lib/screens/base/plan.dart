@@ -56,7 +56,7 @@ class _PlanState extends State<Plan> {
   void _checkCurrentPositionVisibility() {
     try {
       final planController = Get.find<PlanController>();
-      final currentIndex = planController.getCurrentTimelineIndex();
+      final currentIndex = planController.getCurrentTimelineIndex(context);
       
       // Calculate approximate position of current timeline item
       // Timeline starts after header content (approximately 520px) + (index * item height)

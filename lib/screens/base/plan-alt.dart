@@ -39,7 +39,7 @@ class _PlanAltState extends State<PlanAlt> {
   void _calculateInitialPosition() {
     try {
       final planController = Get.find<PlanController>();
-      final currentIndex = planController.getCurrentTimelineIndex();
+      final currentIndex = planController.getCurrentTimelineIndex(context);
 
       // Accurate calculation based on plan-alt.dart structure:
       // Header section: SizedBox(12.h) + today date + SizedBox(8.h) + plan button stack + SizedBox(10.h) +
@@ -80,7 +80,7 @@ class _PlanAltState extends State<PlanAlt> {
   void _checkCurrentPositionVisibility(ScrollController controller) {
     try {
       final planController = Get.find<PlanController>();
-      final currentIndex = planController.getCurrentTimelineIndex();
+      final currentIndex = planController.getCurrentTimelineIndex(context);
 
       // Use same calculation as initial position
       final headerHeight = 580.0;

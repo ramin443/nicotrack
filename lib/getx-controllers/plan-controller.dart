@@ -25,169 +25,151 @@ class PlanController extends GetxController {
   final scaffoldState = GlobalKey<ScaffoldState>();
   bool isBottomSheetOn = false;
 
-  List<TimelineItemModel> timelineItems = [
+  // Method to get translated timeline items
+  List<TimelineItemModel> getTimelineItems(BuildContext context) => [
     TimelineItemModel(
         dayNumber: 0,
         streakNumber: 0,
-        dayDuration: "First 24 Hours",
-        whatHappens: "💨 CO exits • 🧠 Oxygen normalizes • 💓 Heart rate drops",
+        dayDuration: context.l10n.timeline_duration_first_24_hours,
+        whatHappens: context.l10n.timeline_happens_first_24_hours,
         streakImg: ballImg),
     TimelineItemModel(
         dayNumber: 1,
         streakNumber: 1,
-        dayDuration: "Day 2",
-        whatHappens:
-            "🧪 Nicotine drops 90% • 👃 Taste improves • 😰 Withdrawal starts",
+        dayDuration: context.l10n.timeline_duration_day_2,
+        whatHappens: context.l10n.timeline_happens_day_2,
         streakImg: ballImg),
     TimelineItemModel(
         dayNumber: 3,
         streakNumber: 3,
-        dayDuration: "Day 3-4",
-        whatHappens:
-            "🚫 Nicotine eliminated • 📈 Peak cravings • 🧠 Brain adjusts",
+        dayDuration: context.l10n.timeline_duration_day_3_4,
+        whatHappens: context.l10n.timeline_happens_day_3_4,
         streakImg: ballrollImg),
     TimelineItemModel(
         dayNumber: 5,
         streakNumber: 5,
-        dayDuration: "Day 5-7",
-        whatHappens: "🫁 Cilia moving • 🤧 Toxin removal • 💪 Peak withdrawal",
+        dayDuration: context.l10n.timeline_duration_day_5_7,
+        whatHappens: context.l10n.timeline_happens_day_5_7,
         streakImg: baseballImg),
     TimelineItemModel(
         dayNumber: 8,
         streakNumber: 8,
-        dayDuration: "Week 1-2",
-        whatHappens:
-            "🩸 Circulation +15% • 😮‍💨 Easier breathing • 🧠 Fog clears",
+        dayDuration: context.l10n.timeline_duration_week_1_2,
+        whatHappens: context.l10n.timeline_happens_week_1_2,
         streakImg: capImg),
     TimelineItemModel(
         dayNumber: 14,
         streakNumber: 14,
-        dayDuration: "2 Weeks",
-        whatHappens:
-            "🫁 Lung function +5% • 🏃 Exercise easier • 😊 Mood stabilizes",
+        dayDuration: context.l10n.timeline_duration_2_weeks,
+        whatHappens: context.l10n.timeline_happens_2_weeks,
         streakImg: medalImg),
     TimelineItemModel(
         dayNumber: 18,
         streakNumber: 18,
-        dayDuration: "2.5 Weeks",
-        whatHappens:
-            "🫁 Rapid cilia regrowth • 🌬️ Self-cleaning starts • 💪 Stamina up",
+        dayDuration: context.l10n.timeline_duration_2_5_weeks,
+        whatHappens: context.l10n.timeline_happens_2_5_weeks,
         streakImg: teddyImg),
     TimelineItemModel(
         dayNumber: 21,
         streakNumber: 21,
-        dayDuration: "3 Weeks",
-        whatHappens: "🧠 Receptors -50% • 😌 Less anxiety • 🔋 Energy boost",
+        dayDuration: context.l10n.timeline_duration_3_weeks,
+        whatHappens: context.l10n.timeline_happens_3_weeks,
         streakImg: celebrateImg),
     TimelineItemModel(
         dayNumber: 28,
         streakNumber: 28,
-        dayDuration: "4 Weeks",
-        whatHappens: "🫁 Capacity +15% • 💓 BP stabilizes • 🎯 Cravings fade",
+        dayDuration: context.l10n.timeline_duration_4_weeks,
+        whatHappens: context.l10n.timeline_happens_4_weeks,
         streakImg: crownImg),
     TimelineItemModel(
         dayNumber: 35,
         streakNumber: 35,
-        dayDuration: "5 Weeks",
-        whatHappens:
-            "🌬️ Infection risk drops • 🏃‍♂️ Cardio +20% • 😴 Better sleep",
+        dayDuration: context.l10n.timeline_duration_5_weeks,
+        whatHappens: context.l10n.timeline_happens_5_weeks,
         streakImg: chocolateImg),
     TimelineItemModel(
         dayNumber: 42,
         streakNumber: 42,
-        dayDuration: "6 Weeks",
-        whatHappens: "👃 Sinuses clear • 💪 Strength up • ⚡ Energy doubles",
+        dayDuration: context.l10n.timeline_duration_6_weeks,
+        whatHappens: context.l10n.timeline_happens_6_weeks,
         streakImg: trophyImg),
     TimelineItemModel(
         dayNumber: 50,
         streakNumber: 50,
-        dayDuration: "7 Weeks",
-        whatHappens:
-            "🫁 Function +25% • 🧠 Sharp focus • 🔥 Optimal metabolism",
+        dayDuration: context.l10n.timeline_duration_7_weeks,
+        whatHappens: context.l10n.timeline_happens_7_weeks,
         streakImg: vacayImg),
     TimelineItemModel(
         dayNumber: 56,
         streakNumber: 56,
-        dayDuration: "8 Weeks",
-        whatHappens:
-            "🩸 Peak oxygen delivery • 💓 Heart +30% • 😊 Mood optimal",
+        dayDuration: context.l10n.timeline_duration_8_weeks,
+        whatHappens: context.l10n.timeline_happens_8_weeks,
         streakImg: magicbowlImg),
     TimelineItemModel(
         dayNumber: 65,
         streakNumber: 65,
-        dayDuration: "9-10 Weeks",
-        whatHappens:
-            "🏃 Athletic baseline • 🛡️ Strong immunity • 🌟 Better skin",
+        dayDuration: context.l10n.timeline_duration_9_10_weeks,
+        whatHappens: context.l10n.timeline_happens_9_10_weeks,
         streakImg: no1Img),
     TimelineItemModel(
         dayNumber: 75,
         streakNumber: 75,
-        dayDuration: "10-11 Weeks",
-        whatHappens:
-            "🫁 Cilia 70% restored • 😮‍💨 No breathlessness • 🧠 Peak clarity",
+        dayDuration: context.l10n.timeline_duration_10_11_weeks,
+        whatHappens: context.l10n.timeline_happens_10_11_weeks,
         streakImg: hatImg),
     TimelineItemModel(
         dayNumber: 84,
         streakNumber: 84,
-        dayDuration: "12 Weeks",
-        whatHappens:
-            "💪 Peak muscle oxygen • 🌬️ Full lung cleaning • 🎯 Optimal cognition",
+        dayDuration: context.l10n.timeline_duration_12_weeks,
+        whatHappens: context.l10n.timeline_happens_12_weeks,
         streakImg: dartarrowImg),
     TimelineItemModel(
         dayNumber: 95,
         streakNumber: 95,
-        dayDuration: "13-14 Weeks",
-        whatHappens:
-            "🫁 Function +40% • ❤️ Low heart risk • ⚡ Sustained energy",
+        dayDuration: context.l10n.timeline_duration_13_14_weeks,
+        whatHappens: context.l10n.timeline_happens_13_14_weeks,
         streakImg: kiteImg),
     TimelineItemModel(
         dayNumber: 105,
         streakNumber: 105,
-        dayDuration: "15 Weeks",
-        whatHappens:
-            "🛡️ Optimal white cells • 🏃‍♀️ Fast recovery • 😴 Deep sleep",
+        dayDuration: context.l10n.timeline_duration_15_weeks,
+        whatHappens: context.l10n.timeline_happens_15_weeks,
         streakImg: golfImg),
     TimelineItemModel(
         dayNumber: 112,
         streakNumber: 112,
-        dayDuration: "16 Weeks",
-        whatHappens:
-            "🌬️ Athletic breathing • 🧠 Full neurotransmitters • 💎 Peak repair",
+        dayDuration: context.l10n.timeline_duration_16_weeks,
+        whatHappens: context.l10n.timeline_happens_16_weeks,
         streakImg: pinataImg),
     TimelineItemModel(
         dayNumber: 126,
         streakNumber: 126,
-        dayDuration: "18 Weeks",
-        whatHappens:
-            "🫁 Capacity +45% • 🔋 Optimal mitochondria • 🌟 Visible transformation",
+        dayDuration: context.l10n.timeline_duration_18_weeks,
+        whatHappens: context.l10n.timeline_happens_18_weeks,
         streakImg: hat2Img),
     TimelineItemModel(
         dayNumber: 140,
         streakNumber: 140,
-        dayDuration: "20 Weeks",
-        whatHappens:
-            "💓 Peak heart efficiency • 🏃 Max VO2 • 🧬 DNA repair boost",
+        dayDuration: context.l10n.timeline_duration_20_weeks,
+        whatHappens: context.l10n.timeline_happens_20_weeks,
         streakImg: ballrollImg),
     TimelineItemModel(
         dayNumber: 154,
         streakNumber: 154,
-        dayDuration: "22 Weeks",
-        whatHappens:
-            "🫁 Cilia 90% normal • 🛡️ Max infection resistance • ⚡ No crashes",
+        dayDuration: context.l10n.timeline_duration_22_weeks,
+        whatHappens: context.l10n.timeline_happens_22_weeks,
         streakImg: hatImg),
     TimelineItemModel(
         dayNumber: 168,
         streakNumber: 168,
-        dayDuration: "24 Weeks",
-        whatHappens:
-            "🫁 Function +50% • 🌬️ Non-smoker breathing • 🏆 Full transformation",
+        dayDuration: context.l10n.timeline_duration_24_weeks,
+        whatHappens: context.l10n.timeline_happens_24_weeks,
         streakImg: badge1Emoji),
     TimelineItemModel(
         dayNumber: 180,
         streakNumber: 180,
-        dayDuration: "6 Months",
-        whatHappens:
-            "✨ Complete restoration • 💪 Peak performance • 🎉 Major milestone!",
+        dayDuration: context.l10n.timeline_duration_6_months,
+        whatHappens: context.l10n.timeline_happens_6_months,
         streakImg: dartarrowImg),
   ];
   final ScrollController scrollController = ScrollController();
@@ -213,11 +195,12 @@ class PlanController extends GetxController {
   }
 
   // Determine which timeline item the user has reached based on days passed
-  int getCurrentTimelineIndex() {
+  int getCurrentTimelineIndex(BuildContext context) {
     int daysPassed = getCurrentDaysPassed();
+    final items = getTimelineItems(context);
 
-    for (int i = timelineItems.length - 1; i >= 0; i--) {
-      if (daysPassed >= timelineItems[i].dayNumber) {
+    for (int i = items.length - 1; i >= 0; i--) {
+      if (daysPassed >= items[i].dayNumber) {
         return i;
       }
     }
@@ -318,11 +301,11 @@ class PlanController extends GetxController {
                   width: double.infinity,
                   child: Column(
                     children: [
-                      for (int index = 0; index < timelineItems.length; index++)
+                      for (int index = 0; index < getTimelineItems(context).length; index++)
                         Column(
                           children: [
                             timelineRow(
-                                timelineModelItem: timelineItems[index],
+                                timelineModelItem: getTimelineItems(context)[index],
                                 index: index,
                                 context: context),
                             SizedBox(
@@ -347,7 +330,7 @@ class PlanController extends GetxController {
                                           width: 2.w,
                                           decoration: BoxDecoration(
                                             color: index ==
-                                                    timelineItems.length - 1
+                                                    getTimelineItems(context).length - 1
                                                 ? Colors.transparent
                                                 : Color(0xffF6F4F1),
                                             borderRadius: index == 0
@@ -577,15 +560,18 @@ class PlanController extends GetxController {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TextAutoSize(
-                            "📅 ${timelineModelItem.dayDuration}",
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              fontFamily: circularBold,
-                              height: 1.1,
-                              color: nicotrackBlack1,
+                          SizedBox(
+                            width: 160.w,
+                            child: TextAutoSize(
+                              "📅 ${timelineModelItem.dayDuration}",
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontFamily: circularBold,
+                                height: 1.1,
+                                color: nicotrackBlack1,
+                              ),
                             ),
                           ),
                           Icon(
@@ -599,7 +585,7 @@ class PlanController extends GetxController {
                         height: 12.w,
                       ),
                       TextAutoSize(
-                        "What happens to your body",
+                        context.l10n.what_happens_to_body,
                         style: TextStyle(
                           fontSize: 14.sp,
                           fontFamily: circularMedium,
@@ -626,7 +612,7 @@ class PlanController extends GetxController {
             ],
           ),
         ),
-        _shouldShowProgressLine(index)
+        _shouldShowProgressLine(index, context)
             ? Positioned.fill(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.w),
@@ -654,8 +640,8 @@ class PlanController extends GetxController {
   }
 
   // Determine if the green progress line should be shown at this timeline index
-  bool _shouldShowProgressLine(int index) {
-    int currentIndex = getCurrentTimelineIndex();
+  bool _shouldShowProgressLine(int index, BuildContext context) {
+    int currentIndex = getCurrentTimelineIndex(context);
     // Show the line at the user's current position in the timeline
     return index == currentIndex;
   }

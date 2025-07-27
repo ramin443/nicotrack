@@ -26,7 +26,12 @@
       "Bash(for key in \"personalized_quit_routine\" \"instant_quit_plan\" \"your_quit_journey\" \"personalized_plan\" \"plan_description\" \"track_progress\" \"earn_badges\" \"stay_strong\" \"important_note\" \"timeline_disclaimer\" \"info_button\" \"plan_today\")",
       "Bash(do grep -q \"\"\"$key\"\":\" \"$file\")",
       "Bash(echo:*)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(do if ! grep -q \"timeline_duration_first_24_hours\" \"$file\")",
+      "Bash(then echo \"$file\")",
+      "Bash(fi)",
+      "Bash(then echo \"$file MISSING\")",
+      "Bash(else echo \"$file OK\")"
     ],
     "deny": []
   }
