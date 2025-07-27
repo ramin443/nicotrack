@@ -10,6 +10,7 @@ import 'package:nicotrack/screens/elements/textAutoSize.dart';
 
 import '../../constants/color-constants.dart';
 import '../../constants/font-constants.dart';
+import '../../extensions/app_localizations_extension.dart';
 import '../../getx-controllers/plan-controller.dart';
 
 class InfoBottomSheet extends StatefulWidget {
@@ -129,7 +130,7 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                             color: Color(0x33FF611D),
                           ),
                           child: TextAutoSize(
-                            "Current Stage",
+                            context.l10n.info_bottom_current_stage,
                             style: TextStyle(
                               fontSize: 12.sp,
                               fontFamily: circularBook,
@@ -182,7 +183,7 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                 ),
                 children: [
               TextSpan(
-                text: "Symptoms ",
+                text: context.l10n.info_bottom_symptoms,
                 style: TextStyle(
                   fontSize: 17.sp,
                   fontFamily: circularBoldItalic,
@@ -190,7 +191,7 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                   color: Color(0xffFF611D),
                 ),
               ),
-              TextSpan(text: "you might feel 😵 "),
+              TextSpan(text: context.l10n.info_bottom_you_might_feel),
             ])),
         SizedBox(
           height: 14.w,
@@ -213,7 +214,7 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                 ),
                 children: [
               TextSpan(
-                text: "What happens ",
+                text: context.l10n.info_bottom_what_happens,
                 style: TextStyle(
                   fontSize: 17.sp,
                   fontFamily: circularBoldItalic,
@@ -221,7 +222,7 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                   color: Color(0xffFF9900),
                 ),
               ),
-              TextSpan(text: "to your body 💪"),
+              TextSpan(text: context.l10n.info_bottom_to_your_body),
             ])),
         SizedBox(
           height: 14.w,
@@ -310,7 +311,7 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                 ),
                 children: [
               TextSpan(
-                text: "How to ",
+                text: context.l10n.info_bottom_how_to,
                 style: TextStyle(
                   fontSize: 17.sp,
                   fontFamily: circularBoldItalic,
@@ -318,7 +319,7 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                   color: nicotrackGreen,
                 ),
               ),
-              TextSpan(text: "cope with it 🧘‍♂️"),
+              TextSpan(text: context.l10n.info_bottom_cope_with_it),
             ])),
         SizedBox(
           height: 14.h,
@@ -505,7 +506,7 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Important Note",
+                      context.l10n.info_bottom_important_note,
                       style: TextStyle(
                         fontSize: 17.sp,
                         fontFamily: circularBold,
@@ -515,7 +516,7 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                     ),
                     SizedBox(height: 2.h),
                     Text(
-                      "Individual experiences may vary",
+                      context.l10n.info_bottom_individual_experiences,
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontFamily: circularBook,
@@ -558,7 +559,7 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                     SizedBox(width: 12.w),
                     Expanded(
                       child: Text(
-                        "These symptoms and effects on your body are approximations based on common experiences. They may vary from person to person. Everyone's quit journey is unique!",
+                        context.l10n.info_bottom_disclaimer_text,
                         style: TextStyle(
                           fontSize: 13.sp,
                           fontFamily: circularBook,
@@ -574,9 +575,9 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _buildFeatureItem("🎯", "Personalized", nicotrackOrange),
-                    _buildFeatureItem("📊", "Evidence-based", nicotracklightBlue),
-                    _buildFeatureItem("💪", "Supportive", Color(0xFF6BB02A)),
+                    _buildFeatureItem("🎯", context.l10n.info_bottom_personalized, nicotrackOrange),
+                    _buildFeatureItem("📊", context.l10n.info_bottom_evidence_based, nicotracklightBlue),
+                    _buildFeatureItem("💪", context.l10n.info_bottom_supportive, Color(0xFF6BB02A)),
                   ],
                 ),
               ],
@@ -613,7 +614,7 @@ class _InfoBottomSheetState extends State<InfoBottomSheet> {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  "Your journey is unique and valuable",
+                  context.l10n.info_bottom_journey_unique,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 13.sp,

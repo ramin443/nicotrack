@@ -31,7 +31,19 @@
       "Bash(then echo \"$file\")",
       "Bash(fi)",
       "Bash(then echo \"$file MISSING\")",
-      "Bash(else echo \"$file OK\")"
+      "Bash(else echo \"$file OK\")",
+      "Bash(for file in app_hi.arb app_he.arb app_ar.arb app_ko.arb app_nl.arb)",
+      "Bash(do echo \"$file: $(grep -c \"withdrawal_\" \"$file\")\")",
+      "Bash(do if ! grep -q \"withdrawal_symptom_mild_cravings\" \"$file\")",
+      "Bash(then echo \"$file MISSING withdrawal translations\")",
+      "Bash(for file in /Users/raminudash/StudioProjects/Nicotrack/assets/l10n/app_{ja,tr,pl,cs,el,hu,ro,id,hi,he,ar,ko,nl}.arb)",
+      "Bash(do echo \"Processing: $file\")",
+      "Bash(tail:*)",
+      "Bash(rm:*)",
+      "Bash(for:*)",
+      "Bash(do echo \"Processing $file...\")",
+      "Bash(if ! grep -q \"withdrawal_happens_co_exits\" \"$file\")",
+      "Bash(then echo \"Missing translations in $file\")"
     ],
     "deny": []
   }

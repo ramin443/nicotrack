@@ -665,7 +665,7 @@ class PlanController extends GetxController {
       enableDrag: false,
       backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
-        return InfoBottomSheet(withdrawalStage: withdrawalStages[index]);
+        return InfoBottomSheet(withdrawalStage: getTranslatedWithdrawalStages(context)[index]);
       },
     );
   }

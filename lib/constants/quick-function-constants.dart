@@ -6,6 +6,7 @@ import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/models/award-model/award-model.dart';
 import 'package:nicotrack/models/emoji-text-pair/emojitext-model.dart';
 
+import '../extensions/app_localizations_extension.dart';
 import '../models/withdrawal-stage-model/withdrawal-stage-model.dart';
 import '../screens/elements/info-bottom-sheet.dart';
 
@@ -99,7 +100,7 @@ void showCustomBottomSheet({required BuildContext context, required int index}) 
                   child: SingleChildScrollView(
                     controller: scrollController,
                     child: InfoBottomSheet(
-                      withdrawalStage: withdrawalStages[index],
+                      withdrawalStage: getTranslatedWithdrawalStages(context)[index],
                     ), // your actual content
                   ),
                 );
@@ -118,511 +119,511 @@ void showCustomBottomSheet({required BuildContext context, required int index}) 
 
 
 
- List<WithdrawalStageModel> withdrawalStages = [
+// Method to get translated withdrawal stages
+List<WithdrawalStageModel> getTranslatedWithdrawalStages(BuildContext context) => [
   // Day 0 - First 24 Hours
   WithdrawalStageModel(
     intensityLevel: 0,
-    timeAfterQuitting: "First 24 Hours",
+    timeAfterQuitting: context.l10n.timeline_duration_first_24_hours,
     whatHappens: [
-      EmojiTextModel(emoji: "💨", text: "CO exits bloodstream").toJson(),
-      EmojiTextModel(emoji: "🧠", text: "Oxygen normalizes").toJson(),
-      EmojiTextModel(emoji: "💓", text: "Heart rate drops").toJson()
+      EmojiTextModel(emoji: "💨", text: context.l10n.withdrawal_happens_co_exits).toJson(),
+      EmojiTextModel(emoji: "🧠", text: context.l10n.withdrawal_happens_oxygen_normalizes).toJson(),
+      EmojiTextModel(emoji: "💓", text: context.l10n.withdrawal_happens_heart_rate_drops).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "😰", text: "Mild cravings").toJson(),
-      EmojiTextModel(emoji: "😵", text: "Restlessness").toJson(),
-      EmojiTextModel(emoji: "😟", text: "Mild anxiety").toJson()
+      EmojiTextModel(emoji: "😰", text: context.l10n.withdrawal_symptom_mild_cravings).toJson(),
+      EmojiTextModel(emoji: "😵", text: context.l10n.withdrawal_symptom_restlessness).toJson(),
+      EmojiTextModel(emoji: "😟", text: context.l10n.withdrawal_symptom_mild_anxiety).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "💧", text: "Drink plenty of water").toJson(),
-      EmojiTextModel(emoji: "🧘", text: "Practice deep breathing").toJson(),
-      EmojiTextModel(emoji: "🚶", text: "Take short walks").toJson()
+      EmojiTextModel(emoji: "💧", text: context.l10n.withdrawal_cope_drink_water).toJson(),
+      EmojiTextModel(emoji: "🧘", text: context.l10n.withdrawal_cope_deep_breathing).toJson(),
+      EmojiTextModel(emoji: "🚶", text: context.l10n.withdrawal_cope_short_walks).toJson()
     ],
   ),
 
   // Day 1 - Day 2
   WithdrawalStageModel(
     intensityLevel: 0,
-    timeAfterQuitting: "Day 2",
+    timeAfterQuitting: context.l10n.timeline_duration_day_2,
     whatHappens: [
-      EmojiTextModel(emoji: "🧪", text: "Nicotine drops 90%").toJson(),
-      EmojiTextModel(emoji: "👃", text: "Taste improves").toJson(),
-      EmojiTextModel(emoji: "😰", text: "Withdrawal begins").toJson()
+      EmojiTextModel(emoji: "🧪", text: context.l10n.withdrawal_happens_nicotine_drops_90).toJson(),
+      EmojiTextModel(emoji: "👃", text: context.l10n.withdrawal_happens_taste_improves).toJson(),
+      EmojiTextModel(emoji: "😰", text: context.l10n.withdrawal_happens_withdrawal_begins).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "🔥", text: "Strong cravings").toJson(),
-      EmojiTextModel(emoji: "😠", text: "Irritability").toJson(),
-      EmojiTextModel(emoji: "🤯", text: "Headaches").toJson(),
-      EmojiTextModel(emoji: "😴", text: "Sleep issues").toJson()
+      EmojiTextModel(emoji: "🔥", text: context.l10n.withdrawal_symptom_strong_cravings).toJson(),
+      EmojiTextModel(emoji: "😠", text: context.l10n.withdrawal_symptom_irritability).toJson(),
+      EmojiTextModel(emoji: "🤯", text: context.l10n.withdrawal_symptom_headaches).toJson(),
+      EmojiTextModel(emoji: "😴", text: context.l10n.withdrawal_symptom_sleep_issues).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "☕", text: "Limit caffeine intake").toJson(),
-      EmojiTextModel(emoji: "💧", text: "Stay well hydrated").toJson(),
-      EmojiTextModel(emoji: "🧘", text: "Use meditation apps").toJson()
+      EmojiTextModel(emoji: "☕", text: context.l10n.withdrawal_cope_limit_caffeine).toJson(),
+      EmojiTextModel(emoji: "💧", text: context.l10n.withdrawal_cope_stay_hydrated).toJson(),
+      EmojiTextModel(emoji: "🧘", text: context.l10n.withdrawal_cope_meditation_apps).toJson()
     ],
   ),
 
   // Day 3 - Day 3-4
   WithdrawalStageModel(
     intensityLevel: 1,
-    timeAfterQuitting: "Day 3-4",
+    timeAfterQuitting: context.l10n.timeline_duration_day_3_4,
     whatHappens: [
-      EmojiTextModel(emoji: "🚫", text: "Nicotine eliminated").toJson(),
-      EmojiTextModel(emoji: "📈", text: "Peak cravings").toJson(),
-      EmojiTextModel(emoji: "🧠", text: "Brain adjusts").toJson()
+      EmojiTextModel(emoji: "🚫", text: context.l10n.withdrawal_happens_nicotine_eliminated).toJson(),
+      EmojiTextModel(emoji: "📈", text: context.l10n.withdrawal_happens_peak_cravings).toJson(),
+      EmojiTextModel(emoji: "🧠", text: context.l10n.withdrawal_happens_brain_adjusts).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "😢", text: "Low mood").toJson(),
-      EmojiTextModel(emoji: "😩", text: "Fatigue").toJson(),
-      EmojiTextModel(emoji: "🧠", text: "Brain fog").toJson(),
-      EmojiTextModel(emoji: "🚬", text: "Strong urges").toJson()
+      EmojiTextModel(emoji: "😢", text: context.l10n.withdrawal_symptom_low_mood).toJson(),
+      EmojiTextModel(emoji: "😩", text: context.l10n.withdrawal_symptom_fatigue).toJson(),
+      EmojiTextModel(emoji: "🧠", text: context.l10n.withdrawal_symptom_brain_fog).toJson(),
+      EmojiTextModel(emoji: "🚬", text: context.l10n.withdrawal_symptom_strong_urges).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "🏃", text: "Engage in light exercise").toJson(),
-      EmojiTextModel(emoji: "🍎", text: "Eat nutritious snacks").toJson(),
-      EmojiTextModel(emoji: "🧘", text: "Practice progressive muscle relaxation").toJson()
+      EmojiTextModel(emoji: "🏃", text: context.l10n.withdrawal_cope_light_exercise).toJson(),
+      EmojiTextModel(emoji: "🍎", text: context.l10n.withdrawal_cope_nutritious_snacks).toJson(),
+      EmojiTextModel(emoji: "🧘", text: context.l10n.withdrawal_cope_muscle_relaxation).toJson()
     ],
   ),
 
   // Day 5 - Day 5-7
   WithdrawalStageModel(
     intensityLevel: 2,
-    timeAfterQuitting: "Day 5-7",
+    timeAfterQuitting: context.l10n.timeline_duration_day_5_7,
     whatHappens: [
-      EmojiTextModel(emoji: "🫁", text: "Cilia moving").toJson(),
-      EmojiTextModel(emoji: "🤧", text: "Toxin removal").toJson(),
-      EmojiTextModel(emoji: "💪", text: "Peak withdrawal").toJson()
+      EmojiTextModel(emoji: "🫁", text: context.l10n.withdrawal_happens_cilia_moving).toJson(),
+      EmojiTextModel(emoji: "🤧", text: context.l10n.withdrawal_happens_toxin_removal).toJson(),
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_happens_peak_withdrawal).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "🤧", text: "Coughing").toJson(),
-      EmojiTextModel(emoji: "🤮", text: "Mucus buildup").toJson(),
-      EmojiTextModel(emoji: "😵", text: "Dizziness").toJson()
+      EmojiTextModel(emoji: "🤧", text: context.l10n.withdrawal_symptom_coughing).toJson(),
+      EmojiTextModel(emoji: "🤮", text: context.l10n.withdrawal_symptom_mucus_buildup).toJson(),
+      EmojiTextModel(emoji: "😵", text: context.l10n.withdrawal_symptom_dizziness).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "🍵", text: "Drink warm herbal teas").toJson(),
-      EmojiTextModel(emoji: "🚶", text: "Maintain light physical activity").toJson(),
-      EmojiTextModel(emoji: "🌬️", text: "Practice breathing exercises").toJson()
+      EmojiTextModel(emoji: "🍵", text: context.l10n.withdrawal_cope_herbal_teas).toJson(),
+      EmojiTextModel(emoji: "🚶", text: context.l10n.withdrawal_cope_maintain_activity).toJson(),
+      EmojiTextModel(emoji: "🌬️", text: context.l10n.withdrawal_cope_breathing_exercises).toJson()
     ],
   ),
 
   // Day 8 - Week 1-2
   WithdrawalStageModel(
     intensityLevel: 2,
-    timeAfterQuitting: "Week 1-2",
+    timeAfterQuitting: context.l10n.timeline_duration_week_1_2,
     whatHappens: [
-      EmojiTextModel(emoji: "🩸", text: "Circulation +15%").toJson(),
-      EmojiTextModel(emoji: "😮‍💨", text: "Easier breathing").toJson(),
-      EmojiTextModel(emoji: "🧠", text: "Fog clears").toJson()
+      EmojiTextModel(emoji: "🩸", text: context.l10n.withdrawal_happens_circulation_15).toJson(),
+      EmojiTextModel(emoji: "😮‍💨", text: context.l10n.withdrawal_happens_easier_breathing).toJson(),
+      EmojiTextModel(emoji: "🧠", text: context.l10n.withdrawal_happens_fog_clears).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "🌊", text: "Weaker cravings").toJson(),
-      EmojiTextModel(emoji: "😌", text: "Better mood").toJson(),
-      EmojiTextModel(emoji: "💭", text: "Clearer thinking").toJson()
+      EmojiTextModel(emoji: "🌊", text: context.l10n.withdrawal_symptom_weaker_cravings).toJson(),
+      EmojiTextModel(emoji: "😌", text: context.l10n.withdrawal_symptom_better_mood).toJson(),
+      EmojiTextModel(emoji: "💭", text: context.l10n.withdrawal_symptom_clearer_thinking).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "📝", text: "Stick to your established quit plan").toJson(),
-      EmojiTextModel(emoji: "🎁", text: "Reward yourself for progress").toJson(),
-      EmojiTextModel(emoji: "🚫", text: "Continue avoiding smoking triggers").toJson()
+      EmojiTextModel(emoji: "📝", text: context.l10n.withdrawal_cope_stick_quit_plan).toJson(),
+      EmojiTextModel(emoji: "🎁", text: context.l10n.withdrawal_cope_reward_progress).toJson(),
+      EmojiTextModel(emoji: "🚫", text: context.l10n.withdrawal_cope_avoid_triggers).toJson()
     ],
   ),
 
   // Day 14 - 2 Weeks
   WithdrawalStageModel(
     intensityLevel: 3,
-    timeAfterQuitting: "2 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_2_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "🫁", text: "Lung function +5%").toJson(),
-      EmojiTextModel(emoji: "🏃", text: "Exercise easier").toJson(),
-      EmojiTextModel(emoji: "😊", text: "Mood stabilizes").toJson()
+      EmojiTextModel(emoji: "🫁", text: context.l10n.withdrawal_happens_lung_function_5).toJson(),
+      EmojiTextModel(emoji: "🏃", text: context.l10n.withdrawal_happens_exercise_easier).toJson(),
+      EmojiTextModel(emoji: "😊", text: context.l10n.withdrawal_happens_mood_stabilizes).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "😮‍💨", text: "Better breathing").toJson(),
-      EmojiTextModel(emoji: "💪", text: "More energy").toJson(),
-      EmojiTextModel(emoji: "😌", text: "Stable emotions").toJson()
+      EmojiTextModel(emoji: "😮‍💨", text: context.l10n.withdrawal_symptom_better_breathing).toJson(),
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_symptom_more_energy).toJson(),
+      EmojiTextModel(emoji: "😌", text: context.l10n.withdrawal_symptom_stable_emotions).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "🏃‍♀️", text: "Start incorporating light exercise").toJson(),
-      EmojiTextModel(emoji: "🚶‍♂️", text: "Take longer daily walks").toJson(),
-      EmojiTextModel(emoji: "🥗", text: "Focus on nutritious eating habits").toJson()
+      EmojiTextModel(emoji: "🏃‍♀️", text: context.l10n.withdrawal_cope_incorporate_exercise).toJson(),
+      EmojiTextModel(emoji: "🚶‍♂️", text: context.l10n.withdrawal_cope_longer_walks).toJson(),
+      EmojiTextModel(emoji: "🥗", text: context.l10n.withdrawal_cope_nutritious_eating).toJson()
     ],
   ),
 
   // Day 18 - 2.5 Weeks
   WithdrawalStageModel(
     intensityLevel: 3,
-    timeAfterQuitting: "2.5 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_2_5_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "🫁", text: "Rapid cilia regrowth").toJson(),
-      EmojiTextModel(emoji: "🌬️", text: "Self-cleaning starts").toJson(),
-      EmojiTextModel(emoji: "💪", text: "Stamina up").toJson()
+      EmojiTextModel(emoji: "🫁", text: context.l10n.withdrawal_happens_rapid_cilia_regrowth).toJson(),
+      EmojiTextModel(emoji: "🌬️", text: context.l10n.withdrawal_happens_self_cleaning_starts).toJson(),
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_happens_stamina_up).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "🏃", text: "Exercise easier").toJson(),
-      EmojiTextModel(emoji: "😊", text: "Positive mood").toJson(),
-      EmojiTextModel(emoji: "💤", text: "Better sleep").toJson()
+      EmojiTextModel(emoji: "🏃", text: context.l10n.withdrawal_symptom_exercise_easier).toJson(),
+      EmojiTextModel(emoji: "😊", text: context.l10n.withdrawal_symptom_positive_mood).toJson(),
+      EmojiTextModel(emoji: "💤", text: context.l10n.withdrawal_symptom_better_sleep).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "📅", text: "Establish new healthy routines").toJson(),
-      EmojiTextModel(emoji: "🧘‍♂️", text: "Practice daily mindfulness").toJson(),
-      EmojiTextModel(emoji: "🎯", text: "Set progressive fitness goals").toJson()
+      EmojiTextModel(emoji: "📅", text: context.l10n.withdrawal_cope_healthy_routines).toJson(),
+      EmojiTextModel(emoji: "🧘‍♂️", text: context.l10n.withdrawal_cope_daily_mindfulness).toJson(),
+      EmojiTextModel(emoji: "🎯", text: context.l10n.withdrawal_cope_fitness_goals).toJson()
     ],
   ),
 
   // Day 21 - 3 Weeks
   WithdrawalStageModel(
     intensityLevel: 3,
-    timeAfterQuitting: "3 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_3_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "🧠", text: "Receptors -50%").toJson(),
-      EmojiTextModel(emoji: "😌", text: "Less anxiety").toJson(),
-      EmojiTextModel(emoji: "🔋", text: "Energy boost").toJson()
+      EmojiTextModel(emoji: "🧠", text: context.l10n.withdrawal_happens_receptors_50).toJson(),
+      EmojiTextModel(emoji: "😌", text: context.l10n.withdrawal_happens_less_anxiety).toJson(),
+      EmojiTextModel(emoji: "🔋", text: context.l10n.withdrawal_happens_energy_boost).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "😌", text: "Emotional stability").toJson(),
-      EmojiTextModel(emoji: "💭", text: "Mental clarity").toJson(),
-      EmojiTextModel(emoji: "⚡", text: "All-day energy").toJson()
+      EmojiTextModel(emoji: "😌", text: context.l10n.withdrawal_symptom_emotional_stability).toJson(),
+      EmojiTextModel(emoji: "💭", text: context.l10n.withdrawal_symptom_mental_clarity).toJson(),
+      EmojiTextModel(emoji: "⚡", text: context.l10n.withdrawal_symptom_all_day_energy).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "📚", text: "Learn new skills or hobbies").toJson(),
-      EmojiTextModel(emoji: "👥", text: "Strengthen social connections").toJson(),
-      EmojiTextModel(emoji: "🎉", text: "Celebrate your 3-week milestone").toJson()
+      EmojiTextModel(emoji: "📚", text: context.l10n.withdrawal_cope_learn_skills).toJson(),
+      EmojiTextModel(emoji: "👥", text: context.l10n.withdrawal_cope_social_connections).toJson(),
+      EmojiTextModel(emoji: "🎉", text: context.l10n.withdrawal_cope_celebrate_3weeks).toJson()
     ],
   ),
 
   // Day 28 - 4 Weeks
   WithdrawalStageModel(
     intensityLevel: 4,
-    timeAfterQuitting: "4 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_4_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "🫁", text: "Capacity +15%").toJson(),
-      EmojiTextModel(emoji: "💓", text: "BP stabilizes").toJson(),
-      EmojiTextModel(emoji: "🎯", text: "Cravings fade").toJson()
+      EmojiTextModel(emoji: "🫁", text: context.l10n.withdrawal_happens_capacity_15).toJson(),
+      EmojiTextModel(emoji: "💓", text: context.l10n.withdrawal_happens_bp_stabilizes).toJson(),
+      EmojiTextModel(emoji: "🎯", text: context.l10n.withdrawal_happens_cravings_fade).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "🧊", text: "Rare cravings").toJson(),
-      EmojiTextModel(emoji: "😊", text: "Stable mood").toJson(),
-      EmojiTextModel(emoji: "💪", text: "More strength").toJson()
+      EmojiTextModel(emoji: "🧊", text: context.l10n.withdrawal_symptom_rare_cravings).toJson(),
+      EmojiTextModel(emoji: "😊", text: context.l10n.withdrawal_symptom_stable_mood).toJson(),
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_symptom_more_strength).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "🥗", text: "Continue healthy eating habits").toJson(),
-      EmojiTextModel(emoji: "🎉", text: "Celebrate this major milestone!").toJson(),
-      EmojiTextModel(emoji: "💰", text: "Calculate and track money saved").toJson()
+      EmojiTextModel(emoji: "🥗", text: context.l10n.withdrawal_cope_healthy_eating).toJson(),
+      EmojiTextModel(emoji: "🎉", text: context.l10n.withdrawal_cope_celebrate_milestone).toJson(),
+      EmojiTextModel(emoji: "💰", text: context.l10n.withdrawal_cope_track_money).toJson()
     ],
   ),
 
   // Day 35 - 5 Weeks
   WithdrawalStageModel(
     intensityLevel: 4,
-    timeAfterQuitting: "5 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_5_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "🌬️", text: "Infection risk drops").toJson(),
-      EmojiTextModel(emoji: "🏃‍♂️", text: "Cardio +20%").toJson(),
-      EmojiTextModel(emoji: "😴", text: "Better sleep").toJson()
+      EmojiTextModel(emoji: "🌬️", text: context.l10n.withdrawal_happens_infection_risk_drops).toJson(),
+      EmojiTextModel(emoji: "🏃‍♂️", text: context.l10n.withdrawal_happens_cardio_20).toJson(),
+      EmojiTextModel(emoji: "😴", text: context.l10n.withdrawal_happens_better_sleep).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "🌟", text: "More vibrant").toJson(),
-      EmojiTextModel(emoji: "💤", text: "Deep sleep").toJson(),
-      EmojiTextModel(emoji: "🧠", text: "Sharp focus").toJson()
+      EmojiTextModel(emoji: "🌟", text: context.l10n.withdrawal_symptom_more_vibrant).toJson(),
+      EmojiTextModel(emoji: "💤", text: context.l10n.withdrawal_symptom_deep_sleep).toJson(),
+      EmojiTextModel(emoji: "🧠", text: context.l10n.withdrawal_symptom_sharp_focus).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "🏃‍♀️", text: "Increase physical activity intensity").toJson(),
-      EmojiTextModel(emoji: "🧘", text: "Practice gratitude meditation").toJson(),
-      EmojiTextModel(emoji: "📚", text: "Pursue learning new skills").toJson()
+      EmojiTextModel(emoji: "🏃‍♀️", text: context.l10n.withdrawal_cope_increase_activity).toJson(),
+      EmojiTextModel(emoji: "🧘", text: context.l10n.withdrawal_cope_gratitude_meditation).toJson(),
+      EmojiTextModel(emoji: "📚", text: context.l10n.withdrawal_cope_pursue_learning).toJson()
     ],
   ),
 
   // Day 42 - 6 Weeks
   WithdrawalStageModel(
     intensityLevel: 4,
-    timeAfterQuitting: "6 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_6_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "👃", text: "Sinuses clear").toJson(),
-      EmojiTextModel(emoji: "💪", text: "Strength up").toJson(),
-      EmojiTextModel(emoji: "⚡", text: "Energy doubles").toJson()
+      EmojiTextModel(emoji: "👃", text: context.l10n.withdrawal_happens_sinuses_clear).toJson(),
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_happens_strength_up).toJson(),
+      EmojiTextModel(emoji: "⚡", text: context.l10n.withdrawal_happens_energy_doubles).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "🌟", text: "Peak vitality and energy").toJson(),
-      EmojiTextModel(emoji: "😴", text: "Excellent sleep quality").toJson(),
-      EmojiTextModel(emoji: "🏃", text: "Exercise feels effortless").toJson()
+      EmojiTextModel(emoji: "🌟", text: context.l10n.withdrawal_symptom_peak_vitality_energy).toJson(),
+      EmojiTextModel(emoji: "😴", text: context.l10n.withdrawal_symptom_excellent_sleep_quality).toJson(),
+      EmojiTextModel(emoji: "🏃", text: context.l10n.withdrawal_symptom_exercise_feels_effortless).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "🎯", text: "Set ambitious fitness goals").toJson(),
-      EmojiTextModel(emoji: "👥", text: "Join active communities").toJson(),
-      EmojiTextModel(emoji: "📈", text: "Track your fitness improvements").toJson()
+      EmojiTextModel(emoji: "🎯", text: context.l10n.withdrawal_cope_ambitious_fitness).toJson(),
+      EmojiTextModel(emoji: "👥", text: context.l10n.withdrawal_cope_active_communities).toJson(),
+      EmojiTextModel(emoji: "📈", text: context.l10n.withdrawal_cope_track_improvements).toJson()
     ],
   ),
 
   // Day 50 - 7 Weeks
   WithdrawalStageModel(
     intensityLevel: 4,
-    timeAfterQuitting: "7 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_7_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "🫁", text: "Function +25%").toJson(),
-      EmojiTextModel(emoji: "🧠", text: "Sharp focus").toJson(),
-      EmojiTextModel(emoji: "🔥", text: "Optimal metabolism").toJson()
+      EmojiTextModel(emoji: "🫁", text: context.l10n.withdrawal_happens_function_25).toJson(),
+      EmojiTextModel(emoji: "🧠", text: context.l10n.withdrawal_happens_sharp_focus).toJson(),
+      EmojiTextModel(emoji: "🔥", text: context.l10n.withdrawal_happens_optimal_metabolism).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "💭", text: "Crystal clear thinking").toJson(),
-      EmojiTextModel(emoji: "⚡", text: "Sustained high energy").toJson(),
-      EmojiTextModel(emoji: "💪", text: "Peak physical condition").toJson()
+      EmojiTextModel(emoji: "💭", text: context.l10n.withdrawal_symptom_crystal_clear_thinking).toJson(),
+      EmojiTextModel(emoji: "⚡", text: context.l10n.withdrawal_symptom_sustained_high_energy).toJson(),
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_symptom_peak_physical_condition).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "🏆", text: "Challenge yourself with new goals").toJson(),
-      EmojiTextModel(emoji: "📝", text: "Document your transformation").toJson(),
-      EmojiTextModel(emoji: "🌟", text: "Inspire others to quit").toJson()
+      EmojiTextModel(emoji: "🏆", text: context.l10n.withdrawal_cope_challenge_goals).toJson(),
+      EmojiTextModel(emoji: "📝", text: context.l10n.withdrawal_cope_document_transformation).toJson(),
+      EmojiTextModel(emoji: "🌟", text: context.l10n.withdrawal_cope_inspire_others).toJson()
     ],
   ),
 
   // Day 56 - 8 Weeks
   WithdrawalStageModel(
     intensityLevel: 5,
-    timeAfterQuitting: "8 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_8_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "🩸", text: "Peak oxygen delivery").toJson(),
-      EmojiTextModel(emoji: "💓", text: "Heart +30%").toJson(),
-      EmojiTextModel(emoji: "😊", text: "Mood optimal").toJson()
+      EmojiTextModel(emoji: "🩸", text: context.l10n.withdrawal_happens_peak_oxygen_delivery).toJson(),
+      EmojiTextModel(emoji: "💓", text: context.l10n.withdrawal_happens_heart_30).toJson(),
+      EmojiTextModel(emoji: "😊", text: context.l10n.withdrawal_happens_mood_optimal).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "🏃", text: "Athletic performance surpasses baseline").toJson(),
-      EmojiTextModel(emoji: "🧠", text: "Enhanced cognitive function").toJson(),
-      EmojiTextModel(emoji: "😌", text: "Emotional equilibrium achieved").toJson()
+      EmojiTextModel(emoji: "🏃", text: context.l10n.withdrawal_symptom_athletic_performance_surpasses).toJson(),
+      EmojiTextModel(emoji: "🧠", text: context.l10n.withdrawal_symptom_enhanced_cognitive_function).toJson(),
+      EmojiTextModel(emoji: "😌", text: context.l10n.withdrawal_symptom_emotional_equilibrium).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "🏃", text: "Try new physical challenges").toJson(),
-      EmojiTextModel(emoji: "🎯", text: "Set long-term health goals").toJson(),
-      EmojiTextModel(emoji: "👥", text: "Share your success story").toJson()
+      EmojiTextModel(emoji: "🏃", text: context.l10n.withdrawal_cope_physical_challenges).toJson(),
+      EmojiTextModel(emoji: "🎯", text: context.l10n.withdrawal_cope_long_term_health).toJson(),
+      EmojiTextModel(emoji: "👥", text: context.l10n.withdrawal_cope_share_success).toJson()
     ],
   ),
 
   // Day 65 - 9-10 Weeks
   WithdrawalStageModel(
     intensityLevel: 5,
-    timeAfterQuitting: "9-10 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_9_10_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "🏃", text: "Athletic baseline").toJson(),
-      EmojiTextModel(emoji: "🛡️", text: "Strong immunity").toJson(),
-      EmojiTextModel(emoji: "🌟", text: "Better skin").toJson()
+      EmojiTextModel(emoji: "🏃", text: context.l10n.withdrawal_happens_athletic_baseline).toJson(),
+      EmojiTextModel(emoji: "🛡️", text: context.l10n.withdrawal_happens_strong_immunity).toJson(),
+      EmojiTextModel(emoji: "🌟", text: context.l10n.withdrawal_happens_better_skin).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "💪", text: "Exceptional physical stamina").toJson(),
-      EmojiTextModel(emoji: "🧠", text: "Peak mental clarity").toJson(),
-      EmojiTextModel(emoji: "✨", text: "Visible health transformation").toJson()
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_symptom_exceptional_physical_stamina).toJson(),
+      EmojiTextModel(emoji: "🧠", text: context.l10n.withdrawal_symptom_peak_mental_clarity).toJson(),
+      EmojiTextModel(emoji: "✨", text: context.l10n.withdrawal_symptom_visible_health_transformation).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "📊", text: "Monitor your health metrics").toJson(),
-      EmojiTextModel(emoji: "🎉", text: "Celebrate your transformation").toJson(),
-      EmojiTextModel(emoji: "💪", text: "Maintain momentum").toJson()
+      EmojiTextModel(emoji: "📊", text: context.l10n.withdrawal_cope_monitor_health).toJson(),
+      EmojiTextModel(emoji: "🎉", text: context.l10n.withdrawal_cope_celebrate_transformation).toJson(),
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_cope_maintain_momentum).toJson()
     ],
   ),
 
   // Day 75 - 10-11 Weeks
   WithdrawalStageModel(
     intensityLevel: 5,
-    timeAfterQuitting: "10-11 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_10_11_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "🫁", text: "Cilia 70% restored").toJson(),
-      EmojiTextModel(emoji: "😮‍💨", text: "No breathlessness").toJson(),
-      EmojiTextModel(emoji: "🧠", text: "Peak clarity").toJson()
+      EmojiTextModel(emoji: "🫁", text: context.l10n.withdrawal_happens_cilia_70_restored).toJson(),
+      EmojiTextModel(emoji: "😮‍💨", text: context.l10n.withdrawal_happens_no_breathlessness).toJson(),
+      EmojiTextModel(emoji: "🧠", text: context.l10n.withdrawal_happens_peak_clarity).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "🌬️", text: "Perfect breathing capacity").toJson(),
-      EmojiTextModel(emoji: "⚡", text: "Unlimited energy reserves").toJson(),
-      EmojiTextModel(emoji: "🎯", text: "Laser-sharp focus").toJson()
+      EmojiTextModel(emoji: "🌬️", text: context.l10n.withdrawal_symptom_perfect_breathing_capacity).toJson(),
+      EmojiTextModel(emoji: "⚡", text: context.l10n.withdrawal_symptom_unlimited_energy_reserves).toJson(),
+      EmojiTextModel(emoji: "🎯", text: context.l10n.withdrawal_symptom_laser_sharp_focus).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "🏃‍♀️", text: "Enjoy your enhanced abilities").toJson(),
-      EmojiTextModel(emoji: "🌟", text: "Become a quit-smoking advocate").toJson(),
-      EmojiTextModel(emoji: "📝", text: "Journal your journey").toJson()
+      EmojiTextModel(emoji: "🏃‍♀️", text: context.l10n.withdrawal_cope_enjoy_abilities).toJson(),
+      EmojiTextModel(emoji: "🌟", text: context.l10n.withdrawal_cope_quit_advocate).toJson(),
+      EmojiTextModel(emoji: "📝", text: context.l10n.withdrawal_cope_journal_journey).toJson()
     ],
   ),
 
   // Day 84 - 12 Weeks
   WithdrawalStageModel(
     intensityLevel: 5,
-    timeAfterQuitting: "12 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_12_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "💪", text: "Peak muscle oxygen").toJson(),
-      EmojiTextModel(emoji: "🌬️", text: "Full lung cleaning").toJson(),
-      EmojiTextModel(emoji: "🎯", text: "Optimal cognition").toJson()
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_happens_peak_muscle_oxygen).toJson(),
+      EmojiTextModel(emoji: "🌬️", text: context.l10n.withdrawal_happens_full_lung_cleaning).toJson(),
+      EmojiTextModel(emoji: "🎯", text: context.l10n.withdrawal_happens_optimal_cognition).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "🏆", text: "Peak physical performance").toJson(),
-      EmojiTextModel(emoji: "🧠", text: "Optimal brain function").toJson(),
-      EmojiTextModel(emoji: "💎", text: "Perfect health status").toJson()
+      EmojiTextModel(emoji: "🏆", text: context.l10n.withdrawal_symptom_peak_physical_performance).toJson(),
+      EmojiTextModel(emoji: "🧠", text: context.l10n.withdrawal_symptom_optimal_brain_function).toJson(),
+      EmojiTextModel(emoji: "💎", text: context.l10n.withdrawal_symptom_perfect_health_status).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "🎉", text: "Celebrate 3-month milestone").toJson(),
-      EmojiTextModel(emoji: "🎯", text: "Plan long-term health goals").toJson(),
-      EmojiTextModel(emoji: "💪", text: "Maintain peak condition").toJson()
+      EmojiTextModel(emoji: "🎉", text: context.l10n.withdrawal_cope_celebrate_3months).toJson(),
+      EmojiTextModel(emoji: "🎯", text: context.l10n.withdrawal_cope_plan_long_term).toJson(),
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_cope_maintain_peak).toJson()
     ],
   ),
 
   // Day 95 - 13-14 Weeks
   WithdrawalStageModel(
     intensityLevel: 5,
-    timeAfterQuitting: "13-14 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_13_14_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "🫁", text: "Function +40%").toJson(),
-      EmojiTextModel(emoji: "❤️", text: "Low heart risk").toJson(),
-      EmojiTextModel(emoji: "⚡", text: "Sustained energy").toJson()
+      EmojiTextModel(emoji: "🫁", text: context.l10n.withdrawal_happens_function_40).toJson(),
+      EmojiTextModel(emoji: "❤️", text: context.l10n.withdrawal_happens_low_heart_risk).toJson(),
+      EmojiTextModel(emoji: "⚡", text: context.l10n.withdrawal_happens_sustained_energy).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "🏃", text: "Elite athletic performance").toJson(),
-      EmojiTextModel(emoji: "💓", text: "Optimal heart health").toJson(),
-      EmojiTextModel(emoji: "🌟", text: "Radiant vitality").toJson()
+      EmojiTextModel(emoji: "🏃", text: context.l10n.withdrawal_symptom_elite_athletic_performance).toJson(),
+      EmojiTextModel(emoji: "💓", text: context.l10n.withdrawal_symptom_optimal_heart_health).toJson(),
+      EmojiTextModel(emoji: "🌟", text: context.l10n.withdrawal_symptom_radiant_vitality).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "🏆", text: "Push your physical limits").toJson(),
-      EmojiTextModel(emoji: "📈", text: "Track health improvements").toJson(),
-      EmojiTextModel(emoji: "👥", text: "Mentor other quitters").toJson()
+      EmojiTextModel(emoji: "🏆", text: context.l10n.withdrawal_cope_push_limits).toJson(),
+      EmojiTextModel(emoji: "📈", text: context.l10n.withdrawal_cope_track_health).toJson(),
+      EmojiTextModel(emoji: "👥", text: context.l10n.withdrawal_cope_mentor_quitters).toJson()
     ],
   ),
 
   // Day 105 - 15 Weeks
   WithdrawalStageModel(
     intensityLevel: 6,
-    timeAfterQuitting: "15 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_15_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "🛡️", text: "Optimal white cells").toJson(),
-      EmojiTextModel(emoji: "🏃‍♀️", text: "Fast recovery").toJson(),
-      EmojiTextModel(emoji: "😴", text: "Deep sleep").toJson()
+      EmojiTextModel(emoji: "🛡️", text: context.l10n.withdrawal_happens_optimal_white_cells).toJson(),
+      EmojiTextModel(emoji: "🏃‍♀️", text: context.l10n.withdrawal_happens_fast_recovery).toJson(),
+      EmojiTextModel(emoji: "😴", text: context.l10n.withdrawal_happens_deep_sleep).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "💪", text: "Fast recovery").toJson(),
-      EmojiTextModel(emoji: "🧠", text: "Better cognition").toJson(),
-      EmojiTextModel(emoji: "✨", text: "Full vitality").toJson()
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_symptom_fast_recovery).toJson(),
+      EmojiTextModel(emoji: "🧠", text: context.l10n.withdrawal_symptom_better_cognition).toJson(),
+      EmojiTextModel(emoji: "✨", text: context.l10n.withdrawal_symptom_full_vitality).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "🏃‍♀️", text: "Enjoy your superhuman abilities").toJson(),
-      EmojiTextModel(emoji: "🌟", text: "Inspire others with your success").toJson(),
-      EmojiTextModel(emoji: "📝", text: "Document your complete transformation").toJson()
+      EmojiTextModel(emoji: "🏃‍♀️", text: context.l10n.withdrawal_cope_superhuman_abilities).toJson(),
+      EmojiTextModel(emoji: "🌟", text: context.l10n.withdrawal_cope_inspire_success).toJson(),
+      EmojiTextModel(emoji: "📝", text: context.l10n.withdrawal_cope_document_complete).toJson()
     ],
   ),
 
-  // Continue with remaining stages...
   // Day 112 - 16 Weeks
   WithdrawalStageModel(
     intensityLevel: 6,
-    timeAfterQuitting: "16 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_16_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "🌬️", text: "Athletic breathing").toJson(),
-      EmojiTextModel(emoji: "🧠", text: "Full neurotransmitters").toJson(),
-      EmojiTextModel(emoji: "💎", text: "Peak repair").toJson()
+      EmojiTextModel(emoji: "🌬️", text: context.l10n.withdrawal_happens_athletic_breathing).toJson(),
+      EmojiTextModel(emoji: "🧠", text: context.l10n.withdrawal_happens_full_neurotransmitters).toJson(),
+      EmojiTextModel(emoji: "💎", text: context.l10n.withdrawal_happens_peak_repair).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "🏆", text: "Athletic performance").toJson(),
-      EmojiTextModel(emoji: "⚡", text: "Unlimited energy").toJson(),
-      EmojiTextModel(emoji: "🧬", text: "Optimal cells").toJson()
+      EmojiTextModel(emoji: "🏆", text: context.l10n.withdrawal_symptom_athletic_performance).toJson(),
+      EmojiTextModel(emoji: "⚡", text: context.l10n.withdrawal_symptom_unlimited_energy).toJson(),
+      EmojiTextModel(emoji: "🧬", text: context.l10n.withdrawal_symptom_optimal_cells).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "🎯", text: "Set ambitious life goals").toJson(),
-      EmojiTextModel(emoji: "💪", text: "Challenge your limits").toJson(),
-      EmojiTextModel(emoji: "🌟", text: "Live your best life").toJson()
+      EmojiTextModel(emoji: "🎯", text: context.l10n.withdrawal_cope_ambitious_life).toJson(),
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_cope_challenge_limits).toJson(),
+      EmojiTextModel(emoji: "🌟", text: context.l10n.withdrawal_cope_live_best_life).toJson()
     ],
   ),
 
   // Day 126 - 18 Weeks
   WithdrawalStageModel(
     intensityLevel: 6,
-    timeAfterQuitting: "18 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_18_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "🫁", text: "Capacity +45%").toJson(),
-      EmojiTextModel(emoji: "🔋", text: "Optimal mitochondria").toJson(),
-      EmojiTextModel(emoji: "🌟", text: "Visible transformation").toJson()
+      EmojiTextModel(emoji: "🫁", text: context.l10n.withdrawal_happens_capacity_45).toJson(),
+      EmojiTextModel(emoji: "🔋", text: context.l10n.withdrawal_happens_optimal_mitochondria).toJson(),
+      EmojiTextModel(emoji: "🌟", text: context.l10n.withdrawal_happens_visible_transformation).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "✨", text: "Radiant health").toJson(),
-      EmojiTextModel(emoji: "💪", text: "Peak condition").toJson(),
-      EmojiTextModel(emoji: "🧠", text: "Optimal brain").toJson()
+      EmojiTextModel(emoji: "✨", text: context.l10n.withdrawal_symptom_radiant_health).toJson(),
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_symptom_peak_condition).toJson(),
+      EmojiTextModel(emoji: "🧠", text: context.l10n.withdrawal_symptom_optimal_brain).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "📸", text: "Document your transformation").toJson(),
-      EmojiTextModel(emoji: "🎉", text: "Celebrate your new self").toJson(),
-      EmojiTextModel(emoji: "💪", text: "Maintain excellence").toJson()
+      EmojiTextModel(emoji: "📸", text: context.l10n.withdrawal_cope_document_visual).toJson(),
+      EmojiTextModel(emoji: "🎉", text: context.l10n.withdrawal_cope_celebrate_new_self).toJson(),
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_cope_maintain_excellence).toJson()
     ],
   ),
 
   // Day 140 - 20 Weeks
   WithdrawalStageModel(
     intensityLevel: 6,
-    timeAfterQuitting: "20 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_20_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "💓", text: "Peak heart efficiency").toJson(),
-      EmojiTextModel(emoji: "🏃", text: "Max VO2").toJson(),
-      EmojiTextModel(emoji: "🧬", text: "DNA repair boost").toJson()
+      EmojiTextModel(emoji: "💓", text: context.l10n.withdrawal_happens_peak_heart_efficiency).toJson(),
+      EmojiTextModel(emoji: "🏃", text: context.l10n.withdrawal_happens_max_vo2).toJson(),
+      EmojiTextModel(emoji: "🧬", text: context.l10n.withdrawal_happens_dna_repair_boost).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "❤️", text: "Perfect heart health").toJson(),
-      EmojiTextModel(emoji: "⚡", text: "Limitless energy").toJson(),
-      EmojiTextModel(emoji: "🌟", text: "Cell regeneration").toJson()
+      EmojiTextModel(emoji: "❤️", text: context.l10n.withdrawal_symptom_perfect_heart_health).toJson(),
+      EmojiTextModel(emoji: "⚡", text: context.l10n.withdrawal_symptom_limitless_energy).toJson(),
+      EmojiTextModel(emoji: "🌟", text: context.l10n.withdrawal_symptom_cell_regeneration).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "🏆", text: "Achieve your dreams").toJson(),
-      EmojiTextModel(emoji: "💪", text: "Push new boundaries").toJson(),
-      EmojiTextModel(emoji: "🌟", text: "Inspire others").toJson()
+      EmojiTextModel(emoji: "🏆", text: context.l10n.withdrawal_cope_achieve_dreams).toJson(),
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_cope_push_boundaries).toJson(),
+      EmojiTextModel(emoji: "🌟", text: context.l10n.withdrawal_cope_inspire_others_general).toJson()
     ],
   ),
 
   // Day 154 - 22 Weeks
   WithdrawalStageModel(
     intensityLevel: 6,
-    timeAfterQuitting: "22 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_22_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "🫁", text: "Cilia 90% normal").toJson(),
-      EmojiTextModel(emoji: "🛡️", text: "Max infection resistance").toJson(),
-      EmojiTextModel(emoji: "⚡", text: "No crashes").toJson()
+      EmojiTextModel(emoji: "🫁", text: context.l10n.withdrawal_happens_cilia_90_normal).toJson(),
+      EmojiTextModel(emoji: "🛡️", text: context.l10n.withdrawal_happens_max_infection_resistance).toJson(),
+      EmojiTextModel(emoji: "⚡", text: context.l10n.withdrawal_happens_no_crashes).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "💪", text: "Ultimate resilience").toJson(),
-      EmojiTextModel(emoji: "🧠", text: "Peak mental").toJson(),
-      EmojiTextModel(emoji: "🌟", text: "Optimal health").toJson()
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_symptom_ultimate_resilience).toJson(),
+      EmojiTextModel(emoji: "🧠", text: context.l10n.withdrawal_symptom_peak_mental).toJson(),
+      EmojiTextModel(emoji: "🌟", text: context.l10n.withdrawal_symptom_optimal_health).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "🎯", text: "Set lifetime goals").toJson(),
-      EmojiTextModel(emoji: "💪", text: "Maintain peak performance").toJson(),
-      EmojiTextModel(emoji: "🌟", text: "Be a role model").toJson()
+      EmojiTextModel(emoji: "🎯", text: context.l10n.withdrawal_cope_lifetime_goals).toJson(),
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_cope_maintain_performance).toJson(),
+      EmojiTextModel(emoji: "🌟", text: context.l10n.withdrawal_cope_role_model).toJson()
     ],
   ),
 
   // Day 168 - 24 Weeks
   WithdrawalStageModel(
     intensityLevel: 6,
-    timeAfterQuitting: "24 Weeks",
+    timeAfterQuitting: context.l10n.timeline_duration_24_weeks,
     whatHappens: [
-      EmojiTextModel(emoji: "🫁", text: "Function +50%").toJson(),
-      EmojiTextModel(emoji: "🌬️", text: "Non-smoker breathing").toJson(),
-      EmojiTextModel(emoji: "🏆", text: "Full transformation").toJson()
+      EmojiTextModel(emoji: "🫁", text: context.l10n.withdrawal_happens_function_50).toJson(),
+      EmojiTextModel(emoji: "🌬️", text: context.l10n.withdrawal_happens_non_smoker_breathing).toJson(),
+      EmojiTextModel(emoji: "🏆", text: context.l10n.withdrawal_happens_full_transformation).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "✨", text: "Full restoration").toJson(),
-      EmojiTextModel(emoji: "💪", text: "Peak performance").toJson(),
-      EmojiTextModel(emoji: "🧠", text: "Optimal cognition").toJson()
+      EmojiTextModel(emoji: "✨", text: context.l10n.withdrawal_symptom_full_restoration).toJson(),
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_symptom_peak_performance).toJson(),
+      EmojiTextModel(emoji: "🧠", text: context.l10n.withdrawal_symptom_optimal_cognition).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "🎉", text: "Celebrate complete transformation").toJson(),
-      EmojiTextModel(emoji: "🌟", text: "Embrace your new life").toJson(),
-      EmojiTextModel(emoji: "💪", text: "Maintain excellence forever").toJson()
+      EmojiTextModel(emoji: "🎉", text: context.l10n.withdrawal_cope_celebrate_complete).toJson(),
+      EmojiTextModel(emoji: "🌟", text: context.l10n.withdrawal_cope_embrace_new_life).toJson(),
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_cope_maintain_forever).toJson()
     ],
   ),
 
   // Day 180 - 6 Months
   WithdrawalStageModel(
     intensityLevel: 6,
-    timeAfterQuitting: "6 Months",
+    timeAfterQuitting: context.l10n.timeline_duration_6_months,
     whatHappens: [
-      EmojiTextModel(emoji: "✨", text: "Complete restoration").toJson(),
-      EmojiTextModel(emoji: "💪", text: "Peak performance").toJson(),
-      EmojiTextModel(emoji: "🎉", text: "Major milestone!").toJson()
+      EmojiTextModel(emoji: "✨", text: context.l10n.withdrawal_happens_complete_restoration).toJson(),
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_happens_peak_performance).toJson(),
+      EmojiTextModel(emoji: "🎉", text: context.l10n.withdrawal_happens_major_milestone).toJson()
     ],
     symptoms: [
-      EmojiTextModel(emoji: "🏆", text: "Ultimate milestone").toJson(),
-      EmojiTextModel(emoji: "💎", text: "Optimal health").toJson(),
-      EmojiTextModel(emoji: "🌟", text: "Best life").toJson()
+      EmojiTextModel(emoji: "🏆", text: context.l10n.withdrawal_symptom_ultimate_milestone).toJson(),
+      EmojiTextModel(emoji: "💎", text: context.l10n.withdrawal_symptom_optimal_health).toJson(),
+      EmojiTextModel(emoji: "🌟", text: context.l10n.withdrawal_symptom_best_life).toJson()
     ],
     howToCope: [
-      EmojiTextModel(emoji: "🏆", text: "Celebrate this incredible achievement").toJson(),
-      EmojiTextModel(emoji: "🌟", text: "Plan your smoke-free future").toJson(),
-      EmojiTextModel(emoji: "💪", text: "Continue your healthy lifestyle forever").toJson()
+      EmojiTextModel(emoji: "🏆", text: context.l10n.withdrawal_cope_incredible_achievement).toJson(),
+      EmojiTextModel(emoji: "🌟", text: context.l10n.withdrawal_cope_smoke_free_future).toJson(),
+      EmojiTextModel(emoji: "💪", text: context.l10n.withdrawal_cope_healthy_lifestyle).toJson()
     ],
   ),
 ];
