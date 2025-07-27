@@ -5,6 +5,7 @@ import 'package:nicotrack/getx-controllers/did-you-smoke-controller.dart';
 import '../../../../constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
 import '../../../elements/textAutoSize.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class HowManyToday extends StatefulWidget {
   const HowManyToday({super.key});
@@ -42,7 +43,7 @@ class _HowManyTodayState extends State<HowManyToday> {
               SizedBox(
                 width: 247.w,
                 child: TextAutoSize(
-                  "How many 🚬 cigarettes did you consume today?",
+                  context.l10n.how_many_cigarettes_today,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       height: 1.15,

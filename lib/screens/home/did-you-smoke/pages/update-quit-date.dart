@@ -8,6 +8,7 @@ import '../../../elements/textAutoSize.dart';
 import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class UpdateQuitDate extends StatefulWidget {
   const UpdateQuitDate({super.key});
@@ -45,7 +46,7 @@ class _UpdateQuitDateState extends State<UpdateQuitDate> {
               SizedBox(
                 width: 227.w,
                 child: TextAutoSize(
-                  "🗓️ Update Your Quit Date?",
+                  context.l10n.update_quit_date_title,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       height: 1.15,
@@ -63,8 +64,7 @@ class _UpdateQuitDateState extends State<UpdateQuitDate> {
                   textAlign: TextAlign.center,
                     text: TextSpan(children: [
                   TextSpan(
-                      text:
-                          "Update your quit date to today? Or treat this as a rare fluke and keep your original quit date ",
+                      text: context.l10n.update_quit_date_description,
                       style: TextStyle(
                           height: 1.15,
                           fontSize: 13.sp,
@@ -78,7 +78,7 @@ class _UpdateQuitDateState extends State<UpdateQuitDate> {
                           fontFamily: circularBold,
                           color: Colors.black87)),
                   TextSpan(
-                      text: "?",
+                      text: context.l10n.update_quit_date_question,
                       style: TextStyle(
                           height: 1.15,
                           fontSize: 13.sp,

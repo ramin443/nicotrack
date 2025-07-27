@@ -5,6 +5,7 @@ import 'package:nicotrack/getx-controllers/did-you-smoke-controller.dart';
 import '../../../../constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
 import '../../../elements/textAutoSize.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class WhatTriggered extends StatefulWidget {
   const WhatTriggered({super.key});
@@ -29,7 +30,7 @@ class _WhatTriggeredState extends State<WhatTriggered> {
               SizedBox(
                 width: 247.w,
                 child: TextAutoSize(
-                  "What triggered you smoking 🚬 today?",
+                  context.l10n.what_triggered_smoking,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       height: 1.15,
@@ -41,7 +42,7 @@ class _WhatTriggeredState extends State<WhatTriggered> {
               SizedBox(
                 height: 26.h,
               ),
-              didYouSmokeController.whatTriggeredGrid(),
+              didYouSmokeController.whatTriggeredGrid(context),
 
               SizedBox(
                 height: 54.h,

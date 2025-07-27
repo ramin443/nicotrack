@@ -766,5 +766,47 @@
   "info_bottom_personalized": "مخصص",
   "info_bottom_evidence_based": "قائم على الأدلة",
   "info_bottom_supportive": "داعم",
-  "info_bottom_journey_unique": "رحلتك فريدة وقيمة"
+  "info_bottom_journey_unique": "رحلتك فريدة وقيمة",
+
+  "did_you_smoke_today": "هل دخنت\n🚬 اليوم؟",
+  "honesty_best_policy": "الصدق أفضل سياسة 😉",
+  "how_many_cigarettes_today": "كم 🚬 سيجارة دخنت اليوم؟",
+  "amazing_congratulations": "رائع!",
+  "smoke_free_day_message": "أنت في يومك ",
+  "smoke_free_day_suffix": "الخالي من التدخين 🥳.",
+  "financial_goal_label": "🥅 الهدف المالي: \n",
+  "completed_label": " مكتمل.",
+  "go_to_home_button": "🏠 اذهب للرئيسية",
+  "update_quit_date_title": "🗓️ تحديث تاريخ الإقلاع؟",
+  "update_quit_date_description": "تحديث تاريخ الإقلاع لليوم؟ أم اعتبار هذا زلة نادرة والاحتفاظ بتاريخ الإقلاع الأصلي ",
+  "update_quit_date_question": "؟",
+  "no_stayed_smoke_free": "لا، بقيت خالياً من التدخين!",
+  "what_will_you_do_next": "ماذا ستفعل المرة القادمة لتجنب ⚠️ هذا؟",
+  "what_triggered_smoking": "ما الذي دفعك للتدخين 🚬 اليوم؟",
+  "how_did_it_make_feel": "كيف جعلك هذا تشعر 😔؟",
+  "trigger_work_stress": "ضغط العمل",
+  "trigger_relationship": "العلاقة",
+  "trigger_social_setting": "البيئة الاجتماعية",
+  "trigger_after_meal": "بعد الوجبة",
+  "trigger_craving_episode": "نوبة الرغبة",
+  "trigger_other": "أخرى",
+  "feeling_guilty": " مذنب",
+  "feeling_frustrated": "محبط",
+  "feeling_indifferent": "غير مبال",
+  "feeling_motivated_bounce_back": "متحفز للتعافي",
+  "feeling_others": "أخرى",
+  "avoid_breathing_exercises": " استخدام تمارين التنفس",
+  "avoid_distract_game": "الإلهاء بلعبة",
+  "avoid_go_walk": "الذهاب للمشي",
+  "avoid_call_someone": "الاتصال بشخص ما",
+  "avoid_log_craving": "تسجيل الرغبة والمزاج",
+  "avoid_other": "أخرى",
+  
+  "yes_update_quit_date": "نعم، حديث تاريخ الإقلاع",
+  "no_keep_quit_date": "لا، احتفظ بتاريخ الإقلاع",
+  "reset_streak_message": "(إعادة تعيين سلسلة الأيام الخالية من التدخين إلى اليوم 0)",
+  "one_time_slip_message": "(هذه مجرد زلة لمرة واحدة — ما زلت على المسار الصحيح!)",
+  "finish_button": "🏠 إنهاء",
+  "go_home_button": "🏠 اذهب للرئيسية",
+  "yes_smoked_today": "نعم، دخنت اليوم"
 }

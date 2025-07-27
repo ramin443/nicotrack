@@ -21,6 +21,7 @@ import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import 'package:nicotrack/screens/base/base.dart';
 import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class NoSmokeCongratsPage extends StatefulWidget {
   final DateTime selectedDate;
@@ -286,7 +287,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                           height: 14.h,
                         ),
                         GradientText(
-                          text: "Amazing!",
+                          text: context.l10n.amazing_congratulations,
                           gradient: LinearGradient(
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
@@ -313,7 +314,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                                     color: nicotrackBlack1,
                                   ),
                                   children: [
-                                    TextSpan(text: 'You’re on your '),
+                                    TextSpan(text: context.l10n.smoke_free_day_message),
                                     TextSpan(
                                       text: '${daysSinceQuit}${_getDaySuffix(daysSinceQuit)}\n',
                                       style: TextStyle(
@@ -323,7 +324,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                                         color: Color(0xffFF4B4B),
                                       ),
                                     ),
-                                    TextSpan(text: daysSinceQuit == 1 ? 'smoke-free day 🥳.' : 'smoke-free day 🥳.'),
+                                    TextSpan(text: context.l10n.smoke_free_day_suffix),
                                   ])),
                         ),
                         SizedBox(
@@ -474,7 +475,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                           color: nicotrackBlack1,
                         ),
                         children: [
-                          TextSpan(text: '🥅 Financial Goal: \n${topFinancialGoal!.emoji} ${topFinancialGoal!.goalTitle} '),
+                          TextSpan(text: '${context.l10n.financial_goal_prefix}${topFinancialGoal!.emoji} ${topFinancialGoal!.goalTitle} '),
                           TextSpan(
                             text: '$progressPercentage%',
                             style: TextStyle(
@@ -484,7 +485,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                               color: Color(0xff6D9C32),
                             ),
                           ),
-                          TextSpan(text: ' completed.'),
+                          TextSpan(text: context.l10n.financial_goal_completed),
                         ])),
               ),
             ],
@@ -556,7 +557,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                 )
               ),
               TextAutoSize(
-                'Days since\nlast smoked',
+                context.l10n.home_days_since_last_smoked,
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   height: 1.1,
@@ -606,7 +607,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                 )
               ),
               TextAutoSize(
-                'Money saved',
+                context.l10n.home_money_saved,
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   height: 1.1,
@@ -642,7 +643,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                 width: 346.w,
               ),
               Text(
-                "🏠 Go to home",
+                context.l10n.go_home_button,
                 style: TextStyle(
                     fontSize: 18.sp,
                     fontFamily: circularBold,

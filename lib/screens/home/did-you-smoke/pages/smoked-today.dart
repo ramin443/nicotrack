@@ -5,6 +5,7 @@ import 'package:nicotrack/getx-controllers/did-you-smoke-controller.dart';
 import '../../../../constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
 import '../../../elements/textAutoSize.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class SmokedToday extends StatefulWidget {
   const SmokedToday({super.key});
@@ -41,7 +42,7 @@ class _SmokedTodayState extends State<SmokedToday> {
               SizedBox(
                 width: 227.w,
                 child: TextAutoSize(
-                  "Did you\nsmoke 🚬 today?",
+                  context.l10n.did_you_smoke_today,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       height: 1.15,
@@ -55,7 +56,7 @@ class _SmokedTodayState extends State<SmokedToday> {
               ),
               SizedBox(
                 child: TextAutoSize(
-                  "Honesty is the best policy 😉",
+                  context.l10n.honesty_best_policy,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       height: 1.15,
@@ -67,7 +68,7 @@ class _SmokedTodayState extends State<SmokedToday> {
               SizedBox(
                 height: 75.h,
               ),
-              didYouSmokeController.smokedTodaySelection(),
+              didYouSmokeController.smokedTodaySelection(context),
               SizedBox(
                 height: 54.h,
               ),

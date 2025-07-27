@@ -6,6 +6,7 @@ import 'package:nicotrack/getx-controllers/did-you-smoke-controller.dart';
 import '../../../../constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
 import '../../../elements/textAutoSize.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class HowYouFeel extends StatefulWidget {
   const HowYouFeel({super.key});
@@ -30,7 +31,7 @@ class _HowYouFeelState extends State<HowYouFeel> {
               SizedBox(
                 width: 247.w,
                 child: TextAutoSize(
-                  "How did it 😔 make you feel?",
+                  context.l10n.how_did_it_make_feel,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       height: 1.15,
@@ -42,7 +43,7 @@ class _HowYouFeelState extends State<HowYouFeel> {
               SizedBox(
                 height: 26.h,
               ),
-              didYouSmokeController.howYouFeelGrid(),
+              didYouSmokeController.howYouFeelGrid(context),
 
               SizedBox(
                 height: 54.h,

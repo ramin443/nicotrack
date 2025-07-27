@@ -1,5 +1,9 @@
 {
   "ar": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card",
     "withdrawal_happens_oxygen_normalizes",
     "withdrawal_happens_heart_rate_drops",
     "withdrawal_happens_nicotine_drops_90",
@@ -73,6 +77,10 @@
   ],
 
   "cs": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card",
     "withdrawal_happens_oxygen_normalizes",
     "withdrawal_happens_heart_rate_drops",
     "withdrawal_happens_nicotine_drops_90",
@@ -143,9 +151,20 @@
     "withdrawal_happens_complete_restoration",
     "withdrawal_happens_peak_performance",
     "withdrawal_happens_major_milestone"
+  ],
+
+  "de": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card"
   ],
 
   "el": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card",
     "withdrawal_happens_oxygen_normalizes",
     "withdrawal_happens_heart_rate_drops",
     "withdrawal_happens_nicotine_drops_90",
@@ -218,7 +237,25 @@
     "withdrawal_happens_major_milestone"
   ],
 
+  "es": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card"
+  ],
+
+  "fr": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card"
+  ],
+
   "he": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card",
     "withdrawal_happens_oxygen_normalizes",
     "withdrawal_happens_heart_rate_drops",
     "withdrawal_happens_nicotine_drops_90",
@@ -292,6 +329,10 @@
   ],
 
   "hi": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card",
     "withdrawal_happens_oxygen_normalizes",
     "withdrawal_happens_heart_rate_drops",
     "withdrawal_happens_nicotine_drops_90",
@@ -365,6 +406,10 @@
   ],
 
   "hu": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card",
     "withdrawal_happens_oxygen_normalizes",
     "withdrawal_happens_heart_rate_drops",
     "withdrawal_happens_nicotine_drops_90",
@@ -438,6 +483,10 @@
   ],
 
   "id": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card",
     "withdrawal_happens_oxygen_normalizes",
     "withdrawal_happens_heart_rate_drops",
     "withdrawal_happens_nicotine_drops_90",
@@ -510,7 +559,25 @@
     "withdrawal_happens_major_milestone"
   ],
 
+  "it": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card"
+  ],
+
+  "ja": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card"
+  ],
+
   "ko": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card",
     "withdrawal_happens_oxygen_normalizes",
     "withdrawal_happens_heart_rate_drops",
     "withdrawal_happens_nicotine_drops_90",
@@ -584,6 +651,10 @@
   ],
 
   "nl": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card",
     "withdrawal_happens_oxygen_normalizes",
     "withdrawal_happens_heart_rate_drops",
     "withdrawal_happens_nicotine_drops_90",
@@ -657,6 +728,10 @@
   ],
 
   "pl": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card",
     "withdrawal_happens_oxygen_normalizes",
     "withdrawal_happens_heart_rate_drops",
     "withdrawal_happens_nicotine_drops_90",
@@ -727,9 +802,20 @@
     "withdrawal_happens_complete_restoration",
     "withdrawal_happens_peak_performance",
     "withdrawal_happens_major_milestone"
+  ],
+
+  "pt": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card"
   ],
 
   "ro": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card",
     "withdrawal_happens_oxygen_normalizes",
     "withdrawal_happens_heart_rate_drops",
     "withdrawal_happens_nicotine_drops_90",
@@ -802,7 +888,18 @@
     "withdrawal_happens_major_milestone"
   ],
 
+  "ru": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card"
+  ],
+
   "tr": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card",
     "withdrawal_happens_oxygen_normalizes",
     "withdrawal_happens_heart_rate_drops",
     "withdrawal_happens_nicotine_drops_90",
@@ -873,5 +970,12 @@
     "withdrawal_happens_complete_restoration",
     "withdrawal_happens_peak_performance",
     "withdrawal_happens_major_milestone"
+  ],
+
+  "zh": [
+    "financial_goal_prefix",
+    "financial_goal_completed",
+    "days_since_last_smoked_card",
+    "money_saved_card"
   ]
 }

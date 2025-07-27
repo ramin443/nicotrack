@@ -26,6 +26,7 @@ import 'package:nicotrack/getx-controllers/home-controller.dart';
 import 'package:nicotrack/getx-controllers/premium-controller.dart';
 import 'package:nicotrack/screens/premium/premium-paywall-screen.dart';
 import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 import 'dart:ui';
 
 class DidYouSmokeController extends GetxController {
@@ -55,34 +56,37 @@ class DidYouSmokeController extends GetxController {
 
   //What Trigerred variables
   List<Map<String, dynamic>> selectedTriggered = [];
-  List<EmojiTextModel> triggerPairs = [
-    EmojiTextModel(emoji: stressedEmoji, text: "Work Stress"),
-    EmojiTextModel(emoji: tiredImg, text: "Relationship"),
-    EmojiTextModel(emoji: beerEmoji, text: "Social setting"),
-    EmojiTextModel(emoji: platesEmoji, text: "After a meal"),
-    EmojiTextModel(emoji: cigImg, text: "Craving Episode"),
-    EmojiTextModel(emoji: xmarkEmoji, text: "Other"),
+  
+  List<EmojiTextModel> getTriggerPairs(BuildContext context) => [
+    EmojiTextModel(emoji: stressedEmoji, text: context.l10n.trigger_work_stress),
+    EmojiTextModel(emoji: tiredImg, text: context.l10n.trigger_relationship),
+    EmojiTextModel(emoji: beerEmoji, text: context.l10n.trigger_social_setting),
+    EmojiTextModel(emoji: platesEmoji, text: context.l10n.trigger_after_meal),
+    EmojiTextModel(emoji: cigImg, text: context.l10n.trigger_craving_episode),
+    EmojiTextModel(emoji: xmarkEmoji, text: context.l10n.trigger_other),
   ];
 
   //How you feel variables
   List<Map<String, dynamic>> selectedhowYouFeelIndex = [];
-  List<EmojiTextModel> howyouFeelPairs = [
-    EmojiTextModel(emoji: sadImg, text: " Guilty"),
-    EmojiTextModel(emoji: frustratedImg, text: "Frustrated "),
-    EmojiTextModel(emoji: neutralImg, text: "Indifferent"),
-    EmojiTextModel(emoji: motivImg, text: "Motivated to bounce back"),
-    EmojiTextModel(emoji: xmarkEmoji, text: "Others"),
+  
+  List<EmojiTextModel> getHowYouFeelPairs(BuildContext context) => [
+    EmojiTextModel(emoji: sadImg, text: context.l10n.feeling_guilty),
+    EmojiTextModel(emoji: frustratedImg, text: context.l10n.feeling_frustrated),
+    EmojiTextModel(emoji: neutralImg, text: context.l10n.feeling_indifferent),
+    EmojiTextModel(emoji: motivImg, text: context.l10n.feeling_motivated_bounce_back),
+    EmojiTextModel(emoji: xmarkEmoji, text: context.l10n.feeling_others),
   ];
 
   //Avoid Next variables
   List<Map<String, dynamic>> selectedAvoidIndex = [];
-  List<EmojiTextModel> nextAvoidPairs = [
-    EmojiTextModel(emoji: meditateImg, text: " Use breathing exercises"),
-    EmojiTextModel(emoji: gameImg, text: "Distract with a game"),
-    EmojiTextModel(emoji: walkImg, text: "Go for a walk"),
-    EmojiTextModel(emoji: phoneImg, text: "Call someone"),
-    EmojiTextModel(emoji: notesImg, text: "Log craving and mood"),
-    EmojiTextModel(emoji: xmarkEmoji, text: "Other"),
+  
+  List<EmojiTextModel> getNextAvoidPairs(BuildContext context) => [
+    EmojiTextModel(emoji: meditateImg, text: context.l10n.avoid_breathing_exercises),
+    EmojiTextModel(emoji: gameImg, text: context.l10n.avoid_distract_game),
+    EmojiTextModel(emoji: walkImg, text: context.l10n.avoid_go_walk),
+    EmojiTextModel(emoji: phoneImg, text: context.l10n.avoid_call_someone),
+    EmojiTextModel(emoji: notesImg, text: context.l10n.avoid_log_craving),
+    EmojiTextModel(emoji: xmarkEmoji, text: context.l10n.avoid_other),
   ];
 
   // UpdateQuitDate variables
@@ -122,7 +126,7 @@ class DidYouSmokeController extends GetxController {
               ),
         child: Center(
           child: TextAutoSize(
-            currentPage == (pages.length - 1) ? "🏠 Finish" : "Continue",
+            currentPage == (pages.length - 1) ? context.l10n.finish_button : context.l10n.continue_button,
             style: TextStyle(
                 fontSize: 18.sp,
                 fontFamily: circularBold,
@@ -135,14 +139,14 @@ class DidYouSmokeController extends GetxController {
     );
   }
 
-  Widget gotoHomeBtn() {
+  Widget gotoHomeBtn(BuildContext context) {
     return Column(
       children: [
         GestureDetector(
           onTap: () {
             // Save smoke-free data and navigate to home
             DateTime currentDateTime = DateTime.now();
-            addDatatoHiveandNavigate(currentDateTime, Get.context!);
+            addDatatoHiveandNavigate(currentDateTime, context);
           },
           child: Stack(
             alignment: Alignment.center,
@@ -152,7 +156,7 @@ class DidYouSmokeController extends GetxController {
                 width: 346.w,
               ),
               TextAutoSize(
-                "🏠 Go to home",
+                context.l10n.go_home_button,
                 style: TextStyle(
                     fontSize: 18.sp,
                     fontFamily: circularBold,
@@ -214,7 +218,7 @@ class DidYouSmokeController extends GetxController {
     );
   }
 
-  Widget smokedTodaySelection() {
+  Widget smokedTodaySelection(BuildContext context) {
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: Row(
@@ -260,7 +264,7 @@ class DidYouSmokeController extends GetxController {
                             height: 24.h,
                           ),
                           TextAutoSize(
-                            "Yes, I smoked today",
+                            context.l10n.yes_smoked_today,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               height: 1.2,
@@ -324,7 +328,7 @@ class DidYouSmokeController extends GetxController {
                             height: 24.h,
                           ),
                           TextAutoSize(
-                            " No, I stayed smoke-free!",
+                            context.l10n.no_stayed_smoke_free,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               height: 1.2,
@@ -382,8 +386,9 @@ class DidYouSmokeController extends GetxController {
     );
   }
 
-  Widget whatTriggeredGrid() {
+  Widget whatTriggeredGrid(BuildContext context) {
     // Grid View for selection
+    final triggerList = getTriggerPairs(context);
     return Expanded(
       child: Padding(
         padding: EdgeInsets.only(
@@ -391,7 +396,7 @@ class DidYouSmokeController extends GetxController {
           right: 28.w,
         ),
         child: GridView.builder(
-          itemCount: triggerPairs.length,
+          itemCount: triggerList.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, // Two columns
             crossAxisSpacing: 9.w,
@@ -400,18 +405,18 @@ class DidYouSmokeController extends GetxController {
           ),
           itemBuilder: (context, index) {
             bool isSelected = selectedTriggered.any(
-                (element) => (element['emoji'] == triggerPairs[index].emoji));
+                (element) => (element['emoji'] == triggerList[index].emoji));
 
             return GestureDetector(
               onTap: () {
                 HapticFeedback.mediumImpact();
                 if (selectedTriggered.any((element) =>
-                    (element['emoji'] == triggerPairs[index].emoji))) {
+                    (element['emoji'] == triggerList[index].emoji))) {
                   selectedTriggered.removeWhere((elem) =>
-                      elem['emoji'] == triggerPairs[index].emoji &&
-                      elem['text'] == triggerPairs[index].text);
+                      elem['emoji'] == triggerList[index].emoji &&
+                      elem['text'] == triggerList[index].text);
                 } else {
-                  selectedTriggered.add(triggerPairs[index].toJson());
+                  selectedTriggered.add(triggerList[index].toJson());
                   didYouSmokeFilledData = didYouSmokeFilledData.copyWith(
                       whatTriggerred: selectedTriggered);
                 }
@@ -432,14 +437,14 @@ class DidYouSmokeController extends GetxController {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      triggerPairs[index].emoji,
+                      triggerList[index].emoji,
                       width: 54.w,
                     ),
                     SizedBox(height: 18.h),
                     SizedBox(
                       width: 138.w,
                       child: TextAutoSize(
-                        triggerPairs[index].text,
+                        triggerList[index].text,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 14.sp,
@@ -457,8 +462,9 @@ class DidYouSmokeController extends GetxController {
     );
   }
 
-  Widget howYouFeelGrid() {
+  Widget howYouFeelGrid(BuildContext context) {
     // Grid View for selection
+    final feelingsList = getHowYouFeelPairs(context);
     return Expanded(
       child: Padding(
         padding: EdgeInsets.only(
@@ -466,7 +472,7 @@ class DidYouSmokeController extends GetxController {
           right: 28.w,
         ),
         child: GridView.builder(
-          itemCount: howyouFeelPairs.length,
+          itemCount: feelingsList.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, // Two columns
             crossAxisSpacing: 9.w,
@@ -475,17 +481,17 @@ class DidYouSmokeController extends GetxController {
           ),
           itemBuilder: (context, index) {
             bool isSelected = selectedhowYouFeelIndex.any(
-                (element) => element["emoji"] == howyouFeelPairs[index].emoji);
+                (element) => element["emoji"] == feelingsList[index].emoji);
 
             return GestureDetector(
               onTap: () {
                 HapticFeedback.mediumImpact();
                 if (selectedhowYouFeelIndex.any((element) =>
-                    element["emoji"] == howyouFeelPairs[index].emoji)) {
+                    element["emoji"] == feelingsList[index].emoji)) {
                   selectedhowYouFeelIndex.removeWhere(
-                      (elem) => elem["emoji"] == howyouFeelPairs[index].emoji);
+                      (elem) => elem["emoji"] == feelingsList[index].emoji);
                 } else {
-                  selectedhowYouFeelIndex.add(howyouFeelPairs[index].toJson());
+                  selectedhowYouFeelIndex.add(feelingsList[index].toJson());
                   didYouSmokeFilledData = didYouSmokeFilledData.copyWith(
                       howYouFeel: selectedhowYouFeelIndex);
                 }
@@ -506,14 +512,14 @@ class DidYouSmokeController extends GetxController {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      howyouFeelPairs[index].emoji,
+                      feelingsList[index].emoji,
                       width: 54.w,
                     ),
                     SizedBox(height: 18.h),
                     SizedBox(
                       width: 138.w,
                       child: TextAutoSize(
-                        howyouFeelPairs[index].text,
+                        feelingsList[index].text,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 14.sp,
@@ -532,8 +538,9 @@ class DidYouSmokeController extends GetxController {
     );
   }
 
-  Widget avoidNextGrid() {
+  Widget avoidNextGrid(BuildContext context) {
     // Grid View for selection
+    final avoidList = getNextAvoidPairs(context);
     return Expanded(
       child: Padding(
         padding: EdgeInsets.only(
@@ -541,7 +548,7 @@ class DidYouSmokeController extends GetxController {
           right: 28.w,
         ),
         child: GridView.builder(
-          itemCount: nextAvoidPairs.length,
+          itemCount: avoidList.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, // Two columns
             crossAxisSpacing: 9.w,
@@ -550,17 +557,17 @@ class DidYouSmokeController extends GetxController {
           ),
           itemBuilder: (context, index) {
             bool isSelected = selectedAvoidIndex.any(
-                (element) => element["emoji"] == nextAvoidPairs[index].emoji);
+                (element) => element["emoji"] == avoidList[index].emoji);
 
             return GestureDetector(
               onTap: () {
                 HapticFeedback.mediumImpact();
                 if (selectedAvoidIndex.any((element) =>
-                    element["emoji"] == nextAvoidPairs[index].emoji)) {
+                    element["emoji"] == avoidList[index].emoji)) {
                   selectedAvoidIndex.removeWhere((element) =>
-                      element["emoji"] == nextAvoidPairs[index].emoji);
+                      element["emoji"] == avoidList[index].emoji);
                 } else {
-                  selectedAvoidIndex.add(nextAvoidPairs[index].toJson());
+                  selectedAvoidIndex.add(avoidList[index].toJson());
                   didYouSmokeFilledData = didYouSmokeFilledData.copyWith(
                       avoidNext: selectedAvoidIndex);
                 }
@@ -581,14 +588,14 @@ class DidYouSmokeController extends GetxController {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      nextAvoidPairs[index].emoji,
+                      avoidList[index].emoji,
                       width: 54.w,
                     ),
                     SizedBox(height: 18.h),
                     SizedBox(
                       width: 138.w,
                       child: TextAutoSize(
-                        nextAvoidPairs[index].text,
+                        avoidList[index].text,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 14.sp,
@@ -671,7 +678,7 @@ class DidYouSmokeController extends GetxController {
                                     SizedBox(
                                       width: 130.w,
                                       child: TextAutoSize(
-                                        "Yes, update my quit date",
+                                        context.l10n.yes_update_quit_date,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           height: 1.2,
@@ -687,7 +694,7 @@ class DidYouSmokeController extends GetxController {
                                     SizedBox(
                                       width: 145.w,
                                       child: TextAutoSize(
-                                        "(Resets your smoke-free streak to Day 0)",
+                                        context.l10n.reset_streak_message,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           height: 1.2,
@@ -756,7 +763,7 @@ class DidYouSmokeController extends GetxController {
                                 SizedBox(
                                   width: 130.w,
                                   child: TextAutoSize(
-                                    "No, keep my quit date",
+                                    context.l10n.no_keep_quit_date,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       height: 1.2,
@@ -772,7 +779,7 @@ class DidYouSmokeController extends GetxController {
                                 SizedBox(
                                   width: 145.w,
                                   child: TextAutoSize(
-                                    "(This was just a one-time slip — I'm still on track!)",
+                                    context.l10n.one_time_slip_message,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       height: 1.2,

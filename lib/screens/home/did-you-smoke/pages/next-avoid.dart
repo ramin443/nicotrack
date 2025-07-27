@@ -5,6 +5,7 @@ import 'package:nicotrack/getx-controllers/did-you-smoke-controller.dart';
 import '../../../../constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
 import '../../../elements/textAutoSize.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class NextAvoid extends StatefulWidget {
   const NextAvoid({super.key});
@@ -29,7 +30,7 @@ class _NextAvoidState extends State<NextAvoid> {
               SizedBox(
                 width: 267.w,
                 child: TextAutoSize(
-                  "What will you do next time to avoid ⚠️ it?",
+                  context.l10n.what_will_you_do_next,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       height: 1.15,
@@ -42,7 +43,7 @@ class _NextAvoidState extends State<NextAvoid> {
               SizedBox(
                 height: 26.h,
               ),
-              didYouSmokeController.avoidNextGrid(),
+              didYouSmokeController.avoidNextGrid(context),
               SizedBox(
                 height: 54.h,
               ),
