@@ -91,7 +91,7 @@ class _HomeState extends State<Home> {
                                         Positioned(
                                             child: SvgPicture.asset(
                                           premiumBtnBg,
-                                          width: 102.w,
+                                          width: 112.w,
                                         )),
                                         Container(
                                           padding: EdgeInsets.only(bottom: 2.h),

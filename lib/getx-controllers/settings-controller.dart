@@ -302,7 +302,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            width: 195.w,
+            width: 185.w,
             child: RichText(
                 text: TextSpan(
                     style: TextStyle(

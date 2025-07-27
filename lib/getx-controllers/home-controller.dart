@@ -87,6 +87,60 @@ class HomeController extends GetxController {
     });
   }
 
+  /// Helper function to get localized short weekday name
+  String getLocalizedWeekdayShort(BuildContext context, DateTime date) {
+    switch (date.weekday) {
+      case DateTime.monday:
+        return context.l10n.monday_short;
+      case DateTime.tuesday:
+        return context.l10n.tuesday_short;
+      case DateTime.wednesday:
+        return context.l10n.wednesday_short;
+      case DateTime.thursday:
+        return context.l10n.thursday_short;
+      case DateTime.friday:
+        return context.l10n.friday_short;
+      case DateTime.saturday:
+        return context.l10n.saturday_short;
+      case DateTime.sunday:
+        return context.l10n.sunday_short;
+      default:
+        return context.l10n.monday_short;
+    }
+  }
+
+  /// Helper function to get localized month name
+  String getLocalizedMonth(BuildContext context, DateTime date) {
+    switch (date.month) {
+      case 1:
+        return context.l10n.january;
+      case 2:
+        return context.l10n.february;
+      case 3:
+        return context.l10n.march;
+      case 4:
+        return context.l10n.april;
+      case 5:
+        return context.l10n.may;
+      case 6:
+        return context.l10n.june;
+      case 7:
+        return context.l10n.july;
+      case 8:
+        return context.l10n.august;
+      case 9:
+        return context.l10n.september;
+      case 10:
+        return context.l10n.october;
+      case 11:
+        return context.l10n.november;
+      case 12:
+        return context.l10n.december;
+      default:
+        return context.l10n.january;
+    }
+  }
+
   /// 👇 This is your inline mini calendar widget
   Widget weeklyCalendarView(BuildContext context) {
     final today = DateTime.now();
@@ -139,7 +193,7 @@ class HomeController extends GetxController {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextAutoSize(
-                    DateFormat.E().format(date),
+                    getLocalizedWeekdayShort(context, date),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 13.sp,
@@ -165,7 +219,7 @@ class HomeController extends GetxController {
                   ),
                   SizedBox(height: 2.h),
                   TextAutoSize(
-                    DateFormat.MMM().format(date),
+                    getLocalizedMonth(context, date),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 13.sp,
