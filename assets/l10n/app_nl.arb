@@ -114,6 +114,10 @@
   "clear_data_instruction": "Typ \"WIS MIJN GEGEVENS\" hieronder om door te gaan met verwijderen.",
   "clear_data_placeholder": "Typ \"WIS MIJN GEGEVENS\"",
   
+  "privacy_policy": "📃 Privacybeleid",
+  "terms_of_use": "📜 Gebruiksvoorwaarden",
+  "clear_my_journey": "❌ Wis mijn reis",
+  
   "overview_tab": "📋 Overzicht",
   "health_tab": "🧠 Gezondheid",
   "savings_tab": "🪙 Besparingen",

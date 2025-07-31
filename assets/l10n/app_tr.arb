@@ -114,6 +114,10 @@
   "clear_data_instruction": "Silme işlemiyle devam etmek için aşağıya \"VERİLERİMİ TEMİZLE\" yazın.",
   "clear_data_placeholder": "\"VERİLERİMİ TEMİZLE\" yazın",
   
+  "privacy_policy": "📃 Gizlilik Politikası",
+  "terms_of_use": "📜 Kullanım Şartları",
+  "clear_my_journey": "❌ Yolculuğumu temizle",
+  
   "overview_tab": "📋 Genel bakış",
   "health_tab": "🧠 Sağlık",
   "savings_tab": "🪙 Tasarruflar",

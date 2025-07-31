@@ -114,6 +114,10 @@
   "clear_data_instruction": "Digita \"CANCELLA I MIEI DATI\" qui sotto per procedere con l'eliminazione.",
   "clear_data_placeholder": "Digita \"CANCELLA I MIEI DATI\"",
   
+  "privacy_policy": "📃 Informativa sulla privacy",
+  "terms_of_use": "📜 Termini di utilizzo",
+  "clear_my_journey": "❌ Cancella il mio viaggio",
+  
   "overview_tab": "📋 Panoramica",
   "health_tab": "🧠 Salute",
   "savings_tab": "🪙 Risparmi",

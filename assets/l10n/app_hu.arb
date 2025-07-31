@@ -114,6 +114,10 @@
   "clear_data_instruction": "Írja be az \"ADATAIM TÖRLÉSE\" szöveget alább a törlés folytatásához.",
   "clear_data_placeholder": "Írja be: \"ADATAIM TÖRLÉSE\"",
   
+  "privacy_policy": "📃 Adatvédelmi szabályzat",
+  "terms_of_use": "📜 Felhasználási feltételek",
+  "clear_my_journey": "❌ Utam törlése",
+  
   "overview_tab": "📋 Áttekintés",
   "health_tab": "🧠 Egészség",
   "savings_tab": "🪙 Megtakarítások",

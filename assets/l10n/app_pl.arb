@@ -114,6 +114,10 @@
   "clear_data_instruction": "Wpisz \"WYCZYŚĆ MOJE DANE\" poniżej, aby kontynuować usuwanie.",
   "clear_data_placeholder": "Wpisz \"WYCZYŚĆ MOJE DANE\"",
   
+  "privacy_policy": "📃 Polityka prywatności",
+  "terms_of_use": "📜 Warunki użytkowania",
+  "clear_my_journey": "❌ Wyczyść moją podróż",
+  
   "overview_tab": "📋 Przegląd",
   "health_tab": "🧠 Zdrowie",
   "savings_tab": "🪙 Oszczędności",

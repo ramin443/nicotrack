@@ -114,6 +114,10 @@
   "clear_data_instruction": "Napište \"VYMAZAT MÁ DATA\" níže pro pokračování ve smazání.",
   "clear_data_placeholder": "Napište \"VYMAZAT MÁ DATA\"",
   
+  "privacy_policy": "📃 Zásady ochrany osobních údajů",
+  "terms_of_use": "📜 Podmínky použití",
+  "clear_my_journey": "❌ Vymazat mou cestu",
+  
   "overview_tab": "📋 Přehled",
   "health_tab": "🧠 Zdraví",
   "savings_tab": "🪙 Úspory",

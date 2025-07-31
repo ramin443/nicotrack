@@ -114,6 +114,10 @@
   "clear_data_instruction": "Digite \"APAGAR MEUS DADOS\" abaixo para prosseguir com a exclusão.",
   "clear_data_placeholder": "Digite \"APAGAR MEUS DADOS\"",
   
+  "privacy_policy": "📃 Política de privacidade",
+  "terms_of_use": "📜 Termos de uso",
+  "clear_my_journey": "❌ Limpar minha jornada",
+  
   "overview_tab": "📋 Visão geral",
   "health_tab": "🧠 Saúde",
   "savings_tab": "🪙 Economias",

@@ -114,6 +114,10 @@
   "clear_data_instruction": "Ketik \"HAPUS DATA SAYA\" di bawah ini untuk melanjutkan penghapusan.",
   "clear_data_placeholder": "Ketik \"HAPUS DATA SAYA\"",
   
+  "privacy_policy": "📃 Kebijakan Privasi",
+  "terms_of_use": "📜 Syarat Penggunaan",
+  "clear_my_journey": "❌ Hapus perjalanan saya",
+  
   "overview_tab": "📋 Ringkasan",
   "health_tab": "🧠 Kesehatan",
   "savings_tab": "🪙 Tabungan",

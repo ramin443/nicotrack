@@ -114,6 +114,10 @@
   "clear_data_instruction": "Type \"CLEAR MY DATA\" below to proceed with the deletion.",
   "clear_data_placeholder": "Type \"CLEAR MY DATA\"",
   
+  "privacy_policy": "📃 Privacy Policy",
+  "terms_of_use": "📜 Terms of Use", 
+  "clear_my_journey": "❌ Clear my journey",
+  
   "overview_tab": "📋 Overview",
   "health_tab": "🧠 Health",
   "savings_tab": "🪙 Savings",

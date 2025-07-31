@@ -575,7 +575,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                               fontFamily: circularMedium,
                               color: Color(0xFF3380F8)),
                           children: [
-                        TextSpan(text: '📃 Privacy Policy'),
+                        TextSpan(text: context.l10n.privacy_policy),
                       ])),
                 ],
               ),
@@ -607,7 +607,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                               fontFamily: circularMedium,
                               color: nicotrackPurple),
                           children: [
-                        TextSpan(text: '📜 Terms of Use'),
+                        TextSpan(text: context.l10n.terms_of_use),
                       ])),
                 ],
               ),
@@ -639,7 +639,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                               fontFamily: circularMedium,
                               color: nicotrackOrange),
                           children: [
-                        TextSpan(text: '❌ Clear my journey'),
+                        TextSpan(text: context.l10n.clear_my_journey),
                       ])),
                 ],
               ),

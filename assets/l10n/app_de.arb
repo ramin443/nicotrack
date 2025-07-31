@@ -114,6 +114,10 @@
   "clear_data_instruction": "Gib \"MEINE DATEN LÖSCHEN\" unten ein, um mit der Löschung fortzufahren.",
   "clear_data_placeholder": "Gib \"MEINE DATEN LÖSCHEN\" ein",
   
+  "privacy_policy": "📃 Datenschutzrichtlinie",
+  "terms_of_use": "📜 Nutzungsbedingungen",
+  "clear_my_journey": "❌ Meine Reise löschen",
+  
   "overview_tab": "📋 Übersicht",
   "health_tab": "🧠 Gesundheit",
   "savings_tab": "🪙 Ersparnisse",

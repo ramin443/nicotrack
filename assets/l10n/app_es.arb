@@ -114,6 +114,10 @@
   "clear_data_instruction": "Escribe \"BORRAR MIS DATOS\" abajo para proceder con la eliminación.",
   "clear_data_placeholder": "Escribe \"BORRAR MIS DATOS\"",
   
+  "privacy_policy": "📃 Política de privacidad",
+  "terms_of_use": "📜 Términos de uso",
+  "clear_my_journey": "❌ Borrar mi viaje",
+  
   "overview_tab": "📋 Resumen",
   "health_tab": "🧠 Salud",
   "savings_tab": "🪙 Ahorros",

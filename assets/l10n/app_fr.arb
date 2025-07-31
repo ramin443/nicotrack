@@ -114,6 +114,10 @@
   "clear_data_instruction": "Tapez \"EFFACER MES DONNÉES\" ci-dessous pour procéder à la suppression.",
   "clear_data_placeholder": "Tapez \"EFFACER MES DONNÉES\"",
   
+  "privacy_policy": "📃 Politique de confidentialité",
+  "terms_of_use": "📜 Conditions d'utilisation",
+  "clear_my_journey": "❌ Effacer mon parcours",
+  
   "overview_tab": "📋 Aperçu",
   "health_tab": "🧠 Santé",
   "savings_tab": "🪙 Économies",
