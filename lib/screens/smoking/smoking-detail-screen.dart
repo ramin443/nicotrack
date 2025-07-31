@@ -258,6 +258,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 15.sp,
+                  height: 1.0,
                   fontFamily: circularBook,
                   color: nicotrackBlack1.withOpacity(0.6),
                 ),
@@ -373,6 +374,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 15.sp,
+              height: 1.2,
               fontFamily: circularBook,
               color: nicotrackBlack1.withOpacity(0.6),
             ),

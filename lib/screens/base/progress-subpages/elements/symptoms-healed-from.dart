@@ -126,7 +126,7 @@ class _SymptomsHealedFromState extends State<SymptomsHealedFrom> {
                     width: 18.w,
                   ),
                   SizedBox(
-                    width: 150.w,
+                    // width: 300.w,
                     child: RichText(
                         text: TextSpan(
                             style: TextStyle(

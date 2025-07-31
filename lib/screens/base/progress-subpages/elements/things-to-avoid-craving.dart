@@ -114,7 +114,7 @@ class _ThingsToAvoidCravingState extends State<ThingsToAvoidCraving> {
                   width: 18.w,
                 ),
                 SizedBox(
-                  width: 170.w,
+                  // width: 170.w,
                   child: RichText(
                       text: TextSpan(
                           style: TextStyle(
