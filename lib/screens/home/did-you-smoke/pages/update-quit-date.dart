@@ -21,12 +21,12 @@ class _UpdateQuitDateState extends State<UpdateQuitDate> {
   String getActualQuitDate() {
     final box = Hive.box<OnboardingData>('onboardingCompletedData');
     OnboardingData? userOnboardingData = box.get('currentUserOnboarding');
-    
+
     if (userOnboardingData != null && userOnboardingData.lastSmokedDate != "") {
       DateTime parsedDate = DateTime.parse(userOnboardingData.lastSmokedDate);
       return DateFormat('MMMM d, yyyy').format(parsedDate);
     }
-    
+
     // Fallback to current date if no data found
     return DateFormat('MMMM d, yyyy').format(DateTime.now());
   }
@@ -44,7 +44,7 @@ class _UpdateQuitDateState extends State<UpdateQuitDate> {
                 height: 18.h,
               ),
               SizedBox(
-                width: 227.w,
+                width: 300.w,
                 child: TextAutoSize(
                   context.l10n.update_quit_date_title,
                   textAlign: TextAlign.center,
@@ -56,35 +56,38 @@ class _UpdateQuitDateState extends State<UpdateQuitDate> {
                 ),
               ),
               SizedBox(
-                height: 9.h,
+                height: 9.w,
               ),
               SizedBox(
-                width:  double.infinity,
-                child: RichText(
-                  textAlign: TextAlign.center,
-                    text: TextSpan(children: [
-                  TextSpan(
-                      text: context.l10n.update_quit_date_description,
-                      style: TextStyle(
-                          height: 1.15,
-                          fontSize: 13.sp,
-                          fontFamily: circularBook,
-                          color: Color(0xff979797))),
-                  TextSpan(
-                      text: getActualQuitDate(),
-                      style: TextStyle(
-                          height: 1.15,
-                          fontSize: 13.sp,
-                          fontFamily: circularBold,
-                          color: Colors.black87)),
-                  TextSpan(
-                      text: context.l10n.update_quit_date_question,
-                      style: TextStyle(
-                          height: 1.15,
-                          fontSize: 13.sp,
-                          fontFamily: circularBook,
-                          color: Color(0xff979797))),
-                ])),
+                width: double.infinity,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(children: [
+                        TextSpan(
+                            text: context.l10n.update_quit_date_description,
+                            style: TextStyle(
+                                height: 1.15,
+                                fontSize: 13.sp,
+                                fontFamily: circularBook,
+                                color: Color(0xff979797))),
+                        TextSpan(
+                            text: getActualQuitDate(),
+                            style: TextStyle(
+                                height: 1.15,
+                                fontSize: 13.sp,
+                                fontFamily: circularBold,
+                                color: Colors.black87)),
+                        TextSpan(
+                            text: context.l10n.update_quit_date_question,
+                            style: TextStyle(
+                                height: 1.15,
+                                fontSize: 13.sp,
+                                fontFamily: circularBook,
+                                color: Color(0xff979797))),
+                      ])),
+                ),
               ),
               SizedBox(
                 height: 46.h,

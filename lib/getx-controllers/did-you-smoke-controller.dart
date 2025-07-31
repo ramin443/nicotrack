@@ -1022,7 +1022,7 @@ class DidYouSmokeController extends GetxController {
         }
       }
       
-      // Navigate to smoking detail screen to show overview of what they said
+      // Navigate to smoking detail screen to show overview of what they
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => SmokingDetailScreen(

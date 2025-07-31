@@ -364,7 +364,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                     minBlastForce: 0.4,
                     // set a lower min blast force
                     emissionFrequency: 0.4,
-                    numberOfParticles: 240,
+                    numberOfParticles: 100,
                     // a lot of particles at once
                     gravity: 0.14,
                   ),
@@ -382,7 +382,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                     minBlastForce: 0.1,
                     // set a lower min blast force
                     emissionFrequency: 0.4,
-                    numberOfParticles: 240,
+                    numberOfParticles: 100,
                     // a lot of particles at once
                     gravity: 0.14,
                     createParticlePath: drawCircle,
@@ -401,7 +401,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                     minBlastForce: 0.1,
                     // set a lower min blast force
                     emissionFrequency: 0.4,
-                    numberOfParticles: 240,
+                    numberOfParticles: 100,
                     // a lot of particles at once
                     gravity: 0.14,
                     createParticlePath: drawCircle,
@@ -420,7 +420,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                     minBlastForce: 0.4,
                     // set a lower min blast force
                     emissionFrequency: 0.4,
-                    numberOfParticles: 240,
+                    numberOfParticles: 100,
                     // a lot of particles at once
                     gravity: 0.14,
                     createParticlePath: drawCircle,
@@ -475,7 +475,9 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                           color: nicotrackBlack1,
                         ),
                         children: [
-                          TextSpan(text: '${context.l10n.financial_goal_prefix}${topFinancialGoal!.emoji} ${topFinancialGoal!.goalTitle} '),
+                          TextSpan(text:
+                          // '${context.l10n.financial_goal_prefix}'
+                              '${topFinancialGoal!.emoji} ${topFinancialGoal!.goalTitle} '),
                           TextSpan(
                             text: '$progressPercentage%',
                             style: TextStyle(
@@ -538,7 +540,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
         children: [
           Image.asset(
             bicepsEmoji,
-            width: 51.w,
+            width: 48.w,
           ),
           SizedBox(width: 12.w),
           Column(
@@ -556,16 +558,20 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                   color: nicotrackBlack1
                 )
               ),
-              TextAutoSize(
-                context.l10n.home_days_since_last_smoked,
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                  height: 1.1,
-                  fontSize: 12.5.sp,
-                  fontFamily: circularMedium,
-                  color: nicotrackBlack1
+              SizedBox(
+                width: 80.w,
+                child: TextAutoSize(
+                  context.l10n.home_days_since_last_smoked,
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                      height: 1.1,
+                      fontSize: 12.5.sp,
+                      fontFamily: circularMedium,
+                      color: nicotrackBlack1
+                  ),
                 ),
-              ),
+              )
+
             ],
           ),
         ],
@@ -588,7 +594,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
         children: [
           Image.asset(
             moneyEmoji,
-            width: 51.w,
+            width: 48.w,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -606,16 +612,20 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                   color: nicotrackBlack1
                 )
               ),
-              TextAutoSize(
-                context.l10n.home_money_saved,
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                  height: 1.1,
-                  fontSize: 12.5.sp,
-                  fontFamily: circularMedium,
-                  color: nicotrackBlack1
+              SizedBox(
+                width: 80.w,
+                child: TextAutoSize(
+                  context.l10n.home_money_saved,
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                      height: 1.1,
+                      fontSize: 12.5.sp,
+                      fontFamily: circularMedium,
+                      color: nicotrackBlack1
+                  ),
                 ),
-              ),
+              )
+
             ],
           ),
         ],

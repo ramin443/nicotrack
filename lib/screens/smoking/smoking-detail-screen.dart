@@ -18,6 +18,7 @@ import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 enum SmokingDetailRouteSource {
   fromHome,
@@ -215,11 +216,11 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
     // Format date
     String dateDisplay;
     if (widget.selectedDate.isToday) {
-      dateDisplay = "Today";
+      dateDisplay = context.l10n.smoking_detail_today;
     } else if (widget.selectedDate.isYesterday) {
-      dateDisplay = "Yesterday";
+      dateDisplay = context.l10n.smoking_detail_yesterday;
     } else {
-      dateDisplay = DateFormat('d. MMM yyyy').format(widget.selectedDate);
+      dateDisplay = DateFormat.yMMMd(Localizations.localeOf(context).languageCode).format(widget.selectedDate);
     }
     
     return Container(
@@ -253,7 +254,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
             if (smokingData!.whatTriggerred.isNotEmpty) ...[
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               TextAutoSize(
-                "This is what triggered your craving",
+                context.l10n.trigger_title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 15.sp,
@@ -275,7 +276,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
           if (smokingData!.howYouFeel.isNotEmpty) ...[
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               TextAutoSize(
-                "This is what it made you feel",
+                context.l10n.feeling_title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 15.sp,
@@ -297,7 +298,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
           if (smokingData!.avoidNext.isNotEmpty) ...[
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               TextAutoSize(
-                "This is what you marked\nyou would do next to avoid craving",
+                context.l10n.smoking_detail_avoidance_title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 15.sp,
@@ -368,7 +369,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
       children: [
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           TextAutoSize(
-            "Did you smoke today?",
+            context.l10n.did_you_smoke_today,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 15.sp,
@@ -386,7 +387,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
               Expanded(
                 child: _buildStatusButton(
                   icon: '👎',
-                  text: 'Yes',
+                  text: context.l10n.smoking_detail_yes,
                   isSelected: smokingData!.hasSmokedToday == 0, // 0 means smoked
                 ),
               ),
@@ -394,7 +395,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
               Expanded(
                 child: _buildStatusButton(
                   icon: '👍',
-                  text: 'No',
+                  text: context.l10n.smoking_detail_no,
                   isSelected: smokingData!.hasSmokedToday == 1, // 1 means didn't smoke
                 ),
               ),
@@ -464,7 +465,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
           ),
           SizedBox(height: 24.h),
           TextAutoSize(
-            "No Smoking Data",
+            context.l10n.no_smoking_data,
             style: TextStyle(
               fontSize: 24.sp,
               fontFamily: circularBold,
@@ -473,7 +474,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
           ),
           SizedBox(height: 8.h),
           TextAutoSize(
-            "No smoking status was recorded for this date",
+            context.l10n.no_smoking_recorded,
             style: TextStyle(
               fontSize: 14.sp,
               fontFamily: circularBook,
@@ -724,14 +725,14 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
     // Determine the date text
     String dateText;
     if (widget.selectedDate.isToday) {
-      dateText = "today";
+      dateText = context.l10n.today.toLowerCase();
     } else if (widget.selectedDate.isYesterday) {
-      dateText = "yesterday";
+      dateText = context.l10n.yesterday.toLowerCase();
     } else {
       // Format as "June 25th, 2025"
       final day = widget.selectedDate.day;
       final suffix = _getDaySuffix(day);
-      dateText = "on \n${DateFormat('MMMM d').format(widget.selectedDate)}$suffix, ${widget.selectedDate.year}";
+      dateText = "${context.l10n.smoking_detail_on} \n${DateFormat('MMMM d', Localizations.localeOf(context).languageCode).format(widget.selectedDate)}$suffix, ${widget.selectedDate.year}";
     }
     
     return Column(
@@ -765,16 +766,16 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
               height: 1.1
             ),
             children: [
-              TextSpan(text: "This is how many "),
+              TextSpan(text: context.l10n.smoking_detail_cigarettes_smoked_prefix),
               TextSpan(
-                text: "🚬\ncigarettes",
+                text: "🚬\n${context.l10n.smoking_detail_cigarettes}",
                 style: TextStyle(
                   color: Color(0xffFF611D),
                   fontSize: 22.w,
                   fontFamily: circularBold,
                 ),
               ),
-              TextSpan(text: " you smoked $dateText"),
+              TextSpan(text: "${context.l10n.smoking_detail_you_smoked}$dateText"),
             ],
           ),
         ),
@@ -811,7 +812,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
         
         // Amazing text with gradient
         GradientText(
-          text: "Amazing!",
+          text: context.l10n.smoking_detail_amazing,
           gradient: LinearGradient(
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
@@ -837,7 +838,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
               color: nicotrackBlack1,
             ),
             children: [
-              TextSpan(text: 'You\'re on your '),
+              TextSpan(text: context.l10n.smoking_detail_youre_on_your),
               TextSpan(
                 text: '${daysSinceQuit}${_getDaySuffix(daysSinceQuit)}\n',
                 style: TextStyle(
@@ -847,7 +848,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
                   color: Color(0xffFF4B4B),
                 ),
               ),
-              TextSpan(text: daysSinceQuit == 1 ? 'smoke-free day 🥳.' : 'smoke-free day 🥳.'),
+              TextSpan(text: context.l10n.smoking_detail_smoke_free_day),
             ],
           ),
         ),
@@ -861,19 +862,19 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
 
 
   String _getDaySuffix(int day) {
-    if (day <= 0) return 'th';
+    if (day <= 0) return context.l10n.ordinal_suffix_th;
     if (day >= 11 && day <= 13) {
-      return 'th';
+      return context.l10n.ordinal_suffix_th;
     }
     switch (day % 10) {
       case 1:
-        return 'st';
+        return context.l10n.ordinal_suffix_st;
       case 2:
-        return 'nd';
+        return context.l10n.ordinal_suffix_nd;
       case 3:
-        return 'rd';
+        return context.l10n.ordinal_suffix_rd;
       default:
-        return 'th';
+        return context.l10n.ordinal_suffix_th;
     }
   }
 
@@ -903,7 +904,9 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
                           color: nicotrackBlack1,
                         ),
                         children: [
-                          TextSpan(text: '🥅 Financial Goal: \n${topFinancialGoal!.emoji} ${topFinancialGoal!.goalTitle} '),
+                          TextSpan(text:
+                          // '${context.l10n.smoking_detail_financial_goal}\n'
+                              '${topFinancialGoal!.emoji} ${topFinancialGoal!.goalTitle} '),
                           TextSpan(
                             text: '$progressPercentage%',
                             style: TextStyle(
@@ -913,7 +916,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
                               color: Color(0xff6D9C32),
                             ),
                           ),
-                          TextSpan(text: ' completed.'),
+                          TextSpan(text: context.l10n.smoking_detail_completed),
                         ])),
               ),
             ],
@@ -981,7 +984,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
                 )
               ),
               TextAutoSize(
-                'Days since\nlast smoked',
+                context.l10n.smoking_detail_days_since_last_smoked,
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   height: 1.1,
@@ -1031,7 +1034,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
                 )
               ),
               TextAutoSize(
-                'Money saved',
+                context.l10n.smoking_detail_money_saved,
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   height: 1.1,
@@ -1063,7 +1066,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
                 width: 346.w,
               ),
               Text(
-                "🏠 Go to home",
+                context.l10n.smoking_detail_go_to_home,
                 style: TextStyle(
                     fontSize: 18.sp,
                     fontFamily: circularBold,

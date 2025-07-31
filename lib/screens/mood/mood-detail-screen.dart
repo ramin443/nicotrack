@@ -8,6 +8,7 @@ import 'package:nicotrack/constants/font-constants.dart';
 import 'package:nicotrack/models/mood-model/mood-model.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import 'package:nicotrack/screens/base/base.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 enum MoodDetailRouteSource {
   fromHome,
@@ -114,11 +115,13 @@ class _MoodDetailScreenState extends State<MoodDetailScreen> {
     // Format date
     String dateDisplay;
     if (widget.selectedDate.isToday) {
-      dateDisplay = "Today";
+      dateDisplay = context.l10n.today;
     } else if (widget.selectedDate.isYesterday) {
-      dateDisplay = "Yesterday";
+      dateDisplay = context.l10n.yesterday;
     } else {
-      dateDisplay = DateFormat('d. MMM yyyy').format(widget.selectedDate);
+      dateDisplay =
+          DateFormat.yMMMd(Localizations.localeOf(context).languageCode)
+              .format(widget.selectedDate);
     }
 
     return Container(
@@ -133,8 +136,8 @@ class _MoodDetailScreenState extends State<MoodDetailScreen> {
           // Large emoji with blue background
           if (selfFeeling.isNotEmpty) ...[
             Container(
-              width: 150.w,
-              height: 150.w,
+              width: 250.w,
+              // height: 50.w,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Color(0x192196F3),
@@ -165,8 +168,6 @@ class _MoodDetailScreenState extends State<MoodDetailScreen> {
               ),
             ),
             SizedBox(height: 25.w),
-
-
           ],
           // Cravings section
           if (cravingLevel != -1) ...[
@@ -174,10 +175,13 @@ class _MoodDetailScreenState extends State<MoodDetailScreen> {
             SizedBox(height: 32.w),
           ],
           // Subtitle
+
           TextAutoSize(
-            "This is what's affecting your mood",
+            context.l10n.mood_detail_affecting_mood,
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 15.sp,
+              height: 1.1,
               fontFamily: circularBook,
               color: nicotrackBlack1.withOpacity(0.6),
             ),
@@ -193,12 +197,11 @@ class _MoodDetailScreenState extends State<MoodDetailScreen> {
             SizedBox(height: 32.w),
           ],
 
-
           // Only show craving timing section if user had cravings and timing data exists
           if (craveTiming.isNotEmpty) ...[
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               TextAutoSize(
-                'This is when you craved most',
+                context.l10n.mood_detail_craving_timing,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 15.sp,
@@ -218,7 +221,7 @@ class _MoodDetailScreenState extends State<MoodDetailScreen> {
 
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             TextAutoSize(
-              'Reflection note',
+              context.l10n.mood_detail_reflection_note,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 15.sp,
@@ -322,7 +325,7 @@ class _MoodDetailScreenState extends State<MoodDetailScreen> {
   }
 
   Widget _buildCravingSection(int cravingLevel) {
-    String questionText = "Did you have any cravings?";
+    String questionText = context.l10n.mood_detail_cravings_question;
     bool hadCravings = cravingLevel != 2;
 
     return Column(
@@ -348,7 +351,7 @@ class _MoodDetailScreenState extends State<MoodDetailScreen> {
               Expanded(
                 child: _buildCravingButton(
                   icon: '👍',
-                  text: 'Yes',
+                  text: context.l10n.mood_detail_yes,
                   isSelected: hadCravings,
                 ),
               ),
@@ -356,7 +359,7 @@ class _MoodDetailScreenState extends State<MoodDetailScreen> {
               Expanded(
                 child: _buildCravingButton(
                   icon: '👎',
-                  text: 'No',
+                  text: context.l10n.mood_detail_no,
                   isSelected: !hadCravings,
                 ),
               ),
@@ -419,7 +422,9 @@ class _MoodDetailScreenState extends State<MoodDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextAutoSize(
-                reflection.isNotEmpty ? reflection : "Nothing here",
+                reflection.isNotEmpty
+                    ? reflection
+                    : context.l10n.mood_detail_nothing_here,
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontFamily: circularBook,
@@ -460,7 +465,7 @@ class _MoodDetailScreenState extends State<MoodDetailScreen> {
           ),
           SizedBox(height: 24.h),
           TextAutoSize(
-            "No Mood Recorded",
+            context.l10n.mood_detail_no_mood_recorded,
             style: TextStyle(
               fontSize: 24.sp,
               fontFamily: circularBold,
@@ -469,7 +474,7 @@ class _MoodDetailScreenState extends State<MoodDetailScreen> {
           ),
           SizedBox(height: 8.h),
           TextAutoSize(
-            "No mood data was captured for this date",
+            context.l10n.mood_detail_no_mood_data_captured,
             style: TextStyle(
               fontSize: 14.sp,
               fontFamily: circularBook,
@@ -580,9 +585,11 @@ extension DateTimeExtension on DateTime {
     final now = DateTime.now();
     return year == now.year && month == now.month && day == now.day;
   }
-  
+
   bool get isYesterday {
     final yesterday = DateTime.now().subtract(Duration(days: 1));
-    return year == yesterday.year && month == yesterday.month && day == yesterday.day;
+    return year == yesterday.year &&
+        month == yesterday.month &&
+        day == yesterday.day;
   }
 }
