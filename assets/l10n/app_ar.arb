@@ -885,5 +885,16 @@
   "mood_detail_no": "لا",
   "mood_detail_nothing_here": "لا شيء هنا",
   "mood_detail_no_mood_recorded": "لم يتم تسجيل مزاج",
-  "mood_detail_no_mood_data_captured": "لم يتم التقاط بيانات المزاج لهذا التاريخ"
+  "mood_detail_no_mood_data_captured": "لم يتم التقاط بيانات المزاج لهذا التاريخ",
+
+  "daily_task_streak": "سلسلة المهام اليومية",
+  "daily_task_streak_progress": "{count} من أصل 7 هذا الأسبوع",
+  "@daily_task_streak_progress": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  }
 }

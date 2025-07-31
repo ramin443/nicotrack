@@ -885,5 +885,16 @@
   "mood_detail_no": "Nee",
   "mood_detail_nothing_here": "Niets hier",
   "mood_detail_no_mood_recorded": "Geen Stemming Opgenomen",
-  "mood_detail_no_mood_data_captured": "Er zijn geen stemmingsgegevens vastgelegd voor deze datum"
+  "mood_detail_no_mood_data_captured": "Er zijn geen stemmingsgegevens vastgelegd voor deze datum",
+
+  "daily_task_streak": "Dagelijkse takenreeks",
+  "daily_task_streak_progress": "{count} van 7 deze week",
+  "@daily_task_streak_progress": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  }
 }

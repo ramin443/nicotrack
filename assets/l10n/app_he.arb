@@ -885,5 +885,16 @@
   "mood_detail_no": "לא",
   "mood_detail_nothing_here": "אין כאן כלום",
   "mood_detail_no_mood_recorded": "לא נרשם מצב רוח",
-  "mood_detail_no_mood_data_captured": "לא נאספו נתוני מצב רוח עבור תאריך זה"
+  "mood_detail_no_mood_data_captured": "לא נאספו נתוני מצב רוח עבור תאריך זה",
+
+  "daily_task_streak": "רצף משימות יומיות",
+  "daily_task_streak_progress": "{count} מתוך 7 השבוע",
+  "@daily_task_streak_progress": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  }
 }

@@ -885,5 +885,16 @@
   "mood_detail_no": "Hayır",
   "mood_detail_nothing_here": "Burada hiçbir şey yok",
   "mood_detail_no_mood_recorded": "Ruh Hali Kaydedilmedi",
-  "mood_detail_no_mood_data_captured": "Bu tarih için ruh hali verisi yakalanmadı"
+  "mood_detail_no_mood_data_captured": "Bu tarih için ruh hali verisi yakalanmadı",
+
+  "daily_task_streak": "Günlük görev serisi",
+  "daily_task_streak_progress": "Bu hafta {count} / 7",
+  "@daily_task_streak_progress": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  }
 }

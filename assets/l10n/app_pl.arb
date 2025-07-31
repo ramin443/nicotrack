@@ -885,5 +885,16 @@
   "mood_detail_no": "Nie",
   "mood_detail_nothing_here": "Nic tu nie ma",
   "mood_detail_no_mood_recorded": "Nie Zarejestrowano Nastroju",
-  "mood_detail_no_mood_data_captured": "Nie zarejestrowano danych o nastroju dla tej daty"
+  "mood_detail_no_mood_data_captured": "Nie zarejestrowano danych o nastroju dla tej daty",
+
+  "daily_task_streak": "Seria codziennych zadań",
+  "daily_task_streak_progress": "{count} z 7 w tym tygodniu",
+  "@daily_task_streak_progress": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  }
 }

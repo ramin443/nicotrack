@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:nicotrack/screens/elements/gradient-text.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 import '../../../../constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
@@ -134,25 +135,32 @@ class _DailyTaskStreakState extends State<DailyTaskStreak> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              TextAutoSize(
-                                'Daily task streak',
-                                style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontFamily: circularBold,
-                                    height: 1.1,
-                                    color: nicotrackBlack1),
+                              SizedBox(
+                                width: 150.w,
+                                child: TextAutoSize(
+                                  context.l10n.daily_task_streak,
+                                  style: TextStyle(
+                                      fontSize: 16.sp,
+                                      fontFamily: circularBold,
+                                      height: 1.1,
+                                      color: nicotrackBlack1),
+                                ),
                               ),
                               SizedBox(
-                                height: 3.h,
+                                height: 3.w,
                               ),
-                              TextAutoSize(
-                                '$thisWeekCount out of 7 this week',
-                                style: TextStyle(
-                                    fontSize: 14.sp,
-                                    fontFamily: circularBook,
-                                    height: 1.1,
-                                    color: Color(0xffA1A1A1)),
+                              SizedBox(
+                                width: 150.w,
+                                child: TextAutoSize(
+                                  context.l10n.daily_task_streak_progress(thisWeekCount),
+                                  style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontFamily: circularBook,
+                                      height: 1.1,
+                                      color: Color(0xffA1A1A1)),
+                                ),
                               ),
+
                             ],
                           ),
                         ],

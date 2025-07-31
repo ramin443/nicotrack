@@ -881,5 +881,16 @@
   "mood_detail_no": "否",
   "mood_detail_nothing_here": "这里什么都没有",
   "mood_detail_no_mood_recorded": "未记录心情",
-  "mood_detail_no_mood_data_captured": "未捕获此日期的心情数据"
+  "mood_detail_no_mood_data_captured": "未捕获此日期的心情数据",
+
+  "daily_task_streak": "日常任务连续记录",
+  "daily_task_streak_progress": "本周{count}个/共7个",
+  "@daily_task_streak_progress": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  }
 }

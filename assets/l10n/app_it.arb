@@ -881,5 +881,16 @@
   "mood_detail_no": "No",
   "mood_detail_nothing_here": "Niente qui",
   "mood_detail_no_mood_recorded": "Nessun Umore Registrato",
-  "mood_detail_no_mood_data_captured": "Nessun dato sull'umore è stato catturato per questa data"
+  "mood_detail_no_mood_data_captured": "Nessun dato sull'umore è stato catturato per questa data",
+
+  "daily_task_streak": "Serie di compiti giornalieri",
+  "daily_task_streak_progress": "{count} di 7 questa settimana",
+  "@daily_task_streak_progress": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  }
 }

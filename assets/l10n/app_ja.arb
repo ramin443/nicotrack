@@ -881,5 +881,16 @@
   "mood_detail_no": "いいえ",
   "mood_detail_nothing_here": "何もありません",
   "mood_detail_no_mood_recorded": "気分が記録されていません",
-  "mood_detail_no_mood_data_captured": "この日付の気分データはキャプチャされませんでした"
+  "mood_detail_no_mood_data_captured": "この日付の気分データはキャプチャされませんでした",
+
+  "daily_task_streak": "日々のタスク連続記録",
+  "daily_task_streak_progress": "今週{count}個中7個",
+  "@daily_task_streak_progress": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  }
 }

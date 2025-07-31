@@ -881,5 +881,16 @@
   "mood_detail_no": "Não",
   "mood_detail_nothing_here": "Nada aqui",
   "mood_detail_no_mood_recorded": "Nenhum Humor Registrado",
-  "mood_detail_no_mood_data_captured": "Nenhum dado de humor foi capturado para esta data"
+  "mood_detail_no_mood_data_captured": "Nenhum dado de humor foi capturado para esta data",
+
+  "daily_task_streak": "Sequência de tarefas diárias",
+  "daily_task_streak_progress": "{count} de 7 esta semana",
+  "@daily_task_streak_progress": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  }
 }

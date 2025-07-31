@@ -885,5 +885,16 @@
   "mood_detail_no": "नहीं",
   "mood_detail_nothing_here": "यहाँ कुछ नहीं",
   "mood_detail_no_mood_recorded": "कोई मूड रिकॉर्ड नहीं",
-  "mood_detail_no_mood_data_captured": "इस तारीख के लिए कोई मूड डेटा कैप्चर नहीं किया गया"
+  "mood_detail_no_mood_data_captured": "इस तारीख के लिए कोई मूड डेटा कैप्चर नहीं किया गया",
+
+  "daily_task_streak": "दैनिक कार्य शृंखला",
+  "daily_task_streak_progress": "इस सप्ताह {count} में से 7",
+  "@daily_task_streak_progress": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  }
 }

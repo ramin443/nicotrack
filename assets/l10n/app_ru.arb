@@ -881,5 +881,16 @@
   "mood_detail_no": "Нет",
   "mood_detail_nothing_here": "Здесь ничего нет",
   "mood_detail_no_mood_recorded": "Настроение не записано",
-  "mood_detail_no_mood_data_captured": "Данные о настроении для этой даты не были зафиксированы"
+  "mood_detail_no_mood_data_captured": "Данные о настроении для этой даты не были зафиксированы",
+
+  "daily_task_streak": "Серия ежедневных задач",
+  "daily_task_streak_progress": "{count} из 7 на этой неделе",
+  "@daily_task_streak_progress": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  }
 }

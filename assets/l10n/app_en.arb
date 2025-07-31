@@ -884,5 +884,16 @@
   "mood_detail_no": "No",
   "mood_detail_nothing_here": "Nothing here",
   "mood_detail_no_mood_recorded": "No Mood Recorded",
-  "mood_detail_no_mood_data_captured": "No mood data was captured for this date"
+  "mood_detail_no_mood_data_captured": "No mood data was captured for this date",
+
+  "daily_task_streak": "Daily task streak",
+  "daily_task_streak_progress": "{count} out of 7 this week",
+  "@daily_task_streak_progress": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  }
 }

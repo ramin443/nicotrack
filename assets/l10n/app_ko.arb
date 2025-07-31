@@ -885,5 +885,16 @@
   "mood_detail_no": "아니요",
   "mood_detail_nothing_here": "여기에는 아무것도 없습니다",
   "mood_detail_no_mood_recorded": "기분이 기록되지 않음",
-  "mood_detail_no_mood_data_captured": "이 날짜에 대한 기분 데이터가 캡처되지 않았습니다"
+  "mood_detail_no_mood_data_captured": "이 날짜에 대한 기분 데이터가 캡처되지 않았습니다",
+
+  "daily_task_streak": "일일 과제 연속 기록",
+  "daily_task_streak_progress": "이번 주 {count}개 / 7개",
+  "@daily_task_streak_progress": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  }
 }
