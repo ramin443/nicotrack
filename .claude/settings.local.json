@@ -48,7 +48,9 @@
       "Bash(if [ \"$file\" != \"/Users/raminudash/StudioProjects/Nicotrack/assets/l10n/app_en.arb\" ])",
       "Bash(then)",
       "Bash(sed:*)",
-      "Bash(pod install:*)"
+      "Bash(pod install:*)",
+      "Bash(do echo \"=== app_$lang.arb ===\")",
+      "Bash(do echo \"Processing $file\")"
     ],
     "deny": []
   }

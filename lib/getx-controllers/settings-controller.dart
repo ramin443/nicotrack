@@ -64,12 +64,17 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
   String feedbackType = 'general'; // general, bug_report, feature_request, other
   bool isSubmittingSupport = false;
   bool isSubmittingFeedback = false;
+  
+  // Error message states for inline display
+  String? contactSupportErrorMessage;
+  String? feedbackErrorMessage;
   bool isweeklyReminderExpanded = false;
   bool isquitTipsExpanded = false;
   final PageController financialGoalsScrollController =
       PageController(viewportFraction: 0.75);
   int currentPage = 0;
-  EmojiTextModel addNewGoal = EmojiTextModel(emoji: '🎯', text: 'Add new goal');
+  // Dynamic getter for localized add new goal text
+  EmojiTextModel getAddNewGoal(BuildContext context) => EmojiTextModel(emoji: '🎯', text: context.l10n.add_new_goal);
 
   //Set cigs variables
   late FixedExtentScrollController smokesPerDayController;
@@ -2137,7 +2142,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     );
   }
 
-  Widget contactSupportTextFields() {
+  Widget contactSupportTextFields(BuildContext context) {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
@@ -2150,7 +2155,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 width: 5.w,
               ),
               TextAutoSize(
-                'Email Address',
+                context.l10n.email_address,
                 style: TextStyle(
                   fontSize: 15.sp,
                   fontFamily: circularBook,
@@ -2172,7 +2177,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
               FocusManager.instance.primaryFocus?.unfocus();
             },
             decoration: InputDecoration(
-              hintText: 'jdoe@icloud.com',
+              hintText: context.l10n.email_placeholder,
               hintStyle: TextStyle(
                 fontSize: 15.sp,
                 fontFamily: circularBook,
@@ -2206,7 +2211,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 width: 5.w,
               ),
               TextAutoSize(
-                'Details',
+                context.l10n.details,
                 style: TextStyle(
                   fontSize: 15.sp,
                   fontFamily: circularBook,
@@ -2233,7 +2238,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
               },
               decoration: InputDecoration(
                 filled: true,
-                hintText: 'Describe your issue or question...',
+                hintText: context.l10n.describe_issue_placeholder,
                 hintStyle: TextStyle(
                   fontSize: 15.sp,
                   fontFamily: circularBook,
@@ -2256,7 +2261,40 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
               ),
               textAlignVertical: TextAlignVertical.top,
             ),
-          )
+          ),
+          // Error message display
+          if (contactSupportErrorMessage != null) ...[
+            SizedBox(height: 12.w),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.w),
+              decoration: BoxDecoration(
+                color: Colors.red.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8.r),
+                border: Border.all(color: Colors.red.withOpacity(0.3)),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                    size: 16.w,
+                  ),
+                  SizedBox(width: 8.w),
+                  Expanded(
+                    child: TextAutoSize(
+                      contactSupportErrorMessage!,
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        fontFamily: circularBook,
+                        color: Colors.red,
+                        height: 1.2,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -2330,7 +2368,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             TextAutoSize(
-              'NEW FINANCIAL GOAL',
+              context.l10n.new_financial_goal,
               style: TextStyle(
                 fontSize: 12.sp,
                 letterSpacing: 1.92,
@@ -2348,7 +2386,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
             update(); // Update UI when text changes for validation
           },
           decoration: InputDecoration(
-            hintText: 'e.g., Airpods pro ',
+            hintText: context.l10n.goal_title_placeholder,
             hintStyle: TextStyle(
               fontSize: 24.sp,
               fontFamily: circularBold,
@@ -2378,7 +2416,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             TextAutoSize(
-              'SET THE PRICE',
+              context.l10n.set_the_price,
               style: TextStyle(
                 fontSize: 12.sp,
                 letterSpacing: 1.92,
@@ -2451,7 +2489,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     );
   }
 
-  Widget honestFeedbackTextFields() {
+  Widget honestFeedbackTextFields(BuildContext context) {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
@@ -2471,7 +2509,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
               },
               decoration: InputDecoration(
                 filled: true,
-                hintText: 'Your Feedback...',
+                hintText: context.l10n.your_feedback_placeholder,
                 hintStyle: TextStyle(
                   fontSize: 15.sp,
                   fontFamily: circularBook,
@@ -2494,7 +2532,40 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
               ),
               textAlignVertical: TextAlignVertical.top,
             ),
-          )
+          ),
+          // Error message display
+          if (feedbackErrorMessage != null) ...[
+            SizedBox(height: 12.w),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.w),
+              decoration: BoxDecoration(
+                color: Colors.red.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8.r),
+                border: Border.all(color: Colors.red.withOpacity(0.3)),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                    size: 16.w,
+                  ),
+                  SizedBox(width: 8.w),
+                  Expanded(
+                    child: TextAutoSize(
+                      feedbackErrorMessage!,
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        fontFamily: circularBook,
+                        color: Colors.red,
+                        height: 1.2,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -3845,19 +3916,25 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
   Future<void> submitContactSupport(BuildContext context) async {
     if (isSubmittingSupport) return;
     
+    // Clear previous error messages
+    contactSupportErrorMessage = null;
+    
     // Validate form
     if (contactEmailController.text.trim().isEmpty) {
-      _showErrorSnackBar(context, context.l10n.email_address_required);
+      contactSupportErrorMessage = context.l10n.email_address_required;
+      update();
       return;
     }
     
     if (contactDetailsController.text.trim().isEmpty) {
-      _showErrorSnackBar(context, context.l10n.issue_description_required);
+      contactSupportErrorMessage = context.l10n.issue_description_required;
+      update();
       return;
     }
     
     if (!_isValidEmail(contactEmailController.text.trim())) {
-      _showErrorSnackBar(context, context.l10n.valid_email_required);
+      contactSupportErrorMessage = context.l10n.valid_email_required;
+      update();
       return;
     }
     
@@ -3902,7 +3979,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       
     } catch (e) {
       print('Error submitting contact support: $e');
-      _showErrorSnackBar(context, context.l10n.support_request_failed);
+      contactSupportErrorMessage = context.l10n.support_request_failed;
     } finally {
       isSubmittingSupport = false;
       update();
@@ -3912,9 +3989,13 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
   Future<void> submitFeedback(BuildContext context) async {
     if (isSubmittingFeedback) return;
     
+    // Clear previous error messages
+    feedbackErrorMessage = null;
+    
     // Validate form
     if (feedbackController.text.trim().isEmpty) {
-      _showErrorSnackBar(context, context.l10n.feedback_required);
+      feedbackErrorMessage = context.l10n.feedback_required;
+      update();
       return;
     }
     
@@ -3966,7 +4047,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       
     } catch (e) {
       print('Error submitting feedback: $e');
-      _showErrorSnackBar(context, context.l10n.feedback_submission_failed);
+      feedbackErrorMessage = context.l10n.feedback_submission_failed;
     } finally {
       isSubmittingFeedback = false;
       update();

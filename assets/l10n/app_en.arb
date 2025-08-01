@@ -904,5 +904,71 @@
   "valid_email_required": "Please enter a valid email address",
   "feedback_required": "Please enter your feedback",
   "support_request_failed": "Failed to submit support request. Please try again.",
-  "feedback_submission_failed": "Failed to submit feedback. Please try again."
+  "feedback_submission_failed": "Failed to submit feedback. Please try again.",
+
+  "done": "Done",
+  "save": "Save",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "change_currency": "💰 Change currency",
+  "change_language": "🌍 Change language",
+  "change_name": "✏️ Change Name",
+  "change_quit_date": "🗓️ Change quit date",
+  "cost_per_pack": "💸 Cost per pack",
+  "your_honest_feedback": "📝 Your honest feedback",
+  "set_price": "💸 Set price",
+  "set_time": "🕑 Set Time",
+  "set_weekday": "🕑 Set Weekday",
+  "set_weekly_reminder_time": "🕑 Set Weekly Reminder Time",
+  "cigarettes_per_day": "🚬 Cigarettes per day",
+  "save": "Save",
+  "edit_financial_goal": "EDIT FINANCIAL GOAL",
+  "set_the_price": "SET THE PRICE",
+  "edit_financial_goal": "EDIT FINANCIAL GOAL",
+  "goal_example_text": "e.g., Airpods pro",
+  "set_the_price": "SET THE PRICE",
+  "delete_goal": "Delete Goal",
+  "delete_goal_confirmation": "Are you sure you want to delete \"{goalTitle}\"?",
+  "@delete_goal_confirmation": {
+    "placeholders": {
+      "goalTitle": {
+        "type": "String",
+        "example": "Airpods pro"
+      }
+    }
+  },
+
+  "privacy_policy": "Privacy Policy",
+  "your_privacy_matters": "Your Privacy Matters",
+  "last_updated": "Last Updated: {date}",
+  "@last_updated": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "January 1, 2024"
+      }
+    }
+  },
+  "privacy_transparency_text": "We believe in complete transparency about how we handle your personal information.",
+  "privacy_first_design": "Privacy-First Design",
+  "privacy_design_description": "Nicotrack is designed with your privacy as the top priority. All your personal data stays on your device and is never transmitted to external servers.",
+  "privacy_promise": "🌟 Your Privacy is Our Promise",
+  "privacy_commitment_text": "Nicotrack is committed to helping you quit smoking while keeping your personal journey completely private and secure.",
+
+  "terms_of_use": "Terms of Use",
+  "legal_agreement": "Legal Agreement",
+  "terms_read_carefully": "Please read these terms carefully before using Nicotrack. By using our app, you agree to these terms.",
+  "user_agreement": "User Agreement",
+  "terms_agreement_description": "By downloading and using Nicotrack, you agree to be bound by these terms of use. These terms establish your rights and responsibilities when using our smoking cessation app.",
+  "fair_transparent_terms": "🤝 Fair & Transparent Terms",
+  "terms_protection_text": "These terms are designed to protect both you and us while ensuring you have the best possible experience with Nicotrack on your quit smoking journey.",
+
+  "add_new_goal": "Add new goal",
+  "new_financial_goal": "NEW FINANCIAL GOAL",
+  "email_address": "Email Address",
+  "email_placeholder": "jdoe@icloud.com",
+  "details": "Details",
+  "describe_issue_placeholder": "Describe your issue or question...",
+  "your_feedback_placeholder": "Your Feedback...",
+  "goal_title_placeholder": "e.g., Airpods pro"
 }

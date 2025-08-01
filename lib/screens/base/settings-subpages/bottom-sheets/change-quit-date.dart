@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/constants/color-constants.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 import '../../../../constants/font-constants.dart';
 import '../../../../getx-controllers/settings-controller.dart';
@@ -78,7 +79,7 @@ class _CostPerPackBottomSheetState extends State<ChangeQuitDateBottomSheet> {
                             Navigator.of(context).pop();
                           },
                           child: TextAutoSize(
-                            'Done',
+                            context.l10n.done,
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontFamily: circularBook,
@@ -98,7 +99,7 @@ class _CostPerPackBottomSheetState extends State<ChangeQuitDateBottomSheet> {
                   height: 4.w,
                 ),
                 TextAutoSize(
-                  '🗓️ Change quit date',
+                  context.l10n.change_quit_date,
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontFamily: circularBold,

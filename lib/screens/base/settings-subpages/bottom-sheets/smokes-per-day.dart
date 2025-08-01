@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/constants/color-constants.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 import '../../../../constants/font-constants.dart';
 import '../../../../getx-controllers/settings-controller.dart';
@@ -83,7 +84,7 @@ class _SmokesPerDayBottomSheetState extends State<SmokesPerDayBottomSheet> {
                             Navigator.of(context).pop();
                           },
                           child: TextAutoSize(
-                            'Done',
+                            context.l10n.done,
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontFamily: circularBook,
@@ -103,7 +104,7 @@ class _SmokesPerDayBottomSheetState extends State<SmokesPerDayBottomSheet> {
                   height: 4.w,
                 ),
                 TextAutoSize(
-                  '🚬 Cigarettes per day',
+                  context.l10n.cigarettes_per_day,
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontFamily: circularBold,

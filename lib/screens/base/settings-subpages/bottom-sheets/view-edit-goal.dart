@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/constants/color-constants.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 import 'package:nicotrack/models/financial-goals-model/financialGoals-model.dart';
 
 import '../../../../constants/font-constants.dart';
@@ -107,7 +108,7 @@ class _ViewEditGoalBottomSheetState extends State<ViewEditGoalBottomSheet> {
                         }
                       },
                       child: TextAutoSize(
-                        'Save',
+                        context.l10n.save,
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontFamily: circularBook,
@@ -199,7 +200,7 @@ class _ViewEditGoalBottomSheetState extends State<ViewEditGoalBottomSheet> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             TextAutoSize(
-              'EDIT FINANCIAL GOAL',
+              context.l10n.edit_financial_goal,
               style: TextStyle(
                 fontSize: 12.sp,
                 letterSpacing: 1.92,
@@ -245,7 +246,7 @@ class _ViewEditGoalBottomSheetState extends State<ViewEditGoalBottomSheet> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             TextAutoSize(
-              'SET THE PRICE',
+              context.l10n.set_the_price,
               style: TextStyle(
                 fontSize: 12.sp,
                 letterSpacing: 1.92,

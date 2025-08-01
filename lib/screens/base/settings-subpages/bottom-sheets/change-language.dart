@@ -139,7 +139,7 @@ class _ChangeLanguageBottomSheetState extends State<ChangeLanguageBottomSheet> {
                   height: 4.w,
                 ),
                 TextAutoSize(
-                  '🌍 Change language',
+                  context.l10n.change_language,
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontFamily: circularBold,

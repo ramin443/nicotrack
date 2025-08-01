@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/constants/color-constants.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 import '../../../../constants/font-constants.dart';
 import '../../../../getx-controllers/settings-controller.dart';
@@ -79,7 +80,7 @@ class _FinancialGoalsBottomSheetState extends State<FinancialGoalsBottomSheet> {
                             }
                           },
                           child: TextAutoSize(
-                            'Done',
+                            context.l10n.done,
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontFamily: circularBook,

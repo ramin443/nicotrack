@@ -7,6 +7,7 @@ import 'package:nicotrack/getx-controllers/progress-controller.dart';
 import 'package:nicotrack/models/emoji-text-pair/emojitext-model.dart';
 import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
 import 'package:nicotrack/screens/premium/premium-paywall-screen.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 import '../../../elements/textAutoSize.dart';
 
@@ -40,10 +41,11 @@ class OnexTwoScrollView extends StatefulWidget {
 
 class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
   int currentPage = 0;
-  EmojiTextModel addNewGoal = EmojiTextModel(emoji: '🎯', text: 'Add new goal');
+  // This will be initialized with localized text in build method
 
   @override
   Widget build(BuildContext context) {
+    EmojiTextModel addNewGoal = EmojiTextModel(emoji: '🎯', text: context.l10n.add_new_goal);
     List<EmojiTextModel> extendedList = [...widget.items, addNewGoal];
 
     final pages = _chunkItems(extendedList, 4); // 4 items per scroll "page"
@@ -78,7 +80,7 @@ class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
                         final item = pageItems[index];
                         return GestureDetector(
                           onTap: () {
-                            if (item.emoji == '🎯' && item.text == 'Add new goal') {
+                            if (item.emoji == '🎯' && item.text == context.l10n.add_new_goal) {
                               // Check if user is premium for "Add new goal"
                               if (!widget.isUserPremium) {
                                 // Navigate to premium screen
@@ -126,7 +128,7 @@ class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
                                           ),
                                         ),
                                         SizedBox(height: 14.h),
-                                        widget.withPercent && !(item.emoji == '🎯' && item.text == 'Add new goal')
+                                        widget.withPercent && !(item.emoji == '🎯' && item.text == context.l10n.add_new_goal)
                                             ?
 
                                         Container(
@@ -165,7 +167,7 @@ class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
                                     ),
                                   ),),
                                   // Show lock for "Add new goal" if user is not premium
-                                  (item.emoji == '🎯' && item.text == 'Add new goal' && !widget.isUserPremium)
+                                  (item.emoji == '🎯' && item.text == context.l10n.add_new_goal && !widget.isUserPremium)
                                       ? Positioned(
                                           top: 10.w,
                                           right: 10.w,
@@ -230,7 +232,7 @@ class _OnexTwoScrollViewState extends State<OnexTwoScrollView> {
 
   int _getPercentageForItem(EmojiTextModel item, int pageIndex) {
     // If it's the "Add new goal" item, return 0
-    if (item.emoji == '🎯' && item.text == 'Add new goal') {
+    if (item.emoji == '🎯' && item.text == context.l10n.add_new_goal) {
       return 0;
     }
     
