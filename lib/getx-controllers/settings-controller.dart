@@ -3847,17 +3847,17 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     
     // Validate form
     if (contactEmailController.text.trim().isEmpty) {
-      _showErrorSnackBar(context, 'Please enter your email address');
+      _showErrorSnackBar(context, context.l10n.email_address_required);
       return;
     }
     
     if (contactDetailsController.text.trim().isEmpty) {
-      _showErrorSnackBar(context, 'Please describe your issue');
+      _showErrorSnackBar(context, context.l10n.issue_description_required);
       return;
     }
     
     if (!_isValidEmail(contactEmailController.text.trim())) {
-      _showErrorSnackBar(context, 'Please enter a valid email address');
+      _showErrorSnackBar(context, context.l10n.valid_email_required);
       return;
     }
     
@@ -3895,14 +3895,14 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       contactDetailsController.clear();
       
       // Show success message
-      _showSuccessSnackBar(context, 'Support request submitted successfully! We\'ll get back to you soon.');
+      _showSuccessSnackBar(context, context.l10n.support_request_submitted_success);
       
       // Close bottom sheet
       Navigator.of(context).pop();
       
     } catch (e) {
       print('Error submitting contact support: $e');
-      _showErrorSnackBar(context, 'Failed to submit support request. Please try again.');
+      _showErrorSnackBar(context, context.l10n.support_request_failed);
     } finally {
       isSubmittingSupport = false;
       update();
@@ -3914,7 +3914,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     
     // Validate form
     if (feedbackController.text.trim().isEmpty) {
-      _showErrorSnackBar(context, 'Please enter your feedback');
+      _showErrorSnackBar(context, context.l10n.feedback_required);
       return;
     }
     
@@ -3959,14 +3959,14 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       feedbackType = 'general';
       
       // Show success message
-      _showSuccessSnackBar(context, 'Thank you for your feedback! We appreciate your input.');
+      _showSuccessSnackBar(context, context.l10n.feedback_submitted_success);
       
       // Close bottom sheet
       Navigator.of(context).pop();
       
     } catch (e) {
       print('Error submitting feedback: $e');
-      _showErrorSnackBar(context, 'Failed to submit feedback. Please try again.');
+      _showErrorSnackBar(context, context.l10n.feedback_submission_failed);
     } finally {
       isSubmittingFeedback = false;
       update();

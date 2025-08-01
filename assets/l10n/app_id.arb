@@ -896,5 +896,14 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "support_request_submitted_success": "Permintaan dukungan berhasil dikirim! Kami akan segera menghubungi Anda.",
+  "feedback_submitted_success": "Terima kasih atas masukan Anda! Kami menghargai kontribusi Anda.",
+  "email_address_required": "Silakan masukkan alamat email Anda",
+  "issue_description_required": "Silakan jelaskan masalah Anda",
+  "valid_email_required": "Silakan masukkan alamat email yang valid",
+  "feedback_required": "Silakan masukkan masukan Anda",
+  "support_request_failed": "Gagal mengirim permintaan dukungan. Silakan coba lagi.",
+  "feedback_submission_failed": "Gagal mengirim masukan. Silakan coba lagi."
 }

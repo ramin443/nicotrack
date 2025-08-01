@@ -896,5 +896,14 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "support_request_submitted_success": "지원 요청이 성공적으로 제출되었습니다! 곧 연락드리겠습니다.",
+  "feedback_submitted_success": "피드백을 주셔서 감사합니다! 귀하의 의견을 소중히 여깁니다.",
+  "email_address_required": "이메일 주소를 입력해 주세요",
+  "issue_description_required": "문제를 설명해 주세요",
+  "valid_email_required": "유효한 이메일 주소를 입력해 주세요",
+  "feedback_required": "피드백을 입력해 주세요",
+  "support_request_failed": "지원 요청 제출에 실패했습니다. 다시 시도해 주세요.",
+  "feedback_submission_failed": "피드백 제출에 실패했습니다. 다시 시도해 주세요."
 }

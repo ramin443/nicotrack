@@ -896,5 +896,14 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "support_request_submitted_success": "בקשת התמיכה נשלחה בהצלחה! נחזור אליך בקרוב.",
+  "feedback_submitted_success": "תודה על המשב שלך! אנו מעריכים את תרומתך.",
+  "email_address_required": "אנא הזן את כתובת הדוא\"ל שלך",
+  "issue_description_required": "אנא תאר את הבעיה שלך",
+  "valid_email_required": "אנא הזן כתובת דוא\"ל תקינה",
+  "feedback_required": "אנא הזן את המשב שלך",
+  "support_request_failed": "נכשל בשליחת בקשת התמיכה. אנא נסה שוב.",
+  "feedback_submission_failed": "נכשל בשליחת המשב. אנא נסה שוב."
 }

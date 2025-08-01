@@ -895,5 +895,14 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "support_request_submitted_success": "Support request submitted successfully! We'll get back to you soon.",
+  "feedback_submitted_success": "Thank you for your feedback! We appreciate your input.",
+  "email_address_required": "Please enter your email address",
+  "issue_description_required": "Please describe your issue",
+  "valid_email_required": "Please enter a valid email address",
+  "feedback_required": "Please enter your feedback",
+  "support_request_failed": "Failed to submit support request. Please try again.",
+  "feedback_submission_failed": "Failed to submit feedback. Please try again."
 }

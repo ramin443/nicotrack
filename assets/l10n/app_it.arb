@@ -892,5 +892,14 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "support_request_submitted_success": "Richiesta di supporto inviata con successo! Ti risponderemo presto.",
+  "feedback_submitted_success": "Grazie per il tuo feedback! Apprezziamo il tuo contributo.",
+  "email_address_required": "Inserisci il tuo indirizzo email",
+  "issue_description_required": "Descrivi il tuo problema",
+  "valid_email_required": "Inserisci un indirizzo email valido",
+  "feedback_required": "Inserisci il tuo feedback",
+  "support_request_failed": "Errore nell'invio della richiesta di supporto. Riprova.",
+  "feedback_submission_failed": "Errore nell'invio del feedback. Riprova."
 }

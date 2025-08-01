@@ -896,5 +896,14 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "support_request_submitted_success": "تم إرسال طلب الدعم بنجاح! سنتواصل معك قريباً.",
+  "feedback_submitted_success": "شكراً لك على ملاحظاتك! نقدر مساهمتك.",
+  "email_address_required": "يرجى إدخال عنوان بريدك الإلكتروني",
+  "issue_description_required": "يرجى وصف مشكلتك",
+  "valid_email_required": "يرجى إدخال عنوان بريد إلكتروني صحيح",
+  "feedback_required": "يرجى إدخال ملاحظاتك",
+  "support_request_failed": "فشل في إرسال طلب الدعم. يرجى المحاولة مرة أخرى.",
+  "feedback_submission_failed": "فشل في إرسال الملاحظات. يرجى المحاولة مرة أخرى."
 }

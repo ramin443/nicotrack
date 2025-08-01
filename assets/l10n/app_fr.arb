@@ -866,5 +866,14 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "support_request_submitted_success": "Demande de support soumise avec succès ! Nous vous répondrons bientôt.",
+  "feedback_submitted_success": "Merci pour vos commentaires ! Nous apprécions votre contribution.",
+  "email_address_required": "Veuillez saisir votre adresse e-mail",
+  "issue_description_required": "Veuillez décrire votre problème",
+  "valid_email_required": "Veuillez saisir une adresse e-mail valide",
+  "feedback_required": "Veuillez saisir vos commentaires",
+  "support_request_failed": "Échec de l'envoi de la demande de support. Veuillez réessayer.",
+  "feedback_submission_failed": "Échec de l'envoi des commentaires. Veuillez réessayer."
 }

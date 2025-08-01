@@ -866,5 +866,14 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "support_request_submitted_success": "Support-Anfrage erfolgreich gesendet! Wir werden uns bald bei Ihnen melden.",
+  "feedback_submitted_success": "Vielen Dank für Ihr Feedback! Wir schätzen Ihre Meinung.",
+  "email_address_required": "Bitte geben Sie Ihre E-Mail-Adresse ein",
+  "issue_description_required": "Bitte beschreiben Sie Ihr Problem",
+  "valid_email_required": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+  "feedback_required": "Bitte geben Sie Ihr Feedback ein",
+  "support_request_failed": "Fehler beim Senden der Support-Anfrage. Bitte versuchen Sie es erneut.",
+  "feedback_submission_failed": "Fehler beim Senden des Feedbacks. Bitte versuchen Sie es erneut."
 }

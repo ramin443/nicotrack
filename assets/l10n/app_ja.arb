@@ -892,5 +892,14 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "support_request_submitted_success": "サポートリクエストが正常に送信されました！すぐにご連絡いたします。",
+  "feedback_submitted_success": "フィードバックをありがとうございます！ご意見をお聞かせいただき感謝いたします。",
+  "email_address_required": "メールアドレスを入力してください",
+  "issue_description_required": "問題を説明してください",
+  "valid_email_required": "有効なメールアドレスを入力してください",
+  "feedback_required": "フィードバックを入力してください",
+  "support_request_failed": "サポートリクエストの送信に失敗しました。もう一度お試しください。",
+  "feedback_submission_failed": "フィードバックの送信に失敗しました。もう一度お試しください。"
 }

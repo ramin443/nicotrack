@@ -896,5 +896,14 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "support_request_submitted_success": "Ondersteuningsverzoek succesvol verzonden! We nemen binnenkort contact met je op.",
+  "feedback_submitted_success": "Bedankt voor je feedback! We waarderen je bijdrage.",
+  "email_address_required": "Voer je e-mailadres in",
+  "issue_description_required": "Beschrijf je probleem",
+  "valid_email_required": "Voer een geldig e-mailadres in",
+  "feedback_required": "Voer je feedback in",
+  "support_request_failed": "Verzenden van ondersteuningsverzoek mislukt. Probeer het opnieuw.",
+  "feedback_submission_failed": "Verzenden van feedback mislukt. Probeer het opnieuw."
 }

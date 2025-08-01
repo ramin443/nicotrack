@@ -896,5 +896,14 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "support_request_submitted_success": "Destek talebi başarıyla gönderildi! Yakında sizinle iletişime geçeceğiz.",
+  "feedback_submitted_success": "Geri bildiriminiz için teşekkürler! Katkınızı takdir ediyoruz.",
+  "email_address_required": "Lütfen e-posta adresinizi girin",
+  "issue_description_required": "Lütfen sorununuzu açıklayın",
+  "valid_email_required": "Lütfen geçerli bir e-posta adresi girin",
+  "feedback_required": "Lütfen geri bildiriminizi girin",
+  "support_request_failed": "Destek talebi gönderme başarısız oldu. Lütfen tekrar deneyin.",
+  "feedback_submission_failed": "Geri bildirim gönderme başarısız oldu. Lütfen tekrar deneyin."
 }

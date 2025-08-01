@@ -896,5 +896,14 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "support_request_submitted_success": "Žádost o podporu byla úspěšně odeslána! Brzy se vám ozveme.",
+  "feedback_submitted_success": "Děkujeme za vaši zpětnou vazbu! Vážíme si vašeho příspěvku.",
+  "email_address_required": "Zadejte prosím svou e-mailovou adresu",
+  "issue_description_required": "Popište prosím svůj problém",
+  "valid_email_required": "Zadejte prosím platnou e-mailovou adresu",
+  "feedback_required": "Zadejte prosím svou zpětnou vazbu",
+  "support_request_failed": "Odeslání žádosti o podporu se nezdařilo. Zkuste to prosím znovu.",
+  "feedback_submission_failed": "Odeslání zpětné vazby se nezdařilo. Zkuste to prosím znovu."
 }

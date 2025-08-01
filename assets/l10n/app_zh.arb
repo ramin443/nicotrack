@@ -892,5 +892,14 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "support_request_submitted_success": "支持请求提交成功！我们将尽快与您联系。",
+  "feedback_submitted_success": "感谢您的反馈！我们非常重视您的意见。",
+  "email_address_required": "请输入您的邮箱地址",
+  "issue_description_required": "请描述您的问题",
+  "valid_email_required": "请输入有效的邮箱地址",
+  "feedback_required": "请输入您的反馈",
+  "support_request_failed": "提交支持请求失败。请重试。",
+  "feedback_submission_failed": "提交反馈失败。请重试。"
 }

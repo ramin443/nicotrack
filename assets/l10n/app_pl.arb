@@ -896,5 +896,14 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "support_request_submitted_success": "Prośba o wsparcie została pomyślnie wysłana! Wkrótce się z Tobą skontaktujemy.",
+  "feedback_submitted_success": "Dziękujemy za opinię! Cenimy Twój wkład.",
+  "email_address_required": "Proszę wprowadzić adres e-mail",
+  "issue_description_required": "Proszę opisać problem",
+  "valid_email_required": "Proszę wprowadzić prawidłowy adres e-mail",
+  "feedback_required": "Proszę wprowadzić opinię",
+  "support_request_failed": "Nie udało się wysłać prośby o wsparcie. Spróbuj ponownie.",
+  "feedback_submission_failed": "Nie udało się wysłać opinii. Spróbuj ponownie."
 }

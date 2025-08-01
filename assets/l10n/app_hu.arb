@@ -896,5 +896,14 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "support_request_submitted_success": "A támogatási kérés sikeresen elküldve! Hamarosan felvesszük Önnel a kapcsolatot.",
+  "feedback_submitted_success": "Köszönjük a visszajelzését! Értékeljük a hozzájárulását.",
+  "email_address_required": "Kérjük, adja meg az e-mail címét",
+  "issue_description_required": "Kérjük, írja le a problémáját",
+  "valid_email_required": "Kérjük, adjon meg egy érvényes e-mail címet",
+  "feedback_required": "Kérjük, adja meg a visszajelzését",
+  "support_request_failed": "A támogatási kérés elküldése sikertelen. Kérjük, próbálja újra.",
+  "feedback_submission_failed": "A visszajelzés elküldése sikertelen. Kérjük, próbálja újra."
 }

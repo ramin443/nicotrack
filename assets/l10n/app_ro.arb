@@ -896,5 +896,14 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "support_request_submitted_success": "Cererea de suport a fost trimisă cu succes! Vă vom contacta în curând.",
+  "feedback_submitted_success": "Mulțumim pentru feedback! Apreciem contribuția dumneavoastră.",
+  "email_address_required": "Vă rugăm să introduceți adresa de email",
+  "issue_description_required": "Vă rugăm să descrieți problema",
+  "valid_email_required": "Vă rugăm să introduceți o adresă de email validă",
+  "feedback_required": "Vă rugăm să introduceți feedback-ul",
+  "support_request_failed": "Trimiterea cererii de suport a eșuat. Vă rugăm să încercați din nou.",
+  "feedback_submission_failed": "Trimiterea feedback-ului a eșuat. Vă rugăm să încercați din nou."
 }

@@ -896,5 +896,14 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "support_request_submitted_success": "समर्थन अनुरोध सफलतापूर्वक भेजा गया! हम जल्द ही आपसे संपर्क करेंगे।",
+  "feedback_submitted_success": "आपकी प्रतिक्रिया के लिए धन्यवाद! हम आपके योगदान की सराहना करते हैं।",
+  "email_address_required": "कृपया अपना ईमेल पता दर्ज करें",
+  "issue_description_required": "कृपया अपनी समस्या का वर्णन करें",
+  "valid_email_required": "कृपया एक वैध ईमेल पता दर्ज करें",
+  "feedback_required": "कृपया अपनी प्रतिक्रिया दर्ज करें",
+  "support_request_failed": "समर्थन अनुरोध भेजने में विफल। कृपया फिर से कोशिश करें।",
+  "feedback_submission_failed": "प्रतिक्रिया भेजने में विफल। कृपया फिर से कोशिश करें।"
 }
