@@ -28,7 +28,7 @@ class _AllBadgesSectionState extends State<AllBadgesSection> {
   
   List<AwardModel> _getNextMilestones() {
     int currentDays = getDaysSinceLastSmoked(DateTime.now());
-    return allAwards.where((badge) => badge.day > currentDays).take(6).toList();
+    return allAwards.where((badge) => badge.day > currentDays).toList();
   }
 
   @override

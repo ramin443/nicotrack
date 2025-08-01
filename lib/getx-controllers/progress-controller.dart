@@ -21,6 +21,7 @@ import 'package:flutter/services.dart';
 import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 import 'package:nicotrack/extensions/app_localizations_extension.dart';
 import 'package:nicotrack/getx-controllers/settings-controller.dart';
+import 'package:nicotrack/services/firebase-service.dart';
 
 import '../constants/color-constants.dart';
 import '../constants/dummy-data-constants.dart';
@@ -391,6 +392,13 @@ class ProgressController extends GetxController {
       // Save to Hive
       await saveFinancialGoalsToHive();
       
+      // Log financial goal creation
+      FirebaseService().logFinancialGoalCreated(
+        emoji: selectedEmoji,
+        goalTitle: goalTitleController.text.trim(),
+        cost: '$selectedFinGoalDollar.$selectedFinGoalCent',
+      );
+      
       // Refresh SettingsController to sync data
       if (Get.isRegistered<SettingsController>()) {
         Get.find<SettingsController>().loadFinancialGoalsFromHive();
@@ -552,6 +560,13 @@ class ProgressController extends GetxController {
 
   // Show add financial goals bottom sheet
   void showAddFinancialGoalsBottomSheet(BuildContext context) {
+    FirebaseService().logEvent(
+      name: 'financial_goal_bottomsheet_opened',
+      parameters: {
+        'action': 'add_new_goal',
+        'page': 'progress_savings',
+      },
+    );
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.white,

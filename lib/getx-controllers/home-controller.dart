@@ -13,6 +13,7 @@ import 'package:nicotrack/screens/home/mood/mood-main-slider.dart';
 import 'package:nicotrack/screens/mood/mood-detail-screen.dart';
 import 'package:nicotrack/screens/smoking/smoking-detail-screen.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import '../services/firebase-service.dart';
 import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
 import 'package:nicotrack/screens/premium/premium-paywall-screen.dart';
 
@@ -1012,28 +1013,46 @@ class HomeController extends GetxController {
   void toggleAction(int actionNumber) async {
     String quickActionsStringToday = "currentUserActions";
     final box = Hive.box<QuickactionsModel>('quickActionsData');
+    
+    // Track the current state for analytics
+    bool newState = false;
+    String actionText = quickActionsList.length > actionNumber ? quickActionsList[actionNumber] : "unknown_action";
+    
     switch (actionNumber) {
       case 0:
+        newState = !quickActionsModel.firstActionDone;
         quickActionsModel = quickActionsModel.copyWith(
-            firstActionDone: !quickActionsModel.firstActionDone);
+            firstActionDone: newState);
         await box.put(quickActionsStringToday, quickActionsModel);
       case 1:
+        newState = !quickActionsModel.secondActionDone;
         quickActionsModel = quickActionsModel.copyWith(
-            secondActionDone: !quickActionsModel.secondActionDone);
+            secondActionDone: newState);
         await box.put(quickActionsStringToday, quickActionsModel);
       case 2:
+        newState = !quickActionsModel.thirdActionDone;
         quickActionsModel = quickActionsModel.copyWith(
-            thirdActionDone: !quickActionsModel.thirdActionDone);
+            thirdActionDone: newState);
         await box.put(quickActionsStringToday, quickActionsModel);
       case 3:
+        newState = !quickActionsModel.fourthActionDone;
         quickActionsModel = quickActionsModel.copyWith(
-            fourthActionDone: !quickActionsModel.fourthActionDone);
+            fourthActionDone: newState);
         await box.put(quickActionsStringToday, quickActionsModel);
       default:
+        newState = !quickActionsModel.firstActionDone;
         quickActionsModel = quickActionsModel.copyWith(
-            firstActionDone: !quickActionsModel.firstActionDone);
+            firstActionDone: newState);
         await box.put(quickActionsStringToday, quickActionsModel);
     }
+    
+    // Log analytics event
+    FirebaseService().logQuickActionToggled(
+      actionNumber: actionNumber,
+      actionText: actionText,
+      completed: newState,
+    );
+    
     setQuickActionsData();
     update();
   }

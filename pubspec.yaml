@@ -66,6 +66,11 @@ dependencies:
   emoji_picker_flutter: ^4.3.0
   in_app_purchase: ^3.2.3
 
+  # Firebase packages
+  firebase_core: ^4.0.0
+  firebase_analytics: ^12.0.0
+  cloud_firestore: ^6.0.0
+
 dev_dependencies:
   hive_generator: ^2.0.0
   build_runner: ^2.4.13
@@ -203,6 +208,12 @@ flutter:
     - assets/images/award-emojis/trophy.png
     - assets/images/award-emojis/vacay.png
     - assets/images/award-emojis/medalImg.png
+    - assets/images/award-emojis/beachvacay.png
+    - assets/images/award-emojis/cablecar.png
+    - assets/images/award-emojis/camping.png
+    - assets/images/award-emojis/drumroll.png
+    - assets/images/award-emojis/goalstadion.png
+    - assets/images/award-emojis/rocket.png
     - assets/images/mood-affection-emojis/cig.png
     - assets/images/mood-affection-emojis/confetti.png
     - assets/images/mood-affection-emojis/family.png

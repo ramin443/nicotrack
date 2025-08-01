@@ -63,6 +63,13 @@ String teddyImg = "assets/images/award-emojis/teddy.png";
 String trophyImg = "assets/images/award-emojis/trophy.png";
 String vacayImg = "assets/images/award-emojis/vacay.png";
 String medalImg = "assets/images/award-emojis/medalImg.png";
+String beachvacayImg = "assets/images/award-emojis/beachvacay.png";
+String cablecarImg = "assets/images/award-emojis/cablecar.png";
+String campingImg = "assets/images/award-emojis/camping.png";
+String drumrollImg = "assets/images/award-emojis/drumroll.png";
+String goalstadionImg = "assets/images/award-emojis/goalstadion.png";
+String rocketImg = "assets/images/award-emojis/rocket.png";
+
 
 String cigImg = 'assets/images/mood-affection-emojis/cig.png';
 String confettiImg = 'assets/images/mood-affection-emojis/confetti.png';

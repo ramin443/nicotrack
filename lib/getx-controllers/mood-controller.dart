@@ -17,6 +17,7 @@ import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
 import 'package:nicotrack/screens/mood/mood-detail-screen.dart';
 import 'package:nicotrack/extensions/app_localizations_extension.dart';
+import 'package:nicotrack/services/firebase-service.dart';
 
 class MoodController extends GetxController {
   final PageController pageController = PageController();
@@ -194,6 +195,13 @@ class MoodController extends GetxController {
                   final feelingsList = getHowYouFeelingPairs(context);
                   moodFilledData = moodFilledData.copyWith(
                       selfFeeling: feelingsList[index].toJson());
+                  FirebaseService().logEvent(
+                    name: 'mood_feeling_selected',
+                    parameters: {
+                      'feeling': feelingsList[index].text,
+                      'page': 'mood_questionnaire',
+                    },
+                  );
                 }
                 getCurrentPageStatus();
               },
@@ -259,7 +267,8 @@ class MoodController extends GetxController {
             return GestureDetector(
               onTap: () {
                 HapticFeedback.mediumImpact();
-                if (selectedMoodAffectingIndices.contains(index)) {
+                bool wasSelected = selectedMoodAffectingIndices.contains(index);
+                if (wasSelected) {
                   // Deselect if already selected
                   selectedMoodAffectingIndices.remove(index);
                 } else {
@@ -275,6 +284,16 @@ class MoodController extends GetxController {
                         .toList();
                 moodFilledData =
                     moodFilledData.copyWith(moodAffecting: selectedItems);
+                
+                FirebaseService().logEvent(
+                  name: 'mood_affecting_factor_selected',
+                  parameters: {
+                    'factor': affectingList[index].text,
+                    'selected': (!wasSelected).toString(),
+                    'total_factors': selectedItems.length,
+                    'page': 'mood_questionnaire',
+                  },
+                );
 
                 getCurrentPageStatus();
               },
@@ -342,6 +361,15 @@ class MoodController extends GetxController {
                         selectedCravingIndex = index;
                         moodFilledData =
                             moodFilledData.copyWith(anyCravingToday: index);
+                        
+                        final cravingsList = getCravingPairs(context);
+                        FirebaseService().logEvent(
+                          name: 'mood_craving_intensity_selected',
+                          parameters: {
+                            'craving_intensity': cravingsList[index].text,
+                            'page': 'mood_questionnaire',
+                          },
+                        );
 
                         // If user selected "No cravings at all", set empty craving timing
                         if (index == 2) {
@@ -427,7 +455,8 @@ class MoodController extends GetxController {
             return GestureDetector(
               onTap: () {
                 HapticFeedback.mediumImpact();
-                if (selectedCraveTimesIndices.contains(index)) {
+                bool wasSelected = selectedCraveTimesIndices.contains(index);
+                if (wasSelected) {
                   // Deselect if already selected
                   selectedCraveTimesIndices.remove(index);
                 } else {
@@ -443,6 +472,16 @@ class MoodController extends GetxController {
                         .toList();
                 moodFilledData =
                     moodFilledData.copyWith(craveTiming: selectedItems);
+                
+                FirebaseService().logEvent(
+                  name: 'mood_craving_time_selected',
+                  parameters: {
+                    'craving_time': craveTimesList[index].text,
+                    'selected': (!wasSelected).toString(),
+                    'total_times': selectedItems.length,
+                    'page': 'mood_questionnaire',
+                  },
+                );
 
                 getCurrentPageStatus();
               },
@@ -507,6 +546,16 @@ class MoodController extends GetxController {
                 keyboardType: TextInputType.multiline,
                 onChanged: (v) {
                   moodFilledData = moodFilledData.copyWith(reflectionNote: v);
+                  if (v.isNotEmpty && v.length % 50 == 0) {
+                    // Log reflection progress every 50 characters
+                    FirebaseService().logEvent(
+                      name: 'mood_reflection_progress',
+                      parameters: {
+                        'character_count': v.length,
+                        'page': 'mood_questionnaire',
+                      },
+                    );
+                  }
                   getCurrentPageStatus();
                 },
                 textInputAction: TextInputAction.done,
@@ -639,6 +688,16 @@ class MoodController extends GetxController {
     String moodStringToday = DateFormat.yMMMd().format(currentDateTime);
     final box = Hive.box<MoodModel>('moodData');
     await box.put(moodStringToday, moodFilledData);
+    
+    // Log mood session completion
+    FirebaseService().logMoodSessionCompleted(
+      feeling: moodFilledData.selfFeeling['text'] ?? '',
+      affectingFactorsCount: moodFilledData.moodAffecting.length,
+      cravingIntensity: moodFilledData.anyCravingToday == 0 ? 'Strong' : 
+                       moodFilledData.anyCravingToday == 1 ? 'Mild' : 'None',
+      hasReflection: moodFilledData.reflectionNote.isNotEmpty,
+      cravingTimesCount: moodFilledData.craveTiming.length,
+    );
     if (context.mounted) {
       // Good practice: check if the widget is still in the tree
       Navigator.of(context).pushAndRemoveUntil(

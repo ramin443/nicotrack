@@ -46,6 +46,7 @@ import 'package:nicotrack/models/did-you-smoke/didyouSmoke-model.dart';
 import 'package:nicotrack/models/quick-actions-model/quickActions-model.dart';
 import 'package:nicotrack/initial/welcome-info/info-slider-main.dart';
 import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
+import 'package:nicotrack/services/firebase-service.dart';
 
 class SettingsController extends GetxController with WidgetsBindingObserver {
   bool enablePushNotification = false;
@@ -2845,6 +2846,13 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
 
     // Update local state
     currentDateOnboardingData = updatedData;
+    
+    // Log settings change
+    FirebaseService().logSettingsChanged(
+      settingType: 'user_name',
+      newValue: nameController.text.isNotEmpty ? 'name_provided' : 'name_removed',
+    );
+    
     update();
   }
 
@@ -3166,10 +3174,23 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
               manuallyDisabled: false,
             );
             await updateNotificationPreferences();
+            
+            // Log notification permission granted
+            FirebaseService().logSettingsChanged(
+              settingType: 'push_notifications',
+              newValue: 'enabled_with_permission',
+            );
           } else {
             // Permission denied, keep switch off and automatically open settings
             enablePushNotification = false;
             update();
+            
+            // Log notification permission denied
+            FirebaseService().logSettingsChanged(
+              settingType: 'push_notifications',
+              newValue: 'permission_denied',
+            );
+            
             // Automatically open app settings instead of showing dialog
             openAppSettings();
           }
@@ -3192,6 +3213,12 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           manuallyDisabled: true, // Mark as manually disabled
         );
         await updateNotificationPreferences();
+        
+        // Log notification disabled
+        FirebaseService().logSettingsChanged(
+          settingType: 'push_notifications',
+          newValue: 'manually_disabled',
+        );
       }
     } catch (e, stackTrace) {
       print('Push notification toggle error: $e');

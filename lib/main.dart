@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:nicotrack/getx-controllers/progress-controller.dart';
 import 'package:nicotrack/initial/splash-screen.dart';
-import 'package:nicotrack/screens/base/base.dart';
-import 'package:path_provider/path_provider.dart'
-    show getApplicationDocumentsDirectory;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 import 'models/onboarding-data/onboardingData-model.dart';
 import 'package:nicotrack/hive-adapters/onboarding-data-adapter.dart';
@@ -25,14 +23,28 @@ import 'package:nicotrack/models/notifications-preferences-model/notificationsPr
 import 'package:nicotrack/services/notification-service.dart';
 import 'package:nicotrack/services/purchase-service.dart';
 import 'package:nicotrack/services/premium-persistence-service.dart';
+import 'package:nicotrack/services/firebase-service.dart';
 import 'package:nicotrack/getx-controllers/premium-controller.dart';
 import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 import 'package:nicotrack/models/app-preferences-model/appPreferences-model.dart';
 import 'package:timezone/data/latest.dart' as tz;
-import 'package:nicotrack/screens/home/did-you-smoke/pages/no-selected/congratulatory-page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize Firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  
+  // Enable Firebase Analytics debug mode for development
+  FirebaseService().analytics.setAnalyticsCollectionEnabled(true);
+  
+  // Log app launch event
+  await FirebaseService().logAppOpen();
+  
+  print('🚀 App launched - Firebase Analytics initialized');
+  
   Get.put(ProgressController()); // now accessible globally
   Get.put(PremiumController()); // Initialize premium controller
   await Hive.initFlutter();
@@ -67,6 +79,9 @@ void main() async {
   
   // Initialize app preferences controller after Hive is ready
   Get.put(AppPreferencesController()); // Initialize app preferences controller
+  
+  // Log app open event
+  await FirebaseService().logAppOpen();
 
   runApp(const MyApp());
 }
@@ -100,6 +115,9 @@ class MyApp extends StatelessWidget {
                   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
                   useMaterial3: true,
                 ),
+                navigatorObservers: [
+                  FirebaseService().analyticsObserver,
+                ],
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 supportedLocales: AppLocalizations.supportedLocales,
                 locale: appLocale,

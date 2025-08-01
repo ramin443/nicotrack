@@ -4,6 +4,7 @@ import '../services/purchase-service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nicotrack/constants/color-constants.dart';
 import '../config/app-mode.dart';
+import 'package:nicotrack/services/firebase-service.dart';
 
 class PremiumController extends GetxController {
   // Premium status
@@ -21,6 +22,19 @@ class PremiumController extends GetxController {
   
   // Selected subscription plan
   RxInt selectedPlan = 1.obs; // 0: Monthly, 1: Yearly, 2: Lifetime
+  
+  // Log plan selection
+  void selectPlan(int planIndex) {
+    selectedPlan.value = planIndex;
+    final planData = subscriptionPlans[planIndex];
+    if (planData != null) {
+      FirebaseService().logPremiumPlanSelected(
+        planIndex: planIndex,
+        planType: planData['title'],
+        planPrice: planData['price'],
+      );
+    }
+  }
   
   // Subscription prices
   final Map<int, Map<String, dynamic>> subscriptionPlans = {
@@ -81,9 +95,6 @@ class PremiumController extends GetxController {
     },
   ];
 
-  void selectPlan(int planIndex) {
-    selectedPlan.value = planIndex;
-  }
 
   void subscribeToPremium(int planIndex, BuildContext context) async {
     // Use PurchaseService to handle the actual purchase
@@ -103,12 +114,37 @@ class PremiumController extends GetxController {
       },
     );
     
+    // Log purchase attempt
+    final planData = subscriptionPlans[planIndex];
+    if (planData != null) {
+      FirebaseService().logPremiumPurchaseAttempted(
+        planType: planData['title'],
+        planIndex: planIndex,
+      );
+    }
+    
     try {
       bool success = await purchaseService.purchaseProduct(planIndex);
       Navigator.pop(context); // Close loading dialog
       
       if (!success) {
         print("Purchase failed for plan: ${subscriptionPlans[planIndex]?["title"]}");
+        FirebaseService().logEvent(
+          name: 'premium_purchase_failed',
+          parameters: {
+            'plan_type': planData?['title'] ?? 'unknown',
+            'plan_index': planIndex,
+            'error_type': 'purchase_failed',
+          },
+        );
+      } else {
+        FirebaseService().logEvent(
+          name: 'premium_purchase_completed',
+          parameters: {
+            'plan_type': planData?['title'] ?? 'unknown',
+            'plan_index': planIndex,
+          },
+        );
       }
       // The purchase service will handle success/error messages and update isPremium
     } catch (e) {
@@ -136,12 +172,25 @@ class PremiumController extends GetxController {
       },
     );
     
+    FirebaseService().logEvent(
+      name: 'premium_restore_attempted',
+      parameters: {
+        'page': 'premium_screen',
+      },
+    );
+    
     try {
       await purchaseService.restorePurchases();
       Navigator.pop(context); // Close loading dialog
       
       // Show message based on whether purchases were restored
       if (isPremium.value) {
+        FirebaseService().logEvent(
+          name: 'premium_restore_successful',
+          parameters: {
+            'restored_premium': 'true',
+          },
+        );
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text("Purchases restored successfully"),

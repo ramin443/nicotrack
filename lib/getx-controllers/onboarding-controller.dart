@@ -18,6 +18,7 @@ import 'package:nicotrack/models/emoji-Text-Pair.dart';
 import '../../../screens/elements/textAutoSize.dart';
 import 'package:nicotrack/initial/onboarding-questions/question-pages/enter-name.dart';
 import '../models/onboarding-data/onboardingData-model.dart';
+import '../services/firebase-service.dart';
 import '../screens/base/base.dart';
 import 'package:hive/hive.dart';
 import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
@@ -110,6 +111,15 @@ class OnboardingController extends GetxController {
   void nextPage() {
     // Move to the next page
     if (currentPage < pages.length - 1) {
+      // Log onboarding step completed
+      final stepNames = ["last_smoke_date", "cigarettes_per_day", "cost_per_pack", "pack_contents", "motivation", "crave_situations", "help_needed", "user_name"];
+      if (currentPage < stepNames.length) {
+        FirebaseService().logOnboardingStepCompleted(
+          stepNumber: currentPage + 1,
+          stepName: stepNames[currentPage],
+        );
+      }
+      
       currentPage++;
       getCurrentPageStatus();
       pageController.animateToPage(
@@ -1017,6 +1027,17 @@ class OnboardingController extends GetxController {
         if (currentPageDoneStatus) {
           HapticFeedback.mediumImpact();
           if (currentPage == (pages.length - 1)) {
+            // Log onboarding completion analytics
+            FirebaseService().logOnboardingCompleted(
+              lastSmokedDate: onboardingFilledData.lastSmokedDate,
+              cigarettesPerDay: onboardingFilledData.cigarettesPerDay,
+              costPerPack: onboardingFilledData.costOfAPack,
+              motivations: onboardingFilledData.biggestMotivation,
+              craveSituations: onboardingFilledData.craveSituations,
+              helpNeeded: onboardingFilledData.helpNeeded,
+              userName: onboardingFilledData.name,
+            );
+            
             final box = Hive.box<OnboardingData>('onboardingCompletedData');
             await box.put('currentUserOnboarding', onboardingFilledData); // Use a consistent key
             Navigator.of(context).pushAndRemoveUntil(

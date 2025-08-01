@@ -1,0 +1,390 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class FirebaseService {
+  static final FirebaseService _instance = FirebaseService._internal();
+  factory FirebaseService() => _instance;
+  FirebaseService._internal();
+
+  // Firebase Analytics instance
+  final FirebaseAnalytics _analytics = FirebaseAnalytics.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  // Analytics getters
+  FirebaseAnalytics get analytics => _analytics;
+  FirebaseAnalyticsObserver get analyticsObserver => FirebaseAnalyticsObserver(analytics: _analytics);
+
+  // Firestore getter
+  FirebaseFirestore get firestore => _firestore;
+
+  // Analytics methods
+  Future<void> logEvent({
+    required String name,
+    Map<String, Object>? parameters,
+  }) async {
+    // Debug print to help track events
+    print('🔥 Firebase Analytics Event: $name');
+    if (parameters != null && parameters.isNotEmpty) {
+      print('📊 Parameters: $parameters');
+    } else {
+      print('📊 Parameters: (no parameters)');
+    }
+    
+    await _analytics.logEvent(
+      name: name,
+      parameters: parameters,
+    );
+  }
+
+  Future<void> setUserId(String? id) async {
+    await _analytics.setUserId(id: id);
+  }
+
+  Future<void> setUserProperty({
+    required String name,
+    required String? value,
+  }) async {
+    await _analytics.setUserProperty(name: name, value: value);
+  }
+
+  // Note: setCurrentScreen is deprecated in newer Firebase Analytics versions
+  // Screen tracking is now handled automatically by FirebaseAnalyticsObserver
+
+  // Common analytics events for your app
+  Future<void> logAppOpen() async {
+    await logEvent(
+      name: 'app_open',
+      parameters: {
+        'timestamp': DateTime.now().toIso8601String(),
+        'platform': 'flutter',
+      },
+    );
+  }
+  
+  // Test method to verify analytics are working
+  Future<void> logTestEvent() async {
+    await logEvent(
+      name: 'test_analytics_working',
+      parameters: {
+        'timestamp': DateTime.now().toIso8601String(),
+        'test_parameter': 'analytics_test',
+        'app_version': '1.0.0',
+      },
+    );
+  }
+
+  Future<void> logQuitSmoking({
+    required DateTime quitDate,
+    String? method,
+  }) async {
+    await logEvent(
+      name: 'quit_smoking',
+      parameters: {
+        'quit_date': quitDate.toIso8601String(),
+        if (method != null) 'quit_method': method,
+      },
+    );
+  }
+
+  Future<void> logMilestoneReached({
+    required int dayNumber,
+    required String milestone,
+  }) async {
+    await logEvent(
+      name: 'milestone_reached',
+      parameters: {
+        'day_number': dayNumber,
+        'milestone': milestone,
+      },
+    );
+  }
+
+  Future<void> logMoodTracked({
+    required String mood,
+    required int daysSinceQuit,
+  }) async {
+    await logEvent(
+      name: 'mood_tracked',
+      parameters: {
+        'mood': mood,
+        'days_since_quit': daysSinceQuit,
+      },
+    );
+  }
+
+  Future<void> logSmokeEvent({
+    required bool didSmoke,
+    required int daysSinceQuit,
+  }) async {
+    await logEvent(
+      name: 'smoke_event',
+      parameters: {
+        'did_smoke': didSmoke.toString(),
+        'days_since_quit': daysSinceQuit,
+      },
+    );
+  }
+
+  Future<void> logPremiumPurchase({
+    required String productId,
+    required double price,
+    required String currency,
+  }) async {
+    await logEvent(
+      name: 'premium_purchase',
+      parameters: {
+        'product_id': productId,
+        'price': price,
+        'currency': currency,
+      },
+    );
+  }
+
+  // Onboarding events
+  Future<void> logOnboardingStepCompleted({
+    required int stepNumber,
+    required String stepName,
+  }) async {
+    await logEvent(
+      name: 'onboarding_step_completed',
+      parameters: {
+        'step_number': stepNumber,
+        'step_name': stepName,
+      },
+    );
+  }
+
+  Future<void> logOnboardingCompleted({
+    required String lastSmokedDate,
+    required int cigarettesPerDay,
+    required String costPerPack,
+    required List<String> motivations,
+    required List<String> craveSituations,
+    required List<String> helpNeeded,
+    required String userName,
+  }) async {
+    await logEvent(
+      name: 'onboarding_completed',
+      parameters: {
+        'last_smoked_date': lastSmokedDate,
+        'cigarettes_per_day': cigarettesPerDay,
+        'cost_per_pack': costPerPack,
+        'motivations_count': motivations.length,
+        'crave_situations_count': craveSituations.length,
+        'help_needed_count': helpNeeded.length,
+        'user_name_provided': userName.isNotEmpty.toString(),
+      },
+    );
+  }
+
+  // Daily tracking events
+  Future<void> logQuickActionToggled({
+    required int actionNumber,
+    required String actionText,
+    required bool completed,
+  }) async {
+    await logEvent(
+      name: 'quick_action_toggled',
+      parameters: {
+        'action_number': actionNumber,
+        'action_text': actionText,
+        'completed': completed.toString(),
+      },
+    );
+  }
+
+  Future<void> logSmokingSessionCompleted({
+    required bool smokedToday,
+    required int cigaretteCount,
+    required bool quitDateUpdated,
+    List<String>? triggers,
+    List<String>? feelings,
+    List<String>? avoidanceStrategies,
+  }) async {
+    await logEvent(
+      name: 'smoking_session_completed',
+      parameters: {
+        'smoked_today': smokedToday.toString(),
+        'cigarette_count': cigaretteCount,
+        'quit_date_updated': quitDateUpdated.toString(),
+        'triggers_count': triggers?.length ?? 0,
+        'feelings_count': feelings?.length ?? 0,
+        'avoidance_strategies_count': avoidanceStrategies?.length ?? 0,
+      },
+    );
+  }
+
+  Future<void> logMoodSessionCompleted({
+    required String feeling,
+    required int affectingFactorsCount,
+    required String cravingIntensity,
+    required bool hasReflection,
+    required int cravingTimesCount,
+  }) async {
+    await logEvent(
+      name: 'mood_session_completed',
+      parameters: {
+        'feeling': feeling,
+        'affecting_factors_count': affectingFactorsCount,
+        'craving_intensity': cravingIntensity,
+        'has_reflection': hasReflection.toString(),
+        'craving_times_count': cravingTimesCount,
+      },
+    );
+  }
+
+  // Premium events
+  Future<void> logPremiumPlanSelected({
+    required int planIndex,
+    required String planType,
+    required String planPrice,
+  }) async {
+    await logEvent(
+      name: 'premium_plan_selected',
+      parameters: {
+        'plan_index': planIndex,
+        'plan_type': planType,
+        'plan_price': planPrice,
+      },
+    );
+  }
+
+  Future<void> logPremiumPurchaseAttempted({
+    required String planType,
+    required int planIndex,
+  }) async {
+    await logEvent(
+      name: 'premium_purchase_attempted',
+      parameters: {
+        'plan_type': planType,
+        'plan_index': planIndex,
+      },
+    );
+  }
+
+  // Progress events
+  Future<void> logProgressTabViewed({
+    required int tabIndex,
+    required String tabName,
+  }) async {
+    await logEvent(
+      name: 'progress_tab_viewed',
+      parameters: {
+        'tab_index': tabIndex,
+        'tab_name': tabName,
+      },
+    );
+  }
+
+  Future<void> logFinancialGoalCreated({
+    required String emoji,
+    required String goalTitle,
+    required String cost,
+  }) async {
+    await logEvent(
+      name: 'financial_goal_created',
+      parameters: {
+        'emoji': emoji,
+        'goal_title': goalTitle,
+        'cost': cost,
+      },
+    );
+  }
+
+  // Daily task events
+  Future<void> logDailyTaskAccessed({
+    required String taskType,
+    required bool taskCompleted,
+    required bool isPremiumRequired,
+  }) async {
+    await logEvent(
+      name: 'daily_task_accessed',
+      parameters: {
+        'task_type': taskType,
+        'task_completed': taskCompleted.toString(),
+        'is_premium_required': isPremiumRequired.toString(),
+      },
+    );
+  }
+
+  // Settings events
+  Future<void> logSettingsChanged({
+    required String settingType,
+    required String newValue,
+  }) async {
+    await logEvent(
+      name: 'settings_changed',
+      parameters: {
+        'setting_type': settingType,
+        'new_value': newValue,
+      },
+    );
+  }
+
+  // Firestore methods for user data
+  Future<void> saveUserData({
+    required String userId,
+    required Map<String, dynamic> userData,
+  }) async {
+    await _firestore.collection('users').doc(userId).set(
+      userData,
+      SetOptions(merge: true),
+    );
+  }
+
+  Future<DocumentSnapshot> getUserData(String userId) async {
+    return await _firestore.collection('users').doc(userId).get();
+  }
+
+  Future<void> saveQuitSession({
+    required String userId,
+    required Map<String, dynamic> sessionData,
+  }) async {
+    await _firestore
+        .collection('users')
+        .doc(userId)
+        .collection('quit_sessions')
+        .add(sessionData);
+  }
+
+  Future<void> saveMoodEntry({
+    required String userId,
+    required Map<String, dynamic> moodData,
+  }) async {
+    await _firestore
+        .collection('users')
+        .doc(userId)
+        .collection('mood_entries')
+        .add(moodData);
+  }
+
+  Future<void> saveSmokeEntry({
+    required String userId,
+    required Map<String, dynamic> smokeData,
+  }) async {
+    await _firestore
+        .collection('users')
+        .doc(userId)
+        .collection('smoke_entries')
+        .add(smokeData);
+  }
+
+  // Query methods
+  Stream<QuerySnapshot> getUserMoodEntries(String userId) {
+    return _firestore
+        .collection('users')
+        .doc(userId)
+        .collection('mood_entries')
+        .orderBy('timestamp', descending: true)
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot> getUserSmokeEntries(String userId) {
+    return _firestore
+        .collection('users')
+        .doc(userId)
+        .collection('smoke_entries')
+        .orderBy('timestamp', descending: true)
+        .snapshots();
+  }
+}

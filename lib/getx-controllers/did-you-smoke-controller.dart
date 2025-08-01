@@ -27,6 +27,7 @@ import 'package:nicotrack/getx-controllers/premium-controller.dart';
 import 'package:nicotrack/screens/premium/premium-paywall-screen.dart';
 import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
 import 'package:nicotrack/extensions/app_localizations_extension.dart';
+import 'package:nicotrack/services/firebase-service.dart';
 import 'dart:ui';
 
 class DidYouSmokeController extends GetxController {
@@ -232,6 +233,13 @@ class DidYouSmokeController extends GetxController {
                       smokedToday = true;
                       didYouSmokeFilledData =
                           didYouSmokeFilledData.copyWith(hasSmokedToday: 0);
+                      FirebaseService().logEvent(
+                        name: 'smoking_status_selected',
+                        parameters: {
+                          'smoked_today': 'true',
+                          'page': 'smoking_questionnaire',
+                        },
+                      );
                       getCurrentPageStatus();
                     },
                     child: Container(
@@ -301,6 +309,13 @@ class DidYouSmokeController extends GetxController {
                         avoidNext: [],
                         updateQuitDate: 1, // Keep current quit date
                       );
+                      FirebaseService().logEvent(
+                        name: 'smoking_status_selected',
+                        parameters: {
+                          'smoked_today': 'false',
+                          'page': 'smoking_questionnaire',
+                        },
+                      );
                       getCurrentPageStatus();
                     },
                     child: Container(
@@ -369,6 +384,13 @@ class DidYouSmokeController extends GetxController {
           selectedNumber1 = packNumbers[index];
           didYouSmokeFilledData =
               didYouSmokeFilledData.copyWith(howManyCigs: selectedNumber1);
+          FirebaseService().logEvent(
+            name: 'cigarette_count_selected',
+            parameters: {
+              'cigarette_count': selectedNumber1,
+              'page': 'smoking_questionnaire',
+            },
+          );
           getCurrentPageStatus();
         },
         childDelegate: ListWheelChildBuilderDelegate(
@@ -982,6 +1004,13 @@ class DidYouSmokeController extends GetxController {
     await box.put(didYouSmokeStringToday, didYouSmokeFilledData);
     print("Saving smoke-free data: $didYouSmokeStringToday with data $didYouSmokeFilledData");
     
+    // Log smoke-free session completion
+    FirebaseService().logSmokingSessionCompleted(
+      smokedToday: false,
+      cigaretteCount: 0,
+      quitDateUpdated: false,
+    );
+    
     if (context.mounted) {
       // Navigate directly to congratulations page for smoke-free days after questionnaire completion
       Navigator.of(context).pushReplacement(
@@ -997,6 +1026,16 @@ class DidYouSmokeController extends GetxController {
         .format(currentDateTime);
     final box = Hive.box<DidYouSmokeModel>('didYouSmokeData');
     await box.put(didYouSmokeStringToday, didYouSmokeFilledData);
+    
+    // Log smoking session completion
+    FirebaseService().logSmokingSessionCompleted(
+      smokedToday: didYouSmokeFilledData.hasSmokedToday == 0,
+      cigaretteCount: didYouSmokeFilledData.howManyCigs,
+      quitDateUpdated: didYouSmokeFilledData.updateQuitDate == 0,
+      triggers: didYouSmokeFilledData.whatTriggerred.map((t) => t['text'] as String).toList(),
+      feelings: didYouSmokeFilledData.howYouFeel.map((f) => f['text'] as String).toList(),
+      avoidanceStrategies: didYouSmokeFilledData.avoidNext.map((a) => a['text'] as String).toList(),
+    );
     
     // If user chose to update their quit date (0 = Yes, update my quit date)
     if (didYouSmokeFilledData.updateQuitDate == 0) {

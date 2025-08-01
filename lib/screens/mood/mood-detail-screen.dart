@@ -136,8 +136,8 @@ class _MoodDetailScreenState extends State<MoodDetailScreen> {
           // Large emoji with blue background
           if (selfFeeling.isNotEmpty) ...[
             Container(
-              width: 250.w,
-              // height: 50.w,
+              width: 170.w,
+              height: 170.w,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Color(0x192196F3),
