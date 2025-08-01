@@ -71,6 +71,9 @@ void main() async {
   tz.initializeTimeZones();
   await NotificationService().initialize();
   
+  // Check permissions and schedule notifications if enabled
+  await NotificationService().checkPermissionsAndScheduleNotifications();
+  
   // Initialize premium persistence
   await PremiumPersistenceService.initialize();
   

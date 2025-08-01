@@ -3057,6 +3057,17 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
 
       // Update local state
       currentNotificationsPreferences = updatedPrefs;
+      
+      // Update notification service with new time
+      final notificationService = NotificationService();
+      int hour24Format = selectedHour;
+      if (selectedHalf == ' PM' && selectedHour != 12) {
+        hour24Format += 12;
+      } else if (selectedHalf == ' AM' && selectedHour == 12) {
+        hour24Format = 0;
+      }
+      await notificationService.updateMorningNotificationTime(hour24Format, selectedMinute);
+      
       update();
     } catch (e) {
       print('Error updating daily reminder preferences: $e');
@@ -3086,6 +3097,17 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
 
       // Update local state
       currentNotificationsPreferences = updatedPrefs;
+      
+      // Update notification service with new time  
+      final notificationService = NotificationService();
+      int hour24Format = selectedWeeklyHour;
+      if (selectedWeeklyHalf == ' PM' && selectedWeeklyHour != 12) {
+        hour24Format += 12;
+      } else if (selectedWeeklyHalf == ' AM' && selectedWeeklyHour == 12) {
+        hour24Format = 0;
+      }
+      await notificationService.updateEveningNotificationTime(hour24Format, selectedWeeklyMinute);
+      
       update();
     } catch (e) {
       print('Error updating weekly reminder preferences: $e');
@@ -4143,5 +4165,29 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
 
   bool get isFeedbackFormValid {
     return feedbackController.text.trim().isNotEmpty;
+  }
+
+  // Debug method to test notifications
+  Future<void> debugNotifications() async {
+    final notificationService = NotificationService();
+    
+    print('🔔 DEBUG: Testing notification permissions and scheduling...');
+    
+    // Check permissions
+    final bool enabled = await notificationService.areNotificationsEnabled();
+    print('🔔 Notifications enabled: $enabled');
+    
+    if (enabled) {
+      // Send immediate test notification
+      await notificationService.scheduleTestNotification();
+      
+      // Send 5-second delayed notification (better for testing)
+      await notificationService.scheduleTestNotificationDelayed();
+      
+      // Check pending notifications
+      await notificationService.debugPendingNotifications();
+    } else {
+      print('🔔 Notifications not enabled - please enable in device settings');
+    }
   }
 }

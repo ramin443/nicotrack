@@ -101,6 +101,13 @@ class _SettingsState extends State<Settings> {
                                   ),
                                 ],
                               ),
+                        // ElevatedButton(
+                        //   onPressed: () async {
+                        //     await Get.find<SettingsController>().debugNotifications();
+                        //   },
+                        //   child: Text('🧪 Test Notifications'),
+                        // ),
+
                         settingsController.personalInfoSection(context:context, isUserPremium: premiumController.effectivePremiumStatus),
                         settingsController.pushNotificationSection(context),
                         settingsController.financialGoalsSection(context: context, isUserPremium: premiumController.effectivePremiumStatus),
