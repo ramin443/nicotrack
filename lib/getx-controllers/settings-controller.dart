@@ -11,6 +11,8 @@ import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/contact-s
 import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/feedback.dart';
 import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/financial-goal.dart';
 import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/set-time.dart';
+import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/set-morning-time.dart';
+import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/set-evening-time.dart';
 import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/set-weekly-time.dart';
 import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/set-weekday.dart';
 import 'package:nicotrack/screens/base/settings-subpages/bottom-sheets/smokes-per-day.dart';
@@ -794,14 +796,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                   )
                 ],
               ),
-              TextAutoSize(getFormattedDailyReminderTime(),
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    height: 1.1,
-                    fontSize: 16.sp,
-                    fontFamily: circularBold,
-                    color: nicotrackOrange,
-                  )),
+              Container(), // Empty container since we'll show times in expanded section
             ],
           ),
           children: [
@@ -810,25 +805,86 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 SizedBox(
                   height: 8.w,
                 ),
-                GestureDetector(
-                  onTap: () {
-                    showSetTimeBottomSheet(context);
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 13.sp, vertical: 10.sp),
-                    decoration: BoxDecoration(
-                        color: nicotrackOrange.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(9.r)),
-                    child: TextAutoSize(getFormattedDailyReminderDetailedTime(),
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          height: 1.1,
-                          fontSize: 16.sp,
-                          fontFamily: circularBold,
-                          color: nicotrackOrange,
-                        )),
-                  ),
+                // Morning notification time selector
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: TextAutoSize('Morning:',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            height: 1.1,
+                            fontSize: 16.sp,
+                            fontFamily: circularMedium,
+                            color: nicotrackBlack1,
+                          )),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: GestureDetector(
+                        onTap: () {
+                          showSetMorningTimeBottomSheet(context);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 13.sp, vertical: 10.sp),
+                          decoration: BoxDecoration(
+                              color: nicotrackOrange.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(9.r)),
+                          child: TextAutoSize(getFormattedMorningTime(),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                height: 1.1,
+                                fontSize: 16.sp,
+                                fontFamily: circularBold,
+                                color: nicotrackOrange,
+                              )),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 12.w,
+                ),
+                // Evening notification time selector
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: TextAutoSize('Evening:',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            height: 1.1,
+                            fontSize: 16.sp,
+                            fontFamily: circularMedium,
+                            color: nicotrackBlack1,
+                          )),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: GestureDetector(
+                        onTap: () {
+                          showSetEveningTimeBottomSheet(context);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 13.sp, vertical: 10.sp),
+                          decoration: BoxDecoration(
+                              color: nicotrackOrange.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(9.r)),
+                          child: TextAutoSize(getFormattedEveningTime(),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                height: 1.1,
+                                fontSize: 16.sp,
+                                fontFamily: circularBold,
+                                color: nicotrackOrange,
+                              )),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 8.w,
@@ -1146,6 +1202,32 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
         // isScrollControlled: true,
         builder: (context) {
           return SetTimeBottomSheet();
+        });
+  }
+
+  void showSetMorningTimeBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
+        ),
+        // isScrollControlled: true,
+        builder: (context) {
+          return SetMorningTimeBottomSheet();
+        });
+  }
+
+  void showSetEveningTimeBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
+        ),
+        // isScrollControlled: true,
+        builder: (context) {
+          return SetEveningTimeBottomSheet();
         });
   }
 
@@ -3060,13 +3142,16 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       
       // Update notification service with new time
       final notificationService = NotificationService();
-      int hour24Format = selectedHour;
-      if (selectedHalf == ' PM' && selectedHour != 12) {
-        hour24Format += 12;
-      } else if (selectedHalf == ' AM' && selectedHour == 12) {
-        hour24Format = 0;
-      }
+      int hour24Format = _convertTo24HourFormat(selectedHour, selectedHalf);
+      
+      print('🔔 DEBUG Settings Controller - Daily Reminder:');
+      print('  Selected: ${selectedHour}:${selectedMinute.toString().padLeft(2, '0')} ${selectedHalf}');
+      print('  Converted to 24h: ${hour24Format}:${selectedMinute.toString().padLeft(2, '0')}');
+      
       await notificationService.updateMorningNotificationTime(hour24Format, selectedMinute);
+      
+      // Schedule a test notification to verify the change worked
+      await notificationService.scheduleSettingsTestNotification(hour24Format, selectedMinute);
       
       update();
     } catch (e) {
@@ -3100,17 +3185,56 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       
       // Update notification service with new time  
       final notificationService = NotificationService();
-      int hour24Format = selectedWeeklyHour;
-      if (selectedWeeklyHalf == ' PM' && selectedWeeklyHour != 12) {
-        hour24Format += 12;
-      } else if (selectedWeeklyHalf == ' AM' && selectedWeeklyHour == 12) {
-        hour24Format = 0;
-      }
+      int hour24Format = _convertTo24HourFormat(selectedWeeklyHour, selectedWeeklyHalf);
+      
+      print('🔔 DEBUG Settings Controller - Weekly Reminder:');
+      print('  Selected: ${selectedWeeklyHour}:${selectedWeeklyMinute.toString().padLeft(2, '0')} ${selectedWeeklyHalf}');
+      print('  Converted to 24h: ${hour24Format}:${selectedWeeklyMinute.toString().padLeft(2, '0')}');
+      
       await notificationService.updateEveningNotificationTime(hour24Format, selectedWeeklyMinute);
+      
+      // Schedule a test notification to verify the change worked
+      await notificationService.scheduleSettingsTestNotification(hour24Format, selectedWeeklyMinute);
       
       update();
     } catch (e) {
       print('Error updating weekly reminder preferences: $e');
+    }
+  }
+
+  // Update morning notification time (8 AM default)
+  Future<void> updateMorningNotificationTime() async {
+    try {
+      final notificationService = NotificationService();
+      int hour24Format = _convertTo24HourFormat(selectedHour, selectedHalf);
+      
+      print('🔔 DEBUG Settings Controller - Morning Notification:');
+      print('  Selected: ${selectedHour}:${selectedMinute.toString().padLeft(2, '0')} ${selectedHalf}');
+      print('  Converted to 24h: ${hour24Format}:${selectedMinute.toString().padLeft(2, '0')}');
+      
+      await notificationService.updateMorningNotificationTime(hour24Format, selectedMinute);
+      
+      update();
+    } catch (e) {
+      print('Error updating morning notification time: $e');
+    }
+  }
+
+  // Update evening notification time (8 PM default)
+  Future<void> updateEveningNotificationTime() async {
+    try {
+      final notificationService = NotificationService();
+      int hour24Format = _convertTo24HourFormat(selectedHour, selectedHalf);
+      
+      print('🔔 DEBUG Settings Controller - Evening Notification:');
+      print('  Selected: ${selectedHour}:${selectedMinute.toString().padLeft(2, '0')} ${selectedHalf}');
+      print('  Converted to 24h: ${hour24Format}:${selectedMinute.toString().padLeft(2, '0')}');
+      
+      await notificationService.updateEveningNotificationTime(hour24Format, selectedMinute);
+      
+      update();
+    } catch (e) {
+      print('Error updating evening notification time: $e');
     }
   }
 
@@ -3138,6 +3262,42 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       return '${displayHour.toString().padLeft(2, '0')}: $formattedMinute${period.isNotEmpty ? period : ' AM'}';
     } catch (e) {
       return '08: 00 AM'; // Safe fallback
+    }
+  }
+
+  // Morning notification time (8:00 AM default)
+  String getFormattedMorningTime() {
+    try {
+      int hour24 = 8; // Default morning time is 8 AM
+      int minute = 0;
+      
+      // Convert to 12-hour format for display
+      String period = hour24 < 12 ? ' AM' : ' PM';
+      int displayHour = hour24 == 0 ? 12 : (hour24 > 12 ? hour24 - 12 : hour24);
+      if (hour24 == 12) displayHour = 12;
+      
+      String formattedMinute = minute.toString().padLeft(2, '0');
+      return '${displayHour.toString().padLeft(2, '0')}:$formattedMinute$period';
+    } catch (e) {
+      return '08:00 AM'; // Safe fallback
+    }
+  }
+
+  // Evening notification time (8:00 PM default)
+  String getFormattedEveningTime() {
+    try {
+      int hour24 = 20; // Default evening time is 8 PM
+      int minute = 0;
+      
+      // Convert to 12-hour format for display
+      String period = hour24 < 12 ? ' AM' : ' PM';
+      int displayHour = hour24 == 0 ? 12 : (hour24 > 12 ? hour24 - 12 : hour24);
+      if (hour24 == 12) displayHour = 12;
+      
+      String formattedMinute = minute.toString().padLeft(2, '0');
+      return '${displayHour.toString().padLeft(2, '0')}:$formattedMinute$period';
+    } catch (e) {
+      return '08:00 PM'; // Safe fallback
     }
   }
 
@@ -4189,5 +4349,38 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     } else {
       print('🔔 Notifications not enabled - please enable in device settings');
     }
+  }
+
+  // Helper method to convert 12-hour format to 24-hour format
+  int _convertTo24HourFormat(int hour12, String period) {
+    // Validate inputs
+    if (hour12 < 1 || hour12 > 12) {
+      print('🔔 ERROR: Invalid 12-hour format hour: $hour12');
+      return 8; // Default to 8 AM if invalid
+    }
+    
+    if (period != ' AM' && period != ' PM') {
+      print('🔔 ERROR: Invalid period: "$period"');
+      return 8; // Default to 8 AM if invalid
+    }
+    
+    int hour24;
+    
+    if (period == ' AM') {
+      if (hour12 == 12) {
+        hour24 = 0; // 12 AM = 00:00 (midnight)
+      } else {
+        hour24 = hour12; // 1-11 AM = 01:00-11:00
+      }
+    } else { // PM
+      if (hour12 == 12) {
+        hour24 = 12; // 12 PM = 12:00 (noon)
+      } else {
+        hour24 = hour12 + 12; // 1-11 PM = 13:00-23:00
+      }
+    }
+    
+    print('🔔 Time conversion: ${hour12}:xx ${period} → ${hour24}:xx (24h)');
+    return hour24;
   }
 }

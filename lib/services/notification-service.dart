@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
@@ -21,6 +22,64 @@ class NotificationService {
 
     // Initialize timezone
     tz.initializeTimeZones();
+    
+    // Set local timezone - use system default
+    try {
+      // Get the local timezone
+      final String timeZoneName = DateTime.now().timeZoneName;
+      print('🔔 System timezone name: $timeZoneName');
+      
+      // For iOS simulator/device, timeZoneName might be an abbreviation like "PST", "EST", etc.
+      // We need to map these to proper timezone identifiers
+      String? locationName;
+      
+      // Try common timezone mappings
+      switch (timeZoneName) {
+        case 'PST':
+        case 'PDT':
+          locationName = 'America/Los_Angeles';
+          break;
+        case 'EST':
+        case 'EDT':
+          locationName = 'America/New_York';
+          break;
+        case 'CST':
+        case 'CDT':
+          locationName = 'America/Chicago';
+          break;
+        case 'MST':
+        case 'MDT':
+          locationName = 'America/Denver';
+          break;
+        case 'GMT':
+        case 'UTC':
+          locationName = 'UTC';
+          break;
+        case 'BST':
+          locationName = 'Europe/London';
+          break;
+        case 'CET':
+        case 'CEST':
+          locationName = 'Europe/Berlin';
+          break;
+        default:
+          // If we can't map it, we'll use UTC offset approach
+          locationName = null;
+      }
+      
+      if (locationName != null) {
+        tz.setLocalLocation(tz.getLocation(locationName));
+        print('🔔 Timezone set to: $locationName');
+      } else {
+        // Fallback: Use UTC offset
+        final now = DateTime.now();
+        final offset = now.timeZoneOffset;
+        print('🔔 Using UTC offset: ${offset.inHours} hours');
+        // Note: This is a limitation - we can't perfectly set timezone without proper detection
+      }
+    } catch (e) {
+      print('🔔 Error setting timezone: $e, notifications will use device local time');
+    }
 
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     const AndroidInitializationSettings initializationSettingsAndroid =
@@ -141,6 +200,33 @@ class NotificationService {
     );
   }
 
+  // Check Android exact alarm permissions
+  Future<bool> checkAndRequestExactAlarmPermission() async {
+    if (!Platform.isAndroid) return true;
+    
+    try {
+      final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
+          flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>();
+
+      if (androidImplementation != null) {
+        final bool? canScheduleExactNotifications = await androidImplementation.canScheduleExactNotifications();
+        
+        if (canScheduleExactNotifications == false) {
+          print('🔔 WARNING: App cannot schedule exact notifications on Android');
+          // Note: We can't automatically request this permission, user must grant it manually
+          return false;
+        }
+        
+        return canScheduleExactNotifications ?? true;
+      }
+    } catch (e) {
+      print('🔔 Error checking exact alarm permissions: $e');
+    }
+    
+    return true; // Assume it's fine if we can't check
+  }
+
   Future<void> scheduleDailyNotification({
     required int id,
     required String title,
@@ -148,6 +234,15 @@ class NotificationService {
     required int hour,
     required int minute,
   }) async {
+    print('🔔 DEBUG scheduleDailyNotification: $title at $hour:${minute.toString().padLeft(2, '0')}');
+    
+    // Check Android exact alarm permissions
+    final canScheduleExact = await checkAndRequestExactAlarmPermission();
+    if (!canScheduleExact) {
+      print('🔔 ERROR: Cannot schedule exact notifications - permission denied');
+      return;
+    }
+    
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(
       'nicotrack_daily_reminders',
@@ -169,17 +264,26 @@ class NotificationService {
       iOS: iOSPlatformChannelSpecifics,
     );
 
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-      id,
-      title,
-      body,
-      _nextInstanceOfTime(hour, minute),
-      platformChannelSpecifics,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-      matchDateTimeComponents: DateTimeComponents.time,
-    );
+    try {
+      final scheduledTime = _nextInstanceOfTime(hour, minute);
+      
+      await flutterLocalNotificationsPlugin.zonedSchedule(
+        id,
+        title,
+        body,
+        scheduledTime,
+        platformChannelSpecifics,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.time,
+      );
+      
+      print('🔔 ✅ Successfully scheduled notification ID $id for ${scheduledTime.toString()}');
+      
+    } catch (e) {
+      print('🔔 ERROR scheduling notification: $e');
+    }
   }
 
   Future<void> scheduleDefaultDailyNotifications() async {
@@ -211,47 +315,97 @@ class NotificationService {
   }
 
   Future<void> updateMorningNotificationTime(int hour, int minute) async {
+    print('🔔 DEBUG updateMorningNotificationTime called with: $hour:${minute.toString().padLeft(2, '0')}');
+    
     final bool notificationsEnabled = await areNotificationsEnabled();
     if (!notificationsEnabled) {
-      print('🔔 Notifications not enabled, cannot update morning notification time');
+      print('🔔 ERROR: Notifications not enabled, cannot update morning notification time');
       return;
     }
 
-    // Cancel existing morning notification
-    await flutterLocalNotificationsPlugin.cancel(morningNotificationId);
+    // Validate time parameters
+    if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+      print('🔔 ERROR: Invalid time parameters - hour: $hour, minute: $minute');
+      return;
+    }
 
-    // Schedule new morning notification with updated time
-    await scheduleDailyNotification(
-      id: morningNotificationId,
-      title: '🌅 Good Morning!',
-      body: 'How are you feeling today? Log your mood and start your smoke-free day strong! 💪',
-      hour: hour,
-      minute: minute,
-    );
+    try {
+      // Cancel existing morning notification
+      await flutterLocalNotificationsPlugin.cancel(morningNotificationId);
+      print('🔔 Cancelled existing morning notification (ID: $morningNotificationId)');
 
-    print('🔔 Updated morning notification time to $hour:${minute.toString().padLeft(2, '0')}');
+      // Schedule new morning notification with updated time
+      await scheduleDailyNotification(
+        id: morningNotificationId,
+        title: '🌅 Good Morning!',
+        body: 'How are you feeling today? Log your mood and start your smoke-free day strong! 💪',
+        hour: hour,
+        minute: minute,
+      );
+
+      // Verify the notification was scheduled
+      final pendingNotifications = await getPendingNotifications();
+      final morningNotification = pendingNotifications.where((n) => n.id == morningNotificationId).toList();
+      
+      if (morningNotification.isNotEmpty) {
+        print('🔔 ✅ SUCCESS: Morning notification updated to $hour:${minute.toString().padLeft(2, '0')}');
+      } else {
+        print('🔔 ❌ WARNING: Morning notification may not have been scheduled properly');
+      }
+      
+      // Debug: Show all pending notifications
+      await debugPendingNotifications();
+      
+    } catch (e) {
+      print('🔔 ERROR updating morning notification: $e');
+    }
   }
 
   Future<void> updateEveningNotificationTime(int hour, int minute) async {
+    print('🔔 DEBUG updateEveningNotificationTime called with: $hour:${minute.toString().padLeft(2, '0')}');
+    
     final bool notificationsEnabled = await areNotificationsEnabled();
     if (!notificationsEnabled) {
-      print('🔔 Notifications not enabled, cannot update evening notification time');
+      print('🔔 ERROR: Notifications not enabled, cannot update evening notification time');
       return;
     }
 
-    // Cancel existing evening notification
-    await flutterLocalNotificationsPlugin.cancel(eveningNotificationId);
+    // Validate time parameters
+    if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+      print('🔔 ERROR: Invalid time parameters - hour: $hour, minute: $minute');
+      return;
+    }
 
-    // Schedule new evening notification with updated time
-    await scheduleDailyNotification(
-      id: eveningNotificationId,
-      title: '🌙 Evening Check-in',
-      body: 'Did you smoke today? Track your progress and log your mood. You\'re doing great! 🎉',
-      hour: hour,
-      minute: minute,
-    );
+    try {
+      // Cancel existing evening notification
+      await flutterLocalNotificationsPlugin.cancel(eveningNotificationId);
+      print('🔔 Cancelled existing evening notification (ID: $eveningNotificationId)');
 
-    print('🔔 Updated evening notification time to $hour:${minute.toString().padLeft(2, '0')}');
+      // Schedule new evening notification with updated time
+      await scheduleDailyNotification(
+        id: eveningNotificationId,
+        title: '🌙 Evening Check-in',
+        body: 'Did you smoke today? Track your progress and log your mood. You\'re doing great! 🎉',
+        hour: hour,
+        minute: minute,
+      );
+
+      // Verify the notification was scheduled
+      final pendingNotifications = await getPendingNotifications();
+      final eveningNotification = pendingNotifications.where((n) => n.id == eveningNotificationId).toList();
+      
+      if (eveningNotification.isNotEmpty) {
+        print('🔔 ✅ SUCCESS: Evening notification updated to $hour:${minute.toString().padLeft(2, '0')}');
+      } else {
+        print('🔔 ❌ WARNING: Evening notification may not have been scheduled properly');
+      }
+      
+      // Debug: Show all pending notifications
+      await debugPendingNotifications();
+      
+    } catch (e) {
+      print('🔔 ERROR updating evening notification: $e');
+    }
   }
 
   Future<void> cancelNotification(int id) async {
@@ -264,7 +418,19 @@ class NotificationService {
   }
 
   tz.TZDateTime _nextInstanceOfTime(int hour, int minute) {
+    // First try to get the current time in local timezone
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+    
+    // Also get system DateTime for comparison
+    final DateTime systemNow = DateTime.now();
+    
+    print('🔔 DEBUG _nextInstanceOfTime:');
+    print('  System DateTime.now(): ${systemNow.toString()}');
+    print('  TZDateTime.now(tz.local): ${now.toString()}');
+    print('  Timezone offset: ${systemNow.timeZoneOffset}');
+    print('  Requested time: ${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}');
+    
+    // Create scheduled date in local timezone
     tz.TZDateTime scheduledDate = tz.TZDateTime(
       tz.local,
       now.year,
@@ -272,12 +438,26 @@ class NotificationService {
       now.day,
       hour,
       minute,
+      0, // seconds
+      0, // milliseconds
     );
+    
+    print('  Initial scheduled: ${scheduledDate.toString()}');
+    print('  Initial scheduled (local): ${scheduledDate.toLocal().toString()}');
 
-    // If the scheduled time has already passed today, schedule for tomorrow
-    if (scheduledDate.isBefore(now)) {
+    // Add buffer time (30 seconds) to avoid edge cases with immediate scheduling
+    final nowWithBuffer = now.add(Duration(seconds: 30));
+    
+    // If the scheduled time has already passed today (including buffer), schedule for tomorrow
+    if (scheduledDate.isBefore(nowWithBuffer)) {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
+      print('  Time has passed, moved to tomorrow: ${scheduledDate.toString()}');
+    } else {
+      print('  Scheduled for today: ${scheduledDate.toString()}');
     }
+    
+    print('  Final scheduled time: ${scheduledDate.toString()}');
+    print('  Final scheduled time (local): ${scheduledDate.toLocal().toString()}');
 
     return scheduledDate;
   }
@@ -372,4 +552,32 @@ class NotificationService {
       print('🔔 ERROR scheduling delayed test notification: $e');
     }
   }
+
+  // Schedule a test notification to verify settings change worked
+  Future<void> scheduleSettingsTestNotification(int hour, int minute) async {
+    final bool notificationsEnabled = await areNotificationsEnabled();
+    if (!notificationsEnabled) {
+      print('🔔 Notifications not enabled, cannot schedule settings test notification');
+      return;
+    }
+
+    try {
+      // Schedule for 1 minute from now to verify the new time setting
+      final now = DateTime.now();
+      final testTime = now.add(Duration(minutes: 1));
+      
+      await scheduleDailyNotification(
+        id: 996, // Unique ID for settings test
+        title: '⚙️ Settings Test',
+        body: 'Your notification time was successfully updated to ${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}!',
+        hour: testTime.hour,
+        minute: testTime.minute,
+      );
+      
+      print('🔔 Settings test notification scheduled for 1 minute from now');
+    } catch (e) {
+      print('🔔 ERROR scheduling settings test notification: $e');
+    }
+  }
+
 }

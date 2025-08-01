@@ -69,6 +69,7 @@ void main() async {
 
   // Initialize timezone and notification service
   tz.initializeTimeZones();
+  
   await NotificationService().initialize();
   
   // Check permissions and schedule notifications if enabled
