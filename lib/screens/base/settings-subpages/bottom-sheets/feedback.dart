@@ -81,8 +81,14 @@ class _FeedbackBottomSheetState extends State<FeedbackBottomSheet> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).pop();
+                                onTap: () async {
+                                  // If feedback field is empty, just close without submitting
+                                  if (settingsController.feedbackController.text.trim().isEmpty) {
+                                    Navigator.of(context).pop();
+                                    return;
+                                  }
+                                  // Otherwise, attempt to submit
+                                  await settingsController.submitFeedback(context);
                                 },
                                 child: TextAutoSize(
                                   'Done',

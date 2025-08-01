@@ -55,6 +55,15 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
   // Clear data confirmation variables
   TextEditingController confirmationTextController = TextEditingController();
   bool isConfirmationValid = false;
+  
+  // Contact Support and Feedback form controllers
+  TextEditingController contactEmailController = TextEditingController();
+  TextEditingController contactDetailsController = TextEditingController();
+  TextEditingController feedbackController = TextEditingController();
+  int feedbackRating = 5; // Default rating (1-5 stars)
+  String feedbackType = 'general'; // general, bug_report, feature_request, other
+  bool isSubmittingSupport = false;
+  bool isSubmittingFeedback = false;
   bool isweeklyReminderExpanded = false;
   bool isquitTipsExpanded = false;
   final PageController financialGoalsScrollController =
@@ -2155,6 +2164,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
             height: 8.w,
           ),
           TextField(
+            controller: contactEmailController,
             cursorColor: nicotrackBlack1,
             textInputAction: TextInputAction.done,
             scrollPadding: EdgeInsets.only(bottom: 100.h),
@@ -2212,6 +2222,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           Container(
             height: 260.w,
             child: TextField(
+              controller: contactDetailsController,
               maxLines: null,
               expands: true,
               cursorColor: nicotrackBlack1,
@@ -2449,6 +2460,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           Container(
             height: 300.h,
             child: TextField(
+              controller: feedbackController,
               maxLines: null,
               expands: true,
               cursorColor: nicotrackBlack1,
@@ -3827,5 +3839,228 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
         return const ChangeLanguageBottomSheet();
       },
     );
+  }
+
+  // Contact Support and Feedback submission methods
+  Future<void> submitContactSupport(BuildContext context) async {
+    if (isSubmittingSupport) return;
+    
+    // Validate form
+    if (contactEmailController.text.trim().isEmpty) {
+      _showErrorSnackBar(context, 'Please enter your email address');
+      return;
+    }
+    
+    if (contactDetailsController.text.trim().isEmpty) {
+      _showErrorSnackBar(context, 'Please describe your issue');
+      return;
+    }
+    
+    if (!_isValidEmail(contactEmailController.text.trim())) {
+      _showErrorSnackBar(context, 'Please enter a valid email address');
+      return;
+    }
+    
+    isSubmittingSupport = true;
+    update();
+    
+    try {
+      // Get device and app info
+      final deviceInfo = await FirebaseService().getDeviceAndAppInfo();
+      
+      // Generate user ID (you can replace this with actual user ID from your auth system)
+      final userId = _generateUserId();
+      
+      // Submit to Firebase Firestore
+      await FirebaseService().saveContactSupport(
+        userId: userId,
+        email: contactEmailController.text.trim(),
+        details: contactDetailsController.text.trim(),
+        deviceInfo: '${deviceInfo['device_model']} - ${deviceInfo['os_version']}',
+        appVersion: '${deviceInfo['app_version']} (${deviceInfo['app_build']})',
+      );
+      
+      // Log analytics event
+      FirebaseService().logEvent(
+        name: 'contact_support_submitted',
+        parameters: {
+          'email_provided': 'true',
+          'details_length': contactDetailsController.text.trim().length.toString(),
+          'platform': deviceInfo['platform'] ?? 'unknown',
+        },
+      );
+      
+      // Clear form
+      contactEmailController.clear();
+      contactDetailsController.clear();
+      
+      // Show success message
+      _showSuccessSnackBar(context, 'Support request submitted successfully! We\'ll get back to you soon.');
+      
+      // Close bottom sheet
+      Navigator.of(context).pop();
+      
+    } catch (e) {
+      print('Error submitting contact support: $e');
+      _showErrorSnackBar(context, 'Failed to submit support request. Please try again.');
+    } finally {
+      isSubmittingSupport = false;
+      update();
+    }
+  }
+
+  Future<void> submitFeedback(BuildContext context) async {
+    if (isSubmittingFeedback) return;
+    
+    // Validate form
+    if (feedbackController.text.trim().isEmpty) {
+      _showErrorSnackBar(context, 'Please enter your feedback');
+      return;
+    }
+    
+    isSubmittingFeedback = true;
+    update();
+    
+    try {
+      // Get device and app info
+      final deviceInfo = await FirebaseService().getDeviceAndAppInfo();
+      
+      // Generate user ID (you can replace this with actual user ID from your auth system)
+      final userId = _generateUserId();
+      
+      // Get user context for better analysis
+      final userContext = await _getUserContext();
+      
+      // Submit to Firebase Firestore
+      await FirebaseService().saveFeedback(
+        userId: userId,
+        feedback: feedbackController.text.trim(),
+        rating: feedbackRating,
+        feedbackType: feedbackType,
+        deviceInfo: '${deviceInfo['device_model']} - ${deviceInfo['os_version']}',
+        appVersion: '${deviceInfo['app_version']} (${deviceInfo['app_build']})',
+        userContext: userContext,
+      );
+      
+      // Log analytics event
+      FirebaseService().logEvent(
+        name: 'feedback_submitted',
+        parameters: {
+          'rating': feedbackRating.toString(),
+          'feedback_type': feedbackType,
+          'feedback_length': feedbackController.text.trim().length.toString(),
+          'platform': deviceInfo['platform'] ?? 'unknown',
+        },
+      );
+      
+      // Clear form
+      feedbackController.clear();
+      feedbackRating = 5; // Reset to default
+      feedbackType = 'general';
+      
+      // Show success message
+      _showSuccessSnackBar(context, 'Thank you for your feedback! We appreciate your input.');
+      
+      // Close bottom sheet
+      Navigator.of(context).pop();
+      
+    } catch (e) {
+      print('Error submitting feedback: $e');
+      _showErrorSnackBar(context, 'Failed to submit feedback. Please try again.');
+    } finally {
+      isSubmittingFeedback = false;
+      update();
+    }
+  }
+
+  // Helper methods
+  String _generateUserId() {
+    // Generate a simple user ID based on device and timestamp
+    // In a real app, you'd use Firebase Auth or another user management system
+    final now = DateTime.now().millisecondsSinceEpoch;
+    return 'user_${now.toString().substring(now.toString().length - 8)}';
+  }
+
+  Future<Map<String, dynamic>> _getUserContext() async {
+    try {
+      // Get user's current progress and app usage data
+      final onboardingBox = Hive.box<OnboardingData>('onboardingCompletedData');
+      final userData = onboardingBox.get('currentUserOnboarding');
+      
+      return {
+        'days_since_quit': userData?.lastSmokedDate != null 
+            ? DateTime.now().difference(DateTime.parse(userData!.lastSmokedDate)).inDays
+            : null,
+        'cigarettes_per_day': userData?.cigarettesPerDay,
+        'user_name_provided': userData?.name?.isNotEmpty == true,
+        'app_language': Get.locale?.languageCode ?? 'en',
+        'submission_timestamp': DateTime.now().toIso8601String(),
+      };
+    } catch (e) {
+      return {
+        'error': 'Could not retrieve user context',
+        'submission_timestamp': DateTime.now().toIso8601String(),
+      };
+    }
+  }
+
+  bool _isValidEmail(String email) {
+    return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email);
+  }
+
+  void _showSuccessSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: TextAutoSize(
+          message,
+          style: TextStyle(
+              fontSize: 14.sp,
+              fontFamily: circularBook,
+              height: 1.2,
+              color: Colors.white),
+        ),
+        backgroundColor: Colors.black,
+        duration: Duration(seconds: 3),
+      ),
+    );
+  }
+
+  void _showErrorSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: TextAutoSize(
+          message,
+          style: TextStyle(
+              fontSize: 14.sp,
+              fontFamily: circularBook,
+              height: 1.2,
+              color: Colors.white),
+        ),
+        backgroundColor: nicotrackBlack1,
+        duration: Duration(seconds: 3),
+      ),
+    );
+  }
+
+  // Rating and feedback type setters
+  void setFeedbackRating(int rating) {
+    feedbackRating = rating;
+    update();
+  }
+
+  void setFeedbackType(String type) {
+    feedbackType = type;
+    update();
+  }
+
+  // Form validation helpers
+  bool get isContactSupportFormValid {
+    return contactEmailController.text.trim().isNotEmpty &&
+           contactDetailsController.text.trim().isNotEmpty &&
+           _isValidEmail(contactEmailController.text.trim());
+  }
+
+  bool get isFeedbackFormValid {
+    return feedbackController.text.trim().isNotEmpty;
   }
 }

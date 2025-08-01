@@ -70,6 +70,10 @@ dependencies:
   firebase_core: ^4.0.0
   firebase_analytics: ^12.0.0
   cloud_firestore: ^6.0.0
+  
+  # Device and app info packages
+  device_info_plus: ^10.1.2
+  package_info_plus: ^8.0.3
 
 dev_dependencies:
   hive_generator: ^2.0.0

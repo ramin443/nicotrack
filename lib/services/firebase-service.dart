@@ -1,5 +1,8 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:io' show Platform;
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class FirebaseService {
   static final FirebaseService _instance = FirebaseService._internal();
@@ -386,5 +389,183 @@ class FirebaseService {
         .collection('smoke_entries')
         .orderBy('timestamp', descending: true)
         .snapshots();
+  }
+
+  // Contact Support and Feedback methods
+  Future<void> saveContactSupport({
+    required String userId,
+    required String email,
+    required String details,
+    required String deviceInfo,
+    required String appVersion,
+  }) async {
+    final supportData = {
+      'email': email,
+      'details': details,
+      'device_info': deviceInfo,
+      'app_version': appVersion,
+      'timestamp': FieldValue.serverTimestamp(),
+      'created_at': DateTime.now().toIso8601String(),
+      'status': 'new',
+      'priority': _calculateSupportPriority(details),
+      'category': _categorizeSupportRequest(details),
+      'user_id': userId,
+      'platform': 'flutter_ios',
+    };
+
+    await _firestore
+        .collection('contact_support')
+        .add(supportData);
+  }
+
+  Future<void> saveFeedback({
+    required String userId,
+    required String feedback,
+    required int rating,
+    required String feedbackType,
+    required String deviceInfo,
+    required String appVersion,
+    Map<String, dynamic>? userContext,
+  }) async {
+    final feedbackData = {
+      'feedback': feedback,
+      'rating': rating,
+      'feedback_type': feedbackType,
+      'device_info': deviceInfo,
+      'app_version': appVersion,
+      'timestamp': FieldValue.serverTimestamp(),
+      'created_at': DateTime.now().toIso8601String(),
+      'user_id': userId,
+      'platform': 'flutter_ios',
+      'sentiment': _analyzeFeedbackSentiment(feedback),
+      'word_count': feedback.split(' ').length,
+      'user_context': userContext ?? {},
+    };
+
+    await _firestore
+        .collection('feedback')
+        .add(feedbackData);
+  }
+
+  // Helper methods for categorization and analysis
+  String _calculateSupportPriority(String details) {
+    final urgentKeywords = ['crash', 'bug', 'error', 'broken', 'not working', 'urgent', 'critical'];
+    final mediumKeywords = ['slow', 'issue', 'problem', 'feature request'];
+    
+    final lowerDetails = details.toLowerCase();
+    
+    if (urgentKeywords.any((keyword) => lowerDetails.contains(keyword))) {
+      return 'high';
+    } else if (mediumKeywords.any((keyword) => lowerDetails.contains(keyword))) {
+      return 'medium';
+    }
+    return 'low';
+  }
+
+  String _categorizeSupportRequest(String details) {
+    final lowerDetails = details.toLowerCase();
+    
+    final categories = {
+      'technical': ['crash', 'bug', 'error', 'not working', 'broken', 'slow'],
+      'account': ['login', 'account', 'password', 'premium', 'subscription'],
+      'feature': ['feature', 'request', 'suggestion', 'add', 'new'],
+      'data': ['sync', 'lost', 'missing', 'backup', 'restore'],
+      'payment': ['payment', 'billing', 'refund', 'purchase', 'charged'],
+    };
+    
+    for (final category in categories.keys) {
+      if (categories[category]!.any((keyword) => lowerDetails.contains(keyword))) {
+        return category;
+      }
+    }
+    
+    return 'general';
+  }
+
+  String _analyzeFeedbackSentiment(String feedback) {
+    final positiveKeywords = ['great', 'love', 'amazing', 'excellent', 'good', 'helpful', 'awesome', 'fantastic'];
+    final negativeKeywords = ['hate', 'bad', 'terrible', 'awful', 'worst', 'useless', 'annoying', 'frustrating'];
+    
+    final lowerFeedback = feedback.toLowerCase();
+    
+    final positiveCount = positiveKeywords.where((keyword) => lowerFeedback.contains(keyword)).length;
+    final negativeCount = negativeKeywords.where((keyword) => lowerFeedback.contains(keyword)).length;
+    
+    if (positiveCount > negativeCount) return 'positive';
+    if (negativeCount > positiveCount) return 'negative';
+    return 'neutral';
+  }
+
+  // Query methods for admin dashboard
+  Stream<QuerySnapshot> getAllContactSupport() {
+    return _firestore
+        .collection('contact_support')
+        .orderBy('timestamp', descending: true)
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot> getAllFeedback() {
+    return _firestore
+        .collection('feedback')
+        .orderBy('timestamp', descending: true)
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot> getContactSupportByStatus(String status) {
+    return _firestore
+        .collection('contact_support')
+        .where('status', isEqualTo: status)
+        .orderBy('timestamp', descending: true)
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot> getFeedbackByRating(int minRating) {
+    return _firestore
+        .collection('feedback')
+        .where('rating', isGreaterThanOrEqualTo: minRating)
+        .orderBy('rating', descending: true)
+        .snapshots();
+  }
+
+  // Helper method to get device and app info
+  Future<Map<String, String>> getDeviceAndAppInfo() async {
+    try {
+      final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+      
+      String deviceModel = 'Unknown';
+      String osVersion = 'Unknown';
+      String platform = 'Unknown';
+      
+      if (Platform.isIOS) {
+        final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+        deviceModel = '${iosInfo.name} ${iosInfo.model}';
+        osVersion = '${iosInfo.systemName} ${iosInfo.systemVersion}';
+        platform = 'iOS';
+      } else if (Platform.isAndroid) {
+        final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+        deviceModel = '${androidInfo.manufacturer} ${androidInfo.model}';
+        osVersion = 'Android ${androidInfo.version.release}';
+        platform = 'Android';
+      }
+      
+      return {
+        'device_model': deviceModel,
+        'os_version': osVersion,
+        'platform': platform,
+        'app_version': packageInfo.version,
+        'app_build': packageInfo.buildNumber,
+        'app_name': packageInfo.appName,
+      };
+    } catch (e) {
+      return {
+        'device_model': 'Unknown',
+        'os_version': 'Unknown', 
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'app_version': '1.0.0',
+        'app_build': '1',
+        'app_name': 'Nicotrack',
+      };
+    }
   }
 }

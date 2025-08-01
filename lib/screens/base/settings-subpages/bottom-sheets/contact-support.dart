@@ -83,8 +83,15 @@ class _ContactSupportBottomSheetBottomSheetState
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).pop();
+                                onTap: () async {
+                                  // If both fields are empty, just close without submitting
+                                  if (settingsController.contactEmailController.text.trim().isEmpty && 
+                                      settingsController.contactDetailsController.text.trim().isEmpty) {
+                                    Navigator.of(context).pop();
+                                    return;
+                                  }
+                                  // Otherwise, attempt to submit
+                                  await settingsController.submitContactSupport(context);
                                 },
                                 child: TextAutoSize(
                                   'Done',
