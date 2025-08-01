@@ -7,6 +7,7 @@ import 'package:nicotrack/constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
 import '../../../../getx-controllers/settings-controller.dart';
 import '../../../elements/textAutoSize.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class SetWeeklyTimeBottomSheet extends StatefulWidget {
   const SetWeeklyTimeBottomSheet({super.key});
@@ -108,7 +109,7 @@ class _SetWeeklyTimeBottomSheetState extends State<SetWeeklyTimeBottomSheet> {
                             Navigator.of(context).pop();
                           },
                           child: TextAutoSize(
-                            'Done',
+                            context.l10n.done,
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontFamily: circularBook,
@@ -126,7 +127,7 @@ class _SetWeeklyTimeBottomSheetState extends State<SetWeeklyTimeBottomSheet> {
                   height: 4.w,
                 ),
                 TextAutoSize(
-                  '🕑 Set Weekly Reminder Time',
+                  context.l10n.set_weekly_reminder_time,
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontFamily: circularBold,

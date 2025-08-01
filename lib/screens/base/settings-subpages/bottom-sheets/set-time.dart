@@ -7,6 +7,7 @@ import 'package:nicotrack/constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
 import '../../../../getx-controllers/settings-controller.dart';
 import '../../../elements/textAutoSize.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class SetTimeBottomSheet extends StatefulWidget {
   const SetTimeBottomSheet({super.key});
@@ -108,7 +109,7 @@ class _SetTimeBottomSheetState extends State<SetTimeBottomSheet> {
                           Navigator.of(context).pop();
                         },
                         child: TextAutoSize(
-                          'Done',
+                          context.l10n.done,
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontFamily: circularBook,
@@ -126,7 +127,7 @@ class _SetTimeBottomSheetState extends State<SetTimeBottomSheet> {
                 height: 4.w,
               ),
               TextAutoSize(
-                '🕑 Set Time',
+                context.l10n.set_time,
                 style: TextStyle(
                   fontSize: 24.sp,
                   fontFamily: circularBold,

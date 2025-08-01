@@ -7,6 +7,7 @@ import 'package:nicotrack/constants/color-constants.dart';
 import '../../../../constants/font-constants.dart';
 import '../../../../getx-controllers/settings-controller.dart';
 import '../../../elements/textAutoSize.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class SetWeekdayBottomSheet extends StatefulWidget {
   const SetWeekdayBottomSheet({super.key});
@@ -88,7 +89,7 @@ class _SetWeekdayBottomSheetState extends State<SetWeekdayBottomSheet> {
                             Navigator.of(context).pop();
                           },
                           child: TextAutoSize(
-                            'Done',
+                            context.l10n.done,
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontFamily: circularBook,
@@ -106,7 +107,7 @@ class _SetWeekdayBottomSheetState extends State<SetWeekdayBottomSheet> {
                   height: 4.w,
                 ),
                 TextAutoSize(
-                  '🕑 Set Weekday',
+                  context.l10n.set_weekday,
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontFamily: circularBold,

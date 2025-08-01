@@ -924,9 +924,7 @@
   "save": "Save",
   "edit_financial_goal": "EDIT FINANCIAL GOAL",
   "set_the_price": "SET THE PRICE",
-  "edit_financial_goal": "EDIT FINANCIAL GOAL",
   "goal_example_text": "e.g., Airpods pro",
-  "set_the_price": "SET THE PRICE",
   "delete_goal": "Delete Goal",
   "delete_goal_confirmation": "Are you sure you want to delete \"{goalTitle}\"?",
   "@delete_goal_confirmation": {
