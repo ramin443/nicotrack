@@ -23,7 +23,7 @@ class _SetMorningTimeBottomSheetState extends State<SetMorningTimeBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SettingsController>(
-        init: SettingsController(),
+        init: settingsMainController,
         initState: (v) {
           // Initialize with saved morning time or default (8:00 AM)
           int morningHour = settingsMainController.currentNotificationsPreferences?.morningReminderHour ?? 8;
@@ -104,8 +104,8 @@ class _SetMorningTimeBottomSheetState extends State<SetMorningTimeBottomSheet> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       GestureDetector(
-                        onTap: (){
-                          settingsController.updateMorningNotificationTime();
+                        onTap: () async {
+                          await settingsMainController.updateMorningNotificationTime();
                           Navigator.of(context).pop();
                         },
                         child: TextAutoSize(
@@ -135,7 +135,7 @@ class _SetMorningTimeBottomSheetState extends State<SetMorningTimeBottomSheet> {
                   height: 1.1,
                 ),
               ),
-              Expanded(child: settingsController.setTimePicker()),
+              Expanded(child: settingsMainController.setTimePicker()),
               SizedBox(
                 height: 24.w,
               ),

@@ -60,7 +60,6 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SettingsController>(
-        init: SettingsController(),
         builder: (settingsController) {
           return GetBuilder<PremiumController>(
               init: PremiumController(),

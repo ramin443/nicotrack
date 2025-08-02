@@ -119,10 +119,10 @@ class AppPreferencesService {
   
   // Detect preferences based on locale and IP
   static Future<AppPreferencesModel> _detectPreferences() async {
-    // First try device locale
-    final locale = Platform.localeName;
-    final languageCode = locale.split('_')[0];
-    final languageName = _languageNames[languageCode] ?? 'English';
+    // Force English as default locale instead of using device locale
+    final locale = 'en_US'; // Always default to English
+    final languageCode = 'en';
+    final languageName = 'English';
     
     // Check if we have exact locale match
     if (_localeCurrencyMap.containsKey(locale)) {

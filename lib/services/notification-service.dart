@@ -5,7 +5,9 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hive/hive.dart';
 import '../getx-controllers/app-preferences-controller.dart';
+import '../models/notifications-preferences-model/notificationsPreferences-model.dart';
 
 class NotificationService {
   static final NotificationService _instance = NotificationService._internal();
@@ -295,28 +297,61 @@ class NotificationService {
       return;
     }
 
-    // Get localized texts
-    final localizedTexts = await _getLocalizedTexts();
-    
-    // Schedule morning notification at 8:00 AM
-    await scheduleDailyNotification(
-      id: morningNotificationId,
-      title: localizedTexts['morningTitle'] ?? '🌅 Good Morning!',
-      body: localizedTexts['morningBody'] ?? 'How are you feeling today? Log your mood and start your smoke-free day strong! 💪',
-      hour: 8,
-      minute: 0,
-    );
+    try {
+      // Cancel any existing notifications first
+      await flutterLocalNotificationsPlugin.cancel(morningNotificationId);
+      await flutterLocalNotificationsPlugin.cancel(eveningNotificationId);
+      print('🔔 Cancelled existing morning and evening notifications');
+      
+      // Get saved notification preferences
+      final savedTimes = await _getSavedNotificationTimes();
+      
+      // Get localized texts
+      final localizedTexts = await _getLocalizedTexts();
+      
+      // Schedule morning notification using saved or default time
+      await scheduleDailyNotification(
+        id: morningNotificationId,
+        title: localizedTexts['morningTitle'] ?? '🌅 Good Morning!',
+        body: localizedTexts['morningBody'] ?? 'How are you feeling today? Log your mood and start your smoke-free day strong! 💪',
+        hour: savedTimes['morningHour24'] ?? 8,
+        minute: savedTimes['morningMinute'] ?? 0,
+      );
 
-    // Schedule evening notification at 8:00 PM
-    await scheduleDailyNotification(
-      id: eveningNotificationId,
-      title: localizedTexts['eveningTitle'] ?? '🌙 Evening Check-in',
-      body: localizedTexts['eveningBody'] ?? 'Did you smoke today? Track your progress and log your mood. You\'re doing great! 🎉',
-      hour: 20,
-      minute: 0,
-    );
+      // Schedule evening notification using saved or default time
+      await scheduleDailyNotification(
+        id: eveningNotificationId,
+        title: localizedTexts['eveningTitle'] ?? '🌙 Evening Check-in',
+        body: localizedTexts['eveningBody'] ?? 'Did you smoke today? Track your progress and log your mood. You\'re doing great! 🎉',
+        hour: savedTimes['eveningHour24'] ?? 20,
+        minute: savedTimes['eveningMinute'] ?? 0,
+      );
 
-    print('🔔 Default daily notifications scheduled (8:00 AM & 8:00 PM)');
+      print('🔔 Daily notifications scheduled - Morning: ${savedTimes['morningHour24'] ?? 8}:${(savedTimes['morningMinute'] ?? 0).toString().padLeft(2, '0')}, Evening: ${savedTimes['eveningHour24'] ?? 20}:${(savedTimes['eveningMinute'] ?? 0).toString().padLeft(2, '0')}');
+    } catch (e) {
+      print('🔔 Error scheduling daily notifications, using defaults: $e');
+      
+      // Fallback to hardcoded defaults
+      final localizedTexts = await _getLocalizedTexts();
+      
+      await scheduleDailyNotification(
+        id: morningNotificationId,
+        title: localizedTexts['morningTitle'] ?? '🌅 Good Morning!',
+        body: localizedTexts['morningBody'] ?? 'How are you feeling today? Log your mood and start your smoke-free day strong! 💪',
+        hour: 8,
+        minute: 0,
+      );
+
+      await scheduleDailyNotification(
+        id: eveningNotificationId,
+        title: localizedTexts['eveningTitle'] ?? '🌙 Evening Check-in',
+        body: localizedTexts['eveningBody'] ?? 'Did you smoke today? Track your progress and log your mood. You\'re doing great! 🎉',
+        hour: 20,
+        minute: 0,
+      );
+      
+      print('🔔 Default daily notifications scheduled (8:00 AM & 8:00 PM)');
+    }
   }
 
   Future<void> updateMorningNotificationTime(int hour, int minute) async {
@@ -588,6 +623,58 @@ class NotificationService {
       print('🔔 Settings test notification scheduled for 1 minute from now');
     } catch (e) {
       print('🔔 ERROR scheduling settings test notification: $e');
+    }
+  }
+
+  // Helper method to get saved notification times from storage
+  Future<Map<String, int?>> _getSavedNotificationTimes() async {
+    try {
+      // Get the notification preferences box
+      final box = Hive.box<NotificationsPreferencesModel>('notificationsPreferencesData');
+      final prefs = box.get('currentUserNotificationPrefs');
+      
+      if (prefs != null) {
+        // Convert morning time to 24-hour format
+        int morningHour24 = prefs.morningReminderHour;
+        if (prefs.morningReminderPeriod.trim().toUpperCase() == 'PM' && morningHour24 != 12) {
+          morningHour24 += 12;
+        } else if (prefs.morningReminderPeriod.trim().toUpperCase() == 'AM' && morningHour24 == 12) {
+          morningHour24 = 0;
+        }
+        
+        // Convert evening time to 24-hour format
+        int eveningHour24 = prefs.eveningReminderHour;
+        if (prefs.eveningReminderPeriod.trim().toUpperCase() == 'PM' && eveningHour24 != 12) {
+          eveningHour24 += 12;
+        } else if (prefs.eveningReminderPeriod.trim().toUpperCase() == 'AM' && eveningHour24 == 12) {
+          eveningHour24 = 0;
+        }
+        
+        print('🔔 Loaded saved times - Morning: ${prefs.morningReminderHour}:${prefs.morningReminderMinute}${prefs.morningReminderPeriod} (${morningHour24}:${prefs.morningReminderMinute}), Evening: ${prefs.eveningReminderHour}:${prefs.eveningReminderMinute}${prefs.eveningReminderPeriod} (${eveningHour24}:${prefs.eveningReminderMinute})');
+        
+        return {
+          'morningHour24': morningHour24,
+          'morningMinute': prefs.morningReminderMinute,
+          'eveningHour24': eveningHour24,
+          'eveningMinute': prefs.eveningReminderMinute,
+        };
+      } else {
+        print('🔔 No saved notification preferences found, using defaults');
+        return {
+          'morningHour24': null,
+          'morningMinute': null,
+          'eveningHour24': null,
+          'eveningMinute': null,
+        };
+      }
+    } catch (e) {
+      print('🔔 Error loading saved notification times: $e');
+      return {
+        'morningHour24': null,
+        'morningMinute': null,
+        'eveningHour24': null,
+        'eveningMinute': null,
+      };
     }
   }
 

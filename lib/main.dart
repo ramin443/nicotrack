@@ -26,6 +26,7 @@ import 'package:nicotrack/services/premium-persistence-service.dart';
 import 'package:nicotrack/services/firebase-service.dart';
 import 'package:nicotrack/getx-controllers/premium-controller.dart';
 import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
+import 'package:nicotrack/getx-controllers/settings-controller.dart';
 import 'package:nicotrack/models/app-preferences-model/appPreferences-model.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
@@ -47,6 +48,7 @@ void main() async {
   
   Get.put(ProgressController()); // now accessible globally
   Get.put(PremiumController()); // Initialize premium controller
+  
   await Hive.initFlutter();
 
   // Initialize Hive adapter(s)
@@ -67,13 +69,8 @@ void main() async {
   await Hive.openBox<NotificationsPreferencesModel>('notificationsPreferencesData');
   await Hive.openBox<AppPreferencesModel>('appPreferences');
 
-  // Initialize timezone and notification service
+  // Initialize timezone 
   tz.initializeTimeZones();
-  
-  await NotificationService().initialize();
-  
-  // Check permissions and schedule notifications if enabled
-  await NotificationService().checkPermissionsAndScheduleNotifications();
   
   // Initialize premium persistence
   await PremiumPersistenceService.initialize();
@@ -83,6 +80,15 @@ void main() async {
   
   // Initialize app preferences controller after Hive is ready
   Get.put(AppPreferencesController()); // Initialize app preferences controller
+  
+  // Initialize settings controller after Hive is ready - MUST be before NotificationService
+  Get.put(SettingsController()); // Initialize settings controller
+  
+  // Initialize notification service AFTER SettingsController to ensure data is properly loaded
+  await NotificationService().initialize();
+  
+  // Check permissions and schedule notifications if enabled
+  await NotificationService().checkPermissionsAndScheduleNotifications();
   
   // Log app open event
   await FirebaseService().logAppOpen();
@@ -98,14 +104,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<AppPreferencesController>(
       builder: (appPrefsController) {
-        // Parse locale from stored preference
-        Locale? appLocale;
+        // Parse locale from stored preference, default to English
+        Locale appLocale = const Locale('en'); // Default to English
         if (appPrefsController.isInitialized && appPrefsController.locale.isNotEmpty) {
           try {
             // The locale is stored as language code only (e.g., 'en', 'es')
             appLocale = Locale(appPrefsController.locale);
           } catch (e) {
             print('Error parsing locale: $e');
+            appLocale = const Locale('en'); // Fallback to English on error
           }
         }
 
@@ -124,7 +131,21 @@ class MyApp extends StatelessWidget {
                 ],
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 supportedLocales: AppLocalizations.supportedLocales,
-                locale: appLocale,
+                locale: appLocale, // Always English by default, prevents RTL issues
+                localeResolutionCallback: (locale, supportedLocales) {
+                  // Force English if no preference is set or on fresh install
+                  if (!appPrefsController.isInitialized || appPrefsController.locale.isEmpty) {
+                    return const Locale('en');
+                  }
+                  // Check if the preferred locale is supported
+                  for (var supportedLocale in supportedLocales) {
+                    if (supportedLocale.languageCode == appLocale.languageCode) {
+                      return appLocale;
+                    }
+                  }
+                  // Fallback to English if preferred locale isn't supported
+                  return const Locale('en');
+                },
                 home: SplashScreen(),
               );
             });

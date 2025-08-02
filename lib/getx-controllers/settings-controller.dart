@@ -100,7 +100,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
   String selectedWeeklyHalf = ' PM';
 
   //Shared time lists
-  List<int> hours = List.generate(12, (index) => index); // 0 to 100
+  List<int> hours = List.generate(12, (index) => index + 1); // 1 to 12
   List<int> minutes = List.generate(60, (index) => index); // 0 to 99
   List<String> halves = [' AM', ' PM']; // 0 to 99
 
@@ -164,8 +164,12 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
     // Wait until after UI builds to scroll
     WidgetsBinding.instance.addPostFrameCallback((_) {});
-    setCurrentFilledData();
-    // Check notification permission status when settings loads
+    _initializeData();
+  }
+
+  Future<void> _initializeData() async {
+    await setCurrentFilledData();
+    // Check notification permission status AFTER data is loaded
     syncNotificationPermissionOnLoad();
   }
 
@@ -726,7 +730,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 children: [
                   statCard2(
                     emoji: moneyEmoji,
-                    value: double.parse(currentDateOnboardingData.costOfAPack),
+                    value: double.tryParse(currentDateOnboardingData.costOfAPack) ?? 0.0,
                     label: context.l10n.field_cost_per_pack,
                     isCost: true,
                   ),
@@ -2683,7 +2687,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       FinancialGoalsModel newGoal = FinancialGoalsModel(
         emoji: selectedEmoji,
         goalTitle: goalTitleController.text.trim(),
-        cost: double.parse('$selectedFinGoalDollar.$selectedFinGoalCent'),
+        cost: double.tryParse('$selectedFinGoalDollar.$selectedFinGoalCent') ?? 0.0,
       );
 
       // Add to beginning of list
@@ -2716,7 +2720,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       FinancialGoalsModel updatedGoal = FinancialGoalsModel(
         emoji: selectedEmoji1,
         goalTitle: goalTitleController1.text.trim(),
-        cost: double.parse('$selectedFinGoalDollar1.$selectedFinGoalCent1'),
+        cost: double.tryParse('$selectedFinGoalDollar1.$selectedFinGoalCent1') ?? 0.0,
       );
 
       // Update in list
@@ -2932,7 +2936,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     );
   }
 
-  void setCurrentFilledData() {
+  Future<void> setCurrentFilledData() async {
     DateTime currentDateTime = DateTime.now();
     final onboardingBox = Hive.box<OnboardingData>(
         'onboardingCompletedData'); // Specify the type of values in the box
@@ -2964,9 +2968,9 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     // Initialize notification preferences
     final notificationsBox =
         Hive.box<NotificationsPreferencesModel>('notificationsPreferencesData');
+    
     NotificationsPreferencesModel notificationPrefs =
-        notificationsBox.get('currentUserNotificationPrefs') ??
-            NotificationsPreferencesModel();
+        notificationsBox.get('currentUserNotificationPrefs') ?? NotificationsPreferencesModel();
     currentNotificationsPreferences = notificationPrefs;
 
     // Set UI variables from saved preferences
@@ -2985,6 +2989,9 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     selectedWeeklyHalf =
         currentNotificationsPreferences?.weeklyReminderPeriod ?? " PM";
 
+    // Initialize morning/evening times if they don't exist in storage
+    // Removed problematic initialization - using defaults from model instead
+
     // Check if saved preference is enabled but permission is revoked
     checkAndSyncNotificationPermission();
 
@@ -2992,6 +2999,46 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     loadFinancialGoalsFromHive();
 
     update();
+  }
+
+  // Initialize morning/evening times if they don't exist in storage
+  Future<void> _initializeMorningEveningTimes() async {
+    try {
+      final box = Hive.box<NotificationsPreferencesModel>('notificationsPreferencesData');
+      
+      // Check if morning/evening times are already set (not using defaults)
+      bool morningTimeExists = currentNotificationsPreferences?.morningReminderHour != 8 || 
+                              currentNotificationsPreferences?.morningReminderMinute != 0 ||
+                              currentNotificationsPreferences?.morningReminderPeriod != ' AM';
+      
+      bool eveningTimeExists = currentNotificationsPreferences?.eveningReminderHour != 8 || 
+                              currentNotificationsPreferences?.eveningReminderMinute != 0 ||
+                              currentNotificationsPreferences?.eveningReminderPeriod != ' PM';
+      
+      // If morning/evening times don't exist, initialize them with defaults and save
+      if (!morningTimeExists || !eveningTimeExists) {
+        print('🔔 Initializing missing morning/evening times with defaults');
+        
+        NotificationsPreferencesModel updatedPrefs = (currentNotificationsPreferences ?? NotificationsPreferencesModel()).copyWith(
+          morningReminderHour: 8,
+          morningReminderMinute: 0,
+          morningReminderPeriod: ' AM',
+          eveningReminderHour: 8,
+          eveningReminderMinute: 0,
+          eveningReminderPeriod: ' PM',
+        );
+        
+        await box.put('currentUserNotificationPrefs', updatedPrefs);
+        currentNotificationsPreferences = updatedPrefs;
+        print('🔔 Saved default morning (8:00 AM) and evening (8:00 PM) times to storage');
+      } else {
+        print('🔔 Morning and evening times already exist in storage - Morning: ${currentNotificationsPreferences?.morningReminderHour}:${currentNotificationsPreferences?.morningReminderMinute}${currentNotificationsPreferences?.morningReminderPeriod}, Evening: ${currentNotificationsPreferences?.eveningReminderHour}:${currentNotificationsPreferences?.eveningReminderMinute}${currentNotificationsPreferences?.eveningReminderPeriod}');
+      }
+      
+      update();
+    } catch (e) {
+      print('🔔 Error initializing morning/evening times: $e');
+    }
   }
 
   void updateUserName() async {
@@ -3204,10 +3251,6 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       final notificationService = NotificationService();
       int hour24Format = _convertTo24HourFormat(selectedHour, selectedHalf);
       
-      print('🔔 DEBUG Settings Controller - Morning Notification:');
-      print('  Selected: ${selectedHour}:${selectedMinute.toString().padLeft(2, '0')} ${selectedHalf}');
-      print('  Converted to 24h: ${hour24Format}:${selectedMinute.toString().padLeft(2, '0')}');
-      
       // Update notification schedule
       await notificationService.updateMorningNotificationTime(hour24Format, selectedMinute);
       
@@ -3222,6 +3265,8 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       );
       
       await box.put('currentUserNotificationPrefs', updatedPrefs);
+      await box.flush();
+      
       currentNotificationsPreferences = updatedPrefs;
       
       update();
@@ -3230,15 +3275,12 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     }
   }
 
+
   // Update evening notification time (8 PM default)
   Future<void> updateEveningNotificationTime() async {
     try {
       final notificationService = NotificationService();
       int hour24Format = _convertTo24HourFormat(selectedHour, selectedHalf);
-      
-      print('🔔 DEBUG Settings Controller - Evening Notification:');
-      print('  Selected: ${selectedHour}:${selectedMinute.toString().padLeft(2, '0')} ${selectedHalf}');
-      print('  Converted to 24h: ${hour24Format}:${selectedMinute.toString().padLeft(2, '0')}');
       
       // Update notification schedule
       await notificationService.updateEveningNotificationTime(hour24Format, selectedMinute);
@@ -3254,6 +3296,8 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       );
       
       await box.put('currentUserNotificationPrefs', updatedPrefs);
+      await box.flush();
+      
       currentNotificationsPreferences = updatedPrefs;
       
       update();
@@ -3300,8 +3344,11 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       // Format for display
       int displayHour = hour == 0 ? 12 : hour;
       String formattedMinute = minute.toString().padLeft(2, '0');
-      return '${displayHour.toString().padLeft(2, '0')}:$formattedMinute$period';
+      String result = '${displayHour.toString().padLeft(2, '0')}:$formattedMinute$period';
+      
+      return result;
     } catch (e) {
+      print('Error in getFormattedMorningTime: $e');
       return '08:00 AM'; // Safe fallback
     }
   }
@@ -3314,11 +3361,13 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       int minute = currentNotificationsPreferences?.eveningReminderMinute ?? 0;
       String period = currentNotificationsPreferences?.eveningReminderPeriod ?? ' PM';
       
+      
       // Format for display
       int displayHour = hour == 0 ? 12 : hour;
       String formattedMinute = minute.toString().padLeft(2, '0');
       return '${displayHour.toString().padLeft(2, '0')}:$formattedMinute$period';
     } catch (e) {
+      print('🔔 ERROR in getFormattedEveningTime: $e');
       return '08:00 PM'; // Safe fallback
     }
   }
@@ -3405,8 +3454,11 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       bool wasManuallyDisabled =
           currentNotificationsPreferences?.manuallyDisabled ?? false;
 
+      print('🔔 Permission sync: hasSystemPermission=$hasSystemPermission, wasManuallyDisabled=$wasManuallyDisabled');
+
       if (hasSystemPermission && !wasManuallyDisabled) {
         // System permission is granted and user hasn't manually disabled - auto-enable
+        print('🔔 Auto-enabling notifications: system permission granted and not manually disabled');
         enablePushNotification = true;
         currentNotificationsPreferences =
             currentNotificationsPreferences?.copyWith(
@@ -3417,6 +3469,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
         update();
       } else if (!hasSystemPermission || wasManuallyDisabled) {
         // Either system permission denied OR user manually disabled - keep off
+        print('🔔 Keeping notifications disabled: hasSystemPermission=$hasSystemPermission, wasManuallyDisabled=$wasManuallyDisabled');
         enablePushNotification = false;
         // Don't change manuallyDisabled flag here - preserve user's manual choice
         await updateNotificationPreferences();
@@ -4375,6 +4428,8 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
 
   // Helper method to convert 12-hour format to 24-hour format
   int _convertTo24HourFormat(int hour12, String period) {
+    print('🔔 Time conversion: $hour12:xx $period → ?');
+    
     // Validate inputs
     if (hour12 < 1 || hour12 > 12) {
       print('🔔 ERROR: Invalid 12-hour format hour: $hour12');
@@ -4391,14 +4446,18 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     if (period == ' AM') {
       if (hour12 == 12) {
         hour24 = 0; // 12 AM = 00:00 (midnight)
+        print('🔔 Time conversion: 12 AM → 0 (midnight)');
       } else {
         hour24 = hour12; // 1-11 AM = 01:00-11:00
+        print('🔔 Time conversion: $hour12 AM → $hour24');
       }
     } else { // PM
       if (hour12 == 12) {
         hour24 = 12; // 12 PM = 12:00 (noon)
+        print('🔔 Time conversion: 12 PM → 12 (noon)');
       } else {
         hour24 = hour12 + 12; // 1-11 PM = 13:00-23:00
+        print('🔔 Time conversion: $hour12 PM → $hour24');
       }
     }
     

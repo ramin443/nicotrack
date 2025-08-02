@@ -23,7 +23,7 @@ class _SetEveningTimeBottomSheetState extends State<SetEveningTimeBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SettingsController>(
-        init: SettingsController(),
+        init: settingsMainController,
         initState: (v) {
           // Initialize with saved evening time or default (8:00 PM)
           int eveningHour = settingsMainController.currentNotificationsPreferences?.eveningReminderHour ?? 8;
@@ -104,8 +104,8 @@ class _SetEveningTimeBottomSheetState extends State<SetEveningTimeBottomSheet> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       GestureDetector(
-                        onTap: (){
-                          settingsController.updateEveningNotificationTime();
+                        onTap: () async {
+                          await settingsMainController.updateEveningNotificationTime();
                           Navigator.of(context).pop();
                         },
                         child: TextAutoSize(
@@ -135,7 +135,7 @@ class _SetEveningTimeBottomSheetState extends State<SetEveningTimeBottomSheet> {
                   height: 1.1,
                 ),
               ),
-              Expanded(child: settingsController.setTimePicker()),
+              Expanded(child: settingsMainController.setTimePicker()),
               SizedBox(
                 height: 24.w,
               ),
