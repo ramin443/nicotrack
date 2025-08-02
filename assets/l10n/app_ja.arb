@@ -946,5 +946,10 @@
   "details": "詳細",
   "describe_issue_placeholder": "問題や質問を説明してください...",
   "your_feedback_placeholder": "あなたのフィードバック...",
-  "goal_title_placeholder": "例：AirPods Pro"
+  "goal_title_placeholder": "例：AirPods Pro",
+
+  "notification_morning_title": "🌅 おはようございます！",
+  "notification_morning_body": "今日の気分はいかがですか？気分を記録して、禁煙の一日を力強くスタートしましょう！💪",
+  "notification_evening_title": "🌙 夜のチェック",
+  "notification_evening_body": "今日タバコを吸いましたか？進捗を追跡して気分を記録しましょう。素晴らしい頑張りです！🎉"
 }

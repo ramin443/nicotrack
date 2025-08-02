@@ -968,5 +968,10 @@
   "details": "Details",
   "describe_issue_placeholder": "Describe your issue or question...",
   "your_feedback_placeholder": "Your Feedback...",
-  "goal_title_placeholder": "e.g., Airpods pro"
+  "goal_title_placeholder": "e.g., Airpods pro",
+
+  "notification_morning_title": "🌅 Good Morning!",
+  "notification_morning_body": "How are you feeling today? Log your mood and start your smoke-free day strong! 💪",
+  "notification_evening_title": "🌙 Evening Check-in",
+  "notification_evening_body": "Did you smoke today? Track your progress and log your mood. You're doing great! 🎉"
 }

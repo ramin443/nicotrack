@@ -950,5 +950,10 @@
   "details": "Λεπτομέρειες",
   "describe_issue_placeholder": "Περιγράψτε το πρόβλημα ή την ερώτησή σας...",
   "your_feedback_placeholder": "Τα σχόλιά σας...",
-  "goal_title_placeholder": "π.χ. AirPods Pro"
+  "goal_title_placeholder": "π.χ. AirPods Pro",
+
+  "notification_morning_title": "🌅 Καλημέρα!",
+  "notification_morning_body": "Πώς αισθάνεστε σήμερα; Καταγράψτε τη διάθεσή σας και ξεκινήστε δυναμικά τη μέρα σας χωρίς κάπνισμα! 💪",
+  "notification_evening_title": "🌙 Βραδινός έλεγχος",
+  "notification_evening_body": "Καπνίσατε σήμερα; Παρακολουθήστε την πρόοδό σας και καταγράψτε τη διάθεσή σας. Τα πάτε υπέροχα! 🎉"
 }

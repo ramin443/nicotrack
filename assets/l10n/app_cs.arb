@@ -950,5 +950,10 @@
   "details": "Podrobnosti",
   "describe_issue_placeholder": "Popište svůj problém nebo otázku...",
   "your_feedback_placeholder": "Vaše zpětná vazba...",
-  "goal_title_placeholder": "např. AirPods Pro"
+  "goal_title_placeholder": "např. AirPods Pro",
+
+  "notification_morning_title": "🌅 Dobré ráno!",
+  "notification_morning_body": "Jak se dnes cítíte? Zaznamenejte si svou náladu a silně začněte svůj den bez kouření! 💪",
+  "notification_evening_title": "🌙 Večerní kontrola",
+  "notification_evening_body": "Kouřili jste dnes? Sledujte svůj pokrok a zaznamenejte si svou náladu. Jde vám to skvěle! 🎉"
 }

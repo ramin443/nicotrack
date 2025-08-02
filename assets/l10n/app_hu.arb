@@ -950,5 +950,10 @@
   "details": "Részletek",
   "describe_issue_placeholder": "Írja le problémáját vagy kérdését...",
   "your_feedback_placeholder": "Az Ön visszajelzése...",
-  "goal_title_placeholder": "pl. AirPods Pro"
+  "goal_title_placeholder": "pl. AirPods Pro",
+
+  "notification_morning_title": "🌅 Jó reggelt!",
+  "notification_morning_body": "Hogy érzi magát ma? Rögzítse hangulatát és kezdje erősen a dohányzásmentes napját! 💪",
+  "notification_evening_title": "🌙 Esti ellenőrzés",
+  "notification_evening_body": "Dohányzott ma? Kövesse nyomon fejlődését és rögzítse hangulatát. Remekül csinálja! 🎉"
 }

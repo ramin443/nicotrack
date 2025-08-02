@@ -950,5 +950,10 @@
   "details": "פרטים",
   "describe_issue_placeholder": "תאר את הבעיה או השאלה שלך...",
   "your_feedback_placeholder": "המשוב שלך...",
-  "goal_title_placeholder": "לדוגמה, AirPods Pro"
+  "goal_title_placeholder": "לדוגמה, AirPods Pro",
+
+  "notification_morning_title": "🌅 בוקר טוב!",
+  "notification_morning_body": "איך אתה מרגיש היום? תתעד את מצב הרוח שלך והתחל את היום הללא עישון בחוזקה! 💪",
+  "notification_evening_title": "🌙 בדיקת ערב",
+  "notification_evening_body": "עישנת היום? עקוב אחר ההתקדמות שלך ותתעד את מצב הרוח שלך. אתה עושה נהדר! 🎉"
 }

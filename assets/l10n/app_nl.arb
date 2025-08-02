@@ -950,5 +950,10 @@
   "details": "Details",
   "describe_issue_placeholder": "Beschrijf uw probleem of vraag...",
   "your_feedback_placeholder": "Uw feedback...",
-  "goal_title_placeholder": "bijv. AirPods Pro"
+  "goal_title_placeholder": "bijv. AirPods Pro",
+
+  "notification_morning_title": "🌅 Goedemorgen!",
+  "notification_morning_body": "Hoe voel je je vandaag? Leg je stemming vast en begin je rookvrije dag krachtig! 💪",
+  "notification_evening_title": "🌙 Avondcontrole",
+  "notification_evening_body": "Heb je vandaag gerookt? Volg je voortgang en leg je stemming vast. Je doet het geweldig! 🎉"
 }

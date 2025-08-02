@@ -950,5 +950,10 @@
   "details": "Detail",
   "describe_issue_placeholder": "Jelaskan masalah atau pertanyaan Anda...",
   "your_feedback_placeholder": "Umpan balik Anda...",
-  "goal_title_placeholder": "misal AirPods Pro"
+  "goal_title_placeholder": "misal AirPods Pro",
+
+  "notification_morning_title": "🌅 Selamat pagi!",
+  "notification_morning_body": "Bagaimana perasaan Anda hari ini? Catat suasana hati Anda dan mulai hari bebas rokok dengan kuat! 💪",
+  "notification_evening_title": "🌙 Pemeriksaan malam",
+  "notification_evening_body": "Apakah Anda merokok hari ini? Lacak kemajuan Anda dan catat suasana hati Anda. Anda luar biasa! 🎉"
 }

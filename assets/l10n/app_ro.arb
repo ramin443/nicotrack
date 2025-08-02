@@ -950,5 +950,10 @@
   "details": "Detalii",
   "describe_issue_placeholder": "Descrie problema sau întrebarea ta...",
   "your_feedback_placeholder": "Feedback-ul tău...",
-  "goal_title_placeholder": "ex. AirPods Pro"
+  "goal_title_placeholder": "ex. AirPods Pro",
+
+  "notification_morning_title": "🌅 Bună dimineața!",
+  "notification_morning_body": "Cum te simți astăzi? Înregistrează-ți starea de spirit și începe puternic ziua fără fumat! 💪",
+  "notification_evening_title": "🌙 Verificare de seară",
+  "notification_evening_body": "Ai fumat astăzi? Urmărește-ți progresul și înregistrează-ți starea de spirit. O faci grozav! 🎉"
 }

@@ -950,5 +950,10 @@
   "details": "Detaylar",
   "describe_issue_placeholder": "Sorun veya sorunuzu açıklayın...",
   "your_feedback_placeholder": "Geri bildiriminiz...",
-  "goal_title_placeholder": "örn. AirPods Pro"
+  "goal_title_placeholder": "örn. AirPods Pro",
+
+  "notification_morning_title": "🌅 Günaydın!",
+  "notification_morning_body": "Bugün nasıl hissediyorsun? Ruh halini kaydet ve sigara içmediğin günü güçlü bir şekilde başlat! 💪",
+  "notification_evening_title": "🌙 Akşam Kontrolü",
+  "notification_evening_body": "Bugün sigara içtin mi? İlerlemenizi takip edin ve ruh halinizi kaydedin. Harika gidiyorsun! 🎉"
 }

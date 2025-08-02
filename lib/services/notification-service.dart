@@ -1,9 +1,11 @@
 import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../getx-controllers/app-preferences-controller.dart';
 
 class NotificationService {
   static final NotificationService _instance = NotificationService._internal();
@@ -293,11 +295,14 @@ class NotificationService {
       return;
     }
 
+    // Get localized texts
+    final localizedTexts = await _getLocalizedTexts();
+    
     // Schedule morning notification at 8:00 AM
     await scheduleDailyNotification(
       id: morningNotificationId,
-      title: '🌅 Good Morning!',
-      body: 'How are you feeling today? Log your mood and start your smoke-free day strong! 💪',
+      title: localizedTexts['morningTitle'] ?? '🌅 Good Morning!',
+      body: localizedTexts['morningBody'] ?? 'How are you feeling today? Log your mood and start your smoke-free day strong! 💪',
       hour: 8,
       minute: 0,
     );
@@ -305,8 +310,8 @@ class NotificationService {
     // Schedule evening notification at 8:00 PM
     await scheduleDailyNotification(
       id: eveningNotificationId,
-      title: '🌙 Evening Check-in',
-      body: 'Did you smoke today? Track your progress and log your mood. You\'re doing great! 🎉',
+      title: localizedTexts['eveningTitle'] ?? '🌙 Evening Check-in',
+      body: localizedTexts['eveningBody'] ?? 'Did you smoke today? Track your progress and log your mood. You\'re doing great! 🎉',
       hour: 20,
       minute: 0,
     );
@@ -334,11 +339,14 @@ class NotificationService {
       await flutterLocalNotificationsPlugin.cancel(morningNotificationId);
       print('🔔 Cancelled existing morning notification (ID: $morningNotificationId)');
 
+      // Get localized texts
+      final localizedTexts = await _getLocalizedTexts();
+      
       // Schedule new morning notification with updated time
       await scheduleDailyNotification(
         id: morningNotificationId,
-        title: '🌅 Good Morning!',
-        body: 'How are you feeling today? Log your mood and start your smoke-free day strong! 💪',
+        title: localizedTexts['morningTitle'] ?? '🌅 Good Morning!',
+        body: localizedTexts['morningBody'] ?? 'How are you feeling today? Log your mood and start your smoke-free day strong! 💪',
         hour: hour,
         minute: minute,
       );
@@ -381,11 +389,14 @@ class NotificationService {
       await flutterLocalNotificationsPlugin.cancel(eveningNotificationId);
       print('🔔 Cancelled existing evening notification (ID: $eveningNotificationId)');
 
+      // Get localized texts
+      final localizedTexts = await _getLocalizedTexts();
+      
       // Schedule new evening notification with updated time
       await scheduleDailyNotification(
         id: eveningNotificationId,
-        title: '🌙 Evening Check-in',
-        body: 'Did you smoke today? Track your progress and log your mood. You\'re doing great! 🎉',
+        title: localizedTexts['eveningTitle'] ?? '🌙 Evening Check-in',
+        body: localizedTexts['eveningBody'] ?? 'Did you smoke today? Track your progress and log your mood. You\'re doing great! 🎉',
         hour: hour,
         minute: minute,
       );
@@ -577,6 +588,39 @@ class NotificationService {
       print('🔔 Settings test notification scheduled for 1 minute from now');
     } catch (e) {
       print('🔔 ERROR scheduling settings test notification: $e');
+    }
+  }
+
+  // Helper method to get localized notification texts
+  Future<Map<String, String>> _getLocalizedTexts() async {
+    try {
+      // Get the current locale from app preferences
+      final appPrefsController = Get.find<AppPreferencesController>();
+      String localeCode = 'en'; // Default to English
+      
+      if (appPrefsController.isInitialized && appPrefsController.locale.isNotEmpty) {
+        localeCode = appPrefsController.locale;
+      }
+      
+      // Create a locale and get the localizations
+      final locale = Locale(localeCode);
+      final localizations = await AppLocalizations.delegate.load(locale);
+      
+      return {
+        'morningTitle': localizations.notification_morning_title,
+        'morningBody': localizations.notification_morning_body,
+        'eveningTitle': localizations.notification_evening_title,
+        'eveningBody': localizations.notification_evening_body,
+      };
+    } catch (e) {
+      print('🔔 Error getting localized texts: $e, using English fallback');
+      // Return English fallback
+      return {
+        'morningTitle': '🌅 Good Morning!',
+        'morningBody': 'How are you feeling today? Log your mood and start your smoke-free day strong! 💪',
+        'eveningTitle': '🌙 Evening Check-in',
+        'eveningBody': 'Did you smoke today? Track your progress and log your mood. You\'re doing great! 🎉',
+      };
     }
   }
 

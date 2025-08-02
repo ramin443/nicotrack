@@ -950,5 +950,10 @@
   "details": "Szczegóły",
   "describe_issue_placeholder": "Opisz swój problem lub pytanie...",
   "your_feedback_placeholder": "Twoja opinia...",
-  "goal_title_placeholder": "np. AirPods Pro"
+  "goal_title_placeholder": "np. AirPods Pro",
+
+  "notification_morning_title": "🌅 Dzień dobry!",
+  "notification_morning_body": "Jak się dziś czujesz? Zapisz swój nastrój i rozpocznij dzień bez palenia z mocą! 💪",
+  "notification_evening_title": "🌙 Wieczorny sprawdzian",
+  "notification_evening_body": "Czy dziś paliłeś? Śledź swoje postępy i zapisz swój nastrój. Radzisz sobie świetnie! 🎉"
 }

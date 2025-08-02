@@ -946,5 +946,10 @@
   "details": "详情",
   "describe_issue_placeholder": "描述您的问题或疑问...",
   "your_feedback_placeholder": "您的反馈...",
-  "goal_title_placeholder": "例如：AirPods Pro"
+  "goal_title_placeholder": "例如：AirPods Pro",
+
+  "notification_morning_title": "🌅 早上好！",
+  "notification_morning_body": "您今天感觉如何？记录您的心情，强势开始您的无烟生活！💪",
+  "notification_evening_title": "🌙 晚间检查",
+  "notification_evening_body": "您今天吸烟了吗？跟踪您的进度并记录您的心情。您做得很棒！🎉"
 }
