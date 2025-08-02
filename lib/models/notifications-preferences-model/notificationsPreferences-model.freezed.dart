@@ -30,6 +30,18 @@ mixin _$NotificationsPreferencesModel {
   int get dailyReminderMinute => throw _privateConstructorUsedError; // 0-59
   String get dailyReminderPeriod =>
       throw _privateConstructorUsedError; // " AM" or " PM" (with space to match app pattern)
+// Morning notification time
+  int get morningReminderHour =>
+      throw _privateConstructorUsedError; // 0-11 for 12-hour format (default 8 AM)
+  int get morningReminderMinute => throw _privateConstructorUsedError; // 0-59
+  String get morningReminderPeriod =>
+      throw _privateConstructorUsedError; // " AM" or " PM"
+// Evening notification time
+  int get eveningReminderHour =>
+      throw _privateConstructorUsedError; // 0-11 for 12-hour format (default 8 PM)
+  int get eveningReminderMinute => throw _privateConstructorUsedError; // 0-59
+  String get eveningReminderPeriod =>
+      throw _privateConstructorUsedError; // " AM" or " PM"
 // Weekly summary notification
   String get weeklyReminderDay =>
       throw _privateConstructorUsedError; // Full weekday name to match app pattern
@@ -62,6 +74,12 @@ abstract class $NotificationsPreferencesModelCopyWith<$Res> {
       int dailyReminderHour,
       int dailyReminderMinute,
       String dailyReminderPeriod,
+      int morningReminderHour,
+      int morningReminderMinute,
+      String morningReminderPeriod,
+      int eveningReminderHour,
+      int eveningReminderMinute,
+      String eveningReminderPeriod,
       String weeklyReminderDay,
       int weeklyReminderHour,
       int weeklyReminderMinute,
@@ -89,6 +107,12 @@ class _$NotificationsPreferencesModelCopyWithImpl<$Res,
     Object? dailyReminderHour = null,
     Object? dailyReminderMinute = null,
     Object? dailyReminderPeriod = null,
+    Object? morningReminderHour = null,
+    Object? morningReminderMinute = null,
+    Object? morningReminderPeriod = null,
+    Object? eveningReminderHour = null,
+    Object? eveningReminderMinute = null,
+    Object? eveningReminderPeriod = null,
     Object? weeklyReminderDay = null,
     Object? weeklyReminderHour = null,
     Object? weeklyReminderMinute = null,
@@ -114,6 +138,30 @@ class _$NotificationsPreferencesModelCopyWithImpl<$Res,
       dailyReminderPeriod: null == dailyReminderPeriod
           ? _value.dailyReminderPeriod
           : dailyReminderPeriod // ignore: cast_nullable_to_non_nullable
+              as String,
+      morningReminderHour: null == morningReminderHour
+          ? _value.morningReminderHour
+          : morningReminderHour // ignore: cast_nullable_to_non_nullable
+              as int,
+      morningReminderMinute: null == morningReminderMinute
+          ? _value.morningReminderMinute
+          : morningReminderMinute // ignore: cast_nullable_to_non_nullable
+              as int,
+      morningReminderPeriod: null == morningReminderPeriod
+          ? _value.morningReminderPeriod
+          : morningReminderPeriod // ignore: cast_nullable_to_non_nullable
+              as String,
+      eveningReminderHour: null == eveningReminderHour
+          ? _value.eveningReminderHour
+          : eveningReminderHour // ignore: cast_nullable_to_non_nullable
+              as int,
+      eveningReminderMinute: null == eveningReminderMinute
+          ? _value.eveningReminderMinute
+          : eveningReminderMinute // ignore: cast_nullable_to_non_nullable
+              as int,
+      eveningReminderPeriod: null == eveningReminderPeriod
+          ? _value.eveningReminderPeriod
+          : eveningReminderPeriod // ignore: cast_nullable_to_non_nullable
               as String,
       weeklyReminderDay: null == weeklyReminderDay
           ? _value.weeklyReminderDay
@@ -150,6 +198,12 @@ abstract class _$$NotificationsPreferencesModelImplCopyWith<$Res>
       int dailyReminderHour,
       int dailyReminderMinute,
       String dailyReminderPeriod,
+      int morningReminderHour,
+      int morningReminderMinute,
+      String morningReminderPeriod,
+      int eveningReminderHour,
+      int eveningReminderMinute,
+      String eveningReminderPeriod,
       String weeklyReminderDay,
       int weeklyReminderHour,
       int weeklyReminderMinute,
@@ -176,6 +230,12 @@ class __$$NotificationsPreferencesModelImplCopyWithImpl<$Res>
     Object? dailyReminderHour = null,
     Object? dailyReminderMinute = null,
     Object? dailyReminderPeriod = null,
+    Object? morningReminderHour = null,
+    Object? morningReminderMinute = null,
+    Object? morningReminderPeriod = null,
+    Object? eveningReminderHour = null,
+    Object? eveningReminderMinute = null,
+    Object? eveningReminderPeriod = null,
     Object? weeklyReminderDay = null,
     Object? weeklyReminderHour = null,
     Object? weeklyReminderMinute = null,
@@ -201,6 +261,30 @@ class __$$NotificationsPreferencesModelImplCopyWithImpl<$Res>
       dailyReminderPeriod: null == dailyReminderPeriod
           ? _value.dailyReminderPeriod
           : dailyReminderPeriod // ignore: cast_nullable_to_non_nullable
+              as String,
+      morningReminderHour: null == morningReminderHour
+          ? _value.morningReminderHour
+          : morningReminderHour // ignore: cast_nullable_to_non_nullable
+              as int,
+      morningReminderMinute: null == morningReminderMinute
+          ? _value.morningReminderMinute
+          : morningReminderMinute // ignore: cast_nullable_to_non_nullable
+              as int,
+      morningReminderPeriod: null == morningReminderPeriod
+          ? _value.morningReminderPeriod
+          : morningReminderPeriod // ignore: cast_nullable_to_non_nullable
+              as String,
+      eveningReminderHour: null == eveningReminderHour
+          ? _value.eveningReminderHour
+          : eveningReminderHour // ignore: cast_nullable_to_non_nullable
+              as int,
+      eveningReminderMinute: null == eveningReminderMinute
+          ? _value.eveningReminderMinute
+          : eveningReminderMinute // ignore: cast_nullable_to_non_nullable
+              as int,
+      eveningReminderPeriod: null == eveningReminderPeriod
+          ? _value.eveningReminderPeriod
+          : eveningReminderPeriod // ignore: cast_nullable_to_non_nullable
               as String,
       weeklyReminderDay: null == weeklyReminderDay
           ? _value.weeklyReminderDay
@@ -232,6 +316,12 @@ class _$NotificationsPreferencesModelImpl
       this.dailyReminderHour = 8,
       this.dailyReminderMinute = 0,
       this.dailyReminderPeriod = " AM",
+      this.morningReminderHour = 8,
+      this.morningReminderMinute = 0,
+      this.morningReminderPeriod = " AM",
+      this.eveningReminderHour = 8,
+      this.eveningReminderMinute = 0,
+      this.eveningReminderPeriod = " PM",
       this.weeklyReminderDay = "Monday",
       this.weeklyReminderHour = 6,
       this.weeklyReminderMinute = 0,
@@ -261,6 +351,32 @@ class _$NotificationsPreferencesModelImpl
   @JsonKey()
   final String dailyReminderPeriod;
 // " AM" or " PM" (with space to match app pattern)
+// Morning notification time
+  @override
+  @JsonKey()
+  final int morningReminderHour;
+// 0-11 for 12-hour format (default 8 AM)
+  @override
+  @JsonKey()
+  final int morningReminderMinute;
+// 0-59
+  @override
+  @JsonKey()
+  final String morningReminderPeriod;
+// " AM" or " PM"
+// Evening notification time
+  @override
+  @JsonKey()
+  final int eveningReminderHour;
+// 0-11 for 12-hour format (default 8 PM)
+  @override
+  @JsonKey()
+  final int eveningReminderMinute;
+// 0-59
+  @override
+  @JsonKey()
+  final String eveningReminderPeriod;
+// " AM" or " PM"
 // Weekly summary notification
   @override
   @JsonKey()
@@ -280,7 +396,7 @@ class _$NotificationsPreferencesModelImpl
 
   @override
   String toString() {
-    return 'NotificationsPreferencesModel(pushNotificationsActivated: $pushNotificationsActivated, manuallyDisabled: $manuallyDisabled, dailyReminderHour: $dailyReminderHour, dailyReminderMinute: $dailyReminderMinute, dailyReminderPeriod: $dailyReminderPeriod, weeklyReminderDay: $weeklyReminderDay, weeklyReminderHour: $weeklyReminderHour, weeklyReminderMinute: $weeklyReminderMinute, weeklyReminderPeriod: $weeklyReminderPeriod)';
+    return 'NotificationsPreferencesModel(pushNotificationsActivated: $pushNotificationsActivated, manuallyDisabled: $manuallyDisabled, dailyReminderHour: $dailyReminderHour, dailyReminderMinute: $dailyReminderMinute, dailyReminderPeriod: $dailyReminderPeriod, morningReminderHour: $morningReminderHour, morningReminderMinute: $morningReminderMinute, morningReminderPeriod: $morningReminderPeriod, eveningReminderHour: $eveningReminderHour, eveningReminderMinute: $eveningReminderMinute, eveningReminderPeriod: $eveningReminderPeriod, weeklyReminderDay: $weeklyReminderDay, weeklyReminderHour: $weeklyReminderHour, weeklyReminderMinute: $weeklyReminderMinute, weeklyReminderPeriod: $weeklyReminderPeriod)';
   }
 
   @override
@@ -300,6 +416,18 @@ class _$NotificationsPreferencesModelImpl
                 other.dailyReminderMinute == dailyReminderMinute) &&
             (identical(other.dailyReminderPeriod, dailyReminderPeriod) ||
                 other.dailyReminderPeriod == dailyReminderPeriod) &&
+            (identical(other.morningReminderHour, morningReminderHour) ||
+                other.morningReminderHour == morningReminderHour) &&
+            (identical(other.morningReminderMinute, morningReminderMinute) ||
+                other.morningReminderMinute == morningReminderMinute) &&
+            (identical(other.morningReminderPeriod, morningReminderPeriod) ||
+                other.morningReminderPeriod == morningReminderPeriod) &&
+            (identical(other.eveningReminderHour, eveningReminderHour) ||
+                other.eveningReminderHour == eveningReminderHour) &&
+            (identical(other.eveningReminderMinute, eveningReminderMinute) ||
+                other.eveningReminderMinute == eveningReminderMinute) &&
+            (identical(other.eveningReminderPeriod, eveningReminderPeriod) ||
+                other.eveningReminderPeriod == eveningReminderPeriod) &&
             (identical(other.weeklyReminderDay, weeklyReminderDay) ||
                 other.weeklyReminderDay == weeklyReminderDay) &&
             (identical(other.weeklyReminderHour, weeklyReminderHour) ||
@@ -319,6 +447,12 @@ class _$NotificationsPreferencesModelImpl
       dailyReminderHour,
       dailyReminderMinute,
       dailyReminderPeriod,
+      morningReminderHour,
+      morningReminderMinute,
+      morningReminderPeriod,
+      eveningReminderHour,
+      eveningReminderMinute,
+      eveningReminderPeriod,
       weeklyReminderDay,
       weeklyReminderHour,
       weeklyReminderMinute,
@@ -350,6 +484,12 @@ abstract class _NotificationsPreferencesModel
       final int dailyReminderHour,
       final int dailyReminderMinute,
       final String dailyReminderPeriod,
+      final int morningReminderHour,
+      final int morningReminderMinute,
+      final String morningReminderPeriod,
+      final int eveningReminderHour,
+      final int eveningReminderMinute,
+      final String eveningReminderPeriod,
       final String weeklyReminderDay,
       final int weeklyReminderHour,
       final int weeklyReminderMinute,
@@ -371,6 +511,20 @@ abstract class _NotificationsPreferencesModel
   @override
   String
       get dailyReminderPeriod; // " AM" or " PM" (with space to match app pattern)
+// Morning notification time
+  @override
+  int get morningReminderHour; // 0-11 for 12-hour format (default 8 AM)
+  @override
+  int get morningReminderMinute; // 0-59
+  @override
+  String get morningReminderPeriod; // " AM" or " PM"
+// Evening notification time
+  @override
+  int get eveningReminderHour; // 0-11 for 12-hour format (default 8 PM)
+  @override
+  int get eveningReminderMinute; // 0-59
+  @override
+  String get eveningReminderPeriod; // " AM" or " PM"
 // Weekly summary notification
   @override
   String get weeklyReminderDay; // Full weekday name to match app pattern

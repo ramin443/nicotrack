@@ -25,10 +25,10 @@ class _SetEveningTimeBottomSheetState extends State<SetEveningTimeBottomSheet> {
     return GetBuilder<SettingsController>(
         init: SettingsController(),
         initState: (v) {
-          // Initialize with default evening time (8:00 PM)
-          int eveningHour = 8; // 8 PM in 12-hour format
-          int eveningMinute = 0;
-          String eveningPeriod = ' PM';
+          // Initialize with saved evening time or default (8:00 PM)
+          int eveningHour = settingsMainController.currentNotificationsPreferences?.eveningReminderHour ?? 8;
+          int eveningMinute = settingsMainController.currentNotificationsPreferences?.eveningReminderMinute ?? 0;
+          String eveningPeriod = settingsMainController.currentNotificationsPreferences?.eveningReminderPeriod ?? ' PM';
           
           // Set the UI variables to match the evening time
           settingsMainController.selectedHour = eveningHour;

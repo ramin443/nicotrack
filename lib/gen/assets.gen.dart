@@ -342,6 +342,18 @@ class $AssetsImagesAwardEmojisGen {
   AssetGenImage get baseball =>
       const AssetGenImage('assets/images/award-emojis/baseball.png');
 
+  /// File path: assets/images/award-emojis/beachvacay.png
+  AssetGenImage get beachvacay =>
+      const AssetGenImage('assets/images/award-emojis/beachvacay.png');
+
+  /// File path: assets/images/award-emojis/cablecar.png
+  AssetGenImage get cablecar =>
+      const AssetGenImage('assets/images/award-emojis/cablecar.png');
+
+  /// File path: assets/images/award-emojis/camping.png
+  AssetGenImage get camping =>
+      const AssetGenImage('assets/images/award-emojis/camping.png');
+
   /// File path: assets/images/award-emojis/cap.png
   AssetGenImage get cap =>
       const AssetGenImage('assets/images/award-emojis/cap.png');
@@ -361,6 +373,14 @@ class $AssetsImagesAwardEmojisGen {
   /// File path: assets/images/award-emojis/dart arrow.png
   AssetGenImage get dartArrow =>
       const AssetGenImage('assets/images/award-emojis/dart arrow.png');
+
+  /// File path: assets/images/award-emojis/drumroll.png
+  AssetGenImage get drumroll =>
+      const AssetGenImage('assets/images/award-emojis/drumroll.png');
+
+  /// File path: assets/images/award-emojis/goalstadion.png
+  AssetGenImage get goalstadion =>
+      const AssetGenImage('assets/images/award-emojis/goalstadion.png');
 
   /// File path: assets/images/award-emojis/golf.png
   AssetGenImage get golf =>
@@ -394,6 +414,10 @@ class $AssetsImagesAwardEmojisGen {
   AssetGenImage get pinata =>
       const AssetGenImage('assets/images/award-emojis/pinata.png');
 
+  /// File path: assets/images/award-emojis/rocket.png
+  AssetGenImage get rocket =>
+      const AssetGenImage('assets/images/award-emojis/rocket.png');
+
   /// File path: assets/images/award-emojis/teddy.png
   AssetGenImage get teddy =>
       const AssetGenImage('assets/images/award-emojis/teddy.png');
@@ -411,11 +435,16 @@ class $AssetsImagesAwardEmojisGen {
         ball,
         ballroll,
         baseball,
+        beachvacay,
+        cablecar,
+        camping,
         cap,
         celebrate,
         chocolate,
         crown,
         dartArrow,
+        drumroll,
+        goalstadion,
         golf,
         hat,
         hat2,
@@ -424,6 +453,7 @@ class $AssetsImagesAwardEmojisGen {
         medalImg,
         no1,
         pinata,
+        rocket,
         teddy,
         trophy,
         vacay

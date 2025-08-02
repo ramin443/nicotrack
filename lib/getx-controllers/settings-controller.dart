@@ -807,38 +807,36 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 ),
                 // Morning notification time selector
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      flex: 1,
-                      child: TextAutoSize('Morning:',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            height: 1.1,
-                            fontSize: 16.sp,
-                            fontFamily: circularMedium,
-                            color: nicotrackBlack1,
-                          )),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: GestureDetector(
-                        onTap: () {
-                          showSetMorningTimeBottomSheet(context);
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 13.sp, vertical: 10.sp),
-                          decoration: BoxDecoration(
-                              color: nicotrackOrange.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(9.r)),
-                          child: TextAutoSize(getFormattedMorningTime(),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                height: 1.1,
-                                fontSize: 16.sp,
-                                fontFamily: circularBold,
-                                color: nicotrackOrange,
-                              )),
+                    GestureDetector(
+                      onTap: () {
+                        showSetMorningTimeBottomSheet(context);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 13.sp, vertical: 10.sp),
+                        decoration: BoxDecoration(
+                            color: nicotrackOrange.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(9.r)),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextAutoSize('Morning: ',
+                                style: TextStyle(
+                                  height: 1.1,
+                                  fontSize: 16.sp,
+                                  fontFamily: circularMedium,
+                                  color: nicotrackOrange,
+                                )),
+                            TextAutoSize(getFormattedMorningTime(),
+                                style: TextStyle(
+                                  height: 1.1,
+                                  fontSize: 16.sp,
+                                  fontFamily: circularBold,
+                                  color: nicotrackOrange,
+                                )),
+                          ],
                         ),
                       ),
                     ),
@@ -849,38 +847,36 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 ),
                 // Evening notification time selector
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      flex: 1,
-                      child: TextAutoSize('Evening:',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            height: 1.1,
-                            fontSize: 16.sp,
-                            fontFamily: circularMedium,
-                            color: nicotrackBlack1,
-                          )),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: GestureDetector(
-                        onTap: () {
-                          showSetEveningTimeBottomSheet(context);
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 13.sp, vertical: 10.sp),
-                          decoration: BoxDecoration(
-                              color: nicotrackOrange.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(9.r)),
-                          child: TextAutoSize(getFormattedEveningTime(),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                height: 1.1,
-                                fontSize: 16.sp,
-                                fontFamily: circularBold,
-                                color: nicotrackOrange,
-                              )),
+                    GestureDetector(
+                      onTap: () {
+                        showSetEveningTimeBottomSheet(context);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 13.sp, vertical: 10.sp),
+                        decoration: BoxDecoration(
+                            color: nicotrackOrange.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(9.r)),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextAutoSize('Evening: ',
+                                style: TextStyle(
+                                  height: 1.1,
+                                  fontSize: 16.sp,
+                                  fontFamily: circularMedium,
+                                  color: nicotrackOrange,
+                                )),
+                            TextAutoSize(getFormattedEveningTime(),
+                                style: TextStyle(
+                                  height: 1.1,
+                                  fontSize: 16.sp,
+                                  fontFamily: circularBold,
+                                  color: nicotrackOrange,
+                                )),
+                          ],
                         ),
                       ),
                     ),
@@ -3212,7 +3208,21 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       print('  Selected: ${selectedHour}:${selectedMinute.toString().padLeft(2, '0')} ${selectedHalf}');
       print('  Converted to 24h: ${hour24Format}:${selectedMinute.toString().padLeft(2, '0')}');
       
+      // Update notification schedule
       await notificationService.updateMorningNotificationTime(hour24Format, selectedMinute);
+      
+      // Save to preferences
+      final box = Hive.box<NotificationsPreferencesModel>('notificationsPreferencesData');
+      NotificationsPreferencesModel basePrefs = currentNotificationsPreferences ?? NotificationsPreferencesModel();
+      
+      NotificationsPreferencesModel updatedPrefs = basePrefs.copyWith(
+        morningReminderHour: selectedHour,
+        morningReminderMinute: selectedMinute,
+        morningReminderPeriod: selectedHalf,
+      );
+      
+      await box.put('currentUserNotificationPrefs', updatedPrefs);
+      currentNotificationsPreferences = updatedPrefs;
       
       update();
     } catch (e) {
@@ -3230,7 +3240,21 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       print('  Selected: ${selectedHour}:${selectedMinute.toString().padLeft(2, '0')} ${selectedHalf}');
       print('  Converted to 24h: ${hour24Format}:${selectedMinute.toString().padLeft(2, '0')}');
       
+      // Update notification schedule
       await notificationService.updateEveningNotificationTime(hour24Format, selectedMinute);
+      
+      // Save to preferences
+      final box = Hive.box<NotificationsPreferencesModel>('notificationsPreferencesData');
+      NotificationsPreferencesModel basePrefs = currentNotificationsPreferences ?? NotificationsPreferencesModel();
+      
+      NotificationsPreferencesModel updatedPrefs = basePrefs.copyWith(
+        eveningReminderHour: selectedHour,
+        eveningReminderMinute: selectedMinute,
+        eveningReminderPeriod: selectedHalf,
+      );
+      
+      await box.put('currentUserNotificationPrefs', updatedPrefs);
+      currentNotificationsPreferences = updatedPrefs;
       
       update();
     } catch (e) {
@@ -3268,14 +3292,13 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
   // Morning notification time (8:00 AM default)
   String getFormattedMorningTime() {
     try {
-      int hour24 = 8; // Default morning time is 8 AM
-      int minute = 0;
+      // Get stored morning time from preferences
+      int hour = currentNotificationsPreferences?.morningReminderHour ?? 8;
+      int minute = currentNotificationsPreferences?.morningReminderMinute ?? 0;
+      String period = currentNotificationsPreferences?.morningReminderPeriod ?? ' AM';
       
-      // Convert to 12-hour format for display
-      String period = hour24 < 12 ? ' AM' : ' PM';
-      int displayHour = hour24 == 0 ? 12 : (hour24 > 12 ? hour24 - 12 : hour24);
-      if (hour24 == 12) displayHour = 12;
-      
+      // Format for display
+      int displayHour = hour == 0 ? 12 : hour;
       String formattedMinute = minute.toString().padLeft(2, '0');
       return '${displayHour.toString().padLeft(2, '0')}:$formattedMinute$period';
     } catch (e) {
@@ -3286,14 +3309,13 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
   // Evening notification time (8:00 PM default)
   String getFormattedEveningTime() {
     try {
-      int hour24 = 20; // Default evening time is 8 PM
-      int minute = 0;
+      // Get stored evening time from preferences
+      int hour = currentNotificationsPreferences?.eveningReminderHour ?? 8;
+      int minute = currentNotificationsPreferences?.eveningReminderMinute ?? 0;
+      String period = currentNotificationsPreferences?.eveningReminderPeriod ?? ' PM';
       
-      // Convert to 12-hour format for display
-      String period = hour24 < 12 ? ' AM' : ' PM';
-      int displayHour = hour24 == 0 ? 12 : (hour24 > 12 ? hour24 - 12 : hour24);
-      if (hour24 == 12) displayHour = 12;
-      
+      // Format for display
+      int displayHour = hour == 0 ? 12 : hour;
       String formattedMinute = minute.toString().padLeft(2, '0');
       return '${displayHour.toString().padLeft(2, '0')}:$formattedMinute$period';
     } catch (e) {

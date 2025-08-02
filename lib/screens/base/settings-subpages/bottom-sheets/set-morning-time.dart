@@ -25,10 +25,10 @@ class _SetMorningTimeBottomSheetState extends State<SetMorningTimeBottomSheet> {
     return GetBuilder<SettingsController>(
         init: SettingsController(),
         initState: (v) {
-          // Initialize with default morning time (8:00 AM)
-          int morningHour = 8;
-          int morningMinute = 0;
-          String morningPeriod = ' AM';
+          // Initialize with saved morning time or default (8:00 AM)
+          int morningHour = settingsMainController.currentNotificationsPreferences?.morningReminderHour ?? 8;
+          int morningMinute = settingsMainController.currentNotificationsPreferences?.morningReminderMinute ?? 0;
+          String morningPeriod = settingsMainController.currentNotificationsPreferences?.morningReminderPeriod ?? ' AM';
           
           // Set the UI variables to match the morning time
           settingsMainController.selectedHour = morningHour;

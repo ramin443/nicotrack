@@ -16,6 +16,18 @@ _$NotificationsPreferencesModelImpl
           dailyReminderMinute:
               (json['dailyReminderMinute'] as num?)?.toInt() ?? 0,
           dailyReminderPeriod: json['dailyReminderPeriod'] as String? ?? " AM",
+          morningReminderHour:
+              (json['morningReminderHour'] as num?)?.toInt() ?? 8,
+          morningReminderMinute:
+              (json['morningReminderMinute'] as num?)?.toInt() ?? 0,
+          morningReminderPeriod:
+              json['morningReminderPeriod'] as String? ?? " AM",
+          eveningReminderHour:
+              (json['eveningReminderHour'] as num?)?.toInt() ?? 8,
+          eveningReminderMinute:
+              (json['eveningReminderMinute'] as num?)?.toInt() ?? 0,
+          eveningReminderPeriod:
+              json['eveningReminderPeriod'] as String? ?? " PM",
           weeklyReminderDay: json['weeklyReminderDay'] as String? ?? "Monday",
           weeklyReminderHour:
               (json['weeklyReminderHour'] as num?)?.toInt() ?? 6,
@@ -33,6 +45,12 @@ Map<String, dynamic> _$$NotificationsPreferencesModelImplToJson(
       'dailyReminderHour': instance.dailyReminderHour,
       'dailyReminderMinute': instance.dailyReminderMinute,
       'dailyReminderPeriod': instance.dailyReminderPeriod,
+      'morningReminderHour': instance.morningReminderHour,
+      'morningReminderMinute': instance.morningReminderMinute,
+      'morningReminderPeriod': instance.morningReminderPeriod,
+      'eveningReminderHour': instance.eveningReminderHour,
+      'eveningReminderMinute': instance.eveningReminderMinute,
+      'eveningReminderPeriod': instance.eveningReminderPeriod,
       'weeklyReminderDay': instance.weeklyReminderDay,
       'weeklyReminderHour': instance.weeklyReminderHour,
       'weeklyReminderMinute': instance.weeklyReminderMinute,
