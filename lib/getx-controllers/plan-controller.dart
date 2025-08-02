@@ -507,19 +507,40 @@ class PlanController extends GetxController {
                         SizedBox(
                           height: 9.w,
                         ),
-                        Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              iconPolygon,
-                              width: 100.w,
-                            ),
-                            Image.asset(
-                              timelineModelItem.streakImg,
-                              width: 54.w,
-                            )
-                          ],
-                        ),
+                        // Apply grayscale filter to entire stack if this streak hasn't been earned yet
+                        index > getCurrentTimelineIndex(context)
+                            ? ColorFiltered(
+                                colorFilter: ColorFilter.mode(
+                                  Colors.white,
+                                  BlendMode.saturation, // Removes color = grayscale
+                                ),
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      iconPolygon,
+                                      width: 100.w,
+                                    ),
+                                    Image.asset(
+                                      timelineModelItem.streakImg,
+                                      width: 54.w,
+                                    )
+                                  ],
+                                ),
+                              )
+                            : Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    iconPolygon,
+                                    width: 100.w,
+                                  ),
+                                  Image.asset(
+                                    timelineModelItem.streakImg,
+                                    width: 54.w,
+                                  )
+                                ],
+                              ),
                         SizedBox(
                           height: 5.w,
                         ),
