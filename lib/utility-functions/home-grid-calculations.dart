@@ -11,15 +11,26 @@ int getDaysSinceLastSmoked(DateTime selectedDateTime) {
   OnboardingData userOnboardingData =
       box.get('currentUserOnboarding') ?? OnboardingData();
 
-  String lastSmokedDate = userOnboardingData?.lastSmokedDate ??
-      DateFormat.yMMMd().format(DateTime.now());
-  DateTime parsedStoredDate = DateTime.parse(lastSmokedDate);
-  DateTime certainDateTime = DateTime(
-      selectedDateTime.year, selectedDateTime.month, selectedDateTime.day);
-  Duration difference = certainDateTime.difference(parsedStoredDate);
-  int smokeFreeDays = difference.inDays;
-
-  return smokeFreeDays;
+  String lastSmokedDate = userOnboardingData.lastSmokedDate;
+  
+  // Handle invalid or empty dates
+  if (lastSmokedDate.isEmpty) {
+    return 0; // No data available, return 0 days
+  }
+  
+  try {
+    DateTime parsedStoredDate = DateTime.parse(lastSmokedDate);
+    DateTime certainDateTime = DateTime(
+        selectedDateTime.year, selectedDateTime.month, selectedDateTime.day);
+    Duration difference = certainDateTime.difference(parsedStoredDate);
+    int smokeFreeDays = difference.inDays;
+    
+    // Ensure we don't return negative days
+    return smokeFreeDays > 0 ? smokeFreeDays : 0;
+  } catch (e) {
+    print('Error parsing last smoked date: $lastSmokedDate - $e');
+    return 0; // Return 0 if date parsing fails
+  }
 }
 
 double getMoneySaved(DateTime selectedDateTime) {
@@ -28,21 +39,54 @@ double getMoneySaved(DateTime selectedDateTime) {
   OnboardingData userOnboardingData =
       box.get('currentUserOnboarding') ?? OnboardingData();
 
-  String lastSmokedDate = userOnboardingData?.lastSmokedDate ??
-      DateFormat.yMMMd().format(DateTime.now());
-  DateTime parsedStoredDate = DateTime.parse(lastSmokedDate);
-  DateTime certainDateTime = DateTime(
-      selectedDateTime.year, selectedDateTime.month, selectedDateTime.day);
-  Duration difference = certainDateTime.difference(parsedStoredDate);
-  int smokeFreeDays = difference.inDays;
+  String lastSmokedDate = userOnboardingData.lastSmokedDate;
+  
+  // Handle invalid or empty dates
+  if (lastSmokedDate.isEmpty) {
+    return 0.0; // No data available, return 0
+  }
+  
+  // Handle invalid cigarettes per day
+  if (userOnboardingData.cigarettesPerDay <= 0) {
+    return 0.0; // Invalid data, return 0
+  }
+  
+  // Handle invalid cost per pack
+  if (userOnboardingData.costOfAPack.isEmpty) {
+    return 0.0; // No cost data, return 0
+  }
+  
+  // Handle invalid cigarettes per pack
+  if (userOnboardingData.numberOfCigarettesIn1Pack <= 0) {
+    return 0.0; // Invalid pack size, return 0
+  }
+  
+  try {
+    DateTime parsedStoredDate = DateTime.parse(lastSmokedDate);
+    DateTime certainDateTime = DateTime(
+        selectedDateTime.year, selectedDateTime.month, selectedDateTime.day);
+    Duration difference = certainDateTime.difference(parsedStoredDate);
+    int smokeFreeDays = difference.inDays;
+    
+    // Ensure we don't calculate with negative days
+    if (smokeFreeDays <= 0) {
+      return 0.0;
+    }
 
-  double costOfPack = double.parse(userOnboardingData.costOfAPack);
-  int cigarettesNotSmoked =
-      (smokeFreeDays * userOnboardingData.cigarettesPerDay).toInt();
-  double costPerCigarette =
-      costOfPack / userOnboardingData.numberOfCigarettesIn1Pack;
-  double moneySaved = cigarettesNotSmoked.toDouble() * costPerCigarette;
-  return moneySaved;
+    double costOfPack = double.tryParse(userOnboardingData.costOfAPack) ?? 0.0;
+    if (costOfPack <= 0) {
+      return 0.0; // Invalid cost, return 0
+    }
+    
+    int cigarettesNotSmoked = (smokeFreeDays * userOnboardingData.cigarettesPerDay);
+    double costPerCigarette = costOfPack / userOnboardingData.numberOfCigarettesIn1Pack;
+    double moneySaved = cigarettesNotSmoked.toDouble() * costPerCigarette;
+    
+    return moneySaved >= 0 ? moneySaved : 0.0; // Ensure no negative values
+  } catch (e) {
+    print('Error calculating money saved: $e');
+    return 0.0; // Return 0 if calculation fails
+  }
 }
 
 double getdaysOfLifeRegained(DateTime selectedDateTime) {
@@ -51,19 +95,39 @@ double getdaysOfLifeRegained(DateTime selectedDateTime) {
   OnboardingData userOnboardingData =
       box.get('currentUserOnboarding') ?? OnboardingData();
 
-  String lastSmokedDate = userOnboardingData?.lastSmokedDate ??
-      DateFormat.yMMMd().format(DateTime.now());
-  DateTime parsedStoredDate = DateTime.parse(lastSmokedDate);
-  DateTime certainDateTime = DateTime(
-      selectedDateTime.year, selectedDateTime.month, selectedDateTime.day);
-  Duration difference = certainDateTime.difference(parsedStoredDate);
-  int smokeFreeDays = difference.inDays;
+  String lastSmokedDate = userOnboardingData.lastSmokedDate;
+  
+  // Handle invalid or empty dates
+  if (lastSmokedDate.isEmpty) {
+    return 0.0; // No data available, return 0
+  }
+  
+  // Handle invalid cigarettes per day
+  if (userOnboardingData.cigarettesPerDay <= 0) {
+    return 0.0; // Invalid data, return 0
+  }
+  
+  try {
+    DateTime parsedStoredDate = DateTime.parse(lastSmokedDate);
+    DateTime certainDateTime = DateTime(
+        selectedDateTime.year, selectedDateTime.month, selectedDateTime.day);
+    Duration difference = certainDateTime.difference(parsedStoredDate);
+    int smokeFreeDays = difference.inDays;
+    
+    // Ensure we don't calculate with negative days
+    if (smokeFreeDays <= 0) {
+      return 0.0;
+    }
 
-  int cigarettesNotSmoked =
-      (smokeFreeDays * userOnboardingData.cigarettesPerDay).toInt();
-  int totalMinutesRegained = cigarettesNotSmoked * minutesRegainedPerCigarette;
-  double daysOfLifeRegained = totalMinutesRegained / minutesInDay;
-  return daysOfLifeRegained;
+    int cigarettesNotSmoked = (smokeFreeDays * userOnboardingData.cigarettesPerDay);
+    int totalMinutesRegained = cigarettesNotSmoked * minutesRegainedPerCigarette;
+    double daysOfLifeRegained = totalMinutesRegained / minutesInDay;
+    
+    return daysOfLifeRegained >= 0 ? daysOfLifeRegained : 0.0; // Ensure no negative values
+  } catch (e) {
+    print('Error calculating life regained: $e');
+    return 0.0; // Return 0 if calculation fails
+  }
 }
 
 int getcigarettesNotSmoked(DateTime selectedDateTime) {
@@ -72,17 +136,36 @@ int getcigarettesNotSmoked(DateTime selectedDateTime) {
   OnboardingData userOnboardingData =
       box.get('currentUserOnboarding') ?? OnboardingData();
 
-  String lastSmokedDate = userOnboardingData?.lastSmokedDate ??
-      DateFormat.yMMMd().format(DateTime.now());
-  DateTime parsedStoredDate = DateTime.parse(lastSmokedDate);
-  DateTime certainDateTime = DateTime(
-      selectedDateTime.year, selectedDateTime.month, selectedDateTime.day);
-  Duration difference = certainDateTime.difference(parsedStoredDate);
-  int smokeFreeDays = difference.inDays;
+  String lastSmokedDate = userOnboardingData.lastSmokedDate;
+  
+  // Handle invalid or empty dates
+  if (lastSmokedDate.isEmpty) {
+    return 0; // No data available, return 0
+  }
+  
+  // Handle invalid cigarettes per day
+  if (userOnboardingData.cigarettesPerDay <= 0) {
+    return 0; // Invalid data, return 0
+  }
+  
+  try {
+    DateTime parsedStoredDate = DateTime.parse(lastSmokedDate);
+    DateTime certainDateTime = DateTime(
+        selectedDateTime.year, selectedDateTime.month, selectedDateTime.day);
+    Duration difference = certainDateTime.difference(parsedStoredDate);
+    int smokeFreeDays = difference.inDays;
+    
+    // Ensure we don't calculate with negative days
+    if (smokeFreeDays <= 0) {
+      return 0;
+    }
 
-  int totalCigarettesNotSmoke =
-      (smokeFreeDays * userOnboardingData.cigarettesPerDay);
-  return totalCigarettesNotSmoke;
+    int totalCigarettesNotSmoked = (smokeFreeDays * userOnboardingData.cigarettesPerDay);
+    return totalCigarettesNotSmoked >= 0 ? totalCigarettesNotSmoked : 0; // Ensure no negative values
+  } catch (e) {
+    print('Error calculating cigarettes not smoked: $e');
+    return 0; // Return 0 if calculation fails
+  }
 }
 
 int getWholeDigits(double value) {

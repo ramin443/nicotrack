@@ -236,8 +236,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
             },
             child: personalInfoBox(
                 fieldName: context.l10n.field_quit_date,
-                fieldValue: convertDatetoUsableFormat(
-                    currentDateOnboardingData.lastSmokedDate),
+                fieldValue: convertDatetoUsableFormat(selectedQuitDate.toIso8601String()),
                 fieldActionName: context.l10n.action_change,
                 action: () {}),
           ),
@@ -440,7 +439,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           SizedBox(
             height: 7.w,
           ),
-          weeklyReminderSection(context),
+          // weeklyReminderSection(context),
           SizedBox(
             height: 36.w,
           ),
@@ -703,8 +702,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 children: [
                   statCard2(
                     emoji: cigImg,
-                    value:
-                        currentDateOnboardingData.cigarettesPerDay.toDouble(),
+                    value: selectedFreq.toDouble(),
                     label: context.l10n.field_cigarettes_per_day,
                     backgroundColor: const Color(0xFFB0F0A1),
                     isCost: false, // green-ish background
@@ -730,7 +728,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 children: [
                   statCard2(
                     emoji: moneyEmoji,
-                    value: double.tryParse(currentDateOnboardingData.costOfAPack) ?? 0.0,
+                    value: double.parse('$selectedDollar.$selectedCent'),
                     label: context.l10n.field_cost_per_pack,
                     isCost: true,
                   ),
@@ -895,138 +893,138 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     );
   }
 
-  Widget weeklyReminderSection(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(21.r),
-        color: btnBGLightGrey,
-        // border: Border.all(
-        //   width: 1,
-        //   color: const Color(0xFFEFEFEF),
-        // )
-      ),
-      child: ExpansionTile(
-          trailing: AnimatedRotation(
-            turns: isweeklyReminderExpanded ? 0.5 : 0.0,
-            // 180 degrees when expanded
-            duration: Duration(milliseconds: 200),
-            child: Icon(
-              FeatherIcons.chevronDown,
-              size: 20.sp,
-              color: nicotrackOrange,
-            ),
-          ),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(21.r)),
-          collapsedShape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(21.r)),
-          backgroundColor: btnBGLightGrey,
-          collapsedBackgroundColor: btnBGLightGrey,
-          initiallyExpanded: false,
-          tilePadding: EdgeInsets.only(right: 19.w, top: 6.h, bottom: 6.h),
-          childrenPadding: EdgeInsets.only(bottom: 14.h),
-          onExpansionChanged: (expanded) {
-            isweeklyReminderExpanded = expanded;
-            update();
-          },
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  SizedBox(
-                    width: 18.w,
-                  ),
-                  SizedBox(
-                    width: 175.w,
-                    child: TextAutoSize(
-                        context.l10n.weekly_summary,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          height: 1.1,
-                          fontSize: 16.sp,
-                          fontFamily: circularMedium,
-                          color: nicotrackBlack1,
-                        )),
-                  )
-                ],
-              ),
-              TextAutoSize(getFormattedWeeklyReminderTime(),
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    height: 1.1,
-                    fontSize: 16.sp,
-                    fontFamily: circularBold,
-                    color: nicotrackOrange,
-                  )),
-            ],
-          ),
-          children: [
-            Column(
-              children: [
-                SizedBox(
-                  height: 8.w,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        showWeekDayBottomSheet(context);
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 13.sp, vertical: 10.sp),
-                        decoration: BoxDecoration(
-                            color: nicotrackOrange.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(9.r)),
-                        child: TextAutoSize(
-                            currentNotificationsPreferences
-                                    ?.weeklyReminderDay ??
-                                'Monday',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              height: 1.1,
-                              fontSize: 16.sp,
-                              fontFamily: circularBold,
-                              color: nicotrackOrange,
-                            )),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 12.w,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        showWeeklySetTimeBottomSheet(context);
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 13.sp, vertical: 10.sp),
-                        decoration: BoxDecoration(
-                            color: nicotrackOrange.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(9.r)),
-                        child: TextAutoSize(
-                            getFormattedWeeklyReminderDetailedTime(),
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              height: 1.1,
-                              fontSize: 16.sp,
-                              fontFamily: circularBold,
-                              color: nicotrackOrange,
-                            )),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 8.w,
-                ),
-              ],
-            ),
-          ]),
-    );
-  }
+  // Widget weeklyReminderSection(BuildContext context) {
+  //   return Container(
+  //     decoration: BoxDecoration(
+  //       borderRadius: BorderRadius.circular(21.r),
+  //       color: btnBGLightGrey,
+  //       // border: Border.all(
+  //       //   width: 1,
+  //       //   color: const Color(0xFFEFEFEF),
+  //       // )
+  //     ),
+  //     child: ExpansionTile(
+  //         trailing: AnimatedRotation(
+  //           turns: isweeklyReminderExpanded ? 0.5 : 0.0,
+  //           // 180 degrees when expanded
+  //           duration: Duration(milliseconds: 200),
+  //           child: Icon(
+  //             FeatherIcons.chevronDown,
+  //             size: 20.sp,
+  //             color: nicotrackOrange,
+  //           ),
+  //         ),
+  //         shape:
+  //             RoundedRectangleBorder(borderRadius: BorderRadius.circular(21.r)),
+  //         collapsedShape:
+  //             RoundedRectangleBorder(borderRadius: BorderRadius.circular(21.r)),
+  //         backgroundColor: btnBGLightGrey,
+  //         collapsedBackgroundColor: btnBGLightGrey,
+  //         initiallyExpanded: false,
+  //         tilePadding: EdgeInsets.only(right: 19.w, top: 6.h, bottom: 6.h),
+  //         childrenPadding: EdgeInsets.only(bottom: 14.h),
+  //         onExpansionChanged: (expanded) {
+  //           isweeklyReminderExpanded = expanded;
+  //           update();
+  //         },
+  //         title: Row(
+  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //           children: [
+  //             Row(
+  //               children: [
+  //                 SizedBox(
+  //                   width: 18.w,
+  //                 ),
+  //                 SizedBox(
+  //                   width: 175.w,
+  //                   child: TextAutoSize(
+  //                       context.l10n.weekly_summary,
+  //                       textAlign: TextAlign.left,
+  //                       style: TextStyle(
+  //                         height: 1.1,
+  //                         fontSize: 16.sp,
+  //                         fontFamily: circularMedium,
+  //                         color: nicotrackBlack1,
+  //                       )),
+  //                 )
+  //               ],
+  //             ),
+  //             TextAutoSize(getFormattedWeeklyReminderTime(),
+  //                 textAlign: TextAlign.left,
+  //                 style: TextStyle(
+  //                   height: 1.1,
+  //                   fontSize: 16.sp,
+  //                   fontFamily: circularBold,
+  //                   color: nicotrackOrange,
+  //                 )),
+  //           ],
+  //         ),
+  //         children: [
+  //           Column(
+  //             children: [
+  //               SizedBox(
+  //                 height: 8.w,
+  //               ),
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.center,
+  //                 children: [
+  //                   GestureDetector(
+  //                     onTap: () {
+  //                       showWeekDayBottomSheet(context);
+  //                     },
+  //                     child: Container(
+  //                       padding: EdgeInsets.symmetric(
+  //                           horizontal: 13.sp, vertical: 10.sp),
+  //                       decoration: BoxDecoration(
+  //                           color: nicotrackOrange.withOpacity(0.2),
+  //                           borderRadius: BorderRadius.circular(9.r)),
+  //                       child: TextAutoSize(
+  //                           currentNotificationsPreferences
+  //                                   ?.weeklyReminderDay ??
+  //                               'Monday',
+  //                           textAlign: TextAlign.left,
+  //                           style: TextStyle(
+  //                             height: 1.1,
+  //                             fontSize: 16.sp,
+  //                             fontFamily: circularBold,
+  //                             color: nicotrackOrange,
+  //                           )),
+  //                     ),
+  //                   ),
+  //                   SizedBox(
+  //                     width: 12.w,
+  //                   ),
+  //                   GestureDetector(
+  //                     onTap: () {
+  //                       showWeeklySetTimeBottomSheet(context);
+  //                     },
+  //                     child: Container(
+  //                       padding: EdgeInsets.symmetric(
+  //                           horizontal: 13.sp, vertical: 10.sp),
+  //                       decoration: BoxDecoration(
+  //                           color: nicotrackOrange.withOpacity(0.2),
+  //                           borderRadius: BorderRadius.circular(9.r)),
+  //                       child: TextAutoSize(
+  //                           getFormattedWeeklyReminderDetailedTime(),
+  //                           textAlign: TextAlign.left,
+  //                           style: TextStyle(
+  //                             height: 1.1,
+  //                             fontSize: 16.sp,
+  //                             fontFamily: circularBold,
+  //                             color: nicotrackOrange,
+  //                           )),
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //               SizedBox(
+  //                 height: 8.w,
+  //               ),
+  //             ],
+  //           ),
+  //         ]),
+  //   );
+  // }
 
   Widget quitTipsSection(BuildContext context) {
     return Container(
