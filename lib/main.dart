@@ -78,6 +78,9 @@ void main() async {
   // Initialize purchase service
   await PurchaseService().initialize();
   
+  // Debug premium status after initialization
+  Get.find<PremiumController>().debugPremiumStatus();
+  
   // Initialize app preferences controller after Hive is ready
   Get.put(AppPreferencesController()); // Initialize app preferences controller
   

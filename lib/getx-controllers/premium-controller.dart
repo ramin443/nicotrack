@@ -14,10 +14,27 @@ class PremiumController extends GetxController {
   bool get effectivePremiumStatus {
     // If in dev mode, always return true (full premium)
     if (AppModeConfig.shouldForcePremium) {
+      print('⚠️ App in dev mode - forcing premium features enabled');
       return true;
     }
     // Otherwise, return actual premium status
+    print('✅ Using actual premium status: ${isPremium.value}');
     return isPremium.value;
+  }
+  
+  // Method to manually refresh premium status
+  void refreshPremiumStatus() {
+    print('🔄 Refreshing premium status...');
+    update();
+  }
+  
+  // Method to debug current premium status
+  void debugPremiumStatus() {
+    print('🐛 DEBUG Premium Status:');
+    print('   - Raw isPremium value: ${isPremium.value}');
+    print('   - App mode: ${AppModeConfig.appMode}');
+    print('   - Should force premium: ${AppModeConfig.shouldForcePremium}');
+    print('   - Effective premium status: $effectivePremiumStatus');
   }
   
   // Selected subscription plan

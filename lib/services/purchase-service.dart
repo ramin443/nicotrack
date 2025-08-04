@@ -174,8 +174,10 @@ class PurchaseService {
         // Lifetime is non-consumable
         success = await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
       } else {
-        // Monthly and yearly are subscriptions
+        // Monthly and yearly are subscriptions - use proper subscription purchase
         success = await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
+        // Note: For iOS, both subscriptions and non-consumables use buyNonConsumable
+        // The App Store handles subscription vs non-consumable based on product configuration
       }
       
       return success;
@@ -190,27 +192,39 @@ class PurchaseService {
 
   // Handle purchase updates
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) async {
+    print('🔔 Purchase stream received ${purchaseDetailsList.length} updates');
+    
     for (final PurchaseDetails purchaseDetails in purchaseDetailsList) {
+      print('📦 Processing purchase: ${purchaseDetails.productID} - Status: ${purchaseDetails.status}');
+      
       if (purchaseDetails.status == PurchaseStatus.pending) {
         // Show pending UI
+        print('⏳ Purchase pending for: ${purchaseDetails.productID}');
         purchasePending = true;
       } else {
         if (purchaseDetails.status == PurchaseStatus.error) {
           // Handle error
-          print('Purchase error: ${purchaseDetails.error}');
+          print('❌ Purchase error: ${purchaseDetails.error}');
           print('Purchase Failed: Something went wrong. Please try again.');
         } else if (purchaseDetails.status == PurchaseStatus.purchased ||
                    purchaseDetails.status == PurchaseStatus.restored) {
+          print('✅ Processing ${purchaseDetails.status == PurchaseStatus.purchased ? "purchase" : "restore"} for: ${purchaseDetails.productID}');
+          
           // Verify purchase
           bool valid = await _verifyPurchase(purchaseDetails);
+          print('🔐 Purchase verification result: $valid');
+          
           if (valid) {
             // Update premium status
             _deliverProduct(purchaseDetails);
+          } else {
+            print('❌ Purchase verification failed for: ${purchaseDetails.productID}');
           }
         }
         
         // Complete the purchase
         if (purchaseDetails.pendingCompletePurchase) {
+          print('✔️ Completing purchase for: ${purchaseDetails.productID}');
           await _inAppPurchase.completePurchase(purchaseDetails);
         }
         
@@ -219,15 +233,26 @@ class PurchaseService {
     }
   }
 
-  // Verify purchase (implement server-side verification in production)
+  // Verify purchase (implement server-side verification in production)  
   Future<bool> _verifyPurchase(PurchaseDetails purchaseDetails) async {
+    print('🔍 Verifying purchase for: ${purchaseDetails.productID}');
+    
     // TODO: Implement server-side receipt validation
     // For now, we'll do basic client-side validation
     
     // Check if we have verification data
     if (purchaseDetails.verificationData.localVerificationData.isEmpty) {
+      print('❌ No verification data found');
       return false;
     }
+    
+    // Check if product ID matches our expected products
+    if (!_productIds.contains(purchaseDetails.productID)) {
+      print('❌ Unknown product ID: ${purchaseDetails.productID}');
+      return false;
+    }
+    
+    print('✅ Basic verification passed for: ${purchaseDetails.productID}');
     
     // In production, send receipt to your server for validation
     // Return true for now (testing purposes)
@@ -238,13 +263,18 @@ class PurchaseService {
   void _deliverProduct(PurchaseDetails purchaseDetails) {
     final controller = Get.find<PremiumController>();
     
+    print('🎉 Delivering premium product: ${purchaseDetails.productID}');
+    
     // Set premium status
     controller.isPremium.value = true;
     
     // Store purchase info (you might want to save this to local storage)
     _savePurchaseInfo(purchaseDetails);
     
-    print('Success! Premium features unlocked!');
+    // Force UI refresh
+    controller.refreshPremiumStatus();
+    
+    print('✅ Success! Premium features unlocked! Current status: ${controller.isPremium.value}');
   }
 
   // Save purchase information
@@ -261,10 +291,18 @@ class PurchaseService {
   // Restore previous purchases
   Future<void> restorePurchases() async {
     try {
+      print('🔄 Starting restore purchases...');
       await _inAppPurchase.restorePurchases();
+      
+      // Wait a bit for the purchase stream to process restored purchases
+      await Future.delayed(Duration(seconds: 2));
+      
+      final controller = Get.find<PremiumController>();
+      print('📱 After restore - Premium status: ${controller.isPremium.value}');
+      
       // The purchase stream will handle the restored purchases
     } catch (e) {
-      print('Restore error: $e');
+      print('❌ Restore error: $e');
       print('Restore Failed: Could not restore purchases. Please try again.');
     }
   }

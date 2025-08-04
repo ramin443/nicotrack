@@ -24,36 +24,52 @@ class PremiumPersistenceService {
     String? productId,
     DateTime? purchaseDate,
   }) async {
-    if (_box == null) return;
+    if (_box == null) {
+      print('❌ Premium persistence box is null!');
+      return;
+    }
+    
+    print('💾 Saving premium status: $isPremium');
     
     await _box!.put(_isPremiumKey, isPremium);
     
     if (purchaseId != null) {
       await _box!.put(_purchaseIdKey, purchaseId);
+      print('💾 Saved purchase ID: $purchaseId');
     }
     
     if (productId != null) {
       await _box!.put(_productIdKey, productId);
+      print('💾 Saved product ID: $productId');
     }
     
     if (purchaseDate != null) {
       await _box!.put(_purchaseDateKey, purchaseDate.toIso8601String());
+      print('💾 Saved purchase date: $purchaseDate');
     }
     
     // Update controller
     final controller = Get.find<PremiumController>();
     controller.isPremium.value = isPremium;
+    
+    print('✅ Premium status saved and controller updated');
   }
   
   // Load premium status
   static Future<void> loadPremiumStatus() async {
-    if (_box == null) return;
+    if (_box == null) {
+      print('❌ Premium persistence box is null during load!');
+      return;
+    }
     
     bool isPremium = _box!.get(_isPremiumKey, defaultValue: false);
+    print('📖 Loading premium status from storage: $isPremium');
     
     // Update controller
     final controller = Get.find<PremiumController>();
     controller.isPremium.value = isPremium;
+    
+    print('✅ Premium status loaded and controller updated: ${controller.isPremium.value}');
   }
   
   // Get premium info
