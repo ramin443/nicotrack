@@ -57,6 +57,12 @@
   "stepdown_method": "Schrittweise Methode",
   "stepdown_description": "Das Rauchen mit der Zeit schrittweise reduzieren",
   
+  "get_started": "Loslegen",
+  "skip": "Überspringen",
+  "today": "Heute",
+  "yesterday": "Gestern",
+  "custom_date": "Benutzerdefiniertes Datum",
+  
   "select_date": "Datum auswählen",
   "cancel": "Abbrechen",
   "confirm": "Bestätigen",

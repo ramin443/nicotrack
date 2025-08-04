@@ -57,6 +57,12 @@
   "stepdown_method": "Método Gradual",
   "stepdown_description": "Reducir gradualmente el fumar con el tiempo",
   
+  "get_started": "Comenzar",
+  "skip": "Omitir",
+  "today": "Hoy",
+  "yesterday": "Ayer",
+  "custom_date": "Fecha personalizada",
+  
   "select_date": "Seleccionar fecha",
   "cancel": "Cancelar",
   "confirm": "Confirmar",

@@ -56,6 +56,11 @@
   "instant_quit_description": "עצרו מיד והשתמשו בכלי תמיכה",
   "stepdown_method": "שיטה הדרגתית",
   "stepdown_description": "הפחיתו הדרגתיות את העישון עם הזמן",
+  "get_started": "התחילו",
+  "skip": "דלגו",
+  "today": "היום",
+  "yesterday": "אתמול",
+  "custom_date": "תאריך מותאם אישית",
   
   "select_date": "בחרו תאריך",
   "cancel": "ביטול",

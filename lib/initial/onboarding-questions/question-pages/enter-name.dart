@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../screens/elements/textAutoSize.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 import 'package:nicotrack/constants/font-constants.dart';
 import 'package:nicotrack/constants/color-constants.dart';
@@ -36,7 +37,7 @@ class _EnterNameState extends State<EnterName> {
                         width: 6.w,
                       ),
                       TextAutoSize(
-                        "One last step, 😅",
+                        context.l10n.enter_name_subtitle,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20.sp,
@@ -49,7 +50,7 @@ class _EnterNameState extends State<EnterName> {
                   ),
                   Spacer(),
                   TextAutoSize(
-                    "What should we call you?",
+                    context.l10n.enter_name_title,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 26.sp,

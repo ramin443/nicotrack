@@ -56,6 +56,11 @@
   "instant_quit_description": "Arrêter immédiatement et utiliser les outils de soutien",
   "stepdown_method": "Méthode Progressive",
   "stepdown_description": "Réduire progressivement le tabac avec le temps",
+  "get_started": "Commencer",
+  "skip": "Ignorer",
+  "today": "Aujourd'hui",
+  "yesterday": "Hier",
+  "custom_date": "Date personnalisée",
   
   "select_date": "Sélectionner la date",
   "cancel": "Annuler",

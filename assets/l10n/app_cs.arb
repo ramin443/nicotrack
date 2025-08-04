@@ -56,6 +56,11 @@
   "instant_quit_description": "Přestaňte okamžitě a používejte podpůrné nástroje",
   "stepdown_method": "Postupné snižování",
   "stepdown_description": "Postupně snižujte kouření v průběhu času",
+  "get_started": "Začít",
+  "skip": "Přeskočit",
+  "today": "Dnes",
+  "yesterday": "Včera",
+  "custom_date": "Vlastní datum",
   
   "select_date": "Vyberte datum",
   "cancel": "Zrušit",

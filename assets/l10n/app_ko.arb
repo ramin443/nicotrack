@@ -56,6 +56,11 @@
   "instant_quit_description": "즉시 중단하고 지원 도구 사용",
   "stepdown_method": "단계적 방법",
   "stepdown_description": "시간을 두고 점진적으로 흡연 줄이기",
+  "get_started": "시작하기",
+  "skip": "건너뛰기",
+  "today": "오늘",
+  "yesterday": "어제",
+  "custom_date": "사용자 지정 날짜",
   
   "select_date": "날짜 선택",
   "cancel": "취소",

@@ -57,6 +57,12 @@
   "stepdown_method": "Step-down Method",
   "stepdown_description": "Gradually reduce smoking over time",
   
+  "get_started": "Get Started",
+  "skip": "Skip",
+  "today": "Today",
+  "yesterday": "Yesterday",
+  "custom_date": "Custom date",
+  
   "select_date": "Select Date",
   "cancel": "Cancel",
   "confirm": "Confirm",

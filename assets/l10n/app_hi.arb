@@ -56,6 +56,11 @@
   "instant_quit_description": "तुरंत रोकें और सहायक उपकरण का उपयोग करें",
   "stepdown_method": "क्रमिक विधि",
   "stepdown_description": "समय के साथ धूम्रपान को धीरे-धीरे कम करें",
+  "get_started": "शुरू करें",
+  "skip": "छोड़ें",
+  "today": "आज",
+  "yesterday": "कल",
+  "custom_date": "कस्टम दिनांक",
   
   "select_date": "दिनांक चुनें",
   "cancel": "रद्द करें",

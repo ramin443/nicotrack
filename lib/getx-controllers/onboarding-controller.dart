@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 import 'package:nicotrack/initial/onboarding-questions/question-pages/cost-of-pack.dart';
 import 'package:nicotrack/initial/onboarding-questions/question-pages/last-smoke.dart';
 import 'package:nicotrack/initial/onboarding-questions/question-pages/smoke-frequency.dart';
@@ -64,35 +65,46 @@ class OnboardingController extends GetxController {
   //Page 5 variables - Cigarette frequency
   List<int> selectedMotivationIndex = [];
   List<String> selectedMotivations = [];
-  List<EmojiTextPair> motivationPairs = [
-    EmojiTextPair(emoji: heartEmoji, text: "Health benefits"),
-    EmojiTextPair(emoji: cashEmoji, text: "Save Money"),
-    EmojiTextPair(emoji: crownEmoji, text: "Personal challenge"),
-    EmojiTextPair(emoji: peopleEmoji, text: "Family & loved ones"),
-    EmojiTextPair(emoji: xmarkEmoji, text: "Break the addiction"),
-    EmojiTextPair(emoji: rocketEmoji, text: "Other"),
-  ];
+  
+  // Dynamic method to build motivation pairs with localization
+  List<EmojiTextPair> getMotivationPairs(BuildContext context) {
+    return [
+      EmojiTextPair(emoji: heartEmoji, text: context.l10n.motivation_health),
+      EmojiTextPair(emoji: cashEmoji, text: context.l10n.motivation_money),
+      EmojiTextPair(emoji: crownEmoji, text: context.l10n.motivation_challenge),
+      EmojiTextPair(emoji: peopleEmoji, text: context.l10n.motivation_family),
+      EmojiTextPair(emoji: xmarkEmoji, text: context.l10n.motivation_addiction),
+      EmojiTextPair(emoji: rocketEmoji, text: context.l10n.motivation_other),
+    ];
+  }
 
   //Page 6 variables - Cigarette frequency
   List<int> selectedcravingsIndex = [];
-  List<EmojiTextPair> craveSituationPairs = [
-    EmojiTextPair(emoji: coffeeEmoji, text: "Morning with coffee"),
-    EmojiTextPair(emoji: platesEmoji, text: "After meals"),
-    EmojiTextPair(emoji: beerEmoji, text: "When drinking alcohol"),
-    EmojiTextPair(emoji: stressedEmoji, text: "When feeling stressed"),
-    EmojiTextPair(emoji: homeEmoji, text: "Boredom or habit"),
-    EmojiTextPair(emoji: othersEmoji, text: "Other"),
-  ];
+  
+  // Dynamic method to build crave situation pairs with localization
+  List<EmojiTextPair> getCraveSituationPairs(BuildContext context) {
+    return [
+      EmojiTextPair(emoji: coffeeEmoji, text: context.l10n.craving_coffee),
+      EmojiTextPair(emoji: platesEmoji, text: context.l10n.craving_meals),
+      EmojiTextPair(emoji: beerEmoji, text: context.l10n.craving_alcohol),
+      EmojiTextPair(emoji: stressedEmoji, text: context.l10n.craving_stress),
+      EmojiTextPair(emoji: homeEmoji, text: context.l10n.craving_boredom),
+      EmojiTextPair(emoji: othersEmoji, text: context.l10n.craving_other),
+    ];
+  }
 
   //Page 7 variables - Cigarette frequency
   List<int> selectedHelpIndex = [];
-  List<EmojiTextPair> helpPairs = [
-    EmojiTextPair(
-        emoji: brainsoutEmoji, text: "Handling cravings & withdrawal"),
-    EmojiTextPair(emoji: mountainEmoji, text: "Sticking to my quit plan"),
-    EmojiTextPair(emoji: celebrateEmoji, text: "Support & motivation"),
-    EmojiTextPair(emoji: badge1Emoji, text: "Tracking my progress"),
-  ];
+  
+  // Dynamic method to build help pairs with localization
+  List<EmojiTextPair> getHelpPairs(BuildContext context) {
+    return [
+      EmojiTextPair(emoji: brainsoutEmoji, text: context.l10n.help_cravings),
+      EmojiTextPair(emoji: mountainEmoji, text: context.l10n.help_plan),
+      EmojiTextPair(emoji: celebrateEmoji, text: context.l10n.help_support),
+      EmojiTextPair(emoji: badge1Emoji, text: context.l10n.help_tracking),
+    ];
+  }
 
   //Page 8 variables - Cigarette frequency
   int instantQuitSelected = 0;
@@ -191,9 +203,9 @@ class OnboardingController extends GetxController {
   Widget getLastSmokedDate() {
     return Builder(builder: (context) {
       List<Map<String, dynamic>> options = [
-        {'text': 'Today', 'emoji': '📅'},
-        {'text': 'Yesterday', 'emoji': '⏮️'},
-        {'text': 'Custom date', 'emoji': '🗓️'},
+        {'text': context.l10n.today, 'emoji': '📅'},
+        {'text': context.l10n.yesterday, 'emoji': '⏮️'},
+        {'text': context.l10n.custom_date, 'emoji': '🗓️'},
       ];
 
       return Padding(
@@ -523,70 +535,75 @@ class OnboardingController extends GetxController {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.only(left: 28.w, right: 28.w),
-        child: GridView.builder(
-          itemCount: motivationPairs.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // Two columns
-            crossAxisSpacing: 9.w,
-            mainAxisSpacing: 9.w,
-            childAspectRatio: 1, // Adjusts box shape
-          ),
-          itemBuilder: (context, index) {
-            bool isSelected = selectedMotivationIndex.contains(index);
-
-            return GestureDetector(
-              onTap: () {
-                HapticFeedback.mediumImpact();
-                if (selectedMotivationIndex.contains(index)) {
-                  selectedMotivationIndex.remove(index);
-                  onboardingFilledData = onboardingFilledData.copyWith(
-                      biggestMotivation: onboardingFilledData.biggestMotivation
-                          .where((e) => e != motivationPairs[index].text)
-                          .toList());
-                } else {
-                  selectedMotivationIndex.add(index);
-                  onboardingFilledData = onboardingFilledData.copyWith(
-                      biggestMotivation: [
-                        ...onboardingFilledData.biggestMotivation,
-                        motivationPairs[index].text
-                      ]);
-                }
-                getCurrentPageStatus();
-              },
-              child: AnimatedContainer(
-                height: 176.h,
-                duration: Duration(milliseconds: 200),
-                decoration: BoxDecoration(
-                  color: isSelected
-                      ? Colors.deepPurple.shade100
-                      : Colors.grey.shade100,
-                  borderRadius: BorderRadius.circular(16),
-                  border: isSelected
-                      ? Border.all(color: Colors.deepPurple, width: 2)
-                      : null,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      motivationPairs[index].emoji,
-                      width: 54.w,
-                    ),
-                    SizedBox(height: 18.h),
-                    SizedBox(
-                      width: 138.w,
-                      child: TextAutoSize(
-                        motivationPairs[index].text,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 14.sp,
-                            fontFamily: circularMedium,
-                            color: nicotrackBlack1),
-                      ),
-                    )
-                  ],
-                ),
+        child: Builder(
+          builder: (context) {
+            final motivationPairs = getMotivationPairs(context);
+            return GridView.builder(
+              itemCount: motivationPairs.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, // Two columns
+                crossAxisSpacing: 9.w,
+                mainAxisSpacing: 9.w,
+                childAspectRatio: 1, // Adjusts box shape
               ),
+              itemBuilder: (context, index) {
+                bool isSelected = selectedMotivationIndex.contains(index);
+
+                return GestureDetector(
+                  onTap: () {
+                    HapticFeedback.mediumImpact();
+                    if (selectedMotivationIndex.contains(index)) {
+                      selectedMotivationIndex.remove(index);
+                      onboardingFilledData = onboardingFilledData.copyWith(
+                          biggestMotivation: onboardingFilledData.biggestMotivation
+                              .where((e) => e != motivationPairs[index].text)
+                              .toList());
+                    } else {
+                      selectedMotivationIndex.add(index);
+                      onboardingFilledData = onboardingFilledData.copyWith(
+                          biggestMotivation: [
+                            ...onboardingFilledData.biggestMotivation,
+                            motivationPairs[index].text
+                          ]);
+                    }
+                    getCurrentPageStatus();
+                  },
+                  child: AnimatedContainer(
+                    height: 176.h,
+                    duration: Duration(milliseconds: 200),
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? Colors.deepPurple.shade100
+                          : Colors.grey.shade100,
+                      borderRadius: BorderRadius.circular(16),
+                      border: isSelected
+                          ? Border.all(color: Colors.deepPurple, width: 2)
+                          : null,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          motivationPairs[index].emoji,
+                          width: 54.w,
+                        ),
+                        SizedBox(height: 18.h),
+                        SizedBox(
+                          width: 138.w,
+                          child: TextAutoSize(
+                            motivationPairs[index].text,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 14.sp,
+                                fontFamily: circularMedium,
+                                color: nicotrackBlack1),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              },
             );
           },
         ),
@@ -599,15 +616,18 @@ class OnboardingController extends GetxController {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: GridView.builder(
-          itemCount: craveSituationPairs.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // Two columns
-            crossAxisSpacing: 9.w,
-            mainAxisSpacing: 9.w,
-            childAspectRatio: 1, // Adjusts box shape
-          ),
-          itemBuilder: (context, index) {
+        child: Builder(
+          builder: (context) {
+            final craveSituationPairs = getCraveSituationPairs(context);
+            return GridView.builder(
+              itemCount: craveSituationPairs.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, // Two columns
+                crossAxisSpacing: 9.w,
+                mainAxisSpacing: 9.w,
+                childAspectRatio: 1, // Adjusts box shape
+              ),
+              itemBuilder: (context, index) {
             bool isSelected = selectedcravingsIndex.contains(index);
 
             return GestureDetector(
@@ -664,6 +684,8 @@ class OnboardingController extends GetxController {
               ),
             );
           },
+        );
+          },
         ),
       ),
     );
@@ -674,15 +696,18 @@ class OnboardingController extends GetxController {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: GridView.builder(
-          itemCount: helpPairs.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // Two columns
-            crossAxisSpacing: 9.w,
-            mainAxisSpacing: 9.w,
-            childAspectRatio: 1, // Adjusts box shape
-          ),
-          itemBuilder: (context, index) {
+        child: Builder(
+          builder: (context) {
+            final helpPairs = getHelpPairs(context);
+            return GridView.builder(
+              itemCount: helpPairs.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, // Two columns
+                crossAxisSpacing: 9.w,
+                mainAxisSpacing: 9.w,
+                childAspectRatio: 1, // Adjusts box shape
+              ),
+              itemBuilder: (context, index) {
             bool isSelected = selectedHelpIndex.contains(index);
 
             return GestureDetector(
@@ -738,6 +763,8 @@ class OnboardingController extends GetxController {
                 ),
               ),
             );
+          },
+        );
           },
         ),
       ),
@@ -854,9 +881,11 @@ class OnboardingController extends GetxController {
   Widget quitMethodSelection() {
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+        child: Builder(
+          builder: (context) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
             Expanded(
                 flex: 2,
                 child: GestureDetector(
@@ -894,7 +923,7 @@ class OnboardingController extends GetxController {
                             height: 16.h,
                           ),
                           TextAutoSize(
-                            "Instant\nQuit",
+                            context.l10n.instant_quit,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               height: 1.2,
@@ -909,7 +938,7 @@ class OnboardingController extends GetxController {
                           SizedBox(
                             width: 130.w,
                             child: TextAutoSize(
-                              "Stop immediately and use support tools",
+                              context.l10n.instant_quit_description,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 11.sp,
@@ -959,7 +988,7 @@ class OnboardingController extends GetxController {
                             height: 16.h,
                           ),
                           TextAutoSize(
-                            "Step-down Method",
+                            context.l10n.stepdown_method,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               height: 1.2,
@@ -974,7 +1003,7 @@ class OnboardingController extends GetxController {
                           SizedBox(
                             width: 130.w,
                             child: TextAutoSize(
-                              "Gradually reduce smoking over time",
+                              context.l10n.stepdown_description,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 11.sp,
@@ -987,7 +1016,9 @@ class OnboardingController extends GetxController {
                         ],
                       ),
                     ))),
-          ],
+              ],
+            );
+          }
         ));
   }
 
@@ -1062,7 +1093,7 @@ class OnboardingController extends GetxController {
         ),
         child: Center(
           child: TextAutoSize(
-            currentPage == (pages.length - 1) ? "Finish" : "Continue",
+            currentPage == (pages.length - 1) ? context.l10n.finish : context.l10n.continueButton,
             style: TextStyle(
                 fontSize: 18.sp,
                 fontFamily: circularMedium,

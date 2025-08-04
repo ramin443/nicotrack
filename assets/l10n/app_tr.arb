@@ -56,6 +56,11 @@
   "instant_quit_description": "Hemen durdurun ve destek araçlarını kullanın",
   "stepdown_method": "Kademeli azaltma yöntemi",
   "stepdown_description": "Zaman içinde sigarayı kademeli olarak azaltın",
+  "get_started": "Başla",
+  "skip": "Atla",
+  "today": "Bugün",
+  "yesterday": "Dün",
+  "custom_date": "Özel tarih",
   
   "select_date": "Tarih seçin",
   "cancel": "İptal",

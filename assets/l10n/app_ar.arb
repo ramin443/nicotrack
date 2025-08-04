@@ -56,6 +56,11 @@
   "instant_quit_description": "توقف فورًا واستخدم أدوات الدعم",
   "stepdown_method": "الطريقة التدريجية",
   "stepdown_description": "قلل التدخين تدريجيًا مع الوقت",
+  "get_started": "ابدأ",
+  "skip": "تخطي",
+  "today": "اليوم",
+  "yesterday": "أمس",
+  "custom_date": "تاريخ مخصص",
   
   "select_date": "اختر التاريخ",
   "cancel": "إلغاء",

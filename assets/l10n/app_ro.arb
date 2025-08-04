@@ -56,6 +56,11 @@
   "instant_quit_description": "Opriți-vă imediat și folosiți instrumentele de sprijin",
   "stepdown_method": "Metoda treptată",
   "stepdown_description": "Reduceți treptat fumatul în timp",
+  "get_started": "Începeți",
+  "skip": "Omiteți",
+  "today": "Astăzi",
+  "yesterday": "Ieri",
+  "custom_date": "Dată personalizată",
   
   "select_date": "Selectați data",
   "cancel": "Anulați",

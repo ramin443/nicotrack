@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/getx-controllers/welcome-initial-controller.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 import '../../constants/color-constants.dart';
 import '../../constants/font-constants.dart';
@@ -72,7 +73,7 @@ class _InfoSliderMainState extends State<InfoSliderMain> {
                                 ),
                                 child: Center(
                                   child: TextAutoSize(
-                                    "Get Started",
+                                    context.l10n.get_started,
                                     style: TextStyle(
                                         fontSize: 18.sp,
                                         fontFamily: circularBold,
@@ -107,7 +108,7 @@ class _InfoSliderMainState extends State<InfoSliderMain> {
                                 ),
                                 child: Center(
                                   child: TextAutoSize(
-                                    "Continue",
+                                    context.l10n.continueButton,
                                     style: TextStyle(
                                         fontSize: 18.sp,
                                         fontFamily: circularMedium,
@@ -121,7 +122,7 @@ class _InfoSliderMainState extends State<InfoSliderMain> {
                                 welcomeInitialController.navigateToOnboarding(context);
                               },
                               child: TextAutoSize(
-                                "Skip",
+                                context.l10n.skip,
                                 style: TextStyle(
                                     fontSize: 18.sp,
                                     decoration: TextDecoration.underline,

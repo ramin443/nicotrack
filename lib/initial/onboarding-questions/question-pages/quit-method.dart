@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 import '../../../constants/color-constants.dart';
 import '../../../constants/font-constants.dart';
 import '../../../screens/elements/textAutoSize.dart';
@@ -30,7 +31,7 @@ class _LastSmokedState extends State<QuitMethod> {
               SizedBox(
                 width: 230.w,
                 child: TextAutoSize(
-                  "How do you want to ❌ quit smoking?",
+                  context.l10n.onboarding_quit_method_question,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       height: 1.2,
@@ -45,7 +46,7 @@ class _LastSmokedState extends State<QuitMethod> {
               SizedBox(
                   width: 150.w,
                   child: TextAutoSize(
-                    "Please select one. You can change this later too",
+                    context.l10n.onboarding_quit_method_subtitle,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         height: 1.2,

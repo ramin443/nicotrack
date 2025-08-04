@@ -1,5 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 import '../../../constants/color-constants.dart';
 import '../../../constants/font-constants.dart';
 import '../../../screens/elements/textAutoSize.dart';
@@ -37,7 +38,7 @@ class _LastSmokedState extends State<LastSmoked> {
               SizedBox(
                 width: 340.w,
                 child: TextAutoSize(
-                  "When was the last time you smoked a 🚬 cigarette?",
+                  context.l10n.onboarding_last_smoke_question,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       height: 1.2,

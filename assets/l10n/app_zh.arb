@@ -56,6 +56,11 @@
   "instant_quit_description": "立即停止并使用支持工具",
   "stepdown_method": "逐步减少法",
   "stepdown_description": "随着时间的推移逐渐减少吸烟",
+  "get_started": "开始",
+  "skip": "跳过",
+  "today": "今天",
+  "yesterday": "昨天",
+  "custom_date": "自定义日期",
   
   "select_date": "选择日期",
   "cancel": "取消",

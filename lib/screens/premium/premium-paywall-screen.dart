@@ -6,6 +6,7 @@ import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/getx-controllers/premium-controller.dart';
+import 'dart:ui'; // Required for ImageFilter
 
 class PremiumPaywallScreen extends StatefulWidget {
   const PremiumPaywallScreen({super.key});
@@ -19,7 +20,7 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
   final PageController _pageController = PageController();
   int _currentFeaturePage = 0;
   final PremiumController _premiumController = Get.find<PremiumController>();
-  
+
   @override
   void initState() {
     super.initState();
@@ -76,59 +77,60 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body:
-        Stack(
+      Stack(
           children: [
             SingleChildScrollView(
-        child:
-        Column(
-          children: [
-            // Top section with background image
-            Container(
-              height: 240.w,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(premiumBGImg),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: SafeArea(
-                child: Column(
+                child:
+                Column(
                   children: [
-                    _buildHeader(),
-                    _buildHeroSection(),
-                  ],
-                ),
-              ),
-            ),
+                    // Top section with background image
+                    Container(
+                      height: 430.w,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(neupremiumBG),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: SafeArea(
+                        child: Column(
+                          children: [
+                            _buildHeader(),
+                            _buildHeroSection(),
+                            _buildBenefitsSection(),
+                            SizedBox(height: 16.w,),
+                            _buildFeatureSlider(),
+                          ],
+                        ),
+                      ),
+                    ),
 
-            // Bottom section with white background
-            Container(
-              color: Colors.white,
+                    // Bottom section with white background
+                    Container(
+                      color: Colors.white,
+                      child: Column(
+                        children: [
+                          _buildPlanSection(),
+                          _buildFooterLinks(),
+                          SizedBox(height: 120.w,)
+                        ],
+                      ),
+                    ),
+                  ],
+                )),
+            Align(
+              alignment: Alignment.bottomCenter,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  _buildBenefitsSection(),
-                  _buildFeatureSlider(),
-                  _buildPlanSection(),
-                  _buildFooterLinks(),
-                  SizedBox(height: 120.w,)
+                  _buildContinueButton(),
+                  SizedBox(
+                    height: 24.w,
+                  )
                 ],
-              ),
-            ),
-          ],
-        )),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                _buildContinueButton(),
-                SizedBox(
-                  height: 24.w,
-                )
-              ],
+              )
+              ,
             )
-            ,
-          )
 
           ]),
 
@@ -167,10 +169,10 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             TextAutoSize(
-              "Unlock\nNicotrack Premium",
+              "Unlock\nNicotrack Pro",
               textAlign: TextAlign.center,
               style: TextStyle(
                 height: 1.1,
@@ -198,7 +200,7 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
                     height: 1.1,
                     fontSize: 17.sp,
                     fontFamily: circularBook,
-                    color: Colors.black87,
+                    color: Colors.white,
                   ),
                   children: [
                     TextSpan(
@@ -210,7 +212,7 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
                         height: 1.1,
                         fontSize: 17.sp,
                         fontFamily: circularBold,
-                        color: Colors.black87,
+                        color: Colors.white,
                       ),
                     ),
                   ])),
@@ -225,7 +227,7 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
 
     return Container(
       height: 120.w,
-      margin: EdgeInsets.symmetric(vertical: 20.h),
+      // margin: EdgeInsets.symmetric(vertical: 20.h),
       child: Column(
         children: [
           Expanded(
@@ -248,50 +250,57 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: pageFeatures.map((feature) {
                       return Expanded(
-                        flex: 3,
-                        child: Container(
-                          height: 104.w,
-                          width: 110.w,
-                          margin: EdgeInsets.only(
-                              right: pageIndex == endIndex ? 0 : 8.w),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12.r),
-                              border: Border.all(
-                                  color: Color(0xfff1f1f1), width: 1.sp)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Center(
-                                child: TextAutoSize(
-                                  feature["emoji"],
-                                  style: TextStyle(
-                                    fontSize: 24.sp,
+                          flex: 3,
+                          child:
+                          ClipRRect(borderRadius: BorderRadius.circular(12.r),
+                            child: BackdropFilter(
+                                filter: ImageFilter.blur(
+                                sigmaX: 10.0, sigmaY: 10.0),
+                                // Adjust blur intensity
+                                child: Container(
+                                height: 104.w,
+                                width: 110.w,
+                                margin: EdgeInsets.only(
+                                right: pageIndex == endIndex ? 0 : 8.w),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12.r),
+                                color: Colors.white10,
+                                // border: Border.all(color: Color(0xfff1f1f1), width: 1.sp)
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Center(
+                                  child: TextAutoSize(
+                                    feature["emoji"],
+                                    style: TextStyle(
+                                      fontSize: 24.sp,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(height: 12.w),
-                              TextAutoSize(
-                                feature["title"],
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 12.sp,
-                                  height: 1.1,
-                                  fontFamily: circularBold,
-                                  color: Colors.black87,
+                                SizedBox(height: 12.w),
+                                TextAutoSize(
+                                  feature["title"],
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    height: 1.1,
+                                    fontFamily: circularBold,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                              TextAutoSize(
-                                feature["subtitle"],
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 12.sp,
-                                  fontFamily: circularBold,
-                                  color: Colors.black87,
+                                TextAutoSize(
+                                  feature["subtitle"],
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontFamily: circularBold,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
+                              ],
+                            ),
+                          ))),
                       );
                     }).toList(),
                   ),
@@ -311,8 +320,8 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4.r),
                   color: _currentFeaturePage == index
-                      ? Colors.black87
-                      : Colors.grey.withOpacity(0.3),
+                      ? Colors.white
+                      : Colors.white.withOpacity(0.3),
                 ),
               );
             }),
@@ -324,10 +333,10 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
 
   Widget _buildPlanSection() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
         children: [
-          SizedBox(height: 8.w),
+          SizedBox(height: 24.w),
           TextAutoSize(
             "Choose your plan",
             style: TextStyle(
@@ -343,7 +352,8 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
                   1,
                   _premiumController.subscriptionPlans[1]!['title'],
                   _premiumController.subscriptionPlans[1]!['price'],
-                  _premiumController.subscriptionPlans[1]!['savings'] ?? "🎉Best Deal",
+                  _premiumController.subscriptionPlans[1]!['savings'] ??
+                      "🎉Best Deal",
                   _premiumController.subscriptionPlans[1]!['isPopular']),
               SizedBox(width: 8.w),
               _buildPlanCard(
@@ -393,8 +403,8 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
     );
   }
 
-  Widget _buildPlanCard(
-      int index, String title, String price, String subtitle, bool isPopular) {
+  Widget _buildPlanCard(int index, String title, String price, String subtitle,
+      bool isPopular) {
     final isSelected = selectedPlan == index;
 
     return Expanded(
@@ -445,7 +455,9 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
                         style: TextStyle(
                           fontSize: 22.sp,
                           fontFamily: circularBold,
-                          color: (index == 0 || index == 2) ? nicotrackRed:nicotrackGreen,
+                          color: (index == 0 || index == 2)
+                              ? nicotrackRed
+                              : nicotrackGreen,
                         ),
                       ),
                     ],
@@ -522,21 +534,21 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
               ),
               isSelected
                   ? Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 14.w,
-                          height: 14.w,
-                          margin: EdgeInsets.only(top: 6.w, right: 6.w),
-                          decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              border:
-                                  Border.all(color: Colors.white, width: 3.sp),
-                              shape: BoxShape.circle),
-                        )
-                      ],
-                    )
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 14.w,
+                    height: 14.w,
+                    margin: EdgeInsets.only(top: 6.w, right: 6.w),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border:
+                        Border.all(color: Colors.white, width: 3.sp),
+                        shape: BoxShape.circle),
+                  )
+                ],
+              )
                   : SizedBox.shrink()
             ],
           ),

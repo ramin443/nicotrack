@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 import '../../../constants/color-constants.dart';
 import '../../../constants/font-constants.dart';
@@ -31,7 +32,7 @@ class _LastSmokedState extends State<CraveSituations> {
               SizedBox(
                 width: 340.w,
                 child: TextAutoSize(
-                  "What situations make you crave cigarettes 😥 the most?",
+                  context.l10n.onboarding_crave_situations_question,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       height: 1.2,

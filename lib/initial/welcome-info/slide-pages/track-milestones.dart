@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 import '../../../constants/color-constants.dart';
 import '../../../constants/font-constants.dart';
@@ -17,7 +18,7 @@ class TrackMilestones extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         TextAutoSize(
-          "Track your progress\n& milestones",
+          context.l10n.track_milestones_title,
           textAlign: TextAlign.center,
           style: TextStyle(
               height: 1.2,
@@ -37,26 +38,14 @@ class TrackMilestones extends StatelessWidget {
         ),
         SizedBox(
           width: 305.w,
-          child: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                  style: TextStyle(
-                      fontSize: 18.sp,
-                      fontFamily: circularBook,
-                      color: nicotrackBlack1),
-                  children: [
-                    TextSpan(
-                      text: "Every smoke-free day brings you closer to a ",
-                    ),
-                    TextSpan(
-                      text: "healthier life. ",
-                      style: TextStyle(
-                          fontSize: 18.sp,
-                          fontFamily: circularBold,
-                          color: nicotrackBlack1),
-                    ),
-                    TextSpan(text: "See how far you’ve come with Nicotrack")
-                  ])),
+          child: TextAutoSize(
+            context.l10n.track_milestones_description,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 18.sp,
+                fontFamily: circularBook,
+                color: nicotrackBlack1),
+          ),
         ),
       ],
     );

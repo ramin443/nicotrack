@@ -56,6 +56,11 @@
   "instant_quit_description": "Przestań natychmiast i używaj narzędzi wsparcia",
   "stepdown_method": "Metoda stopniowa",
   "stepdown_description": "Stopniowo zmniejszaj palenie w czasie",
+  "get_started": "Zacznij",
+  "skip": "Pomiń",
+  "today": "Dzisiaj",
+  "yesterday": "Wczoraj",
+  "custom_date": "Niestandardowa data",
   
   "select_date": "Wybierz datę",
   "cancel": "Anuluj",

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 import '../../../constants/color-constants.dart';
 import '../../../constants/font-constants.dart';
@@ -19,7 +20,7 @@ class StayMotivated extends StatelessWidget {
         SizedBox(
           width: 293.w,
           child: TextAutoSize(
-            "Stay motivated and connected",
+            context.l10n.stay_motivated_title,
             textAlign: TextAlign.center,
             style: TextStyle(
                 height: 1.2,
@@ -40,26 +41,14 @@ class StayMotivated extends StatelessWidget {
         ),
         SizedBox(
           width: 305.w,
-          child: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                  style: TextStyle(
-                      fontSize: 18.sp,
-                      fontFamily: circularBook,
-                      color: nicotrackBlack1),
-                  children: [
-                    TextSpan(
-                      text: "You’re not alone. ",
-                    ),
-                    TextSpan(
-                      text: "Celebrate",
-                      style: TextStyle(
-                          fontSize: 18.sp,
-                          fontFamily: circularBold,
-                          color: nicotrackBlack1),
-                    ),
-                    TextSpan(text: " every milestone with achievement badges and connect with others quitting. ")
-                  ])),
+          child: TextAutoSize(
+            context.l10n.stay_motivated_description,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 18.sp,
+                fontFamily: circularBook,
+                color: nicotrackBlack1),
+          ),
         ),
       ],
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 import '../../../constants/color-constants.dart';
 import '../../../constants/font-constants.dart';
@@ -18,7 +19,7 @@ class PersonalizedQuitPlan extends StatelessWidget {
         SizedBox(
           width: 293.w,
           child: TextAutoSize(
-            "Your personalized Quit plan",
+            context.l10n.quit_plan_title,
             textAlign: TextAlign.center,
             style: TextStyle(
                 height: 1.2,
@@ -35,32 +36,28 @@ class PersonalizedQuitPlan extends StatelessWidget {
         SizedBox(height: 36.h,),
         SizedBox(
           width: 325.w,
-          child: RichText(
-              textAlign: TextAlign.left,
-              text: TextSpan(
-                  style: TextStyle(
-                      fontSize: 18.sp,
-                      fontFamily: circularBook,
-                      color: nicotrackBlack1),
-                  children: [
-                    TextSpan(
-                      text: "⚡ Choose Your ",
-                    ),
-                    TextSpan(
-                      text: "Quit Method – ",
-                      style: TextStyle(
-                          fontSize: 18.sp,
-                          fontFamily: circularBold,
-                          color: nicotrackBlack1),
-                    ),
-                    TextSpan(text: "Instant quit or step-down approach\n\n🔗 Sync with Apple Health – Track "),
-                    TextSpan(text: "improvements",
-                      style: TextStyle(
-                          fontSize: 18.sp,
-                          fontFamily: circularBold,
-                          color: nicotrackBlack1),),
-                    TextSpan(text: " in breathing, heart rate, and more "),
-                  ])),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextAutoSize(
+                context.l10n.quit_plan_feature_1,
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                    fontSize: 18.sp,
+                    fontFamily: circularBook,
+                    color: nicotrackBlack1),
+              ),
+              SizedBox(height: 12.h),
+              TextAutoSize(
+                context.l10n.quit_plan_feature_2,
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                    fontSize: 18.sp,
+                    fontFamily: circularBook,
+                    color: nicotrackBlack1),
+              ),
+            ],
+          ),
         ),
       ],
     );

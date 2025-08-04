@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 import '../../../constants/color-constants.dart';
 import '../../../constants/font-constants.dart';
@@ -48,7 +49,7 @@ class _LastSmokedState extends State<OnePackContents> {
               SizedBox(
                 width: 340.w,
                 child: TextAutoSize(
-                  "How many 🚬 cigarettes are there in one pack?",
+                  context.l10n.onboarding_pack_contents_question,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       height: 1.2,

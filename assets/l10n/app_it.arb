@@ -56,6 +56,11 @@
   "instant_quit_description": "Smetti immediatamente e usa gli strumenti di supporto",
   "stepdown_method": "Metodo Graduale",
   "stepdown_description": "Riduci gradualmente il fumo nel tempo",
+  "get_started": "Inizia",
+  "skip": "Salta",
+  "today": "Oggi",
+  "yesterday": "Ieri",
+  "custom_date": "Data personalizzata",
   
   "select_date": "Seleziona data",
   "cancel": "Annulla",

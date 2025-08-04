@@ -56,6 +56,11 @@
   "instant_quit_description": "Stop onmiddellijk en gebruik ondersteunende tools",
   "stepdown_method": "Afbouwmethode",
   "stepdown_description": "Verminder het roken geleidelijk",
+  "get_started": "Beginnen",
+  "skip": "Overslaan",
+  "today": "Vandaag",
+  "yesterday": "Gisteren",
+  "custom_date": "Aangepaste datum",
   
   "select_date": "Selecteer datum",
   "cancel": "Annuleren",

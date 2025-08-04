@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 import '../../../constants/color-constants.dart';
 import '../../../constants/font-constants.dart';
@@ -43,7 +44,7 @@ class _LastSmokedState extends State<SmokeFrequency> {
               SizedBox(
                 width: 340.w,
                 child: TextAutoSize(
-                  "How many 🚬 cigarettes did you consume per day?",
+                  context.l10n.onboarding_smoke_frequency_question,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       height: 1.2,

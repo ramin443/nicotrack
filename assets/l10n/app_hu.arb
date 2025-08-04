@@ -56,6 +56,11 @@
   "instant_quit_description": "Azonnal hagyja abba és használja a támogatási eszközöket",
   "stepdown_method": "Fokozatos módszer",
   "stepdown_description": "Fokozatosan csökkentse a dohányzást idővel",
+  "get_started": "Kezdés",
+  "skip": "Kihagyás",
+  "today": "Ma",
+  "yesterday": "Tegnap",
+  "custom_date": "Egyéni dátum",
   
   "select_date": "Dátum kiválasztása",
   "cancel": "Mégse",

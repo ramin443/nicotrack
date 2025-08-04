@@ -56,6 +56,11 @@
   "instant_quit_description": "Berhenti segera dan gunakan alat dukungan",
   "stepdown_method": "Metode Bertahap",
   "stepdown_description": "Secara bertahap mengurangi merokok seiring waktu",
+  "get_started": "Mulai",
+  "skip": "Lewati",
+  "today": "Hari ini",
+  "yesterday": "Kemarin",
+  "custom_date": "Tanggal khusus",
   
   "select_date": "Pilih Tanggal",
   "cancel": "Batal",

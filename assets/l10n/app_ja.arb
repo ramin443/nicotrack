@@ -56,6 +56,11 @@
   "instant_quit_description": "すぐに止めてサポートツールを使用",
   "stepdown_method": "段階的方法",
   "stepdown_description": "時間をかけて徐々に喫煙を減らす",
+  "get_started": "開始",
+  "skip": "スキップ",
+  "today": "今日",
+  "yesterday": "昨日",
+  "custom_date": "カスタム日付",
   
   "select_date": "日付を選択",
   "cancel": "キャンセル",
