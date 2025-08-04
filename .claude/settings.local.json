@@ -50,7 +50,11 @@
       "Bash(sed:*)",
       "Bash(pod install:*)",
       "Bash(do echo \"=== app_$lang.arb ===\")",
-      "Bash(do echo \"Processing $file\")"
+      "Bash(do echo \"Processing $file\")",
+      "Bash(do if grep -q \"premium_paywall_unlock_title\" \"/Users/raminudash/StudioProjects/Nicotrack/assets/l10n/app_$lang.arb\")",
+      "Bash(then echo \"$lang: HAS premium translations\")",
+      "Bash(else echo \"$lang: MISSING premium translations\")",
+      "Bash(do echo \"=== $lang ===\")"
     ],
     "deny": []
   }

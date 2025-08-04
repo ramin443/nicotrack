@@ -6,6 +6,7 @@ import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/getx-controllers/premium-controller.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 import 'dart:ui'; // Required for ImageFilter
 
 class PremiumPaywallScreen extends StatefulWidget {
@@ -27,44 +28,44 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
     selectedPlan = _premiumController.selectedPlan.value;
   }
 
-  final List<Map<String, dynamic>> _features = [
-    {
-      "emoji": "📊",
-      "title": "Advanced",
-      "subtitle": "Analytics",
-      "description": "Get detailed insights into your quitting progress"
-    },
-    {
-      "emoji": "🎯",
-      "title": "Unlimited",
-      "subtitle": "Goals",
-      "description": "Set multiple personalized goals for your journey"
-    },
-    {
-      "emoji": "🏆",
-      "title": "Complete",
-      "subtitle": "Badges",
-      "description": "Access to all achievement badges and rewards"
-    },
-    {
-      "emoji": "✍️",
-      "title": "Unlimited Quit",
-      "subtitle": "Changes",
-      "description": "Change your quit method anytime without limits"
-    },
-    {
-      "emoji": "📅",
-      "title": "Full Timeline",
-      "subtitle": "Access",
-      "description": "View complete timeline of your quitting journey"
-    },
-    {
-      "emoji": "✅",
-      "title": "Unlimited",
-      "subtitle": "Daily Tasks",
-      "description": "Access to all daily tasks and activities"
-    },
-  ];
+  List<Map<String, dynamic>> get _features => [
+        {
+          "emoji": "📊",
+          "title": context.l10n.premium_feature_advanced,
+          "subtitle": context.l10n.premium_feature_analytics,
+          "description": context.l10n.premium_feature_analytics_desc
+        },
+        {
+          "emoji": "🎯",
+          "title": context.l10n.premium_feature_unlimited,
+          "subtitle": context.l10n.premium_feature_goals,
+          "description": context.l10n.premium_feature_goals_desc
+        },
+        {
+          "emoji": "🏆",
+          "title": context.l10n.premium_feature_complete,
+          "subtitle": context.l10n.premium_feature_badges,
+          "description": context.l10n.premium_feature_badges_desc
+        },
+        {
+          "emoji": "✍️",
+          "title": context.l10n.premium_feature_unlimited_quit,
+          "subtitle": context.l10n.premium_feature_changes,
+          "description": context.l10n.premium_feature_changes_desc
+        },
+        {
+          "emoji": "📅",
+          "title": context.l10n.premium_feature_full_timeline,
+          "subtitle": context.l10n.premium_feature_access,
+          "description": context.l10n.premium_feature_timeline_desc
+        },
+        {
+          "emoji": "✅",
+          "title": context.l10n.premium_feature_unlimited_tasks,
+          "subtitle": context.l10n.premium_feature_daily_tasks,
+          "description": context.l10n.premium_feature_tasks_desc
+        },
+      ];
 
   @override
   void dispose() {
@@ -76,64 +77,62 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body:
-      Stack(
+      body: Stack(children: [
+        SingleChildScrollView(
+            child: Column(
           children: [
-            SingleChildScrollView(
-                child:
-                Column(
+            // Top section with background image
+            Container(
+              height: 440.w,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(neupremiumBG),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: SafeArea(
+                child: Column(
                   children: [
-                    // Top section with background image
-                    Container(
-                      height: 430.w,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(neupremiumBG),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: SafeArea(
-                        child: Column(
-                          children: [
-                            _buildHeader(),
-                            _buildHeroSection(),
-                            _buildBenefitsSection(),
-                            SizedBox(height: 16.w,),
-                            _buildFeatureSlider(),
-                          ],
-                        ),
-                      ),
+                    _buildHeader(),
+                    _buildHeroSection(),
+                    _buildBenefitsSection(),
+                    SizedBox(
+                      height: 16.w,
                     ),
-
-                    // Bottom section with white background
-                    Container(
-                      color: Colors.white,
-                      child: Column(
-                        children: [
-                          _buildPlanSection(),
-                          _buildFooterLinks(),
-                          SizedBox(height: 120.w,)
-                        ],
-                      ),
-                    ),
+                    _buildFeatureSlider(),
                   ],
-                )),
-            Align(
-              alignment: Alignment.bottomCenter,
+                ),
+              ),
+            ),
+
+            // Bottom section with white background
+            Container(
+              color: Colors.white,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  _buildContinueButton(),
+                  _buildPlanSection(),
+                  _buildFooterLinks(),
                   SizedBox(
-                    height: 24.w,
+                    height: 120.w,
                   )
                 ],
+              ),
+            ),
+          ],
+        )),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              _buildContinueButton(),
+              SizedBox(
+                height: 24.w,
               )
-              ,
-            )
-
-          ]),
-
+            ],
+          ),
+        )
+      ]),
     );
   }
 
@@ -172,10 +171,10 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             TextAutoSize(
-              "Unlock\nNicotrack Pro",
+              context.l10n.premium_paywall_unlock_title,
               textAlign: TextAlign.center,
               style: TextStyle(
-                height: 1.1,
+                height: 1.05,
                 fontSize: 32.sp,
                 fontFamily: circularBold,
                 color: Colors.white,
@@ -203,11 +202,9 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
                     color: Colors.white,
                   ),
                   children: [
+                    TextSpan(text: context.l10n.premium_paywall_benefits_text),
                     TextSpan(
-                        text: "Enjoy these benefits freely "
-                            "when you get on the "),
-                    TextSpan(
-                      text: "premium plan",
+                      text: context.l10n.premium_paywall_premium_plan,
                       style: TextStyle(
                         height: 1.1,
                         fontSize: 17.sp,
@@ -250,57 +247,57 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: pageFeatures.map((feature) {
                       return Expanded(
-                          flex: 3,
-                          child:
-                          ClipRRect(borderRadius: BorderRadius.circular(12.r),
+                        flex: 3,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12.r),
                             child: BackdropFilter(
                                 filter: ImageFilter.blur(
-                                sigmaX: 10.0, sigmaY: 10.0),
+                                    sigmaX: 10.0, sigmaY: 10.0),
                                 // Adjust blur intensity
                                 child: Container(
-                                height: 104.w,
-                                width: 110.w,
-                                margin: EdgeInsets.only(
-                                right: pageIndex == endIndex ? 0 : 8.w),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12.r),
-                                color: Colors.white10,
-                                // border: Border.all(color: Color(0xfff1f1f1), width: 1.sp)
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Center(
-                                  child: TextAutoSize(
-                                    feature["emoji"],
-                                    style: TextStyle(
-                                      fontSize: 24.sp,
-                                    ),
+                                  height: 104.w,
+                                  width: 110.w,
+                                  margin: EdgeInsets.only(
+                                      right: pageIndex == endIndex ? 0 : 8.w),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12.r),
+                                    color: Colors.white10,
+                                    // border: Border.all(color: Color(0xfff1f1f1), width: 1.sp)
                                   ),
-                                ),
-                                SizedBox(height: 12.w),
-                                TextAutoSize(
-                                  feature["title"],
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 12.sp,
-                                    height: 1.1,
-                                    fontFamily: circularBold,
-                                    color: Colors.white,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Center(
+                                        child: TextAutoSize(
+                                          feature["emoji"],
+                                          style: TextStyle(
+                                            fontSize: 24.sp,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 12.w),
+                                      TextAutoSize(
+                                        feature["title"],
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                          height: 1.1,
+                                          fontFamily: circularBold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      TextAutoSize(
+                                        feature["subtitle"],
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                          fontFamily: circularBold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                TextAutoSize(
-                                  feature["subtitle"],
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 12.sp,
-                                    fontFamily: circularBold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ))),
+                                ))),
                       );
                     }).toList(),
                   ),
@@ -338,7 +335,7 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
         children: [
           SizedBox(height: 24.w),
           TextAutoSize(
-            "Choose your plan",
+            context.l10n.premium_paywall_choose_plan,
             style: TextStyle(
               fontSize: 18.sp,
               fontFamily: circularBold,
@@ -378,7 +375,7 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextAutoSize(
-                  "📱 Cancel anytime",
+                  context.l10n.premium_paywall_cancel_anytime,
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontFamily: circularBook,
@@ -387,7 +384,7 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
                 ),
                 SizedBox(height: 0.w),
                 TextAutoSize(
-                  "🧧 Costs less than cigarettes in 2 weeks",
+                  context.l10n.premium_paywall_cost_comparison,
                   maxLines: 2,
                   style: TextStyle(
                     fontSize: 12.sp,
@@ -403,8 +400,8 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
     );
   }
 
-  Widget _buildPlanCard(int index, String title, String price, String subtitle,
-      bool isPopular) {
+  Widget _buildPlanCard(
+      int index, String title, String price, String subtitle, bool isPopular) {
     final isSelected = selectedPlan == index;
 
     return Expanded(
@@ -485,46 +482,60 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
                   if (index == 0) ...[
                     SizedBox(height: 4.w),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      TextAutoSize(
-                        "Billed annually",
-                        style: TextStyle(
-                          fontSize: 10.sp,
-                          fontFamily: circularBook,
-                          color: isSelected
-                              ? Colors.white.withOpacity(0.7)
-                              : Colors.grey[600],
-                        ),
-                      )
+                      SizedBox(
+                          width: 80.w,
+                          child: TextAutoSize(
+                            context.l10n.premium_paywall_billed_annually,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              fontFamily: circularBook,
+                              height: 1.1,
+                              color: isSelected
+                                  ? Colors.white.withOpacity(0.7)
+                                  : Colors.grey[600],
+                            ),
+                          ))
                     ])
                   ],
                   if (index == 1) ...[
                     SizedBox(height: 4.w),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      TextAutoSize(
-                        "Billed monthly",
-                        style: TextStyle(
-                          fontSize: 10.sp,
-                          fontFamily: circularBook,
-                          color: isSelected
-                              ? Colors.white.withOpacity(0.7)
-                              : Colors.grey[600],
+                      SizedBox(
+                        width: 80.w,
+                        child: TextAutoSize(
+                          context.l10n.premium_paywall_billed_monthly,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 10.sp,
+                            fontFamily: circularBook,
+                            height: 1.1,
+                            color: isSelected
+                                ? Colors.white.withOpacity(0.7)
+                                : Colors.grey[600],
+                          ),
                         ),
-                      ),
+                      )
                     ])
                   ],
                   if (index == 2) ...[
                     SizedBox(height: 4.w),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      TextAutoSize(
-                        "Billed once",
-                        style: TextStyle(
-                          fontSize: 10.sp,
-                          fontFamily: circularBook,
-                          color: isSelected
-                              ? Colors.white.withOpacity(0.7)
-                              : Colors.grey[600],
+                      SizedBox(
+                        width: 80.w,
+                        child: TextAutoSize(
+                          context.l10n.premium_paywall_billed_once,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 10.sp,
+                            fontFamily: circularBook,
+                            height: 1.1,
+                            color: isSelected
+                                ? Colors.white.withOpacity(0.7)
+                                : Colors.grey[600],
+                          ),
                         ),
-                      ),
+                      )
                     ])
                   ],
                   SizedBox(
@@ -534,21 +545,21 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
               ),
               isSelected
                   ? Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 14.w,
-                    height: 14.w,
-                    margin: EdgeInsets.only(top: 6.w, right: 6.w),
-                    decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        border:
-                        Border.all(color: Colors.white, width: 3.sp),
-                        shape: BoxShape.circle),
-                  )
-                ],
-              )
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 14.w,
+                          height: 14.w,
+                          margin: EdgeInsets.only(top: 6.w, right: 6.w),
+                          decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              border:
+                                  Border.all(color: Colors.white, width: 3.sp),
+                              shape: BoxShape.circle),
+                        )
+                      ],
+                    )
                   : SizedBox.shrink()
             ],
           ),
@@ -571,7 +582,7 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
           ),
           child: Center(
             child: TextAutoSize(
-              "Continue",
+              context.l10n.premium_paywall_continue,
               style: TextStyle(
                 fontSize: 16.sp,
                 fontFamily: circularBold,
@@ -586,7 +597,7 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
 
   Widget _buildFooterLinks() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+      padding: EdgeInsets.symmetric( vertical: 20.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -595,43 +606,52 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
               // Handle restore purchase
               _premiumController.restorePurchases(context);
             },
-            child: TextAutoSize(
-              "Restore purchase",
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontFamily: circularBook,
-                color: Colors.black87,
-                decoration: TextDecoration.underline,
-              ),
-            ),
+            child: SizedBox(
+                width: 90.w,
+                child: TextAutoSize(
+                  context.l10n.premium_paywall_restore_purchase,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontFamily: circularBook,
+                    color: Colors.black87,
+                    decoration: TextDecoration.underline,
+                  ),
+                )),
           ),
           GestureDetector(
             onTap: () {
               // Handle terms of use
             },
-            child: TextAutoSize(
-              "Terms of use",
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontFamily: circularBook,
-                color: Colors.black87,
-                decoration: TextDecoration.underline,
-              ),
-            ),
+            child: SizedBox(
+                width: 90.w,
+                child: TextAutoSize(
+                  context.l10n.premium_paywall_terms_of_use,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontFamily: circularBook,
+                    color: Colors.black87,
+                    decoration: TextDecoration.underline,
+                  ),
+                )),
           ),
           GestureDetector(
             onTap: () {
               // Handle privacy policy
             },
-            child: TextAutoSize(
-              "Privacy Policy",
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontFamily: circularBook,
-                color: Colors.black87,
-                decoration: TextDecoration.underline,
-              ),
-            ),
+            child: SizedBox(
+                width: 90.w,
+                child: TextAutoSize(
+                  context.l10n.premium_paywall_privacy_policy,
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontFamily: circularBook,
+                    color: Colors.black87,
+                    decoration: TextDecoration.underline,
+                  ),
+                )),
           ),
         ],
       ),
