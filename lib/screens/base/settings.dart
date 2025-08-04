@@ -85,21 +85,20 @@ class _SettingsState extends State<Settings> {
                                 color: nicotrackBlack1),
                           ),
                         ),
-                        premiumController.effectivePremiumStatus
-                            ? SizedBox.shrink()
-                            : Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: 14.w,
-                                  ),
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 14.w),
-                                    child: premiumBox(context),
-                                  ),
-                                ],
-                              ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 14.w,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 14.w),
+                              child: premiumController.effectivePremiumStatus
+                                  ? premiumStatusBox(context)
+                                  : premiumBox(context),
+                            ),
+                          ],
+                        ),
                         // ElevatedButton(
                         //   onPressed: () async {
                         //     await Get.find<SettingsController>().debugNotifications();

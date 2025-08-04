@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nicotrack/constants/color-constants.dart';
 import '../config/app-mode.dart';
 import 'package:nicotrack/services/firebase-service.dart';
+import 'package:nicotrack/services/premium-persistence-service.dart';
 
 class PremiumController extends GetxController {
   // Premium status
@@ -35,6 +36,69 @@ class PremiumController extends GetxController {
     print('   - App mode: ${AppModeConfig.appMode}');
     print('   - Should force premium: ${AppModeConfig.shouldForcePremium}');
     print('   - Effective premium status: $effectivePremiumStatus');
+  }
+  
+  // Get current subscription plan type
+  String getCurrentPlanType() {
+    if (!effectivePremiumStatus) return '';
+    
+    // If in dev mode, return a default plan for testing
+    if (AppModeConfig.shouldForcePremium) {
+      return 'Premium Active';
+    }
+    
+    // Get premium info from persistence service
+    try {
+      final premiumInfo = PremiumPersistenceService.getPremiumInfo();
+      final productId = premiumInfo['productId'] as String?;
+      
+      if (productId == null) return 'Premium Active';
+      
+      // Map product IDs to plan names
+      switch (productId) {
+        case 'nicotrack_monthly_plan':
+          return 'Monthly Plan';
+        case 'nicotrack_yearly_plan':
+          return 'Annual Plan';
+        case 'nicotrack_lifetime_premium':
+          return 'Lifetime Plan';
+        default:
+          return 'Premium Active';
+      }
+    } catch (e) {
+      print('Error getting current plan type: $e');
+      return 'Premium Active';
+    }
+  }
+  
+  // Get plan display text
+  String getPlanDisplayText() {
+    final planType = getCurrentPlanType();
+    switch (planType) {
+      case 'Monthly Plan':
+        return 'Monthly Subscription';
+      case 'Annual Plan':
+        return 'Annual Subscription';
+      case 'Lifetime Plan':
+        return 'Lifetime Access';
+      default:
+        return 'Premium Active';
+    }
+  }
+  
+  // Get plan status emoji
+  String getPlanStatusEmoji() {
+    final planType = getCurrentPlanType();
+    switch (planType) {
+      case 'Monthly Plan':
+        return '📅';
+      case 'Annual Plan':
+        return '⭐';
+      case 'Lifetime Plan':
+        return '👑';
+      default:
+        return '✨';
+    }
   }
   
   // Selected subscription plan

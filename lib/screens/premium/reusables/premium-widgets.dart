@@ -5,6 +5,8 @@ import 'package:nicotrack/constants/font-constants.dart';
 import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import 'package:nicotrack/screens/premium/premium-paywall-screen.dart';
+import 'package:get/get.dart';
+import 'package:nicotrack/getx-controllers/premium-controller.dart';
 
 Widget premiumBox(BuildContext context) {
   return GestureDetector(
@@ -161,6 +163,85 @@ Widget calendarLock() {
           ),
         )
 
+      ],
+    ),
+  );
+}
+
+Widget premiumStatusBox(BuildContext context) {
+  final premiumController = Get.find<PremiumController>();
+  
+  return Container(
+    width: double.infinity,
+    padding: EdgeInsets.only(left: 4.w, right: 13.w, top: 7.w, bottom: 8.w),
+    decoration: BoxDecoration(
+      color: Colors.black, // Different color to indicate active status
+      borderRadius: BorderRadius.circular(14.r)
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20.r),
+              child: Container(
+                width: 65.w,
+                height: 65.w,
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(20.r),
+                ),
+                child: Center(
+                  child: TextAutoSize(
+                    premiumController.getPlanStatusEmoji(),
+                    style: TextStyle(
+                      fontSize: 28.sp,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 12.w,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 6.w,
+                ),
+                TextAutoSize(
+                  'Pro Active',
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    height: 1,
+                    fontFamily: recoletaBold,
+                    color: Colors.white,
+                  ),
+                ),
+                TextAutoSize(
+                  premiumController.getPlanDisplayText(),
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontFamily: circularBook,
+                    color: Colors.white.withValues(alpha: 0.85),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+        TextAutoSize(
+          '✨ Active',
+          style: TextStyle(
+            fontSize: 15.sp,
+            fontFamily: circularMedium,
+            color: Colors.white,
+          ),
+        ),
       ],
     ),
   );
