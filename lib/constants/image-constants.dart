@@ -115,3 +115,4 @@ String premiumBGImg= "assets/images/branding/premiumBG.png";
 String nicopro= 'assets/images/button-bg/nicopro.png';
 String lockImg= 'assets/images/Emojis/lockimg.png';
 String neupremiumBG= 'assets/images/Illustration/neu-premium-bg-3.png';
+String badgeBG= "assets/images/Illustration/Polygon 4.png";

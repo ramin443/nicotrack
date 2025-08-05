@@ -1024,5 +1024,26 @@
   "premium_active": "✨ Active",
   
   "onboarding_choose_language": "🌍 Choose your language",
-  "onboarding_language_subtitle": "Select your preferred language for the best experience"
+  "onboarding_language_subtitle": "Select your preferred language for the best experience",
+  
+  "badge_earned_title": "You earned a new badge!",
+  "badge_collect_button": "📦 Collect badge",
+  "badge_days_no_smoking_single": "{days} day of no smoking",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days} days of no smoking",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }

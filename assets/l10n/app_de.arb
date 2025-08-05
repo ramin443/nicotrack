@@ -974,5 +974,26 @@
   "premium_pro_active": "Pro Aktiv",
   "premium_active": "✨ Aktiv",
   "onboarding_choose_language": "🌍 Wähle deine Sprache",
-  "onboarding_language_subtitle": "Wähle deine bevorzugte Sprache für die beste Erfahrung"
+  "onboarding_language_subtitle": "Wähle deine bevorzugte Sprache für die beste Erfahrung",
+  
+  "badge_earned_title": "Du hast ein neues Abzeichen verdient!",
+  "badge_collect_button": "📦 Abzeichen sammeln",
+  "badge_days_no_smoking_single": "{days} Tag ohne Rauchen",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days} Tage ohne Rauchen",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }

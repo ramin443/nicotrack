@@ -1005,5 +1005,26 @@
   "premium_active": "✨ نشط",
   
   "onboarding_choose_language": "🌍 اختر لغتك",
-  "onboarding_language_subtitle": "اختر لغتك المفضلة للحصول على أفضل تجربة"
+  "onboarding_language_subtitle": "اختر لغتك المفضلة للحصول على أفضل تجربة",
+  
+  "badge_earned_title": "لقد حصلت على شارة جديدة!",
+  "badge_collect_button": "📦 جمع الشارة",
+  "badge_days_no_smoking_single": "{days} يوم بدون تدخين",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days} أيام بدون تدخين",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }

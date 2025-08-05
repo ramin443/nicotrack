@@ -999,5 +999,26 @@
   "premium_pro_active": "Pro Attivo",
   "premium_active": "✨ Attivo",
   "onboarding_choose_language": "🌍 Scegli la tua lingua",
-  "onboarding_language_subtitle": "Seleziona la tua lingua preferita per la migliore esperienza"
+  "onboarding_language_subtitle": "Seleziona la tua lingua preferita per la migliore esperienza",
+  
+  "badge_earned_title": "Hai guadagnato un nuovo distintivo!",
+  "badge_collect_button": "📦 Raccogli distintivo",
+  "badge_days_no_smoking_single": "{days} giorno senza fumare",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days} giorni senza fumare",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }

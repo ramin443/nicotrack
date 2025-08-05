@@ -1004,5 +1004,26 @@
   "premium_pro_active": "Pro Activ",
   "premium_active": "✨ Activ",
   "onboarding_choose_language": "🌍 Alegeți limba",
-  "onboarding_language_subtitle": "Selectați limba preferată pentru cea mai bună experiență"
+  "onboarding_language_subtitle": "Selectați limba preferată pentru cea mai bună experiență",
+  
+  "badge_earned_title": "Ați câștigat o nouă insignă!",
+  "badge_collect_button": "📦 Colectează insigna",
+  "badge_days_no_smoking_single": "{days} zi fără fumat",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days} zile fără fumat",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }

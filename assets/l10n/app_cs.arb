@@ -1004,5 +1004,26 @@
   "premium_active": "✨ Aktivní",
   
   "onboarding_choose_language": "🌍 Vyberte svůj jazyk",
-  "onboarding_language_subtitle": "Vyberte svůj preferovaný jazyk pro nejlepší zážitek"
+  "onboarding_language_subtitle": "Vyberte svůj preferovaný jazyk pro nejlepší zážitek",
+  
+  "badge_earned_title": "Získali jste nový odznak!",
+  "badge_collect_button": "📦 Sebrat odznak",
+  "badge_days_no_smoking_single": "{days} den bez kouření",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days} dní bez kouření",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }

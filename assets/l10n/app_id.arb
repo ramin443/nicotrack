@@ -1004,5 +1004,26 @@
   "premium_pro_active": "Pro Aktif",
   "premium_active": "✨ Aktif",
   "onboarding_choose_language": "🌍 Pilih bahasa Anda",
-  "onboarding_language_subtitle": "Pilih bahasa pilihan Anda untuk pengalaman terbaik"
+  "onboarding_language_subtitle": "Pilih bahasa pilihan Anda untuk pengalaman terbaik",
+  
+  "badge_earned_title": "Anda mendapat lencana baru!",
+  "badge_collect_button": "📦 Kumpulkan lencana",
+  "badge_days_no_smoking_single": "{days} hari tanpa merokok",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days} hari tanpa merokok",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }

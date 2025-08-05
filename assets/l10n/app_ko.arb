@@ -1004,5 +1004,26 @@
   "premium_pro_active": "Pro 활성화됨",
   "premium_active": "✨ 활성화됨",
   "onboarding_choose_language": "🌍 언어를 선택하세요",
-  "onboarding_language_subtitle": "최고의 경험을 위해 선호하는 언어를 선택하세요"
+  "onboarding_language_subtitle": "최고의 경험을 위해 선호하는 언어를 선택하세요",
+  
+  "badge_earned_title": "새로운 배지를 획득했습니다!",
+  "badge_collect_button": "📦 배지 수집",
+  "badge_days_no_smoking_single": "{days}일 금연",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days}일 금연",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }

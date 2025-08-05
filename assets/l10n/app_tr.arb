@@ -1003,5 +1003,26 @@
   "premium_pro_active": "Pro Aktif",
   "premium_active": "✨ Aktif",
   "onboarding_choose_language": "🌍 Dilinizi seçin",
-  "onboarding_language_subtitle": "En iyi deneyim için tercih ettiğiniz dili seçin"
+  "onboarding_language_subtitle": "En iyi deneyim için tercih ettiğiniz dili seçin",
+  
+  "badge_earned_title": "Yeni bir rozet kazandınız!",
+  "badge_collect_button": "📦 Rozeti topla",
+  "badge_days_no_smoking_single": "{days} gün sigara içmeden",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days} gün sigara içmeden",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }

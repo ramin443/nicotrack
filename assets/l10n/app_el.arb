@@ -1004,5 +1004,26 @@
   "premium_pro_active": "Pro Ενεργό",
   "premium_active": "✨ Ενεργό",
   "onboarding_choose_language": "🌍 Επιλέξτε τη γλώσσα σας",
-  "onboarding_language_subtitle": "Επιλέξτε την προτιμώμενη γλώσσα σας για την καλύτερη εμπειρία"
+  "onboarding_language_subtitle": "Επιλέξτε την προτιμώμενη γλώσσα σας για την καλύτερη εμπειρία",
+  
+  "badge_earned_title": "Κερδίσατε ένα νέο σήμα!",
+  "badge_collect_button": "📦 Συλλογή σήματος",
+  "badge_days_no_smoking_single": "{days} μέρα χωρίς κάπνισμα",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days} μέρες χωρίς κάπνισμα",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }

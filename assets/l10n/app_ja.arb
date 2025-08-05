@@ -999,5 +999,26 @@
   "premium_pro_active": "Pro アクティブ",
   "premium_active": "✨ アクティブ",
   "onboarding_choose_language": "🌍 言語を選んでください",
-  "onboarding_language_subtitle": "最適な体験のために、お好みの言語を選択してください"
+  "onboarding_language_subtitle": "最適な体験のために、お好みの言語を選択してください",
+  
+  "badge_earned_title": "新しいバッジを獲得しました！",
+  "badge_collect_button": "📦 バッジを収集",
+  "badge_days_no_smoking_single": "{days} 日間禁煙",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days} 日間禁煙",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }

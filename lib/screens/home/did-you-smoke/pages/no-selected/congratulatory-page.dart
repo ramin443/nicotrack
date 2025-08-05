@@ -22,6 +22,10 @@ import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import 'package:nicotrack/screens/base/base.dart';
 import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 import 'package:nicotrack/extensions/app_localizations_extension.dart';
+import 'package:nicotrack/constants/quick-function-constants.dart';
+import 'package:nicotrack/models/award-model/award-model.dart';
+import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
+import 'badge-earned.dart';
 
 class NoSmokeCongratsPage extends StatefulWidget {
   final DateTime selectedDate;
@@ -237,9 +241,8 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                             actions: [
                               GestureDetector(
                                 onTap: () {
-                                  // Save smoke-free data and navigate to home using selected date
-                                  final controller = Get.find<DidYouSmokeController>();
-                                  controller.addDatatoHiveandNavigate(widget.selectedDate, context);
+                                  // Save smoke-free data and navigate based on badge status
+                                  _navigateBasedOnBadgeStatus();
                                 },
                                 child: Container(
                                   height: 36.w,
@@ -638,13 +641,9 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
       children: [
         GestureDetector(
           onTap: () {
-            // Navigate to base using the same method as close button
-            Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (context) => Base(),
-              ),
-                  (route) => false,
-            );          },
+            // Navigate based on badge status
+            _navigateBasedOnBadgeStatus();
+          },
           child: Stack(
             alignment: Alignment.center,
             children: [
@@ -675,6 +674,37 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
       controllerTopCenter.play();
       HapticFeedback.heavyImpact();
     });
+  }
+
+  AwardModel? _checkIfBadgeEarned() {
+    final earnedBadge = allAwards.firstWhere(
+      (badge) => badge.day == daysSinceQuit,
+      orElse: () => AwardModel(emojiImg: '', day: -1), // Return invalid badge if not found
+    );
+    
+    return earnedBadge.day != -1 ? earnedBadge : null;
+  }
+
+  void _navigateBasedOnBadgeStatus() {
+    final earnedBadge = _checkIfBadgeEarned();
+    
+    if (earnedBadge != null) {
+      // User earned a badge today, show badge-earned screen first
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => BadgeEarned(
+            earnedBadge: earnedBadge,
+            daysSinceQuit: daysSinceQuit,
+            selectedDate: widget.selectedDate,
+          ),
+        ),
+        (route) => false,
+      );
+    } else {
+      // No badge earned, go directly to home
+      final controller = Get.find<DidYouSmokeController>();
+      controller.addDatatoHiveandNavigate(widget.selectedDate, context);
+    }
   }
 
   Path drawCircle(Size size) {

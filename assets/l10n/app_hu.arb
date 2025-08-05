@@ -1004,5 +1004,26 @@
   "premium_pro_active": "Pro Aktív",
   "premium_active": "✨ Aktív",
   "onboarding_choose_language": "🌍 Válaszd ki a nyelved",
-  "onboarding_language_subtitle": "Válaszd ki a preferált nyelved a legjobb élményért"
+  "onboarding_language_subtitle": "Válaszd ki a preferált nyelved a legjobb élményért",
+  
+  "badge_earned_title": "Szereztél egy új jelvényt!",
+  "badge_collect_button": "📦 Jelvény gyűjtése",
+  "badge_days_no_smoking_single": "{days} nap dohányzás nélkül",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days} nap dohányzás nélkül",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }

@@ -1004,5 +1004,26 @@
   "premium_pro_active": "Pro सक्रिय",
   "premium_active": "✨ सक्रिय",
   "onboarding_choose_language": "🌍 अपनी भाषा चुनें",
-  "onboarding_language_subtitle": "सबसे अच्छे अनुभव के लिए अपनी पसंदीदा भाषा चुनें"
+  "onboarding_language_subtitle": "सबसे अच्छे अनुभव के लिए अपनी पसंदीदा भाषा चुनें",
+  
+  "badge_earned_title": "आपने एक नया बैज अर्जित किया है!",
+  "badge_collect_button": "📦 बैज एकत्रित करें",
+  "badge_days_no_smoking_single": "{days} दिन धूम्रपान नहीं",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days} दिन धूम्रपान नहीं",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }

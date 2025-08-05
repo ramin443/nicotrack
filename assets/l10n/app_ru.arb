@@ -999,5 +999,26 @@
   "premium_pro_active": "Pro Активен",
   "premium_active": "✨ Активен",
   "onboarding_choose_language": "🌍 Выберите ваш язык",
-  "onboarding_language_subtitle": "Выберите предпочитаемый язык для лучшего опыта"
+  "onboarding_language_subtitle": "Выберите предпочитаемый язык для лучшего опыта",
+  
+  "badge_earned_title": "Вы заработали новый значок!",
+  "badge_collect_button": "📦 Собрать значок",
+  "badge_days_no_smoking_single": "{days} день без курения",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days} дней без курения",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }

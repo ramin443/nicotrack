@@ -999,5 +999,26 @@
   "premium_pro_active": "专业版已激活",
   "premium_active": "✨ 已激活",
   "onboarding_choose_language": "🌍 选择您的语言",
-  "onboarding_language_subtitle": "选择您的首选语言以获得最佳体验"
+  "onboarding_language_subtitle": "选择您的首选语言以获得最佳体验",
+  
+  "badge_earned_title": "您获得了新徽章！",
+  "badge_collect_button": "📦 收集徽章",
+  "badge_days_no_smoking_single": "{days} 天无烟",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days} 天无烟",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }

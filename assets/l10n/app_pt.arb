@@ -999,5 +999,26 @@
   "premium_pro_active": "Pro Ativo",
   "premium_active": "✨ Ativo",
   "onboarding_choose_language": "🌍 Escolha seu idioma",
-  "onboarding_language_subtitle": "Selecione seu idioma preferido para a melhor experiência"
+  "onboarding_language_subtitle": "Selecione seu idioma preferido para a melhor experiência",
+  
+  "badge_earned_title": "Você ganhou uma nova conquista!",
+  "badge_collect_button": "📦 Coletar conquista",
+  "badge_days_no_smoking_single": "{days} dia sem fumar",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days} dias sem fumar",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }

@@ -1004,5 +1004,26 @@
   "premium_pro_active": "Pro פעיל",
   "premium_active": "✨ פעיל",
   "onboarding_choose_language": "🌍 בחר את השפה שלך",
-  "onboarding_language_subtitle": "בחר את השפה המועדפת שלך לחוויה הטובה ביותר"
+  "onboarding_language_subtitle": "בחר את השפה המועדפת שלך לחוויה הטובה ביותר",
+  
+  "badge_earned_title": "זכית בתג חדש!",
+  "badge_collect_button": "📦 אסוף תג",
+  "badge_days_no_smoking_single": "{days} יום ללא עישון",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days} ימים ללא עישון",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }

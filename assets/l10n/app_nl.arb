@@ -1003,5 +1003,26 @@
   "premium_pro_active": "Pro Actief",
   "premium_active": "✨ Actief",
   "onboarding_choose_language": "🌍 Kies je taal",
-  "onboarding_language_subtitle": "Selecteer je gewenste taal voor de beste ervaring"
+  "onboarding_language_subtitle": "Selecteer je gewenste taal voor de beste ervaring",
+  
+  "badge_earned_title": "Je hebt een nieuwe badge verdiend!",
+  "badge_collect_button": "📦 Badge verzamelen",
+  "badge_days_no_smoking_single": "{days} dag niet roken",
+  "@badge_days_no_smoking_single": {
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "badge_days_no_smoking_plural": "{days} dagen niet roken",
+  "@badge_days_no_smoking_plural": {
+    "placeholders": {
+      "days": {
+        "type": "String", 
+        "example": "5"
+      }
+    }
+  }
 }
