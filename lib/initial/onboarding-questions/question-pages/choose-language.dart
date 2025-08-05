@@ -80,7 +80,7 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
               Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
                   child: SizedBox(
-                    width: 300.w,
+                    width: 250.w,
                     child: TextAutoSize(
                       "Select your preferred language for the best experience",
                       // Static text

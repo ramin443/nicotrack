@@ -97,6 +97,7 @@ class OnboardingController extends GetxController {
 
   //Page 0 variables - Language selection
   int selectedLanguageIndex = 0;
+  int rememberedLanguageIndex = 0; // Store user's selection during onboarding
   late FixedExtentScrollController languageController;
   
   final List<Map<String, String>> supportedLanguages = [
@@ -146,7 +147,7 @@ class OnboardingController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Initialize language controller
+    // Initialize language controller with default position
     languageController = FixedExtentScrollController(initialItem: selectedLanguageIndex);
   }
 
@@ -160,7 +161,10 @@ class OnboardingController extends GetxController {
   void nextPage() {
     // Handle language selection on page 0
     if (currentPage == 0) {
-      // Save the selected language
+      // Remember the user's selection for when they come back
+      rememberedLanguageIndex = selectedLanguageIndex;
+      
+      // Save the selected language to app preferences
       final selectedLanguage = supportedLanguages[selectedLanguageIndex];
       final appPrefsController = Get.find<AppPreferencesController>();
       appPrefsController.updateLanguage(
@@ -191,9 +195,25 @@ class OnboardingController extends GetxController {
   }
 
   void previousPage() {
-    // Move to the next page
+    // Move to the previous page
     if (currentPage > 0) {
       currentPage--;
+      
+      // If going back to language selection page, restore the remembered selection
+      if (currentPage == 0) {
+        selectedLanguageIndex = rememberedLanguageIndex;
+        print("Remembered language is $rememberedLanguageIndex and selected language is $selectedLanguageIndex");
+        // Update the picker to show the remembered language selection after the page transition
+        Future.delayed(Duration(milliseconds: 200), () {
+          print("Animating to language index: $selectedLanguageIndex");
+          languageController.animateToItem(
+            selectedLanguageIndex,
+            duration: Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+          );
+        });
+      }
+      
       pageController.animateToPage(
         currentPage,
         duration: Duration(milliseconds: 500),
