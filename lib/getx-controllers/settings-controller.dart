@@ -2942,7 +2942,6 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
         onboardingBox.get('currentUserOnboarding') ?? OnboardingData();
     currentDateOnboardingData = userOnboardingData;
     nameController.text = currentDateOnboardingData.name;
-
     // Initialize quit date
     if (currentDateOnboardingData.lastSmokedDate.isNotEmpty) {
       selectedQuitDate =

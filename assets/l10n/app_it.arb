@@ -997,5 +997,7 @@
   "premium_get_pro_to_unlock": "🔒 Ottieni Pro per sbloccare",
   "premium_get_pro_sparkle": "✨ Ottieni Pro",
   "premium_pro_active": "Pro Attivo",
-  "premium_active": "✨ Attivo"
+  "premium_active": "✨ Attivo",
+  "onboarding_choose_language": "🌍 Scegli la tua lingua",
+  "onboarding_language_subtitle": "Seleziona la tua lingua preferita per la migliore esperienza"
 }

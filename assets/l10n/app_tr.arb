@@ -1001,5 +1001,7 @@
   "premium_get_pro_to_unlock": "🔒 Kilidi açmak için Pro'yu alın",
   "premium_get_pro_sparkle": "✨ Pro'yu Al",
   "premium_pro_active": "Pro Aktif",
-  "premium_active": "✨ Aktif"
+  "premium_active": "✨ Aktif",
+  "onboarding_choose_language": "🌍 Dilinizi seçin",
+  "onboarding_language_subtitle": "En iyi deneyim için tercih ettiğiniz dili seçin"
 }

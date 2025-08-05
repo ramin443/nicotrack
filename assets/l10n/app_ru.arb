@@ -997,5 +997,7 @@
   "premium_get_pro_to_unlock": "🔒 Получите Pro для разблокировки",
   "premium_get_pro_sparkle": "✨ Получить Pro",
   "premium_pro_active": "Pro Активен",
-  "premium_active": "✨ Активен"
+  "premium_active": "✨ Активен",
+  "onboarding_choose_language": "🌍 Выберите ваш язык",
+  "onboarding_language_subtitle": "Выберите предпочитаемый язык для лучшего опыта"
 }

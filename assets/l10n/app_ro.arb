@@ -1002,5 +1002,7 @@
   "premium_get_pro_to_unlock": "🔒 Obține Pro pentru a debloca",
   "premium_get_pro_sparkle": "✨ Obține Pro",
   "premium_pro_active": "Pro Activ",
-  "premium_active": "✨ Activ"
+  "premium_active": "✨ Activ",
+  "onboarding_choose_language": "🌍 Alegeți limba",
+  "onboarding_language_subtitle": "Selectați limba preferată pentru cea mai bună experiență"
 }

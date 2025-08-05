@@ -997,5 +997,7 @@
   "premium_get_pro_to_unlock": "🔒 获取专业版以解锁",
   "premium_get_pro_sparkle": "✨ 获取专业版",
   "premium_pro_active": "专业版已激活",
-  "premium_active": "✨ 已激活"
+  "premium_active": "✨ 已激活",
+  "onboarding_choose_language": "🌍 选择您的语言",
+  "onboarding_language_subtitle": "选择您的首选语言以获得最佳体验"
 }

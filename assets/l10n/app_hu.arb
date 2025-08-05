@@ -1002,5 +1002,7 @@
   "premium_get_pro_to_unlock": "🔒 Szerezd meg a Pro-t a feloldáshoz",
   "premium_get_pro_sparkle": "✨ Pro megszerzése",
   "premium_pro_active": "Pro Aktív",
-  "premium_active": "✨ Aktív"
+  "premium_active": "✨ Aktív",
+  "onboarding_choose_language": "🌍 Válaszd ki a nyelved",
+  "onboarding_language_subtitle": "Válaszd ki a preferált nyelved a legjobb élményért"
 }

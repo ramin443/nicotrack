@@ -997,5 +997,7 @@
   "premium_get_pro_to_unlock": "🔒 ロック解除するにはProを取得",
   "premium_get_pro_sparkle": "✨ Proを取得",
   "premium_pro_active": "Pro アクティブ",
-  "premium_active": "✨ アクティブ"
+  "premium_active": "✨ アクティブ",
+  "onboarding_choose_language": "🌍 言語を選んでください",
+  "onboarding_language_subtitle": "最適な体験のために、お好みの言語を選択してください"
 }

@@ -195,17 +195,15 @@ class OnboardingController extends GetxController {
   }
 
   void previousPage() {
-    // Move to the previous page
+    // Move to the previouslanguage page
     if (currentPage > 0) {
       currentPage--;
       
       // If going back to language selection page, restore the remembered selection
       if (currentPage == 0) {
         selectedLanguageIndex = rememberedLanguageIndex;
-        print("Remembered language is $rememberedLanguageIndex and selected language is $selectedLanguageIndex");
         // Update the picker to show the remembered language selection after the page transition
         Future.delayed(Duration(milliseconds: 200), () {
-          print("Animating to language index: $selectedLanguageIndex");
           languageController.animateToItem(
             selectedLanguageIndex,
             duration: Duration(milliseconds: 300),

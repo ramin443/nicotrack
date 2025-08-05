@@ -1002,5 +1002,7 @@
   "premium_get_pro_to_unlock": "🔒 Αποκτήστε Pro για ξεκλείδωμα",
   "premium_get_pro_sparkle": "✨ Αποκτήστε Pro",
   "premium_pro_active": "Pro Ενεργό",
-  "premium_active": "✨ Ενεργό"
+  "premium_active": "✨ Ενεργό",
+  "onboarding_choose_language": "🌍 Επιλέξτε τη γλώσσα σας",
+  "onboarding_language_subtitle": "Επιλέξτε την προτιμώμενη γλώσσα σας για την καλύτερη εμπειρία"
 }

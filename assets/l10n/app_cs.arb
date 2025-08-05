@@ -1001,5 +1001,8 @@
   "premium_get_pro_to_unlock": "🔒 Získejte Pro pro odemčení",
   "premium_get_pro_sparkle": "✨ Získat Pro",
   "premium_pro_active": "Pro Aktivní",
-  "premium_active": "✨ Aktivní"
+  "premium_active": "✨ Aktivní",
+  
+  "onboarding_choose_language": "🌍 Vyberte svůj jazyk",
+  "onboarding_language_subtitle": "Vyberte svůj preferovaný jazyk pro nejlepší zážitek"
 }

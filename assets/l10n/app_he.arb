@@ -1002,5 +1002,7 @@
   "premium_get_pro_to_unlock": "🔒 קבל Pro כדי לפתוח",
   "premium_get_pro_sparkle": "✨ קבל Pro",
   "premium_pro_active": "Pro פעיל",
-  "premium_active": "✨ פעיל"
+  "premium_active": "✨ פעיל",
+  "onboarding_choose_language": "🌍 בחר את השפה שלך",
+  "onboarding_language_subtitle": "בחר את השפה המועדפת שלך לחוויה הטובה ביותר"
 }

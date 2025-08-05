@@ -6,6 +6,7 @@ import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/constants/font-constants.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import 'package:nicotrack/getx-controllers/onboarding-controller.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class ChooseLanguage extends StatefulWidget {
   const ChooseLanguage({super.key});
@@ -30,8 +31,7 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
               SizedBox(
                 width: 340.w,
                 child: TextAutoSize(
-                  "🌍 Choose your language ",
-                  // Static text since this is before language selection
+                  context.l10n.onboarding_choose_language,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       height: 1.2,
@@ -82,8 +82,7 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
                   child: SizedBox(
                     width: 250.w,
                     child: TextAutoSize(
-                      "Select your preferred language for the best experience",
-                      // Static text
+                      context.l10n.onboarding_language_subtitle,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         height: 1.1,

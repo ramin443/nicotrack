@@ -1002,5 +1002,7 @@
   "premium_get_pro_to_unlock": "🔒 Dapatkan Pro untuk membuka",
   "premium_get_pro_sparkle": "✨ Dapatkan Pro",
   "premium_pro_active": "Pro Aktif",
-  "premium_active": "✨ Aktif"
+  "premium_active": "✨ Aktif",
+  "onboarding_choose_language": "🌍 Pilih bahasa Anda",
+  "onboarding_language_subtitle": "Pilih bahasa pilihan Anda untuk pengalaman terbaik"
 }

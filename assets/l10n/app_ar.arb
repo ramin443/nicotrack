@@ -1002,5 +1002,8 @@
   "premium_get_pro_to_unlock": "🔒 احصل على Pro لفتح القفل",
   "premium_get_pro_sparkle": "✨ احصل على Pro",
   "premium_pro_active": "Pro نشط",
-  "premium_active": "✨ نشط"
+  "premium_active": "✨ نشط",
+  
+  "onboarding_choose_language": "🌍 اختر لغتك",
+  "onboarding_language_subtitle": "اختر لغتك المفضلة للحصول على أفضل تجربة"
 }

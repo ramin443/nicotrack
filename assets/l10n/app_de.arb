@@ -972,5 +972,7 @@
   "premium_get_pro_to_unlock": "🔒 Pro erhalten zum Freischalten",
   "premium_get_pro_sparkle": "✨ Pro erhalten",
   "premium_pro_active": "Pro Aktiv",
-  "premium_active": "✨ Aktiv"
+  "premium_active": "✨ Aktiv",
+  "onboarding_choose_language": "🌍 Wähle deine Sprache",
+  "onboarding_language_subtitle": "Wähle deine bevorzugte Sprache für die beste Erfahrung"
 }

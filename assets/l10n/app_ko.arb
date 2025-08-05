@@ -1002,5 +1002,7 @@
   "premium_get_pro_to_unlock": "🔒 잠금 해제하려면 Pro 구매",
   "premium_get_pro_sparkle": "✨ Pro 구매",
   "premium_pro_active": "Pro 활성화됨",
-  "premium_active": "✨ 활성화됨"
+  "premium_active": "✨ 활성화됨",
+  "onboarding_choose_language": "🌍 언어를 선택하세요",
+  "onboarding_language_subtitle": "최고의 경험을 위해 선호하는 언어를 선택하세요"
 }

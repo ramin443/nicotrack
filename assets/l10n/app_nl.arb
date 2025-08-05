@@ -1001,5 +1001,7 @@
   "premium_get_pro_to_unlock": "🔒 Krijg Pro om te ontgrendelen",
   "premium_get_pro_sparkle": "✨ Krijg Pro",
   "premium_pro_active": "Pro Actief",
-  "premium_active": "✨ Actief"
+  "premium_active": "✨ Actief",
+  "onboarding_choose_language": "🌍 Kies je taal",
+  "onboarding_language_subtitle": "Selecteer je gewenste taal voor de beste ervaring"
 }

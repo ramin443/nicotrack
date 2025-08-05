@@ -1001,5 +1001,7 @@
   "premium_get_pro_to_unlock": "🔒 Zdobądź Pro, aby odblokować",
   "premium_get_pro_sparkle": "✨ Zdobądź Pro",
   "premium_pro_active": "Pro Aktywne",
-  "premium_active": "✨ Aktywne"
+  "premium_active": "✨ Aktywne",
+  "onboarding_choose_language": "🌍 Wybierz swój język",
+  "onboarding_language_subtitle": "Wybierz preferowany język dla najlepszego doświadczenia"
 }
