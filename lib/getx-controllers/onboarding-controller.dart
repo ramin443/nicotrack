@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nicotrack/extensions/app_localizations_extension.dart';
+import 'package:nicotrack/initial/onboarding-questions/question-pages/choose-language.dart';
 import 'package:nicotrack/initial/onboarding-questions/question-pages/cost-of-pack.dart';
 import 'package:nicotrack/initial/onboarding-questions/question-pages/last-smoke.dart';
 import 'package:nicotrack/initial/onboarding-questions/question-pages/smoke-frequency.dart';
@@ -26,6 +27,7 @@ import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 
 class OnboardingController extends GetxController {
   List<Widget> pages = [
+    ChooseLanguage(),
     LastSmoked(),
     SmokeFrequency(),
     CostofPack(),
@@ -93,7 +95,35 @@ class OnboardingController extends GetxController {
     ];
   }
 
-  //Page 7 variables - Cigarette frequency
+  //Page 0 variables - Language selection
+  int selectedLanguageIndex = 0;
+  late FixedExtentScrollController languageController;
+  
+  final List<Map<String, String>> supportedLanguages = [
+    {'code': 'en', 'name': 'English', 'flag': '🇺🇸'},
+    {'code': 'es', 'name': 'Spanish', 'flag': '🇪🇸'},
+    {'code': 'fr', 'name': 'French', 'flag': '🇫🇷'},
+    {'code': 'de', 'name': 'German', 'flag': '🇩🇪'},
+    {'code': 'it', 'name': 'Italian', 'flag': '🇮🇹'},
+    {'code': 'pt', 'name': 'Portuguese', 'flag': '🇧🇷'},
+    {'code': 'zh', 'name': 'Chinese', 'flag': '🇨🇳'},
+    {'code': 'ja', 'name': 'Japanese', 'flag': '🇯🇵'},
+    {'code': 'ko', 'name': 'Korean', 'flag': '🇰🇷'},
+    {'code': 'hi', 'name': 'Hindi', 'flag': '🇮🇳'},
+    {'code': 'nl', 'name': 'Dutch', 'flag': '🇳🇱'},
+    {'code': 'ar', 'name': 'Arabic', 'flag': '🇸🇦'},
+    {'code': 'cs', 'name': 'Czech', 'flag': '🇨🇿'},
+    {'code': 'el', 'name': 'Greek', 'flag': '🇬🇷'},
+    {'code': 'he', 'name': 'Hebrew', 'flag': '🇮🇱'},
+    {'code': 'hu', 'name': 'Hungarian', 'flag': '🇭🇺'},
+    {'code': 'id', 'name': 'Indonesian', 'flag': '🇮🇩'},
+    {'code': 'pl', 'name': 'Polish', 'flag': '🇵🇱'},
+    {'code': 'ro', 'name': 'Romanian', 'flag': '🇷🇴'},
+    {'code': 'ru', 'name': 'Russian', 'flag': '🇷🇺'},
+    {'code': 'tr', 'name': 'Turkish', 'flag': '🇹🇷'},
+  ];
+
+  //Page 8 variables - Help needed
   List<int> selectedHelpIndex = [];
   
   // Dynamic method to build help pairs with localization
@@ -113,6 +143,13 @@ class OnboardingController extends GetxController {
   int selectedLastSmokeOption = -1; // 0: Today, 1: Yesterday, 2: Custom
   DateTime selectedCustomDate = DateTime.now();
 
+  @override
+  void onInit() {
+    super.onInit();
+    // Initialize language controller
+    languageController = FixedExtentScrollController(initialItem: selectedLanguageIndex);
+  }
+
 
 
   void goToNextPage(int page) {
@@ -121,10 +158,21 @@ class OnboardingController extends GetxController {
   }
 
   void nextPage() {
+    // Handle language selection on page 0
+    if (currentPage == 0) {
+      // Save the selected language
+      final selectedLanguage = supportedLanguages[selectedLanguageIndex];
+      final appPrefsController = Get.find<AppPreferencesController>();
+      appPrefsController.updateLanguage(
+        selectedLanguage['code']!,
+        selectedLanguage['name']!,
+      );
+    }
+    
     // Move to the next page
     if (currentPage < pages.length - 1) {
       // Log onboarding step completed
-      final stepNames = ["last_smoke_date", "cigarettes_per_day", "cost_per_pack", "pack_contents", "motivation", "crave_situations", "help_needed", "user_name"];
+      final stepNames = ["language_selection", "last_smoke_date", "cigarettes_per_day", "cost_per_pack", "pack_contents", "motivation", "crave_situations", "help_needed", "user_name"];
       if (currentPage < stepNames.length) {
         FirebaseService().logOnboardingStepCompleted(
           stepNumber: currentPage + 1,
@@ -1162,48 +1210,51 @@ class OnboardingController extends GetxController {
   void getCurrentPageStatus() {
     switch (currentPage) {
       case 0:
+        // Language selection - always enabled since it has a default selection
+        currentPageDoneStatus = true;
+      case 1:
         if (selectedLastSmokeOption != -1 && onboardingFilledData.lastSmokedDate != "") {
           currentPageDoneStatus = true;
         } else {
           currentPageDoneStatus = false;
         }
-      case 1:
+      case 2:
         if (onboardingFilledData.cigarettesPerDay != -1) {
           currentPageDoneStatus = true;
         } else {
           currentPageDoneStatus = false;
         }
-      case 2:
+      case 3:
         if (onboardingFilledData.costOfAPack != "") {
           currentPageDoneStatus = true;
         } else {
           currentPageDoneStatus = false;
         }
-      case 3:
+      case 4:
         if (onboardingFilledData.numberOfCigarettesIn1Pack != -1) {
           currentPageDoneStatus = true;
         } else {
           currentPageDoneStatus = false;
         }
-      case 4:
+      case 5:
         if (onboardingFilledData.biggestMotivation.isNotEmpty) {
           currentPageDoneStatus = true;
         } else {
           currentPageDoneStatus = false;
         }
-      case 5:
+      case 6:
         if (onboardingFilledData.craveSituations.isNotEmpty) {
           currentPageDoneStatus = true;
         } else {
           currentPageDoneStatus = false;
         }
-      case 6:
+      case 7:
         if (onboardingFilledData.helpNeeded.isNotEmpty) {
           currentPageDoneStatus = true;
         } else {
           currentPageDoneStatus = false;
         }
-      case 7:
+      case 8:
         if (onboardingFilledData.name != "") {
           currentPageDoneStatus = true;
         } else {
