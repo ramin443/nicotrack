@@ -989,5 +989,13 @@
   "premium_feature_timeline_desc": "Visualize a linha do tempo completa da sua jornada para parar",
   "premium_feature_unlimited_tasks": "Tarefas Diárias",
   "premium_feature_daily_tasks": "Ilimitadas",
-  "premium_feature_tasks_desc": "Acesso a todas as tarefas diárias e atividades"
+  "premium_feature_tasks_desc": "Acesso a todas as tarefas diárias e atividades",
+  
+  "premium_get_pro": "Obter Pro",
+  "premium_access_all_features": "Acesse todos os recursos",
+  "premium_save_50": "🎉 Economize 50%",
+  "premium_get_pro_to_unlock": "🔒 Obtenha Pro para desbloquear",
+  "premium_get_pro_sparkle": "✨ Obter Pro",
+  "premium_pro_active": "Pro Ativo",
+  "premium_active": "✨ Ativo"
 }

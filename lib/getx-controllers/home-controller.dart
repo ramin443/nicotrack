@@ -29,6 +29,7 @@ import 'package:nicotrack/models/did-you-smoke/didyouSmoke-model.dart';
 import 'package:nicotrack/models/quick-actions-model/quickActions-model.dart';
 import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 import 'package:nicotrack/extensions/app_localizations_extension.dart';
+import 'package:nicotrack/services/mood-usage-service.dart';
 
 enum DailyTaskType { mood, smoking }
 
@@ -560,17 +561,17 @@ class HomeController extends GetxController {
             ),
             GestureDetector(
               onTap: () {
-                // Check if lock should be shown (not premium user for mood task)
-                bool shouldShowLock = !isUserPremium;
+                // Check if user can use mood feature
+                bool canUseMood = MoodUsageService.canUseMoodFeature();
                 
-                if (shouldShowLock) {
-                  // Navigate to premium screen
+                if (!canUseMood) {
+                  // User has exceeded free usage limit, show premium screen
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
                     return const PremiumPaywallScreen();
                   }));
                 } else {
-                  // Normal behavior
+                  // User can use mood feature (either premium or within free limit)
                   if (!isMoodDone) {
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (context) {
@@ -578,6 +579,7 @@ class HomeController extends GetxController {
                           currentDateTime: currentSelectedDateTime);
                     }));
                   } else {
+                    // If mood is already done for today, allow viewing details
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (context) {
                       return MoodDetailScreen(
@@ -692,9 +694,10 @@ class HomeController extends GetxController {
                 ],
               ),
             ),
-            isUserPremium || taskType == DailyTaskType.smoking
-                ? SizedBox.shrink()
-                : Positioned(top: 10.w, right: 10.w, child: smallLockBox())
+            // Show lock box if user cannot use mood feature
+            taskType == DailyTaskType.mood && !MoodUsageService.canUseMoodFeature()
+                ? Positioned(top: 10.w, right: 10.w, child: smallLockBox())
+                : SizedBox.shrink()
           ],
         ));
   }

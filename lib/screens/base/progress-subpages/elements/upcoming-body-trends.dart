@@ -205,7 +205,7 @@ class _UpcomingHealthTrendState extends State<UpcomingHealthTrend> {
                       filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                       child: Container(
                         color: Colors.white.withOpacity(0.1),
-                        child: Center(child: contentLockBox(),),
+                        child: Center(child: contentLockBox(context),),
                       ),
                     ),
                   ),

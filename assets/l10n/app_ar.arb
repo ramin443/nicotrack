@@ -994,5 +994,13 @@
   "premium_feature_timeline_desc": "عرض الجدول الزمني الكامل لرحلة الإقلاع عن التدخين",
   "premium_feature_unlimited_tasks": "غير محدودة",
   "premium_feature_daily_tasks": "مهام يومية",
-  "premium_feature_tasks_desc": "الوصول إلى جميع المهام والأنشطة اليومية"
+  "premium_feature_tasks_desc": "الوصول إلى جميع المهام والأنشطة اليومية",
+  
+  "premium_get_pro": "احصل على Pro",
+  "premium_access_all_features": "الوصول إلى جميع الميزات",
+  "premium_save_50": "🎉 وفر 50%",
+  "premium_get_pro_to_unlock": "🔒 احصل على Pro لفتح القفل",
+  "premium_get_pro_sparkle": "✨ احصل على Pro",
+  "premium_pro_active": "Pro نشط",
+  "premium_active": "✨ نشط"
 }

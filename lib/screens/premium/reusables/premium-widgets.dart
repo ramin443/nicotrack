@@ -7,6 +7,7 @@ import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import 'package:nicotrack/screens/premium/premium-paywall-screen.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/getx-controllers/premium-controller.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 Widget premiumBox(BuildContext context) {
   return GestureDetector(
@@ -47,7 +48,7 @@ Widget premiumBox(BuildContext context) {
                     height: 6.w,
                   ),
                   TextAutoSize(
-                    'Get Pro',
+                    context.l10n.premium_get_pro,
                     style: TextStyle(
                       fontSize: 18.sp,
                       height: 1,
@@ -55,26 +56,38 @@ Widget premiumBox(BuildContext context) {
                       color: Colors.white,
                     ),
                   ),
-                  TextAutoSize(
-                    'Access all features',
+                  SizedBox(
+                    height: 3.w,
+                  ),
+                  SizedBox(
+                    width: 140.w,
+                    child:
+                    TextAutoSize(
+                    context.l10n.premium_access_all_features,
                     style: TextStyle(
                       fontSize: 14.sp,
+                      height: 1.05,
                       fontFamily: circularBook,
                       color: Colors.white.withValues(alpha: 0.75),
                     ),
-                  ),
+                  ),)
                 ],
               )
             ],
           ),
+          SizedBox(
+            width: 110.w,
+          child:
           TextAutoSize(
-            '🎉 Save 50% ',
+            context.l10n.premium_save_50 + ' ',
+            textAlign: TextAlign.right,
             style: TextStyle(
               fontSize: 15.sp,
+              height: 1.1,
               fontFamily: circularMedium,
               color: Colors.white,
             ),
-          ),
+          ),)
         ],
       ),
     ),
@@ -97,7 +110,7 @@ Widget smallLockBox() {
   );
 }
 
-Widget contentLockBox() {
+Widget contentLockBox(BuildContext context) {
   return Container(
     width: 200.w,
     height: 48.w,
@@ -108,7 +121,7 @@ Widget contentLockBox() {
     ),
     child: Center(
       child: TextAutoSize(
-        '🔒 Get Pro to unlock ',
+        context.l10n.premium_get_pro_to_unlock + ' ',
         style: TextStyle(
           fontSize: 16.sp,
           fontFamily: circularMedium,
@@ -119,7 +132,7 @@ Widget contentLockBox() {
   );
 }
 
-Widget calendarLock() {
+Widget calendarLock(BuildContext context) {
   return Container(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -153,7 +166,7 @@ Widget calendarLock() {
           ),
           child: Center(
             child: TextAutoSize(
-              '✨ Get Pro ',
+              context.l10n.premium_get_pro_sparkle + ' ',
               style: TextStyle(
                 fontSize: 17.sp,
                 fontFamily: recoletaSemiBold,
@@ -214,7 +227,7 @@ Widget premiumStatusBox(BuildContext context) {
                   height: 6.w,
                 ),
                 TextAutoSize(
-                  'Pro Active',
+                  context.l10n.premium_pro_active,
                   style: TextStyle(
                     fontSize: 18.sp,
                     height: 1,
@@ -223,19 +236,21 @@ Widget premiumStatusBox(BuildContext context) {
                   ),
                 ),
                 TextAutoSize(
-                  premiumController.getPlanDisplayText(),
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontFamily: circularBook,
-                    color: Colors.white.withValues(alpha: 0.85),
+                    premiumController.getPlanDisplayText(),
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontFamily: circularBook,
+                      color: Colors.white.withValues(alpha: 0.85),
+                    ),
                   ),
-                ),
+
+
               ],
             )
           ],
         ),
         TextAutoSize(
-          '✨ Active',
+          context.l10n.premium_active,
           style: TextStyle(
             fontSize: 15.sp,
             fontFamily: circularMedium,

@@ -989,5 +989,13 @@
   "premium_feature_timeline_desc": "禁煙の旅の完全なタイムラインを表示",
   "premium_feature_unlimited_tasks": "無制限の",
   "premium_feature_daily_tasks": "日次タスク",
-  "premium_feature_tasks_desc": "すべての日次タスクとアクティビティへのアクセス"
+  "premium_feature_tasks_desc": "すべての日次タスクとアクティビティへのアクセス",
+  
+  "premium_get_pro": "Proを取得",
+  "premium_access_all_features": "すべての機能にアクセス",
+  "premium_save_50": "🎉 50%節約",
+  "premium_get_pro_to_unlock": "🔒 ロック解除するにはProを取得",
+  "premium_get_pro_sparkle": "✨ Proを取得",
+  "premium_pro_active": "Pro アクティブ",
+  "premium_active": "✨ アクティブ"
 }

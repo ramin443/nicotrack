@@ -989,5 +989,13 @@
   "premium_feature_timeline_desc": "查看您戒烟旅程的完整时间线",
   "premium_feature_unlimited_tasks": "无限",
   "premium_feature_daily_tasks": "每日任务",
-  "premium_feature_tasks_desc": "访问所有每日任务和活动"
+  "premium_feature_tasks_desc": "访问所有每日任务和活动",
+  
+  "premium_get_pro": "获取专业版",
+  "premium_access_all_features": "访问所有功能",
+  "premium_save_50": "🎉 节省50%",
+  "premium_get_pro_to_unlock": "🔒 获取专业版以解锁",
+  "premium_get_pro_sparkle": "✨ 获取专业版",
+  "premium_pro_active": "专业版已激活",
+  "premium_active": "✨ 已激活"
 }

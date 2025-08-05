@@ -994,5 +994,13 @@
   "premium_feature_timeline_desc": "금연 여정의 전체 타임라인 보기",
   "premium_feature_unlimited_tasks": "무제한",
   "premium_feature_daily_tasks": "일일 작업",
-  "premium_feature_tasks_desc": "모든 일일 작업 및 활동에 접근"
+  "premium_feature_tasks_desc": "모든 일일 작업 및 활동에 접근",
+  
+  "premium_get_pro": "Pro 구매",
+  "premium_access_all_features": "모든 기능 이용",
+  "premium_save_50": "🎉 50% 절약",
+  "premium_get_pro_to_unlock": "🔒 잠금 해제하려면 Pro 구매",
+  "premium_get_pro_sparkle": "✨ Pro 구매",
+  "premium_pro_active": "Pro 활성화됨",
+  "premium_active": "✨ 활성화됨"
 }

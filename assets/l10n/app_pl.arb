@@ -993,5 +993,13 @@
   "premium_feature_timeline_desc": "Zobacz pełną oś czasu swojej podróży rzucania palenia",
   "premium_feature_unlimited_tasks": "Nieograniczone",
   "premium_feature_daily_tasks": "Zadania Codzienne",
-  "premium_feature_tasks_desc": "Dostęp do wszystkich codziennych zadań i aktywności"
+  "premium_feature_tasks_desc": "Dostęp do wszystkich codziennych zadań i aktywności",
+  
+  "premium_get_pro": "Zdobądź Pro",
+  "premium_access_all_features": "Dostęp do wszystkich funkcji",
+  "premium_save_50": "🎉 Oszczędź 50%",
+  "premium_get_pro_to_unlock": "🔒 Zdobądź Pro, aby odblokować",
+  "premium_get_pro_sparkle": "✨ Zdobądź Pro",
+  "premium_pro_active": "Pro Aktywne",
+  "premium_active": "✨ Aktywne"
 }

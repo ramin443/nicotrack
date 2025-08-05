@@ -964,5 +964,13 @@
   "premium_feature_timeline_desc": "Betrachte den kompletten Zeitplan deiner Aufhörreise",
   "premium_feature_unlimited_tasks": "Unbegrenzte",
   "premium_feature_daily_tasks": "Tägliche Aufgaben",
-  "premium_feature_tasks_desc": "Zugang zu allen täglichen Aufgaben und Aktivitäten"
+  "premium_feature_tasks_desc": "Zugang zu allen täglichen Aufgaben und Aktivitäten",
+  
+  "premium_get_pro": "Pro erhalten",
+  "premium_access_all_features": "Zugriff auf alle Funktionen",
+  "premium_save_50": "🎉 50% sparen",
+  "premium_get_pro_to_unlock": "🔒 Pro erhalten zum Freischalten",
+  "premium_get_pro_sparkle": "✨ Pro erhalten",
+  "premium_pro_active": "Pro Aktiv",
+  "premium_active": "✨ Aktiv"
 }

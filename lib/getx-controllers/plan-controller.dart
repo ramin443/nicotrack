@@ -391,7 +391,7 @@ class PlanController extends GetxController {
                                             Colors.white.withValues(alpha: 0.1),
                                       ),
                                       child: Center(
-                                        child: calendarLock(),
+                                        child: calendarLock(context),
                                       ),
                                     ),
                                     i == 4

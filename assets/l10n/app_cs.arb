@@ -993,5 +993,13 @@
   "premium_feature_timeline_desc": "Zobrazit úplnou časovou osu vaší cesty odvykání kouření",
   "premium_feature_unlimited_tasks": "Neomezené",
   "premium_feature_daily_tasks": "Denní Úkoly",
-  "premium_feature_tasks_desc": "Přístup ke všem denním úkolům a aktivitám"
+  "premium_feature_tasks_desc": "Přístup ke všem denním úkolům a aktivitám",
+  
+  "premium_get_pro": "Získat Pro",
+  "premium_access_all_features": "Přístup ke všem funkcím",
+  "premium_save_50": "🎉 Ušetřete 50%",
+  "premium_get_pro_to_unlock": "🔒 Získejte Pro pro odemčení",
+  "premium_get_pro_sparkle": "✨ Získat Pro",
+  "premium_pro_active": "Pro Aktivní",
+  "premium_active": "✨ Aktivní"
 }

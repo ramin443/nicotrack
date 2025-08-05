@@ -322,9 +322,19 @@ class $AssetsImagesIllustrationGen {
   /// File path: assets/images/Illustration/Run - Health.svg
   String get runHealth => 'assets/images/Illustration/Run - Health.svg';
 
+  /// File path: assets/images/Illustration/neu-premium-bg-3.png
+  AssetGenImage get neuPremiumBg3 =>
+      const AssetGenImage('assets/images/Illustration/neu-premium-bg-3.png');
+
   /// List of all assets
-  List<dynamic> get values =>
-      [financesPng, financesSvg, healthSports, painter, runHealth];
+  List<dynamic> get values => [
+        financesPng,
+        financesSvg,
+        healthSports,
+        painter,
+        runHealth,
+        neuPremiumBg3
+      ];
 }
 
 class $AssetsImagesAwardEmojisGen {

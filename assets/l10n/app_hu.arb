@@ -994,5 +994,13 @@
   "premium_feature_timeline_desc": "Tekintse meg leszokási útjának teljes idővonalát",
   "premium_feature_unlimited_tasks": "Korlátlan",
   "premium_feature_daily_tasks": "Napi Feladatok",
-  "premium_feature_tasks_desc": "Hozzáférés az összes napi feladathoz és tevékenységhez"
+  "premium_feature_tasks_desc": "Hozzáférés az összes napi feladathoz és tevékenységhez",
+  
+  "premium_get_pro": "Pro megszerzése",
+  "premium_access_all_features": "Hozzáférés minden funkcióhoz",
+  "premium_save_50": "🎉 50% megtakarítás",
+  "premium_get_pro_to_unlock": "🔒 Szerezd meg a Pro-t a feloldáshoz",
+  "premium_get_pro_sparkle": "✨ Pro megszerzése",
+  "premium_pro_active": "Pro Aktív",
+  "premium_active": "✨ Aktív"
 }

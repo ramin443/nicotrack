@@ -963,5 +963,13 @@
   "premium_feature_timeline_desc": "Visualisez la chronologie complète de votre parcours d'arrêt",
   "premium_feature_unlimited_tasks": "Tâches Quotidiennes",
   "premium_feature_daily_tasks": "Illimitées",
-  "premium_feature_tasks_desc": "Accès à toutes les tâches quotidiennes et activités"
+  "premium_feature_tasks_desc": "Accès à toutes les tâches quotidiennes et activités",
+  
+  "premium_get_pro": "Obtenir Pro",
+  "premium_access_all_features": "Accédez à toutes les fonctionnalités",
+  "premium_save_50": "🎉 Économisez 50%",
+  "premium_get_pro_to_unlock": "🔒 Obtenez Pro pour déverrouiller",
+  "premium_get_pro_sparkle": "✨ Obtenir Pro",
+  "premium_pro_active": "Pro Actif",
+  "premium_active": "✨ Actif"
 }

@@ -18,6 +18,7 @@ import 'package:hive/hive.dart';
 import 'package:nicotrack/screens/mood/mood-detail-screen.dart';
 import 'package:nicotrack/extensions/app_localizations_extension.dart';
 import 'package:nicotrack/services/firebase-service.dart';
+import 'package:nicotrack/services/mood-usage-service.dart';
 
 class MoodController extends GetxController {
   final PageController pageController = PageController();
@@ -688,6 +689,9 @@ class MoodController extends GetxController {
     String moodStringToday = DateFormat.yMMMd().format(currentDateTime);
     final box = Hive.box<MoodModel>('moodData');
     await box.put(moodStringToday, moodFilledData);
+    
+    // Track mood usage for non-premium users
+    await MoodUsageService.recordMoodUsage();
     
     // Log mood session completion
     FirebaseService().logMoodSessionCompleted(

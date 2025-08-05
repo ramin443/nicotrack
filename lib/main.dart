@@ -20,6 +20,8 @@ import 'package:nicotrack/models/did-you-smoke/didyouSmoke-model.dart';
 import 'package:nicotrack/models/quick-actions-model/quickActions-model.dart';
 import 'package:nicotrack/models/financial-goals-model/financialGoals-model.dart';
 import 'package:nicotrack/models/notifications-preferences-model/notificationsPreferences-model.dart';
+import 'package:nicotrack/models/mood-usage-model/moodUsage-model.dart';
+import 'package:nicotrack/hive-adapters/mood-usage-adapter.dart';
 import 'package:nicotrack/services/notification-service.dart';
 import 'package:nicotrack/services/purchase-service.dart';
 import 'package:nicotrack/services/premium-persistence-service.dart';
@@ -59,6 +61,7 @@ void main() async {
   Hive.registerAdapter(FinancialGoalsAdapter());
   Hive.registerAdapter(NotificationsPreferencesAdapter());
   Hive.registerAdapter(AppPreferencesModelAdapter());
+  Hive.registerAdapter(MoodUsageAdapter());
 
   // Open your Hive box(es)
   await Hive.openBox<OnboardingData>('onboardingCompletedData');
@@ -68,6 +71,7 @@ void main() async {
   await Hive.openBox<FinancialGoalsModel>('financialGoalsData');
   await Hive.openBox<NotificationsPreferencesModel>('notificationsPreferencesData');
   await Hive.openBox<AppPreferencesModel>('appPreferences');
+  await Hive.openBox<MoodUsageModel>('moodUsageData');
 
   // Initialize timezone 
   tz.initializeTimeZones();

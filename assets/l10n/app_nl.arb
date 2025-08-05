@@ -993,5 +993,13 @@
   "premium_feature_timeline_desc": "Bekijk de volledige tijdlijn van je stopreize",
   "premium_feature_unlimited_tasks": "Onbeperkte",
   "premium_feature_daily_tasks": "Dagelijkse Taken",
-  "premium_feature_tasks_desc": "Toegang tot alle dagelijkse taken en activiteiten"
+  "premium_feature_tasks_desc": "Toegang tot alle dagelijkse taken en activiteiten",
+  
+  "premium_get_pro": "Krijg Pro",
+  "premium_access_all_features": "Toegang tot alle functies",
+  "premium_save_50": "🎉 Bespaar 50%",
+  "premium_get_pro_to_unlock": "🔒 Krijg Pro om te ontgrendelen",
+  "premium_get_pro_sparkle": "✨ Krijg Pro",
+  "premium_pro_active": "Pro Actief",
+  "premium_active": "✨ Actief"
 }

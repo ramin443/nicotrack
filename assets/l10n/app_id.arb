@@ -994,5 +994,13 @@
   "premium_feature_timeline_desc": "Lihat timeline lengkap perjalanan berhenti merokok Anda",
   "premium_feature_unlimited_tasks": "Tak Terbatas",
   "premium_feature_daily_tasks": "Tugas Harian",
-  "premium_feature_tasks_desc": "Akses ke semua tugas dan aktivitas harian"
+  "premium_feature_tasks_desc": "Akses ke semua tugas dan aktivitas harian",
+  
+  "premium_get_pro": "Dapatkan Pro",
+  "premium_access_all_features": "Akses semua fitur",
+  "premium_save_50": "🎉 Hemat 50%",
+  "premium_get_pro_to_unlock": "🔒 Dapatkan Pro untuk membuka",
+  "premium_get_pro_sparkle": "✨ Dapatkan Pro",
+  "premium_pro_active": "Pro Aktif",
+  "premium_active": "✨ Aktif"
 }

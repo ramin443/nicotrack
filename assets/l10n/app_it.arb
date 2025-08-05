@@ -989,5 +989,13 @@
   "premium_feature_timeline_desc": "Visualizza la timeline completa del tuo percorso per smettere",
   "premium_feature_unlimited_tasks": "Compiti Giornalieri",
   "premium_feature_daily_tasks": "Illimitati",
-  "premium_feature_tasks_desc": "Accesso a tutti i compiti giornalieri e attività"
+  "premium_feature_tasks_desc": "Accesso a tutti i compiti giornalieri e attività",
+  
+  "premium_get_pro": "Ottieni Pro",
+  "premium_access_all_features": "Accedi a tutte le funzionalità",
+  "premium_save_50": "🎉 Risparmia il 50%",
+  "premium_get_pro_to_unlock": "🔒 Ottieni Pro per sbloccare",
+  "premium_get_pro_sparkle": "✨ Ottieni Pro",
+  "premium_pro_active": "Pro Attivo",
+  "premium_active": "✨ Attivo"
 }

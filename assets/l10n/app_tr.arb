@@ -993,5 +993,13 @@
   "premium_feature_timeline_desc": "Sigarayı bırakma yolculuğunuzun tam zaman çizelgesini görüntüleyin",
   "premium_feature_unlimited_tasks": "Sınırsız",
   "premium_feature_daily_tasks": "Günlük Görevler",
-  "premium_feature_tasks_desc": "Tüm günlük görevlere ve etkinliklere erişim"
+  "premium_feature_tasks_desc": "Tüm günlük görevlere ve etkinliklere erişim",
+  
+  "premium_get_pro": "Pro'yu Al",
+  "premium_access_all_features": "Tüm özelliklere erişin",
+  "premium_save_50": "🎉 %50 tasarruf edin",
+  "premium_get_pro_to_unlock": "🔒 Kilidi açmak için Pro'yu alın",
+  "premium_get_pro_sparkle": "✨ Pro'yu Al",
+  "premium_pro_active": "Pro Aktif",
+  "premium_active": "✨ Aktif"
 }

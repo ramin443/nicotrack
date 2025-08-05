@@ -994,5 +994,13 @@
   "premium_feature_timeline_desc": "צפה בציר הזמן המלא של מסע הגמילה שלך",
   "premium_feature_unlimited_tasks": "ללא הגבלה",
   "premium_feature_daily_tasks": "משימות יומיות",
-  "premium_feature_tasks_desc": "גישה לכל המשימות והפעילויות היומיות"
+  "premium_feature_tasks_desc": "גישה לכל המשימות והפעילויות היומיות",
+  
+  "premium_get_pro": "קבל Pro",
+  "premium_access_all_features": "גישה לכל התכונות",
+  "premium_save_50": "🎉 חסוך 50%",
+  "premium_get_pro_to_unlock": "🔒 קבל Pro כדי לפתוח",
+  "premium_get_pro_sparkle": "✨ קבל Pro",
+  "premium_pro_active": "Pro פעיל",
+  "premium_active": "✨ פעיל"
 }

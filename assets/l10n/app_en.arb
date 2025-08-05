@@ -1013,5 +1013,13 @@
   "premium_feature_timeline_desc": "View complete timeline of your quitting journey",
   "premium_feature_unlimited_tasks": "Unlimited",
   "premium_feature_daily_tasks": "Daily Tasks",
-  "premium_feature_tasks_desc": "Access to all daily tasks and activities"
+  "premium_feature_tasks_desc": "Access to all daily tasks and activities",
+  
+  "premium_get_pro": "Get Pro",
+  "premium_access_all_features": "Access all features",
+  "premium_save_50": "🎉 Save 50%",
+  "premium_get_pro_to_unlock": "🔒 Get Pro to unlock",
+  "premium_get_pro_sparkle": "✨ Get Pro",
+  "premium_pro_active": "Pro Active",
+  "premium_active": "✨ Active"
 }

@@ -964,5 +964,13 @@
   "premium_feature_timeline_desc": "Ve la cronología completa de tu viaje para dejar de fumar",
   "premium_feature_unlimited_tasks": "Tareas Diarias",
   "premium_feature_daily_tasks": "Ilimitadas",
-  "premium_feature_tasks_desc": "Acceso a todas las tareas diarias y actividades"
+  "premium_feature_tasks_desc": "Acceso a todas las tareas diarias y actividades",
+  
+  "premium_get_pro": "Obtener Pro",
+  "premium_access_all_features": "Accede a todas las funciones",
+  "premium_save_50": "🎉 Ahorra 50%",
+  "premium_get_pro_to_unlock": "🔒 Obtén Pro para desbloquear",
+  "premium_get_pro_sparkle": "✨ Obtener Pro",
+  "premium_pro_active": "Pro Activo",
+  "premium_active": "✨ Activo"
 }

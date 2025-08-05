@@ -994,5 +994,13 @@
   "premium_feature_timeline_desc": "Vezi cronologia completă a călătoriei tale de renunțare",
   "premium_feature_unlimited_tasks": "Nelimitate",
   "premium_feature_daily_tasks": "Sarcini Zilnice",
-  "premium_feature_tasks_desc": "Acces la toate sarcinile și activitățile zilnice"
+  "premium_feature_tasks_desc": "Acces la toate sarcinile și activitățile zilnice",
+  
+  "premium_get_pro": "Obține Pro",
+  "premium_access_all_features": "Acces la toate funcțiile",
+  "premium_save_50": "🎉 Economisește 50%",
+  "premium_get_pro_to_unlock": "🔒 Obține Pro pentru a debloca",
+  "premium_get_pro_sparkle": "✨ Obține Pro",
+  "premium_pro_active": "Pro Activ",
+  "premium_active": "✨ Activ"
 }
