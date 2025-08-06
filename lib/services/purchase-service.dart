@@ -216,7 +216,7 @@ class PurchaseService {
           
           if (valid) {
             // Update premium status
-            _deliverProduct(purchaseDetails);
+            await _deliverProduct(purchaseDetails);
           } else {
             print('❌ Purchase verification failed for: ${purchaseDetails.productID}');
           }
@@ -260,16 +260,13 @@ class PurchaseService {
   }
 
   // Deliver the product (update user's premium status)
-  void _deliverProduct(PurchaseDetails purchaseDetails) {
+  Future<void> _deliverProduct(PurchaseDetails purchaseDetails) async {
     final controller = Get.find<PremiumController>();
     
     print('🎉 Delivering premium product: ${purchaseDetails.productID}');
     
-    // Set premium status
-    controller.isPremium.value = true;
-    
-    // Store purchase info (you might want to save this to local storage)
-    _savePurchaseInfo(purchaseDetails);
+    // Store purchase info first (this also updates the controller via PremiumPersistenceService)
+    await _savePurchaseInfo(purchaseDetails);
     
     // Force UI refresh
     controller.refreshPremiumStatus();
@@ -278,7 +275,7 @@ class PurchaseService {
   }
 
   // Save purchase information
-  void _savePurchaseInfo(PurchaseDetails purchaseDetails) async {
+  Future<void> _savePurchaseInfo(PurchaseDetails purchaseDetails) async {
     // Save purchase info using persistence service
     await PremiumPersistenceService.savePremiumStatus(
       isPremium: true,
