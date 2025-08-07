@@ -40,7 +40,8 @@ class PurchaseService {
     try {
       // Check if the store is available
       isAvailable = await _inAppPurchase.isAvailable();
-      
+
+
       if (!isAvailable) {
         print('Store is not available');
         return;
