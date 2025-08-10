@@ -38,7 +38,7 @@ class _EnterNameState extends State<EnterName> {
                       ),
                       TextAutoSize(
                         context.l10n.enter_name_subtitle,
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.left,
                         style: TextStyle(
                           fontSize: 20.sp,
                           height: 1.2,
@@ -51,7 +51,7 @@ class _EnterNameState extends State<EnterName> {
                   Spacer(),
                   TextAutoSize(
                     context.l10n.enter_name_title,
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 26.sp,
                       height: 1.2,

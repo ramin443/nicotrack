@@ -19,6 +19,10 @@ import 'package:flutter/services.dart';
 import 'package:nicotrack/models/emoji-Text-Pair.dart';
 import '../../../screens/elements/textAutoSize.dart';
 import 'package:nicotrack/initial/onboarding-questions/question-pages/enter-name.dart';
+import 'package:nicotrack/initial/onboarding-questions/question-pages/manage-notifications.dart';
+import 'package:permission_handler/permission_handler.dart';
+import '../services/notification-service.dart';
+import '../models/notifications-preferences-model/notificationsPreferences-model.dart';
 import '../models/onboarding-data/onboardingData-model.dart';
 import '../services/firebase-service.dart';
 import '../screens/base/base.dart';
@@ -37,6 +41,7 @@ class OnboardingController extends GetxController {
     HelpNeed(),
     // QuitMethod(),
     EnterName(),
+    ManageNotifications(),
   ];
   final PageController pageController = PageController();
   int currentPage = 0;
@@ -1117,35 +1122,160 @@ class OnboardingController extends GetxController {
     );
   }
 
+  // Method to complete onboarding
+  Future<void> completeOnboarding(BuildContext context) async {
+    // Log onboarding completion analytics
+    FirebaseService().logOnboardingCompleted(
+      lastSmokedDate: onboardingFilledData.lastSmokedDate,
+      cigarettesPerDay: onboardingFilledData.cigarettesPerDay,
+      costPerPack: onboardingFilledData.costOfAPack,
+      motivations: onboardingFilledData.biggestMotivation,
+      craveSituations: onboardingFilledData.craveSituations,
+      helpNeeded: onboardingFilledData.helpNeeded,
+      userName: onboardingFilledData.name,
+    );
+    
+    final box = Hive.box<OnboardingData>('onboardingCompletedData');
+    await box.put('currentUserOnboarding', onboardingFilledData);
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => const Base(),
+        ),
+        (route) => false);
+  }
+
+  // Method to complete onboarding without notifications (skip case)
+  Future<void> completeOnboardingSkipNotifications(BuildContext context) async {
+    // Save preferences indicating user skipped notifications
+    await saveNotificationPreferences(false);
+    
+    // Complete normal onboarding flow
+    await completeOnboarding(context);
+  }
+
+  // Method to handle notification permission request
+  Future<void> requestNotificationPermission(BuildContext context) async {
+    try {
+      print('🔔 Requesting notification permission via onboarding...');
+      
+      // Use NotificationService to request permissions - this will now show the dialog
+      final notificationService = NotificationService();
+      bool granted = await notificationService.requestPermissions();
+      print('🔔 Permission request result: $granted');
+      
+      if (granted) {
+        print('🔔 Permission granted! Initializing notifications...');
+        // Initialize notifications if permission granted
+        await notificationService.initialize();
+        
+        // Save notification preferences to indicate permission was granted
+        await saveNotificationPreferences(true);
+        print('🔔 Notification preferences saved successfully');
+      } else {
+        print('🔔 Permission denied');
+        
+        // Save preferences indicating permission was denied
+        await saveNotificationPreferences(false);
+      }
+      
+      // Complete onboarding regardless of permission result
+      await completeOnboarding(context);
+    } catch (e) {
+      print('🔔 Error requesting notification permission: $e');
+      // Save preferences indicating there was an error (assume denied)
+      await saveNotificationPreferences(false);
+      // Still complete onboarding even if there's an error
+      await completeOnboarding(context);
+    }
+  }
+
+  // Method to save notification preferences
+  Future<void> saveNotificationPreferences(bool permissionGranted) async {
+    try {
+      final notificationsBox = Hive.box<NotificationsPreferencesModel>('notificationsPreferencesData');
+      
+      // Create default notification preferences
+      NotificationsPreferencesModel notificationPrefs = NotificationsPreferencesModel(
+        pushNotificationsActivated: permissionGranted,
+        manuallyDisabled: false, // User hasn't manually disabled
+        dailyReminderHour: 8,
+        dailyReminderMinute: 0,
+        dailyReminderPeriod: " AM",
+        morningReminderHour: 8,
+        morningReminderMinute: 0,
+        morningReminderPeriod: " AM",
+        eveningReminderHour: 8,
+        eveningReminderMinute: 0,
+        eveningReminderPeriod: " PM",
+        weeklyReminderDay: "Monday",
+        weeklyReminderHour: 6,
+        weeklyReminderMinute: 0,
+        weeklyReminderPeriod: " PM",
+      );
+      
+      await notificationsBox.put('currentUserNotificationPrefs', notificationPrefs);
+      print('📱 Saved notification preferences: permissionGranted=$permissionGranted');
+    } catch (e) {
+      print('Error saving notification preferences: $e');
+    }
+  }
+
   Widget continueButton(BuildContext context) {
+    // Special handling for notifications page (last page)
+    if (currentPage == pages.length - 1) {
+      return Column(
+        children: [
+          // Allow notifications button
+          GestureDetector(
+            onTap: () async {
+              HapticFeedback.mediumImpact();
+              await requestNotificationPermission(context);
+            },
+            child: Container(
+              width: 346.w,
+              height: 54.h,
+              decoration: BoxDecoration(
+                color: nicotrackBlack1,
+                borderRadius: BorderRadius.circular(30.r),
+              ),
+              child: Center(
+                child: TextAutoSize(
+                  "Allow notifications",
+                  style: TextStyle(
+                      fontSize: 18.sp,
+                      fontFamily: circularMedium,
+                      color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 16.h),
+          // Skip for now button
+          GestureDetector(
+            onTap: () async {
+              HapticFeedback.mediumImpact();
+              await completeOnboardingSkipNotifications(context);
+            },
+            child: TextAutoSize(
+              "Skip for now",
+              style: TextStyle(
+                  fontSize: 16.sp,
+                  decoration: TextDecoration.underline,
+                  fontFamily: circularMedium,
+                  color: nicotrackBlack1.withOpacity(0.7)),
+            ),
+          ),
+        ],
+      );
+    }
+    
+    // Standard continue button for other pages
     return GestureDetector(
       onTap: () async{
 
         if (currentPageDoneStatus) {
           HapticFeedback.mediumImpact();
-          if (currentPage == (pages.length - 1)) {
-            // Log onboarding completion analytics
-            FirebaseService().logOnboardingCompleted(
-              lastSmokedDate: onboardingFilledData.lastSmokedDate,
-              cigarettesPerDay: onboardingFilledData.cigarettesPerDay,
-              costPerPack: onboardingFilledData.costOfAPack,
-              motivations: onboardingFilledData.biggestMotivation,
-              craveSituations: onboardingFilledData.craveSituations,
-              helpNeeded: onboardingFilledData.helpNeeded,
-              userName: onboardingFilledData.name,
-            );
-            
-            final box = Hive.box<OnboardingData>('onboardingCompletedData');
-            await box.put('currentUserOnboarding', onboardingFilledData); // Use a consistent key
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => const Base(
-                  ),
-                ),
-                    (route) => false);
-          } else {
-            nextPage();
-          }
+          nextPage();
         }
       },
       child: Container(
@@ -1159,7 +1289,7 @@ class OnboardingController extends GetxController {
         ),
         child: Center(
           child: TextAutoSize(
-            currentPage == (pages.length - 1) ? context.l10n.finish : context.l10n.continueButton,
+            context.l10n.continueButton,
             style: TextStyle(
                 fontSize: 18.sp,
                 fontFamily: circularMedium,
@@ -1278,6 +1408,9 @@ class OnboardingController extends GetxController {
         } else {
           currentPageDoneStatus = false;
         }
+      case 9:
+        // Notifications page - always skip the standard validation
+        currentPageDoneStatus = true;
       default:
         currentPageDoneStatus = false;
     }

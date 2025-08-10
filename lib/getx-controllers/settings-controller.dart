@@ -3644,7 +3644,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           duration: Duration(milliseconds: 100),
           child: Container(
             constraints: BoxConstraints(
-              maxHeight: MediaQuery.of(context).size.height * 0.75,
+              maxHeight: MediaQuery.of(context).size.height * 0.92,
             ),
             decoration: BoxDecoration(
               color: Colors.white,
