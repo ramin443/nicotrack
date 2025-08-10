@@ -1039,5 +1039,15 @@
   "clear_data_confirmation_required": "Wymagane Potwierdzenie",
   "clear_data_type_instruction": "Wpisz \"CLEAR MY DATA\" poniżej, aby kontynuować usuwanie.",
   "clear_data_type_hint": "Wpisz \"CLEAR MY DATA\"",
-  "clear_data_button": "Wyczyść Wszystkie Dane"
+  "clear_data_button": "Wyczyść Wszystkie Dane",
+
+  "manage_notifications_title": "🔔 Pozostań na właściwej ścieżce dzięki terminowym przypomnieniom",
+  "manage_notifications_morning_title": "⏰ Poranne sprawdzenia ",
+  "manage_notifications_morning_desc": "- Śledź swój postęp i nastrój,",
+  "manage_notifications_motivation_title": "💪 Dawki motywacji ",
+  "manage_notifications_motivation_desc": "- Zachęcające wiadomości, gdy najbardziej ich potrzebujesz,",
+  "manage_notifications_evening_title": "🎯 Wieczorne przypomnienia ",
+  "manage_notifications_evening_desc": "- Świętuj swoje osiągnięcia bez papierosów.",
+  "manage_notifications_allow_button": "Zezwól na powiadomienia",
+  "manage_notifications_skip_button": "Pomiń na razie"
 }

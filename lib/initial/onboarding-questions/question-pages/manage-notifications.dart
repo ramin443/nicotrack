@@ -22,7 +22,7 @@ class ManageNotifications extends StatelessWidget {
         SizedBox(
           width: 300.w,
           child: TextAutoSize(
-            '🔔 Stay on track with timely reminders',
+            context.l10n.manage_notifications_title,
             textAlign: TextAlign.center,
             style: TextStyle(
                 height: 1.1,
@@ -55,7 +55,7 @@ class ManageNotifications extends StatelessWidget {
                           color: nicotrackBlack1),
                       children: [
                         TextSpan(
-                          text: '⏰ Morning check-ins ',
+                          text: context.l10n.manage_notifications_morning_title,
                           style: TextStyle(
                               fontSize: 16.sp,
                               height: 1.2,
@@ -63,10 +63,10 @@ class ManageNotifications extends StatelessWidget {
                               color: nicotrackBlack1),
                         ),
                         TextSpan(
-                          text: '- Track your progress and mood,\n\n'
+                          text: context.l10n.manage_notifications_morning_desc + '\n\n'
                         ),
                         TextSpan(
-                          text: '💪 Motivation boosts ',
+                          text: context.l10n.manage_notifications_motivation_title,
                           style: TextStyle(
                               height: 1.2,
                               fontSize: 16.sp,
@@ -74,10 +74,10 @@ class ManageNotifications extends StatelessWidget {
                               color: nicotrackBlack1),
                         ),
                         TextSpan(
-                            text: '- Encouraging messages when you need them most,\n\n'
+                            text: context.l10n.manage_notifications_motivation_desc + '\n\n'
                         ),
                         TextSpan(
-                          text: '🎯 Evening reminders ',
+                          text: context.l10n.manage_notifications_evening_title,
                           style: TextStyle(
                               fontSize: 16.sp,
                               height: 1.2,
@@ -85,7 +85,7 @@ class ManageNotifications extends StatelessWidget {
                               color: nicotrackBlack1),
                         ),
                         TextSpan(
-                            text: '- Celebrate your smoke-free achievements.\n\n'
+                            text: context.l10n.manage_notifications_evening_desc + '\n\n'
                         ),
 
                       ])),

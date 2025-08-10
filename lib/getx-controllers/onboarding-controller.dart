@@ -1240,7 +1240,7 @@ class OnboardingController extends GetxController {
               ),
               child: Center(
                 child: TextAutoSize(
-                  "Allow notifications",
+                  context.l10n.manage_notifications_allow_button,
                   style: TextStyle(
                       fontSize: 18.sp,
                       fontFamily: circularMedium,
@@ -1257,7 +1257,7 @@ class OnboardingController extends GetxController {
               await completeOnboardingSkipNotifications(context);
             },
             child: TextAutoSize(
-              "Skip for now",
+              context.l10n.manage_notifications_skip_button,
               style: TextStyle(
                   fontSize: 16.sp,
                   decoration: TextDecoration.underline,

@@ -1035,5 +1035,15 @@
   "clear_data_confirmation_required": "Confirmação Necessária",
   "clear_data_type_instruction": "Digite \"CLEAR MY DATA\" abaixo para prosseguir com a exclusão.",
   "clear_data_type_hint": "Digite \"CLEAR MY DATA\"",
-  "clear_data_button": "Limpar Todos os Dados"
+  "clear_data_button": "Limpar Todos os Dados",
+
+  "manage_notifications_title": "🔔 Mantenha-se no caminho certo com lembretes oportunos",
+  "manage_notifications_morning_title": "⏰ Check-ins matinais ",
+  "manage_notifications_morning_desc": "- Acompanhe seu progresso e humor,",
+  "manage_notifications_motivation_title": "💪 Impulsos de motivação ",
+  "manage_notifications_motivation_desc": "- Mensagens encorajadoras quando você mais precisa,",
+  "manage_notifications_evening_title": "🎯 Lembretes noturnos ",
+  "manage_notifications_evening_desc": "- Comemore suas conquistas livre do cigarro.",
+  "manage_notifications_allow_button": "Permitir notificações",
+  "manage_notifications_skip_button": "Pular por enquanto"
 }

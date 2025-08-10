@@ -1039,5 +1039,15 @@
   "clear_data_confirmation_required": "Bevestiging Vereist",
   "clear_data_type_instruction": "Typ \"CLEAR MY DATA\" hieronder om door te gaan met verwijderen.",
   "clear_data_type_hint": "Typ \"CLEAR MY DATA\"",
-  "clear_data_button": "Alle Gegevens Wissen"
+  "clear_data_button": "Alle Gegevens Wissen",
+
+  "manage_notifications_title": "🔔 Blijf op koers met tijdige herinneringen",
+  "manage_notifications_morning_title": "⏰ Ochtend check-ins ",
+  "manage_notifications_morning_desc": "- Volg je voortgang en stemming,",
+  "manage_notifications_motivation_title": "💪 Motivatie boosts ",
+  "manage_notifications_motivation_desc": "- Aanmoedigende berichten wanneer je ze het meest nodig hebt,",
+  "manage_notifications_evening_title": "🎯 Avond herinneringen ",
+  "manage_notifications_evening_desc": "- Vier je rookvrije prestaties.",
+  "manage_notifications_allow_button": "Meldingen toestaan",
+  "manage_notifications_skip_button": "Voor nu overslaan"
 }

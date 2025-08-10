@@ -1040,5 +1040,15 @@
   "clear_data_confirmation_required": "Confirmare Necesară",
   "clear_data_type_instruction": "Tastați \"CLEAR MY DATA\" mai jos pentru a continua cu ștergerea.",
   "clear_data_type_hint": "Tastați \"CLEAR MY DATA\"",
-  "clear_data_button": "Șterge Toate Datele"
+  "clear_data_button": "Șterge Toate Datele",
+
+  "manage_notifications_title": "🔔 Rămâneți pe drumul cel bun cu memento-uri la timp",
+  "manage_notifications_morning_title": "⏰ Verificări matinale ",
+  "manage_notifications_morning_desc": "- Urmăriți progresul și starea de spirit,",
+  "manage_notifications_motivation_title": "💪 Impulsuri de motivație ",
+  "manage_notifications_motivation_desc": "- Mesaje încurajatoare când aveți cea mai mare nevoie de ele,",
+  "manage_notifications_evening_title": "🎯 Memento-uri de seară ",
+  "manage_notifications_evening_desc": "- Sărbătoriți realizările fără fumat.",
+  "manage_notifications_allow_button": "Permite notificările",
+  "manage_notifications_skip_button": "Sari pentru moment"
 }

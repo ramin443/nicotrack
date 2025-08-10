@@ -1040,5 +1040,15 @@
   "clear_data_confirmation_required": "Απαιτείται Επιβεβαίωση",
   "clear_data_type_instruction": "Πληκτρολογήστε \"CLEAR MY DATA\" παρακάτω για να συνεχίσετε με τη διαγραφή.",
   "clear_data_type_hint": "Πληκτρολογήστε \"CLEAR MY DATA\"",
-  "clear_data_button": "Εκκαθάριση Όλων των Δεδομένων"
+  "clear_data_button": "Εκκαθάριση Όλων των Δεδομένων",
+
+  "manage_notifications_title": "🔔 Μείνετε στη σωστή πορεία με έγκαιρες υπενθυμίσεις",
+  "manage_notifications_morning_title": "⏰ Πρωινοί έλεγχοι ",
+  "manage_notifications_morning_desc": "- Παρακολουθήστε την πρόοδο και τη διάθεσή σας,",
+  "manage_notifications_motivation_title": "💪 Κίνητρα μοτιβάρισμα ",
+  "manage_notifications_motivation_desc": "- Ενθαρρυντικά μηνύματα όταν τα χρειάζεστε περισσότερο,",
+  "manage_notifications_evening_title": "🎯 Βραδινές υπενθυμίσεις ",
+  "manage_notifications_evening_desc": "- Γιορτάστε τα επιτεύγματά σας χωρίς κάπνισμα.",
+  "manage_notifications_allow_button": "Επιτρέψτε ειδοποιήσεις",
+  "manage_notifications_skip_button": "Παράλειψη για τώρα"
 }

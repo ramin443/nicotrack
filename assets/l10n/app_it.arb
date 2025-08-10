@@ -1035,5 +1035,15 @@
   "clear_data_confirmation_required": "Conferma Richiesta",
   "clear_data_type_instruction": "Digita \"CLEAR MY DATA\" sotto per procedere con la cancellazione.",
   "clear_data_type_hint": "Digita \"CLEAR MY DATA\"",
-  "clear_data_button": "Cancella Tutti i Dati"
+  "clear_data_button": "Cancella Tutti i Dati",
+
+  "manage_notifications_title": "🔔 Rimani in carreggiata con promemoria tempestivi",
+  "manage_notifications_morning_title": "⏰ Check-in mattutini ",
+  "manage_notifications_morning_desc": "- Tieni traccia dei tuoi progressi e del tuo umore,",
+  "manage_notifications_motivation_title": "💪 Spinte motivazionali ",
+  "manage_notifications_motivation_desc": "- Messaggi incoraggianti quando ne hai più bisogno,",
+  "manage_notifications_evening_title": "🎯 Promemoria serali ",
+  "manage_notifications_evening_desc": "- Celebra i tuoi traguardi senza fumo.",
+  "manage_notifications_allow_button": "Consenti notifiche",
+  "manage_notifications_skip_button": "Salta per ora"
 }

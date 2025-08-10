@@ -1040,5 +1040,15 @@
   "clear_data_confirmation_required": "Vyžaduje se Potvrzení",
   "clear_data_type_instruction": "Napište \"CLEAR MY DATA\" níže pro pokračování v mazání.",
   "clear_data_type_hint": "Napište \"CLEAR MY DATA\"",
-  "clear_data_button": "Vymazat Všechna Data"
+  "clear_data_button": "Vymazat Všechna Data",
+
+  "manage_notifications_title": "🔔 Zůstaněte na správné cestě s včasnými připomínkami",
+  "manage_notifications_morning_title": "⏰ Ranní kontroly ",
+  "manage_notifications_morning_desc": "- Sledujte svůj pokrok a náladu,",
+  "manage_notifications_motivation_title": "💪 Motivační impulsy ",
+  "manage_notifications_motivation_desc": "- Povzbuzující zprávy, když je potřebujete nejvíce,",
+  "manage_notifications_evening_title": "🎯 Večerní připomínky ",
+  "manage_notifications_evening_desc": "- Oslavte své úspěchy bez kouření.",
+  "manage_notifications_allow_button": "Povolit upozornění",
+  "manage_notifications_skip_button": "Pro teď přeskočit"
 }

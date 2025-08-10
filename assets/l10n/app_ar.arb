@@ -1041,5 +1041,15 @@
   "clear_data_confirmation_required": "التأكيد مطلوب",
   "clear_data_type_instruction": "اكتب \"CLEAR MY DATA\" أدناه للمتابعة بالحذف.",
   "clear_data_type_hint": "اكتب \"CLEAR MY DATA\"",
-  "clear_data_button": "مسح جميع البيانات"
+  "clear_data_button": "مسح جميع البيانات",
+
+  "manage_notifications_title": "🔔 ابق على الطريق الصحيح مع تذكيرات في الوقت المناسب",
+  "manage_notifications_morning_title": "⏰ فحوصات الصباح ",
+  "manage_notifications_morning_desc": "- تتبع تقدمك ومزاجك،",
+  "manage_notifications_motivation_title": "💪 دفعات تحفيزية ",
+  "manage_notifications_motivation_desc": "- رسائل مشجعة عندما تحتاجها أكثر،",
+  "manage_notifications_evening_title": "🎯 تذكيرات المساء ",
+  "manage_notifications_evening_desc": "- احتفل بإنجازاتك الخالية من التدخين.",
+  "manage_notifications_allow_button": "السماح بالإشعارات",
+  "manage_notifications_skip_button": "تخطى في الوقت الحالي"
 }

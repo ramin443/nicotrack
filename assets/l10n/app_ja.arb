@@ -1035,5 +1035,15 @@
   "clear_data_confirmation_required": "確認が必要",
   "clear_data_type_instruction": "削除を続行するには、下に\"CLEAR MY DATA\"と入力してください。",
   "clear_data_type_hint": "\"CLEAR MY DATA\"と入力",
-  "clear_data_button": "すべてのデータを消去"
+  "clear_data_button": "すべてのデータを消去",
+
+  "manage_notifications_title": "🔔 タイムリーなリマインダーで軌道を保ちましょう",
+  "manage_notifications_morning_title": "⏰ 朝のチェックイン ",
+  "manage_notifications_morning_desc": "- 進歩と気分を追跡し、",
+  "manage_notifications_motivation_title": "💪 モチベーションブースト ",
+  "manage_notifications_motivation_desc": "- 最も必要な時に励ましのメッセージを、",
+  "manage_notifications_evening_title": "🎯 夜のリマインダー ",
+  "manage_notifications_evening_desc": "- 禁煙の成果を祝いましょう。",
+  "manage_notifications_allow_button": "通知を許可",
+  "manage_notifications_skip_button": "今はスキップ"
 }

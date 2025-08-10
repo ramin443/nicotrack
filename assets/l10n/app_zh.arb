@@ -1035,5 +1035,15 @@
   "clear_data_confirmation_required": "需要确认",
   "clear_data_type_instruction": "在下方输入\"CLEAR MY DATA\"以继续删除。",
   "clear_data_type_hint": "输入\"CLEAR MY DATA\"",
-  "clear_data_button": "清除所有数据"
+  "clear_data_button": "清除所有数据",
+
+  "manage_notifications_title": "🔔 通过及时提醒保持正轨",
+  "manage_notifications_morning_title": "⏰ 晨间检查 ",
+  "manage_notifications_morning_desc": "- 追踪您的进度和心情，",
+  "manage_notifications_motivation_title": "💪 动力提升 ",
+  "manage_notifications_motivation_desc": "- 在您最需要的时候给予鼓励信息，",
+  "manage_notifications_evening_title": "🎯 晚间提醒 ",
+  "manage_notifications_evening_desc": "- 庆祝您的无烟成就。",
+  "manage_notifications_allow_button": "允许通知",
+  "manage_notifications_skip_button": "暂时跳过"
 }

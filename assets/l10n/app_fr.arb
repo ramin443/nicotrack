@@ -1009,5 +1009,15 @@
   "clear_data_confirmation_required": "Confirmation Requise",
   "clear_data_type_instruction": "Tapez \"CLEAR MY DATA\" ci-dessous pour procéder à la suppression.",
   "clear_data_type_hint": "Tapez \"CLEAR MY DATA\"",
-  "clear_data_button": "Effacer Toutes les Données"
+  "clear_data_button": "Effacer Toutes les Données",
+
+  "manage_notifications_title": "🔔 Restez sur la bonne voie avec des rappels opportuns",
+  "manage_notifications_morning_title": "⏰ Vérifications matinales ",
+  "manage_notifications_morning_desc": "- Suivez votre progrès et votre humeur,",
+  "manage_notifications_motivation_title": "💪 Boosts de motivation ",
+  "manage_notifications_motivation_desc": "- Messages encourageants quand vous en avez le plus besoin,",
+  "manage_notifications_evening_title": "🎯 Rappels du soir ",
+  "manage_notifications_evening_desc": "- Célébrez vos réussites sans tabac.",
+  "manage_notifications_allow_button": "Autoriser les notifications",
+  "manage_notifications_skip_button": "Passer pour maintenant"
 }

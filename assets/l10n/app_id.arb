@@ -1040,5 +1040,15 @@
   "clear_data_confirmation_required": "Konfirmasi Diperlukan",
   "clear_data_type_instruction": "Ketik \"CLEAR MY DATA\" di bawah untuk melanjutkan penghapusan.",
   "clear_data_type_hint": "Ketik \"CLEAR MY DATA\"",
-  "clear_data_button": "Hapus Semua Data"
+  "clear_data_button": "Hapus Semua Data",
+
+  "manage_notifications_title": "🔔 Tetap di jalur dengan pengingat tepat waktu",
+  "manage_notifications_morning_title": "⏰ Pemeriksaan pagi ",
+  "manage_notifications_morning_desc": "- Lacak kemajuan dan suasana hati Anda,",
+  "manage_notifications_motivation_title": "💪 Dorongan motivasi ",
+  "manage_notifications_motivation_desc": "- Pesan penyemangat saat Anda paling membutuhkannya,",
+  "manage_notifications_evening_title": "🎯 Pengingat malam ",
+  "manage_notifications_evening_desc": "- Rayakan pencapaian bebas rokok Anda.",
+  "manage_notifications_allow_button": "Izinkan notifikasi",
+  "manage_notifications_skip_button": "Lewati untuk sekarang"
 }

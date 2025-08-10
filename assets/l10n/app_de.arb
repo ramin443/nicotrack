@@ -1010,5 +1010,15 @@
   "clear_data_confirmation_required": "Bestätigung Erforderlich",
   "clear_data_type_instruction": "Gib \"CLEAR MY DATA\" unten ein, um mit der Löschung fortzufahren.",
   "clear_data_type_hint": "Gib \"CLEAR MY DATA\" ein",
-  "clear_data_button": "Alle Daten Löschen"
+  "clear_data_button": "Alle Daten Löschen",
+
+  "manage_notifications_title": "🔔 Bleiben Sie mit rechtzeitigen Erinnerungen auf Kurs",
+  "manage_notifications_morning_title": "⏰ Morgendliche Check-ins ",
+  "manage_notifications_morning_desc": "- Verfolgen Sie Ihren Fortschritt und Ihre Stimmung,",
+  "manage_notifications_motivation_title": "💪 Motivationsschübe ",
+  "manage_notifications_motivation_desc": "- Ermutigende Nachrichten, wenn Sie sie am meisten brauchen,",
+  "manage_notifications_evening_title": "🎯 Abenderinnerungen ",
+  "manage_notifications_evening_desc": "- Feiern Sie Ihre rauchfreien Erfolge.",
+  "manage_notifications_allow_button": "Benachrichtigungen erlauben",
+  "manage_notifications_skip_button": "Vorerst überspringen"
 }

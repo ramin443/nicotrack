@@ -1040,5 +1040,15 @@
   "clear_data_confirmation_required": "Megerősítés Szükséges",
   "clear_data_type_instruction": "Írja be a \"CLEAR MY DATA\" szöveget alább a törlés folytatásához.",
   "clear_data_type_hint": "Írja be: \"CLEAR MY DATA\"",
-  "clear_data_button": "Összes Adat Törlése"
+  "clear_data_button": "Összes Adat Törlése",
+
+  "manage_notifications_title": "🔔 Maradjon a helyes úton időszerű emlékeztetőkkel",
+  "manage_notifications_morning_title": "⏰ Reggeli ellenőrzések ",
+  "manage_notifications_morning_desc": "- Kövesse nyomon előrehaladását és hangulatát,",
+  "manage_notifications_motivation_title": "💪 Motivációs lökések ",
+  "manage_notifications_motivation_desc": "- Biztató üzenetek, amikor a legnagyobb szüksége van rájuk,",
+  "manage_notifications_evening_title": "🎯 Esti emlékeztetők ",
+  "manage_notifications_evening_desc": "- Ünnepelje dohányzásmentes eredményeit.",
+  "manage_notifications_allow_button": "Értesítések engedélyezése",
+  "manage_notifications_skip_button": "Kihagyás egylőre"
 }

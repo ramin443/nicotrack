@@ -1040,5 +1040,15 @@
   "clear_data_confirmation_required": "확인 필요",
   "clear_data_type_instruction": "삭제를 진행하려면 아래에 \"CLEAR MY DATA\"를 입력하세요.",
   "clear_data_type_hint": "\"CLEAR MY DATA\" 입력",
-  "clear_data_button": "모든 데이터 삭제"
+  "clear_data_button": "모든 데이터 삭제",
+
+  "manage_notifications_title": "🔔 시기적절한 알림으로 궤도를 유지하세요",
+  "manage_notifications_morning_title": "⏰ 아침 체크인 ",
+  "manage_notifications_morning_desc": "- 진행 상황과 기분을 추적하고,",
+  "manage_notifications_motivation_title": "💪 동기부여 부스터 ",
+  "manage_notifications_motivation_desc": "- 가장 필요할 때 격려 메시지를,",
+  "manage_notifications_evening_title": "🎯 저녁 알림 ",
+  "manage_notifications_evening_desc": "- 금연 성취를 축하하세요.",
+  "manage_notifications_allow_button": "알림 허용",
+  "manage_notifications_skip_button": "지금은 건너뛰기"
 }

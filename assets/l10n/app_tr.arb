@@ -1039,5 +1039,15 @@
   "clear_data_confirmation_required": "Onay Gerekli",
   "clear_data_type_instruction": "Silme işlemine devam etmek için aşağıya \"CLEAR MY DATA\" yazın.",
   "clear_data_type_hint": "\"CLEAR MY DATA\" yazın",
-  "clear_data_button": "Tüm Verileri Temizle"
+  "clear_data_button": "Tüm Verileri Temizle",
+
+  "manage_notifications_title": "🔔 Zamanında hatırlatmalarla yolda kalın",
+  "manage_notifications_morning_title": "⏰ Sabah kontrolleri ",
+  "manage_notifications_morning_desc": "- İlerlemenizi ve ruh halinizi takip edin,",
+  "manage_notifications_motivation_title": "💪 Motivasyon artışı ",
+  "manage_notifications_motivation_desc": "- En çok ihtiyacınız olduğunda cesaretlendirici mesajlar,",
+  "manage_notifications_evening_title": "🎯 Akşam hatırlatmaları ",
+  "manage_notifications_evening_desc": "- Sigarasız başarılarınızı kutlayın.",
+  "manage_notifications_allow_button": "Bildirimlere izin ver",
+  "manage_notifications_skip_button": "Şimdilik atla"
 }

@@ -1035,5 +1035,15 @@
   "clear_data_confirmation_required": "Требуется Подтверждение",
   "clear_data_type_instruction": "Введите \"CLEAR MY DATA\" ниже, чтобы продолжить удаление.",
   "clear_data_type_hint": "Введите \"CLEAR MY DATA\"",
-  "clear_data_button": "Очистить Все Данные"
+  "clear_data_button": "Очистить Все Данные",
+
+  "manage_notifications_title": "🔔 Оставайтесь на правильном пути с своевременными напоминаниями",
+  "manage_notifications_morning_title": "⏰ Утренние проверки ",
+  "manage_notifications_morning_desc": "- Отслеживайте свой прогресс и настроение,",
+  "manage_notifications_motivation_title": "💪 Мотивационные импульсы ",
+  "manage_notifications_motivation_desc": "- Вдохновляющие сообщения, когда они вам больше всего нужны,",
+  "manage_notifications_evening_title": "🎯 Вечерние напоминания ",
+  "manage_notifications_evening_desc": "- Отмечайте свои достижения без курения.",
+  "manage_notifications_allow_button": "Разрешить уведомления",
+  "manage_notifications_skip_button": "Пропустить пока"
 }

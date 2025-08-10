@@ -1040,5 +1040,15 @@
   "clear_data_confirmation_required": "נדרש אישור",
   "clear_data_type_instruction": "הקלד \"CLEAR MY DATA\" למטה כדי להמשיך במחיקה.",
   "clear_data_type_hint": "הקלד \"CLEAR MY DATA\"",
-  "clear_data_button": "נקה את כל הנתונים"
+  "clear_data_button": "נקה את כל הנתונים",
+
+  "manage_notifications_title": "🔔 הישאר על המסלול עם תזכורות בזמן הנכון",
+  "manage_notifications_morning_title": "⏰ בדיקות בוקר ",
+  "manage_notifications_morning_desc": "- עקב אחר ההתקדמות והמצב רוח שלךש",
+  "manage_notifications_motivation_title": "💪 דחיפות מוטיבציה ",
+  "manage_notifications_motivation_desc": "- מסרים מעודדים כשאתה זקוק להם ביותרש",
+  "manage_notifications_evening_title": "🎯 תזכורות ערב ",
+  "manage_notifications_evening_desc": "- חגג את ההצלחות חסרות העישון שלך.",
+  "manage_notifications_allow_button": "אפשר התראות",
+  "manage_notifications_skip_button": "דלג לעכשיו"
 }
