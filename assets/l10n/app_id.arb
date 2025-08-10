@@ -1025,5 +1025,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "Hapus Semua Data",
+  "clear_data_destructive_action": "Tindakan Destruktif",
+  "clear_data_this_action": "Tindakan ini",
+  "clear_data_cannot_be_undone": "tidak dapat dibatalkan",
+  "clear_data_will_delete": "dan akan menghapus secara permanen semua",
+  "clear_data_progress_data": "data kemajuan",
+  "clear_data_delete_description": ", catatan suasana hati, riwayat merokok, dan pengaturan pribadi Anda.",
+  "clear_data_progress_label": "Data Kemajuan",
+  "clear_data_mood_records": "Catatan Suasana Hati",
+  "clear_data_settings": "Pengaturan",
+  "clear_data_confirmation_required": "Konfirmasi Diperlukan",
+  "clear_data_type_instruction": "Ketik \"CLEAR MY DATA\" di bawah untuk melanjutkan penghapusan.",
+  "clear_data_type_hint": "Ketik \"CLEAR MY DATA\"",
+  "clear_data_button": "Hapus Semua Data"
 }

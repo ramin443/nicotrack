@@ -1020,5 +1020,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "清除所有数据",
+  "clear_data_destructive_action": "破坏性操作",
+  "clear_data_this_action": "此操作",
+  "clear_data_cannot_be_undone": "无法撤销",
+  "clear_data_will_delete": "并将永久删除您所有的",
+  "clear_data_progress_data": "进度数据",
+  "clear_data_delete_description": "、心情记录、吸烟历史和个人设置。",
+  "clear_data_progress_label": "进度数据",
+  "clear_data_mood_records": "心情记录",
+  "clear_data_settings": "设置",
+  "clear_data_confirmation_required": "需要确认",
+  "clear_data_type_instruction": "在下方输入\"CLEAR MY DATA\"以继续删除。",
+  "clear_data_type_hint": "输入\"CLEAR MY DATA\"",
+  "clear_data_button": "清除所有数据"
 }

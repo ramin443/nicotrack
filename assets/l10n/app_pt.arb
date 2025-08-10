@@ -1020,5 +1020,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "Limpar Todos os Dados",
+  "clear_data_destructive_action": "Ação Destrutiva",
+  "clear_data_this_action": "Esta ação",
+  "clear_data_cannot_be_undone": "não pode ser desfeita",
+  "clear_data_will_delete": "e irá excluir permanentemente todos os seus",
+  "clear_data_progress_data": "dados de progresso",
+  "clear_data_delete_description": ", registros de humor, histórico de tabagismo e configurações pessoais.",
+  "clear_data_progress_label": "Dados de Progresso",
+  "clear_data_mood_records": "Registros de Humor",
+  "clear_data_settings": "Configurações",
+  "clear_data_confirmation_required": "Confirmação Necessária",
+  "clear_data_type_instruction": "Digite \"CLEAR MY DATA\" abaixo para prosseguir com a exclusão.",
+  "clear_data_type_hint": "Digite \"CLEAR MY DATA\"",
+  "clear_data_button": "Limpar Todos os Dados"
 }

@@ -1020,5 +1020,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "すべてのデータを消去",
+  "clear_data_destructive_action": "破壊的アクション",
+  "clear_data_this_action": "このアクション",
+  "clear_data_cannot_be_undone": "は元に戻せません",
+  "clear_data_will_delete": "そしてあなたのすべての",
+  "clear_data_progress_data": "進行データ",
+  "clear_data_delete_description": "、気分記録、喫煙履歴、個人設定を永久に削除します。",
+  "clear_data_progress_label": "進行データ",
+  "clear_data_mood_records": "気分記録",
+  "clear_data_settings": "設定",
+  "clear_data_confirmation_required": "確認が必要",
+  "clear_data_type_instruction": "削除を続行するには、下に\"CLEAR MY DATA\"と入力してください。",
+  "clear_data_type_hint": "\"CLEAR MY DATA\"と入力",
+  "clear_data_button": "すべてのデータを消去"
 }

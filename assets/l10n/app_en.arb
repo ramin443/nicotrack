@@ -1045,5 +1045,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "Clear All Data",
+  "clear_data_destructive_action": "Destructive Action",
+  "clear_data_this_action": "This action",
+  "clear_data_cannot_be_undone": "cannot be undone",
+  "clear_data_will_delete": "and will permanently delete all your",
+  "clear_data_progress_data": "progress data",
+  "clear_data_delete_description": ", mood records, smoking history, and personal settings.",
+  "clear_data_progress_label": "Progress Data",
+  "clear_data_mood_records": "Mood Records",
+  "clear_data_settings": "Settings",
+  "clear_data_confirmation_required": "Confirmation Required",
+  "clear_data_type_instruction": "Type \"CLEAR MY DATA\" below to proceed with the deletion.",
+  "clear_data_type_hint": "Type \"CLEAR MY DATA\"",
+  "clear_data_button": "Clear All Data"
 }

@@ -1025,5 +1025,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "Összes Adat Törlése",
+  "clear_data_destructive_action": "Destruktív Művelet",
+  "clear_data_this_action": "Ez a művelet",
+  "clear_data_cannot_be_undone": "nem vonható vissza",
+  "clear_data_will_delete": "és véglegesen törli az összes",
+  "clear_data_progress_data": "haladási adatot",
+  "clear_data_delete_description": ", hangulat-feljegyzéseket, dohányzási előzményeket és személyes beállításokat.",
+  "clear_data_progress_label": "Haladási Adatok",
+  "clear_data_mood_records": "Hangulat-feljegyzések",
+  "clear_data_settings": "Beállítások",
+  "clear_data_confirmation_required": "Megerősítés Szükséges",
+  "clear_data_type_instruction": "Írja be a \"CLEAR MY DATA\" szöveget alább a törlés folytatásához.",
+  "clear_data_type_hint": "Írja be: \"CLEAR MY DATA\"",
+  "clear_data_button": "Összes Adat Törlése"
 }

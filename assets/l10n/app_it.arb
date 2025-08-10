@@ -1020,5 +1020,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "Cancella Tutti i Dati",
+  "clear_data_destructive_action": "Azione Distruttiva",
+  "clear_data_this_action": "Questa azione",
+  "clear_data_cannot_be_undone": "non può essere annullata",
+  "clear_data_will_delete": "e cancellerà definitivamente tutti i tuoi",
+  "clear_data_progress_data": "dati di progresso",
+  "clear_data_delete_description": ", registrazioni dell'umore, cronologia del fumo e impostazioni personali.",
+  "clear_data_progress_label": "Dati di Progresso",
+  "clear_data_mood_records": "Registrazioni dell'Umore",
+  "clear_data_settings": "Impostazioni",
+  "clear_data_confirmation_required": "Conferma Richiesta",
+  "clear_data_type_instruction": "Digita \"CLEAR MY DATA\" sotto per procedere con la cancellazione.",
+  "clear_data_type_hint": "Digita \"CLEAR MY DATA\"",
+  "clear_data_button": "Cancella Tutti i Dati"
 }

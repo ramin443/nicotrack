@@ -1025,5 +1025,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "Șterge Toate Datele",
+  "clear_data_destructive_action": "Acțiune Destructivă",
+  "clear_data_this_action": "Această acțiune",
+  "clear_data_cannot_be_undone": "nu poate fi anulată",
+  "clear_data_will_delete": "și va șterge permanent toate",
+  "clear_data_progress_data": "datele de progres",
+  "clear_data_delete_description": ", înregistrările de stare de spirit, istoricul fumatului și setările personale.",
+  "clear_data_progress_label": "Date de Progres",
+  "clear_data_mood_records": "Înregistrări Stare de Spirit",
+  "clear_data_settings": "Setări",
+  "clear_data_confirmation_required": "Confirmare Necesară",
+  "clear_data_type_instruction": "Tastați \"CLEAR MY DATA\" mai jos pentru a continua cu ștergerea.",
+  "clear_data_type_hint": "Tastați \"CLEAR MY DATA\"",
+  "clear_data_button": "Șterge Toate Datele"
 }

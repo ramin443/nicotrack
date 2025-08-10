@@ -994,5 +994,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "Effacer Toutes les Données",
+  "clear_data_destructive_action": "Action Destructive",
+  "clear_data_this_action": "Cette action",
+  "clear_data_cannot_be_undone": "ne peut pas être annulée",
+  "clear_data_will_delete": "et supprimera définitivement toutes vos",
+  "clear_data_progress_data": "données de progression",
+  "clear_data_delete_description": ", enregistrements d'humeur, historique de tabac et paramètres personnels.",
+  "clear_data_progress_label": "Données de Progression",
+  "clear_data_mood_records": "Enregistrements d'Humeur",
+  "clear_data_settings": "Paramètres",
+  "clear_data_confirmation_required": "Confirmation Requise",
+  "clear_data_type_instruction": "Tapez \"CLEAR MY DATA\" ci-dessous pour procéder à la suppression.",
+  "clear_data_type_hint": "Tapez \"CLEAR MY DATA\"",
+  "clear_data_button": "Effacer Toutes les Données"
 }

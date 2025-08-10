@@ -1020,5 +1020,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "Очистить Все Данные",
+  "clear_data_destructive_action": "Разрушительное Действие",
+  "clear_data_this_action": "Это действие",
+  "clear_data_cannot_be_undone": "нельзя отменить",
+  "clear_data_will_delete": "и оно навсегда удалит все ваши",
+  "clear_data_progress_data": "данные о прогрессе",
+  "clear_data_delete_description": ", записи настроения, историю курения и персональные настройки.",
+  "clear_data_progress_label": "Данные о Прогрессе",
+  "clear_data_mood_records": "Записи Настроения",
+  "clear_data_settings": "Настройки",
+  "clear_data_confirmation_required": "Требуется Подтверждение",
+  "clear_data_type_instruction": "Введите \"CLEAR MY DATA\" ниже, чтобы продолжить удаление.",
+  "clear_data_type_hint": "Введите \"CLEAR MY DATA\"",
+  "clear_data_button": "Очистить Все Данные"
 }

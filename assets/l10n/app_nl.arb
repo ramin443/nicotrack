@@ -1024,5 +1024,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "Alle Gegevens Wissen",
+  "clear_data_destructive_action": "Destructieve Actie",
+  "clear_data_this_action": "Deze actie",
+  "clear_data_cannot_be_undone": "kan niet ongedaan worden gemaakt",
+  "clear_data_will_delete": "en zal permanent al uw",
+  "clear_data_progress_data": "voortgangsgegevens",
+  "clear_data_delete_description": ", stemmingsregistraties, rookgeschiedenis en persoonlijke instellingen verwijderen.",
+  "clear_data_progress_label": "Voortgangsgegevens",
+  "clear_data_mood_records": "Stemmingsregistraties",
+  "clear_data_settings": "Instellingen",
+  "clear_data_confirmation_required": "Bevestiging Vereist",
+  "clear_data_type_instruction": "Typ \"CLEAR MY DATA\" hieronder om door te gaan met verwijderen.",
+  "clear_data_type_hint": "Typ \"CLEAR MY DATA\"",
+  "clear_data_button": "Alle Gegevens Wissen"
 }

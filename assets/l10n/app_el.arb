@@ -1025,5 +1025,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "Εκκαθάριση Όλων των Δεδομένων",
+  "clear_data_destructive_action": "Καταστρεπτική Ενέργεια",
+  "clear_data_this_action": "Αυτή η ενέργεια",
+  "clear_data_cannot_be_undone": "δεν μπορεί να αναιρεθεί",
+  "clear_data_will_delete": "και θα διαγράψει μόνιμα όλα τα",
+  "clear_data_progress_data": "δεδομένα προόδου",
+  "clear_data_delete_description": ", αρχεία διάθεσης, ιστορικό καπνίσματος και προσωπικές ρυθμίσεις σας.",
+  "clear_data_progress_label": "Δεδομένα Προόδου",
+  "clear_data_mood_records": "Αρχεία Διάθεσης",
+  "clear_data_settings": "Ρυθμίσεις",
+  "clear_data_confirmation_required": "Απαιτείται Επιβεβαίωση",
+  "clear_data_type_instruction": "Πληκτρολογήστε \"CLEAR MY DATA\" παρακάτω για να συνεχίσετε με τη διαγραφή.",
+  "clear_data_type_hint": "Πληκτρολογήστε \"CLEAR MY DATA\"",
+  "clear_data_button": "Εκκαθάριση Όλων των Δεδομένων"
 }

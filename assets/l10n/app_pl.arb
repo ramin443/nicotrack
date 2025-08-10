@@ -1024,5 +1024,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "Wyczyść Wszystkie Dane",
+  "clear_data_destructive_action": "Działanie Destrukcyjne",
+  "clear_data_this_action": "To działanie",
+  "clear_data_cannot_be_undone": "nie może być cofnięte",
+  "clear_data_will_delete": "i trwale usunie wszystkie Twoje",
+  "clear_data_progress_data": "dane postępu",
+  "clear_data_delete_description": ", zapisy nastrojów, historię palenia i ustawienia osobiste.",
+  "clear_data_progress_label": "Dane Postępu",
+  "clear_data_mood_records": "Zapisy Nastrojów",
+  "clear_data_settings": "Ustawienia",
+  "clear_data_confirmation_required": "Wymagane Potwierdzenie",
+  "clear_data_type_instruction": "Wpisz \"CLEAR MY DATA\" poniżej, aby kontynuować usuwanie.",
+  "clear_data_type_hint": "Wpisz \"CLEAR MY DATA\"",
+  "clear_data_button": "Wyczyść Wszystkie Dane"
 }

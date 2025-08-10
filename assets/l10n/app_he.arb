@@ -1025,5 +1025,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "נקה את כל הנתונים",
+  "clear_data_destructive_action": "פעולה הרסנית",
+  "clear_data_this_action": "פעולה זו",
+  "clear_data_cannot_be_undone": "לא ניתנת לביטול",
+  "clear_data_will_delete": "ותמחק לצמיתות את כל",
+  "clear_data_progress_data": "נתוני ההתקדמות",
+  "clear_data_delete_description": ", רישומי מצב רוח, היסטוריית עישון והגדרות אישיות שלך.",
+  "clear_data_progress_label": "נתוני התקדמות",
+  "clear_data_mood_records": "רישומי מצב רוח",
+  "clear_data_settings": "הגדרות",
+  "clear_data_confirmation_required": "נדרש אישור",
+  "clear_data_type_instruction": "הקלד \"CLEAR MY DATA\" למטה כדי להמשיך במחיקה.",
+  "clear_data_type_hint": "הקלד \"CLEAR MY DATA\"",
+  "clear_data_button": "נקה את כל הנתונים"
 }

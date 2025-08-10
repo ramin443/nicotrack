@@ -39,8 +39,7 @@ import 'package:nicotrack/services/notification-service.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:nicotrack/models/financial-goals-model/financialGoals-model.dart';
 import '../screens/base/settings-subpages/bottom-sheets/view-edit-goal.dart';
-import '../screens/base/settings-subpages/bottom-sheets/privacy-policy.dart';
-import '../screens/base/settings-subpages/bottom-sheets/terms-of-use.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../screens/base/settings-subpages/bottom-sheets/change-currency.dart';
 import '../screens/base/settings-subpages/bottom-sheets/change-language.dart';
 import 'package:nicotrack/models/mood-model/mood-model.dart';
@@ -3724,7 +3723,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
 
                               // Title
                               Text(
-                                "Clear All Data",
+                                context.l10n.clear_data_title,
                                 style: TextStyle(
                                   fontSize: 22.sp,
                                   fontFamily: circularBold,
@@ -3743,7 +3742,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                                   borderRadius: BorderRadius.circular(20.r),
                                 ),
                                 child: Text(
-                                  "Destructive Action",
+                                  context.l10n.clear_data_destructive_action,
                                   style: TextStyle(
                                     fontSize: 13.sp,
                                     fontFamily: circularMedium,
@@ -3774,27 +3773,25 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                                           color: nicotrackBlack1,
                                         ),
                                         children: [
-                                          TextSpan(text: "This action "),
+                                          TextSpan(text: context.l10n.clear_data_this_action + " "),
                                           TextSpan(
-                                            text: "cannot be undone",
+                                            text: context.l10n.clear_data_cannot_be_undone,
                                             style: TextStyle(
                                               fontFamily: circularBold,
                                               color: Color(0xffFF611D),
                                             ),
                                           ),
                                           TextSpan(
-                                              text:
-                                                  " and will permanently delete all your "),
+                                              text: " " + context.l10n.clear_data_will_delete + " "),
                                           TextSpan(
-                                            text: "progress data",
+                                            text: context.l10n.clear_data_progress_data,
                                             style: TextStyle(
                                               fontFamily: circularMedium,
                                               color: nicotrackOrange,
                                             ),
                                           ),
                                           TextSpan(
-                                              text:
-                                                  ", mood records, smoking history, and personal settings."),
+                                              text: context.l10n.clear_data_delete_description),
                                         ],
                                       ),
                                     ),
@@ -3821,15 +3818,18 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                                                         fontSize: 24.sp)),
                                               ),
                                             ),
-                                            SizedBox(height: 8.h),
-                                            Text(
-                                              "Progress Data",
+                                            SizedBox(height: 8.w),
+                                            SizedBox(width:90.w,
+                                            child: Text(
+                                              context.l10n.clear_data_progress_label,
+                                              textAlign: TextAlign.center,
                                               style: TextStyle(
                                                 fontSize: 12.sp,
                                                 fontFamily: circularMedium,
                                                 color: nicotrackBlack1,
                                               ),
-                                            ),
+                                            ),),
+
                                           ],
                                         ),
                                         Column(
@@ -3849,14 +3849,16 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                                               ),
                                             ),
                                             SizedBox(height: 8.h),
-                                            Text(
-                                              "Mood Records",
-                                              style: TextStyle(
+                                            SizedBox(width:90.w,
+                                              child: Text(
+                                              context.l10n.clear_data_mood_records,
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
                                                 fontSize: 12.sp,
                                                 fontFamily: circularMedium,
                                                 color: nicotrackBlack1,
                                               ),
-                                            ),
+                                            ),)
                                           ],
                                         ),
                                         Column(
@@ -3876,14 +3878,16 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                                               ),
                                             ),
                                             SizedBox(height: 8.h),
-                                            Text(
-                                              "Settings",
+                                            SizedBox(width:90.w,
+                                              child: Text(
+                                              context.l10n.clear_data_settings,
+                                              textAlign: TextAlign.center,
                                               style: TextStyle(
                                                 fontSize: 12.sp,
                                                 fontFamily: circularMedium,
                                                 color: nicotrackBlack1,
                                               ),
-                                            ),
+                                            ),)
                                           ],
                                         ),
                                       ],
@@ -3928,7 +3932,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "Confirmation Required",
+                                            context.l10n.clear_data_confirmation_required,
                                             style: TextStyle(
                                               fontSize: 14.sp,
                                               fontFamily: circularBold,
@@ -3938,7 +3942,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                                           ),
                                           SizedBox(height: 6.h),
                                           Text(
-                                            "Type \"CLEAR MY DATA\" below to proceed with the deletion.",
+                                            context.l10n.clear_data_type_instruction,
                                             style: TextStyle(
                                               fontSize: 12.sp,
                                               fontFamily: circularBook,
@@ -3993,7 +3997,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                                     color: nicotrackBlack1,
                                   ),
                                   decoration: InputDecoration(
-                                    hintText: "Type \"CLEAR MY DATA\"",
+                                    hintText: context.l10n.clear_data_type_hint,
                                     hintStyle: TextStyle(
                                       fontSize: 14.sp,
                                       fontFamily: circularBook,
@@ -4084,7 +4088,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                                         ),
                                         child: Center(
                                           child: TextAutoSize(
-                                            "Clear All Data",
+                                            context.l10n.clear_data_button,
                                             style: TextStyle(
                                               fontSize: 16.sp,
                                               fontFamily: circularMedium,
@@ -4116,28 +4120,38 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     );
   }
 
-  void showPrivacyPolicyBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      enableDrag: false,
-      backgroundColor: Colors.transparent,
-      builder: (BuildContext context) {
-        return const PrivacyPolicyBottomSheet();
-      },
-    );
+  void showPrivacyPolicyBottomSheet(BuildContext context) async {
+    final Uri url = Uri.parse('https://aged-jewel-b95.notion.site/Nicotrack-Privacy-Policy-24818258f0c080199a49c27c50efd55a?source=copy_link');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    } else {
+      Get.snackbar(
+        'Error',
+        'Could not open Privacy Policy',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.9),
+        colorText: Colors.white,
+        margin: EdgeInsets.all(16.w),
+        borderRadius: 12.r,
+      );
+    }
   }
 
-  void showTermsOfUseBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      enableDrag: false,
-      backgroundColor: Colors.transparent,
-      builder: (BuildContext context) {
-        return const TermsOfUseBottomSheet();
-      },
-    );
+  void showTermsOfUseBottomSheet(BuildContext context) async {
+    final Uri url = Uri.parse('https://aged-jewel-b95.notion.site/Nicotrack-Terms-of-Use-24818258f0c080fdac85ccca299d576a?source=copy_link');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    } else {
+      Get.snackbar(
+        'Error',
+        'Could not open Terms of Use',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.9),
+        colorText: Colors.white,
+        margin: EdgeInsets.all(16.w),
+        borderRadius: 12.r,
+      );
+    }
   }
 
   void showChangeCurrencyBottomSheet(BuildContext context) {

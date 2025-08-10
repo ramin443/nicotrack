@@ -1025,5 +1025,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "सभी डेटा साफ़ करें",
+  "clear_data_destructive_action": "विनाशकारी कार्य",
+  "clear_data_this_action": "यह कार्य",
+  "clear_data_cannot_be_undone": "को पूर्ववत नहीं किया जा सकता",
+  "clear_data_will_delete": "और यह स्थायी रूप से आपके सभी",
+  "clear_data_progress_data": "प्रगति डेटा",
+  "clear_data_delete_description": ", मूड रिकॉर्ड, धूम्रपान इतिहास, और व्यक्तिगत सेटिंग्स को हटा देगा।",
+  "clear_data_progress_label": "प्रगति डेटा",
+  "clear_data_mood_records": "मूड रिकॉर्ड",
+  "clear_data_settings": "सेटिंग्स",
+  "clear_data_confirmation_required": "पुष्टि आवश्यक",
+  "clear_data_type_instruction": "हटाना जारी रखने के लिए नीचे \"CLEAR MY DATA\" टाइप करें।",
+  "clear_data_type_hint": "\"CLEAR MY DATA\" टाइप करें",
+  "clear_data_button": "सभी डेटा साफ़ करें"
 }

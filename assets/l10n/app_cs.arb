@@ -1025,5 +1025,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "Vymazat Všechna Data",
+  "clear_data_destructive_action": "Destruktivní Akce",
+  "clear_data_this_action": "Tato akce",
+  "clear_data_cannot_be_undone": "nemůže být vrácena",
+  "clear_data_will_delete": "a trvale smaže všechna vaše",
+  "clear_data_progress_data": "data o pokroku",
+  "clear_data_delete_description": ", záznamy nálady, historii kouření a osobní nastavení.",
+  "clear_data_progress_label": "Data o Pokroku",
+  "clear_data_mood_records": "Záznamy Nálady",
+  "clear_data_settings": "Nastavení",
+  "clear_data_confirmation_required": "Vyžaduje se Potvrzení",
+  "clear_data_type_instruction": "Napište \"CLEAR MY DATA\" níže pro pokračování v mazání.",
+  "clear_data_type_hint": "Napište \"CLEAR MY DATA\"",
+  "clear_data_button": "Vymazat Všechna Data"
 }

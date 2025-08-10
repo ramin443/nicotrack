@@ -114,6 +114,9 @@ class _FeedbackBottomSheetState extends State<FeedbackBottomSheet> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          SizedBox(
+                            width: 300.w,
+                            child:
                           TextAutoSize(
                             context.l10n.your_honest_feedback,
                             style: TextStyle(
@@ -122,7 +125,7 @@ class _FeedbackBottomSheetState extends State<FeedbackBottomSheet> {
                               color: nicotrackBlack1,
                               height: 1.1,
                             ),
-                          ),
+                          ),)
                         ],
                       ),
                       SizedBox(

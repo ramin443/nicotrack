@@ -1024,5 +1024,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "Tüm Verileri Temizle",
+  "clear_data_destructive_action": "Yıkıcı İşlem",
+  "clear_data_this_action": "Bu işlem",
+  "clear_data_cannot_be_undone": "geri alınamaz",
+  "clear_data_will_delete": "ve tüm",
+  "clear_data_progress_data": "ilerleme verilerinizi",
+  "clear_data_delete_description": ", ruh hali kayıtlarınızı, sigara geçmişinizi ve kişisel ayarlarınızı kalıcı olarak silecektir.",
+  "clear_data_progress_label": "İlerleme Verileri",
+  "clear_data_mood_records": "Ruh Hali Kayıtları",
+  "clear_data_settings": "Ayarlar",
+  "clear_data_confirmation_required": "Onay Gerekli",
+  "clear_data_type_instruction": "Silme işlemine devam etmek için aşağıya \"CLEAR MY DATA\" yazın.",
+  "clear_data_type_hint": "\"CLEAR MY DATA\" yazın",
+  "clear_data_button": "Tüm Verileri Temizle"
 }

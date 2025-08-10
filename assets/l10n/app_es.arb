@@ -995,5 +995,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "Borrar Todos los Datos",
+  "clear_data_destructive_action": "Acción Destructiva",
+  "clear_data_this_action": "Esta acción",
+  "clear_data_cannot_be_undone": "no se puede deshacer",
+  "clear_data_will_delete": "y eliminará permanentemente todos tus",
+  "clear_data_progress_data": "datos de progreso",
+  "clear_data_delete_description": ", registros de estado de ánimo, historial de tabaquismo y configuraciones personales.",
+  "clear_data_progress_label": "Datos de Progreso",
+  "clear_data_mood_records": "Registros de Estado de Ánimo",
+  "clear_data_settings": "Configuraciones",
+  "clear_data_confirmation_required": "Confirmación Requerida",
+  "clear_data_type_instruction": "Escribe \"CLEAR MY DATA\" abajo para proceder con la eliminación.",
+  "clear_data_type_hint": "Escribe \"CLEAR MY DATA\"",
+  "clear_data_button": "Borrar Todos los Datos"
 }

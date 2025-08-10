@@ -995,5 +995,20 @@
         "example": "5"
       }
     }
-  }
+  },
+
+  "clear_data_title": "Alle Daten Löschen",
+  "clear_data_destructive_action": "Zerstörende Aktion",
+  "clear_data_this_action": "Diese Aktion",
+  "clear_data_cannot_be_undone": "kann nicht rückgängig gemacht werden",
+  "clear_data_will_delete": "und wird dauerhaft alle deine",
+  "clear_data_progress_data": "Fortschrittsdaten",
+  "clear_data_delete_description": ", Stimmungsaufzeichnungen, Rauchhistorie und persönlichen Einstellungen löschen.",
+  "clear_data_progress_label": "Fortschrittsdaten",
+  "clear_data_mood_records": "Stimmungsaufzeichnungen",
+  "clear_data_settings": "Einstellungen",
+  "clear_data_confirmation_required": "Bestätigung Erforderlich",
+  "clear_data_type_instruction": "Gib \"CLEAR MY DATA\" unten ein, um mit der Löschung fortzufahren.",
+  "clear_data_type_hint": "Gib \"CLEAR MY DATA\" ein",
+  "clear_data_button": "Alle Daten Löschen"
 }
