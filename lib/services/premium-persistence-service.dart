@@ -8,6 +8,8 @@ class PremiumPersistenceService {
   static const String _purchaseIdKey = 'purchaseId';
   static const String _purchaseDateKey = 'purchaseDate';
   static const String _productIdKey = 'productId';
+  static const String _lastVerificationKey = 'lastVerification';
+  static const String _subscriptionActiveKey = 'subscriptionActive';
   
   static Box? _box;
   
@@ -23,6 +25,7 @@ class PremiumPersistenceService {
     String? purchaseId,
     String? productId,
     DateTime? purchaseDate,
+    bool? subscriptionActive,
   }) async {
     if (_box == null) {
       print('❌ Premium persistence box is null!');
@@ -47,6 +50,14 @@ class PremiumPersistenceService {
       await _box!.put(_purchaseDateKey, purchaseDate.toIso8601String());
       print('💾 Saved purchase date: $purchaseDate');
     }
+    
+    if (subscriptionActive != null) {
+      await _box!.put(_subscriptionActiveKey, subscriptionActive);
+      print('💾 Saved subscription active status: $subscriptionActive');
+    }
+    
+    // Always update last verification timestamp
+    await _box!.put(_lastVerificationKey, DateTime.now().toIso8601String());
     
     // Update controller
     final controller = Get.find<PremiumController>();
@@ -81,6 +92,8 @@ class PremiumPersistenceService {
       'purchaseId': _box!.get(_purchaseIdKey),
       'productId': _box!.get(_productIdKey),
       'purchaseDate': _box!.get(_purchaseDateKey),
+      'subscriptionActive': _box!.get(_subscriptionActiveKey, defaultValue: false),
+      'lastVerification': _box!.get(_lastVerificationKey),
     };
   }
   
@@ -97,23 +110,39 @@ class PremiumPersistenceService {
   
   // Check if premium status needs verification (e.g., for subscriptions)
   static bool needsVerification() {
+    if (_box == null) return true;
+    
+    String? lastVerificationStr = _box!.get(_lastVerificationKey);
+    if (lastVerificationStr == null) return true;
+    
+    try {
+      DateTime lastVerification = DateTime.parse(lastVerificationStr);
+      DateTime now = DateTime.now();
+      
+      // Verify if more than 6 hours have passed since last verification
+      // This ensures we check subscription status regularly without being too aggressive
+      return now.difference(lastVerification).inHours > 6;
+    } catch (e) {
+      print('Error parsing last verification date: $e');
+      return true;
+    }
+  }
+  
+  // Check if we have an active subscription that needs validation
+  static bool hasSubscriptionToVerify() {
     if (_box == null) return false;
     
     String? productId = _box!.get(_productIdKey);
     if (productId == null) return false;
     
-    // If it's a subscription (not lifetime), check if we should verify
-    if (productId.contains('monthly') || productId.contains('annual')) {
-      String? purchaseDateStr = _box!.get(_purchaseDateKey);
-      if (purchaseDateStr == null) return true;
-      
-      DateTime purchaseDate = DateTime.parse(purchaseDateStr);
-      DateTime now = DateTime.now();
-      
-      // Verify if more than 24 hours have passed since last check
-      return now.difference(purchaseDate).inHours > 24;
-    }
+    // Only subscriptions need regular verification (not lifetime purchases)
+    return productId.contains('monthly') || productId.contains('yearly') || productId.contains('annual');
+  }
+  
+  // Update subscription verification timestamp
+  static Future<void> updateLastVerification() async {
+    if (_box == null) return;
     
-    return false;
+    await _box!.put(_lastVerificationKey, DateTime.now().toIso8601String());
   }
 }

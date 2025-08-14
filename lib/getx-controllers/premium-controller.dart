@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../services/purchase-service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nicotrack/constants/color-constants.dart';
 import '../config/app-mode.dart';
 import 'package:nicotrack/services/firebase-service.dart';
 import 'package:nicotrack/services/premium-persistence-service.dart';
@@ -22,11 +21,24 @@ class PremiumController extends GetxController {
     print('✅ Using actual premium status: ${isPremium.value}');
     return isPremium.value;
   }
+
   
   // Method to manually refresh premium status
   void refreshPremiumStatus() {
     print('🔄 Refreshing premium status...');
     update();
+  }
+  
+  // Method to verify subscription status with app store
+  Future<void> verifySubscriptionStatus() async {
+    print('🔍 Manually verifying subscription status...');
+    try {
+      final purchaseService = PurchaseService();
+      await purchaseService.checkSubscriptionStatus();
+      refreshPremiumStatus();
+    } catch (e) {
+      print('❌ Error during manual subscription verification: $e');
+    }
   }
   
   // Method to debug current premium status
@@ -320,7 +332,7 @@ class PremiumController extends GetxController {
   String getComparisonText() {
     switch (selectedPlan.value) {
       case 0:
-        return "2 days";
+        return "4 days";
       case 1:
         return "1 week";
       case 2:

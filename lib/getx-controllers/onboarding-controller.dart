@@ -178,6 +178,11 @@ class OnboardingController extends GetxController {
       );
     }
     
+    // Unfocus keyboard when leaving the name input page (page 8)
+    if (currentPage == 8) {
+      FocusManager.instance.primaryFocus?.unfocus();
+    }
+    
     // Move to the next page
     if (currentPage < pages.length - 1) {
       // Log onboarding step completed

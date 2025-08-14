@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:get/get.dart';
@@ -60,8 +59,12 @@ class PurchaseService {
       // Load products
       await loadProducts();
       
-      // Check for previous purchases
+      // Check for previous purchases and validate current subscription status
       await restorePurchases();
+      
+      // Additional validation for subscription status
+      await Future.delayed(Duration(seconds: 1)); // Allow purchase stream to process
+      await _validateActiveSubscriptions();
       
     } catch (e) {
       print('Error initializing purchase service: $e');
@@ -273,6 +276,102 @@ class PurchaseService {
     controller.refreshPremiumStatus();
     
     print('✅ Success! Premium features unlocked! Current status: ${controller.isPremium.value}');
+    
+    // Show success dialog
+    _showPurchaseSuccessDialog();
+  }
+
+  // Show purchase success dialog
+  void _showPurchaseSuccessDialog() {
+    if (Get.context != null) {
+      showDialog(
+        context: Get.context!,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Container(
+              padding: EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Success checkmark
+                  Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.check,
+                      color: Colors.white,
+                      size: 48,
+                    ),
+                  ),
+                  SizedBox(height: 24),
+                  
+                  // Success title
+                  Text(
+                    'Purchase Successful!',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 16),
+                  
+                  // Success message
+                  Text(
+                    'Your premium features have been activated. Enjoy unlimited access to all Nicotrack features!',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black54,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 24),
+                  
+                  // OK button
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      // Navigate back to previous screen
+                      if (Navigator.canPop(Get.context!)) {
+                        Navigator.pop(Get.context!);
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    ),
+                    child: Text(
+                      'Continue',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
   }
 
   // Save purchase information
@@ -283,6 +382,7 @@ class PurchaseService {
       purchaseId: purchaseDetails.purchaseID,
       productId: purchaseDetails.productID,
       purchaseDate: DateTime.now(),
+      subscriptionActive: true,
     );
   }
 
@@ -307,14 +407,97 @@ class PurchaseService {
 
   // Check if user has active subscription
   Future<bool> checkSubscriptionStatus() async {
-    // Check if we need to verify subscription status
-    if (PremiumPersistenceService.needsVerification()) {
-      // Restore purchases to verify subscription is still active
-      await restorePurchases();
-    }
+    print('🔍 Checking subscription status...');
+    
+    // Always check current subscription status with the store
+    await _verifyCurrentSubscriptionStatus();
     
     final controller = Get.find<PremiumController>();
     return controller.isPremium.value;
+  }
+
+  // Verify current subscription status with the app store
+  Future<void> _verifyCurrentSubscriptionStatus() async {
+    try {
+      print('🔄 Verifying subscription status with app store...');
+      
+      if (!isAvailable) {
+        print('❌ App store is not available for verification');
+        return;
+      }
+
+      // First, try to restore purchases to get current subscription status
+      await _inAppPurchase.restorePurchases();
+      
+      // Wait for the purchase stream to process
+      await Future.delayed(Duration(seconds: 3));
+      
+      // Update verification timestamp
+      await PremiumPersistenceService.updateLastVerification();
+      
+      final controller = Get.find<PremiumController>();
+      print('✅ Subscription verification complete. Premium status: ${controller.isPremium.value}');
+      
+    } catch (e) {
+      print('❌ Error verifying subscription status: $e');
+      
+      // If verification fails, check if we have existing premium status
+      // but mark that verification failed
+      final premiumInfo = PremiumPersistenceService.getPremiumInfo();
+      if (premiumInfo['isPremium'] == true) {
+        print('⚠️ Using cached premium status due to verification failure');
+      }
+    }
+  }
+
+  // Comprehensive subscription verification (for app startup)
+  Future<void> verifySubscriptionOnStartup() async {
+    print('🚀 Starting comprehensive subscription verification on app startup...');
+    
+    // Check if we need verification
+    if (!PremiumPersistenceService.needsVerification() && 
+        !PremiumPersistenceService.hasSubscriptionToVerify()) {
+      print('✅ No verification needed at this time');
+      return;
+    }
+    
+    try {
+      // Perform comprehensive verification
+      await _verifyCurrentSubscriptionStatus();
+      
+      // Additional validation for TestFlight and production subscriptions
+      await _validateActiveSubscriptions();
+      
+    } catch (e) {
+      print('❌ Comprehensive verification failed: $e');
+    }
+  }
+
+  // Validate active subscriptions using restore purchases
+  Future<void> _validateActiveSubscriptions() async {
+    try {
+      print('🔍 Validating active subscriptions using restore...');
+      
+      // Use restore purchases to validate current subscription status
+      // The purchase stream will handle the validation when purchases are restored
+      await _inAppPurchase.restorePurchases();
+      
+      // Give time for the purchase stream to process restored purchases
+      await Future.delayed(Duration(seconds: 2));
+      
+      // Check current premium status after restore
+      final controller = Get.find<PremiumController>();
+      print('📊 After validation - Premium status: ${controller.isPremium.value}');
+      
+    } catch (e) {
+      print('❌ Error validating active subscriptions: $e');
+      
+      // If restore fails, check if we have existing premium info
+      final premiumInfo = PremiumPersistenceService.getPremiumInfo();
+      if (premiumInfo['isPremium'] == true) {
+        print('⚠️ Restore failed but using cached premium status');
+      }
+    }
   }
 
   // Get product details by plan index

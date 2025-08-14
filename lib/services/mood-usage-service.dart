@@ -8,7 +8,7 @@ import 'package:nicotrack/getx-controllers/premium-controller.dart';
 class MoodUsageService {
   static const String _boxName = 'moodUsageData';
   static const String _usageKey = 'moodUsage';
-  static const int _freeUsageLimit = 2;
+  static const int _freeUsageLimit = 4;
 
   static Box<MoodUsageModel>? _box;
 
@@ -49,15 +49,15 @@ class MoodUsageService {
       }
     }
     
-    // If they've already used it on 2 or more different days
+    // If they've already used it on 4 or more different days
     if (uniqueDaysWithMood >= _freeUsageLimit) {
       // Check if today is one of those days they already used it
       // If yes, allow them to continue using it today
-      // If no, block them as they've exhausted their 2-day trial
+      // If no, block them as they've exhausted their 4-day trial
       return daysWithMood.contains(todayDate);
     }
     
-    // They haven't reached the 2-day limit yet, allow usage
+    // They haven't reached the 4-day limit yet, allow usage
     return true;
   }
 

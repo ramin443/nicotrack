@@ -51,8 +51,8 @@ class MoodTrialInfoWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 2.h),
                 TextAutoSize(
-                  remainingDays == 2 
-                    ? 'You can track your mood for 2 days to try this feature'
+                  remainingDays == 4 
+                    ? 'You can track your mood for 4 days to try this feature'
                     : 'You have $remainingDays day${remainingDays == 1 ? '' : 's'} remaining in your free trial',
                   style: TextStyle(
                     fontSize: 12.sp,

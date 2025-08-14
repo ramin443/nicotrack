@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/screens/base/home.dart';
+import 'package:nicotrack/screens/base/activity.dart';
 import 'package:nicotrack/screens/base/plan-alt.dart';
 import 'package:nicotrack/screens/base/settings.dart';
 
@@ -15,7 +16,7 @@ import '../screens/elements/textAutoSize.dart';
 
 class BaseController extends GetxController {
   int selectedIndex = 0;
-  List<Widget> mainPages = [Home(), PlanAlt(), ProgressMain(), Settings()];
+  List<Widget> mainPages = [Home(), Activity(), PlanAlt(), ProgressMain(), Settings()];
 
   void setCurrentIndex(index) {
     selectedIndex = index;
@@ -67,14 +68,14 @@ class BaseController extends GetxController {
             icon: Column(
               children: [
                 Icon(
-                  FeatherIcons.calendar,
+                  FeatherIcons.activity,
                   size: 22.sp,
                   color: selectedIndex == 1 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
                   height: 7.h,
                 ),
-                TextAutoSize('Plan',
+                TextAutoSize('Activity',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       height: 1.1,
@@ -92,14 +93,14 @@ class BaseController extends GetxController {
             icon: Column(
               children: [
                 Icon(
-                  FeatherIcons.pieChart,
+                  FeatherIcons.calendar,
                   size: 22.sp,
                   color: selectedIndex == 2 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
                   height: 7.h,
                 ),
-                TextAutoSize('Progress',
+                TextAutoSize('Plan',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       height: 1.1,
@@ -113,12 +114,37 @@ class BaseController extends GetxController {
             label: '',
           ),
           BottomNavigationBarItem(
+            backgroundColor: Colors.white,
+            icon: Column(
+              children: [
+                Icon(
+                  FeatherIcons.pieChart,
+                  size: 22.sp,
+                  color: selectedIndex == 3 ? Colors.black87 : Colors.black54,
+                ),
+                SizedBox(
+                  height: 7.h,
+                ),
+                TextAutoSize('Progress',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      height: 1.1,
+                      fontSize: 13.sp,
+                      fontFamily: circularBold,
+                      color:
+                          selectedIndex == 3 ? Colors.black87 : Colors.black54,
+                    )),
+              ],
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
             icon: Column(
               children: [
                 Icon(
                   FeatherIcons.sliders,
                   size: 22.sp,
-                  color: selectedIndex == 3 ? Colors.black87 : Colors.black54,
+                  color: selectedIndex == 4 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
                   height: 7.h,
@@ -130,7 +156,7 @@ class BaseController extends GetxController {
                       fontSize: 13.sp,
                       fontFamily: circularBold,
                       color:
-                          selectedIndex == 3 ? Colors.black87 : Colors.black54,
+                          selectedIndex == 4 ? Colors.black87 : Colors.black54,
                     )),
               ],
             ),
@@ -183,14 +209,14 @@ class BaseController extends GetxController {
                   height: 16.h,
                 ),
                 Icon(
-                  FeatherIcons.calendar,
+                  FeatherIcons.activity,
                   size: 22.sp,
                   color: selectedIndex == 1 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
                   height: 7.h,
                 ),
-                TextAutoSize('Plan',
+                TextAutoSize('Activity',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       height: 1.1,
@@ -210,14 +236,14 @@ class BaseController extends GetxController {
                   height: 16.h,
                 ),
                 Icon(
-                  FeatherIcons.pieChart,
+                  FeatherIcons.calendar,
                   size: 22.sp,
                   color: selectedIndex == 2 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
                   height: 7.h,
                 ),
-                TextAutoSize('Progress',
+                TextAutoSize('Plan',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       height: 1.1,
@@ -237,9 +263,36 @@ class BaseController extends GetxController {
                   height: 16.h,
                 ),
                 Icon(
-                  FeatherIcons.sliders,
+                  FeatherIcons.pieChart,
                   size: 22.sp,
                   color: selectedIndex == 3 ? Colors.black87 : Colors.black54,
+                ),
+                SizedBox(
+                  height: 7.h,
+                ),
+                TextAutoSize('Progress',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      height: 1.1,
+                      fontSize: 13.sp,
+                      fontFamily: circularBold,
+                      color:
+                          selectedIndex == 3 ? Colors.black87 : Colors.black54,
+                    )),
+              ],
+            ),
+            label: '',
+          ),
+          NavigationDestination(
+            icon: Column(
+              children: [
+                SizedBox(
+                  height: 16.h,
+                ),
+                Icon(
+                  FeatherIcons.sliders,
+                  size: 22.sp,
+                  color: selectedIndex == 4 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
                   height: 7.h,
@@ -251,7 +304,7 @@ class BaseController extends GetxController {
                       fontSize: 13.sp,
                       fontFamily: circularBold,
                       color:
-                          selectedIndex == 3 ? Colors.black87 : Colors.black54,
+                          selectedIndex == 4 ? Colors.black87 : Colors.black54,
                     )),
               ],
             ),

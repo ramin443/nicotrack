@@ -81,6 +81,9 @@ void main() async {
   // Initialize purchase service
   await PurchaseService().initialize();
   
+  // Verify subscription status on app startup (for both TestFlight and production)
+  await PurchaseService().verifySubscriptionOnStartup();
+  
   // Debug premium status after initialization
   Get.find<PremiumController>().debugPremiumStatus();
   
