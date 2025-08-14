@@ -25,166 +25,198 @@ class _ActivityState extends State<Activity> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20.w),
-        width: double.infinity,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [Positioned.fill(child: Image.asset(emergencyCravingBtn))],
-        ),
-      ),
       body: SafeArea(
-        child: CustomScrollView(
-          physics: BouncingScrollPhysics(),
-          slivers: [
-            // Top spacing
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 12.h,
-              ),
-            ),
+        child: Stack(
+          children: [
+            CustomScrollView(
+              physics: BouncingScrollPhysics(),
+              slivers: [
+                // Top spacing
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 12.h,
+                  ),
+                ),
 
-            // Header section with activity button
-            SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                // Header section with activity button
+                SliverToBoxAdapter(
+                  child: Column(
                     children: [
-                      Stack(
-                        alignment: Alignment.center,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(
-                            activityBGBtn,
-                            width: 140.w,
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Image.asset(
+                                activityBGBtn,
+                                width: 140.w,
+                              ),
+                              Positioned.fill(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    TextAutoSize(
+                                      "🎮",
+                                      style: TextStyle(
+                                          fontSize: 50.sp,
+                                          fontFamily: circularBold,
+                                          height: 1.1,
+                                          color: nicotrackBlack1),
+                                    ),
+                                    SizedBox(
+                                      height: 8.w,
+                                    ),
+                                    TextAutoSize(
+                                      "Activities",
+                                      style: TextStyle(
+                                          fontSize: 18.sp,
+                                          fontFamily: circularBold,
+                                          height: 1.1,
+                                          color: nicotrackBlack1),
+                                    ),
+                                    SizedBox(
+                                      width: 4.w,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
                           ),
-                          Positioned.fill(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextAutoSize(
-                                  "🎮",
-                                  style: TextStyle(
-                                      fontSize: 50.sp,
-                                      fontFamily: circularBold,
-                                      height: 1.1,
-                                      color: nicotrackBlack1),
-                                ),
-                                SizedBox(
-                                  height: 8.w,
-                                ),
-                                TextAutoSize(
-                                  "Activities",
-                                  style: TextStyle(
-                                      fontSize: 18.sp,
-                                      fontFamily: circularBold,
-                                      height: 1.1,
-                                      color: nicotrackBlack1),
-                                ),
-                                SizedBox(
-                                  width: 4.w,
-                                ),
-                              ],
-                            ),
-                          )
                         ],
+                      ),
+                      Container(
+                        height: 10.h,
+                        width: 1.w,
+                        decoration: BoxDecoration(color: nicotrackBlack1),
+                      ),
+                      Container(
+                        width: 256.w,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 14.w, vertical: 14.h),
+                        decoration: BoxDecoration(
+                            color: nicotrackBlack1,
+                            borderRadius: BorderRadius.circular(26.r)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              instantQuitEmoji,
+                              width: 24.w,
+                            ),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            SizedBox(
+                              width: 190.w,
+                              child: TextAutoSize(
+                                'Tricks to handle cravings',
+                                style: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontFamily: circularMedium,
+                                    height: 1.1,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              FeatherIcons.info,
+                              weight: 14.sp,
+                              color: const Color(0xFFA1A1A1),
+                            ),
+                            SizedBox(
+                              width: 8.w,
+                            ),
+                            TextAutoSize(
+                              context.l10n.info_button,
+                              style: TextStyle(
+                                fontSize: 15.sp,
+                                fontFamily: circularBook,
+                                height: 1.1,
+                                color: const Color(0xFFA1A1A1),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30.w,
                       ),
                     ],
                   ),
-                  Container(
-                    height: 10.h,
-                    width: 1.w,
-                    decoration: BoxDecoration(color: nicotrackBlack1),
-                  ),
-                  Container(
-                    width: 256.w,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
-                    decoration: BoxDecoration(
-                        color: nicotrackBlack1,
-                        borderRadius: BorderRadius.circular(26.r)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          instantQuitEmoji,
-                          width: 24.w,
-                        ),
-                        SizedBox(
-                          width: 10.w,
-                        ),
-                        SizedBox(
-                          width: 190.w,
-                          child: TextAutoSize(
-                            'Tricks to handle cravings',
-                            style: TextStyle(
-                                fontSize: 16.sp,
-                                fontFamily: circularMedium,
-                                height: 1.1,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ],
+                ),
+
+                // Grid view as sliver
+                SliverPadding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  sliver: SliverGrid(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 8.w,
+                      mainAxisSpacing: 8.w,
+                      childAspectRatio: 0.76,
+                    ),
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        return _buildTechniqueCard(exercises[index]);
+                      },
+                      childCount: exercises.length,
                     ),
                   ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          FeatherIcons.info,
-                          weight: 14.sp,
-                          color: const Color(0xFFA1A1A1),
-                        ),
-                        SizedBox(
-                          width: 8.w,
-                        ),
-                        TextAutoSize(
-                          context.l10n.info_button,
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                            fontFamily: circularBook,
-                            height: 1.1,
-                            color: const Color(0xFFA1A1A1),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30.w,
-                  ),
-                ],
-              ),
+                ),
+
+                // Bottom padding to make space for the emergency button
+                SliverToBoxAdapter(
+                  child: SizedBox(height: 120.h),
+                ),
+              ],
             ),
 
-            // Grid view as sliver
-            SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              sliver: SliverGrid(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 8.w,
-                  mainAxisSpacing: 8.w,
-                  childAspectRatio: 0.76,
-                ),
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    return _buildTechniqueCard(exercises[index]);
+            // Emergency Craving Button positioned at bottom
+            Positioned(
+              bottom: 8.h,
+              left: 20.w,
+              right: 20.w,
+              child: GestureDetector(
+                  onTap: () {
+                    // Add emergency craving functionality here
                   },
-                  childCount: exercises.length,
-                ),
-              ),
-            ),
-
-            // Bottom padding
-            SliverToBoxAdapter(
-              child: SizedBox(height: 100.h),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                        height: 52.h, // Give it a specific height
+                        width: double.infinity,
+                        child: Image.asset(
+                          emergencyCravingBtn,
+                          fit: BoxFit.contain, // Ensure proper image scaling
+                        ),
+                      ),
+                      Positioned.fill(
+                        child: Center(
+                          child: TextAutoSize(
+                            '📟 Emergency craving button',
+                            style: TextStyle(
+                              fontSize: 17.sp,
+                              fontFamily: circularBold,
+                              height: 1.1,
+                              color: nicotrackBlack1,
+                            ),
+                          ),
+                        )
+                      )
+                    ],
+                  )),
             ),
           ],
         ),
