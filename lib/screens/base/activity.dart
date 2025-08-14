@@ -8,6 +8,8 @@ import '../elements/textAutoSize.dart';
 import 'package:feather_icons/feather_icons.dart';
 import '../../extensions/app_localizations_extension.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
+import '../../models/exercise_model.dart';
+import '../exercises/exercise_overview_screen.dart';
 
 class Activity extends StatefulWidget {
   const Activity({super.key});
@@ -17,81 +19,7 @@ class Activity extends StatefulWidget {
 }
 
 class _ActivityState extends State<Activity> {
-  final List<Map<String, dynamic>> techniques = [
-    {
-      'phase': 'Phase 1',
-      'title': 'The 4-7-8 Technique',
-      'duration': '2-3 min',
-      'icon': '💨',
-    },
-    {
-      'phase': 'Phase 1',
-      'title': 'Cold Water Shock',
-      'duration': '60 sec',
-      'icon': '🌊',
-    },
-    {
-      'phase': 'Phase 1',
-      'title': 'The 3-Minute Rule',
-      'duration': '3 min',
-      'icon': '⌛',
-    },
-    {
-      'phase': 'Phase 1',
-      'title': '5-4-3-2-1 Grounding',
-      'duration': '2-3 min',
-      'icon': '🔍',
-    },
-    {
-      'phase': 'Phase 2',
-      'title': 'Muscle Relaxation (PMR)',
-      'duration': '8-10 min',
-      'icon': '💆',
-    },
-    {
-      'phase': 'Phase 2',
-      'title': 'Bilateral Stimulation',
-      'duration': '2-3 min',
-      'icon': '🔍',
-    },
-    {
-      'phase': 'Phase 2',
-      'title': 'Finger Pressure Points',
-      'duration': '60 sec',
-      'icon': '👈',
-    },
-    {
-      'phase': 'Phase 2',
-      'title': 'Rapid distraction',
-      'duration': '60 sec',
-      'icon': '⚡',
-    },
-    {
-      'phase': 'Phase 2',
-      'title': 'Stop-Drop-Roll',
-      'duration': '30 sec',
-      'icon': '🔄',
-    },
-    {
-      'phase': 'Phase 3',
-      'title': 'Rapid Eye Movement',
-      'duration': '1-2 min',
-      'icon': '👀',
-    },
-    {
-      'phase': 'Phase 3',
-      'title': 'Lemon Visualization',
-      'duration': '2-3 min',
-      'icon': '🍋',
-    },
-    {
-      'phase': 'Phase 3',
-      'title': 'Hand Warming',
-      'duration': '1 min',
-      'icon': '🤲',
-    },
-
-  ];
+  final List<ExerciseModel> exercises = allExercises;
 
   @override
   Widget build(BuildContext context) {
@@ -237,9 +165,9 @@ class _ActivityState extends State<Activity> {
                 ),
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
-                    return _buildTechniqueCard(techniques[index]);
+                    return _buildTechniqueCard(exercises[index]);
                   },
-                  childCount: techniques.length,
+                  childCount: exercises.length,
                 ),
               ),
             ),
@@ -254,87 +182,96 @@ class _ActivityState extends State<Activity> {
     );
   }
 
-  Widget _buildTechniqueCard(Map<String, dynamic> technique) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Color(0xffff1f1f1),width: 1.sp)
-      ),
-      child: Stack(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(16.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                      technique['icon'],
-                      textAlign: TextAlign.left,
-                      style: TextStyle(fontSize: 56.sp),
-                    ),
-
-                SizedBox(height: 12.h),
-                TextAutoSize(
-                  technique['phase'],
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontFamily: circularMedium,
-                    color: Colors.grey[500],
+  Widget _buildTechniqueCard(ExerciseModel exercise) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ExerciseOverviewScreen(exercise: exercise),
+          ),
+        );
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Color(0xffff1f1f1), width: 1.sp),
+        ),
+        child: Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(16.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    exercise.icon,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 56.sp),
                   ),
-                ),
-                SizedBox(height: 4.h),
-                TextAutoSize(
-                  technique['title'],
-                  maxLines: 2,
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontFamily: circularBold,
-                    color: Colors.black87,
-                    height: 1.2,
-                  ),
-                ),
-                Spacer(),
-                Row(
-                  children: [
-                    Icon(
-                      FeatherIcons.clock,
-                      size: 14.sp,
-                      color: Colors.grey[600],
+                  SizedBox(height: 12.h),
+                  TextAutoSize(
+                    exercise.phase,
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontFamily: circularMedium,
+                      color: Colors.grey[500],
                     ),
-                    SizedBox(width: 4.w),
-                    TextAutoSize(
-                      technique['duration'],
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontFamily: circularMedium,
+                  ),
+                  SizedBox(height: 4.h),
+                  TextAutoSize(
+                    exercise.title,
+                    maxLines: 2,
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontFamily: circularBold,
+                      color: Colors.black87,
+                      height: 1.2,
+                    ),
+                  ),
+                  Spacer(),
+                  Row(
+                    children: [
+                      Icon(
+                        FeatherIcons.clock,
+                        size: 14.sp,
                         color: Colors.grey[600],
                       ),
-                    ),
-                  ],
+                      SizedBox(width: 4.w),
+                      TextAutoSize(
+                        exercise.duration,
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          fontFamily: circularMedium,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              top: 12.h,
+              right: 12.w,
+              child: Container(
+                width: 36.w,
+                height: 36.w,
+                padding: EdgeInsets.only(left: 1.w),
+                decoration: BoxDecoration(
+                  color: Colors.black87,
+                  shape: BoxShape.circle,
                 ),
-              ],
-            ),
-          ),
-          Positioned(
-            top: 12.h,
-            right: 12.w,
-            child: Container(
-              width: 36.w,
-              height: 36.w,
-              padding: EdgeInsets.only(left: 1.w),
-              decoration: BoxDecoration(
-                color: Colors.black87,
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.play_arrow_rounded,
-                color: Colors.white,
-                size: 22.sp,
+                child: Icon(
+                  Icons.play_arrow_rounded,
+                  color: Colors.white,
+                  size: 22.sp,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
