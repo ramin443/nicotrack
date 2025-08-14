@@ -7,6 +7,7 @@ import '../../constants/image-constants.dart';
 import '../elements/textAutoSize.dart';
 import 'package:feather_icons/feather_icons.dart';
 import '../../extensions/app_localizations_extension.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
 
 class Activity extends StatefulWidget {
   const Activity({super.key});
@@ -20,39 +21,76 @@ class _ActivityState extends State<Activity> {
     {
       'phase': 'Phase 1',
       'title': 'The 4-7-8 Technique',
-      'duration': '4 min',
+      'duration': '2-3 min',
       'icon': '💨',
     },
     {
       'phase': 'Phase 1',
-      'title': 'Cold water shock',
-      'duration': '4 min',
+      'title': 'Cold Water Shock',
+      'duration': '60 sec',
       'icon': '🌊',
     },
     {
-      'phase': 'Phase 2',
+      'phase': 'Phase 1',
       'title': 'The 3-Minute Rule',
-      'duration': '4 min',
-      'icon': '⏳',
+      'duration': '3 min',
+      'icon': '⌛',
     },
     {
       'phase': 'Phase 1',
-      'title': '5-4-3-2-1 Technique',
-      'duration': '4 min',
+      'title': '5-4-3-2-1 Grounding',
+      'duration': '2-3 min',
       'icon': '🔍',
     },
     {
       'phase': 'Phase 2',
-      'title': 'Deep Breathing',
-      'duration': '5 min',
-      'icon': '🫁',
+      'title': 'Muscle Relaxation (PMR)',
+      'duration': '8-10 min',
+      'icon': '💆',
+    },
+    {
+      'phase': 'Phase 2',
+      'title': 'Bilateral Stimulation',
+      'duration': '2-3 min',
+      'icon': '🔍',
+    },
+    {
+      'phase': 'Phase 2',
+      'title': 'Finger Pressure Points',
+      'duration': '60 sec',
+      'icon': '👈',
+    },
+    {
+      'phase': 'Phase 2',
+      'title': 'Rapid distraction',
+      'duration': '60 sec',
+      'icon': '⚡',
+    },
+    {
+      'phase': 'Phase 2',
+      'title': 'Stop-Drop-Roll',
+      'duration': '30 sec',
+      'icon': '🔄',
     },
     {
       'phase': 'Phase 3',
-      'title': 'Mindful Walking',
-      'duration': '10 min',
-      'icon': '🚶',
+      'title': 'Rapid Eye Movement',
+      'duration': '1-2 min',
+      'icon': '👀',
     },
+    {
+      'phase': 'Phase 3',
+      'title': 'Lemon Visualization',
+      'duration': '2-3 min',
+      'icon': '🍋',
+    },
+    {
+      'phase': 'Phase 3',
+      'title': 'Hand Warming',
+      'duration': '1 min',
+      'icon': '🤲',
+    },
+
   ];
 
   @override
@@ -181,7 +219,7 @@ class _ActivityState extends State<Activity> {
                     ),
                   ),
                   SizedBox(
-                    height: 20.h,
+                    height: 30.w,
                   ),
                 ],
               ),
@@ -195,7 +233,7 @@ class _ActivityState extends State<Activity> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 8.w,
                   mainAxisSpacing: 8.w,
-                  childAspectRatio: 0.75,
+                  childAspectRatio: 0.76,
                 ),
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
@@ -284,14 +322,15 @@ class _ActivityState extends State<Activity> {
             child: Container(
               width: 36.w,
               height: 36.w,
+              padding: EdgeInsets.only(left: 1.w),
               decoration: BoxDecoration(
                 color: Colors.black87,
                 shape: BoxShape.circle,
               ),
               child: Icon(
-                FeatherIcons.play,
+                Icons.play_arrow_rounded,
                 color: Colors.white,
-                size: 16.sp,
+                size: 22.sp,
               ),
             ),
           ),

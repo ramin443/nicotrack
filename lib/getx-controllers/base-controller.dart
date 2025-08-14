@@ -16,7 +16,7 @@ import '../screens/elements/textAutoSize.dart';
 
 class BaseController extends GetxController {
   int selectedIndex = 0;
-  List<Widget> mainPages = [Home(), Activity(), PlanAlt(), ProgressMain(), Settings()];
+  List<Widget> mainPages = [Home(), PlanAlt(), Activity(), ProgressMain(), Settings()];
 
   void setCurrentIndex(index) {
     selectedIndex = index;
@@ -68,14 +68,14 @@ class BaseController extends GetxController {
             icon: Column(
               children: [
                 Icon(
-                  FeatherIcons.activity,
+                  FeatherIcons.calendar,
                   size: 22.sp,
                   color: selectedIndex == 1 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
                   height: 7.h,
                 ),
-                TextAutoSize('Activity',
+                TextAutoSize('Plan',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       height: 1.1,
@@ -93,14 +93,14 @@ class BaseController extends GetxController {
             icon: Column(
               children: [
                 Icon(
-                  FeatherIcons.calendar,
+                  FeatherIcons.activity,
                   size: 22.sp,
                   color: selectedIndex == 2 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
                   height: 7.h,
                 ),
-                TextAutoSize('Plan',
+                TextAutoSize('Activity',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       height: 1.1,
@@ -209,14 +209,14 @@ class BaseController extends GetxController {
                   height: 16.h,
                 ),
                 Icon(
-                  FeatherIcons.activity,
+                  FeatherIcons.calendar,
                   size: 22.sp,
                   color: selectedIndex == 1 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
                   height: 7.h,
                 ),
-                TextAutoSize('Activity',
+                TextAutoSize('Plan',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       height: 1.1,
@@ -236,14 +236,14 @@ class BaseController extends GetxController {
                   height: 16.h,
                 ),
                 Icon(
-                  FeatherIcons.calendar,
+                  FeatherIcons.activity,
                   size: 22.sp,
                   color: selectedIndex == 2 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
                   height: 7.h,
                 ),
-                TextAutoSize('Plan',
+                TextAutoSize('Activity',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       height: 1.1,
