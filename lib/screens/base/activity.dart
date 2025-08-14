@@ -25,6 +25,15 @@ class _ActivityState extends State<Activity> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Container(
+        margin: EdgeInsets.symmetric(horizontal: 20.w),
+        width: double.infinity,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [Positioned.fill(child: Image.asset(emergencyCravingBtn))],
+        ),
+      ),
       body: SafeArea(
         child: CustomScrollView(
           physics: BouncingScrollPhysics(),
@@ -35,7 +44,7 @@ class _ActivityState extends State<Activity> {
                 height: 12.h,
               ),
             ),
-            
+
             // Header section with activity button
             SliverToBoxAdapter(
               child: Column(
@@ -90,7 +99,8 @@ class _ActivityState extends State<Activity> {
                   ),
                   Container(
                     width: 256.w,
-                    padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
                     decoration: BoxDecoration(
                         color: nicotrackBlack1,
                         borderRadius: BorderRadius.circular(26.r)),
@@ -152,7 +162,7 @@ class _ActivityState extends State<Activity> {
                 ],
               ),
             ),
-            
+
             // Grid view as sliver
             SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -171,7 +181,7 @@ class _ActivityState extends State<Activity> {
                 ),
               ),
             ),
-            
+
             // Bottom padding
             SliverToBoxAdapter(
               child: SizedBox(height: 100.h),

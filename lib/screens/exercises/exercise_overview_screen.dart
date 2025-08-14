@@ -74,14 +74,14 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 30.h),
+                  SizedBox(height: 10.w),
 
                   // Exercise Icon and Title
                   Text(
                     widget.exercise.icon,
-                    style: TextStyle(fontSize: 80.sp),
+                    style: TextStyle(fontSize: 120.sp),
                   ),
-                  SizedBox(height: 16.h),
+                  SizedBox(height: 5.w),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40.w),
                     child: TextAutoSize(
@@ -95,7 +95,7 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 40.h),
+                  SizedBox(height: 40.w),
                 ],
               ),
             ),
@@ -109,9 +109,10 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen> {
                   children: [
                     // What it does section
                     Container(
-                      padding: EdgeInsets.all(20.w),
+                      padding: EdgeInsets.only(
+                          left: 20.w, right: 20.w, top: 16.w, bottom: 22.w),
                       decoration: BoxDecoration(
-                        color: Colors.grey[50],
+                        color: nicotrackBlack1,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Column(
@@ -129,25 +130,25 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen> {
                                 style: TextStyle(
                                   fontSize: 16.sp,
                                   fontFamily: circularBold,
-                                  color: nicotrackBlack1,
+                                  color: Colors.white,
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(height: 12.h),
+                          SizedBox(height: 4.w),
                           TextAutoSize(
                             widget.exercise.description,
                             style: TextStyle(
                               fontSize: 14.sp,
                               fontFamily: circularBook,
-                              color: Colors.black87,
-                              height: 1.5,
+                              color: Colors.white.withOpacity(0.87),
+                              height: 1.2,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 16.h),
+                    SizedBox(height: 8.w),
 
                     // The Science section
                     Container(
@@ -176,20 +177,20 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 12.h),
+                          SizedBox(height: 4.w),
                           TextAutoSize(
                             widget.exercise.science,
                             style: TextStyle(
                               fontSize: 14.sp,
                               fontFamily: circularBook,
                               color: Colors.black87,
-                              height: 1.5,
+                              height: 1.2,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 16.h),
+                    SizedBox(height: 8.w),
 
                     // Duration section
                     Container(
@@ -230,7 +231,7 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 24.h),
+                    SizedBox(height: 16.w),
 
                     // Learn More expandable
                     if (_learnMoreExpanded) ...[
@@ -329,13 +330,13 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen> {
                         padding: EdgeInsets.symmetric(vertical: 12.h),
                         decoration: BoxDecoration(
                           border: Border.all(color: nicotrackBlack1),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(30.r),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             TextAutoSize(
-                              _learnMoreExpanded ? 'Show Less' : 'Learn More',
+                              _learnMoreExpanded ? '     Show Less' : '    Learn More',
                               style: TextStyle(
                                 fontSize: 15.sp,
                                 fontFamily: circularMedium,
@@ -389,11 +390,11 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen> {
               height: 56.h,
               decoration: BoxDecoration(
                 color: nicotrackBlack1,
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(30.r),
               ),
               child: Center(
                 child: TextAutoSize(
-                  'START EXERCISE',
+                  'Start Exercise',
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontFamily: circularBold,

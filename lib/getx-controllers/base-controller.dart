@@ -46,7 +46,7 @@ class BaseController extends GetxController {
                 ),
                 SvgPicture.asset(
                     selectedIndex == 0 ? homeIconSelected : homeIconUnselected,
-                    width: 20.sp),
+                    width: 18.sp),
                 SizedBox(
                   height: 7.h,
                 ),
@@ -69,7 +69,7 @@ class BaseController extends GetxController {
               children: [
                 Icon(
                   FeatherIcons.calendar,
-                  size: 22.sp,
+                  size: 20.sp,
                   color: selectedIndex == 1 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
@@ -94,7 +94,7 @@ class BaseController extends GetxController {
               children: [
                 Icon(
                   FeatherIcons.activity,
-                  size: 22.sp,
+                  size: 18.sp,
                   color: selectedIndex == 2 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
@@ -119,7 +119,7 @@ class BaseController extends GetxController {
               children: [
                 Icon(
                   FeatherIcons.pieChart,
-                  size: 22.sp,
+                  size: 18.sp,
                   color: selectedIndex == 3 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
@@ -143,7 +143,7 @@ class BaseController extends GetxController {
               children: [
                 Icon(
                   FeatherIcons.sliders,
-                  size: 22.sp,
+                  size: 18.sp,
                   color: selectedIndex == 4 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
@@ -181,13 +181,13 @@ class BaseController extends GetxController {
             icon: Column(
               children: [
                 SizedBox(
-                  height: 16.h,
+                  height: 16.w,
                 ),
                 SvgPicture.asset(
                     selectedIndex == 0 ? homeIconSelected : homeIconUnselected,
-                    width: 20.sp),
+                    width: 18.sp),
                 SizedBox(
-                  height: 7.h,
+                  height: 7.w,
                 ),
                 TextAutoSize('Home',
                     textAlign: TextAlign.left,
@@ -206,15 +206,15 @@ class BaseController extends GetxController {
             icon: Column(
               children: [
                 SizedBox(
-                  height: 16.h,
+                  height: 16.w,
                 ),
                 Icon(
                   FeatherIcons.calendar,
-                  size: 22.sp,
+                  size: 20.sp,
                   color: selectedIndex == 1 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
-                  height: 7.h,
+                  height: 7.w,
                 ),
                 TextAutoSize('Plan',
                     textAlign: TextAlign.left,
@@ -233,15 +233,15 @@ class BaseController extends GetxController {
             icon: Column(
               children: [
                 SizedBox(
-                  height: 16.h,
+                  height: 16.w,
                 ),
                 Icon(
                   FeatherIcons.activity,
-                  size: 22.sp,
+                  size: 20.sp,
                   color: selectedIndex == 2 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
-                  height: 7.h,
+                  height: 7.w,
                 ),
                 TextAutoSize('Activity',
                     textAlign: TextAlign.left,
@@ -260,11 +260,11 @@ class BaseController extends GetxController {
             icon: Column(
               children: [
                 SizedBox(
-                  height: 16.h,
+                  height: 16.w,
                 ),
                 Icon(
                   FeatherIcons.pieChart,
-                  size: 22.sp,
+                  size: 20.sp,
                   color: selectedIndex == 3 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
@@ -287,11 +287,11 @@ class BaseController extends GetxController {
             icon: Column(
               children: [
                 SizedBox(
-                  height: 16.h,
+                  height: 16.w,
                 ),
                 Icon(
                   FeatherIcons.sliders,
-                  size: 22.sp,
+                  size: 20.sp,
                   color: selectedIndex == 4 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
