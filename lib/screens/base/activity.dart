@@ -59,139 +59,157 @@ class _ActivityState extends State<Activity> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 60.w,
+      body: SafeArea(
+        child: CustomScrollView(
+          physics: BouncingScrollPhysics(),
+          slivers: [
+            // Top spacing
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 12.h,
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Image.asset(
-                      activityBGBtn,
-                      width: 140.w,
-                    ),
-                    Positioned.fill(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+            
+            // Header section with activity button
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Stack(
+                        alignment: Alignment.center,
                         children: [
-                          TextAutoSize(
-                            "🎮",
-                            style: TextStyle(
-                                fontSize: 50.sp,
-                                fontFamily: circularBold,
-                                height: 1.1,
-                                color: nicotrackBlack1),
+                          Image.asset(
+                            activityBGBtn,
+                            width: 140.w,
                           ),
-                          SizedBox(
-                            height: 8.w,
-                          ),
-                          TextAutoSize(
-                            "Activities",
-                            style: TextStyle(
-                                fontSize: 18.sp,
-                                fontFamily: circularBold,
-                                height: 1.1,
-                                color: nicotrackBlack1),
-                          ),
-                          SizedBox(
-                            width: 4.w,
-                          ),
+                          Positioned.fill(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextAutoSize(
+                                  "🎮",
+                                  style: TextStyle(
+                                      fontSize: 50.sp,
+                                      fontFamily: circularBold,
+                                      height: 1.1,
+                                      color: nicotrackBlack1),
+                                ),
+                                SizedBox(
+                                  height: 8.w,
+                                ),
+                                TextAutoSize(
+                                  "Activities",
+                                  style: TextStyle(
+                                      fontSize: 18.sp,
+                                      fontFamily: circularBold,
+                                      height: 1.1,
+                                      color: nicotrackBlack1),
+                                ),
+                                SizedBox(
+                                  width: 4.w,
+                                ),
+                              ],
+                            ),
+                          )
                         ],
                       ),
-                    )
-                  ],
-                ),
-              ],
-            ),
-            Container(
-              height: 10.h,
-              width: 1.w,
-              decoration: BoxDecoration(color: nicotrackBlack1),
-            ),
-            Container(
-              width: 256.w,
-              padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
-              decoration: BoxDecoration(
-                  color: nicotrackBlack1,
-                  borderRadius: BorderRadius.circular(26.r)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    instantQuitEmoji,
-                    width: 24.w,
+                    ],
                   ),
-                  SizedBox(
-                    width: 10.w,
+                  Container(
+                    height: 10.h,
+                    width: 1.w,
+                    decoration: BoxDecoration(color: nicotrackBlack1),
                   ),
-                  SizedBox(
-                    width: 190.w,
-                    child: TextAutoSize(
-                      'Tricks to handle cravings',
-                      style: TextStyle(
-                          fontSize: 16.sp,
-                          fontFamily: circularMedium,
-                          height: 1.1,
-                          color: Colors.white),
+                  Container(
+                    width: 256.w,
+                    padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
+                    decoration: BoxDecoration(
+                        color: nicotrackBlack1,
+                        borderRadius: BorderRadius.circular(26.r)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          instantQuitEmoji,
+                          width: 24.w,
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        SizedBox(
+                          width: 190.w,
+                          child: TextAutoSize(
+                            'Tricks to handle cravings',
+                            style: TextStyle(
+                                fontSize: 16.sp,
+                                fontFamily: circularMedium,
+                                height: 1.1,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          FeatherIcons.info,
+                          weight: 14.sp,
+                          color: const Color(0xFFA1A1A1),
+                        ),
+                        SizedBox(
+                          width: 8.w,
+                        ),
+                        TextAutoSize(
+                          context.l10n.info_button,
+                          style: TextStyle(
+                            fontSize: 15.sp,
+                            fontFamily: circularBook,
+                            height: 1.1,
+                            color: const Color(0xFFA1A1A1),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.h,
                   ),
                 ],
               ),
             ),
-            SizedBox(
-              height: 10.w,
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    FeatherIcons.info,
-                    weight: 14.sp,
-                    color: const Color(0xFFA1A1A1),
-                  ),
-                  SizedBox(
-                    width: 8.w,
-                  ),
-                  TextAutoSize(
-                    context.l10n.info_button,
-                    style: TextStyle(
-                      fontSize: 15.sp,
-                      fontFamily: circularBook,
-                      height: 1.1,
-                      color: const Color(0xFFA1A1A1),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
+            
+            // Grid view as sliver
+            SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: GridView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+              sliver: SliverGrid(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 8.w,
                   mainAxisSpacing: 8.w,
                   childAspectRatio: 0.75,
                 ),
-                itemCount: techniques.length,
-                itemBuilder: (context, index) {
-                  return _buildTechniqueCard(techniques[index]);
-                },
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    return _buildTechniqueCard(techniques[index]);
+                  },
+                  childCount: techniques.length,
+                ),
               ),
             ),
-            SizedBox(height: 100.h),
+            
+            // Bottom padding
+            SliverToBoxAdapter(
+              child: SizedBox(height: 100.h),
+            ),
           ],
         ),
       ),
