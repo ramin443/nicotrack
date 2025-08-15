@@ -26,7 +26,7 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen> {
     super.initState();
     _checkedSteps = List.generate(
       widget.exercise.preparationSteps.length + 1, // +1 for the default step
-      (index) => false,
+          (index) => false,
     );
   }
 
@@ -201,14 +201,14 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen> {
           child: GestureDetector(
             onTap: allStepsChecked
                 ? () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            GuidedExerciseScreen(exercise: widget.exercise),
-                      ),
-                    );
-                  }
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      GuidedExerciseScreen(exercise: widget.exercise),
+                ),
+              );
+            }
                 : null,
             child: Container(
               height: 56.h,
@@ -249,7 +249,7 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen> {
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color:
-                _checkedSteps[index] ? nicotrackLightGreen : Colors.grey[200]!,
+            _checkedSteps[index] ? nicotrackLightGreen : Colors.grey[200]!,
             width: 1.5,
           ),
         ),
@@ -260,7 +260,7 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen> {
               height: 24.w,
               decoration: BoxDecoration(
                 color:
-                    _checkedSteps[index] ? nicotrackLightGreen : Colors.white,
+                _checkedSteps[index] ? nicotrackLightGreen : Colors.white,
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: _checkedSteps[index]
@@ -271,10 +271,10 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen> {
               ),
               child: _checkedSteps[index]
                   ? Icon(
-                      Icons.check,
-                      size: 14.sp,
-                      color: Colors.white,
-                    )
+                Icons.check,
+                size: 14.sp,
+                color: Colors.white,
+              )
                   : null,
             ),
             SizedBox(width: 16.w),
@@ -284,7 +284,7 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen> {
                 style: TextStyle(
                   fontSize: 15.sp,
                   fontFamily:
-                      _checkedSteps[index] ? circularMedium : circularBook,
+                  _checkedSteps[index] ? circularMedium : circularBook,
                   color: _checkedSteps[index] ? Colors.white : Colors.black87,
                   height: 1.4,
                 ),
