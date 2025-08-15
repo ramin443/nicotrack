@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/getx-controllers/home-controller.dart';
 import 'package:nicotrack/screens/premium/premium-paywall-screen.dart';
+import 'package:nicotrack/screens/emergency/emergency_craving_motivation_screen.dart';
 import '../../constants/color-constants.dart';
 import '../../constants/font-constants.dart';
 import '../elements/textAutoSize.dart';
@@ -166,9 +167,20 @@ class _HomeState extends State<Home> {
                         SizedBox(
                           height: 12.w,
                         ),
-                        homeController.emergencyCravingButton(
-                          context: context,
-                          label: 'Emergency Craving Button',
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const EmergencyCravingMotivationScreen(),
+                              ),
+                            );
+                          },
+                          child: homeController.emergencyCravingButton(
+                            context: context,
+                            label: 'Emergency Craving Button',
+                          ),
                         ),
                         SizedBox(
                           height: 40.w,
