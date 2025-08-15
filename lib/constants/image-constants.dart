@@ -118,3 +118,4 @@ String neupremiumBG= 'assets/images/Illustration/neu-premium-bg-3.png';
 String badgeBG= "assets/images/Illustration/Polygon 4.png";
 String activityBGBtn = "assets/images/button-bg/activitybgbtn.png";
 String emergencyCravingBtn= 'assets/images/button-bg/emergencyCravingBtn.png';
+String emergencyCravingHomeBtn = "assets/images/button-bg/emergencycravingBtnBg.png";

@@ -166,9 +166,9 @@ class _HomeState extends State<Home> {
                         SizedBox(
                           height: 12.w,
                         ),
-                        homeController.personalizedQuitRoutine(
+                        homeController.emergencyCravingButton(
                           context: context,
-                          label: context.l10n.home_personalized_quit_routine,
+                          label: 'Emergency Craving Button',
                         ),
                         SizedBox(
                           height: 40.w,

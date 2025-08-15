@@ -261,6 +261,7 @@ flutter:
     - assets/images/button-bg/hexapolygon.png
     - assets/images/button-bg/activitybgbtn.png
     - assets/images/button-bg/emergencyCravingBtn.png
+    - assets/images/button-bg/emergencycravingBtnBg.png
     - assets/images/branding/premiumBG.png
     - assets/icons/app_icon.png
 

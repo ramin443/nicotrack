@@ -183,41 +183,41 @@ class _ActivityState extends State<Activity> {
             ),
 
             // Emergency Craving Button positioned at bottom
-            Positioned(
-              bottom: 8.h,
-              left: 20.w,
-              right: 20.w,
-              child: GestureDetector(
-                  onTap: () {
-                    // Add emergency craving functionality here
-                  },
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Container(
-                        height: 52.h, // Give it a specific height
-                        width: double.infinity,
-                        child: Image.asset(
-                          emergencyCravingBtn,
-                          fit: BoxFit.contain, // Ensure proper image scaling
-                        ),
-                      ),
-                      Positioned.fill(
-                        child: Center(
-                          child: TextAutoSize(
-                            '📟 Emergency craving button',
-                            style: TextStyle(
-                              fontSize: 17.sp,
-                              fontFamily: circularBold,
-                              height: 1.1,
-                              color: nicotrackBlack1,
-                            ),
-                          ),
-                        )
-                      )
-                    ],
-                  )),
-            ),
+            // Positioned(
+            //   bottom: 8.h,
+            //   left: 20.w,
+            //   right: 20.w,
+            //   child: GestureDetector(
+            //       onTap: () {
+            //         // Add emergency craving functionality here
+            //       },
+            //       child: Stack(
+            //         alignment: Alignment.center,
+            //         children: [
+            //           Container(
+            //             height: 52.h, // Give it a specific height
+            //             width: double.infinity,
+            //             child: Image.asset(
+            //               emergencyCravingBtn,
+            //               fit: BoxFit.contain, // Ensure proper image scaling
+            //             ),
+            //           ),
+            //           Positioned.fill(
+            //             child: Center(
+            //               child: TextAutoSize(
+            //                 '📟 Emergency craving button',
+            //                 style: TextStyle(
+            //                   fontSize: 17.sp,
+            //                   fontFamily: circularBold,
+            //                   height: 1.1,
+            //                   color: nicotrackBlack1,
+            //                 ),
+            //               ),
+            //             )
+            //           )
+            //         ],
+            //       )),
+            // ),
           ],
         ),
       ),

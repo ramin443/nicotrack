@@ -344,7 +344,6 @@ class HomeController extends GetxController {
                       color: nicotrackBlack1),
                 ),
               )
-
             ],
           ),
         ],
@@ -382,7 +381,9 @@ class HomeController extends GetxController {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AnimatedFlipCounter(
-                  prefix: isCost ? Get.find<AppPreferencesController>().currencySymbol : '',
+                  prefix: isCost
+                      ? Get.find<AppPreferencesController>().currencySymbol
+                      : '',
                   // 👈 add currency symbol dynamically
                   wholeDigits: 2,
                   // 👈 forces two digits to be shown & flip
@@ -406,7 +407,6 @@ class HomeController extends GetxController {
                       color: nicotrackBlack1),
                 ),
               )
-
             ],
           ),
         ],
@@ -546,12 +546,9 @@ class HomeController extends GetxController {
               child: dailyTaskBox(
                   emoji: isSmokedToday ? clappingEmoji : moodEmoji,
                   emojiColor: Color(0xffdfbba8).withOpacity(0.59),
-                  titleTxt: isSmokedToday
-                      ? smokingStatusDone
-                      : didYouSmokeToday,
-                  subTitle: isSmokedToday
-                      ? thanksForUpdate
-                      : letUsKnow,
+                  titleTxt:
+                      isSmokedToday ? smokingStatusDone : didYouSmokeToday,
+                  subTitle: isSmokedToday ? thanksForUpdate : letUsKnow,
                   isCompleted: isSmokedToday,
                   isUserPremium: isUserPremium,
                   taskType: DailyTaskType.smoking),
@@ -563,7 +560,7 @@ class HomeController extends GetxController {
               onTap: () {
                 // Check if user can use mood feature
                 bool canUseMood = MoodUsageService.canUseMoodFeature();
-                
+
                 if (!canUseMood) {
                   // User has exceeded free usage limit, show premium screen
                   Navigator.of(context)
@@ -592,11 +589,8 @@ class HomeController extends GetxController {
               child: dailyTaskBox(
                   emoji: isMoodDone ? kheartEmoji : paperEmoji,
                   emojiColor: Color(0xffEBE8FB).withOpacity(0.53),
-                  titleTxt:
-                      isMoodDone ? moodRecorded : howDoYouFeel,
-                  subTitle: isMoodDone
-                      ? moodSet
-                      : tapToTellMood,
+                  titleTxt: isMoodDone ? moodRecorded : howDoYouFeel,
+                  subTitle: isMoodDone ? moodSet : tapToTellMood,
                   isCompleted: isMoodDone,
                   isUserPremium: isUserPremium,
                   taskType: DailyTaskType.mood),
@@ -688,14 +682,14 @@ class HomeController extends GetxController {
                               color: Color(0xffBCB6D8),
                             )),
                       )
-
                     ],
                   )
                 ],
               ),
             ),
             // Show lock box if user cannot use mood feature
-            taskType == DailyTaskType.mood && !MoodUsageService.canUseMoodFeature()
+            taskType == DailyTaskType.mood &&
+                    !MoodUsageService.canUseMoodFeature()
                 ? Positioned(top: 10.w, right: 10.w, child: smallLockBox())
                 : SizedBox.shrink()
           ],
@@ -869,35 +863,42 @@ class HomeController extends GetxController {
     );
   }
 
-  Widget personalizedQuitRoutine({
+  Widget emergencyCravingButton({
     required BuildContext context,
     required String label,
   }) {
     return Stack(
       alignment: Alignment.center,
       children: [
-        SvgPicture.asset(
-          homePlanBg,
+        Image.asset(
+          emergencyCravingHomeBtn,
           width: 260.w,
         ),
         SizedBox(
           width: 260.w,
-          height: 75.h,
+          // height: 75.h,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
                 width: 18.w,
               ),
-              Image.asset(
-                coffeeEmoji,
-                width: 48.w,
+              // Image.asset(
+              //   coffeeEmoji,
+              //   width: 48.w,
+              TextAutoSize('📟',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    height: 1.1,
+                    fontSize: 50.sp,
+                    fontFamily: circularBold,
+                    color: Colors.black87,
+                  )),
+              SizedBox(
+                width: 8.w,
               ),
               SizedBox(
-                width: 14.w,
-              ),
-              SizedBox(
-                width: 125.w,
+                width: 145.w,
                 child: TextAutoSize(label,
                     textAlign: TextAlign.left,
                     style: TextStyle(
@@ -911,14 +912,14 @@ class HomeController extends GetxController {
               SizedBox(
                 width: 11.w,
               ),
-              Icon(
-                FeatherIcons.chevronRight,
-                size: 26.sp,
-                color: nicotrackBlack1,
-              ),
-              SizedBox(
-                width: 16.w,
-              ),
+              // Icon(
+              //   FeatherIcons.chevronRight,
+              //   size: 26.sp,
+              //   color: nicotrackBlack1,
+              // ),
+              // SizedBox(
+              //   width: 16.w,
+              // ),
             ],
           ),
         ),
@@ -1016,46 +1017,48 @@ class HomeController extends GetxController {
   void toggleAction(int actionNumber) async {
     String quickActionsStringToday = "currentUserActions";
     final box = Hive.box<QuickactionsModel>('quickActionsData');
-    
+
     // Track the current state for analytics
     bool newState = false;
-    String actionText = quickActionsList.length > actionNumber ? quickActionsList[actionNumber] : "unknown_action";
-    
+    String actionText = quickActionsList.length > actionNumber
+        ? quickActionsList[actionNumber]
+        : "unknown_action";
+
     switch (actionNumber) {
       case 0:
         newState = !quickActionsModel.firstActionDone;
-        quickActionsModel = quickActionsModel.copyWith(
-            firstActionDone: newState);
+        quickActionsModel =
+            quickActionsModel.copyWith(firstActionDone: newState);
         await box.put(quickActionsStringToday, quickActionsModel);
       case 1:
         newState = !quickActionsModel.secondActionDone;
-        quickActionsModel = quickActionsModel.copyWith(
-            secondActionDone: newState);
+        quickActionsModel =
+            quickActionsModel.copyWith(secondActionDone: newState);
         await box.put(quickActionsStringToday, quickActionsModel);
       case 2:
         newState = !quickActionsModel.thirdActionDone;
-        quickActionsModel = quickActionsModel.copyWith(
-            thirdActionDone: newState);
+        quickActionsModel =
+            quickActionsModel.copyWith(thirdActionDone: newState);
         await box.put(quickActionsStringToday, quickActionsModel);
       case 3:
         newState = !quickActionsModel.fourthActionDone;
-        quickActionsModel = quickActionsModel.copyWith(
-            fourthActionDone: newState);
+        quickActionsModel =
+            quickActionsModel.copyWith(fourthActionDone: newState);
         await box.put(quickActionsStringToday, quickActionsModel);
       default:
         newState = !quickActionsModel.firstActionDone;
-        quickActionsModel = quickActionsModel.copyWith(
-            firstActionDone: newState);
+        quickActionsModel =
+            quickActionsModel.copyWith(firstActionDone: newState);
         await box.put(quickActionsStringToday, quickActionsModel);
     }
-    
+
     // Log analytics event
     FirebaseService().logQuickActionToggled(
       actionNumber: actionNumber,
       actionText: actionText,
       completed: newState,
     );
-    
+
     setQuickActionsData();
     update();
   }
