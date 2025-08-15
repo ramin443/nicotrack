@@ -216,17 +216,17 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen> {
                                       color: nicotrackBlack1,
                                     ),
                                     children: [
-                                  TextSpan(text: 'Duration: '),
-                                  TextSpan(
-                                    text: widget.exercise.detailedDuration,
-                                    style: TextStyle(
-                                      height: 1.2,
-                                      fontSize: 16.sp,
-                                      fontFamily: circularMedium,
-                                      color: nicotrackOrange,
-                                    ),
-                                  ),
-                                ])),
+                                      TextSpan(text: 'Duration: '),
+                                      TextSpan(
+                                        text: widget.exercise.detailedDuration,
+                                        style: TextStyle(
+                                          height: 1.2,
+                                          fontSize: 16.sp,
+                                          fontFamily: circularMedium,
+                                          color: nicotrackOrange,
+                                        ),
+                                      ),
+                                    ])),
                           ),
                         ],
                       ),
@@ -286,7 +286,7 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen> {
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           TextAutoSize(
                                             step.instruction,
