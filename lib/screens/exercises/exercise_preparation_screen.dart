@@ -6,6 +6,7 @@ import '../../constants/font-constants.dart';
 import '../../models/exercise_model.dart';
 import '../elements/textAutoSize.dart';
 import 'guided_exercise_screen.dart';
+import 'package:flutter/services.dart';
 
 class ExercisePreparationScreen extends StatefulWidget {
   final ExerciseModel exercise;
@@ -113,8 +114,8 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen> {
                       'Take a moment to focus on your intention',
                       isDefault: true,
                     ),
-                    SizedBox(height: 16.h),
-                    
+                    SizedBox(height: 6.w),
+
                     // Exercise-specific preparation steps
                     ...widget.exercise.preparationSteps
                         .asMap()
@@ -123,19 +124,19 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen> {
                       final index = entry.key + 1; // +1 because of default step
                       final step = entry.value;
                       return Padding(
-                        padding: EdgeInsets.only(bottom: 16.h),
+                        padding: EdgeInsets.only(bottom: 6.w),
                         child: _buildChecklistItem(index, step),
                       );
                     }).toList(),
-                    
+
                     SizedBox(height: 20.h),
-                    
+
                     // Tips section
                     Container(
                       padding: EdgeInsets.all(16.w),
                       decoration: BoxDecoration(
-                        color: nicotrackLightGreen.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(12),
+                        color: nicotrackBlack1,
+                        borderRadius: BorderRadius.circular(16.r),
                         border: Border.all(
                           color: nicotrackLightGreen.withOpacity(0.3),
                         ),
@@ -143,31 +144,31 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            '💡',
-                            style: TextStyle(fontSize: 20.sp),
-                          ),
-                          SizedBox(width: 12.w),
+                          // Text(
+                          //   '💡',
+                          //   style: TextStyle(fontSize: 26.sp),
+                          // ),
+                          // SizedBox(width: 12.w),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 TextAutoSize(
-                                  'Tip',
+                                  '💡 Tip',
                                   style: TextStyle(
-                                    fontSize: 14.sp,
+                                    fontSize: 20.sp,
                                     fontFamily: circularBold,
-                                    color: nicotrackBlack1,
+                                    color: Colors.white,
                                   ),
                                 ),
-                                SizedBox(height: 4.h),
+                                SizedBox(height: 4.w),
                                 TextAutoSize(
                                   'This exercise works best when you\'re fully present. Take your time with each step.',
                                   style: TextStyle(
                                     fontSize: 13.sp,
                                     fontFamily: circularBook,
-                                    color: Colors.black87,
-                                    height: 1.4,
+                                    color: Colors.white,
+                                    height: 1.2,
                                   ),
                                 ),
                               ],
@@ -212,14 +213,12 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen> {
             child: Container(
               height: 56.h,
               decoration: BoxDecoration(
-                color: allStepsChecked
-                    ? nicotrackBlack1
-                    : Colors.grey[300],
+                color: allStepsChecked ? nicotrackBlack1 : Colors.grey[300],
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Center(
                 child: TextAutoSize(
-                  'I\'M READY',
+                  'I\'m Ready',
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontFamily: circularBold,
@@ -238,6 +237,7 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen> {
   Widget _buildChecklistItem(int index, String text, {bool isDefault = false}) {
     return GestureDetector(
       onTap: () {
+        HapticFeedback.mediumImpact();
         setState(() {
           _checkedSteps[index] = !_checkedSteps[index];
         });
@@ -245,14 +245,11 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen> {
       child: Container(
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
-          color: _checkedSteps[index]
-              ? nicotrackLightGreen.withOpacity(0.1)
-              : Colors.grey[50],
-          borderRadius: BorderRadius.circular(12),
+          color: _checkedSteps[index] ? nicotrackBlack1 : Colors.grey[50],
+          borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: _checkedSteps[index]
-                ? nicotrackLightGreen
-                : Colors.grey[200]!,
+            color:
+                _checkedSteps[index] ? nicotrackLightGreen : Colors.grey[200]!,
             width: 1.5,
           ),
         ),
@@ -262,9 +259,8 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen> {
               width: 24.w,
               height: 24.w,
               decoration: BoxDecoration(
-                color: _checkedSteps[index]
-                    ? nicotrackLightGreen
-                    : Colors.white,
+                color:
+                    _checkedSteps[index] ? nicotrackLightGreen : Colors.white,
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: _checkedSteps[index]
@@ -287,12 +283,9 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen> {
                 text,
                 style: TextStyle(
                   fontSize: 15.sp,
-                  fontFamily: _checkedSteps[index]
-                      ? circularMedium
-                      : circularBook,
-                  color: _checkedSteps[index]
-                      ? nicotrackBlack1
-                      : Colors.black87,
+                  fontFamily:
+                      _checkedSteps[index] ? circularMedium : circularBook,
+                  color: _checkedSteps[index] ? Colors.white : Colors.black87,
                   height: 1.4,
                 ),
               ),

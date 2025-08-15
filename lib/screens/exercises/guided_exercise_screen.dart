@@ -263,6 +263,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
       context: context,
       barrierDismissible: false,
       builder: (BuildContext dialogContext) => AlertDialog(
+        backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
