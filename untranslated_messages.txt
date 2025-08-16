@@ -73,7 +73,16 @@
     "withdrawal_happens_full_transformation",
     "withdrawal_happens_complete_restoration",
     "withdrawal_happens_peak_performance",
-    "withdrawal_happens_major_milestone"
+    "withdrawal_happens_major_milestone",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "cs": [
@@ -150,14 +159,32 @@
     "withdrawal_happens_full_transformation",
     "withdrawal_happens_complete_restoration",
     "withdrawal_happens_peak_performance",
-    "withdrawal_happens_major_milestone"
+    "withdrawal_happens_major_milestone",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "de": [
     "financial_goal_prefix",
     "financial_goal_completed",
     "days_since_last_smoked_card",
-    "money_saved_card"
+    "money_saved_card",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "el": [
@@ -234,21 +261,48 @@
     "withdrawal_happens_full_transformation",
     "withdrawal_happens_complete_restoration",
     "withdrawal_happens_peak_performance",
-    "withdrawal_happens_major_milestone"
+    "withdrawal_happens_major_milestone",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "es": [
     "financial_goal_prefix",
     "financial_goal_completed",
     "days_since_last_smoked_card",
-    "money_saved_card"
+    "money_saved_card",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "fr": [
     "financial_goal_prefix",
     "financial_goal_completed",
     "days_since_last_smoked_card",
-    "money_saved_card"
+    "money_saved_card",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "he": [
@@ -325,7 +379,16 @@
     "withdrawal_happens_full_transformation",
     "withdrawal_happens_complete_restoration",
     "withdrawal_happens_peak_performance",
-    "withdrawal_happens_major_milestone"
+    "withdrawal_happens_major_milestone",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "hi": [
@@ -402,7 +465,16 @@
     "withdrawal_happens_full_transformation",
     "withdrawal_happens_complete_restoration",
     "withdrawal_happens_peak_performance",
-    "withdrawal_happens_major_milestone"
+    "withdrawal_happens_major_milestone",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "hu": [
@@ -479,7 +551,16 @@
     "withdrawal_happens_full_transformation",
     "withdrawal_happens_complete_restoration",
     "withdrawal_happens_peak_performance",
-    "withdrawal_happens_major_milestone"
+    "withdrawal_happens_major_milestone",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "id": [
@@ -556,21 +637,48 @@
     "withdrawal_happens_full_transformation",
     "withdrawal_happens_complete_restoration",
     "withdrawal_happens_peak_performance",
-    "withdrawal_happens_major_milestone"
+    "withdrawal_happens_major_milestone",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "it": [
     "financial_goal_prefix",
     "financial_goal_completed",
     "days_since_last_smoked_card",
-    "money_saved_card"
+    "money_saved_card",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "ja": [
     "financial_goal_prefix",
     "financial_goal_completed",
     "days_since_last_smoked_card",
-    "money_saved_card"
+    "money_saved_card",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "ko": [
@@ -647,7 +755,16 @@
     "withdrawal_happens_full_transformation",
     "withdrawal_happens_complete_restoration",
     "withdrawal_happens_peak_performance",
-    "withdrawal_happens_major_milestone"
+    "withdrawal_happens_major_milestone",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "nl": [
@@ -724,7 +841,16 @@
     "withdrawal_happens_full_transformation",
     "withdrawal_happens_complete_restoration",
     "withdrawal_happens_peak_performance",
-    "withdrawal_happens_major_milestone"
+    "withdrawal_happens_major_milestone",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "pl": [
@@ -801,14 +927,32 @@
     "withdrawal_happens_full_transformation",
     "withdrawal_happens_complete_restoration",
     "withdrawal_happens_peak_performance",
-    "withdrawal_happens_major_milestone"
+    "withdrawal_happens_major_milestone",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "pt": [
     "financial_goal_prefix",
     "financial_goal_completed",
     "days_since_last_smoked_card",
-    "money_saved_card"
+    "money_saved_card",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "ro": [
@@ -885,14 +1029,32 @@
     "withdrawal_happens_full_transformation",
     "withdrawal_happens_complete_restoration",
     "withdrawal_happens_peak_performance",
-    "withdrawal_happens_major_milestone"
+    "withdrawal_happens_major_milestone",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "ru": [
     "financial_goal_prefix",
     "financial_goal_completed",
     "days_since_last_smoked_card",
-    "money_saved_card"
+    "money_saved_card",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "tr": [
@@ -969,13 +1131,31 @@
     "withdrawal_happens_full_transformation",
     "withdrawal_happens_complete_restoration",
     "withdrawal_happens_peak_performance",
-    "withdrawal_happens_major_milestone"
+    "withdrawal_happens_major_milestone",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ],
 
   "zh": [
     "financial_goal_prefix",
     "financial_goal_completed",
     "days_since_last_smoked_card",
-    "money_saved_card"
+    "money_saved_card",
+    "activity_info_title",
+    "activity_info_subtitle",
+    "activity_info_description",
+    "activity_info_when_to_use",
+    "activity_info_when_description",
+    "activity_info_disclaimer_title",
+    "activity_info_disclaimer_text",
+    "activity_info_remember",
+    "activity_info_remember_text"
   ]
 }

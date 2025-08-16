@@ -860,6 +860,16 @@
   "info_bottom_supportive": "Supportive",
   "info_bottom_journey_unique": "Your journey is unique and valuable",
   
+  "activity_info_title": "About Activities",
+  "activity_info_subtitle": "Science-backed techniques to manage cravings",
+  "activity_info_description": "These activities are scientifically and neurologically proven techniques designed to help you manage cravings effectively. They work by redirecting your focus, calming your nervous system, and strengthening your resolve.",
+  "activity_info_when_to_use": "When to Use",
+  "activity_info_when_description": "Use these activities whenever you experience strong cravings or as part of your daily routine to build resilience against nicotine urges.",
+  "activity_info_disclaimer_title": "Disclaimer",
+  "activity_info_disclaimer_text": "These techniques are suggestions based on research and common experiences. Results may vary from person to person. What works for one individual may not work for another. We encourage you to try different activities to find what works best for you.",
+  "activity_info_remember": "Remember",
+  "activity_info_remember_text": "Every moment you resist a craving makes you stronger. These activities are tools to help you on your journey to becoming smoke-free.",
+  
   "smoking_detail_today": "Today",
   "smoking_detail_yesterday": "Yesterday",
   "smoking_detail_avoidance_title": "This is what you marked\nyou would do next to avoid craving",

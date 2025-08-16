@@ -125,7 +125,358 @@ class _ActivityState extends State<Activity> {
                         height: 10.h,
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            enableDrag: false,
+                            backgroundColor: Colors.transparent,
+                            builder: (BuildContext context) {
+                              return Container(
+                                height: MediaQuery.of(context).size.height * 0.85,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(30.r),
+                                    topRight: Radius.circular(30.r),
+                                  ),
+                                ),
+                                child: Column(
+                                  children: [
+                                    // Handle bar
+                                    Container(
+                                      margin: EdgeInsets.only(top: 12.h),
+                                      width: 50.w,
+                                      height: 5.h,
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[300],
+                                        borderRadius: BorderRadius.circular(10.r),
+                                      ),
+                                    ),
+                                    // Close button
+                                    Align(
+                                      alignment: Alignment.topRight,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                          right: 20.w,
+                                          top: 10.h,
+                                        ),
+                                        child: GestureDetector(
+                                          onTap: () => Navigator.pop(context),
+                                          child: Container(
+                                            width: 32.w,
+                                            height: 32.w,
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey[100],
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Icon(
+                                              FeatherIcons.x,
+                                              size: 18.sp,
+                                              color: Colors.black54,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    // Content
+                                    Expanded(
+                                      child: SingleChildScrollView(
+                                        physics: BouncingScrollPhysics(),
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 24.w,
+                                          vertical: 20.h,
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            // Title with icon
+                                            Container(
+                                              width: 80.w,
+                                              height: 80.w,
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    nicotrackGreen.withOpacity(0.1),
+                                                    nicotrackLightGreen.withOpacity(0.05),
+                                                  ],
+                                                ),
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  "🎮",
+                                                  style: TextStyle(fontSize: 40.sp),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(height: 20.h),
+                                            Text(
+                                              context.l10n.activity_info_title,
+                                              style: TextStyle(
+                                                fontSize: 24.sp,
+                                                fontFamily: circularBold,
+                                                color: nicotrackBlack1,
+                                              ),
+                                            ),
+                                            SizedBox(height: 8.h),
+                                            Text(
+                                              context.l10n.activity_info_subtitle,
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontSize: 14.sp,
+                                                fontFamily: circularMedium,
+                                                color: nicotrackBlack1.withOpacity(0.6),
+                                              ),
+                                            ),
+                                            SizedBox(height: 30.h),
+                                            
+                                            // Main description
+                                            Container(
+                                              padding: EdgeInsets.all(20.w),
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    nicotrackBlack1,
+                                                    nicotrackBlack1.withOpacity(0.95),
+                                                  ],
+                                                ),
+                                                borderRadius: BorderRadius.circular(20.r),
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                        width: 36.w,
+                                                        height: 36.w,
+                                                        decoration: BoxDecoration(
+                                                          color: Colors.white.withOpacity(0.1),
+                                                          shape: BoxShape.circle,
+                                                        ),
+                                                        child: Center(
+                                                          child: Icon(
+                                                            FeatherIcons.activity,
+                                                            size: 18.sp,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(width: 12.w),
+                                                      Text(
+                                                        "How it Works",
+                                                        style: TextStyle(
+                                                          fontSize: 16.sp,
+                                                          fontFamily: circularBold,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(height: 12.h),
+                                                  Text(
+                                                    context.l10n.activity_info_description,
+                                                    style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                      fontFamily: circularBook,
+                                                      color: Colors.white.withOpacity(0.9),
+                                                      height: 1.4,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(height: 16.h),
+                                            
+                                            // When to use section
+                                            Container(
+                                              padding: EdgeInsets.all(20.w),
+                                              decoration: BoxDecoration(
+                                                color: nicotrackLightGreen.withOpacity(0.1),
+                                                borderRadius: BorderRadius.circular(20.r),
+                                                border: Border.all(
+                                                  color: nicotrackGreen.withOpacity(0.2),
+                                                  width: 1.5,
+                                                ),
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                        width: 36.w,
+                                                        height: 36.w,
+                                                        decoration: BoxDecoration(
+                                                          color: nicotrackGreen.withOpacity(0.15),
+                                                          shape: BoxShape.circle,
+                                                        ),
+                                                        child: Center(
+                                                          child: Icon(
+                                                            FeatherIcons.clock,
+                                                            size: 18.sp,
+                                                            color: nicotrackGreen,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(width: 12.w),
+                                                      Text(
+                                                        context.l10n.activity_info_when_to_use,
+                                                        style: TextStyle(
+                                                          fontSize: 16.sp,
+                                                          fontFamily: circularBold,
+                                                          color: nicotrackBlack1,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(height: 12.h),
+                                                  Text(
+                                                    context.l10n.activity_info_when_description,
+                                                    style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                      fontFamily: circularBook,
+                                                      color: nicotrackBlack1.withOpacity(0.8),
+                                                      height: 1.4,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(height: 16.h),
+                                            
+                                            // Disclaimer section
+                                            Container(
+                                              padding: EdgeInsets.all(20.w),
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.circular(20.r),
+                                                border: Border.all(
+                                                  color: Color(0xFFE0E0E0),
+                                                  width: 1.w,
+                                                ),
+                                              ),
+                                              child: Row(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    width: 32.w,
+                                                    height: 32.w,
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: nicotrackOrange.withOpacity(0.1),
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        "⚠️",
+                                                        style: TextStyle(fontSize: 16.sp),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(width: 12.w),
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          context.l10n.activity_info_disclaimer_title,
+                                                          style: TextStyle(
+                                                            fontSize: 14.sp,
+                                                            fontFamily: circularBold,
+                                                            color: nicotrackBlack1,
+                                                            height: 1.1,
+                                                          ),
+                                                        ),
+                                                        SizedBox(height: 6.h),
+                                                        Text(
+                                                          context.l10n.activity_info_disclaimer_text,
+                                                          style: TextStyle(
+                                                            fontSize: 12.sp,
+                                                            fontFamily: circularBook,
+                                                            height: 1.3,
+                                                            color: nicotrackBlack1.withOpacity(0.7),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(height: 16.h),
+                                            
+                                            // Remember section
+                                            Container(
+                                              padding: EdgeInsets.all(20.w),
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    nicotrackPurple.withOpacity(0.1),
+                                                    nicotracklightBlue.withOpacity(0.05),
+                                                  ],
+                                                ),
+                                                borderRadius: BorderRadius.circular(20.r),
+                                                border: Border.all(
+                                                  color: nicotrackPurple.withOpacity(0.2),
+                                                  width: 1.5,
+                                                ),
+                                              ),
+                                              child: Row(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    width: 32.w,
+                                                    height: 32.w,
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: nicotrackPurple.withOpacity(0.15),
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        "💪",
+                                                        style: TextStyle(fontSize: 16.sp),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(width: 12.w),
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          context.l10n.activity_info_remember,
+                                                          style: TextStyle(
+                                                            fontSize: 14.sp,
+                                                            fontFamily: circularBold,
+                                                            color: nicotrackBlack1,
+                                                            height: 1.1,
+                                                          ),
+                                                        ),
+                                                        SizedBox(height: 6.h),
+                                                        Text(
+                                                          context.l10n.activity_info_remember_text,
+                                                          style: TextStyle(
+                                                            fontSize: 12.sp,
+                                                            fontFamily: circularBook,
+                                                            height: 1.3,
+                                                            color: nicotrackBlack1.withOpacity(0.8),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(height: 40.h),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
