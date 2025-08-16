@@ -25,25 +25,25 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
   int _totalElapsedTime = 0;
   bool _isPaused = false;
   bool _isCompleted = false;
-  
+
   late AnimationController _breathingController;
   late Animation<double> _breathingAnimation;
   late AnimationController _progressController;
   late Animation<double> _progressAnimation;
-  
+
   @override
   void initState() {
     super.initState();
     _setupAnimation();
     _startExercise();
   }
-  
+
   void _setupAnimation() {
     _breathingController = AnimationController(
       duration: Duration(seconds: 4),
       vsync: this,
     );
-    
+
     _breathingAnimation = Tween<double>(
       begin: 0.8,
       end: 1.2,
@@ -51,13 +51,13 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
       parent: _breathingController,
       curve: Curves.easeInOut,
     ));
-    
+
     // Setup progress animation controller
     _progressController = AnimationController(
       duration: Duration(seconds: 1), // 1 second for smooth transitions
       vsync: this,
     );
-    
+
     _progressAnimation = Tween<double>(
       begin: 0.0,
       end: 0.0,
@@ -65,34 +65,34 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
       parent: _progressController,
       curve: Curves.easeInOut,
     ));
-    
+
     if (widget.exercise.timerType == ExerciseTimerType.cycle) {
       _breathingController.repeat(reverse: true);
     }
   }
-  
+
   void _startExercise() {
     // Trigger haptic feedback when exercise starts
     HapticFeedback.heavyImpact();
-    
+
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (!_isPaused) {
         setState(() {
           _currentStepTime++;
           _totalElapsedTime++;
-          
+
           // Animate progress to new value
           _animateProgressToCurrentValue();
-          
+
           final currentStep = widget.exercise.exerciseSteps[_currentStepIndex];
           if (_currentStepTime >= currentStep.durationSeconds) {
             if (_currentStepIndex < widget.exercise.exerciseSteps.length - 1) {
               _currentStepIndex++;
               _currentStepTime = 0;
-              
+
               // Trigger heavy haptic feedback when step changes
               HapticFeedback.heavyImpact();
-              
+
               // For cycle exercises, restart when reaching the end
               if (widget.exercise.timerType == ExerciseTimerType.cycle &&
                   _currentStepIndex == widget.exercise.exerciseSteps.length - 1) {
@@ -119,10 +119,10 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
       }
     });
   }
-  
+
   void _animateProgressToCurrentValue() {
     final newProgress = _calculateProgress();
-    
+
     _progressAnimation = Tween<double>(
       begin: _progressAnimation.value,
       end: newProgress,
@@ -130,11 +130,11 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
       parent: _progressController,
       curve: Curves.easeInOut,
     ));
-    
+
     _progressController.reset();
     _progressController.forward();
   }
-  
+
   double _calculateProgress() {
     final totalDuration = widget.exercise.exerciseSteps
         .fold(0, (sum, step) => sum + step.durationSeconds);
@@ -143,7 +143,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
         .fold(0, (sum, step) => sum + step.durationSeconds) + _currentStepTime;
     return elapsedInCurrentCycle / totalDuration;
   }
-  
+
   void _completeExercise() {
     _timer?.cancel();
     setState(() {
@@ -153,7 +153,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
     HapticFeedback.heavyImpact();
     _showCompletionDialog();
   }
-  
+
   void _showCompletionDialog() {
     showDialog(
       context: context,
@@ -228,7 +228,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
       ),
     );
   }
-  
+
   void _togglePause() {
     setState(() {
       _isPaused = !_isPaused;
@@ -239,7 +239,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
       }
     });
   }
-  
+
   void _restart() {
     setState(() {
       _currentStepIndex = 0;
@@ -253,12 +253,12 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
     _animateProgressToCurrentValue();
     _startExercise();
   }
-  
+
   void _stop() {
     // Cancel timer first to prevent any state updates
     _timer?.cancel();
     _breathingController.stop();
-    
+
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -325,7 +325,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
       ),
     );
   }
-  
+
   @override
   void dispose() {
     _timer?.cancel();
@@ -333,18 +333,18 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
     _progressController.dispose();
     super.dispose();
   }
-  
+
   String _formatTime(int seconds) {
     final minutes = seconds ~/ 60;
     final secs = seconds % 60;
     return '${minutes.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
   }
-  
-  
+
+
   @override
   Widget build(BuildContext context) {
     final currentStep = widget.exercise.exerciseSteps[_currentStepIndex];
-    
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -377,7 +377,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
               ),
             ),
             SizedBox(height: 40.h),
-            
+
             // Main Timer Display
             Expanded(
               child: Column(
@@ -422,9 +422,9 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
                       widget.exercise.icon,
                       style: TextStyle(fontSize: 80.sp),
                     ),
-                  
+
                   SizedBox(height: 40.h),
-                  
+
                   // Timer Display
                   TextAutoSize(
                     _formatTime(_currentStepTime),
@@ -434,9 +434,9 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
                       color: nicotrackBlack1,
                     ),
                   ),
-                  
+
                   SizedBox(height: 20.h),
-                  
+
                   // Progress Bar
                   Container(
                     width: 280.w,
@@ -461,9 +461,9 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
                       ),
                     ),
                   ),
-                  
+
                   SizedBox(height: 40.h),
-                  
+
                   // Current Step Instruction
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 40.w),
@@ -509,7 +509,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
                 ],
               ),
             ),
-            
+
             // Control Buttons
             Padding(
               padding: EdgeInsets.all(20.w),
@@ -534,7 +534,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
                     ),
                   ),
                   SizedBox(width: 24.w),
-                  
+
                   // Pause/Play Button
                   GestureDetector(
                     onTap: _togglePause,
@@ -553,7 +553,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
                     ),
                   ),
                   SizedBox(width: 24.w),
-                  
+
                   // Stop Button
                   GestureDetector(
                     onTap: _stop,
