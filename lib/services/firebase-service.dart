@@ -9,22 +9,54 @@ class FirebaseService {
   factory FirebaseService() => _instance;
   FirebaseService._internal();
 
-  // Firebase Analytics instance
-  final FirebaseAnalytics _analytics = FirebaseAnalytics.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // Firebase Analytics instance (lazy initialization)
+  FirebaseAnalytics? _analytics;
+  FirebaseFirestore? _firestore;
+  FirebaseAnalyticsObserver? _analyticsObserver;
 
-  // Analytics getters
-  FirebaseAnalytics get analytics => _analytics;
-  FirebaseAnalyticsObserver get analyticsObserver => FirebaseAnalyticsObserver(analytics: _analytics);
+  // Check if Firebase is initialized
+  bool get isInitialized => _analytics != null;
 
-  // Firestore getter
-  FirebaseFirestore get firestore => _firestore;
+  // Initialize Firebase services
+  void initialize() {
+    _analytics = FirebaseAnalytics.instance;
+    _firestore = FirebaseFirestore.instance;
+    _analyticsObserver = FirebaseAnalyticsObserver(analytics: _analytics!);
+  }
 
-  // Analytics methods
+  // Analytics getters (safe)
+  FirebaseAnalytics get analytics {
+    if (_analytics == null) {
+      throw StateError('Firebase not initialized. Call FirebaseService().initialize() first.');
+    }
+    return _analytics!;
+  }
+  
+  FirebaseAnalyticsObserver get analyticsObserver {
+    if (_analyticsObserver == null) {
+      throw StateError('Firebase not initialized. Call FirebaseService().initialize() first.');
+    }
+    return _analyticsObserver!;
+  }
+
+  // Firestore getter (safe)
+  FirebaseFirestore get firestore {
+    if (_firestore == null) {
+      throw StateError('Firebase not initialized. Call FirebaseService().initialize() first.');
+    }
+    return _firestore!;
+  }
+
+  // Analytics methods (safe)
   Future<void> logEvent({
     required String name,
     Map<String, Object>? parameters,
   }) async {
+    if (!isInitialized) {
+      print('⚠️ Firebase not initialized, skipping event: $name');
+      return;
+    }
+    
     // Debug print to help track events
     print('🔥 Firebase Analytics Event: $name');
     if (parameters != null && parameters.isNotEmpty) {
@@ -33,21 +65,23 @@ class FirebaseService {
       print('📊 Parameters: (no parameters)');
     }
     
-    await _analytics.logEvent(
+    await _analytics!.logEvent(
       name: name,
       parameters: parameters,
     );
   }
 
   Future<void> setUserId(String? id) async {
-    await _analytics.setUserId(id: id);
+    if (!isInitialized) return;
+    await _analytics!.setUserId(id: id);
   }
 
   Future<void> setUserProperty({
     required String name,
     required String? value,
   }) async {
-    await _analytics.setUserProperty(name: name, value: value);
+    if (!isInitialized) return;
+    await _analytics!.setUserProperty(name: name, value: value);
   }
 
   // Note: setCurrentScreen is deprecated in newer Firebase Analytics versions
@@ -329,21 +363,24 @@ class FirebaseService {
     required String userId,
     required Map<String, dynamic> userData,
   }) async {
-    await _firestore.collection('users').doc(userId).set(
+    if (!isInitialized) return;
+    await _firestore!.collection('users').doc(userId).set(
       userData,
       SetOptions(merge: true),
     );
   }
 
-  Future<DocumentSnapshot> getUserData(String userId) async {
-    return await _firestore.collection('users').doc(userId).get();
+  Future<DocumentSnapshot?> getUserData(String userId) async {
+    if (!isInitialized) return null;
+    return await _firestore!.collection('users').doc(userId).get();
   }
 
   Future<void> saveQuitSession({
     required String userId,
     required Map<String, dynamic> sessionData,
   }) async {
-    await _firestore
+    if (!isInitialized) return;
+    await _firestore!
         .collection('users')
         .doc(userId)
         .collection('quit_sessions')
@@ -354,7 +391,8 @@ class FirebaseService {
     required String userId,
     required Map<String, dynamic> moodData,
   }) async {
-    await _firestore
+    if (!isInitialized) return;
+    await _firestore!
         .collection('users')
         .doc(userId)
         .collection('mood_entries')
@@ -365,7 +403,8 @@ class FirebaseService {
     required String userId,
     required Map<String, dynamic> smokeData,
   }) async {
-    await _firestore
+    if (!isInitialized) return;
+    await _firestore!
         .collection('users')
         .doc(userId)
         .collection('smoke_entries')
@@ -373,8 +412,9 @@ class FirebaseService {
   }
 
   // Query methods
-  Stream<QuerySnapshot> getUserMoodEntries(String userId) {
-    return _firestore
+  Stream<QuerySnapshot>? getUserMoodEntries(String userId) {
+    if (!isInitialized) return null;
+    return _firestore!
         .collection('users')
         .doc(userId)
         .collection('mood_entries')
@@ -382,8 +422,9 @@ class FirebaseService {
         .snapshots();
   }
 
-  Stream<QuerySnapshot> getUserSmokeEntries(String userId) {
-    return _firestore
+  Stream<QuerySnapshot>? getUserSmokeEntries(String userId) {
+    if (!isInitialized) return null;
+    return _firestore!
         .collection('users')
         .doc(userId)
         .collection('smoke_entries')
@@ -399,6 +440,8 @@ class FirebaseService {
     required String deviceInfo,
     required String appVersion,
   }) async {
+    if (!isInitialized) return;
+    
     final supportData = {
       'email': email,
       'details': details,
@@ -413,7 +456,7 @@ class FirebaseService {
       'platform': 'flutter_ios',
     };
 
-    await _firestore
+    await _firestore!
         .collection('contact_support')
         .add(supportData);
   }
@@ -427,6 +470,8 @@ class FirebaseService {
     required String appVersion,
     Map<String, dynamic>? userContext,
   }) async {
+    if (!isInitialized) return;
+    
     final feedbackData = {
       'feedback': feedback,
       'rating': rating,
@@ -442,7 +487,7 @@ class FirebaseService {
       'user_context': userContext ?? {},
     };
 
-    await _firestore
+    await _firestore!
         .collection('feedback')
         .add(feedbackData);
   }
@@ -497,30 +542,34 @@ class FirebaseService {
   }
 
   // Query methods for admin dashboard
-  Stream<QuerySnapshot> getAllContactSupport() {
-    return _firestore
+  Stream<QuerySnapshot>? getAllContactSupport() {
+    if (!isInitialized) return null;
+    return _firestore!
         .collection('contact_support')
         .orderBy('timestamp', descending: true)
         .snapshots();
   }
 
-  Stream<QuerySnapshot> getAllFeedback() {
-    return _firestore
+  Stream<QuerySnapshot>? getAllFeedback() {
+    if (!isInitialized) return null;
+    return _firestore!
         .collection('feedback')
         .orderBy('timestamp', descending: true)
         .snapshots();
   }
 
-  Stream<QuerySnapshot> getContactSupportByStatus(String status) {
-    return _firestore
+  Stream<QuerySnapshot>? getContactSupportByStatus(String status) {
+    if (!isInitialized) return null;
+    return _firestore!
         .collection('contact_support')
         .where('status', isEqualTo: status)
         .orderBy('timestamp', descending: true)
         .snapshots();
   }
 
-  Stream<QuerySnapshot> getFeedbackByRating(int minRating) {
-    return _firestore
+  Stream<QuerySnapshot>? getFeedbackByRating(int minRating) {
+    if (!isInitialized) return null;
+    return _firestore!
         .collection('feedback')
         .where('rating', isGreaterThanOrEqualTo: minRating)
         .orderBy('rating', descending: true)

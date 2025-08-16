@@ -34,25 +34,10 @@ import 'package:timezone/data/latest.dart' as tz;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Initialize Firebase
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  
-  // Enable Firebase Analytics debug mode for development
-  FirebaseService().analytics.setAnalyticsCollectionEnabled(true);
-  
-  // Log app launch event
-  await FirebaseService().logAppOpen();
-  
-  print('🚀 App launched - Firebase Analytics initialized');
-  
-  Get.put(ProgressController()); // now accessible globally
-  Get.put(PremiumController()); // Initialize premium controller
-  
+  // Initialize critical services first - minimal blocking
   await Hive.initFlutter();
-
-  // Initialize Hive adapter(s)
+  
+  // Register all adapters at once (synchronous)
   Hive.registerAdapter(OnboardingDataAdapter());
   Hive.registerAdapter(DidYouSmokeAdapter());
   Hive.registerAdapter(MoodModelAdapter());
@@ -61,48 +46,79 @@ void main() async {
   Hive.registerAdapter(NotificationsPreferencesAdapter());
   Hive.registerAdapter(AppPreferencesModelAdapter());
   Hive.registerAdapter(MoodUsageAdapter());
-
-  // Open your Hive box(es)
-  await Hive.openBox<OnboardingData>('onboardingCompletedData');
-  await Hive.openBox<DidYouSmokeModel>('didYouSmokeData');
-  await Hive.openBox<MoodModel>('moodData');
-  await Hive.openBox<QuickactionsModel>('quickActionsData');
-  await Hive.openBox<FinancialGoalsModel>('financialGoalsData');
-  await Hive.openBox<NotificationsPreferencesModel>('notificationsPreferencesData');
-  await Hive.openBox<AppPreferencesModel>('appPreferences');
-  await Hive.openBox<MoodUsageModel>('moodUsageData');
-
-  // Initialize timezone 
-  tz.initializeTimeZones();
   
-  // Initialize premium persistence
-  await PremiumPersistenceService.initialize();
+  // Open only essential boxes for app start
+  await Future.wait([
+    Hive.openBox<OnboardingData>('onboardingCompletedData'),
+    Hive.openBox<AppPreferencesModel>('appPreferences'),
+  ]);
   
-  // Initialize purchase service
-  await PurchaseService().initialize();
+  // Initialize essential controllers
+  Get.put(ProgressController());
+  Get.put(PremiumController());
+  Get.put(AppPreferencesController());
   
-  // Verify subscription status on app startup (for both TestFlight and production)
-  await PurchaseService().verifySubscriptionOnStartup();
-  
-  // Debug premium status after initialization
-  Get.find<PremiumController>().debugPremiumStatus();
-  
-  // Initialize app preferences controller after Hive is ready
-  Get.put(AppPreferencesController()); // Initialize app preferences controller
-  
-  // Initialize settings controller after Hive is ready - MUST be before NotificationService
-  Get.put(SettingsController()); // Initialize settings controller
-  
-  // Initialize notification service AFTER SettingsController to ensure data is properly loaded
-  await NotificationService().initialize();
-  
-  // Check permissions and schedule notifications if enabled
-  await NotificationService().checkPermissionsAndScheduleNotifications();
-  
-  // Log app open event
-  await FirebaseService().logAppOpen();
-
+  // Start the app immediately
   runApp(const MyApp());
+  
+  // Initialize non-critical services after app starts
+  _initializeBackgroundServices();
+}
+
+// Initialize non-critical services in background
+Future<void> _initializeBackgroundServices() async {
+  try {
+    // Initialize Firebase (non-blocking)
+    final firebaseFuture = Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    ).then((_) {
+      FirebaseService().initialize();
+      FirebaseService().analytics.setAnalyticsCollectionEnabled(true);
+      FirebaseService().logAppOpen();
+      print('🚀 Firebase Analytics initialized');
+    });
+    
+    // Open remaining Hive boxes in parallel
+    final hiveBoxesFuture = Future.wait([
+      Hive.openBox<DidYouSmokeModel>('didYouSmokeData'),
+      Hive.openBox<MoodModel>('moodData'),
+      Hive.openBox<QuickactionsModel>('quickActionsData'),
+      Hive.openBox<FinancialGoalsModel>('financialGoalsData'),
+      Hive.openBox<NotificationsPreferencesModel>('notificationsPreferencesData'),
+      Hive.openBox<MoodUsageModel>('moodUsageData'),
+    ]);
+    
+    // Initialize timezone
+    tz.initializeTimeZones();
+    
+    // Wait for Hive boxes before initializing services that depend on them
+    await hiveBoxesFuture;
+    
+    // Initialize settings controller after boxes are ready
+    Get.put(SettingsController());
+    
+    // Wait a moment for SettingsController to fully initialize
+    await Future.delayed(Duration(milliseconds: 100));
+    
+    // Initialize premium and purchase services
+    await PremiumPersistenceService.initialize();
+    await PurchaseService().initialize();
+    
+    // Verify subscription in background
+    PurchaseService().verifySubscriptionOnStartup().then((_) {
+      Get.find<PremiumController>().debugPremiumStatus();
+    });
+    
+    // Initialize notifications last (after SettingsController is ready)
+    await NotificationService().initialize();
+    await NotificationService().checkPermissionsAndScheduleNotifications();
+    
+    // Wait for Firebase to complete
+    await firebaseFuture;
+    
+  } catch (e) {
+    print('Error initializing background services: $e');
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -135,9 +151,9 @@ class MyApp extends StatelessWidget {
                   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
                   useMaterial3: true,
                 ),
-                navigatorObservers: [
-                  FirebaseService().analyticsObserver,
-                ],
+                navigatorObservers: FirebaseService().isInitialized 
+                  ? [FirebaseService().analyticsObserver]
+                  : [],
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 supportedLocales: AppLocalizations.supportedLocales,
                 locale: appLocale, // Always English by default, prevents RTL issues

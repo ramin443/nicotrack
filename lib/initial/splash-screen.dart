@@ -68,37 +68,43 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigateToBaseorHome() async {
-    final box = Hive.box<OnboardingData>(
-        'onboardingCompletedData'); // Specify the type of values in the box
+    // Minimum display time for splash screen (reduced from 3000ms)
+    final minDisplayTime = Future.delayed(const Duration(milliseconds: 800));
+    
+    // Check onboarding status
+    final box = Hive.box<OnboardingData>('onboardingCompletedData');
     OnboardingData? capturedData = box.get('currentUserOnboarding');
+    
+    // Wait for minimum display time
+    await minDisplayTime;
+    
+    if (!mounted) return;
+    
+    // Navigate based on onboarding status
     if (capturedData != null) {
-      await Future.delayed(const Duration(milliseconds: 3000));
       Navigator.pushAndRemoveUntil(
         context,
         PageTransition(
           child: const Base(),
           settings: const RouteSettings(name: 'exerciseBackdrop'),
           type: PageTransitionType.fade,
-          duration: const Duration(milliseconds: 1500),
-          reverseDuration: const Duration(milliseconds: 1000),
+          duration: const Duration(milliseconds: 500),
+          reverseDuration: const Duration(milliseconds: 300),
         ),
         (route) => false,
       );
     } else {
-      if (mounted) {
-        await Future.delayed(const Duration(milliseconds: 3000));
-        Navigator.pushAndRemoveUntil(
-          context,
-          PageTransition(
-            child: const InfoSliderMain(),
-            settings: const RouteSettings(name: 'exerciseBackdrop'),
-            type: PageTransitionType.fade,
-            duration: const Duration(milliseconds: 1500),
-            reverseDuration: const Duration(milliseconds: 1000),
-          ),
-          (route) => false,
-        );
-      }
+      Navigator.pushAndRemoveUntil(
+        context,
+        PageTransition(
+          child: const InfoSliderMain(),
+          settings: const RouteSettings(name: 'exerciseBackdrop'),
+          type: PageTransitionType.fade,
+          duration: const Duration(milliseconds: 500),
+          reverseDuration: const Duration(milliseconds: 300),
+        ),
+        (route) => false,
+      );
     }
   }
 }
