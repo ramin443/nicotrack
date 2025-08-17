@@ -20,8 +20,161 @@ class Activity extends StatefulWidget {
   State<Activity> createState() => _ActivityState();
 }
 
-class _ActivityState extends State<Activity> {
+class _ActivityState extends State<Activity> with SingleTickerProviderStateMixin {
   final List<ExerciseModel> exercises = allExercises;
+  final ScrollController _scrollController = ScrollController();
+  final ScrollController _tabScrollController = ScrollController();
+  bool _showFloatingButton = false;
+  
+  // Filter state
+  int _selectedFilterIndex = 0;
+  late TabController _tabController;
+  
+  final List<Map<String, String>> _filterTabs = [
+    {"key": "all", "emoji": "📱"},
+    {"key": "phase1", "emoji": "1️⃣"},
+    {"key": "phase2", "emoji": "2️⃣"},
+    {"key": "phase3", "emoji": "3️⃣"},
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+    _tabController = TabController(length: _filterTabs.length, vsync: this);
+    _tabController.addListener(() {
+      if (_tabController.indexIsChanging) {
+        setState(() {
+          _selectedFilterIndex = _tabController.index;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+    _tabScrollController.dispose();
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.offset > 200 && !_showFloatingButton) {
+      setState(() {
+        _showFloatingButton = true;
+      });
+    } else if (_scrollController.offset <= 200 && _showFloatingButton) {
+      setState(() {
+        _showFloatingButton = false;
+      });
+    }
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
+  
+  List<ExerciseModel> _getFilteredExercises() {
+    switch (_selectedFilterIndex) {
+      case 0: // All
+        return exercises;
+      case 1: // Phase 1
+        return exercises.where((exercise) => exercise.phase == 'Phase 1').toList();
+      case 2: // Phase 2
+        return exercises.where((exercise) => exercise.phase == 'Phase 2').toList();
+      case 3: // Phase 3
+        return exercises.where((exercise) => exercise.phase == 'Phase 3').toList();
+      default:
+        return exercises;
+    }
+  }
+  
+  String _getTabLabel(int index) {
+    switch (_filterTabs[index]["key"]) {
+      case "all":
+        return "All";
+      case "phase1":
+        return "Phase I";
+      case "phase2":
+        return "Phase II";
+      case "phase3":
+        return "Phase III";
+      default:
+        return "";
+    }
+  }
+
+  Widget _buildFilterTab(int index) {
+    final isSelected = _selectedFilterIndex == index;
+    final tab = _filterTabs[index];
+    
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedFilterIndex = index;
+          _tabController.animateTo(index);
+        });
+        
+        // Scroll to the tapped tab's position (same as progress tabs)
+        final tabWidth = 140.w; // Approximate tab width
+        double targetOffset = (tabWidth + 8.w) * index - 34.w;
+        
+        if (targetOffset < 0) targetOffset = 0;
+        if (targetOffset > _tabScrollController.position.maxScrollExtent) {
+          targetOffset = _tabScrollController.position.maxScrollExtent;
+        }
+        
+        _tabScrollController.animateTo(
+          targetOffset,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.only(
+          left: index == 0 ? 16.w : 0,
+          right: index == _filterTabs.length - 1 ? 16.w : 0
+        ),
+        padding: EdgeInsets.only(
+          right: 18.w, left: 8.w, top: 14.h, bottom: 14.w
+        ),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.black : Colors.transparent,
+          borderRadius: BorderRadius.circular(40.r),
+        ),
+        child: Row(
+          children: [
+            TextAutoSize(
+              '  ${tab["emoji"]!}',
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontFamily: circularBold,
+                height: 1.1,
+                color: isSelected ? Colors.white : nicotrackBlack1
+              ),
+            ),
+            SizedBox(width: 6.w),
+            TextAutoSize(
+              _getTabLabel(index),
+              style: TextStyle(
+                fontSize: 15.sp,
+                fontFamily: circularBold,
+                height: 1.1,
+                color: isSelected ? Colors.white : nicotrackBlack1
+              ),
+            ),
+            SizedBox(width: 2.w),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +184,7 @@ class _ActivityState extends State<Activity> {
         child: Stack(
           children: [
             CustomScrollView(
+              controller: _scrollController,
               physics: BouncingScrollPhysics(),
               slivers: [
                 // Top spacing
@@ -157,12 +311,28 @@ class _ActivityState extends State<Activity> {
                         ),
                       ),
                       SizedBox(
-                        height: 30.w,
+                        height: 18.w,
                       ),
                     ],
                   ),
                 ),
 
+                // Filter tabs
+                SliverToBoxAdapter(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    controller: _tabScrollController,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(_filterTabs.length, (index) {
+                        return _buildFilterTab(index);
+                      }),
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: 18.w),
+                ),
                 // Grid view as sliver
                 SliverPadding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -175,9 +345,10 @@ class _ActivityState extends State<Activity> {
                     ),
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        return _buildTechniqueCard(exercises[index]);
+                        final filteredExercises = _getFilteredExercises();
+                        return _buildTechniqueCard(filteredExercises[index]);
                       },
-                      childCount: exercises.length,
+                      childCount: _getFilteredExercises().length,
                     ),
                   ),
                 ),
@@ -191,6 +362,19 @@ class _ActivityState extends State<Activity> {
           ],
         ),
       ),
+      floatingActionButton: _showFloatingButton
+          ? FloatingActionButton(
+              onPressed: _scrollToTop,
+              backgroundColor: nicotrackBlack1,
+              elevation: 8,
+              heroTag: "activityScrollToTop",
+              child: Icon(
+                Icons.keyboard_arrow_up,
+                color: Colors.white,
+                size: 28.w,
+              ),
+            )
+          : null,
     );
   }
 
