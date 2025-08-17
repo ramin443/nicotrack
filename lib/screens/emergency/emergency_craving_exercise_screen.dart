@@ -12,6 +12,7 @@ import '../exercises/guided_exercise_screen.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'dart:math' as math;
 import 'package:nicotrack/extensions/app_localizations_extension.dart';
+import '../../services/exercise_translation_service.dart';
 
 class EmergencyCravingExerciseScreen extends StatefulWidget {
   const EmergencyCravingExerciseScreen({super.key});
@@ -166,7 +167,7 @@ class _EmergencyCravingExerciseScreenState
                                   ),
                                   SizedBox(width: 6.w),
                                   TextAutoSize(
-                                    selectedExercise.duration,
+                                    ExerciseTranslationService.getDuration(context, selectedExercise.id),
                                     style: TextStyle(
                                       fontSize: 13.sp,
                                       fontFamily: circularBold,
@@ -344,7 +345,7 @@ class _EmergencyCravingExerciseScreenState
                                                 
                                                 // Exercise Title
                                                 TextAutoSize(
-                                                  selectedExercise.title,
+                                                  ExerciseTranslationService.getTitle(context, selectedExercise.id),
                                                   style: TextStyle(
                                                     fontSize: 24.sp,
                                                     fontFamily: circularBold,
@@ -365,7 +366,7 @@ class _EmergencyCravingExerciseScreenState
                                                     borderRadius: BorderRadius.circular(12),
                                                   ),
                                                   child: TextAutoSize(
-                                                    selectedExercise.phase,
+                                                    ExerciseTranslationService.getPhase(context, selectedExercise.id),
                                                     style: TextStyle(
                                                       fontSize: 12.sp,
                                                       fontFamily: circularMedium,
@@ -383,7 +384,7 @@ class _EmergencyCravingExerciseScreenState
                                             child: Column(
                                               children: [
                                                 TextAutoSize(
-                                                  selectedExercise.description,
+                                                  ExerciseTranslationService.getDescription(context, selectedExercise.id),
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                     fontSize: 15.sp,
@@ -444,7 +445,7 @@ class _EmergencyCravingExerciseScreenState
                                                       ),
                                                       SizedBox(height: 12.h),
                                                       TextAutoSize(
-                                                        selectedExercise.science,
+                                                        ExerciseTranslationService.getScience(context, selectedExercise.id),
                                                         textAlign: TextAlign.center,
                                                         style: TextStyle(
                                                           fontSize: 13.sp,
