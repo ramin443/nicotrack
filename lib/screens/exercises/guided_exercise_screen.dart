@@ -7,6 +7,8 @@ import '../../constants/color-constants.dart';
 import '../../constants/font-constants.dart';
 import '../../models/exercise_model.dart';
 import '../elements/textAutoSize.dart';
+import '../../services/exercise_translation_service.dart';
+import '../../extensions/app_localizations_extension.dart';
 
 class GuidedExerciseScreen extends StatefulWidget {
   final ExerciseModel exercise;
@@ -183,7 +185,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
               ),
               SizedBox(height: 8.h),
               TextAutoSize(
-                'You\'ve completed ${widget.exercise.title}',
+                'You\'ve completed ${ExerciseTranslationService.getTitle(context, widget.exercise.id)}',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16.sp,
@@ -358,7 +360,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextAutoSize(
-                    widget.exercise.title,
+                    ExerciseTranslationService.getTitle(context, widget.exercise.id),
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontFamily: circularBold,
@@ -494,7 +496,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
                         ),
                         SizedBox(height: 12.h),
                         TextAutoSize(
-                          currentStep.instruction,
+                          ExerciseTranslationService.getExerciseSteps(context, widget.exercise.id)[_currentStepIndex],
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 18.sp,

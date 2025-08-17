@@ -7,6 +7,8 @@ import '../../models/exercise_model.dart';
 import '../elements/textAutoSize.dart';
 import 'guided_exercise_screen.dart';
 import 'package:flutter/services.dart';
+import '../../services/exercise_translation_service.dart';
+import '../../extensions/app_localizations_extension.dart';
 
 class ExercisePreparationScreen extends StatefulWidget {
   final ExerciseModel exercise;
@@ -34,7 +36,7 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen>
     HapticFeedback.lightImpact();
     
     _checkedSteps = List.generate(
-      widget.exercise.preparationSteps.length + 1, // +1 for the default step
+      3 + 1, // 3 preparation steps + 1 for the default step
       (index) => false,
     );
 
@@ -241,7 +243,7 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen>
                           ),
                           SizedBox(height: 8.h),
                           TextAutoSize(
-                            'Prepare for ${widget.exercise.title}',
+                            'Prepare for ${ExerciseTranslationService.getTitle(context, widget.exercise.id)}',
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontFamily: circularMedium,
@@ -279,7 +281,7 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen>
                               SizedBox(height: 8.w),
 
                               // Exercise-specific preparation steps
-                              ...widget.exercise.preparationSteps
+                              ...ExerciseTranslationService.getPreparationSteps(context, widget.exercise.id)
                                   .asMap()
                                   .entries
                                   .map((entry) {

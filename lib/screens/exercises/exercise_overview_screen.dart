@@ -7,6 +7,8 @@ import '../../constants/font-constants.dart';
 import '../../models/exercise_model.dart';
 import '../elements/textAutoSize.dart';
 import 'exercise_preparation_screen.dart';
+import '../../services/exercise_translation_service.dart';
+import '../../extensions/app_localizations_extension.dart';
 
 class ExerciseOverviewScreen extends StatefulWidget {
   final ExerciseModel exercise;
@@ -162,7 +164,7 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen>
                                     ),
                                     SizedBox(width: 6.w),
                                     TextAutoSize(
-                                      widget.exercise.phase.toUpperCase(),
+                                      ExerciseTranslationService.getPhase(context, widget.exercise.id).toUpperCase(),
                                       style: TextStyle(
                                         fontSize: 11.sp,
                                         fontFamily: circularBold,
@@ -237,7 +239,7 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen>
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 30.w),
                             child: TextAutoSize(
-                              widget.exercise.title,
+                              ExerciseTranslationService.getTitle(context, widget.exercise.id),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 32.sp,
@@ -321,7 +323,7 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen>
                                   ),
                                   SizedBox(height: 12.w),
                                   TextAutoSize(
-                                    widget.exercise.description,
+                                    ExerciseTranslationService.getDescription(context, widget.exercise.id),
                                     style: TextStyle(
                                       fontSize: 14.5.sp,
                                       fontFamily: circularBook,
@@ -389,7 +391,7 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen>
                                   ),
                                   SizedBox(height: 12.w),
                                   TextAutoSize(
-                                    widget.exercise.science,
+                                    ExerciseTranslationService.getScience(context, widget.exercise.id),
                                     style: TextStyle(
                                       fontSize: 14.5.sp,
                                       fontFamily: circularBook,
@@ -523,7 +525,7 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen>
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   TextAutoSize(
-                                                    step.instruction,
+                                                    ExerciseTranslationService.getExerciseSteps(context, widget.exercise.id)[index],
                                                     style: TextStyle(
                                                       fontSize: 14.sp,
                                                       fontFamily:
@@ -661,7 +663,7 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen>
                     ),
                     SizedBox(width: 6.w),
                     TextAutoSize(
-                      widget.exercise.detailedDuration,
+                      ExerciseTranslationService.getDetailedDuration(context, widget.exercise.id),
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontFamily: circularMedium,

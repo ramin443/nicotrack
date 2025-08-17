@@ -12,6 +12,7 @@ import '../../models/exercise_model.dart';
 import '../exercises/exercise_overview_screen.dart';
 import '../elements/info_bottom_sheet.dart';
 import '../elements/activity_info_content.dart';
+import '../../services/exercise_translation_service.dart';
 
 class Activity extends StatefulWidget {
   const Activity({super.key});
@@ -408,7 +409,7 @@ class _ActivityState extends State<Activity> with SingleTickerProviderStateMixin
                   ),
                   SizedBox(height: 12.h),
                   TextAutoSize(
-                    exercise.phase,
+                    ExerciseTranslationService.getPhase(context, exercise.id),
                     style: TextStyle(
                       fontSize: 12.sp,
                       fontFamily: circularMedium,
@@ -417,7 +418,7 @@ class _ActivityState extends State<Activity> with SingleTickerProviderStateMixin
                   ),
                   SizedBox(height: 4.h),
                   TextAutoSize(
-                    exercise.title,
+                    ExerciseTranslationService.getTitle(context, exercise.id),
                     maxLines: 2,
                     style: TextStyle(
                       fontSize: 16.sp,
@@ -436,7 +437,7 @@ class _ActivityState extends State<Activity> with SingleTickerProviderStateMixin
                       ),
                       SizedBox(width: 4.w),
                       TextAutoSize(
-                        exercise.duration,
+                        ExerciseTranslationService.getDuration(context, exercise.id),
                         style: TextStyle(
                           fontSize: 13.sp,
                           fontFamily: circularMedium,
