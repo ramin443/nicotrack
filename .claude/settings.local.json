@@ -54,7 +54,8 @@
       "Bash(do if grep -q \"premium_paywall_unlock_title\" \"/Users/raminudash/StudioProjects/Nicotrack/assets/l10n/app_$lang.arb\")",
       "Bash(then echo \"$lang: HAS premium translations\")",
       "Bash(else echo \"$lang: MISSING premium translations\")",
-      "Bash(do echo \"=== $lang ===\")"
+      "Bash(do echo \"=== $lang ===\")",
+      "WebSearch"
     ],
     "deny": []
   }
