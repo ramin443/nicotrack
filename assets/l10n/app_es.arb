@@ -1355,5 +1355,14 @@
   "exercise_guided_stop_confirmation": "¿Estás seguro de que quieres detener este ejercicio?",
   "exercise_guided_continue": "Continuar",
   "exercise_guided_stop": "Detener",
-  "exercise_guided_current_step": "Paso Actual"
+  "exercise_guided_current_step": "Paso Actual",
+  "emergency_craving_button": "Botón de Emergencia para Ansias",
+  "emergency_badge": "EMERGENCIA",
+  "emergency_motivation_duration": "Toma menos de 3 minutos",
+  "emergency_motivation_cta": "Vence Esta Ansia Ahora",
+  "emergency_exercise_title": "⚡ DESTRUCTOR RÁPIDO DE ANSIAS",
+  "emergency_exercise_subtitle": "Técnica perfecta seleccionada para ti",
+  "emergency_exercise_why_works": "Por Qué Funciona Esto",
+  "emergency_exercise_start": "Comenzar Ejercicio Ahora",
+  "emergency_exercise_try_different": "Probar un Ejercicio Diferente"
 }

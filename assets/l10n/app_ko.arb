@@ -1095,5 +1095,14 @@
   "exercise_guided_stop_confirmation": "정말로 이 운동을 중단하시겠습니까?",
   "exercise_guided_continue": "계속",
   "exercise_guided_stop": "중단",
-  "exercise_guided_current_step": "현재 단계"
+  "exercise_guided_current_step": "현재 단계",
+  "emergency_craving_button": "응급 갈망 버튼",
+  "emergency_badge": "응급",
+  "emergency_motivation_duration": "3분 미만 소요",
+  "emergency_motivation_cta": "지금 이 갈망을 이겨내세요",
+  "emergency_exercise_title": "⚡ 빠른 갈망 파괴자",
+  "emergency_exercise_subtitle": "당신을 위해 선별된 완벽한 기술",
+  "emergency_exercise_why_works": "왜 효과가 있는지",
+  "emergency_exercise_start": "지금 운동 시작하기",
+  "emergency_exercise_try_different": "다른 운동 시도하기"
 }

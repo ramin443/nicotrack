@@ -1095,5 +1095,14 @@
   "exercise_guided_stop_confirmation": "האם אתה בטוח שאתה רוצה להפסיק את התרגיל הזה?",
   "exercise_guided_continue": "המשך",
   "exercise_guided_stop": "הפסק",
-  "exercise_guided_current_step": "השלב הנוכחי"
+  "exercise_guided_current_step": "השלב הנוכחי",
+  "emergency_craving_button": "כפתור חשק חירום",
+  "emergency_badge": "חירום",
+  "emergency_motivation_duration": "לוקח פחות מ-3 דקות",
+  "emergency_motivation_cta": "הבס את החשק הזה עכשיו",
+  "emergency_exercise_title": "⚡ מחסל חשקים מהיר",
+  "emergency_exercise_subtitle": "טכניקה מושלמת שנבחרה בשבילך",
+  "emergency_exercise_why_works": "למה זה עובד",
+  "emergency_exercise_start": "התחל תרגיל עכשיו",
+  "emergency_exercise_try_different": "נסה תרגיל אחר"
 }

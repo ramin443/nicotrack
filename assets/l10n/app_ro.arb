@@ -1095,5 +1095,14 @@
   "exercise_guided_stop_confirmation": "Ești sigur că vrei să oprești acest exercițiu?",
   "exercise_guided_continue": "Continuă",
   "exercise_guided_stop": "Oprește",
-  "exercise_guided_current_step": "Pasul curent"
+  "exercise_guided_current_step": "Pasul curent",
+  "emergency_craving_button": "Butonul de Urgență pentru Poftă",
+  "emergency_badge": "URGENȚĂ",
+  "emergency_motivation_duration": "Durează mai puțin de 3 minute",
+  "emergency_motivation_cta": "Învinge Această Poftă Acum",
+  "emergency_exercise_title": "⚡ DISTRUGĂTOR RAPID DE POFTE",
+  "emergency_exercise_subtitle": "Tehnică perfectă selectată pentru tine",
+  "emergency_exercise_why_works": "De Ce Funcționează",
+  "emergency_exercise_start": "Începe Exercițiul Acum",
+  "emergency_exercise_try_different": "Încearcă un Exercițiu Diferit"
 }

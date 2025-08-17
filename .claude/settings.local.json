@@ -65,7 +65,10 @@
       "Bash(else)",
       "Bash(if grep -q \"exercise_overview_what_it_does\" \"$file\")",
       "Bash(then echo \"✓ HAS exercise translations\")",
-      "Bash(else echo \"✗ MISSING exercise translations\")"
+      "Bash(else echo \"✗ MISSING exercise translations\")",
+      "Bash(if grep -q \"emergency_craving_button\" \"$file\")",
+      "Bash(then echo \"✓ HAS emergency translations\")",
+      "Bash(else echo \"✗ MISSING emergency translations\")"
     ],
     "deny": []
   }

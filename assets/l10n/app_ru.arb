@@ -1380,5 +1380,14 @@
   "exercise_guided_stop_confirmation": "Вы уверены, что хотите остановить это упражнение?",
   "exercise_guided_continue": "Продолжить",
   "exercise_guided_stop": "Остановить",
-  "exercise_guided_current_step": "Текущий Шаг"
+  "exercise_guided_current_step": "Текущий Шаг",
+  "emergency_craving_button": "Кнопка Экстренной Тяги",
+  "emergency_badge": "ЭКСТРЕННО",
+  "emergency_motivation_duration": "Займет меньше 3 минут",
+  "emergency_motivation_cta": "Победи Эту Тягу Сейчас",
+  "emergency_exercise_title": "⚡ БЫСТРЫЙ РАЗРУШИТЕЛЬ ТЯГИ",
+  "emergency_exercise_subtitle": "Идеальная техника выбрана для тебя",
+  "emergency_exercise_why_works": "Почему Это Работает",
+  "emergency_exercise_start": "Начать Упражнение Сейчас",
+  "emergency_exercise_try_different": "Попробовать Другое Упражнение"
 }

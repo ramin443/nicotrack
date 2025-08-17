@@ -1380,5 +1380,14 @@
   "exercise_guided_stop_confirmation": "本当にこのエクササイズを停止しますか？",
   "exercise_guided_continue": "続行",
   "exercise_guided_stop": "停止",
-  "exercise_guided_current_step": "現在のステップ"
+  "exercise_guided_current_step": "現在のステップ",
+  "emergency_craving_button": "緊急渇望ボタン",
+  "emergency_badge": "緊急",
+  "emergency_motivation_duration": "3分未満",
+  "emergency_motivation_cta": "今すぐこの渇望を打ち負かそう",
+  "emergency_exercise_title": "⚡ クイック渇望バスター",
+  "emergency_exercise_subtitle": "あなたのために選ばれた完璧なテクニック",
+  "emergency_exercise_why_works": "なぜ効果があるのか",
+  "emergency_exercise_start": "今すぐエクササイズを開始",
+  "emergency_exercise_try_different": "別のエクササイズを試す"
 }

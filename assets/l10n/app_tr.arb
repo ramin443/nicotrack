@@ -1094,5 +1094,14 @@
   "exercise_guided_stop_confirmation": "Bu egzersizi durdurmak istediğinizden emin misiniz?",
   "exercise_guided_continue": "Devam Et",
   "exercise_guided_stop": "Durdur",
-  "exercise_guided_current_step": "Mevcut Adım"
+  "exercise_guided_current_step": "Mevcut Adım",
+  "emergency_craving_button": "Acil Arzu Düğmesi",
+  "emergency_badge": "ACİL",
+  "emergency_motivation_duration": "3 dakikadan az sürer",
+  "emergency_motivation_cta": "Bu Arzuyu Şimdi Yen",
+  "emergency_exercise_title": "⚡ HIZLI ARZU YIKICI",
+  "emergency_exercise_subtitle": "Senin için seçilen mükemmel teknik",
+  "emergency_exercise_why_works": "Bu Neden İşe Yarar",
+  "emergency_exercise_start": "Egzersizi Şimdi Başlat",
+  "emergency_exercise_try_different": "Farklı Bir Egzersiz Dene"
 }

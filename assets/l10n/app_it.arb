@@ -1380,5 +1380,14 @@
   "exercise_guided_stop_confirmation": "Sei sicuro di voler fermare questo esercizio?",
   "exercise_guided_continue": "Continua",
   "exercise_guided_stop": "Ferma",
-  "exercise_guided_current_step": "Passo Attuale"
+  "exercise_guided_current_step": "Passo Attuale",
+  "emergency_craving_button": "Pulsante di Emergenza Voglia",
+  "emergency_badge": "EMERGENZA",
+  "emergency_motivation_duration": "Richiede meno di 3 minuti",
+  "emergency_motivation_cta": "Sconfiggi Questa Voglia Ora",
+  "emergency_exercise_title": "⚡ DISTRUTTORE RAPIDO DI VOGLIE",
+  "emergency_exercise_subtitle": "Tecnica perfetta selezionata per te",
+  "emergency_exercise_why_works": "Perché Funziona",
+  "emergency_exercise_start": "Inizia Esercizio Ora",
+  "emergency_exercise_try_different": "Prova un Esercizio Diverso"
 }

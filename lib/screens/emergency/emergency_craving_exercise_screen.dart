@@ -11,6 +11,7 @@ import '../elements/textAutoSize.dart';
 import '../exercises/guided_exercise_screen.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'dart:math' as math;
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class EmergencyCravingExerciseScreen extends StatefulWidget {
   const EmergencyCravingExerciseScreen({super.key});
@@ -232,7 +233,7 @@ class _EmergencyCravingExerciseScreenState
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: TextAutoSize(
-                                      '⚡ QUICK CRAVING BUSTER',
+                                      context.l10n.emergency_exercise_title,
                                       style: TextStyle(
                                         fontSize: 12.sp,
                                         fontFamily: circularBold,
@@ -243,7 +244,7 @@ class _EmergencyCravingExerciseScreenState
                                   ),
                                   SizedBox(height: 12.h),
                                   TextAutoSize(
-                                    'Perfect technique selected for you',
+                                    context.l10n.emergency_exercise_subtitle,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 16.sp,
@@ -432,7 +433,7 @@ class _EmergencyCravingExerciseScreenState
                                                           ),
                                                           SizedBox(width: 10.w),
                                                           TextAutoSize(
-                                                            'Why This Works',
+                                                            context.l10n.emergency_exercise_why_works,
                                                             style: TextStyle(
                                                               fontSize: 14.sp,
                                                               fontFamily: circularBold,
@@ -562,7 +563,7 @@ class _EmergencyCravingExerciseScreenState
                                     ),
                                     SizedBox(width: 12.w),
                                     TextAutoSize(
-                                      'Start Exercise Now',
+                                      context.l10n.emergency_exercise_start,
                                       style: TextStyle(
                                         fontSize: 17.sp,
                                         fontFamily: circularBold,
@@ -604,7 +605,7 @@ class _EmergencyCravingExerciseScreenState
                                     ),
                                     SizedBox(width: 10.w),
                                     TextAutoSize(
-                                      'Try a Different Exercise',
+                                      context.l10n.emergency_exercise_try_different,
                                       style: TextStyle(
                                         fontSize: 15.sp,
                                         fontFamily: circularMedium,

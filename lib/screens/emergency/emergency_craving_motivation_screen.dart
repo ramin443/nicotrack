@@ -9,6 +9,7 @@ import '../../constants/image-constants.dart';
 import '../../getx-controllers/emergency-craving-controller.dart';
 import '../elements/textAutoSize.dart';
 import 'package:feather_icons/feather_icons.dart';
+import 'package:nicotrack/extensions/app_localizations_extension.dart';
 
 class EmergencyCravingMotivationScreen extends StatefulWidget {
   const EmergencyCravingMotivationScreen({super.key});
@@ -137,7 +138,7 @@ class _EmergencyCravingMotivationScreenState
                                     ),
                                     SizedBox(width: 6.w),
                                     TextAutoSize(
-                                      'EMERGENCY',
+                                      context.l10n.emergency_badge,
                                       style: TextStyle(
                                         fontSize: 12.sp,
                                         fontFamily: circularBold,
@@ -381,7 +382,7 @@ class _EmergencyCravingMotivationScreenState
                               ),
                               SizedBox(width: 6.w),
                               TextAutoSize(
-                                'Takes less than 3 minutes',
+                                context.l10n.emergency_motivation_duration,
                                 style: TextStyle(
                                   fontSize: 12.sp,
                                   fontFamily: circularMedium,
@@ -431,7 +432,7 @@ class _EmergencyCravingMotivationScreenState
                                 ),
                                 SizedBox(width: 10.w),
                                 TextAutoSize(
-                                  'Beat This Craving Now',
+                                  context.l10n.emergency_motivation_cta,
                                   style: TextStyle(
                                     fontSize: 17.sp,
                                     fontFamily: circularBold,

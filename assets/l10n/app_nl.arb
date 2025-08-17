@@ -1384,5 +1384,14 @@
   "exercise_guided_stop_confirmation": "Weet je zeker dat je deze oefening wilt stoppen?",
   "exercise_guided_continue": "Doorgaan",
   "exercise_guided_stop": "Stop",
-  "exercise_guided_current_step": "Huidige stap"
+  "exercise_guided_current_step": "Huidige stap",
+  "emergency_craving_button": "Noodknop voor Verlangen",
+  "emergency_badge": "NOODGEVAL",
+  "emergency_motivation_duration": "Duurt minder dan 3 minuten",
+  "emergency_motivation_cta": "Versla Dit Verlangen Nu",
+  "emergency_exercise_title": "⚡ SNELLE VERLANGEN VERNIETIGER",
+  "emergency_exercise_subtitle": "Perfecte techniek geselecteerd voor jou",
+  "emergency_exercise_why_works": "Waarom Dit Werkt",
+  "emergency_exercise_start": "Start Oefening Nu",
+  "emergency_exercise_try_different": "Probeer Een Andere Oefening"
 }

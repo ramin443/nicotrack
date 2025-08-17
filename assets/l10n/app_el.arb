@@ -1095,5 +1095,14 @@
   "exercise_guided_stop_confirmation": "Είστε σίγουροι ότι θέλετε να σταματήσετε αυτή την άσκηση;",
   "exercise_guided_continue": "Συνέχεια",
   "exercise_guided_stop": "Διακοπή",
-  "exercise_guided_current_step": "Τρέχον βήμα"
+  "exercise_guided_current_step": "Τρέχον βήμα",
+  "emergency_craving_button": "Κουμπί Επείγουσας Λαχτάρας",
+  "emergency_badge": "ΕΠΕΙΓΟΝ",
+  "emergency_motivation_duration": "Χρειάζεται λιγότερο από 3 λεπτά",
+  "emergency_motivation_cta": "Νίκησε Αυτή τη Λαχτάρα Τώρα",
+  "emergency_exercise_title": "⚡ ΓΡΉΓΟΡΟΣ ΚΑΤΑΣΤΡΟΦΕΑΣ ΛΑΧΤΑΡΩΝ",
+  "emergency_exercise_subtitle": "Τέλεια τεχνική επιλεγμένη για εσένα",
+  "emergency_exercise_why_works": "Γιατί Αυτό Λειτουργεί",
+  "emergency_exercise_start": "Ξεκίνα Άσκηση Τώρα",
+  "emergency_exercise_try_different": "Δοκίμασε Διαφορετική Άσκηση"
 }

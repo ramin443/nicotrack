@@ -1095,5 +1095,14 @@
   "exercise_guided_stop_confirmation": "क्या आप वाकई इस व्यायाम को बंद करना चाहते हैं?",
   "exercise_guided_continue": "जारी रखें",
   "exercise_guided_stop": "बंद करें",
-  "exercise_guided_current_step": "वर्तमान चरण"
+  "exercise_guided_current_step": "वर्तमान चरण",
+  "emergency_craving_button": "आपातकालीन लालसा बटन",
+  "emergency_badge": "आपातकाल",
+  "emergency_motivation_duration": "3 मिनट से कम लगता है",
+  "emergency_motivation_cta": "अब इस लालसा को हराएं",
+  "emergency_exercise_title": "⚡ तेज़ लालसा नाशक",
+  "emergency_exercise_subtitle": "आपके लिए चुनी गई परफेक्ट तकनीक",
+  "emergency_exercise_why_works": "यह क्यों काम करता है",
+  "emergency_exercise_start": "अभी एक्सरसाइज़ शुरू करें",
+  "emergency_exercise_try_different": "एक अलग एक्सरसाइज़ ट्राई करें"
 }

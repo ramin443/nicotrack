@@ -1355,5 +1355,14 @@
   "exercise_guided_stop_confirmation": "Sind Sie sicher, dass Sie diese Übung beenden möchten?",
   "exercise_guided_continue": "Fortfahren",
   "exercise_guided_stop": "Stoppen",
-  "exercise_guided_current_step": "Aktueller Schritt"
+  "exercise_guided_current_step": "Aktueller Schritt",
+  "emergency_craving_button": "Notfall-Verlangen-Taste",
+  "emergency_badge": "NOTFALL",
+  "emergency_motivation_duration": "Dauert weniger als 3 Minuten",
+  "emergency_motivation_cta": "Besiege dieses Verlangen jetzt",
+  "emergency_exercise_title": "⚡ SCHNELLER VERLANGEN-STOPPER",
+  "emergency_exercise_subtitle": "Perfekte Technik für dich ausgewählt",
+  "emergency_exercise_why_works": "Warum das funktioniert",
+  "emergency_exercise_start": "Übung jetzt starten",
+  "emergency_exercise_try_different": "Eine andere Übung probieren"
 }

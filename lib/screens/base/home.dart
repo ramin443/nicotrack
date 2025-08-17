@@ -179,7 +179,7 @@ class _HomeState extends State<Home> {
                           },
                           child: homeController.emergencyCravingButton(
                             context: context,
-                            label: 'Emergency Craving Button',
+                            label: context.l10n.emergency_craving_button,
                           ),
                         ),
                         SizedBox(

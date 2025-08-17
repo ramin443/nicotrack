@@ -1380,5 +1380,14 @@
   "exercise_guided_stop_confirmation": "Tem certeza de que deseja parar este exercício?",
   "exercise_guided_continue": "Continuar",
   "exercise_guided_stop": "Parar",
-  "exercise_guided_current_step": "Passo Atual"
+  "exercise_guided_current_step": "Passo Atual",
+  "emergency_craving_button": "Botão de Emergência de Desejo",
+  "emergency_badge": "EMERGÊNCIA",
+  "emergency_motivation_duration": "Leva menos de 3 minutos",
+  "emergency_motivation_cta": "Vença Este Desejo Agora",
+  "emergency_exercise_title": "⚡ DESTRUIDOR RÁPIDO DE DESEJOS",
+  "emergency_exercise_subtitle": "Técnica perfeita selecionada para você",
+  "emergency_exercise_why_works": "Por Que Isso Funciona",
+  "emergency_exercise_start": "Começar Exercício Agora",
+  "emergency_exercise_try_different": "Tentar um Exercício Diferente"
 }

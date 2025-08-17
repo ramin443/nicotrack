@@ -1095,5 +1095,14 @@
   "exercise_guided_stop_confirmation": "Biztosan le akarod állítani ezt a gyakorlatot?",
   "exercise_guided_continue": "Folytatás",
   "exercise_guided_stop": "Leállítás",
-  "exercise_guided_current_step": "Jelenlegi lépés"
+  "exercise_guided_current_step": "Jelenlegi lépés",
+  "emergency_craving_button": "Sürgősségi Vágy Gomb",
+  "emergency_badge": "SÜRGŐSSÉG",
+  "emergency_motivation_duration": "Kevesebb mint 3 percet vesz igénybe",
+  "emergency_motivation_cta": "Győzd Le Ezt a Vágyat Most",
+  "emergency_exercise_title": "⚡ GYORS VÁGY IRTÓ",
+  "emergency_exercise_subtitle": "Tökéletes technika kiválasztva neked",
+  "emergency_exercise_why_works": "Miért Működik Ez",
+  "emergency_exercise_start": "Gyakorlat Indítása Most",
+  "emergency_exercise_try_different": "Próbálj Egy Másik Gyakorlatot"
 }

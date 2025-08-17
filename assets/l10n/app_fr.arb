@@ -1354,5 +1354,14 @@
   "exercise_guided_stop_confirmation": "Êtes-vous sûr de vouloir arrêter cet exercice ?",
   "exercise_guided_continue": "Continuer",
   "exercise_guided_stop": "Arrêter",
-  "exercise_guided_current_step": "Étape Actuelle"
+  "exercise_guided_current_step": "Étape Actuelle",
+  "emergency_craving_button": "Bouton d'Urgence Envie",
+  "emergency_badge": "URGENCE",
+  "emergency_motivation_duration": "Prend moins de 3 minutes",
+  "emergency_motivation_cta": "Vaincs Cette Envie Maintenant",
+  "emergency_exercise_title": "⚡ BRISEUR D'ENVIE RAPIDE",
+  "emergency_exercise_subtitle": "Technique parfaite sélectionnée pour toi",
+  "emergency_exercise_why_works": "Pourquoi Ça Marche",
+  "emergency_exercise_start": "Commencer l'Exercice Maintenant",
+  "emergency_exercise_try_different": "Essayer un Exercice Différent"
 }

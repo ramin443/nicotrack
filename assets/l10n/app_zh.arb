@@ -1380,5 +1380,14 @@
   "exercise_guided_stop_confirmation": "你确定要停止这个练习吗？",
   "exercise_guided_continue": "继续",
   "exercise_guided_stop": "停止",
-  "exercise_guided_current_step": "当前步骤"
+  "exercise_guided_current_step": "当前步骤",
+  "emergency_craving_button": "紧急渴望按钮",
+  "emergency_badge": "紧急",
+  "emergency_motivation_duration": "不到3分钟",
+  "emergency_motivation_cta": "现在战胜这种渴望",
+  "emergency_exercise_title": "⚡ 快速渴望克星",
+  "emergency_exercise_subtitle": "为您精选的完美技巧",
+  "emergency_exercise_why_works": "为什么有效",
+  "emergency_exercise_start": "立即开始练习",
+  "emergency_exercise_try_different": "尝试不同的练习"
 }

@@ -1095,5 +1095,14 @@
   "exercise_guided_stop_confirmation": "Apakah Anda yakin ingin menghentikan latihan ini?",
   "exercise_guided_continue": "Lanjutkan",
   "exercise_guided_stop": "Hentikan",
-  "exercise_guided_current_step": "Langkah saat ini"
+  "exercise_guided_current_step": "Langkah saat ini",
+  "emergency_craving_button": "Tombol Darurat Hasrat",
+  "emergency_badge": "DARURAT",
+  "emergency_motivation_duration": "Membutuhkan kurang dari 3 menit",
+  "emergency_motivation_cta": "Kalahkan Hasrat Ini Sekarang",
+  "emergency_exercise_title": "⚡ PENGHANCUR HASRAT CEPAT",
+  "emergency_exercise_subtitle": "Teknik sempurna dipilih untuk Anda",
+  "emergency_exercise_why_works": "Mengapa Ini Berhasil",
+  "emergency_exercise_start": "Mulai Latihan Sekarang",
+  "emergency_exercise_try_different": "Coba Latihan Yang Berbeda"
 }
