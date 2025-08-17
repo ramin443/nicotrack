@@ -1045,5 +1045,12 @@
   "manage_notifications_evening_title": "🎯 夜のリマインダー ",
   "manage_notifications_evening_desc": "- 禁煙の成果を祝いましょう。",
   "manage_notifications_allow_button": "通知を許可",
-  "manage_notifications_skip_button": "今はスキップ"
+  "manage_notifications_skip_button": "今はスキップ",
+
+  "activity_screen_title": "アクティビティ",
+  "activity_screen_subtitle": "渇望への対処法",
+  "activity_screen_filter_all": "すべて",
+  "activity_screen_filter_phase_1": "フェーズI",
+  "activity_screen_filter_phase_2": "フェーズII",
+  "activity_screen_filter_phase_3": "フェーズIII"
 }

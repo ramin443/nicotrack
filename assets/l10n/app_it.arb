@@ -1045,5 +1045,12 @@
   "manage_notifications_evening_title": "🎯 Promemoria serali ",
   "manage_notifications_evening_desc": "- Celebra i tuoi traguardi senza fumo.",
   "manage_notifications_allow_button": "Consenti notifiche",
-  "manage_notifications_skip_button": "Salta per ora"
+  "manage_notifications_skip_button": "Salta per ora",
+
+  "activity_screen_title": "Attività",
+  "activity_screen_subtitle": "Tecniche per gestire le voglie",
+  "activity_filter_all": "Tutte",
+  "activity_filter_phase_one": "Fase I",
+  "activity_filter_phase_two": "Fase II",
+  "activity_filter_phase_three": "Fase III"
 }

@@ -1050,5 +1050,12 @@
   "manage_notifications_evening_title": "🎯 Pengingat malam ",
   "manage_notifications_evening_desc": "- Rayakan pencapaian bebas rokok Anda.",
   "manage_notifications_allow_button": "Izinkan notifikasi",
-  "manage_notifications_skip_button": "Lewati untuk sekarang"
+  "manage_notifications_skip_button": "Lewati untuk sekarang",
+
+  "activities": "Aktivitas",
+  "craving_management_techniques": "Teknik mengatasi keinginan",
+  "all": "Semua",
+  "phase_i": "Fase I",
+  "phase_ii": "Fase II",
+  "phase_iii": "Fase III"
 }

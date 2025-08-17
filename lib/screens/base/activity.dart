@@ -95,16 +95,16 @@ class _ActivityState extends State<Activity> with SingleTickerProviderStateMixin
     }
   }
   
-  String _getTabLabel(int index) {
+  String _getTabLabel(BuildContext context, int index) {
     switch (_filterTabs[index]["key"]) {
       case "all":
-        return "All";
+        return context.l10n.activity_filter_all;
       case "phase1":
-        return "Phase I";
+        return context.l10n.activity_filter_phase_one;
       case "phase2":
-        return "Phase II";
+        return context.l10n.activity_filter_phase_two;
       case "phase3":
-        return "Phase III";
+        return context.l10n.activity_filter_phase_three;
       default:
         return "";
     }
@@ -161,7 +161,7 @@ class _ActivityState extends State<Activity> with SingleTickerProviderStateMixin
             ),
             SizedBox(width: 6.w),
             TextAutoSize(
-              _getTabLabel(index),
+              _getTabLabel(context, index),
               style: TextStyle(
                 fontSize: 15.sp,
                 fontFamily: circularBold,
@@ -224,7 +224,7 @@ class _ActivityState extends State<Activity> with SingleTickerProviderStateMixin
                                       height: 8.w,
                                     ),
                                     TextAutoSize(
-                                      "Activities",
+                                      context.l10n.activity_screen_title,
                                       style: TextStyle(
                                           fontSize: 18.sp,
                                           fontFamily: circularBold,
@@ -266,7 +266,7 @@ class _ActivityState extends State<Activity> with SingleTickerProviderStateMixin
                             SizedBox(
                               width: 190.w,
                               child: TextAutoSize(
-                                'Tricks to handle cravings',
+                                context.l10n.activity_screen_subtitle,
                                 style: TextStyle(
                                     fontSize: 16.sp,
                                     fontFamily: circularMedium,

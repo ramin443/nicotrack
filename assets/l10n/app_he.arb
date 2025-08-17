@@ -1050,5 +1050,12 @@
   "manage_notifications_evening_title": "🎯 תזכורות ערב ",
   "manage_notifications_evening_desc": "- חגג את ההצלחות חסרות העישון שלך.",
   "manage_notifications_allow_button": "אפשר התראות",
-  "manage_notifications_skip_button": "דלג לעכשיו"
+  "manage_notifications_skip_button": "דלג לעכשיו",
+
+  "activity_screen_title": "פעילויות",
+  "activity_screen_subtitle": "טכניקות להתמודדות עם חשק",
+  "activity_screen_filter_all": "הכל",
+  "activity_screen_filter_phase_1": "שלב א'",
+  "activity_screen_filter_phase_2": "שלב ב'",
+  "activity_screen_filter_phase_3": "שלב ג'"
 }

@@ -1049,5 +1049,12 @@
   "manage_notifications_evening_title": "🎯 Avond herinneringen ",
   "manage_notifications_evening_desc": "- Vier je rookvrije prestaties.",
   "manage_notifications_allow_button": "Meldingen toestaan",
-  "manage_notifications_skip_button": "Voor nu overslaan"
+  "manage_notifications_skip_button": "Voor nu overslaan",
+
+  "activities": "Activiteiten",
+  "craving_management_techniques": "Technieken om trek te weerstaan",
+  "all": "Alle",
+  "phase_i": "Fase I",
+  "phase_ii": "Fase II",
+  "phase_iii": "Fase III"
 }

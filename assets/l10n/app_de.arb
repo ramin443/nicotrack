@@ -1020,5 +1020,12 @@
   "manage_notifications_evening_title": "🎯 Abenderinnerungen ",
   "manage_notifications_evening_desc": "- Feiern Sie Ihre rauchfreien Erfolge.",
   "manage_notifications_allow_button": "Benachrichtigungen erlauben",
-  "manage_notifications_skip_button": "Vorerst überspringen"
+  "manage_notifications_skip_button": "Vorerst überspringen",
+
+  "activity_screen_title": "Aktivitäten",
+  "activity_screen_subtitle": "Techniken gegen Verlangen",
+  "activity_filter_all": "Alle",
+  "activity_filter_phase_one": "Phase I",
+  "activity_filter_phase_two": "Phase II",
+  "activity_filter_phase_three": "Phase III"
 }

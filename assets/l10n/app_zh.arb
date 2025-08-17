@@ -1045,5 +1045,12 @@
   "manage_notifications_evening_title": "🎯 晚间提醒 ",
   "manage_notifications_evening_desc": "- 庆祝您的无烟成就。",
   "manage_notifications_allow_button": "允许通知",
-  "manage_notifications_skip_button": "暂时跳过"
+  "manage_notifications_skip_button": "暂时跳过",
+
+  "activity_screen_title": "活动",
+  "activity_screen_subtitle": "应对渴望的技巧",
+  "activity_filter_all": "全部",
+  "activity_filter_phase_one": "第一阶段",
+  "activity_filter_phase_two": "第二阶段",
+  "activity_filter_phase_three": "第三阶段"
 }

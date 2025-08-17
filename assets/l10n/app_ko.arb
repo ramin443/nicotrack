@@ -1050,5 +1050,12 @@
   "manage_notifications_evening_title": "🎯 저녁 알림 ",
   "manage_notifications_evening_desc": "- 금연 성취를 축하하세요.",
   "manage_notifications_allow_button": "알림 허용",
-  "manage_notifications_skip_button": "지금은 건너뛰기"
+  "manage_notifications_skip_button": "지금은 건너뛰기",
+
+  "activity_screen_title": "활동",
+  "activity_screen_subtitle": "갈망 대처법",
+  "activity_screen_filter_all": "전체",
+  "activity_screen_filter_phase_1": "1단계",
+  "activity_screen_filter_phase_2": "2단계",
+  "activity_screen_filter_phase_3": "3단계"
 }

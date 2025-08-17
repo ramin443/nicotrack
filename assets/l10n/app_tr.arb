@@ -1049,5 +1049,12 @@
   "manage_notifications_evening_title": "🎯 Akşam hatırlatmaları ",
   "manage_notifications_evening_desc": "- Sigarasız başarılarınızı kutlayın.",
   "manage_notifications_allow_button": "Bildirimlere izin ver",
-  "manage_notifications_skip_button": "Şimdilik atla"
+  "manage_notifications_skip_button": "Şimdilik atla",
+
+  "activities": "Aktiviteler",
+  "craving_management_techniques": "İstek yönetim teknikleri",
+  "all": "Tümü",
+  "phase_i": "Faz I",
+  "phase_ii": "Faz II",
+  "phase_iii": "Faz III"
 }

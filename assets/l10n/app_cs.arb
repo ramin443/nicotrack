@@ -1050,5 +1050,12 @@
   "manage_notifications_evening_title": "🎯 Večerní připomínky ",
   "manage_notifications_evening_desc": "- Oslavte své úspěchy bez kouření.",
   "manage_notifications_allow_button": "Povolit upozornění",
-  "manage_notifications_skip_button": "Pro teď přeskočit"
+  "manage_notifications_skip_button": "Pro teď přeskočit",
+
+  "activities": "Aktivity",
+  "craving_management_techniques": "Techniky zvládání chuti",
+  "all": "Všechny",
+  "phase_i": "Fáze I",
+  "phase_ii": "Fáze II",
+  "phase_iii": "Fáze III"
 }

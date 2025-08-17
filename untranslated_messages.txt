@@ -82,7 +82,11 @@
     "activity_info_disclaimer_title",
     "activity_info_disclaimer_text",
     "activity_info_remember",
-    "activity_info_remember_text"
+    "activity_info_remember_text",
+    "activity_filter_all",
+    "activity_filter_phase_one",
+    "activity_filter_phase_two",
+    "activity_filter_phase_three"
   ],
 
   "cs": [
@@ -168,7 +172,13 @@
     "activity_info_disclaimer_title",
     "activity_info_disclaimer_text",
     "activity_info_remember",
-    "activity_info_remember_text"
+    "activity_info_remember_text",
+    "activity_screen_title",
+    "activity_screen_subtitle",
+    "activity_filter_all",
+    "activity_filter_phase_one",
+    "activity_filter_phase_two",
+    "activity_filter_phase_three"
   ],
 
   "de": [
@@ -270,7 +280,13 @@
     "activity_info_disclaimer_title",
     "activity_info_disclaimer_text",
     "activity_info_remember",
-    "activity_info_remember_text"
+    "activity_info_remember_text",
+    "activity_screen_title",
+    "activity_screen_subtitle",
+    "activity_filter_all",
+    "activity_filter_phase_one",
+    "activity_filter_phase_two",
+    "activity_filter_phase_three"
   ],
 
   "es": [
@@ -388,7 +404,11 @@
     "activity_info_disclaimer_title",
     "activity_info_disclaimer_text",
     "activity_info_remember",
-    "activity_info_remember_text"
+    "activity_info_remember_text",
+    "activity_filter_all",
+    "activity_filter_phase_one",
+    "activity_filter_phase_two",
+    "activity_filter_phase_three"
   ],
 
   "hi": [
@@ -474,7 +494,11 @@
     "activity_info_disclaimer_title",
     "activity_info_disclaimer_text",
     "activity_info_remember",
-    "activity_info_remember_text"
+    "activity_info_remember_text",
+    "activity_filter_all",
+    "activity_filter_phase_one",
+    "activity_filter_phase_two",
+    "activity_filter_phase_three"
   ],
 
   "hu": [
@@ -560,7 +584,13 @@
     "activity_info_disclaimer_title",
     "activity_info_disclaimer_text",
     "activity_info_remember",
-    "activity_info_remember_text"
+    "activity_info_remember_text",
+    "activity_screen_title",
+    "activity_screen_subtitle",
+    "activity_filter_all",
+    "activity_filter_phase_one",
+    "activity_filter_phase_two",
+    "activity_filter_phase_three"
   ],
 
   "id": [
@@ -646,7 +676,13 @@
     "activity_info_disclaimer_title",
     "activity_info_disclaimer_text",
     "activity_info_remember",
-    "activity_info_remember_text"
+    "activity_info_remember_text",
+    "activity_screen_title",
+    "activity_screen_subtitle",
+    "activity_filter_all",
+    "activity_filter_phase_one",
+    "activity_filter_phase_two",
+    "activity_filter_phase_three"
   ],
 
   "it": [
@@ -678,7 +714,11 @@
     "activity_info_disclaimer_title",
     "activity_info_disclaimer_text",
     "activity_info_remember",
-    "activity_info_remember_text"
+    "activity_info_remember_text",
+    "activity_filter_all",
+    "activity_filter_phase_one",
+    "activity_filter_phase_two",
+    "activity_filter_phase_three"
   ],
 
   "ko": [
@@ -764,7 +804,11 @@
     "activity_info_disclaimer_title",
     "activity_info_disclaimer_text",
     "activity_info_remember",
-    "activity_info_remember_text"
+    "activity_info_remember_text",
+    "activity_filter_all",
+    "activity_filter_phase_one",
+    "activity_filter_phase_two",
+    "activity_filter_phase_three"
   ],
 
   "nl": [
@@ -850,7 +894,13 @@
     "activity_info_disclaimer_title",
     "activity_info_disclaimer_text",
     "activity_info_remember",
-    "activity_info_remember_text"
+    "activity_info_remember_text",
+    "activity_screen_title",
+    "activity_screen_subtitle",
+    "activity_filter_all",
+    "activity_filter_phase_one",
+    "activity_filter_phase_two",
+    "activity_filter_phase_three"
   ],
 
   "pl": [
@@ -936,7 +986,13 @@
     "activity_info_disclaimer_title",
     "activity_info_disclaimer_text",
     "activity_info_remember",
-    "activity_info_remember_text"
+    "activity_info_remember_text",
+    "activity_screen_title",
+    "activity_screen_subtitle",
+    "activity_filter_all",
+    "activity_filter_phase_one",
+    "activity_filter_phase_two",
+    "activity_filter_phase_three"
   ],
 
   "pt": [
@@ -1038,7 +1094,13 @@
     "activity_info_disclaimer_title",
     "activity_info_disclaimer_text",
     "activity_info_remember",
-    "activity_info_remember_text"
+    "activity_info_remember_text",
+    "activity_screen_title",
+    "activity_screen_subtitle",
+    "activity_filter_all",
+    "activity_filter_phase_one",
+    "activity_filter_phase_two",
+    "activity_filter_phase_three"
   ],
 
   "ru": [
@@ -1140,7 +1202,13 @@
     "activity_info_disclaimer_title",
     "activity_info_disclaimer_text",
     "activity_info_remember",
-    "activity_info_remember_text"
+    "activity_info_remember_text",
+    "activity_screen_title",
+    "activity_screen_subtitle",
+    "activity_filter_all",
+    "activity_filter_phase_one",
+    "activity_filter_phase_two",
+    "activity_filter_phase_three"
   ],
 
   "zh": [

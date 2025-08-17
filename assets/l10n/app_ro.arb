@@ -1050,5 +1050,12 @@
   "manage_notifications_evening_title": "🎯 Memento-uri de seară ",
   "manage_notifications_evening_desc": "- Sărbătoriți realizările fără fumat.",
   "manage_notifications_allow_button": "Permite notificările",
-  "manage_notifications_skip_button": "Sari pentru moment"
+  "manage_notifications_skip_button": "Sari pentru moment",
+
+  "activities": "Activități",
+  "craving_management_techniques": "Tehnici pentru gestionarea poftelor",
+  "all": "Toate",
+  "phase_i": "Faza I",
+  "phase_ii": "Faza II",
+  "phase_iii": "Faza III"
 }

@@ -1050,5 +1050,12 @@
   "manage_notifications_evening_title": "🎯 शाम के रिमाइंडर ",
   "manage_notifications_evening_desc": "- अपनी धूम्रपान-मुक्त उपलब्धियों का जश्न मनाएं।",
   "manage_notifications_allow_button": "सूचनाओं की अनुमति दें",
-  "manage_notifications_skip_button": "अभी के लिए छोड़ें"
+  "manage_notifications_skip_button": "अभी के लिए छोड़ें",
+
+  "activity_screen_title": "गतिविधियाँ",
+  "activity_screen_subtitle": "तीव्र इच्छा से निपटने के तरीके",
+  "activity_screen_filter_all": "सभी",
+  "activity_screen_filter_phase_1": "चरण I",
+  "activity_screen_filter_phase_2": "चरण II",
+  "activity_screen_filter_phase_3": "चरण III"
 }

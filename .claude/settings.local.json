@@ -55,7 +55,8 @@
       "Bash(then echo \"$lang: HAS premium translations\")",
       "Bash(else echo \"$lang: MISSING premium translations\")",
       "Bash(do echo \"=== $lang ===\")",
-      "WebSearch"
+      "WebSearch",
+      "Bash(do echo \"Checking $file:\")"
     ],
     "deny": []
   }

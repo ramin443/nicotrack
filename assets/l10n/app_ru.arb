@@ -1045,5 +1045,12 @@
   "manage_notifications_evening_title": "🎯 Вечерние напоминания ",
   "manage_notifications_evening_desc": "- Отмечайте свои достижения без курения.",
   "manage_notifications_allow_button": "Разрешить уведомления",
-  "manage_notifications_skip_button": "Пропустить пока"
+  "manage_notifications_skip_button": "Пропустить пока",
+
+  "activity_screen_title": "Активности",
+  "activity_screen_subtitle": "Способы справиться с тягой",
+  "activity_filter_all": "Все",
+  "activity_filter_phase_one": "Фаза I",
+  "activity_filter_phase_two": "Фаза II",
+  "activity_filter_phase_three": "Фаза III"
 }

@@ -1050,5 +1050,12 @@
   "manage_notifications_evening_title": "🎯 Esti emlékeztetők ",
   "manage_notifications_evening_desc": "- Ünnepelje dohányzásmentes eredményeit.",
   "manage_notifications_allow_button": "Értesítések engedélyezése",
-  "manage_notifications_skip_button": "Kihagyás egylőre"
+  "manage_notifications_skip_button": "Kihagyás egylőre",
+
+  "activities": "Tevékenységek",
+  "craving_management_techniques": "Vágyakozás kezelési technikák",
+  "all": "Összes",
+  "phase_i": "I. fázis",
+  "phase_ii": "II. fázis",
+  "phase_iii": "III. fázis"
 }

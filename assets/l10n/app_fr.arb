@@ -1019,5 +1019,12 @@
   "manage_notifications_evening_title": "🎯 Rappels du soir ",
   "manage_notifications_evening_desc": "- Célébrez vos réussites sans tabac.",
   "manage_notifications_allow_button": "Autoriser les notifications",
-  "manage_notifications_skip_button": "Passer pour maintenant"
+  "manage_notifications_skip_button": "Passer pour maintenant",
+
+  "activity_screen_title": "Activités",
+  "activity_screen_subtitle": "Techniques pour gérer les envies",
+  "activity_filter_all": "Toutes",
+  "activity_filter_phase_one": "Phase I",
+  "activity_filter_phase_two": "Phase II",
+  "activity_filter_phase_three": "Phase III"
 }

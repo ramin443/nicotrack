@@ -1049,5 +1049,12 @@
   "manage_notifications_evening_title": "🎯 Wieczorne przypomnienia ",
   "manage_notifications_evening_desc": "- Świętuj swoje osiągnięcia bez papierosów.",
   "manage_notifications_allow_button": "Zezwól na powiadomienia",
-  "manage_notifications_skip_button": "Pomiń na razie"
+  "manage_notifications_skip_button": "Pomiń na razie",
+
+  "activities": "Aktywności",
+  "craving_management_techniques": "Sposoby na radzenie sobie z głodem nikotynowym",
+  "all": "Wszystkie",
+  "phase_i": "Faza I",
+  "phase_ii": "Faza II",
+  "phase_iii": "Faza III"
 }
