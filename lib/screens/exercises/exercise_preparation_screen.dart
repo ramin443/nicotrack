@@ -234,7 +234,7 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen>
                       child: Column(
                         children: [
                           TextAutoSize(
-                            'Get Ready',
+                            context.l10n.exercise_preparation_get_ready,
                             style: TextStyle(
                               fontSize: 32.sp,
                               fontFamily: circularBold,
@@ -243,7 +243,7 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen>
                           ),
                           SizedBox(height: 8.h),
                           TextAutoSize(
-                            'Prepare for ${ExerciseTranslationService.getTitle(context, widget.exercise.id)}',
+                            context.l10n.exercise_preparation_prepare_for(ExerciseTranslationService.getTitle(context, widget.exercise.id)),
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontFamily: circularMedium,
@@ -275,7 +275,7 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen>
                               // Default preparation step
                               _buildChecklistItem(
                                 0,
-                                'Take a moment to focus on your intention',
+                                context.l10n.exercise_preparation_focus_intention,
                                 isDefault: true,
                               ),
                               SizedBox(height: 8.w),
@@ -335,7 +335,7 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen>
                                         ),
                                         SizedBox(width: 12.w),
                                         TextAutoSize(
-                                          'Pro Tip',
+                                          context.l10n.exercise_preparation_pro_tip,
                                           style: TextStyle(
                                             fontSize: 18.sp,
                                             fontFamily: circularBold,
@@ -346,7 +346,7 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen>
                                     ),
                                     SizedBox(height: 16.h),
                                     TextAutoSize(
-                                      'This exercise works best when you\'re fully present. Take your time with each step and breathe deeply.',
+                                      context.l10n.exercise_preparation_pro_tip_text,
                                       style: TextStyle(
                                         fontSize: 15.sp,
                                         fontFamily: circularBook,
@@ -414,8 +414,8 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen>
                         SizedBox(width: 6.w),
                         TextAutoSize(
                           allStepsChecked 
-                              ? 'All steps completed'
-                              : '${_checkedSteps.where((c) => c).length}/${_checkedSteps.length} completed',
+                              ? context.l10n.exercise_preparation_all_steps_completed
+                              : context.l10n.exercise_preparation_steps_completed(_checkedSteps.where((c) => c).length, _checkedSteps.length),
                           style: TextStyle(
                             fontSize: 12.sp,
                             fontFamily: circularMedium,
@@ -481,7 +481,7 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen>
                         SizedBox(width: 12.w),
                       ],
                       TextAutoSize(
-                        allStepsChecked ? 'I\'m Ready' : 'Complete all steps first',
+                        allStepsChecked ? context.l10n.exercise_preparation_im_ready : context.l10n.exercise_preparation_complete_all_steps,
                         style: TextStyle(
                           fontSize: 17.sp,
                           fontFamily: circularBold,
@@ -616,7 +616,7 @@ class _ExercisePreparationScreenState extends State<ExercisePreparationScreen>
                     Padding(
                       padding: EdgeInsets.only(top: 4.h),
                       child: TextAutoSize(
-                        'Essential first step',
+                        context.l10n.exercise_preparation_essential_first_step,
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontFamily: circularBook,

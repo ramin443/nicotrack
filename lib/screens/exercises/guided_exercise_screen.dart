@@ -176,7 +176,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
               ),
               SizedBox(height: 16.h),
               TextAutoSize(
-                'Great Job!',
+                context.l10n.exercise_guided_great_job,
                 style: TextStyle(
                   fontSize: 24.sp,
                   fontFamily: circularBold,
@@ -185,7 +185,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
               ),
               SizedBox(height: 8.h),
               TextAutoSize(
-                'You\'ve completed ${ExerciseTranslationService.getTitle(context, widget.exercise.id)}',
+                context.l10n.exercise_guided_completed(ExerciseTranslationService.getTitle(context, widget.exercise.id)),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16.sp,
@@ -214,7 +214,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
                   ),
                   child: Center(
                     child: TextAutoSize(
-                      'Done',
+                      context.l10n.exercise_guided_done,
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontFamily: circularBold,
@@ -270,7 +270,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
           borderRadius: BorderRadius.circular(16),
         ),
         title: TextAutoSize(
-          'Stop Exercise?',
+          context.l10n.exercise_guided_stop_exercise,
           style: TextStyle(
             fontSize: 18.sp,
             fontFamily: circularBold,
@@ -278,7 +278,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
           ),
         ),
         content: TextAutoSize(
-          'Are you sure you want to stop this exercise?',
+          context.l10n.exercise_guided_stop_confirmation,
           style: TextStyle(
             fontSize: 14.sp,
             fontFamily: circularBook,
@@ -296,7 +296,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
               }
             },
             child: TextAutoSize(
-              'Continue',
+              context.l10n.exercise_guided_continue,
               style: TextStyle(
                 fontSize: 14.sp,
                 fontFamily: circularMedium,
@@ -315,7 +315,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
               });
             },
             child: TextAutoSize(
-              'Stop',
+              context.l10n.exercise_guided_stop,
               style: TextStyle(
                 fontSize: 14.sp,
                 fontFamily: circularMedium,
@@ -485,7 +485,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
                             ),
                             SizedBox(width: 8.w),
                             TextAutoSize(
-                              'Current Step',
+                              context.l10n.exercise_guided_current_step,
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 fontFamily: circularMedium,

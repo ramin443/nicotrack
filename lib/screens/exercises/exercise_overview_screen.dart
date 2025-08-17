@@ -312,7 +312,7 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen>
                                       ),
                                       SizedBox(width: 12.w),
                                       TextAutoSize(
-                                        'What it does',
+                                        context.l10n.exercise_overview_what_it_does,
                                         style: TextStyle(
                                           fontSize: 18.sp,
                                           fontFamily: circularBold,
@@ -380,7 +380,7 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen>
                                       ),
                                       SizedBox(width: 12.w),
                                       TextAutoSize(
-                                        'The Science',
+                                        context.l10n.exercise_overview_the_science,
                                         style: TextStyle(
                                           fontSize: 18.sp,
                                           fontFamily: circularBold,
@@ -450,7 +450,7 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen>
                                               color: nicotrackBlack1,
                                             ),
                                             children: [
-                                          TextSpan(text: 'Duration: '),
+                                          TextSpan(text: context.l10n.exercise_overview_duration_label),
                                           TextSpan(
                                             text: widget
                                                 .exercise.detailedDuration,
@@ -480,7 +480,7 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     TextAutoSize(
-                                      'Exercise Steps',
+                                      context.l10n.exercise_overview_exercise_steps,
                                       style: TextStyle(
                                         fontSize: 16.sp,
                                         fontFamily: circularBold,
@@ -535,7 +535,7 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen>
                                                   ),
                                                   if (step.durationSeconds > 0)
                                                     TextAutoSize(
-                                                      '${step.durationSeconds} seconds',
+                                                      '${step.durationSeconds} ${context.l10n.exercise_overview_seconds}',
                                                       style: TextStyle(
                                                         fontSize: 12.sp,
                                                         fontFamily:
@@ -595,8 +595,8 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen>
                                     SizedBox(width: 10.w),
                                     TextAutoSize(
                                       _learnMoreExpanded
-                                          ? 'Show Less'
-                                          : 'Learn More',
+                                          ? context.l10n.exercise_overview_show_less
+                                          : context.l10n.exercise_overview_learn_more,
                                       style: TextStyle(
                                         fontSize: 16.sp,
                                         fontFamily: circularMedium,
@@ -715,7 +715,7 @@ class _ExerciseOverviewScreenState extends State<ExerciseOverviewScreen>
                       ),
                       SizedBox(width: 12.w),
                       TextAutoSize(
-                        'Start Exercise',
+                        context.l10n.exercise_overview_start_exercise,
                         style: TextStyle(
                           fontSize: 17.sp,
                           fontFamily: circularBold,

@@ -62,7 +62,10 @@
       "Bash(missing_files=\"\")",
       "Bash(if ! grep -q \"\"\"$key\"\":\" \"/Users/raminudash/StudioProjects/Nicotrack/assets/l10n/app_$lang.arb\")",
       "Bash(if [ -z \"$missing_files\" ])",
-      "Bash(else)"
+      "Bash(else)",
+      "Bash(if grep -q \"exercise_overview_what_it_does\" \"$file\")",
+      "Bash(then echo \"✓ HAS exercise translations\")",
+      "Bash(else echo \"✗ MISSING exercise translations\")"
     ],
     "deny": []
   }
