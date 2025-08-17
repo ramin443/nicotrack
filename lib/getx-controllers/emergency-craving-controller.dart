@@ -1,10 +1,12 @@
 import 'dart:math';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import '../models/exercise_model.dart';
 import '../models/onboarding-data/onboardingData-model.dart';
 import '../utility-functions/home-grid-calculations.dart';
+import '../extensions/app_localizations_extension.dart';
 import 'app-preferences-controller.dart';
 
 class EmergencyCravingController extends GetxController {
@@ -24,7 +26,7 @@ class EmergencyCravingController extends GetxController {
     '12', // Hand Warming (1 min)
   ];
   
-  Map<String, dynamic> getRandomMotivation() {
+  Map<String, dynamic> getRandomMotivation(BuildContext context) {
     final hour = DateTime.now().hour;
     final isEvening = hour >= 18 || hour < 6;
     
@@ -37,6 +39,7 @@ class EmergencyCravingController extends GetxController {
     final cigarettesAvoided = getcigarettesNotSmoked(DateTime.now());
     
     final messages = _buildMotivationMessages(
+      context: context,
       userData: userData,
       daysSinceStopped: daysSinceStopped,
       moneySaved: moneySaved,
@@ -60,6 +63,7 @@ class EmergencyCravingController extends GetxController {
   }
   
   List<Map<String, dynamic>> _buildMotivationMessages({
+    required BuildContext context,
     required OnboardingData userData,
     required int daysSinceStopped,
     required double moneySaved,
@@ -74,60 +78,60 @@ class EmergencyCravingController extends GetxController {
       {
         'id': 'emp1',
         'category': 'empowerment',
-        'message': 'You are stronger than this craving!',
-        'detail': 'It will pass in just 3-5 minutes. You\'ve got this!',
+        'message': context.l10n.emergency_motivation_emp1_message,
+        'detail': context.l10n.emergency_motivation_emp1_detail,
       },
       {
         'id': 'emp2',
         'category': 'empowerment',
-        'message': 'Every "NO" to smoking is a "YES" to your health',
-        'detail': 'This moment defines your strength.',
+        'message': context.l10n.emergency_motivation_emp2_message,
+        'detail': context.l10n.emergency_motivation_emp2_detail,
       },
       {
         'id': 'emp3',
         'category': 'empowerment',
-        'message': 'This discomfort is your strength building',
-        'detail': 'Each craving you beat makes you more powerful.',
+        'message': context.l10n.emergency_motivation_emp3_message,
+        'detail': context.l10n.emergency_motivation_emp3_detail,
       },
       if (cigarettesAvoided > 0)
         {
           'id': 'emp4',
           'category': 'empowerment',
-          'message': 'You\'ve already beaten $cigarettesAvoided cravings!',
-          'detail': 'You\'re a champion - one more won\'t defeat you.',
+          'message': context.l10n.emergency_motivation_emp4_message(cigarettesAvoided),
+          'detail': context.l10n.emergency_motivation_emp4_detail,
         },
       {
         'id': 'emp5',
         'category': 'empowerment',
-        'message': 'Right now, your lungs are healing',
-        'detail': 'Your body is thanking you for staying strong.',
+        'message': context.l10n.emergency_motivation_emp5_message,
+        'detail': context.l10n.emergency_motivation_emp5_detail,
       },
       
       // Time-Based Reality Checks
       {
         'id': 'time1',
         'category': 'time',
-        'message': 'In 20 minutes, your heart rate improves',
-        'detail': 'Blood pressure drops to normal levels.',
+        'message': context.l10n.emergency_motivation_time1_message,
+        'detail': context.l10n.emergency_motivation_time1_detail,
       },
       {
         'id': 'time2',
         'category': 'time',
-        'message': 'In 12 hours, carbon monoxide normalizes',
-        'detail': 'Your blood oxygen is returning to healthy levels.',
+        'message': context.l10n.emergency_motivation_time2_message,
+        'detail': context.l10n.emergency_motivation_time2_detail,
       },
       {
         'id': 'time3',
         'category': 'time',
-        'message': 'In 2 weeks, circulation improves dramatically',
-        'detail': 'Lung function increases by up to 30%.',
+        'message': context.l10n.emergency_motivation_time3_message,
+        'detail': context.l10n.emergency_motivation_time3_detail,
       },
       if (daysSinceStopped > 0)
         {
           'id': 'time4',
           'category': 'time',
-          'message': 'You\'re $daysSinceStopped days smoke-free!',
-          'detail': 'Don\'t reset that amazing progress now.',
+          'message': context.l10n.emergency_motivation_time4_message(daysSinceStopped),
+          'detail': context.l10n.emergency_motivation_time4_detail,
         },
       
       // Financial Motivation
@@ -135,21 +139,21 @@ class EmergencyCravingController extends GetxController {
         {
           'id': 'money1',
           'category': 'money',
-          'message': 'You\'ve saved $currencySymbol${moneySaved.toStringAsFixed(0)}!',
-          'detail': 'Don\'t waste it by giving in now.',
+          'message': context.l10n.emergency_motivation_money1_message(currencySymbol, moneySaved.toStringAsFixed(0)),
+          'detail': context.l10n.emergency_motivation_money1_detail,
         },
       {
         'id': 'money2',
         'category': 'money',
-        'message': 'This craving costs money if you give in',
-        'detail': 'Keep your hard-earned cash in your pocket.',
+        'message': context.l10n.emergency_motivation_money2_message,
+        'detail': context.l10n.emergency_motivation_money2_detail,
       },
       if (yearlyMoneySaved > 0)
         {
           'id': 'money3',
           'category': 'money',
-          'message': 'You\'ll save $currencySymbol${yearlyMoneySaved.toStringAsFixed(0)} this year!',
-          'detail': 'Stay strong and watch your savings grow.',
+          'message': context.l10n.emergency_motivation_money3_message(currencySymbol, yearlyMoneySaved.toStringAsFixed(0)),
+          'detail': context.l10n.emergency_motivation_money3_detail,
         },
       
       // Personal Connection
@@ -157,26 +161,26 @@ class EmergencyCravingController extends GetxController {
         {
           'id': 'personal1',
           'category': 'personal',
-          'message': 'Remember why you started, ${userData.name.split(' ')[0]}',
-          'detail': 'Your future self will thank you.',
+          'message': context.l10n.emergency_motivation_personal1_message(userData.name.split(' ')[0]),
+          'detail': context.l10n.emergency_motivation_personal1_detail,
         },
       {
         'id': 'personal2',
         'category': 'personal',
-        'message': 'Your loved ones believe in you',
-        'detail': 'You can do this - they\'re counting on you.',
+        'message': context.l10n.emergency_motivation_personal2_message,
+        'detail': context.l10n.emergency_motivation_personal2_detail,
       },
       {
         'id': 'personal3',
         'category': 'personal',
-        'message': 'Future you will be grateful',
-        'detail': 'Every craving you beat is a gift to yourself.',
+        'message': context.l10n.emergency_motivation_personal3_message,
+        'detail': context.l10n.emergency_motivation_personal3_detail,
       },
       {
         'id': 'personal4',
         'category': 'personal',
-        'message': 'You\'re setting an amazing example',
-        'detail': 'Your strength inspires others around you.',
+        'message': context.l10n.emergency_motivation_personal4_message,
+        'detail': context.l10n.emergency_motivation_personal4_detail,
       },
       
       // Time-specific messages
@@ -184,15 +188,15 @@ class EmergencyCravingController extends GetxController {
         {
           'id': 'evening1',
           'category': 'time',
-          'message': 'End your day with a victory',
-          'detail': 'Go to bed proud of staying smoke-free.',
+          'message': context.l10n.emergency_motivation_evening1_message,
+          'detail': context.l10n.emergency_motivation_evening1_detail,
         }
       else
         {
           'id': 'morning1',
           'category': 'time',
-          'message': 'Start your day with strength',
-          'detail': 'Set the tone for a smoke-free day.',
+          'message': context.l10n.emergency_motivation_morning1_message,
+          'detail': context.l10n.emergency_motivation_morning1_detail,
         },
     ];
   }

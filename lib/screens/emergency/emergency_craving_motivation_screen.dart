@@ -75,7 +75,7 @@ class _EmergencyCravingMotivationScreenState
     return GetBuilder<EmergencyCravingController>(
       init: EmergencyCravingController(),
       builder: (controller) {
-        final motivationMessage = controller.getRandomMotivation();
+        final motivationMessage = controller.getRandomMotivation(context);
         final emoji = controller.getEmojiForCategory(motivationMessage['category'] ?? '');
         
         return Scaffold(
