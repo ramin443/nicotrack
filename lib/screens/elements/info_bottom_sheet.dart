@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:feather_icons/feather_icons.dart';
+import '../../constants/color-constants.dart';
 
 /// Reusable bottom sheet widget for displaying info content
 class InfoBottomSheet extends StatelessWidget {
@@ -48,11 +49,11 @@ class InfoBottomSheet extends StatelessWidget {
         children: [
           // Handle bar
           Container(
-            margin: EdgeInsets.only(top: 12.h),
+            margin: EdgeInsets.only(top: 20.w),
             width: 50.w,
             height: 5.h,
             decoration: BoxDecoration(
-              color: Colors.grey[300],
+              color: nicotrackBlack1,
               borderRadius: BorderRadius.circular(10.r),
             ),
           ),
@@ -67,16 +68,18 @@ class InfoBottomSheet extends StatelessWidget {
               child: GestureDetector(
                 onTap: () => Navigator.pop(context),
                 child: Container(
-                  width: 32.w,
-                  height: 32.w,
+                  width: 36.w,
+                  height: 36.w,
                   decoration: BoxDecoration(
-                    color: Colors.grey[100],
                     shape: BoxShape.circle,
+                    color: nicotrackOrange.withOpacity(0.1),
                   ),
-                  child: Icon(
-                    FeatherIcons.x,
-                    size: 18.sp,
-                    color: Colors.black54,
+                  child: Center(
+                    child: Icon(
+                      Icons.close,
+                      color: nicotrackOrange,
+                      size: 20.sp,
+                    ),
                   ),
                 ),
               ),

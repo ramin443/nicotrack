@@ -106,7 +106,7 @@ class ActivityInfoContent extends StatelessWidget {
               ),
               SizedBox(width: 12.w),
               Text(
-                "How it Works",
+                context.l10n.activity_info_how_it_works,
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontFamily: circularBold,

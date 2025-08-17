@@ -1057,5 +1057,16 @@
   "activity_screen_filter_all": "전체",
   "activity_screen_filter_phase_1": "1단계",
   "activity_screen_filter_phase_2": "2단계",
-  "activity_screen_filter_phase_3": "3단계"
+  "activity_screen_filter_phase_3": "3단계",
+
+  "activity_info_title": "활동 정보",
+  "activity_info_subtitle": "갈망 관리를 위한 과학적 기법",
+  "activity_info_how_it_works": "작동 원리",
+  "activity_info_description": "이러한 활동은 갈망을 효과적으로 관리하도록 설계된 과학적, 신경학적으로 검증된 기법입니다. 주의력을 재조정하고, 신경계를 진정시키며, 의지력을 강화하여 작동합니다.",
+  "activity_info_when_to_use": "사용 시기",
+  "activity_info_when_description": "강한 갈망을 경험할 때마다 또는 니코틴 충동에 대한 저항력을 기르기 위한 일상 루틴의 일부로 이러한 활동을 사용하세요.",
+  "activity_info_disclaimer_title": "면책 조항",
+  "activity_info_disclaimer_text": "이러한 기법은 연구와 일반적인 경험을 바탕으로 한 제안입니다. 결과는 사람마다 다를 수 있습니다. 한 사람에게 효과적인 방법이 다른 사람에게는 효과가 없을 수 있습니다. 자신에게 가장 적합한 방법을 찾기 위해 다양한 활동을 시도해 보시기 바랍니다.",
+  "activity_info_remember": "기억하세요",
+  "activity_info_remember_text": "갈망에 저항하는 매 순간이 당신을 더 강하게 만듭니다. 이러한 활동은 금연 여정에서 당신을 돕는 도구입니다."
 }

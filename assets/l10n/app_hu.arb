@@ -1057,5 +1057,16 @@
   "all": "Összes",
   "phase_i": "I. fázis",
   "phase_ii": "II. fázis",
-  "phase_iii": "III. fázis"
+  "phase_iii": "III. fázis",
+
+  "activity_info_title": "A tevékenységekről",
+  "activity_info_subtitle": "Tudományosan megalapozott technikák a vágyakozás kezelésére",
+  "activity_info_how_it_works": "Hogyan működik",
+  "activity_info_description": "Ezek a tevékenységek tudományosan és neurológiailag bizonyított technikák, amelyek arra szolgálnak, hogy hatékonyan kezelhesse a vágyakozását. Úgy működnek, hogy átirányítják a figyelmét, megnyugtatják az idegrendszerét és megerősítik az elhatározását.",
+  "activity_info_when_to_use": "Mikor használja",
+  "activity_info_when_description": "Használja ezeket a tevékenységeket, amikor erős vágyakozást tapasztal, vagy napi rutinja részeként, hogy ellenállóképességet építsen fel a nikotin iránti vágy ellen.",
+  "activity_info_disclaimer_title": "Jogi nyilatkozat",
+  "activity_info_disclaimer_text": "Ezek a technikák kutatáson és általános tapasztalatokon alapuló javaslatok. Az eredmények személyenként változhatnak. Ami az egyik személynél működik, az másnál esetleg nem. Arra bátorítjuk, hogy próbáljon ki különböző tevékenységeket, hogy megtalálja, mi működik a legjobban Önnél.",
+  "activity_info_remember": "Ne feledje",
+  "activity_info_remember_text": "Minden pillanat, amikor ellenáll a vágyakozásnak, erősebbé teszi Önt. Ezek a tevékenységek olyan eszközök, amelyek segítenek a dohányzásmentes élet felé vezető útján."
 }

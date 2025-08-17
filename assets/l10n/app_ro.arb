@@ -1057,5 +1057,16 @@
   "all": "Toate",
   "phase_i": "Faza I",
   "phase_ii": "Faza II",
-  "phase_iii": "Faza III"
+  "phase_iii": "Faza III",
+
+  "activity_info_title": "Despre activități",
+  "activity_info_subtitle": "Tehnici susținute științific pentru gestionarea poftelor",
+  "activity_info_how_it_works": "Cum funcționează",
+  "activity_info_description": "Aceste activități sunt tehnici dovedite științific și neurologic, concepute pentru a vă ajuta să gestionați eficient poftele. Funcționează prin redirecționarea atenției, calmarea sistemului nervos și întărirea hotărârii.",
+  "activity_info_when_to_use": "Când să le folosiți",
+  "activity_info_when_description": "Folosiți aceste activități ori de câte ori experimentați pofte puternice sau ca parte a rutinei zilnice pentru a construi rezistența împotriva impulsurilor de nicotină.",
+  "activity_info_disclaimer_title": "Disclaimer",
+  "activity_info_disclaimer_text": "Aceste tehnici sunt sugestii bazate pe cercetare și experiențe comune. Rezultatele pot varia de la persoană la persoană. Ce funcționează pentru o persoană poate să nu funcționeze pentru alta. Vă încurajăm să încercați diferite activități pentru a găsi ce funcționează cel mai bine pentru dumneavoastră.",
+  "activity_info_remember": "Amintiți-vă",
+  "activity_info_remember_text": "Fiecare moment în care rezistați unei pofte vă face mai puternic. Aceste activități sunt instrumente care vă vor ajuta în călătoria către o viață fără fumat."
 }

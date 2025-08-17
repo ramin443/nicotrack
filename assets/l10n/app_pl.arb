@@ -1056,5 +1056,16 @@
   "all": "Wszystkie",
   "phase_i": "Faza I",
   "phase_ii": "Faza II",
-  "phase_iii": "Faza III"
+  "phase_iii": "Faza III",
+
+  "activity_info_title": "O Aktywnościach",
+  "activity_info_subtitle": "Naukowe techniki zarządzania głodem nikotynowym",
+  "activity_info_how_it_works": "Jak to działa",
+  "activity_info_description": "Te aktywności to naukowo i neurologicznie udowodnione techniki zaprojektowane, aby pomóc Ci skutecznie zarządzać głodem nikotynowym. Działają poprzez przekierowanie uwagi, uspokojenie układu nerwowego i wzmocnienie determinacji.",
+  "activity_info_when_to_use": "Kiedy używać",
+  "activity_info_when_description": "Używaj tych aktywności zawsze, gdy doświadczasz silnego głodu nikotynowego lub jako część codziennej rutyny, aby budować odporność na impuls sięgania po nikotynę.",
+  "activity_info_disclaimer_title": "Zastrzeżenia",
+  "activity_info_disclaimer_text": "Te techniki to sugestie oparte na badaniach i powszechnych doświadczeniach. Wyniki mogą się różnić w zależności od osoby. To, co działa dla jednej osoby, może nie działać dla innej. Zachęcamy do wypróbowania różnych aktywności, aby znaleźć to, co najlepiej działa dla Ciebie.",
+  "activity_info_remember": "Pamiętaj",
+  "activity_info_remember_text": "Każda chwila, w której opierasz się głodowi nikotynowemu, czyni Cię silniejszym. Te aktywności to narzędzia, które pomogą Ci w podróży ku życiu bez papierosów."
 }

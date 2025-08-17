@@ -1054,6 +1054,17 @@
   "activity_screen_filter_phase_2": "フェーズII",
   "activity_screen_filter_phase_3": "フェーズIII",
 
+  "activity_info_title": "アクティビティについて",
+  "activity_info_subtitle": "渇望を管理する科学的手法",
+  "activity_info_how_it_works": "仕組み",
+  "activity_info_description": "これらのアクティビティは、渇望を効果的に管理するために設計された、科学的・神経学的に実証されたテクニックです。注意力をリダイレクトし、神経系を落ち着かせ、決意を強化することで機能します。",
+  "activity_info_when_to_use": "使用タイミング",
+  "activity_info_when_description": "強い渇望を感じた時や、ニコチン衝動への抵抗力を築くための日常ルーチンの一部として、これらのアクティビティを使用してください。",
+  "activity_info_disclaimer_title": "免責事項",
+  "activity_info_disclaimer_text": "これらのテクニックは研究と一般的な経験に基づく提案です。結果は人によって異なります。ある人に効果的な方法が別の人には効果がない場合があります。あなたに最適な方法を見つけるために、さまざまなアクティビティを試すことをお勧めします。",
+  "activity_info_remember": "覚えておいてください",
+  "activity_info_remember_text": "渇望に抵抗する瞬間一つ一つがあなたを強くします。これらのアクティビティは、禁煙への旅路であなたを助けるツールです。",
+
   "exercise_1_title": "4-7-8呼吸法",
   "exercise_1_duration": "2-3分",
   "exercise_1_phase": "フェーズ1",

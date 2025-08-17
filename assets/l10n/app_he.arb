@@ -1057,5 +1057,16 @@
   "activity_screen_filter_all": "הכל",
   "activity_screen_filter_phase_1": "שלב א'",
   "activity_screen_filter_phase_2": "שלב ב'",
-  "activity_screen_filter_phase_3": "שלב ג'"
+  "activity_screen_filter_phase_3": "שלב ג'",
+
+  "activity_info_title": "אודות פעילויות",
+  "activity_info_subtitle": "טכניקות מבוססות מדע לניהול חשק",
+  "activity_info_how_it_works": "איך זה עובד",
+  "activity_info_description": "הפעילויות הללו הן טכניקות מוכחות מדעית ונוירולוגית שנועדו לעזור לך לנהל חשק באופן יעיל. הן פועלות על ידי הפניית המיקוד שלך, הרגעת מערכת העצבים והחזקת הנחישות שלך.",
+  "activity_info_when_to_use": "מתי להשתמש",
+  "activity_info_when_description": "השתמש בפעילויות הללו בכל פעם שאתה חווה חשק חזק או כחלק מהשגרה היומית שלך כדי לבנות עמידות נגד דחפי ניקוטין.",
+  "activity_info_disclaimer_title": "הבהרה",
+  "activity_info_disclaimer_text": "הטכניקות הללו הן הצעות המבוססות על מחקר וחוויות נפוצות. התוצאות עשויות להשתנות מאדם לאדם. מה שעובד על אדם אחד עשוי לא לעבוד על אחר. אנו מעודדים אותך לנסות פעילויות שונות כדי למצוא מה עובד הכי טוב עבורך.",
+  "activity_info_remember": "זכור",
+  "activity_info_remember_text": "כל רגע שבו אתה מתנגד לחשק עושה אותך חזק יותר. הפעילויות הללו הן כלים שיעזרו לך במסע שלך להיות חופשי מעישון."
 }

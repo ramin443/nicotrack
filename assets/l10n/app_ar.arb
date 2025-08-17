@@ -1058,5 +1058,16 @@
   "activity_screen_filter_all": "الكل",
   "activity_screen_filter_phase_1": "المرحلة الأولى",
   "activity_screen_filter_phase_2": "المرحلة الثانية",
-  "activity_screen_filter_phase_3": "المرحلة الثالثة"
+  "activity_screen_filter_phase_3": "المرحلة الثالثة",
+
+  "activity_info_title": "حول الأنشطة",
+  "activity_info_subtitle": "تقنيات مدعومة علمياً لإدارة الرغبة الشديدة",
+  "activity_info_how_it_works": "كيف تعمل",
+  "activity_info_description": "هذه الأنشطة هي تقنيات مثبتة علمياً وعصبياً مصممة لمساعدتك في إدارة الرغبة الشديدة بفعالية. تعمل من خلال إعادة توجيه تركيزك وتهدئة جهازك العصبي وتقوية عزيمتك.",
+  "activity_info_when_to_use": "متى تستخدمها",
+  "activity_info_when_description": "استخدم هذه الأنشطة كلما واجهت رغبة شديدة قوية أو كجزء من روتينك اليومي لبناء المقاومة ضد الرغبة في النيكوتين.",
+  "activity_info_disclaimer_title": "إخلاء المسؤولية",
+  "activity_info_disclaimer_text": "هذه التقنيات هي اقتراحات مبنية على البحوث والخبرات الشائعة. قد تختلف النتائج من شخص لآخر. ما يعمل مع شخص واحد قد لا يعمل مع آخر. نشجعك على تجربة أنشطة مختلفة لتجد ما يعمل بشكل أفضل معك.",
+  "activity_info_remember": "تذكر",
+  "activity_info_remember_text": "كل لحظة تقاوم فيها الرغبة الشديدة تجعلك أقوى. هذه الأنشطة هي أدوات لمساعدتك في رحلتك لتصبح خالياً من التدخين."
 }

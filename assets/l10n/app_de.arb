@@ -1317,5 +1317,16 @@
   "exercise_20_step_2": "Wechseln Sie das Eis zur linken Hand",
   "exercise_20_step_3": "Tauchen Sie die Hände in warmes Wasser",
   "exercise_20_step_4": "Halten Sie Eis in beiden Händen",
-  "exercise_20_step_5": "Wärmen Sie die Hände durch Aneinanderreiben"
+  "exercise_20_step_5": "Wärmen Sie die Hände durch Aneinanderreiben",
+
+  "activity_info_title": "Über Aktivitäten",
+  "activity_info_subtitle": "Wissenschaftlich fundierte Techniken zur Bewältigung von Verlangen",
+  "activity_info_description": "Diese Aktivitäten sind wissenschaftlich und neurologisch bewährte Techniken, die darauf ausgelegt sind, dir dabei zu helfen, Verlangen effektiv zu bewältigen. Sie funktionieren, indem sie deinen Fokus umleiten, dein Nervensystem beruhigen und deine Entschlossenheit stärken.",
+  "activity_info_when_to_use": "Wann zu verwenden",
+  "activity_info_when_description": "Verwende diese Aktivitäten immer dann, wenn du starkes Verlangen verspürst oder als Teil deiner täglichen Routine, um Widerstandskraft gegen Nikotinverlangen aufzubauen.",
+  "activity_info_disclaimer_title": "Haftungsausschluss",
+  "activity_info_disclaimer_text": "Diese Techniken sind Vorschläge basierend auf Forschung und allgemeinen Erfahrungen. Die Ergebnisse können von Person zu Person variieren. Was für eine Person funktioniert, funktioniert möglicherweise nicht für eine andere. Wir ermutigen dich, verschiedene Aktivitäten auszuprobieren, um herauszufinden, was für dich am besten funktioniert.",
+  "activity_info_remember": "Denke daran",
+  "activity_info_remember_text": "Jeder Moment, in dem du einem Verlangen widerstehst, macht dich stärker. Diese Aktivitäten sind Werkzeuge, die dir auf deinem Weg zu einem rauchfreien Leben helfen.",
+  "activity_info_how_it_works": "Wie es funktioniert"
 }

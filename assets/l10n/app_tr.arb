@@ -1056,5 +1056,16 @@
   "all": "Tümü",
   "phase_i": "Faz I",
   "phase_ii": "Faz II",
-  "phase_iii": "Faz III"
+  "phase_iii": "Faz III",
+
+  "activity_info_title": "Aktiviteler Hakkında",
+  "activity_info_subtitle": "İstekleri yönetmek için bilime dayalı teknikler",
+  "activity_info_how_it_works": "Nasıl Çalışır",
+  "activity_info_description": "Bu aktiviteler, isteklerinizi etkili bir şekilde yönetmenize yardımcı olmak için tasarlanmış bilimsel ve nörolojik olarak kanıtlanmış tekniklerdir. Odağınızı yeniden yönlendirerek, sinir sisteminizi sakinleştirerek ve kararlılığınızı güçlendirerek çalışırlar.",
+  "activity_info_when_to_use": "Ne Zaman Kullanılır",
+  "activity_info_when_description": "Güçlü istekler yaşadığınızda veya nikotin dürtülerine karşı direnç geliştirmek için günlük rutininizin bir parçası olarak bu aktiviteleri kullanın.",
+  "activity_info_disclaimer_title": "Yasal Uyarı",
+  "activity_info_disclaimer_text": "Bu teknikler araştırma ve yaygın deneyimlere dayalı önerilerdir. Sonuçlar kişiden kişiye değişebilir. Bir kişi için işe yarayan bir başkası için işe yaramayabilir. Size en uygun olanı bulmak için farklı aktiviteleri denemenizi teşvik ediyoruz.",
+  "activity_info_remember": "Unutmayın",
+  "activity_info_remember_text": "İsteğe dirençinizin her anı sizi daha güçlü yapar. Bu aktiviteler, sigara içmeme yolculuğunuzda size yardımcı olacak araçlardır."
 }

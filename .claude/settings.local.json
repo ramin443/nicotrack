@@ -56,7 +56,13 @@
       "Bash(else echo \"$lang: MISSING premium translations\")",
       "Bash(do echo \"=== $lang ===\")",
       "WebSearch",
-      "Bash(do echo \"Checking $file:\")"
+      "Bash(do echo \"Checking $file:\")",
+      "Bash(do echo \"Checking key: $key\")",
+      "Bash(file=\"/Users/raminudash/StudioProjects/Nicotrack/assets/l10n/app_$lang.arb\")",
+      "Bash(missing_files=\"\")",
+      "Bash(if ! grep -q \"\"\"$key\"\":\" \"/Users/raminudash/StudioProjects/Nicotrack/assets/l10n/app_$lang.arb\")",
+      "Bash(if [ -z \"$missing_files\" ])",
+      "Bash(else)"
     ],
     "deny": []
   }

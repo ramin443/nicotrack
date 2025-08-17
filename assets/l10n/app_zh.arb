@@ -1054,6 +1054,17 @@
   "activity_filter_phase_two": "第二阶段",
   "activity_filter_phase_three": "第三阶段",
 
+  "activity_info_title": "关于活动",
+  "activity_info_subtitle": "科学支持的技巧来管理渴望",
+  "activity_info_how_it_works": "工作原理",
+  "activity_info_description": "这些活动是经过科学和神经学验证的技术，旨在帮助您有效管理渴望。它们通过重新定向您的注意力、平静您的神经系统和增强您的决心来发挥作用。",
+  "activity_info_when_to_use": "何时使用",
+  "activity_info_when_description": "每当您感到强烈渴望时或作为日常例行程序的一部分使用这些活动，以建立对尼古丁冲动的抵抗力。",
+  "activity_info_disclaimer_title": "免责声明",
+  "activity_info_disclaimer_text": "这些技巧是基于研究和常见经验的建议。结果可能因人而异。对一个人有效的方法可能对另一个人无效。我们鼓励您尝试不同的活动来找到最适合您的方法。",
+  "activity_info_remember": "记住",
+  "activity_info_remember_text": "您抵抗渴望的每一刻都会让您更强大。这些活动是帮助您踏上无烟生活之旅的工具。",
+
   "exercise_1_title": "4-7-8呼吸法",
   "exercise_1_duration": "2-3分钟",
   "exercise_1_phase": "第一阶段",

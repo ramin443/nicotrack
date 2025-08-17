@@ -1342,5 +1342,16 @@
   "exercise_20_step_2": "Sposta il ghiaccio nella mano sinistra",
   "exercise_20_step_3": "Immergi le mani nell'acqua calda",
   "exercise_20_step_4": "Tieni il ghiaccio in entrambe le mani",
-  "exercise_20_step_5": "Riscalda le mani strofinandole insieme"
+  "exercise_20_step_5": "Riscalda le mani strofinandole insieme",
+
+  "activity_info_title": "Informazioni sulle Attività",
+  "activity_info_subtitle": "Tecniche scientificamente supportate per gestire le voglie",
+  "activity_info_description": "Queste attività sono tecniche scientificamente e neurologicamente provate progettate per aiutarti a gestire efficacemente le voglie. Funzionano reindirizzando la tua attenzione, calmando il tuo sistema nervoso e rafforzando la tua determinazione.",
+  "activity_info_when_to_use": "Quando Usare",
+  "activity_info_when_description": "Usa queste attività ogni volta che provi forti voglie o come parte della tua routine quotidiana per sviluppare resistenza agli impulsi di nicotina.",
+  "activity_info_disclaimer_title": "Avvertenza",
+  "activity_info_disclaimer_text": "Queste tecniche sono suggerimenti basati su ricerca ed esperienze comuni. I risultati possono variare da persona a persona. Quello che funziona per un individuo potrebbe non funzionare per un altro. Ti incoraggiamo a provare diverse attività per trovare ciò che funziona meglio per te.",
+  "activity_info_remember": "Ricorda",
+  "activity_info_remember_text": "Ogni momento in cui resisti a una voglia ti rende più forte. Queste attività sono strumenti per aiutarti nel tuo viaggio verso l'essere libero dal fumo.",
+  "activity_info_how_it_works": "Come Funziona"
 }

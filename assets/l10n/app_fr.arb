@@ -1316,5 +1316,16 @@
   "exercise_20_step_2": "Passez la glace à la main gauche",
   "exercise_20_step_3": "Trempez les mains dans l'eau tiède",
   "exercise_20_step_4": "Tenez de la glace dans les deux mains",
-  "exercise_20_step_5": "Réchauffez les mains en les frottant ensemble"
+  "exercise_20_step_5": "Réchauffez les mains en les frottant ensemble",
+
+  "activity_info_title": "À Propos des Activités",
+  "activity_info_subtitle": "Techniques scientifiquement prouvées pour gérer les envies",
+  "activity_info_description": "Ces activités sont des techniques scientifiquement et neurologiquement éprouvées conçues pour vous aider à gérer efficacement les envies. Elles fonctionnent en redirigeant votre attention, en calmant votre système nerveux et en renforçant votre détermination.",
+  "activity_info_when_to_use": "Quand Utiliser",
+  "activity_info_when_description": "Utilisez ces activités chaque fois que vous ressentez de fortes envies ou dans le cadre de votre routine quotidienne pour développer une résistance aux pulsions de nicotine.",
+  "activity_info_disclaimer_title": "Avertissement",
+  "activity_info_disclaimer_text": "Ces techniques sont des suggestions basées sur la recherche et les expériences communes. Les résultats peuvent varier d'une personne à l'autre. Ce qui fonctionne pour un individu peut ne pas fonctionner pour un autre. Nous vous encourageons à essayer différentes activités pour trouver ce qui fonctionne le mieux pour vous.",
+  "activity_info_remember": "Rappelez-vous",
+  "activity_info_remember_text": "Chaque moment où vous résistez à une envie vous rend plus fort. Ces activités sont des outils pour vous aider dans votre parcours vers l'absence de tabac.",
+  "activity_info_how_it_works": "Comment Ça Marche"
 }

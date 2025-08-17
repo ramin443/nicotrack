@@ -1317,5 +1317,16 @@
   "exercise_20_step_2": "Cambia hielo a mano izquierda",
   "exercise_20_step_3": "Sumerge manos en agua tibia",
   "exercise_20_step_4": "Sostén hielo en ambas manos",
-  "exercise_20_step_5": "Calienta manos frotándolas"
+  "exercise_20_step_5": "Calienta manos frotándolas",
+
+  "activity_info_title": "Acerca de las Actividades",
+  "activity_info_subtitle": "Técnicas respaldadas por la ciencia para manejar los antojos",
+  "activity_info_description": "Estas actividades son técnicas científicamente y neurológicamente probadas diseñadas para ayudarte a manejar los antojos de manera efectiva. Funcionan redirigiendo tu enfoque, calmando tu sistema nervioso y fortaleciendo tu determinación.",
+  "activity_info_when_to_use": "Cuándo Usar",
+  "activity_info_when_description": "Usa estas actividades siempre que experimentes antojos fuertes o como parte de tu rutina diaria para desarrollar resistencia contra los impulsos de nicotina.",
+  "activity_info_disclaimer_title": "Descargo de Responsabilidad",
+  "activity_info_disclaimer_text": "Estas técnicas son sugerencias basadas en investigación y experiencias comunes. Los resultados pueden variar de persona a persona. Lo que funciona para un individuo puede no funcionar para otro. Te animamos a probar diferentes actividades para encontrar lo que mejor funciona para ti.",
+  "activity_info_remember": "Recuerda",
+  "activity_info_remember_text": "Cada momento que resistes un antojo te hace más fuerte. Estas actividades son herramientas para ayudarte en tu viaje hacia estar libre de humo.",
+  "activity_info_how_it_works": "Cómo Funciona"
 }

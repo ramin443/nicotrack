@@ -1057,5 +1057,16 @@
   "all": "Semua",
   "phase_i": "Fase I",
   "phase_ii": "Fase II",
-  "phase_iii": "Fase III"
+  "phase_iii": "Fase III",
+
+  "activity_info_title": "Tentang Aktivitas",
+  "activity_info_subtitle": "Teknik berbasis sains untuk mengelola keinginan merokok",
+  "activity_info_how_it_works": "Cara Kerjanya",
+  "activity_info_description": "Aktivitas-aktivitas ini adalah teknik yang telah terbukti secara ilmiah dan neurologis yang dirancang untuk membantu Anda mengelola keinginan merokok secara efektif. Teknik ini bekerja dengan mengalihkan fokus Anda, menenangkan sistem saraf, dan memperkuat tekad Anda.",
+  "activity_info_when_to_use": "Kapan Menggunakannya",
+  "activity_info_when_description": "Gunakan aktivitas ini setiap kali Anda mengalami keinginan merokok yang kuat atau sebagai bagian dari rutina harian untuk membangun ketahanan melawan dorongan nikotin.",
+  "activity_info_disclaimer_title": "Pernyataan",
+  "activity_info_disclaimer_text": "Teknik-teknik ini adalah saran berdasarkan penelitian dan pengalaman umum. Hasilnya dapat bervariasi dari orang ke orang. Apa yang berhasil untuk satu orang mungkin tidak berhasil untuk orang lain. Kami mendorong Anda untuk mencoba berbagai aktivitas untuk menemukan apa yang paling cocok untuk Anda.",
+  "activity_info_remember": "Ingatlah",
+  "activity_info_remember_text": "Setiap saat Anda menahan keinginan merokok membuat Anda lebih kuat. Aktivitas-aktivitas ini adalah alat untuk membantu Anda dalam perjalanan menuju hidup bebas rokok."
 }

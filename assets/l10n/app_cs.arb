@@ -1057,5 +1057,16 @@
   "all": "Všechny",
   "phase_i": "Fáze I",
   "phase_ii": "Fáze II",
-  "phase_iii": "Fáze III"
+  "phase_iii": "Fáze III",
+
+  "activity_info_title": "O aktivitách",
+  "activity_info_subtitle": "Vědecky podložené techniky pro zvládání chuti",
+  "activity_info_how_it_works": "Jak to funguje",
+  "activity_info_description": "Tyto aktivity jsou vědecky a neurologicky ověřené techniky navržené tak, aby vám pomohly efektivně zvládat chuť na kouření. Fungují tak, že přesměrují vaši pozornost, uklidní nervový systém a posílí vaši odhodlanost.",
+  "activity_info_when_to_use": "Kdy používat",
+  "activity_info_when_description": "Používejte tyto aktivity, kdykoli zažíváte silnou chuť na kouření, nebo jako součást své denní rutiny pro budování odolnosti proti nikotinovým impulsům.",
+  "activity_info_disclaimer_title": "Upozornění",
+  "activity_info_disclaimer_text": "Tyto techniky jsou návrhy založené na výzkumu a běžných zkušenostech. Výsledky se mohou lišit od osoby k osobě. Co funguje pro jednoho člověka, nemusí fungovat pro druhého. Doporučujeme vám vyzkoušet různé aktivity, abyste našli to, co vám nejlépe vyhovuje.",
+  "activity_info_remember": "Pamatujte",
+  "activity_info_remember_text": "Každý okamžik, kdy odolate chuti na kouření, vás činí silnějšími. Tyto aktivity jsou nástroje, které vám pomohou na vaší cestě k životu bez kouření."
 }
