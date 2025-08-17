@@ -182,6 +182,7 @@ class _TopTriggersSectionState extends State<TopTriggersSection> {
                 height: 16.h,
               ),
               Stack(
+                alignment: Alignment.center,
                 children: [
                   FourxFourAltScrollView(
                     scrollController:
@@ -193,22 +194,28 @@ class _TopTriggersSectionState extends State<TopTriggersSection> {
                     Positioned.fill(
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                             return const PremiumPaywallScreen();
                           }));
                         },
                         child: ClipRect(
                           child: BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                            child: Container(
-                              color: Colors.white.withOpacity(0.1),
-                              child: Center(child: contentLockBox(context),),
+                            child: Container( // This container will still fill due to BackdropFilter behavior
+                              color: Colors.white.withOpacity(0.1), // Semi-transparent to see blur
+                              child: Align(
+                                alignment: Alignment.center, // Or any other alignment
+                                child: contentLockBox(context), // contentLockBox will now use its intrinsic size
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
+                  Container(
+                    color: Colors.white.withOpacity(0.1),
+                    child: Center(child: contentLockBox(context),),
+                  ),
                 ],
               ),
 

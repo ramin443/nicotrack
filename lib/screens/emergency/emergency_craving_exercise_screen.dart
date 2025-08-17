@@ -280,14 +280,6 @@ class _EmergencyCravingExerciseScreenState
                                           Container(
                                             padding: EdgeInsets.all(24.w),
                                             decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight,
-                                                colors: [
-                                                  nicotrackGreen.withOpacity(0.05),
-                                                  nicotrackGreen.withOpacity(0.02),
-                                                ],
-                                              ),
                                               borderRadius: BorderRadius.only(
                                                 topLeft: Radius.circular(28),
                                                 topRight: Radius.circular(28),

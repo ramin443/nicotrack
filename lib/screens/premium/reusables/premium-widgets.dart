@@ -112,28 +112,37 @@ Widget smallLockBox() {
 
 Widget contentLockBox(BuildContext context) {
   return Container(
-    width: 200.w,
-    height: 48.w,
-    // padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 15.w),
+    constraints: BoxConstraints(
+      maxWidth: 260.w,  // Maximum width it can be
+      maxHeight: 65.w, // Maximum height it can be
+      // minWidth: 0, // Optional: if you want a minimum size
+      // minHeight: 0,
+    ),
+    padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.w),
     decoration: BoxDecoration(
       color: Colors.black,
       borderRadius: BorderRadius.circular(30.r),
     ),
-    child: Center(
-      child: TextAutoSize(
-        context.l10n.premium_get_pro_to_unlock + ' ',
-        style: TextStyle(
-          fontSize: 16.sp,
-          fontFamily: circularMedium,
-          color: Colors.white,
-        ),
+    child: Text( // Removed inner Center, text alignment handles it.
+      context.l10n.premium_get_pro_to_unlock + ' ',
+      textAlign: TextAlign.center, // Text itself will center
+      style: TextStyle(
+        fontSize: 16.sp,
+        height: 1.2,
+        fontFamily: circularMedium,
+        color: Colors.white,
       ),
     ),
   );
 }
 
 Widget calendarLock(BuildContext context) {
-  return Container(
+  // Assuming nicotrackBlack1, lockImg, recoletaSemiBold, w, r, sp are defined
+  // final String circularMedium = 'YourCircularMediumFont'; // Placeholder
+  // final String recoletaSemiBold = 'YourRecoletaSemiBoldFont'; // Placeholder
+  // final Color nicotrackBlack1 = Colors.grey[900]!; // Placeholder
+
+  return Container( // Outer container, can be removed if not needed for alignment/background
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -141,49 +150,60 @@ Widget calendarLock(BuildContext context) {
         Container(
           width: 124.w,
           height: 124.w,
-          decoration:BoxDecoration(
-            color: nicotrackBlack1,
-            borderRadius: BorderRadius.circular(30.r)
-          ),
-          child: Center(
-            child: Image.asset(
-              lockImg,
-              width: 52.w,
-            ),
-          )
-        ),
-
-        SizedBox(
-          height: 7.w,
-        ),
-        Container(
-          width: 120.w,
-          height: 48.w,
-          // padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 15.w),
           decoration: BoxDecoration(
-            color: Colors.black,
+            color: nicotrackBlack1,
             borderRadius: BorderRadius.circular(30.r),
           ),
           child: Center(
-            child: TextAutoSize(
-              context.l10n.premium_get_pro_sparkle + ' ',
-              style: TextStyle(
-                fontSize: 17.sp,
-                fontFamily: recoletaSemiBold,
-                color: Colors.white,
+            child: Image.asset(
+              lockImg, // Ensure lockImg is correctly defined in your assets
+              width: 52.w,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 7.w,
+        ),
+        // This SizedBox can still define the MAX available width for the centered box,
+        // or you can remove it if the Column's crossAxisAlignment handles centering.
+        // For explicit max width and centering of the potentially smaller box:
+        SizedBox(
+          width: 180.w, // Maximum width for the text box area
+          child: Center( // Center the potentially smaller text box within this 180.w space
+            child: Container(
+              constraints: BoxConstraints(
+                maxWidth: 180.w,  // Text box won't exceed this width
+                maxHeight: 48.w,   // Text box won't exceed this height (optional, if text can wrap)
+                // If text is short, height will be determined by text + padding
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 10.w), // Adjusted padding
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(30.r),
+              ),
+              child: TextAutoSize(
+                context.l10n.premium_get_pro_sparkle + ' ',
+                textAlign: TextAlign.center, // Center text within its own bounds
+                minFontSize: 10, // Optional: prevent text from becoming too small
+                maxLines: 2,     // Optional: allow text to wrap to two lines if too long
+                style: TextStyle(
+                  fontSize: 17.sp,
+                  fontFamily: recoletaSemiBold,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
-        )
-
+        ),
       ],
     ),
   );
 }
 
+
 Widget premiumStatusBox(BuildContext context) {
   final premiumController = Get.find<PremiumController>();
-  
+
   return Container(
     width: double.infinity,
     padding: EdgeInsets.only(left: 4.w, right: 13.w, top: 7.w, bottom: 8.w),

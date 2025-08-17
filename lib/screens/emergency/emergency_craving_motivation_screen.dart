@@ -113,7 +113,8 @@ class _EmergencyCravingMotivationScreenState
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
-                                      Color(0xFFFF6B6B),
+                                      nicotrackOrange,
+                                      // Color(0xFFFF6B6B),
                                       Color(0xFFFF8787),
                                     ],
                                   ),
@@ -281,7 +282,7 @@ class _EmergencyCravingMotivationScreenState
                                             fontSize: 22.sp,
                                             fontFamily: circularBold,
                                             color: nicotrackBlack1,
-                                            height: 1.3,
+                                            height: 1.2,
                                           ),
                                         ),
                                         if (motivationMessage['detail'] != null) ...[
@@ -302,7 +303,7 @@ class _EmergencyCravingMotivationScreenState
                                               fontSize: 15.sp,
                                               fontFamily: circularBook,
                                               color: nicotrackBlack1.withOpacity(0.7),
-                                              height: 1.4,
+                                              height: 1.2,
                                             ),
                                           ),
                                         ],

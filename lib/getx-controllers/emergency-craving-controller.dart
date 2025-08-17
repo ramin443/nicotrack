@@ -202,9 +202,9 @@ class EmergencyCravingController extends GetxController {
       case 'empowerment':
         return '💪';
       case 'time':
-        return '⏰';
+        return '🕙';
       case 'money':
-        return '💰';
+        return '💳';
       case 'personal':
         return '❤️';
       default:
@@ -247,4 +247,3 @@ class EmergencyCravingController extends GetxController {
     super.onClose();
   }
 }
-
