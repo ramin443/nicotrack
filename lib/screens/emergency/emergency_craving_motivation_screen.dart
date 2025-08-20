@@ -31,12 +31,12 @@ class _EmergencyCravingMotivationScreenState
   void initState() {
     super.initState();
     HapticFeedback.heavyImpact();
-    
+
     _animationController = AnimationController(
       duration: Duration(milliseconds: 1000),
       vsync: this,
     );
-    
+
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
@@ -44,7 +44,7 @@ class _EmergencyCravingMotivationScreenState
       parent: _animationController,
       curve: Interval(0.0, 0.6, curve: Curves.easeIn),
     ));
-    
+
     _scaleAnimation = Tween<double>(
       begin: 0.5,
       end: 1.0,
@@ -52,7 +52,7 @@ class _EmergencyCravingMotivationScreenState
       parent: _animationController,
       curve: Interval(0.2, 0.8, curve: Curves.elasticOut),
     ));
-    
+
     _slideAnimation = Tween<double>(
       begin: 30,
       end: 0,
@@ -60,7 +60,7 @@ class _EmergencyCravingMotivationScreenState
       parent: _animationController,
       curve: Interval(0.3, 1.0, curve: Curves.easeOutCubic),
     ));
-    
+
     _animationController.forward();
   }
 
@@ -76,8 +76,9 @@ class _EmergencyCravingMotivationScreenState
       init: EmergencyCravingController(),
       builder: (controller) {
         final motivationMessage = controller.getRandomMotivation(context);
-        final emoji = controller.getEmojiForCategory(motivationMessage['category'] ?? '');
-        
+        final emoji =
+            controller.getEmojiForCategory(motivationMessage['category'] ?? '');
+
         return Scaffold(
           backgroundColor: Colors.white,
           body: Container(
@@ -96,7 +97,8 @@ class _EmergencyCravingMotivationScreenState
                 children: [
                   // Custom App Bar
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -183,7 +185,7 @@ class _EmergencyCravingMotivationScreenState
                       ],
                     ),
                   ),
-                  
+
                   // Main content
                   Expanded(
                     child: Padding(
@@ -219,12 +221,8 @@ class _EmergencyCravingMotivationScreenState
                                         width: 120.w,
                                         height: 120.w,
                                         decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: nicotrackGreen.withOpacity(0.2),
-                                            width: 2,
-                                          ),
-                                        ),
+                                            shape: BoxShape.circle,
+                                            color: nicotrackBlack1),
                                       ),
                                       // Emoji
                                       Text(
@@ -237,9 +235,9 @@ class _EmergencyCravingMotivationScreenState
                               );
                             },
                           ),
-                          
+
                           SizedBox(height: 40.h),
-                          
+
                           // Motivation message card
                           AnimatedBuilder(
                             animation: _animationController,
@@ -252,7 +250,7 @@ class _EmergencyCravingMotivationScreenState
                                     width: double.infinity,
                                     padding: EdgeInsets.all(24.w),
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      color: nicotrackBlack1,
                                       borderRadius: BorderRadius.circular(24),
                                       border: Border.all(
                                         color: Color(0xFFEFEFEF),
@@ -272,7 +270,8 @@ class _EmergencyCravingMotivationScreenState
                                         Icon(
                                           Icons.format_quote,
                                           size: 28.sp,
-                                          color: nicotrackGreen.withOpacity(0.4),
+                                          color:
+                                              nicotrackGreen,
                                         ),
                                         SizedBox(height: 16.h),
                                         // Main message
@@ -282,18 +281,20 @@ class _EmergencyCravingMotivationScreenState
                                           style: TextStyle(
                                             fontSize: 22.sp,
                                             fontFamily: circularBold,
-                                            color: nicotrackBlack1,
+                                            color: Colors.white,
                                             height: 1.2,
                                           ),
                                         ),
-                                        if (motivationMessage['detail'] != null) ...[
+                                        if (motivationMessage['detail'] !=
+                                            null) ...[
                                           SizedBox(height: 16.h),
                                           Container(
                                             width: 60.w,
                                             height: 2.h,
                                             decoration: BoxDecoration(
-                                              color: nicotrackGreen.withOpacity(0.3),
-                                              borderRadius: BorderRadius.circular(1),
+                                              color: nicotrackGreen,
+                                              borderRadius:
+                                                  BorderRadius.circular(1),
                                             ),
                                           ),
                                           SizedBox(height: 16.h),
@@ -303,7 +304,8 @@ class _EmergencyCravingMotivationScreenState
                                             style: TextStyle(
                                               fontSize: 15.sp,
                                               fontFamily: circularBook,
-                                              color: nicotrackBlack1.withOpacity(0.7),
+                                              color: Colors.white
+                                                  .withOpacity(0.7),
                                               height: 1.2,
                                             ),
                                           ),
@@ -315,9 +317,9 @@ class _EmergencyCravingMotivationScreenState
                               );
                             },
                           ),
-                          
+
                           SizedBox(height: 32.h),
-                          
+
                           // Progress dots
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -327,7 +329,7 @@ class _EmergencyCravingMotivationScreenState
                                 width: 24.w,
                                 height: 8.h,
                                 decoration: BoxDecoration(
-                                  color: nicotrackGreen,
+                                  color: nicotrackBlack1,
                                   borderRadius: BorderRadius.circular(4),
                                 ),
                               ),
@@ -346,7 +348,7 @@ class _EmergencyCravingMotivationScreenState
                       ),
                     ),
                   ),
-                  
+
                   // Bottom CTA section
                   Container(
                     padding: EdgeInsets.all(24.w),
@@ -369,7 +371,7 @@ class _EmergencyCravingMotivationScreenState
                             vertical: 6.h,
                           ),
                           decoration: BoxDecoration(
-                            color: Color(0xFFF5F5F5),
+                            color: Colors.deepPurple.withOpacity(0.15),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Row(
@@ -378,7 +380,7 @@ class _EmergencyCravingMotivationScreenState
                               Icon(
                                 FeatherIcons.clock,
                                 size: 14.sp,
-                                color: nicotrackBlack1.withOpacity(0.5),
+                                color: Colors.deepPurple.shade800,
                               ),
                               SizedBox(width: 6.w),
                               TextAutoSize(
@@ -386,7 +388,7 @@ class _EmergencyCravingMotivationScreenState
                                 style: TextStyle(
                                   fontSize: 12.sp,
                                   fontFamily: circularMedium,
-                                  color: nicotrackBlack1.withOpacity(0.5),
+                                  color: Colors.deepPurple.shade800,
                                 ),
                               ),
                             ],
@@ -399,7 +401,8 @@ class _EmergencyCravingMotivationScreenState
                             HapticFeedback.mediumImpact();
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => EmergencyCravingExerciseScreen(),
+                                builder: (context) =>
+                                    EmergencyCravingExerciseScreen(),
                               ),
                             );
                           },

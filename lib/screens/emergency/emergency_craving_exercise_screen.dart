@@ -151,19 +151,16 @@ class _EmergencyCravingExerciseScreenState
                                 vertical: 8.h,
                               ),
                               decoration: BoxDecoration(
-                                color: nicotrackGreen.withOpacity(0.1),
+                                color: nicotrackBlack1,
                                 borderRadius: BorderRadius.circular(30),
-                                border: Border.all(
-                                  color: nicotrackGreen.withOpacity(0.2),
-                                  width: 1,
-                                ),
+
                               ),
                               child: Row(
                                 children: [
                                   Icon(
                                     FeatherIcons.clock,
                                     size: 14.sp,
-                                    color: nicotrackGreen,
+                                    color: Colors.white,
                                   ),
                                   SizedBox(width: 6.w),
                                   TextAutoSize(
@@ -171,7 +168,7 @@ class _EmergencyCravingExerciseScreenState
                                     style: TextStyle(
                                       fontSize: 13.sp,
                                       fontFamily: circularBold,
-                                      color: nicotrackGreen,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ],
@@ -505,13 +502,6 @@ class _EmergencyCravingExerciseScreenState
                         padding: EdgeInsets.all(24.w),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.03),
-                              blurRadius: 20,
-                              offset: Offset(0, -4),
-                            ),
-                          ],
                         ),
                         child: Column(
                           children: [

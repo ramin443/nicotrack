@@ -185,7 +185,7 @@ class BaseController extends GetxController {
                 ),
                 SvgPicture.asset(
                     selectedIndex == 0 ? homeIconSelected : homeIconUnselected,
-                    width: 18.sp),
+                    width: 20.sp),
                 SizedBox(
                   height: 7.w,
                 ),
@@ -210,7 +210,7 @@ class BaseController extends GetxController {
                 ),
                 Icon(
                   FeatherIcons.calendar,
-                  size: 20.sp,
+                  size: 22.sp,
                   color: selectedIndex == 1 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
@@ -237,7 +237,7 @@ class BaseController extends GetxController {
                 ),
                 Icon(
                   FeatherIcons.activity,
-                  size: 20.sp,
+                  size: 22.sp,
                   color: selectedIndex == 2 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
@@ -264,7 +264,7 @@ class BaseController extends GetxController {
                 ),
                 Icon(
                   FeatherIcons.pieChart,
-                  size: 20.sp,
+                  size: 22.sp,
                   color: selectedIndex == 3 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
@@ -291,7 +291,7 @@ class BaseController extends GetxController {
                 ),
                 Icon(
                   FeatherIcons.sliders,
-                  size: 20.sp,
+                  size: 22.sp,
                   color: selectedIndex == 4 ? Colors.black87 : Colors.black54,
                 ),
                 SizedBox(
