@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -290,7 +291,10 @@ class _ProgressState extends State<ProgressMain>
             floatingActionButton: _showFloatingButton &&
                     progressController.tabController.index == 0
                 ? FloatingActionButton(
-                    onPressed: _scrollToTop,
+                    onPressed: () {
+                      HapticFeedback.lightImpact();
+                      _scrollToTop();
+                    },
                     backgroundColor: nicotrackBlack1,
                     elevation: 8,
                     child: Icon(

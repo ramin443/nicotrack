@@ -197,6 +197,7 @@ class ProgressController extends GetxController {
           final isSelected = tabController.index == index;
           return GestureDetector(
             onTap: () {
+              HapticFeedback.lightImpact();
               tabController.animateTo(index);
 
               // Scroll to the tapped tab's position
@@ -378,6 +379,8 @@ class ProgressController extends GetxController {
   void addNewFinancialGoal() async {
     if (!isFinancialGoalFormValid()) return;
     
+    HapticFeedback.mediumImpact();
+    
     try {
       // Create new financial goal
       FinancialGoalsModel newGoal = FinancialGoalsModel(
@@ -417,6 +420,8 @@ class ProgressController extends GetxController {
   void addNewFinancialGoal1() async {
     if (!isFinancialGoalFormValid1()) return;
 
+    HapticFeedback.mediumImpact();
+    
     try {
       // Create new financial goal
       FinancialGoalsModel newGoal = FinancialGoalsModel(
@@ -472,6 +477,8 @@ class ProgressController extends GetxController {
   // Delete financial goal
   void deleteFinancialGoal(int index) async {
     if (index >= userFinancialGoals.length) return;
+    
+    HapticFeedback.mediumImpact();
     
     try {
       // Remove from list
@@ -822,7 +829,7 @@ class ProgressController extends GetxController {
                             GestureDetector(
                               onTap: () {
                                 setFinGoalTrue();
-                                HapticFeedback.lightImpact();
+                                HapticFeedback.mediumImpact();
                                 Navigator.of(context).pop();
                               },
                               child: TextAutoSize(
@@ -918,7 +925,7 @@ class ProgressController extends GetxController {
                               GestureDetector(
                                 onTap: () {
                                   setFinGoalTrue();
-                                  HapticFeedback.lightImpact();
+                                  HapticFeedback.mediumImpact();
                                   Navigator.of(context).pop();
                                 },
                                 child: TextAutoSize(
@@ -1161,6 +1168,7 @@ class ProgressController extends GetxController {
               children: [
                 GestureDetector(
                   onTap: () {
+                    HapticFeedback.lightImpact();
                     showEmojiPicker(context);
                   },
                   child: Container(
@@ -1189,6 +1197,7 @@ class ProgressController extends GetxController {
                   right: 0,
                   child: GestureDetector(
                     onTap: () {
+                      HapticFeedback.lightImpact();
                       showEmojiPicker(context);
                     },
                     child: Container(
@@ -1303,6 +1312,7 @@ class ProgressController extends GetxController {
               children: [
                 GestureDetector(
                   onTap: () {
+                    HapticFeedback.lightImpact();
                     showEmojiPicker1(context);
                   },
                   child: Container(
@@ -1331,7 +1341,8 @@ class ProgressController extends GetxController {
                   right: 0,
                   child: GestureDetector(
                     onTap: () {
-                      showEmojiPicker(context);
+                      HapticFeedback.lightImpact();
+                      showEmojiPicker1(context);
                     },
                     child: Container(
                       width: 24.w,

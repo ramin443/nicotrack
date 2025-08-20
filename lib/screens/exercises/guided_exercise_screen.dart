@@ -233,6 +233,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
   }
   
   void _togglePause() {
+    HapticFeedback.mediumImpact();
     setState(() {
       _isPaused = !_isPaused;
       if (_isPaused) {
@@ -258,6 +259,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
   }
   
   void _stop() {
+    HapticFeedback.mediumImpact();
     // Cancel timer first to prevent any state updates
     _timer?.cancel();
     _breathingController.stop();

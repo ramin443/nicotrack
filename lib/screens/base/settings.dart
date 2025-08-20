@@ -1,5 +1,6 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/constants/font-constants.dart';
@@ -116,7 +117,10 @@ class _SettingsState extends State<Settings> {
                   ),
                   floatingActionButton: _showFloatingButton
                       ? FloatingActionButton(
-                          onPressed: _scrollToTop,
+                          onPressed: () {
+                            HapticFeedback.lightImpact();
+                            _scrollToTop();
+                          },
                           backgroundColor: nicotrackBlack1,
                           elevation: 8,
                           child: Icon(

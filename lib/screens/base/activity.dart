@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../constants/color-constants.dart';
@@ -117,6 +118,7 @@ class _ActivityState extends State<Activity> with SingleTickerProviderStateMixin
     
     return GestureDetector(
       onTap: () {
+        HapticFeedback.lightImpact();
         setState(() {
           _selectedFilterIndex = index;
           _tabController.animateTo(index);
@@ -283,6 +285,7 @@ class _ActivityState extends State<Activity> with SingleTickerProviderStateMixin
                       ),
                       GestureDetector(
                         onTap: () {
+                          HapticFeedback.lightImpact();
                           InfoBottomSheet.show(
                             context,
                             content: ActivityInfoContent(),
@@ -365,7 +368,10 @@ class _ActivityState extends State<Activity> with SingleTickerProviderStateMixin
       ),
       floatingActionButton: _showFloatingButton
           ? FloatingActionButton(
-              onPressed: _scrollToTop,
+              onPressed: () {
+                HapticFeedback.lightImpact();
+                _scrollToTop();
+              },
               backgroundColor: nicotrackBlack1,
               elevation: 8,
               heroTag: "activityScrollToTop",
@@ -382,6 +388,7 @@ class _ActivityState extends State<Activity> with SingleTickerProviderStateMixin
   Widget _buildTechniqueCard(ExerciseModel exercise) {
     return GestureDetector(
       onTap: () {
+        HapticFeedback.mediumImpact();
         Navigator.push(
           context,
           MaterialPageRoute(

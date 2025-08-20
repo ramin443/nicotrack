@@ -1,6 +1,7 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -291,6 +292,7 @@ class _PlanAltState extends State<PlanAlt> {
                           ),
                           GestureDetector(
                             onTap: () {
+                              HapticFeedback.lightImpact();
                               showModalBottomSheet(
                                 context: context,
                                 isScrollControlled: true,
@@ -327,6 +329,7 @@ class _PlanAltState extends State<PlanAlt> {
                                             children: [
                                               GestureDetector(
                                                 onTap: () {
+                                                  HapticFeedback.lightImpact();
                                                   Navigator.of(context).pop();
                                                 },
                                                 child: Container(
@@ -710,8 +713,11 @@ class _PlanAltState extends State<PlanAlt> {
                               curve: Curves.easeInOut,
                               child: _showCurrentPositionButton
                                   ? FloatingActionButton(
-                                      onPressed: () => _scrollToCurrentPosition(
-                                          planController.scrollController),
+                                      onPressed: () {
+                                        HapticFeedback.lightImpact();
+                                        _scrollToCurrentPosition(
+                                            planController.scrollController);
+                                      },
                                       backgroundColor: nicotrackBlack1,
                                       elevation: 8,
                                       heroTag: "currentPosition",
@@ -737,8 +743,11 @@ class _PlanAltState extends State<PlanAlt> {
                               curve: Curves.easeInOut,
                               child: _showFloatingButton
                                   ? FloatingActionButton(
-                                      onPressed: () => _scrollToTop(
-                                          planController.scrollController),
+                                      onPressed: () {
+                                        HapticFeedback.lightImpact();
+                                        _scrollToTop(
+                                            planController.scrollController);
+                                      },
                                       backgroundColor: nicotrackBlack1,
                                       elevation: 8,
                                       heroTag: "scrollToTop",

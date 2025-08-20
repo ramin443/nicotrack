@@ -170,6 +170,7 @@ class HomeController extends GetxController {
               DateFormat.yMMMd().format(DateTime.now()));
           return GestureDetector(
             onTap: () {
+              HapticFeedback.lightImpact();
               selectedDateIndex = index;
               // When an item is tapped, 'date' here is the DateTime object for that item
               final tappedDate = last7Days[
@@ -527,6 +528,7 @@ class HomeController extends GetxController {
             ),
             GestureDetector(
               onTap: () {
+                HapticFeedback.mediumImpact();
                 // Smoking task is always available (no lock), so proceed normally
                 if (!isSmokedToday) {
                   Navigator.of(context)
@@ -558,6 +560,7 @@ class HomeController extends GetxController {
             ),
             GestureDetector(
               onTap: () {
+                HapticFeedback.mediumImpact();
                 // Check if user can use mood feature
                 bool canUseMood = MoodUsageService.canUseMoodFeature();
 
@@ -730,6 +733,7 @@ class HomeController extends GetxController {
           tilePadding: EdgeInsets.only(right: 19.w, top: 6.h, bottom: 6.h),
           childrenPadding: EdgeInsets.only(bottom: 14.h),
           onExpansionChanged: (expanded) {
+            HapticFeedback.lightImpact();
             isQuickActionsExpanded = expanded;
             update();
           },
@@ -810,6 +814,7 @@ class HomeController extends GetxController {
           children: List.generate(quickActionsList.length, (index) {
             return GestureDetector(
               onTap: () {
+                HapticFeedback.lightImpact();
                 toggleAction(index);
               },
               child: Container(

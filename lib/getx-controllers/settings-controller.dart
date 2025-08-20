@@ -218,6 +218,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           ),
           GestureDetector(
             onTap: () {
+              HapticFeedback.mediumImpact();
               showChangeNameBottomSheet(context);
             },
             child: personalInfoBox(
@@ -231,6 +232,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           ),
           GestureDetector(
             onTap: () {
+              HapticFeedback.mediumImpact();
               showChangeQuitDateBottomSheet(context);
             },
             child: personalInfoBox(
@@ -250,6 +252,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           GetBuilder<AppPreferencesController>(builder: (appPrefsController) {
             return GestureDetector(
               onTap: () {
+                HapticFeedback.mediumImpact();
                 showChangeCurrencyBottomSheet(context);
               },
               child: personalInfoBox(
@@ -266,6 +269,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           GetBuilder<AppPreferencesController>(builder: (appPrefsController) {
             return GestureDetector(
               onTap: () {
+                HapticFeedback.mediumImpact();
                 showChangeLanguageBottomSheet(context);
               },
               child: personalInfoBox(
@@ -427,6 +431,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
               CupertinoSwitch(
                   value: enablePushNotification,
                   onChanged: (value) {
+                    HapticFeedback.lightImpact();
                     handlePushNotificationToggle(value);
                   })
             ],
@@ -480,9 +485,11 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           withPercent: false,
           percent: 16,
           newfinancialGoalAction: () {
+            HapticFeedback.mediumImpact();
             showAddFinancialGoalsBottomSheet(context);
           },
           onItemTap: (index) {
+            HapticFeedback.mediumImpact();
             showViewEditGoalBottomSheet(context, index);
           },
           isUserPremium: isUserPremium,
@@ -527,6 +534,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
               normalInfoBox(
                   fieldValue: context.l10n.contact_support,
                   action: () {
+                    HapticFeedback.lightImpact();
                     showContactSupportBottomSheet(context);
                   }),
               SizedBox(
@@ -535,6 +543,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
               normalInfoBox(
                   fieldValue: context.l10n.give_feedback,
                   action: () {
+                    HapticFeedback.lightImpact();
                     showFeedbackBottomSheet(context);
                   }),
             ],
@@ -573,6 +582,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           ),
           GestureDetector(
             onTap: () {
+              HapticFeedback.lightImpact();
               showPrivacyPolicyBottomSheet(context);
             },
             child: Container(
@@ -605,6 +615,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           ),
           GestureDetector(
             onTap: () {
+              HapticFeedback.lightImpact();
               showTermsOfUseBottomSheet(context);
             },
             child: Container(
@@ -637,6 +648,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           ),
           GestureDetector(
             onTap: () {
+              HapticFeedback.mediumImpact();
               showClearDataConfirmation(context);
             },
             child: Container(
@@ -772,6 +784,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           tilePadding: EdgeInsets.only(right: 19.w, top: 6.h, bottom: 6.h),
           childrenPadding: EdgeInsets.only(bottom: 14.h),
           onExpansionChanged: (expanded) {
+            HapticFeedback.lightImpact();
             isdailyReminderExpanded = expanded;
             update();
           },
@@ -812,6 +825,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                   children: [
                     GestureDetector(
                       onTap: () {
+                        HapticFeedback.lightImpact();
                         showSetMorningTimeBottomSheet(context);
                       },
                       child: Container(
@@ -852,6 +866,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                   children: [
                     GestureDetector(
                       onTap: () {
+                        HapticFeedback.lightImpact();
                         showSetEveningTimeBottomSheet(context);
                       },
                       child: Container(
@@ -1056,6 +1071,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           tilePadding: EdgeInsets.only(right: 19.w, top: 4.h, bottom: 4.h),
           childrenPadding: EdgeInsets.only(bottom: 14.h),
           onExpansionChanged: (expanded) {
+            HapticFeedback.lightImpact();
             isquitTipsExpanded = expanded;
             update();
           },
