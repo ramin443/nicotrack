@@ -690,6 +690,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
     
     if (earnedBadge != null) {
       // User earned a badge today, show badge-earned screen first
+      HapticFeedback.lightImpact();
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) => BadgeEarned(

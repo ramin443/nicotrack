@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:feather_icons/feather_icons.dart';
 import '../../constants/color-constants.dart';
@@ -66,7 +67,10 @@ class InfoBottomSheet extends StatelessWidget {
                 top: 10.h,
               ),
               child: GestureDetector(
-                onTap: () => Navigator.pop(context),
+                onTap: () {
+                  HapticFeedback.lightImpact();
+                  Navigator.pop(context);
+                },
                 child: Container(
                   width: 36.w,
                   height: 36.w,

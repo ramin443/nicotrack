@@ -118,7 +118,10 @@ class _EmergencyCravingExerciseScreenState
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             GestureDetector(
-                              onTap: () => Navigator.of(context).pop(),
+                              onTap: () {
+                                HapticFeedback.lightImpact();
+                                Navigator.of(context).pop();
+                              },
                               child: Container(
                                 width: 40.w,
                                 height: 40.w,
@@ -176,6 +179,7 @@ class _EmergencyCravingExerciseScreenState
                             ),
                             GestureDetector(
                               onTap: () {
+                                HapticFeedback.lightImpact();
                                 Navigator.of(context).popUntil((route) => route.isFirst);
                               },
                               child: Container(

@@ -1,4 +1,5 @@
 import 'package:feather_icons/feather_icons.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -83,6 +84,7 @@ class _SetEveningTimeBottomSheetState extends State<SetEveningTimeBottomSheet> {
                       settingsController.selectedHalf = ' PM';
                       settingsController.selectedHour = 8;
                       settingsController.selectedMinute = 0;
+                      HapticFeedback.lightImpact();
                       Navigator.of(context).pop();
 
                     },
@@ -106,7 +108,8 @@ class _SetEveningTimeBottomSheetState extends State<SetEveningTimeBottomSheet> {
                       GestureDetector(
                         onTap: () async {
                           await settingsMainController.updateEveningNotificationTime();
-                          Navigator.of(context).pop();
+                          HapticFeedback.lightImpact();
+                      Navigator.of(context).pop();
                         },
                         child: TextAutoSize(
                           context.l10n.done,

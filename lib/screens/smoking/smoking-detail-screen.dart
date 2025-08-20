@@ -100,6 +100,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
   }
 
   void _handleCloseNavigation() {
+    HapticFeedback.lightImpact();
     switch (widget.routeSource) {
       case SmokingDetailRouteSource.fromHome:
         // Coming from home daily page - use pop

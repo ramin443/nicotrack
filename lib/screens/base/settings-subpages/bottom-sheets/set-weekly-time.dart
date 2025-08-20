@@ -1,4 +1,5 @@
 import 'package:feather_icons/feather_icons.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -83,7 +84,8 @@ class _SetWeeklyTimeBottomSheetState extends State<SetWeeklyTimeBottomSheet> {
                         settingsController.selectedWeeklyHalf = ' AM';
                         settingsController.selectedWeeklyHour = 8;
                         settingsController.selectedWeeklyMinute = 0;
-                        Navigator.of(context).pop();
+                        HapticFeedback.lightImpact();
+                      Navigator.of(context).pop();
 
                       },
                       child: Container(
@@ -106,7 +108,8 @@ class _SetWeeklyTimeBottomSheetState extends State<SetWeeklyTimeBottomSheet> {
                         GestureDetector(
                           onTap: (){
                             settingsController.updateWeeklyReminderPreferences();
-                            Navigator.of(context).pop();
+                            HapticFeedback.lightImpact();
+                      Navigator.of(context).pop();
                           },
                           child: TextAutoSize(
                             context.l10n.done,

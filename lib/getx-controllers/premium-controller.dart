@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../services/purchase-service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -218,6 +219,7 @@ class PremiumController extends GetxController {
     
     try {
       bool success = await purchaseService.purchaseProduct(planIndex);
+      HapticFeedback.lightImpact();
       Navigator.pop(context); // Close loading dialog
       
       if (!success) {
@@ -241,6 +243,7 @@ class PremiumController extends GetxController {
       }
       // The purchase service will handle success/error messages and update isPremium
     } catch (e) {
+      HapticFeedback.lightImpact();
       Navigator.pop(context); // Close loading dialog
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -274,6 +277,7 @@ class PremiumController extends GetxController {
     
     try {
       await purchaseService.restorePurchases();
+      HapticFeedback.lightImpact();
       Navigator.pop(context); // Close loading dialog
       
       // Show message based on whether purchases were restored
@@ -299,6 +303,7 @@ class PremiumController extends GetxController {
         );
       }
     } catch (e) {
+      HapticFeedback.lightImpact();
       Navigator.pop(context); // Close loading dialog
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

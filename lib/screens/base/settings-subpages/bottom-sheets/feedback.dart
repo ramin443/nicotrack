@@ -1,5 +1,6 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/constants/color-constants.dart';
@@ -61,6 +62,7 @@ class _FeedbackBottomSheetState extends State<FeedbackBottomSheet> {
                             onTap: () {
                               settingsController.selectedDollar = 4;
                               settingsController.selectedCent = 20;
+                              HapticFeedback.lightImpact();
                               Navigator.of(context).pop();
                             },
                             child: Container(
@@ -85,6 +87,7 @@ class _FeedbackBottomSheetState extends State<FeedbackBottomSheet> {
                                 onTap: () async {
                                   // If feedback field is empty, just close without submitting
                                   if (settingsController.feedbackController.text.trim().isEmpty) {
+                                    HapticFeedback.lightImpact();
                                     Navigator.of(context).pop();
                                     return;
                                   }

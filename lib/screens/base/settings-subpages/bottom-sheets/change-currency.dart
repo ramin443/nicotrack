@@ -1,6 +1,7 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/constants/color-constants.dart';
@@ -68,6 +69,7 @@ class _ChangeCurrencyBottomSheetState extends State<ChangeCurrencyBottomSheet> {
                   children: [
                     GestureDetector(
                       onTap: () {
+                        HapticFeedback.lightImpact();
                         Navigator.of(context).pop();
                       },
                       child: Container(
@@ -107,6 +109,7 @@ class _ChangeCurrencyBottomSheetState extends State<ChangeCurrencyBottomSheet> {
                             } catch (e) {
                               // Controller might not be available in all contexts
                             }
+                            HapticFeedback.lightImpact();
                             Navigator.of(context).pop();
                           },
                           child: TextAutoSize(

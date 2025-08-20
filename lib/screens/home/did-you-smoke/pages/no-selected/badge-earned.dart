@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:confetti/confetti.dart';
 import '../../../../../constants/font-constants.dart';
 import 'package:intl/intl.dart';
@@ -93,6 +94,7 @@ class _BadgeEarnedState extends State<BadgeEarned> {
                     GestureDetector(
                       onTap: () {
                         // Save smoke-free data and navigate to home
+                        HapticFeedback.lightImpact();
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(builder: (context) => Base()),
                             (route) => false);
@@ -232,6 +234,7 @@ class _BadgeEarnedState extends State<BadgeEarned> {
         GestureDetector(
           onTap: () {
             // Save smoke-free data and navigate to home
+            HapticFeedback.lightImpact();
             Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => Base()),
                     (route) => false);

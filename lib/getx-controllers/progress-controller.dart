@@ -636,7 +636,10 @@ class ProgressController extends GetxController {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => Navigator.pop(context),
+                    onTap: () {
+                      HapticFeedback.lightImpact();
+                      Navigator.pop(context);
+                    },
                     child: Icon(
                       Icons.close,
                       color: nicotrackBlack1,
@@ -651,6 +654,7 @@ class ProgressController extends GetxController {
                 onEmojiSelected: (category, emoji) {
                   selectedEmoji = emoji.emoji;
                   update();
+                  HapticFeedback.lightImpact();
                   Navigator.pop(context);
                 },
                 config: Config(
@@ -704,7 +708,10 @@ class ProgressController extends GetxController {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => Navigator.pop(context),
+                    onTap: () {
+                      HapticFeedback.lightImpact();
+                      Navigator.pop(context);
+                    },
                     child: Icon(
                       Icons.close,
                       color: nicotrackBlack1,
@@ -719,6 +726,7 @@ class ProgressController extends GetxController {
                 onEmojiSelected: (category, emoji) {
                   selectedEmoji1 = emoji.emoji;
                   update();
+                  HapticFeedback.lightImpact();
                   Navigator.pop(context);
                 },
                 config: Config(
@@ -790,6 +798,7 @@ class ProgressController extends GetxController {
                       children: [
                         GestureDetector(
                           onTap: () {
+                            HapticFeedback.lightImpact();
                             Navigator.of(context).pop();
                           },
                           child: Container(
@@ -813,6 +822,7 @@ class ProgressController extends GetxController {
                             GestureDetector(
                               onTap: () {
                                 setFinGoalTrue();
+                                HapticFeedback.lightImpact();
                                 Navigator.of(context).pop();
                               },
                               child: TextAutoSize(
@@ -884,6 +894,7 @@ class ProgressController extends GetxController {
                         children: [
                           GestureDetector(
                             onTap: () {
+                              HapticFeedback.lightImpact();
                               Navigator.of(context).pop();
                             },
                             child: Container(
@@ -907,6 +918,7 @@ class ProgressController extends GetxController {
                               GestureDetector(
                                 onTap: () {
                                   setFinGoalTrue();
+                                  HapticFeedback.lightImpact();
                                   Navigator.of(context).pop();
                                 },
                                 child: TextAutoSize(

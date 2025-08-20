@@ -467,6 +467,7 @@ class OnboardingController extends GetxController {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
+                        HapticFeedback.lightImpact();
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -495,6 +496,7 @@ class OnboardingController extends GetxController {
                         if (pickedDate == null) {
                           pickedDate = selectedCustomDate;
                         }
+                        HapticFeedback.lightImpact();
                         Navigator.pop(context);
                       },
                       child: Container(

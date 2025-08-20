@@ -1,5 +1,6 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/constants/color-constants.dart';
@@ -58,6 +59,7 @@ class _ViewEditGoalBottomSheetState extends State<ViewEditGoalBottomSheet> {
                 Row(children: [
                   GestureDetector(
                     onTap: () {
+                      HapticFeedback.lightImpact();
                       Navigator.of(context).pop();
                     },
                     child: Container(
@@ -104,6 +106,7 @@ class _ViewEditGoalBottomSheetState extends State<ViewEditGoalBottomSheet> {
                         if (settingsController.isFinancialGoalFormValid1()) {
                           settingsController
                               .updateFinancialGoal(widget.goalIndex);
+                          HapticFeedback.lightImpact();
                           Navigator.of(context).pop();
                         }
                       },
@@ -305,6 +308,7 @@ class _ViewEditGoalBottomSheetState extends State<ViewEditGoalBottomSheet> {
           actions: [
             TextButton(
               onPressed: () {
+                HapticFeedback.lightImpact();
                 Navigator.of(context).pop();
               },
               child: Text(
@@ -319,7 +323,9 @@ class _ViewEditGoalBottomSheetState extends State<ViewEditGoalBottomSheet> {
             TextButton(
               onPressed: () {
                 controller.deleteFinancialGoal(widget.goalIndex);
+                HapticFeedback.lightImpact();
                 Navigator.of(context).pop(); // Close dialog
+                HapticFeedback.lightImpact();
                 Navigator.of(context).pop(); // Close bottom sheet
               },
               child: Text(

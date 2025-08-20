@@ -156,7 +156,10 @@ class _EmergencyCravingMotivationScreenState
                         ),
                         // Close button
                         GestureDetector(
-                          onTap: () => Navigator.of(context).pop(),
+                          onTap: () {
+                            HapticFeedback.lightImpact();
+                            Navigator.of(context).pop();
+                          },
                           child: Container(
                             width: 40.w,
                             height: 40.w,

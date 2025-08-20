@@ -200,6 +200,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
                   // Use a delay to ensure the dialog is fully closed
                   Future.delayed(Duration(milliseconds: 100), () {
                     if (mounted) {
+                      HapticFeedback.lightImpact();
                       Navigator.of(context).pop(); // Go back to overview
                       Navigator.of(context).pop(); // Go back to activity
                     }
@@ -310,6 +311,7 @@ class _GuidedExerciseScreenState extends State<GuidedExerciseScreen>
               // Use a delay to ensure the dialog is fully closed
               Future.delayed(Duration(milliseconds: 100), () {
                 if (mounted) {
+                  HapticFeedback.lightImpact();
                   Navigator.of(context).pop();
                 }
               });

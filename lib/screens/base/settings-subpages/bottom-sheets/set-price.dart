@@ -1,5 +1,6 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/constants/color-constants.dart';
@@ -65,6 +66,7 @@ class _SetPriceBottomSheetState extends State<SetPriceBottomSheet> {
                       onTap: () {
                         settingsController.selectedFinGoalDollar = 150;
                         settingsController.selectedFinGoalCent = 25;
+                        HapticFeedback.lightImpact();
                         Navigator.of(context).pop();
                       },
                       child: Container(
@@ -88,6 +90,7 @@ class _SetPriceBottomSheetState extends State<SetPriceBottomSheet> {
                         GestureDetector(
                           onTap: () {
                             settingsController.setFinGoalTrue();
+                            HapticFeedback.lightImpact();
                             Navigator.of(context).pop();
                           },
                           child: TextAutoSize(

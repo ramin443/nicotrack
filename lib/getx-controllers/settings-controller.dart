@@ -1309,6 +1309,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                     children: [
                       GestureDetector(
                         onTap: () {
+                          HapticFeedback.lightImpact();
                           Navigator.of(context).pop();
                         },
                         child: Container(
@@ -1332,6 +1333,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                           GestureDetector(
                             onTap: () {
                               setFinGoalTrue();
+                              HapticFeedback.lightImpact();
                               Navigator.of(context).pop();
                             },
                             child: TextAutoSize(
@@ -1401,6 +1403,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                     children: [
                       GestureDetector(
                         onTap: () {
+                          HapticFeedback.lightImpact();
                           Navigator.of(context).pop();
                         },
                         child: Container(
@@ -1424,6 +1427,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                           GestureDetector(
                             onTap: () {
                               setFinGoalTrue();
+                              HapticFeedback.lightImpact();
                               Navigator.of(context).pop();
                             },
                             child: TextAutoSize(
@@ -2825,7 +2829,10 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => Navigator.pop(context),
+                    onTap: () {
+                      HapticFeedback.lightImpact();
+                      Navigator.pop(context);
+                    },
                     child: Icon(
                       Icons.close,
                       color: nicotrackBlack1,
@@ -2840,6 +2847,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 onEmojiSelected: (category, emoji) {
                   selectedEmoji = emoji.emoji;
                   update(); // This will trigger validation check
+                  HapticFeedback.lightImpact();
                   Navigator.pop(context);
                 },
                 config: Config(
@@ -2892,7 +2900,10 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => Navigator.pop(context),
+                    onTap: () {
+                      HapticFeedback.lightImpact();
+                      Navigator.pop(context);
+                    },
                     child: Icon(
                       Icons.close,
                       color: nicotrackBlack1,
@@ -2907,6 +2918,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                 onEmojiSelected: (category, emoji) {
                   selectedEmoji1 = emoji.emoji;
                   update(); // This will trigger validation check
+                  HapticFeedback.lightImpact();
                   Navigator.pop(context);
                 },
                 config: Config(
@@ -3690,6 +3702,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
+                                      HapticFeedback.lightImpact();
                                       Navigator.of(context).pop();
                                     },
                                     child: Container(
@@ -4020,6 +4033,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () {
+                                        HapticFeedback.lightImpact();
                                         Navigator.pop(context);
                                       },
                                       child: Container(
@@ -4054,6 +4068,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
                                       onTap: controller.isConfirmationValid
                                           ? () async {
                                               // Close the confirmation dialog first
+                                              HapticFeedback.lightImpact();
                                               Navigator.pop(context);
 
                                               // Perform data clearing
@@ -4243,6 +4258,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       _showSuccessSnackBar(context, context.l10n.support_request_submitted_success);
       
       // Close bottom sheet
+      HapticFeedback.lightImpact();
       Navigator.of(context).pop();
       
     } catch (e) {
@@ -4311,6 +4327,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       _showSuccessSnackBar(context, context.l10n.feedback_submitted_success);
       
       // Close bottom sheet
+      HapticFeedback.lightImpact();
       Navigator.of(context).pop();
       
     } catch (e) {

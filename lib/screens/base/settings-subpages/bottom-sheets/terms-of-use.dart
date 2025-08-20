@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:nicotrack/constants/color-constants.dart';
@@ -45,6 +46,7 @@ class TermsOfUseBottomSheet extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
+                      HapticFeedback.lightImpact();
                       Navigator.of(context).pop();
                     },
                     child: Container(

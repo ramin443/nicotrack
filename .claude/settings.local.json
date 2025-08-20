@@ -68,7 +68,11 @@
       "Bash(else echo \"✗ MISSING exercise translations\")",
       "Bash(if grep -q \"emergency_craving_button\" \"$file\")",
       "Bash(then echo \"✓ HAS emergency translations\")",
-      "Bash(else echo \"✗ MISSING emergency translations\")"
+      "Bash(else echo \"✗ MISSING emergency translations\")",
+      "Bash(do echo \"=== Processing $file ===\")",
+      "Bash(head:*)",
+      "Bash(if ! grep -q \"flutter/services\" \"$file\")",
+      "Bash(if ! grep -q \"HapticFeedback.lightImpact\" \"$file\")"
     ],
     "deny": []
   }
