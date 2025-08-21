@@ -8,12 +8,14 @@ import '../../constants/image-constants.dart';
 import '../elements/textAutoSize.dart';
 import 'package:feather_icons/feather_icons.dart';
 import '../../extensions/app_localizations_extension.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 import '../../models/exercise_model.dart';
 import '../exercises/exercise_overview_screen.dart';
 import '../elements/info_bottom_sheet.dart';
 import '../elements/activity_info_content.dart';
 import '../../services/exercise_translation_service.dart';
+import '../../getx-controllers/premium-controller.dart';
+import '../premium/reusables/premium-widgets.dart';
+import '../premium/premium-paywall-screen.dart';
 
 class Activity extends StatefulWidget {
   const Activity({super.key});
@@ -386,21 +388,37 @@ class _ActivityState extends State<Activity> with SingleTickerProviderStateMixin
   }
 
   Widget _buildTechniqueCard(ExerciseModel exercise) {
+    final premiumController = Get.find<PremiumController>();
+    final bool isPremium = premiumController.effectivePremiumStatus;
+    
     return GestureDetector(
       onTap: () {
         HapticFeedback.mediumImpact();
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ExerciseOverviewScreen(exercise: exercise),
-          ),
-        );
+        
+        // Check if user is premium or not
+        if (!isPremium) {
+          // If not premium, navigate to premium paywall screen
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PremiumPaywallScreen(),
+            ),
+          );
+        } else {
+          // If premium, proceed normally to exercise
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ExerciseOverviewScreen(exercise: exercise),
+            ),
+          );
+        }
       },
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Color(0xffff1f1f1), width: 1.sp),
+          border: Border.all(color: Color(0xFFF1F1F1), width: 1.sp),
         ),
         child: Stack(
           children: [
@@ -474,6 +492,13 @@ class _ActivityState extends State<Activity> with SingleTickerProviderStateMixin
                 ),
               ),
             ),
+            // Show lock for non-premium users
+            if (!isPremium)
+              Positioned(
+                bottom: 12.h,
+                right: 12.w,
+                child: smallLockBox(),
+              ),
           ],
         ),
       ),

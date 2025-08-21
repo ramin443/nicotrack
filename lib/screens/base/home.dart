@@ -26,11 +26,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  
-  void _showMilestoneBottomSheet(BuildContext context, HomeController homeController) {
+  void _showMilestoneBottomSheet(
+      BuildContext context, HomeController homeController) {
     int currentDays = getDaysSinceLastSmoked(DateTime.now());
-    List<AwardModel> earnedBadges = allAwards.where((badge) => badge.day <= currentDays).toList();
-    List<AwardModel> nextMilestones = allAwards.where((badge) => badge.day > currentDays).toList();
+    List<AwardModel> earnedBadges =
+        allAwards.where((badge) => badge.day <= currentDays).toList();
+    List<AwardModel> nextMilestones =
+        allAwards.where((badge) => badge.day > currentDays).toList();
 
     showModalBottomSheet(
       context: context,
@@ -42,60 +44,61 @@ class _HomeState extends State<Home> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(24.r),
-              topRight: Radius.circular(24.r),
+              topLeft: Radius.circular(40.r),
+              topRight: Radius.circular(40.r),
             ),
           ),
           child: Column(
             children: [
-              SizedBox(height: 18.h),
+              SizedBox(height: 18.w),
               // Handle bar
-              Container(
-                height: 4.h,
-                width: 52.w,
-                decoration: BoxDecoration(
-                  color: nicotrackBlack1.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(18.r),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 36.w,
+                    height: 36.w,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      shape: BoxShape.circle,
+                    ),
+
+                  ),
+                  Container(
+                    height: 5.w,
+                    width: 52.w,
+                    decoration: BoxDecoration(
+                      color: nicotrackBlack1,
+                      borderRadius: BorderRadius.circular(18.r),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      HapticFeedback.lightImpact();
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      width: 36.w,
+                      height: 36.w,
+                      margin: EdgeInsets.only(right: 16.w),
+                      decoration: BoxDecoration(
+                        color: nicotrackOrange.withOpacity(0.2),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.close_rounded,
+                        size: 20.w,
+                        color: nicotrackOrange,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(height: 24.h),
+
+              SizedBox(height: 16.w),
               // Header
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextAutoSize(
-                      context.l10n.milestones_tab.replaceAll('🏆 ', ''),
-                      style: TextStyle(
-                        fontSize: 24.sp,
-                        fontFamily: circularBold,
-                        color: nicotrackBlack1,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        HapticFeedback.lightImpact();
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        width: 36.w,
-                        height: 36.w,
-                        decoration: BoxDecoration(
-                          color: nicotrackOrange.withOpacity(0.2),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          Icons.close_rounded,
-                          size: 20.w,
-                          color: nicotrackOrange,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 24.h),
+
               // Milestone content matching plan screen
               Expanded(
                 child: SingleChildScrollView(
@@ -107,26 +110,24 @@ class _HomeState extends State<Home> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 14.h),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 24.w, vertical: 14.h),
                             decoration: BoxDecoration(
-                              color: nicotrackBlack1,
-                              borderRadius: BorderRadius.circular(24.r)
-                            ),
+                                color: nicotrackBlack1,
+                                borderRadius: BorderRadius.circular(24.r)),
                             child: RichText(
-                              text: TextSpan(
-                                style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontFamily: circularBold,
-                                  height: 1.1,
-                                  color: Colors.white
-                                ),
-                                children: [
+                                text: TextSpan(
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontFamily: circularBold,
+                                        height: 1.1,
+                                        color: Colors.white),
+                                    children: [
                                   TextSpan(
-                                    text: "🪙  ${context.l10n.earned_badges_title} (${earnedBadges.length})",
+                                    text:
+                                        "🪙  ${context.l10n.earned_badges_title} (${earnedBadges.length})",
                                   ),
-                                ]
-                              )
-                            ),
+                                ])),
                           ),
                         ],
                       ),
@@ -137,7 +138,8 @@ class _HomeState extends State<Home> {
                         Container(
                           padding: EdgeInsets.all(24.w),
                           child: Text(
-                            context.l10n.first_badge_message(allAwards.first.day.toString()),
+                            context.l10n.first_badge_message(
+                                allAwards.first.day.toString()),
                             style: TextStyle(
                               fontSize: 14.sp,
                               fontFamily: circularMedium,
@@ -152,38 +154,35 @@ class _HomeState extends State<Home> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 14.h),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 24.w, vertical: 14.h),
                             decoration: BoxDecoration(
-                              color: nicotrackBlack1,
-                              borderRadius: BorderRadius.circular(24.r)
-                            ),
+                                color: nicotrackBlack1,
+                                borderRadius: BorderRadius.circular(24.r)),
                             child: RichText(
-                              text: TextSpan(
-                                style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontFamily: circularBold,
-                                  height: 1.1,
-                                  color: Colors.white
-                                ),
-                                children: [
+                                text: TextSpan(
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontFamily: circularBold,
+                                        height: 1.1,
+                                        color: Colors.white),
+                                    children: [
                                   TextSpan(
-                                    text: "📆  ${context.l10n.next_milestones_title}",
+                                    text:
+                                        "📆  ${context.l10n.next_milestones_title}",
                                   ),
-                                ]
-                              )
-                            ),
+                                ])),
                           ),
                         ],
                       ),
                       SizedBox(height: 12.h),
                       if (nextMilestones.isNotEmpty)
                         ColorFiltered(
-                          colorFilter: ColorFilter.mode(
-                            Colors.white,
-                            BlendMode.saturation,
-                          ),
-                          child: _buildMilestoneGrid(nextMilestones, context)
-                        )
+                            colorFilter: ColorFilter.mode(
+                              Colors.white,
+                              BlendMode.saturation,
+                            ),
+                            child: _buildMilestoneGrid(nextMilestones, context))
                       else
                         Container(
                           padding: EdgeInsets.all(24.w),
@@ -209,7 +208,8 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _buildMilestoneGrid(List<AwardModel> awardsList, BuildContext context) {
+  Widget _buildMilestoneGrid(
+      List<AwardModel> awardsList, BuildContext context) {
     return GridView.builder(
       padding: EdgeInsets.all(16),
       shrinkWrap: true,
@@ -239,10 +239,7 @@ class _HomeState extends State<Home> {
               gradient: LinearGradient(
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
-                colors: [
-                  Color(0xff3217C3).withOpacity(0.7),
-                  Color(0xffFF4B4B)
-                ],
+                colors: [Color(0xff3217C3).withOpacity(0.7), Color(0xffFF4B4B)],
               ),
               style: TextStyle(
                 fontSize: 16.sp,
@@ -311,38 +308,6 @@ class _HomeState extends State<Home> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  // Milestone button
-                                  GestureDetector(
-                                    onTap: () {
-                                      HapticFeedback.lightImpact();
-                                      _showMilestoneBottomSheet(context, homeController);
-                                    },
-                                    child: Container(
-                                      width: 48.w,
-                                      height: 48.w,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: nicotrackOrange.withOpacity(0.3),
-                                          width: 2.w,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: nicotrackOrange.withOpacity(0.1),
-                                            blurRadius: 8.r,
-                                            offset: Offset(0, 2.h),
-                                          ),
-                                        ],
-                                      ),
-                                      child: Center(
-                                        child: homeController.getLatestMilestoneImage(),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 12.w,
-                                  ),
                                   GestureDetector(
                                     onTap: () async {
                                       Navigator.push(
@@ -379,6 +344,37 @@ class _HomeState extends State<Home> {
                                     ),
                                   ),
                                   SizedBox(
+                                    width: 8.w,
+                                  ),
+                                  // Milestone button
+                                  GestureDetector(
+                                      onTap: () {
+                                        HapticFeedback.lightImpact();
+                                        _showMilestoneBottomSheet(
+                                            context, homeController);
+                                      },
+                                      child: Stack(
+                                          alignment: Alignment.center,
+                                          children: [
+                                            Image.asset(
+                                              badgeBG,
+                                              width: 48.w,
+                                            ),
+                                            Container(
+                                              width: 48.w,
+                                              height: 48.w,
+                                              decoration: BoxDecoration(
+                                                color: Colors.transparent,
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Center(
+                                                child: homeController
+                                                    .getLatestMilestoneImage(),
+                                              ),
+                                            ),
+                                          ])),
+
+                                  SizedBox(
                                     width: 24.w,
                                   ),
                                 ],
@@ -395,10 +391,12 @@ class _HomeState extends State<Home> {
                         ),
                         homeController.homeGridView(
                           context: context,
-                          daysSinceLabel: context.l10n.home_days_since_last_smoked,
+                          daysSinceLabel:
+                              context.l10n.home_days_since_last_smoked,
                           moneySavedLabel: context.l10n.home_money_saved,
                           hoursRegainedLabel: context.l10n.home_hours_regained,
-                          cigarettesNotSmokedLabel: context.l10n.home_cigarettes_not_smoked,
+                          cigarettesNotSmokedLabel:
+                              context.l10n.home_cigarettes_not_smoked,
                         ),
                         premiumController.effectivePremiumStatus
                             ? SizedBox.shrink()
@@ -420,10 +418,13 @@ class _HomeState extends State<Home> {
                         ),
                         homeController.dailyTasksSection(
                           context: context,
-                          isUserPremium: premiumController.effectivePremiumStatus,
+                          isUserPremium:
+                              premiumController.effectivePremiumStatus,
                           dailyTasksLabel: context.l10n.home_daily_tasks,
-                          smokingStatusDone: context.l10n.home_smoking_status_done,
-                          didYouSmokeToday: context.l10n.home_did_you_smoke_today,
+                          smokingStatusDone:
+                              context.l10n.home_smoking_status_done,
+                          didYouSmokeToday:
+                              context.l10n.home_did_you_smoke_today,
                           thanksForUpdate: context.l10n.home_thanks_for_update,
                           letUsKnow: context.l10n.home_let_us_know,
                           moodRecorded: context.l10n.home_mood_recorded,

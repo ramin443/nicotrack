@@ -323,7 +323,7 @@ final List<ExerciseModel> allExercises = [
   ExerciseModel(
     id: '13',
     title: 'Box Breathing Technique',
-    icon: '⬜',
+    icon: '📦',
     duration: '4 min',
     phase: 'Phase 1',
     description: 'Military-grade breathing technique using equal counts for inhale, hold, exhale, and hold to reset your nervous system.',
@@ -458,7 +458,7 @@ final List<ExerciseModel> allExercises = [
   ExerciseModel(
     id: '19',
     title: 'Vocal Toning',
-    icon: '🎵',
+    icon: '🎙️',
     duration: '2 min',
     phase: 'Phase 3',
     description: 'Use humming and vocal vibrations to stimulate the vagus nerve and calm your system.',
