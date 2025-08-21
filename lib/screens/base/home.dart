@@ -13,6 +13,10 @@ import '../elements/textAutoSize.dart';
 import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
 import 'package:nicotrack/getx-controllers/premium-controller.dart';
 import 'package:nicotrack/extensions/app_localizations_extension.dart';
+import '../../utility-functions/home-grid-calculations.dart';
+import '../../models/award-model/award-model.dart';
+import '../elements/gradient-text.dart';
+import '../../constants/quick-function-constants.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -22,6 +26,237 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  
+  void _showMilestoneBottomSheet(BuildContext context, HomeController homeController) {
+    int currentDays = getDaysSinceLastSmoked(DateTime.now());
+    List<AwardModel> earnedBadges = allAwards.where((badge) => badge.day <= currentDays).toList();
+    List<AwardModel> nextMilestones = allAwards.where((badge) => badge.day > currentDays).toList();
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.75,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(24.r),
+              topRight: Radius.circular(24.r),
+            ),
+          ),
+          child: Column(
+            children: [
+              SizedBox(height: 18.h),
+              // Handle bar
+              Container(
+                height: 4.h,
+                width: 52.w,
+                decoration: BoxDecoration(
+                  color: nicotrackBlack1.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(18.r),
+                ),
+              ),
+              SizedBox(height: 24.h),
+              // Header
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextAutoSize(
+                      context.l10n.milestones_tab.replaceAll('🏆 ', ''),
+                      style: TextStyle(
+                        fontSize: 24.sp,
+                        fontFamily: circularBold,
+                        color: nicotrackBlack1,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        HapticFeedback.lightImpact();
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        width: 36.w,
+                        height: 36.w,
+                        decoration: BoxDecoration(
+                          color: nicotrackOrange.withOpacity(0.2),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.close_rounded,
+                          size: 20.w,
+                          color: nicotrackOrange,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 24.h),
+              // Milestone content matching plan screen
+              Expanded(
+                child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      // Earned badges section
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 14.h),
+                            decoration: BoxDecoration(
+                              color: nicotrackBlack1,
+                              borderRadius: BorderRadius.circular(24.r)
+                            ),
+                            child: RichText(
+                              text: TextSpan(
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontFamily: circularBold,
+                                  height: 1.1,
+                                  color: Colors.white
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: "🪙  ${context.l10n.earned_badges_title} (${earnedBadges.length})",
+                                  ),
+                                ]
+                              )
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 12.h),
+                      if (earnedBadges.isNotEmpty)
+                        _buildMilestoneGrid(earnedBadges, context)
+                      else
+                        Container(
+                          padding: EdgeInsets.all(24.w),
+                          child: Text(
+                            context.l10n.first_badge_message(allAwards.first.day.toString()),
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              fontFamily: circularMedium,
+                              color: Colors.grey,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      SizedBox(height: 12.h),
+                      // Next milestones section
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 14.h),
+                            decoration: BoxDecoration(
+                              color: nicotrackBlack1,
+                              borderRadius: BorderRadius.circular(24.r)
+                            ),
+                            child: RichText(
+                              text: TextSpan(
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontFamily: circularBold,
+                                  height: 1.1,
+                                  color: Colors.white
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: "📆  ${context.l10n.next_milestones_title}",
+                                  ),
+                                ]
+                              )
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 12.h),
+                      if (nextMilestones.isNotEmpty)
+                        ColorFiltered(
+                          colorFilter: ColorFilter.mode(
+                            Colors.white,
+                            BlendMode.saturation,
+                          ),
+                          child: _buildMilestoneGrid(nextMilestones, context)
+                        )
+                      else
+                        Container(
+                          padding: EdgeInsets.all(24.w),
+                          child: Text(
+                            context.l10n.all_badges_earned_message,
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              fontFamily: circularMedium,
+                              color: Colors.black,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      SizedBox(height: 24.h),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildMilestoneGrid(List<AwardModel> awardsList, BuildContext context) {
+    return GridView.builder(
+      padding: EdgeInsets.all(16),
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        crossAxisSpacing: 16.w,
+        mainAxisSpacing: 8.h,
+        childAspectRatio: 0.7,
+      ),
+      itemCount: awardsList.length,
+      itemBuilder: (context, index) {
+        final item = awardsList[index];
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.asset(hexaPolygon, width: 105.w),
+                Image.asset(item.emojiImg, width: 58.w),
+              ],
+            ),
+            SizedBox(height: 8),
+            GradientText(
+              text: context.l10n.day_number(item.day.toString()),
+              gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [
+                  Color(0xff3217C3).withOpacity(0.7),
+                  Color(0xffFF4B4B)
+                ],
+              ),
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontFamily: circularBold,
+                height: 1.1,
+                color: const Color(0xFFA1A1A1),
+              ),
+            )
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -76,6 +311,38 @@ class _HomeState extends State<Home> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
+                                  // Milestone button
+                                  GestureDetector(
+                                    onTap: () {
+                                      HapticFeedback.lightImpact();
+                                      _showMilestoneBottomSheet(context, homeController);
+                                    },
+                                    child: Container(
+                                      width: 48.w,
+                                      height: 48.w,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: nicotrackOrange.withOpacity(0.3),
+                                          width: 2.w,
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: nicotrackOrange.withOpacity(0.1),
+                                            blurRadius: 8.r,
+                                            offset: Offset(0, 2.h),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Center(
+                                        child: homeController.getLatestMilestoneImage(),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 12.w,
+                                  ),
                                   GestureDetector(
                                     onTap: () async {
                                       Navigator.push(

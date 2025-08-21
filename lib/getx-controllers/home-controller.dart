@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nicotrack/constants/quick-function-constants.dart';
+import 'package:nicotrack/models/award-model/award-model.dart';
 import 'package:nicotrack/screens/home/did-you-smoke/didyousmoke-main-slider.dart';
 import 'package:nicotrack/screens/home/mood/mood-main-slider.dart';
 import 'package:nicotrack/screens/mood/mood-detail-screen.dart';
@@ -1085,5 +1086,209 @@ class HomeController extends GetxController {
         return quickActionsModel.firstActionDone;
     }
     update();
+  }
+
+  // Get latest achieved milestone image
+  Widget getLatestMilestoneImage() {
+    int currentDays = getDaysSinceLastSmoked(DateTime.now());
+    List<AwardModel> earnedBadges = allAwards.where((badge) => badge.day <= currentDays).toList();
+    
+    if (earnedBadges.isNotEmpty) {
+      // Get the latest (highest day) milestone
+      AwardModel latestMilestone = earnedBadges.reduce((a, b) => a.day > b.day ? a : b);
+      return Image.asset(
+        latestMilestone.emojiImg,
+        width: 28.w,
+        height: 28.w,
+        fit: BoxFit.contain,
+      );
+    } else {
+      // No milestones achieved yet - show a default icon
+      return Icon(
+        Icons.emoji_events_outlined,
+        size: 24.w,
+        color: nicotrackOrange,
+      );
+    }
+  }
+
+  // Build milestone grid for bottom sheet using plan screen UI pattern
+  Widget buildMilestoneGrid(BuildContext context) {
+    int currentDays = getDaysSinceLastSmoked(DateTime.now());
+    List<AwardModel> earnedBadges = allAwards.where((badge) => badge.day <= currentDays).toList();
+    List<AwardModel> nextMilestones = allAwards.where((badge) => badge.day > currentDays).toList();
+    
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          // Earned badges section
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 14.h),
+                decoration: BoxDecoration(
+                  color: nicotrackBlack1,
+                  borderRadius: BorderRadius.circular(24.r)
+                ),
+                child: RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontFamily: circularBold,
+                      height: 1.1,
+                      color: Colors.white
+                    ),
+                    children: [
+                      TextSpan(
+                        text: "🪙  Earned Badges (${earnedBadges.length})",
+                      ),
+                    ]
+                  )
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 12.h),
+          if (earnedBadges.isNotEmpty)
+            _buildThreexGridView(earnedBadges, context)
+          else
+            Container(
+              padding: EdgeInsets.all(24.w),
+              child: Text(
+                "Your first badge will be unlocked at day ${allAwards.first.day}",
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontFamily: circularMedium,
+                  color: Colors.grey,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          SizedBox(height: 12.h),
+          
+          // Next milestones section
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 14.h),
+                decoration: BoxDecoration(
+                  color: nicotrackBlack1,
+                  borderRadius: BorderRadius.circular(24.r)
+                ),
+                child: RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontFamily: circularBold,
+                      height: 1.1,
+                      color: Colors.white
+                    ),
+                    children: [
+                      TextSpan(
+                        text: "📆  Next Milestones",
+                      ),
+                    ]
+                  )
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 0.w),
+          if (nextMilestones.isNotEmpty)
+            ColorFiltered(
+              colorFilter: ColorFilter.mode(
+                Colors.white,
+                BlendMode.saturation, // Removes color = grayscale
+              ),
+              child: _buildThreexGridView(nextMilestones, context)
+            )
+          else
+            Container(
+              padding: EdgeInsets.all(24.w),
+              child: Text(
+                "Congratulations! You've earned all badges!",
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontFamily: circularMedium,
+                  color: Colors.grey,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  // Build the same grid view as used in plan screen
+  Widget _buildThreexGridView(List<AwardModel> awardsList, BuildContext context) {
+    return GridView.builder(
+      padding: EdgeInsets.all(16),
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        crossAxisSpacing: 16.w,
+        mainAxisSpacing: 8.h,
+        childAspectRatio: 0.7,
+      ),
+      itemCount: awardsList.length,
+      itemBuilder: (context, index) {
+        final item = awardsList[index];
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.asset(
+                  hexaPolygon,
+                  width: 105.w,
+                ),
+                Image.asset(
+                  item.emojiImg,
+                  width: 58.w,
+                ),
+              ],
+            ),
+            SizedBox(height: 8),
+            _buildGradientText(
+              text: "Day ${item.day}",
+              fontSize: 14.sp,
+              fontFamily: circularBold,
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // Build gradient text like in plan screen
+  Widget _buildGradientText({
+    required String text,
+    required double fontSize,
+    required String fontFamily,
+  }) {
+    return ShaderMask(
+      shaderCallback: (bounds) => LinearGradient(
+        colors: [
+          Color(0xFFFF6B35), // nicotrackOrange
+          Color(0xFFFF8C00), // Slightly different orange
+        ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ).createShader(bounds),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: fontSize,
+          fontFamily: fontFamily,
+          color: Colors.white, // This will be masked by the gradient
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
   }
 }
