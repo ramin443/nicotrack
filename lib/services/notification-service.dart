@@ -167,6 +167,25 @@ class NotificationService {
     return false;
   }
 
+  // Check if notifications should be scheduled (both system permission and user preference)
+  Future<bool> shouldScheduleNotifications() async {
+    final bool systemPermissionEnabled = await areNotificationsEnabled();
+    if (!systemPermissionEnabled) {
+      return false;
+    }
+
+    // Check user's preference in settings
+    try {
+      final notificationsBox = Hive.box<NotificationsPreferencesModel>('notificationsPreferencesData');
+      final prefs = notificationsBox.get('currentUserNotificationPrefs');
+      final userPreferenceEnabled = prefs?.pushNotificationsActivated ?? false;
+      return userPreferenceEnabled;
+    } catch (e) {
+      print('🔔 Error checking user notification preferences: $e');
+      return false;
+    }
+  }
+
   Future<void> showNotification({
     required int id,
     required String title,
@@ -290,12 +309,30 @@ class NotificationService {
     }
   }
 
-  Future<void> scheduleDefaultDailyNotifications() async {
-    final bool notificationsEnabled = await areNotificationsEnabled();
-    if (!notificationsEnabled) {
-      print('🔔 Notifications not enabled, skipping scheduling');
+  // Force schedule notifications without checking user preferences (used when toggle is turned ON)
+  Future<void> forceScheduleNotifications() async {
+    final bool systemPermissionEnabled = await areNotificationsEnabled();
+    if (!systemPermissionEnabled) {
+      print('🔔 System notifications not enabled, cannot force schedule');
       return;
     }
+
+    print('🔔 Force scheduling notifications regardless of saved preferences...');
+    await _scheduleNotificationsInternal();
+  }
+
+  Future<void> scheduleDefaultDailyNotifications() async {
+    final bool shouldSchedule = await shouldScheduleNotifications();
+    if (!shouldSchedule) {
+      print('🔔 Notifications disabled (system or user preference), skipping scheduling');
+      return;
+    }
+
+    await _scheduleNotificationsInternal();
+  }
+
+  // Internal method that does the actual scheduling
+  Future<void> _scheduleNotificationsInternal() async {
 
     try {
       // Cancel any existing notifications first
@@ -357,9 +394,27 @@ class NotificationService {
   Future<void> updateMorningNotificationTime(int hour, int minute) async {
     print('🔔 DEBUG updateMorningNotificationTime called with: $hour:${minute.toString().padLeft(2, '0')}');
     
-    final bool notificationsEnabled = await areNotificationsEnabled();
-    if (!notificationsEnabled) {
-      print('🔔 ERROR: Notifications not enabled, cannot update morning notification time');
+    // Check if user has notifications enabled in settings
+    bool userHasNotificationsEnabled = false;
+    try {
+      final notificationsBox = Hive.box<NotificationsPreferencesModel>('notificationsPreferencesData');
+      await notificationsBox.flush(); // Ensure we read the latest data
+      final prefs = notificationsBox.get('currentUserNotificationPrefs');
+      userHasNotificationsEnabled = prefs?.pushNotificationsActivated ?? false;
+      print('🔔 Morning time update: Read from Hive pushNotificationsActivated=$userHasNotificationsEnabled');
+    } catch (e) {
+      print('🔔 Error checking user notification preferences: $e');
+      return;
+    }
+    
+    if (!userHasNotificationsEnabled) {
+      print('🔔 User has notifications disabled in settings, skipping time update');
+      return;
+    }
+    
+    final bool systemPermissionEnabled = await areNotificationsEnabled();
+    if (!systemPermissionEnabled) {
+      print('🔔 ERROR: System notifications not enabled, cannot update morning notification time');
       return;
     }
 
@@ -407,9 +462,27 @@ class NotificationService {
   Future<void> updateEveningNotificationTime(int hour, int minute) async {
     print('🔔 DEBUG updateEveningNotificationTime called with: $hour:${minute.toString().padLeft(2, '0')}');
     
-    final bool notificationsEnabled = await areNotificationsEnabled();
-    if (!notificationsEnabled) {
-      print('🔔 ERROR: Notifications not enabled, cannot update evening notification time');
+    // Check if user has notifications enabled in settings
+    bool userHasNotificationsEnabled = false;
+    try {
+      final notificationsBox = Hive.box<NotificationsPreferencesModel>('notificationsPreferencesData');
+      await notificationsBox.flush(); // Ensure we read the latest data
+      final prefs = notificationsBox.get('currentUserNotificationPrefs');
+      userHasNotificationsEnabled = prefs?.pushNotificationsActivated ?? false;
+      print('🔔 Evening time update: Read from Hive pushNotificationsActivated=$userHasNotificationsEnabled');
+    } catch (e) {
+      print('🔔 Error checking user notification preferences: $e');
+      return;
+    }
+    
+    if (!userHasNotificationsEnabled) {
+      print('🔔 User has notifications disabled in settings, skipping time update');
+      return;
+    }
+    
+    final bool systemPermissionEnabled = await areNotificationsEnabled();
+    if (!systemPermissionEnabled) {
+      print('🔔 ERROR: System notifications not enabled, cannot update evening notification time');
       return;
     }
 
@@ -514,15 +587,18 @@ class NotificationService {
 
   // Check and request permissions, then schedule notifications if granted
   Future<void> checkPermissionsAndScheduleNotifications() async {
-    final bool currentlyEnabled = await areNotificationsEnabled();
+    final bool systemPermissionEnabled = await areNotificationsEnabled();
+    final bool userPreferenceEnabled = await shouldScheduleNotifications();
     
-    if (currentlyEnabled) {
-      print('🔔 Notifications already enabled, scheduling default notifications');
+    print('🔔 System permission: $systemPermissionEnabled, User preference: $userPreferenceEnabled');
+    
+    if (userPreferenceEnabled) {
+      print('🔔 Notifications enabled (system + user preference), scheduling default notifications');
       await scheduleDefaultDailyNotifications();
       await debugPendingNotifications();
     } else {
-      print('🔔 Notifications not enabled, not scheduling any notifications');
-      // Don't request permissions automatically - let user do it through settings
+      print('🔔 Notifications not fully enabled (system: $systemPermissionEnabled, user: $userPreferenceEnabled), not scheduling');
+      // Don't schedule notifications if either system permission or user preference is disabled
     }
   }
 
@@ -537,9 +613,9 @@ class NotificationService {
 
   // Test immediate notification (for debugging)
   Future<void> scheduleTestNotification() async {
-    final bool notificationsEnabled = await areNotificationsEnabled();
-    if (!notificationsEnabled) {
-      print('🔔 Notifications not enabled, cannot schedule test notification');
+    final bool shouldSchedule = await shouldScheduleNotifications();
+    if (!shouldSchedule) {
+      print('🔔 Notifications disabled (system or user preference), cannot schedule test notification');
       return;
     }
 
@@ -557,9 +633,9 @@ class NotificationService {
 
   // Schedule notification for a few seconds later (better for testing)
   Future<void> scheduleTestNotificationDelayed() async {
-    final bool notificationsEnabled = await areNotificationsEnabled();
-    if (!notificationsEnabled) {
-      print('🔔 Notifications not enabled, cannot schedule delayed test notification');
+    final bool shouldSchedule = await shouldScheduleNotifications();
+    if (!shouldSchedule) {
+      print('🔔 Notifications disabled (system or user preference), cannot schedule delayed test notification');
       return;
     }
 
@@ -601,9 +677,9 @@ class NotificationService {
 
   // Schedule a test notification to verify settings change worked
   Future<void> scheduleSettingsTestNotification(int hour, int minute) async {
-    final bool notificationsEnabled = await areNotificationsEnabled();
-    if (!notificationsEnabled) {
-      print('🔔 Notifications not enabled, cannot schedule settings test notification');
+    final bool shouldSchedule = await shouldScheduleNotifications();
+    if (!shouldSchedule) {
+      print('🔔 Notifications disabled (system or user preference), cannot schedule settings test notification');
       return;
     }
 

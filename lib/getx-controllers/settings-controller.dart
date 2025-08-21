@@ -168,8 +168,11 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
 
   Future<void> _initializeData() async {
     await setCurrentFilledData();
-    // Check notification permission status AFTER data is loaded
-    syncNotificationPermissionOnLoad();
+    // Simple: just load the saved state, no complex sync logic
+    enablePushNotification = currentNotificationsPreferences?.pushNotificationsActivated ?? false;
+    print('🔔 SIMPLE LOAD: enablePushNotification = $enablePushNotification');
+    print('🔔 SIMPLE LOAD: currentNotificationsPreferences.pushNotificationsActivated = ${currentNotificationsPreferences?.pushNotificationsActivated}');
+    print('🔔 SIMPLE LOAD: currentNotificationsPreferences.manuallyDisabled = ${currentNotificationsPreferences?.manuallyDisabled}');
   }
 
   @override
@@ -182,10 +185,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    if (state == AppLifecycleState.resumed) {
-      // Re-sync permission when user returns to app (e.g., from device settings)
-      syncNotificationPermissionOnLoad();
-    }
+    // Removed complex sync logic - keep it simple
   }
 
   Widget personalInfoSection(
@@ -2996,6 +2996,9 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     NotificationsPreferencesModel notificationPrefs =
         notificationsBox.get('currentUserNotificationPrefs') ?? NotificationsPreferencesModel();
     currentNotificationsPreferences = notificationPrefs;
+    
+    // Debug: Print what we loaded from Hive
+    print('🔔 LOADED from Hive: pushNotificationsActivated=${currentNotificationsPreferences?.pushNotificationsActivated}, manuallyDisabled=${currentNotificationsPreferences?.manuallyDisabled}');
 
     // Set UI variables from saved preferences
     enablePushNotification =
@@ -3149,8 +3152,9 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       NotificationsPreferencesModel basePrefs =
           currentNotificationsPreferences ?? NotificationsPreferencesModel();
 
-      // Update with current UI state
-      NotificationsPreferencesModel updatedPrefs = basePrefs.copyWith(
+      // Update with current UI state (use currentNotificationsPreferences if it was updated)
+      NotificationsPreferencesModel prefsToSave = currentNotificationsPreferences ?? basePrefs;
+      NotificationsPreferencesModel updatedPrefs = prefsToSave.copyWith(
         pushNotificationsActivated: enablePushNotification,
         dailyReminderHour: selectedHour,
         dailyReminderMinute: selectedMinute,
@@ -3163,15 +3167,20 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
 
       // Save back to Hive
       await box.put('currentUserNotificationPrefs', updatedPrefs);
+      
+      // Debug: Print what we're saving
+      print('🔔 SAVING to Hive: pushNotificationsActivated=${updatedPrefs.pushNotificationsActivated}, manuallyDisabled=${updatedPrefs.manuallyDisabled}');
 
       // Update local state
       currentNotificationsPreferences = updatedPrefs;
       update();
     } catch (e, stackTrace) {
       print('Error updating notification preferences: $e');
-      // Create fresh instance and retry
+      // Create fresh instance and retry (preserve manuallyDisabled state if it existed)
+      bool preserveManuallyDisabled = currentNotificationsPreferences?.manuallyDisabled ?? false;
       currentNotificationsPreferences = NotificationsPreferencesModel(
         pushNotificationsActivated: enablePushNotification,
+        manuallyDisabled: preserveManuallyDisabled,
         dailyReminderHour: selectedHour,
         dailyReminderMinute: selectedMinute,
         dailyReminderPeriod: selectedHalf,
@@ -3469,8 +3478,10 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
     }
   }
 
-  void syncNotificationPermissionOnLoad() async {
+  Future<void> syncNotificationPermissionOnLoad() async {
     try {
+      print('🔔 ========== SYNC ON LOAD START ==========');
+      
       // Check actual system permission status
       bool hasSystemPermission = await checkNotificationPermission();
 
@@ -3482,8 +3493,10 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       bool savedActivationState = 
           currentNotificationsPreferences?.pushNotificationsActivated ?? false;
 
-      print('🔔 Permission sync: hasSystemPermission=$hasSystemPermission, wasManuallyDisabled=$wasManuallyDisabled, savedActivationState=$savedActivationState');
-      print('🔔 Current toggle state before sync: $enablePushNotification');
+      print('🔔 SYNC: hasSystemPermission=$hasSystemPermission');
+      print('🔔 SYNC: wasManuallyDisabled=$wasManuallyDisabled');
+      print('🔔 SYNC: savedActivationState=$savedActivationState');
+      print('🔔 SYNC: enablePushNotification BEFORE=$enablePushNotification');
 
       // More sophisticated sync logic
       if (hasSystemPermission) {
@@ -3496,13 +3509,24 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
             pushNotificationsActivated: true,
             manuallyDisabled: false,
           );
-        } else if (wasManuallyDisabled) {
-          // User manually disabled - respect their choice even if system permission exists
-          print('🔔 Keeping notifications disabled: user manually disabled');
+        } else if (wasManuallyDisabled && !savedActivationState) {
+          // User manually disabled and notifications are saved as disabled - respect their choice
+          print('🔔 Keeping notifications disabled: user manually disabled and saved as disabled');
           enablePushNotification = false;
+        } else if (wasManuallyDisabled && savedActivationState) {
+          // User manually disabled but notifications are saved as enabled - user re-enabled them, clear manual flag
+          print('🔔 Clearing manual disable flag: user re-enabled notifications');
+          enablePushNotification = true;
+          currentNotificationsPreferences =
+              currentNotificationsPreferences?.copyWith(
+            pushNotificationsActivated: true,
+            manuallyDisabled: false,
+          );
         } else {
-          // System permission exists but notifications weren't previously enabled - keep current state
-          print('🔔 System permission exists but keeping current state: $enablePushNotification');
+          // System permission exists but unclear state - let's be explicit
+          print('🔔 UNCLEAR STATE: wasManuallyDisabled=$wasManuallyDisabled, savedActivationState=$savedActivationState');
+          print('🔔 Will set enablePushNotification to savedActivationState: $savedActivationState');
+          enablePushNotification = savedActivationState;
         }
       } else {
         // No system permission - must disable
@@ -3516,7 +3540,10 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       }
       
       await updateNotificationPreferences();
+      print('🔔 SYNC: enablePushNotification AFTER=$enablePushNotification');
+      print('🔔 SYNC: final prefs: pushNotificationsActivated=${currentNotificationsPreferences?.pushNotificationsActivated}, manuallyDisabled=${currentNotificationsPreferences?.manuallyDisabled}');
       update();
+      print('🔔 ========== SYNC ON LOAD END ==========');
       
     } catch (e) {
       print('🔔 Error syncing notification permission on load: $e');
@@ -3545,105 +3572,55 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
   }
 
   void handlePushNotificationToggle(bool value) async {
-    print('🔔 Toggle changed to: $value');
+    print('🔔 ULTRA SIMPLE TOGGLE: User toggled to $value');
     
+    // Step 1: Update UI immediately
+    enablePushNotification = value;
+    update();
+    
+    // Step 2: Save to Hive immediately
     try {
-      // Immediately update UI state for responsiveness
-      enablePushNotification = value;
-      update();
+      currentNotificationsPreferences = (currentNotificationsPreferences ?? NotificationsPreferencesModel()).copyWith(
+        pushNotificationsActivated: value,
+        manuallyDisabled: false,
+      );
       
-      // Ensure preferences are initialized
-      if (currentNotificationsPreferences == null) {
-        currentNotificationsPreferences = NotificationsPreferencesModel();
-      }
-
-      if (value) {
-        // User wants to enable notifications
-        bool hasPermission = await checkNotificationPermission();
-
-        if (!hasPermission) {
-          // Request permission - this will show the system dialog
-          print('🔔 Requesting notification permission...');
-          bool permissionGranted = await requestNotificationPermission();
-          print('🔔 Permission request result: $permissionGranted');
-
-          if (permissionGranted) {
-            // Permission granted, enable notifications and clear manual disable flag
-            enablePushNotification = true;
-            currentNotificationsPreferences =
-                currentNotificationsPreferences?.copyWith(
-              pushNotificationsActivated: true,
-              manuallyDisabled: false,
-            );
-            await updateNotificationPreferences();
-            
-            // Log notification permission granted
-            FirebaseService().logSettingsChanged(
-              settingType: 'push_notifications',
-              newValue: 'enabled_with_permission',
-            );
-            print('🔔 Notifications enabled successfully');
-          } else {
-            // Permission denied, revert switch to off and mark as manually disabled
-            print('🔔 Permission denied by user');
-            enablePushNotification = false;
-            currentNotificationsPreferences =
-                currentNotificationsPreferences?.copyWith(
-              pushNotificationsActivated: false,
-              manuallyDisabled: true, // Mark as manually disabled since user denied
-            );
-            await updateNotificationPreferences();
-            
-            // Log notification permission denied
-            FirebaseService().logSettingsChanged(
-              settingType: 'push_notifications',
-              newValue: 'permission_denied',
-            );
-          }
-        } else {
-          // Permission already granted, enable notifications and clear manual disable flag
-          enablePushNotification = true;
-          currentNotificationsPreferences =
-              currentNotificationsPreferences?.copyWith(
-            pushNotificationsActivated: true,
-            manuallyDisabled: false,
-          );
-          await updateNotificationPreferences();
-          print('🔔 Notifications enabled (permission already granted)');
-        }
-      } else {
-        // User manually wants to disable notifications
-        enablePushNotification = false;
-        currentNotificationsPreferences =
-            currentNotificationsPreferences?.copyWith(
-          pushNotificationsActivated: false,
-          manuallyDisabled: true, // Mark as manually disabled
-        );
-        await updateNotificationPreferences();
-        
-        // Log notification disabled
-        FirebaseService().logSettingsChanged(
-          settingType: 'push_notifications',
-          newValue: 'manually_disabled',
-        );
-        print('🔔 Notifications disabled by user');
-      }
+      // Save directly to Hive
+      final box = Hive.box<NotificationsPreferencesModel>('notificationsPreferencesData');
+      await box.put('currentUserNotificationPrefs', currentNotificationsPreferences!);
       
-      // Final UI update to ensure consistency
-      update();
+      print('🔔 SAVED TO HIVE: pushNotificationsActivated=$value');
       
-    } catch (e, stackTrace) {
-      print('🔔 Push notification toggle error: $e');
-      print('Full stack trace: $stackTrace');
-      // On error, check actual permission and set toggle accordingly
+      // Verify what was actually saved by reading it back fresh
+      await box.flush(); // Force write to disk
+      final savedPrefs = box.get('currentUserNotificationPrefs');
+      print('🔔 VERIFICATION: Actually saved pushNotificationsActivated=${savedPrefs?.pushNotificationsActivated}, manuallyDisabled=${savedPrefs?.manuallyDisabled}');
+      
+      // Update the local reference to match what we just saved
+      currentNotificationsPreferences = savedPrefs;
+      
+      // Step 3: Schedule or cancel notifications based on toggle
       try {
-        bool actualPermission = await checkNotificationPermission();
-        enablePushNotification = actualPermission;
-        print('🔔 Error fallback: set toggle to actual permission: $actualPermission');
-      } catch (e2) {
-        print('🔔 Fallback permission check failed: $e2');
-        enablePushNotification = false;
+        if (value) {
+          // User turned ON notifications - force schedule them with current times
+          print('🔔 Force scheduling notifications with current times...');
+          await NotificationService().forceScheduleNotifications();
+          print('🔔 Notifications scheduled successfully');
+        } else {
+          // User turned OFF notifications - cancel them
+          print('🔔 Cancelling all notifications...');
+          await NotificationService().cancelAllNotifications();
+          print('🔔 Notifications cancelled successfully');
+        }
+      } catch (e) {
+        print('🔔 ERROR managing notifications: $e');
+        // Don't revert toggle on notification error - keep the user preference
       }
+      
+    } catch (e) {
+      print('🔔 ERROR saving toggle: $e');
+      // Revert UI on error
+      enablePushNotification = !value;
       update();
     }
   }
