@@ -3477,30 +3477,60 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       // Check if user manually disabled notifications
       bool wasManuallyDisabled =
           currentNotificationsPreferences?.manuallyDisabled ?? false;
+      
+      // Check saved push notification activation state
+      bool savedActivationState = 
+          currentNotificationsPreferences?.pushNotificationsActivated ?? false;
 
-      print('🔔 Permission sync: hasSystemPermission=$hasSystemPermission, wasManuallyDisabled=$wasManuallyDisabled');
+      print('🔔 Permission sync: hasSystemPermission=$hasSystemPermission, wasManuallyDisabled=$wasManuallyDisabled, savedActivationState=$savedActivationState');
+      print('🔔 Current toggle state before sync: $enablePushNotification');
 
-      if (hasSystemPermission && !wasManuallyDisabled) {
-        // System permission is granted and user hasn't manually disabled - auto-enable
-        print('🔔 Auto-enabling notifications: system permission granted and not manually disabled');
-        enablePushNotification = true;
+      // More sophisticated sync logic
+      if (hasSystemPermission) {
+        if (!wasManuallyDisabled && savedActivationState) {
+          // System permission granted, user hasn't manually disabled, and notifications were previously enabled
+          print('🔔 Auto-enabling notifications: system permission granted and previously enabled');
+          enablePushNotification = true;
+          currentNotificationsPreferences =
+              currentNotificationsPreferences?.copyWith(
+            pushNotificationsActivated: true,
+            manuallyDisabled: false,
+          );
+        } else if (wasManuallyDisabled) {
+          // User manually disabled - respect their choice even if system permission exists
+          print('🔔 Keeping notifications disabled: user manually disabled');
+          enablePushNotification = false;
+        } else {
+          // System permission exists but notifications weren't previously enabled - keep current state
+          print('🔔 System permission exists but keeping current state: $enablePushNotification');
+        }
+      } else {
+        // No system permission - must disable
+        print('🔔 Disabling notifications: no system permission');
+        enablePushNotification = false;
         currentNotificationsPreferences =
             currentNotificationsPreferences?.copyWith(
-          pushNotificationsActivated: true,
-          manuallyDisabled: false,
+          pushNotificationsActivated: false,
+          // Don't change manuallyDisabled flag - keep user's previous choice
         );
-        await updateNotificationPreferences();
+      }
+      
+      await updateNotificationPreferences();
+      update();
+      
+    } catch (e) {
+      print('🔔 Error syncing notification permission on load: $e');
+      // On error, check actual permission and set toggle accordingly
+      try {
+        bool actualPermission = await checkNotificationPermission();
+        enablePushNotification = actualPermission && !(currentNotificationsPreferences?.manuallyDisabled ?? false);
+        print('🔔 Fallback: set toggle based on permission and manual disable: $enablePushNotification');
         update();
-      } else if (!hasSystemPermission || wasManuallyDisabled) {
-        // Either system permission denied OR user manually disabled - keep off
-        print('🔔 Keeping notifications disabled: hasSystemPermission=$hasSystemPermission, wasManuallyDisabled=$wasManuallyDisabled');
+      } catch (e2) {
+        print('🔔 Fallback permission check failed: $e2');
         enablePushNotification = false;
-        // Don't change manuallyDisabled flag here - preserve user's manual choice
-        await updateNotificationPreferences();
         update();
       }
-    } catch (e) {
-      print('Error syncing notification permission on load: $e');
     }
   }
 
@@ -3515,7 +3545,13 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
   }
 
   void handlePushNotificationToggle(bool value) async {
+    print('🔔 Toggle changed to: $value');
+    
     try {
+      // Immediately update UI state for responsiveness
+      enablePushNotification = value;
+      update();
+      
       // Ensure preferences are initialized
       if (currentNotificationsPreferences == null) {
         currentNotificationsPreferences = NotificationsPreferencesModel();
@@ -3526,8 +3562,10 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
         bool hasPermission = await checkNotificationPermission();
 
         if (!hasPermission) {
-          // Request permission
+          // Request permission - this will show the system dialog
+          print('🔔 Requesting notification permission...');
           bool permissionGranted = await requestNotificationPermission();
+          print('🔔 Permission request result: $permissionGranted');
 
           if (permissionGranted) {
             // Permission granted, enable notifications and clear manual disable flag
@@ -3544,19 +3582,23 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
               settingType: 'push_notifications',
               newValue: 'enabled_with_permission',
             );
+            print('🔔 Notifications enabled successfully');
           } else {
-            // Permission denied, keep switch off and automatically open settings
+            // Permission denied, revert switch to off and mark as manually disabled
+            print('🔔 Permission denied by user');
             enablePushNotification = false;
-            update();
+            currentNotificationsPreferences =
+                currentNotificationsPreferences?.copyWith(
+              pushNotificationsActivated: false,
+              manuallyDisabled: true, // Mark as manually disabled since user denied
+            );
+            await updateNotificationPreferences();
             
             // Log notification permission denied
             FirebaseService().logSettingsChanged(
               settingType: 'push_notifications',
               newValue: 'permission_denied',
             );
-            
-            // Automatically open app settings instead of showing dialog
-            openAppSettings();
           }
         } else {
           // Permission already granted, enable notifications and clear manual disable flag
@@ -3567,6 +3609,7 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
             manuallyDisabled: false,
           );
           await updateNotificationPreferences();
+          print('🔔 Notifications enabled (permission already granted)');
         }
       } else {
         // User manually wants to disable notifications
@@ -3583,12 +3626,24 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
           settingType: 'push_notifications',
           newValue: 'manually_disabled',
         );
+        print('🔔 Notifications disabled by user');
       }
+      
+      // Final UI update to ensure consistency
+      update();
+      
     } catch (e, stackTrace) {
-      print('Push notification toggle error: $e');
+      print('🔔 Push notification toggle error: $e');
       print('Full stack trace: $stackTrace');
-      // If there's an error, keep switch in current state
-      enablePushNotification = !value; // Revert to previous state
+      // On error, check actual permission and set toggle accordingly
+      try {
+        bool actualPermission = await checkNotificationPermission();
+        enablePushNotification = actualPermission;
+        print('🔔 Error fallback: set toggle to actual permission: $actualPermission');
+      } catch (e2) {
+        print('🔔 Fallback permission check failed: $e2');
+        enablePushNotification = false;
+      }
       update();
     }
   }

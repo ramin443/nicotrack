@@ -24,6 +24,14 @@ class _LastSmokedState extends State<CostofPack> {
     return GetBuilder<OnboardingController>(
         init: OnboardingController(),
         initState: (v) {
+          // Initialize currency controller
+          final initialCurrencyIndex = onboardingMainController.selectedCurrencyIndex;
+          onboardingMainController.currencyController =
+              FixedExtentScrollController(
+            initialItem: initialCurrencyIndex >= 0 ? initialCurrencyIndex : 0,
+          );
+          onboardingMainController.currencyController.jumpToItem(initialCurrencyIndex);
+
           // Ensure the initial index matches the current selection
           final initialIndex1 = onboardingMainController.dollars
               .indexOf(onboardingMainController.selectedDollar);

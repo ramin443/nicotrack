@@ -24,10 +24,10 @@ import 'package:permission_handler/permission_handler.dart';
 import '../services/notification-service.dart';
 import '../models/notifications-preferences-model/notificationsPreferences-model.dart';
 import '../models/onboarding-data/onboardingData-model.dart';
+import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 import '../services/firebase-service.dart';
 import '../screens/base/base.dart';
 import 'package:hive/hive.dart';
-import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 
 class OnboardingController extends GetxController {
   List<Widget> pages = [
@@ -55,11 +55,13 @@ class OnboardingController extends GetxController {
       FixedExtentScrollController(initialItem: 1);
   final List<int> numbers = List.generate(15, (index) => index + 1); // 1 to 15
 
-  //Page 3 variables - Cigarette frequency
+  //Page 3 variables - Cost of pack
   late FixedExtentScrollController dollarController;
   late FixedExtentScrollController centController;
+  late FixedExtentScrollController currencyController;
   int selectedDollar = 3;
   int selectedCent = 0;
+  int selectedCurrencyIndex = 0; // Default to USD
   List<int> dollars = List.generate(100, (index) => index); // 0 to 100
   List<int> cents = List.generate(100, (index) => index); // 0 to 99
 
@@ -850,23 +852,81 @@ class OnboardingController extends GetxController {
   }
 
   Widget pricePackPicker() {
-    return // Dollar Picker UI
-        SizedBox(
+    // Get currency list from AppPreferencesController
+    final appPrefsController = Get.find<AppPreferencesController>();
+    final allCurrencies = appPrefsController.getCurrencyList();
+    
+    // Filter currencies for onboarding - only show unique symbols
+    final currencies = <Map<String, String>>[];
+    final seenSymbols = <String>{};
+    
+    for (final currency in allCurrencies) {
+      final symbol = currency['symbol']!;
+      if (!seenSymbols.contains(symbol)) {
+        currencies.add(currency);
+        seenSymbols.add(symbol);
+      }
+    }
+    
+    // Ensure selectedCurrencyIndex is within bounds of filtered list
+    if (selectedCurrencyIndex >= currencies.length) {
+      selectedCurrencyIndex = 0;
+    }
+    
+    return SizedBox(
       height: 328.h,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Dollar Sign - Fixed
-          TextAutoSize(
-            Get.find<AppPreferencesController>().currencySymbol,
-            style: TextStyle(
-              fontSize: 86.sp,
-              fontFamily: circularBold,
-              color: Color(0xffF35E5C),
+          // Currency Symbol Scroll
+          SizedBox(
+            width: 80.w,
+            height: 328.h,
+            child: ListWheelScrollView.useDelegate(
+              controller: currencyController,
+              itemExtent: 120.h,
+              physics: FixedExtentScrollPhysics(),
+              onSelectedItemChanged: (index) async {
+                HapticFeedback.mediumImpact();
+                selectedCurrencyIndex = index;
+                final selectedCurrency = currencies[index];
+                
+                // Update the app's currency setting
+                await appPrefsController.updateCurrency(
+                  selectedCurrency['code']!,
+                  selectedCurrency['symbol']!,
+                );
+                
+                // Update price in onboarding data
+                String dollarValue = "$selectedDollar.$selectedCent";
+                onboardingFilledData =
+                    onboardingFilledData.copyWith(costOfAPack: dollarValue);
+                getCurrentPageStatus();
+                update();
+              },
+              childDelegate: ListWheelChildBuilderDelegate(
+                childCount: currencies.length,
+                builder: (context, index) {
+                  bool isSelected = selectedCurrencyIndex == index;
+                  final currency = currencies[index];
+                  return Center(
+                    child: TextAutoSize(
+                      currency['symbol']!,
+                      style: TextStyle(
+                        fontSize: 86.sp,
+                        fontFamily: circularBold,
+                        color: isSelected
+                            ? Color(0xffF35E5C)
+                            : Color(0xffF35E5C).withOpacity(0.3),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
 
-          SizedBox(width: 10),
+          SizedBox(width: 10.w),
 
           // Dollar Value Scroll
           SizedBox(
