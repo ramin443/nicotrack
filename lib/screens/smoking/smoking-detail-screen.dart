@@ -19,6 +19,10 @@ import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 import 'package:nicotrack/extensions/app_localizations_extension.dart';
+import 'package:nicotrack/models/award-model/award-model.dart';
+import 'package:nicotrack/constants/quick-function-constants.dart';
+import 'package:nicotrack/utility-functions/home-grid-calculations.dart';
+import 'package:nicotrack/screens/home/did-you-smoke/pages/no-selected/badge-earned.dart';
 
 enum SmokingDetailRouteSource {
   fromHome,
@@ -99,22 +103,55 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
     }
   }
 
+  AwardModel? _checkIfBadgeEarned() {
+    // Calculate days since quit using the selected date
+    int daysSinceQuit = getDaysSinceLastSmoked(widget.selectedDate);
+    
+    // Check if user earned a badge for this day
+    final earnedBadge = allAwards.firstWhere(
+      (badge) => badge.day == daysSinceQuit,
+      orElse: () => AwardModel(emojiImg: '', day: -1), // Return invalid badge if not found
+    );
+    
+    return earnedBadge.day != -1 ? earnedBadge : null;
+  }
+
   void _handleCloseNavigation() {
     HapticFeedback.lightImpact();
-    switch (widget.routeSource) {
-      case SmokingDetailRouteSource.fromHome:
-        // Coming from home daily page - use pop
-        Navigator.of(context).pop();
-        break;
-      case SmokingDetailRouteSource.afterSmokingCompletion:
-        // Coming after completing smoking questionnaire - navigate back to home
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-            builder: (context) => const Base(),
+    
+    // Check if user earned a badge and if they haven't smoked today
+    bool isSmokeFree = smokingData != null && smokingData!.hasSmokedToday == 1;
+    AwardModel? earnedBadge = isSmokeFree ? _checkIfBadgeEarned() : null;
+    
+    if (earnedBadge != null && widget.routeSource == SmokingDetailRouteSource.afterSmokingCompletion) {
+      // User earned a badge and coming from smoking completion - show badge earned screen
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => BadgeEarned(
+            earnedBadge: earnedBadge,
+            daysSinceQuit: getDaysSinceLastSmoked(widget.selectedDate),
+            selectedDate: widget.selectedDate,
           ),
-          (route) => false,
-        );
-        break;
+        ),
+        (route) => false,
+      );
+    } else {
+      // Normal navigation
+      switch (widget.routeSource) {
+        case SmokingDetailRouteSource.fromHome:
+          // Coming from home daily page - use pop
+          Navigator.of(context).pop();
+          break;
+        case SmokingDetailRouteSource.afterSmokingCompletion:
+          // Coming after completing smoking questionnaire - navigate back to home
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (context) => const Base(),
+            ),
+            (route) => false,
+          );
+          break;
+      }
     }
   }
 
