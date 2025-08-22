@@ -390,14 +390,17 @@ class _ActivityState extends State<Activity> with SingleTickerProviderStateMixin
   Widget _buildTechniqueCard(ExerciseModel exercise) {
     final premiumController = Get.find<PremiumController>();
     final bool isPremium = premiumController.effectivePremiumStatus;
+    // 4-7-8 technique (id: '1') is free for all users
+    final bool isExerciseFree = exercise.id == '1';
+    final bool canAccessExercise = isPremium || isExerciseFree;
     
     return GestureDetector(
       onTap: () {
         HapticFeedback.mediumImpact();
         
-        // Check if user is premium or not
-        if (!isPremium) {
-          // If not premium, navigate to premium paywall screen
+        // Check if user can access this exercise
+        if (!canAccessExercise) {
+          // If not premium and not free exercise, navigate to premium paywall screen
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -405,7 +408,7 @@ class _ActivityState extends State<Activity> with SingleTickerProviderStateMixin
             ),
           );
         } else {
-          // If premium, proceed normally to exercise
+          // If premium or free exercise, proceed normally
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -492,8 +495,8 @@ class _ActivityState extends State<Activity> with SingleTickerProviderStateMixin
                 ),
               ),
             ),
-            // Show lock for non-premium users
-            if (!isPremium)
+            // Show lock for non-premium users, except for free exercises
+            if (!canAccessExercise)
               Positioned(
                 bottom: 12.h,
                 right: 12.w,

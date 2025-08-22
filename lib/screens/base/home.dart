@@ -453,17 +453,40 @@ class _HomeState extends State<Home> {
                         GestureDetector(
                           onTap: () {
                             HapticFeedback.heavyImpact();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const EmergencyCravingMotivationScreen(),
-                              ),
-                            );
+                            // Check if user is premium
+                            if (!premiumController.effectivePremiumStatus) {
+                              // If not premium, navigate to premium paywall
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const PremiumPaywallScreen(),
+                                ),
+                              );
+                            } else {
+                              // If premium, proceed to emergency craving screen
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const EmergencyCravingMotivationScreen(),
+                                ),
+                              );
+                            }
                           },
-                          child: homeController.emergencyCravingButton(
-                            context: context,
-                            label: context.l10n.emergency_craving_button,
+                          child: Stack(
+                            children: [
+                              homeController.emergencyCravingButton(
+                                context: context,
+                                label: context.l10n.emergency_craving_button,
+                              ),
+                              // Show lock for non-premium users
+                              if (!premiumController.effectivePremiumStatus)
+                                Positioned(
+                                  top: 8.w,
+                                  right: 18.w,
+                                  child: smallLockBox(),
+                                ),
+                            ],
                           ),
                         ),
                         SizedBox(

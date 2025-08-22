@@ -34,7 +34,7 @@ class DidYouSmokeController extends GetxController {
   final PageController pageController = PageController();
   int currentPage = 0;
   DidYouSmokeModel didYouSmokeFilledData = DidYouSmokeModel();
-  
+
   // All pages are for smoking flow only
   List<Widget> pages = [
     SmokedToday(),
@@ -57,38 +57,47 @@ class DidYouSmokeController extends GetxController {
 
   //What Trigerred variables
   List<Map<String, dynamic>> selectedTriggered = [];
-  
+
   List<EmojiTextModel> getTriggerPairs(BuildContext context) => [
-    EmojiTextModel(emoji: stressedEmoji, text: context.l10n.trigger_work_stress),
-    EmojiTextModel(emoji: tiredImg, text: context.l10n.trigger_relationship),
-    EmojiTextModel(emoji: beerEmoji, text: context.l10n.trigger_social_setting),
-    EmojiTextModel(emoji: platesEmoji, text: context.l10n.trigger_after_meal),
-    EmojiTextModel(emoji: cigImg, text: context.l10n.trigger_craving_episode),
-    EmojiTextModel(emoji: xmarkEmoji, text: context.l10n.trigger_other),
-  ];
+        EmojiTextModel(
+            emoji: stressedEmoji, text: context.l10n.trigger_work_stress),
+        EmojiTextModel(
+            emoji: tiredImg, text: context.l10n.trigger_relationship),
+        EmojiTextModel(
+            emoji: beerEmoji, text: context.l10n.trigger_social_setting),
+        EmojiTextModel(
+            emoji: platesEmoji, text: context.l10n.trigger_after_meal),
+        EmojiTextModel(
+            emoji: cigImg, text: context.l10n.trigger_craving_episode),
+        EmojiTextModel(emoji: xmarkEmoji, text: context.l10n.trigger_other),
+      ];
 
   //How you feel variables
   List<Map<String, dynamic>> selectedhowYouFeelIndex = [];
-  
+
   List<EmojiTextModel> getHowYouFeelPairs(BuildContext context) => [
-    EmojiTextModel(emoji: sadImg, text: context.l10n.feeling_guilty),
-    EmojiTextModel(emoji: frustratedImg, text: context.l10n.feeling_frustrated),
-    EmojiTextModel(emoji: neutralImg, text: context.l10n.feeling_indifferent),
-    EmojiTextModel(emoji: motivImg, text: context.l10n.feeling_motivated_bounce_back),
-    EmojiTextModel(emoji: xmarkEmoji, text: context.l10n.feeling_others),
-  ];
+        EmojiTextModel(emoji: sadImg, text: context.l10n.feeling_guilty),
+        EmojiTextModel(
+            emoji: frustratedImg, text: context.l10n.feeling_frustrated),
+        EmojiTextModel(
+            emoji: neutralImg, text: context.l10n.feeling_indifferent),
+        EmojiTextModel(
+            emoji: motivImg, text: context.l10n.feeling_motivated_bounce_back),
+        EmojiTextModel(emoji: xmarkEmoji, text: context.l10n.feeling_others),
+      ];
 
   //Avoid Next variables
   List<Map<String, dynamic>> selectedAvoidIndex = [];
-  
+
   List<EmojiTextModel> getNextAvoidPairs(BuildContext context) => [
-    EmojiTextModel(emoji: meditateImg, text: context.l10n.avoid_breathing_exercises),
-    EmojiTextModel(emoji: gameImg, text: context.l10n.avoid_distract_game),
-    EmojiTextModel(emoji: walkImg, text: context.l10n.avoid_go_walk),
-    EmojiTextModel(emoji: phoneImg, text: context.l10n.avoid_call_someone),
-    EmojiTextModel(emoji: notesImg, text: context.l10n.avoid_log_craving),
-    EmojiTextModel(emoji: xmarkEmoji, text: context.l10n.avoid_other),
-  ];
+        EmojiTextModel(
+            emoji: meditateImg, text: context.l10n.avoid_breathing_exercises),
+        EmojiTextModel(emoji: gameImg, text: context.l10n.avoid_distract_game),
+        EmojiTextModel(emoji: walkImg, text: context.l10n.avoid_go_walk),
+        EmojiTextModel(emoji: phoneImg, text: context.l10n.avoid_call_someone),
+        EmojiTextModel(emoji: notesImg, text: context.l10n.avoid_log_craving),
+        EmojiTextModel(emoji: xmarkEmoji, text: context.l10n.avoid_other),
+      ];
 
   // UpdateQuitDate variables
   int updateQuitDate = -1;
@@ -98,7 +107,7 @@ class DidYouSmokeController extends GetxController {
       onTap: () {
         if (currentPageDoneStatus) {
           HapticFeedback.mediumImpact();
-          
+
           // If on first page and user selected smoke-free, navigate directly to congratulations
           if (currentPage == 0 && !smokedToday) {
             navigateToCongratsPage(currentDateTime, context);
@@ -127,7 +136,9 @@ class DidYouSmokeController extends GetxController {
               ),
         child: Center(
           child: TextAutoSize(
-            currentPage == (pages.length - 1) ? context.l10n.finish_button : context.l10n.continue_button,
+            currentPage == (pages.length - 1)
+                ? context.l10n.finish_button
+                : context.l10n.continue_button,
             style: TextStyle(
                 fontSize: 18.sp,
                 fontFamily: circularBold,
@@ -284,7 +295,6 @@ class DidYouSmokeController extends GetxController {
                               ),
                             ),
                           ),
-
                           SizedBox(
                             height: 11.h,
                           ),
@@ -346,18 +356,19 @@ class DidYouSmokeController extends GetxController {
                           SizedBox(
                             height: 24.w,
                           ),
-                          SizedBox(width: 120.w,
-                          child: TextAutoSize(
-                            context.l10n.no_stayed_smoke_free,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              height: 1.2,
-                              fontSize: 18.sp,
-                              fontFamily: circularBold,
-                              color: nicotrackBlack1,
+                          SizedBox(
+                            width: 120.w,
+                            child: TextAutoSize(
+                              context.l10n.no_stayed_smoke_free,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                height: 1.2,
+                                fontSize: 18.sp,
+                                fontFamily: circularBold,
+                                color: nicotrackBlack1,
+                              ),
                             ),
-                          ),)
-                          ,
+                          ),
                           SizedBox(
                             height: 11.h,
                           ),
@@ -454,7 +465,9 @@ class DidYouSmokeController extends GetxController {
                 height: 176.h,
                 duration: Duration(milliseconds: 200),
                 decoration: BoxDecoration(
-                  color: isSelected ? Colors.deepPurple.shade100 : Colors.transparent,
+                  color: isSelected
+                      ? Colors.deepPurple.shade100
+                      : Colors.transparent,
                   border: Border.all(
                     color: isSelected ? Colors.deepPurple : Color(0xffF0F0F0),
                     width: isSelected ? 2.sp : 1.sp,
@@ -529,7 +542,9 @@ class DidYouSmokeController extends GetxController {
                 height: 176.h,
                 duration: Duration(milliseconds: 200),
                 decoration: BoxDecoration(
-                  color: isSelected ? Colors.deepPurple.shade100 : Colors.transparent,
+                  color: isSelected
+                      ? Colors.deepPurple.shade100
+                      : Colors.transparent,
                   border: Border.all(
                     color: isSelected ? Colors.deepPurple : Color(0xffF0F0F0),
                     width: isSelected ? 2.sp : 1.sp,
@@ -584,16 +599,16 @@ class DidYouSmokeController extends GetxController {
             childAspectRatio: 1, // Adjusts box shape
           ),
           itemBuilder: (context, index) {
-            bool isSelected = selectedAvoidIndex.any(
-                (element) => element["emoji"] == avoidList[index].emoji);
+            bool isSelected = selectedAvoidIndex
+                .any((element) => element["emoji"] == avoidList[index].emoji);
 
             return GestureDetector(
               onTap: () {
                 HapticFeedback.mediumImpact();
-                if (selectedAvoidIndex.any((element) =>
-                    element["emoji"] == avoidList[index].emoji)) {
-                  selectedAvoidIndex.removeWhere((element) =>
-                      element["emoji"] == avoidList[index].emoji);
+                if (selectedAvoidIndex.any(
+                    (element) => element["emoji"] == avoidList[index].emoji)) {
+                  selectedAvoidIndex.removeWhere(
+                      (element) => element["emoji"] == avoidList[index].emoji);
                 } else {
                   selectedAvoidIndex.add(avoidList[index].toJson());
                   didYouSmokeFilledData = didYouSmokeFilledData.copyWith(
@@ -605,7 +620,9 @@ class DidYouSmokeController extends GetxController {
                 height: 176.h,
                 duration: Duration(milliseconds: 200),
                 decoration: BoxDecoration(
-                  color: isSelected ? Colors.deepPurple.shade100 : Colors.transparent,
+                  color: isSelected
+                      ? Colors.deepPurple.shade100
+                      : Colors.transparent,
                   border: Border.all(
                     color: isSelected ? Colors.deepPurple : Color(0xffF0F0F0),
                     width: isSelected ? 2.sp : 1.sp,
@@ -660,8 +677,8 @@ class DidYouSmokeController extends GetxController {
                                 if (premiumController.effectivePremiumStatus) {
                                   HapticFeedback.heavyImpact();
                                   updateQuitDate = 0;
-                                  didYouSmokeFilledData =
-                                      didYouSmokeFilledData.copyWith(updateQuitDate: 0);
+                                  didYouSmokeFilledData = didYouSmokeFilledData
+                                      .copyWith(updateQuitDate: 0);
                                   getCurrentPageStatus();
                                   update();
                                 } else {
@@ -669,7 +686,8 @@ class DidYouSmokeController extends GetxController {
                                   HapticFeedback.mediumImpact();
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => const PremiumPaywallScreen(),
+                                      builder: (context) =>
+                                          const PremiumPaywallScreen(),
                                     ),
                                   );
                                 }
@@ -680,10 +698,12 @@ class DidYouSmokeController extends GetxController {
                                 decoration: BoxDecoration(
                                   color: Color(0xffF4F4F4),
                                   borderRadius: BorderRadius.circular(16.r),
-                                  image: updateQuitDate == 0 && premiumController.effectivePremiumStatus
+                                  image: updateQuitDate == 0 &&
+                                          premiumController
+                                              .effectivePremiumStatus
                                       ? DecorationImage(
-                                          image: AssetImage(
-                                              quitMethodBG), // Replace with your image path
+                                          image: AssetImage(quitMethodBG),
+                                          // Replace with your image path
                                           fit: BoxFit
                                               .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
                                         )
@@ -756,8 +776,8 @@ class DidYouSmokeController extends GetxController {
                           onTap: () {
                             HapticFeedback.heavyImpact();
                             updateQuitDate = 1;
-                            didYouSmokeFilledData =
-                                didYouSmokeFilledData.copyWith(updateQuitDate: 1);
+                            didYouSmokeFilledData = didYouSmokeFilledData
+                                .copyWith(updateQuitDate: 1);
                             getCurrentPageStatus();
                           },
                           child: Container(
@@ -767,8 +787,8 @@ class DidYouSmokeController extends GetxController {
                                 color: Color(0xffF4F4F4),
                                 image: updateQuitDate == 1
                                     ? DecorationImage(
-                                        image: AssetImage(
-                                            quitMethodBG), // Replace with your image path
+                                        image: AssetImage(quitMethodBG),
+                                        // Replace with your image path
                                         fit: BoxFit
                                             .cover, // You can also use BoxFit.fill, BoxFit.contain, etc.
                                       )
@@ -951,7 +971,7 @@ class DidYouSmokeController extends GetxController {
 
   void getCurrentPageStatus() {
     print("FIlled data is ${didYouSmokeFilledData.toJson()}");
-    
+
     // Standard flow for all pages
     switch (currentPage) {
       case 0:
@@ -996,21 +1016,22 @@ class DidYouSmokeController extends GetxController {
     update();
   }
 
-  void navigateToCongratsPage(DateTime currentDateTime, BuildContext context) async {
+  void navigateToCongratsPage(
+      DateTime currentDateTime, BuildContext context) async {
     // Save smoke-free data to Hive
-    String didYouSmokeStringToday = DateFormat.yMMMd()
-        .format(currentDateTime);
+    String didYouSmokeStringToday = DateFormat.yMMMd().format(currentDateTime);
     final box = Hive.box<DidYouSmokeModel>('didYouSmokeData');
     await box.put(didYouSmokeStringToday, didYouSmokeFilledData);
-    print("Saving smoke-free data: $didYouSmokeStringToday with data $didYouSmokeFilledData");
-    
+    print(
+        "Saving smoke-free data: $didYouSmokeStringToday with data $didYouSmokeFilledData");
+
     // Log smoke-free session completion
     FirebaseService().logSmokingSessionCompleted(
       smokedToday: false,
       cigaretteCount: 0,
       quitDateUpdated: false,
     );
-    
+
     if (context.mounted) {
       // Navigate directly to smoking detail screen instead of congratulations page
       Navigator.of(context).pushReplacement(
@@ -1024,37 +1045,45 @@ class DidYouSmokeController extends GetxController {
     }
   }
 
-  void addDatatoHiveandNavigate(DateTime currentDateTime, BuildContext context) async {
-    String didYouSmokeStringToday = DateFormat.yMMMd()
-        .format(currentDateTime);
+  void addDatatoHiveandNavigate(
+      DateTime currentDateTime, BuildContext context) async {
+    String didYouSmokeStringToday = DateFormat.yMMMd().format(currentDateTime);
     final box = Hive.box<DidYouSmokeModel>('didYouSmokeData');
     await box.put(didYouSmokeStringToday, didYouSmokeFilledData);
-    
+
     // Log smoking session completion
     FirebaseService().logSmokingSessionCompleted(
       smokedToday: didYouSmokeFilledData.hasSmokedToday == 0,
       cigaretteCount: didYouSmokeFilledData.howManyCigs,
       quitDateUpdated: didYouSmokeFilledData.updateQuitDate == 0,
-      triggers: didYouSmokeFilledData.whatTriggerred.map((t) => t['text'] as String).toList(),
-      feelings: didYouSmokeFilledData.howYouFeel.map((f) => f['text'] as String).toList(),
-      avoidanceStrategies: didYouSmokeFilledData.avoidNext.map((a) => a['text'] as String).toList(),
+      triggers: didYouSmokeFilledData.whatTriggerred
+          .map((t) => t['text'] as String)
+          .toList(),
+      feelings: didYouSmokeFilledData.howYouFeel
+          .map((f) => f['text'] as String)
+          .toList(),
+      avoidanceStrategies: didYouSmokeFilledData.avoidNext
+          .map((a) => a['text'] as String)
+          .toList(),
     );
-    
+
     // If user chose to update their quit date (0 = Yes, update my quit date)
     if (didYouSmokeFilledData.updateQuitDate == 0) {
       // Update the last smoked date in onboarding data
       final onboardingBox = Hive.box<OnboardingData>('onboardingCompletedData');
-      OnboardingData? userOnboardingData = onboardingBox.get('currentUserOnboarding');
-      
+      OnboardingData? userOnboardingData =
+          onboardingBox.get('currentUserOnboarding');
+
       if (userOnboardingData != null) {
         // Update the last smoked date to today's date
         String newQuitDate = DateFormat('yyyy-MM-dd').format(currentDateTime);
-        OnboardingData updatedData = userOnboardingData.copyWith(lastSmokedDate: newQuitDate);
+        OnboardingData updatedData =
+            userOnboardingData.copyWith(lastSmokedDate: newQuitDate);
         await onboardingBox.put('currentUserOnboarding', updatedData);
         print("Updated quit date to: $newQuitDate");
       }
     }
-    
+
     if (context.mounted) {
       // Force refresh home controller if quit date was updated
       if (didYouSmokeFilledData.updateQuitDate == 0) {
@@ -1063,7 +1092,7 @@ class DidYouSmokeController extends GetxController {
           Get.find<HomeController>().resetHomeGridValues();
         }
       }
-      
+
       // Navigate to smoking detail screen to show overview of what they
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
