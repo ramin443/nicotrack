@@ -28,6 +28,7 @@ import 'package:nicotrack/getx-controllers/app-preferences-controller.dart';
 import '../services/firebase-service.dart';
 import '../screens/base/base.dart';
 import 'package:hive/hive.dart';
+import '../getx-controllers/settings-controller.dart';
 
 class OnboardingController extends GetxController {
   List<Widget> pages = [
@@ -1218,6 +1219,17 @@ class OnboardingController extends GetxController {
     
     // Complete normal onboarding flow
     await completeOnboarding(context);
+    
+    // Notify settings controller to refresh its state after a delay
+    Future.delayed(Duration(milliseconds: 500), () {
+      try {
+        if (Get.isRegistered<SettingsController>()) {
+          Get.find<SettingsController>().refreshNotificationState();
+        }
+      } catch (e) {
+        print('🔔 Could not refresh settings controller: $e');
+      }
+    });
   }
 
   // Method to handle notification permission request
@@ -1247,6 +1259,17 @@ class OnboardingController extends GetxController {
       
       // Complete onboarding regardless of permission result
       await completeOnboarding(context);
+      
+      // Notify settings controller to refresh its state after a delay
+      Future.delayed(Duration(milliseconds: 500), () {
+        try {
+          if (Get.isRegistered<SettingsController>()) {
+            Get.find<SettingsController>().refreshNotificationState();
+          }
+        } catch (e) {
+          print('🔔 Could not refresh settings controller: $e');
+        }
+      });
     } catch (e) {
       print('🔔 Error requesting notification permission: $e');
       // Save preferences indicating there was an error (assume denied)
@@ -1259,12 +1282,13 @@ class OnboardingController extends GetxController {
   // Method to save notification preferences
   Future<void> saveNotificationPreferences(bool permissionGranted) async {
     try {
+      // Wait for box to be ready
       final notificationsBox = Hive.box<NotificationsPreferencesModel>('notificationsPreferencesData');
       
       // Create default notification preferences
       NotificationsPreferencesModel notificationPrefs = NotificationsPreferencesModel(
         pushNotificationsActivated: permissionGranted,
-        manuallyDisabled: false, // User hasn't manually disabled
+        manuallyDisabled: !permissionGranted, // If permission denied, mark as manually disabled
         dailyReminderHour: 8,
         dailyReminderMinute: 0,
         dailyReminderPeriod: " AM",
@@ -1281,9 +1305,28 @@ class OnboardingController extends GetxController {
       );
       
       await notificationsBox.put('currentUserNotificationPrefs', notificationPrefs);
-      print('📱 Saved notification preferences: permissionGranted=$permissionGranted');
+      
+      // Force write to disk and verify
+      await notificationsBox.flush();
+      
+      // Verify the save
+      final savedPrefs = notificationsBox.get('currentUserNotificationPrefs');
+      print('🔔 ONBOARDING SAVE: permissionGranted=$permissionGranted');
+      print('🔔 ONBOARDING VERIFY: pushNotificationsActivated=${savedPrefs?.pushNotificationsActivated}');
+      print('🔔 ONBOARDING VERIFY: manuallyDisabled=${savedPrefs?.manuallyDisabled}');
+      
+      // If permission granted, schedule notifications immediately
+      if (permissionGranted) {
+        try {
+          await NotificationService().scheduleDefaultDailyNotifications();
+          print('🔔 ONBOARDING: Notifications scheduled successfully');
+        } catch (e) {
+          print('🔔 ONBOARDING: Error scheduling notifications: $e');
+        }
+      }
+      
     } catch (e) {
-      print('Error saving notification preferences: $e');
+      print('🔔 ONBOARDING ERROR: Failed to save notification preferences: $e');
     }
   }
 

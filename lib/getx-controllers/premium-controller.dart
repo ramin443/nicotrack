@@ -44,11 +44,59 @@ class PremiumController extends GetxController {
   
   // Method to debug current premium status
   void debugPremiumStatus() {
-    print('🐛 DEBUG Premium Status:');
-    print('   - Raw isPremium value: ${isPremium.value}');
+    print('🐛 ===== DEBUG Premium Status =====');
+    print('   - Raw isPremium.value: ${isPremium.value}');
     print('   - App mode: ${AppModeConfig.appMode}');
     print('   - Should force premium: ${AppModeConfig.shouldForcePremium}');
     print('   - Effective premium status: $effectivePremiumStatus');
+    
+    // Also check stored premium info
+    try {
+      final premiumInfo = PremiumPersistenceService.getPremiumInfo();
+      print('   - Stored isPremium: ${premiumInfo['isPremium']}');
+      print('   - Stored productId: ${premiumInfo['productId']}');
+      print('   - Stored purchaseDate: ${premiumInfo['purchaseDate']}');
+      print('   - Stored subscriptionActive: ${premiumInfo['subscriptionActive']}');
+      print('   - Last verification: ${premiumInfo['lastVerification']}');
+    } catch (e) {
+      print('   - Error reading stored premium info: $e');
+    }
+    print('🐛 ================================');
+  }
+  
+  // Force refresh premium status from storage
+  Future<void> forceRefreshFromStorage() async {
+    print('🔄 Force refreshing premium status from storage...');
+    try {
+      await PremiumPersistenceService.loadPremiumStatus();
+      refreshPremiumStatus();
+      debugPremiumStatus();
+    } catch (e) {
+      print('❌ Error force refreshing premium status: $e');
+    }
+  }
+  
+  // Test method to force premium status (for TestFlight debugging)
+  Future<void> testForcePremiumStatus({bool? status}) async {
+    print('🧪 TEST: Forcing premium status for debugging...');
+    try {
+      final newStatus = status ?? true;
+      isPremium.value = newStatus;
+      
+      // Also save to persistence
+      await PremiumPersistenceService.savePremiumStatus(
+        isPremium: newStatus,
+        productId: newStatus ? 'test_product_id' : null,
+        purchaseDate: newStatus ? DateTime.now() : null,
+        subscriptionActive: newStatus,
+      );
+      
+      refreshPremiumStatus();
+      debugPremiumStatus();
+      print('🧪 TEST: Premium status set to $newStatus');
+    } catch (e) {
+      print('❌ Error in test force premium: $e');
+    }
   }
   
   // Get current subscription plan type
