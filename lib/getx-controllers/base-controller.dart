@@ -20,7 +20,6 @@ class BaseController extends GetxController {
   List<Widget> mainPages = [Home(), PlanAlt(), Activity(), ProgressMain(), Settings()];
 
   void setCurrentIndex(index) {
-    HapticFeedback.mediumImpact();
     selectedIndex = index;
     update();
   }

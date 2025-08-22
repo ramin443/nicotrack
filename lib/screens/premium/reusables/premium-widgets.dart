@@ -206,10 +206,10 @@ Widget premiumStatusBox(BuildContext context) {
 
   return Container(
     width: double.infinity,
-    padding: EdgeInsets.only(left: 4.w, right: 13.w, top: 7.w, bottom: 8.w),
+    padding: EdgeInsets.only(left: 4.w, right: 13.w, top: 10.w, bottom: 10.w),
     decoration: BoxDecoration(
       color: Colors.black, // Different color to indicate active status
-      borderRadius: BorderRadius.circular(14.r)
+      borderRadius: BorderRadius.circular(20.r)
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -217,6 +217,7 @@ Widget premiumStatusBox(BuildContext context) {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            SizedBox(width: 6.w,),
             ClipRRect(
               borderRadius: BorderRadius.circular(20.r),
               child: Container(

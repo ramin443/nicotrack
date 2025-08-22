@@ -62,8 +62,8 @@ class HomeController extends GetxController {
     super.onInit();
     // Wait until after UI builds to scroll
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final offset = scrollController.position.maxScrollExtent;
       if (scrollController.hasClients) {
+        final offset = scrollController.position.maxScrollExtent;
         scrollController.animateTo(offset,
             duration: Duration(milliseconds: 400), curve: Curves.easeOutCubic);
       }
@@ -984,22 +984,34 @@ class HomeController extends GetxController {
   void setCurrentFilledData() {
     DateTime currentDateTime =
         DateTime(selectedYear, selectedMonth, selectedDay);
-    final onboardingBox = Hive.box<OnboardingData>(
-        'onboardingCompletedData'); // Specify the type of values in the box
-    OnboardingData userOnboardingData =
-        onboardingBox.get('currentUserOnboarding') ?? OnboardingData();
-    currentDateOnboardingData = userOnboardingData;
+    // Check if box is open before accessing
+    if (Hive.isBoxOpen('onboardingCompletedData')) {
+      final onboardingBox = Hive.box<OnboardingData>(
+          'onboardingCompletedData'); // Specify the type of values in the box
+      OnboardingData userOnboardingData =
+          onboardingBox.get('currentUserOnboarding') ?? OnboardingData();
+      currentDateOnboardingData = userOnboardingData;
+    } else {
+      // If box is not open yet, set default model
+      currentDateOnboardingData = OnboardingData();
+    }
     update();
   }
 
   void setQuickActionsData() {
     DateTime currentDateTime =
         DateTime(selectedYear, selectedMonth, selectedDay);
-    final quickActionBox = Hive.box<QuickactionsModel>(
-        'quickActionsData'); // Specify the type of values in the box
-    QuickactionsModel quickActionsData =
-        quickActionBox.get('currentUserActions') ?? QuickactionsModel();
-    quickActionsModel = quickActionsData;
+    // Check if box is open before accessing
+    if (Hive.isBoxOpen('quickActionsData')) {
+      final quickActionBox = Hive.box<QuickactionsModel>(
+          'quickActionsData'); // Specify the type of values in the box
+      QuickactionsModel quickActionsData =
+          quickActionBox.get('currentUserActions') ?? QuickactionsModel();
+      quickActionsModel = quickActionsData;
+    } else {
+      // If box is not open yet, set default model
+      quickActionsModel = QuickactionsModel();
+    }
     update();
   }
 

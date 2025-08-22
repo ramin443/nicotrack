@@ -307,9 +307,9 @@ class _EmergencyCravingExerciseScreenState
                                                               shape: BoxShape.circle,
                                                               gradient: LinearGradient(
                                                                 colors: [
-                                                                  nicotrackGreen.withOpacity(0.1),
+                                                                  nicotrackGreen.withOpacity(0.2),
                                                                   Colors.transparent,
-                                                                  nicotrackGreen.withOpacity(0.1),
+                                                                  nicotrackOrange.withOpacity(0.2),
                                                                 ],
                                                               ),
                                                             ),

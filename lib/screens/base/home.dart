@@ -59,6 +59,8 @@ class _HomeState extends State<Home> {
                   Container(
                     width: 36.w,
                     height: 36.w,
+                    margin: EdgeInsets.only(left: 16.w),
+                    // margin: EdgeInsets.only(right: 16.w),
                     decoration: BoxDecoration(
                       color: Colors.transparent,
                       shape: BoxShape.circle,
@@ -96,7 +98,6 @@ class _HomeState extends State<Home> {
                 ],
               ),
 
-              SizedBox(height: 16.w),
               // Header
 
               // Milestone content matching plan screen
@@ -260,8 +261,13 @@ class _HomeState extends State<Home> {
         init: HomeController(),
         initState: (state) {
           // Refresh data when the widget is initialized
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            Get.find<HomeController>().resetHomeGridValues();
+          WidgetsBinding.instance.addPostFrameCallback((_) async {
+            final controller = Get.find<HomeController>();
+            controller.resetHomeGridValues();
+            // Wait a bit for Hive boxes to be opened, then refresh data
+            await Future.delayed(Duration(milliseconds: 500));
+            controller.setCurrentFilledData();
+            controller.setQuickActionsData();
           });
         },
         builder: (homeController) {
@@ -308,41 +314,41 @@ class _HomeState extends State<Home> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  GestureDetector(
-                                    onTap: () async {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const PremiumPaywallScreen(),
-                                        ),
-                                      );
-                                    },
-                                    child: Stack(
-                                      alignment: Alignment.center,
-                                      // Ensures everything centers by default
-                                      children: [
-                                        Positioned(
-                                            child: SvgPicture.asset(
-                                          premiumBtnBg,
-                                          width: 112.w,
-                                        )),
-                                        Container(
-                                          padding: EdgeInsets.only(bottom: 2.h),
-                                          width: 112.w,
-                                          child: Center(
-                                            child: TextAutoSize(
-                                              context.l10n.home_get_pro,
-                                              style: TextStyle(
-                                                  fontSize: 16.sp,
-                                                  fontFamily: recoletaBold,
-                                                  color: nicotrackBlack1),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                  // GestureDetector(
+                                  //   onTap: () async {
+                                  //     Navigator.push(
+                                  //       context,
+                                  //       MaterialPageRoute(
+                                  //         builder: (context) =>
+                                  //             const PremiumPaywallScreen(),
+                                  //       ),
+                                  //     );
+                                  //   },
+                                  //   child: Stack(
+                                  //     alignment: Alignment.center,
+                                  //     // Ensures everything centers by default
+                                  //     children: [
+                                  //       Positioned(
+                                  //           child: SvgPicture.asset(
+                                  //         premiumBtnBg,
+                                  //         width: 112.w,
+                                  //       )),
+                                  //       Container(
+                                  //         padding: EdgeInsets.only(bottom: 2.h),
+                                  //         width: 112.w,
+                                  //         child: Center(
+                                  //           child: TextAutoSize(
+                                  //             context.l10n.home_get_pro,
+                                  //             style: TextStyle(
+                                  //                 fontSize: 16.sp,
+                                  //                 fontFamily: recoletaBold,
+                                  //                 color: nicotrackBlack1),
+                                  //           ),
+                                  //         ),
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // ),
                                   SizedBox(
                                     width: 8.w,
                                   ),
@@ -356,13 +362,21 @@ class _HomeState extends State<Home> {
                                       child: Stack(
                                           alignment: Alignment.center,
                                           children: [
-                                            Image.asset(
-                                              badgeBG,
-                                              width: 48.w,
-                                            ),
                                             Container(
-                                              width: 48.w,
-                                              height: 48.w,
+                                              width: 56.w,
+                                              height: 56.w,
+                                              decoration: BoxDecoration(
+                                                color: Color(0xffF6F4F1),
+                                                shape: BoxShape.circle
+                                              ),
+                                            ),
+                                            // Image.asset(
+                                            //   badgeBG,
+                                            //   width: 60.w,
+                                            // ),
+                                            Container(
+                                              width: 54.w,
+                                              height: 54.w,
                                               decoration: BoxDecoration(
                                                 color: Colors.transparent,
                                                 shape: BoxShape.circle,

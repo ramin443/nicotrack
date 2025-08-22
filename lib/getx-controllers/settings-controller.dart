@@ -1491,9 +1491,12 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(42.r)),
         ),
-        // isScrollControlled: true,
+        isScrollControlled: true,
         builder: (context) {
-          return ChangeNameBottomSheet();
+          return FractionallySizedBox(
+            heightFactor: 0.7,
+            child: ChangeNameBottomSheet(),
+          );
         });
   }
 

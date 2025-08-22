@@ -212,10 +212,7 @@ class _TopTriggersSectionState extends State<TopTriggersSection> {
                         ),
                       ),
                     ),
-                  Container(
-                    color: Colors.white.withOpacity(0.1),
-                    child: Center(child: contentLockBox(context),),
-                  ),
+
                 ],
               ),
 
