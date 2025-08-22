@@ -161,6 +161,7 @@ int getcigarettesNotSmoked(DateTime selectedDateTime) {
     }
 
     int totalCigarettesNotSmoked = (smokeFreeDays * userOnboardingData.cigarettesPerDay);
+    
     return totalCigarettesNotSmoked >= 0 ? totalCigarettesNotSmoked : 0; // Ensure no negative values
   } catch (e) {
     print('Error calculating cigarettes not smoked: $e');

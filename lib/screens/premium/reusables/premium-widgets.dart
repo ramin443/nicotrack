@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/constants/font-constants.dart';
 import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import 'package:nicotrack/screens/premium/premium-paywall-screen.dart';
+import 'package:nicotrack/screens/premium/premium-plan-details-sheet.dart';
 import 'package:get/get.dart';
 import 'package:nicotrack/getx-controllers/premium-controller.dart';
 import 'package:nicotrack/extensions/app_localizations_extension.dart';
@@ -204,81 +206,100 @@ Widget calendarLock(BuildContext context) {
 Widget premiumStatusBox(BuildContext context) {
   final premiumController = Get.find<PremiumController>();
 
-  return Container(
-    width: double.infinity,
-    padding: EdgeInsets.only(left: 4.w, right: 13.w, top: 10.w, bottom: 10.w),
-    decoration: BoxDecoration(
-      color: Colors.black, // Different color to indicate active status
-      borderRadius: BorderRadius.circular(20.r)
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(width: 6.w,),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.r),
-              child: Container(
-                width: 65.w,
-                height: 65.w,
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.2),
-                  borderRadius: BorderRadius.circular(20.r),
-                ),
-                child: Center(
-                  child: TextAutoSize(
-                    premiumController.getPlanStatusEmoji(),
-                    style: TextStyle(
-                      fontSize: 28.sp,
+  return GestureDetector(
+    onTap: () {
+      HapticFeedback.lightImpact();
+      showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.transparent,
+        isScrollControlled: true,
+        builder: (context) => const PremiumPlanDetailsSheet(),
+      );
+    },
+    child: Container(
+      width: double.infinity,
+      padding: EdgeInsets.only(left: 4.w, right: 13.w, top: 10.w, bottom: 10.w),
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(20.r),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(width: 6.w,),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20.r),
+                child: Container(
+                  width: 65.w,
+                  height: 65.w,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.2),
+                    borderRadius: BorderRadius.circular(20.r),
+                  ),
+                  child: Center(
+                    child: TextAutoSize(
+                      premiumController.getPlanStatusEmoji(),
+                      style: TextStyle(
+                        fontSize: 28.sp,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              width: 12.w,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 6.w,
-                ),
-                TextAutoSize(
-                  context.l10n.premium_pro_active,
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    height: 1,
-                    fontFamily: recoletaBold,
-                    color: Colors.white,
+              SizedBox(
+                width: 12.w,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 6.w,
                   ),
-                ),
-                TextAutoSize(
-                    premiumController.getPlanDisplayText(),
+                  TextAutoSize(
+                    context.l10n.premium_pro_active,
                     style: TextStyle(
-                      fontSize: 14.sp,
-                      fontFamily: circularBook,
-                      color: Colors.white.withValues(alpha: 0.85),
+                      fontSize: 18.sp,
+                      height: 1,
+                      fontFamily: recoletaBold,
+                      color: Colors.white,
                     ),
                   ),
-
-
-              ],
-            )
-          ],
-        ),
-        TextAutoSize(
-          context.l10n.premium_active,
-          style: TextStyle(
-            fontSize: 15.sp,
-            fontFamily: circularMedium,
-            color: Colors.white,
+                  TextAutoSize(
+                      premiumController.getPlanDisplayText(),
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontFamily: circularBook,
+                        color: Colors.white.withValues(alpha: 0.85),
+                      ),
+                    ),
+                ],
+              )
+            ],
           ),
-        ),
-      ],
+          Row(
+            children: [
+              TextAutoSize(
+                context.l10n.premium_active,
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontFamily: circularMedium,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(width: 8.w),
+              Icon(
+                Icons.chevron_right,
+                color: Colors.white.withOpacity(0.7),
+                size: 20.sp,
+              ),
+            ],
+          ),
+        ],
+      ),
     ),
   );
 }

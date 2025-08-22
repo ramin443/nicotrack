@@ -936,10 +936,12 @@ class HomeController extends GetxController {
   void resetHomeGridValues() {
     DateTime currentDateTime =
         DateTime(selectedYear, selectedMonth, selectedDay);
+    
     int unsmokedDays = 0;
     double moneySavedsoFar = 0;
     double hoursRegained = 0;
     int cigarettesAvoided = 0;
+    
     unsmokedDays = getDaysSinceLastSmoked(currentDateTime);
     moneySavedsoFar = getMoneySaved(currentDateTime);
     hoursRegained = getdaysOfLifeRegained(currentDateTime);
@@ -984,6 +986,7 @@ class HomeController extends GetxController {
   void setCurrentFilledData() {
     DateTime currentDateTime =
         DateTime(selectedYear, selectedMonth, selectedDay);
+    
     // Check if box is open before accessing
     if (Hive.isBoxOpen('onboardingCompletedData')) {
       final onboardingBox = Hive.box<OnboardingData>(

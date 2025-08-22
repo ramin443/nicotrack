@@ -21,6 +21,7 @@ import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import 'package:nicotrack/screens/premium/reusables/premium-widgets.dart';
 import 'package:nicotrack/screens/premium/premium-paywall-screen.dart';
 import 'package:nicotrack/extensions/app_localizations_extension.dart';
+import 'package:nicotrack/getx-controllers/home-controller.dart';
 
 import '../constants/color-constants.dart';
 import '../constants/dummy-data-constants.dart';
@@ -167,6 +168,9 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
   }
 
   Future<void> _initializeData() async {
+    // Wait a bit to ensure Hive boxes are fully opened
+    await Future.delayed(Duration(milliseconds: 100));
+    
     await setCurrentFilledData();
     
     // Simple load - just get what the user last saved, no complex syncing
@@ -2998,11 +3002,19 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
 
   Future<void> setCurrentFilledData() async {
     DateTime currentDateTime = DateTime.now();
-    final onboardingBox = Hive.box<OnboardingData>(
-        'onboardingCompletedData'); // Specify the type of values in the box
-    OnboardingData userOnboardingData =
-        onboardingBox.get('currentUserOnboarding') ?? OnboardingData();
-    currentDateOnboardingData = userOnboardingData;
+    
+    // Check if box is open before accessing (same as home controller)
+    if (Hive.isBoxOpen('onboardingCompletedData')) {
+      final onboardingBox = Hive.box<OnboardingData>(
+          'onboardingCompletedData'); // Specify the type of values in the box
+      OnboardingData userOnboardingData =
+          onboardingBox.get('currentUserOnboarding') ?? OnboardingData();
+      
+      currentDateOnboardingData = userOnboardingData;
+    } else {
+      // If box is not open yet, set default model (same as home controller)
+      currentDateOnboardingData = OnboardingData();
+    }
     nameController.text = currentDateOnboardingData.name;
     // Initialize quit date
     if (currentDateOnboardingData.lastSmokedDate.isNotEmpty) {
@@ -3132,6 +3144,17 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
 
     // Update local state
     currentDateOnboardingData = updatedData;
+    
+    // Refresh home controller to recalculate values
+    try {
+      final homeController = Get.find<HomeController>();
+      homeController.setCurrentFilledData();
+      homeController.resetHomeGridValues();
+      print('✅ Home controller refreshed after quit date change');
+    } catch (e) {
+      print('⚠️ Home controller not found, will refresh when accessed: $e');
+    }
+    
     update();
   }
 
@@ -3148,6 +3171,17 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
 
     // Update local state
     currentDateOnboardingData = updatedData;
+    
+    // Refresh home controller to recalculate values
+    try {
+      final homeController = Get.find<HomeController>();
+      homeController.setCurrentFilledData();
+      homeController.resetHomeGridValues();
+      print('✅ Home controller refreshed after cigarettes per day change');
+    } catch (e) {
+      print('⚠️ Home controller not found, will refresh when accessed: $e');
+    }
+    
     update();
   }
 
@@ -3167,6 +3201,17 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
 
     // Update local state
     currentDateOnboardingData = updatedData;
+    
+    // Refresh home controller to recalculate values
+    try {
+      final homeController = Get.find<HomeController>();
+      homeController.setCurrentFilledData();
+      homeController.resetHomeGridValues();
+      print('✅ Home controller refreshed after cost per pack change');
+    } catch (e) {
+      print('⚠️ Home controller not found, will refresh when accessed: $e');
+    }
+    
     update();
   }
 
