@@ -1012,10 +1012,13 @@ class DidYouSmokeController extends GetxController {
     );
     
     if (context.mounted) {
-      // Navigate directly to congratulations page for smoke-free days after questionnaire completion
+      // Navigate directly to smoking detail screen instead of congratulations page
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => NoSmokeCongratsPage(selectedDate: currentDateTime),
+          builder: (context) => SmokingDetailScreen(
+            selectedDate: currentDateTime,
+            routeSource: SmokingDetailRouteSource.afterSmokingCompletion,
+          ),
         ),
       );
     }

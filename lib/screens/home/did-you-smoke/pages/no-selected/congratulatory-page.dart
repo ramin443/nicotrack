@@ -242,7 +242,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                               GestureDetector(
                                 onTap: () {
                                   // Save smoke-free data and navigate based on badge status
-                                  _navigateBasedOnBadgeStatus();
+                                  _navigateBasedOnBadgeStatus(didYouSmokeController);
                                 },
                                 child: Container(
                                   height: 36.w,
@@ -347,7 +347,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      _buildGoToHomeButton(),
+                      _buildGoToHomeButton(didYouSmokeController),
                       SizedBox(
                         height: 12.h,
                       )
@@ -636,13 +636,13 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
     );
   }
 
-  Widget _buildGoToHomeButton() {
+  Widget _buildGoToHomeButton(DidYouSmokeController didYouSmokeController) {
     return Column(
       children: [
         GestureDetector(
           onTap: () {
             // Navigate based on badge status
-            _navigateBasedOnBadgeStatus();
+            _navigateBasedOnBadgeStatus(didYouSmokeController);
           },
           child: Stack(
             alignment: Alignment.center,
@@ -685,7 +685,7 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
     return earnedBadge.day != -1 ? earnedBadge : null;
   }
 
-  void _navigateBasedOnBadgeStatus() {
+  void _navigateBasedOnBadgeStatus(DidYouSmokeController? controller) {
     final earnedBadge = _checkIfBadgeEarned();
     
     if (earnedBadge != null) {
@@ -703,8 +703,19 @@ class _NoSmokeCongratsPageState extends State<NoSmokeCongratsPage> {
       );
     } else {
       // No badge earned, go directly to home
-      final controller = Get.find<DidYouSmokeController>();
-      controller.addDatatoHiveandNavigate(widget.selectedDate, context);
+      if (controller != null) {
+        controller.addDatatoHiveandNavigate(widget.selectedDate, context);
+      } else {
+        // Fallback: try to find the controller or create a new instance
+        try {
+          final foundController = Get.find<DidYouSmokeController>();
+          foundController.addDatatoHiveandNavigate(widget.selectedDate, context);
+        } catch (e) {
+          // If controller not found, create a new instance
+          final newController = DidYouSmokeController();
+          newController.addDatatoHiveandNavigate(widget.selectedDate, context);
+        }
+      }
     }
   }
 
