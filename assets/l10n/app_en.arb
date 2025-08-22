@@ -12,8 +12,8 @@
   "stay_motivated_title": "Stay motivated and connected",
   "stay_motivated_description": "You're not alone. Celebrate every milestone with achievement badges and connect with others quitting.",
   "quit_plan_title": "Your personalized Quit plan",
-  "quit_plan_feature_1": "⚡ Choose Your Quit Method – Instant quit or step-down approach",
-  "quit_plan_feature_2": "🔗 Sync with Apple Health – Track improvements in breathing, heart rate, and more",
+  "quit_plan_feature_1": "🚨 Emergency Craving Support – Instant access to proven techniques when cravings hit hardest",
+  "quit_plan_feature_2": "🧘 Guided Activity Library – Science-backed exercises to manage stress and overcome triggers",
   
   "enter_name_subtitle": "One last step, 😅",
   "enter_name_title": "What should we call you?",
@@ -1074,12 +1074,10 @@
   "clear_data_button": "Clear All Data",
 
   "manage_notifications_title": "🔔 Stay on track with timely reminders",
-  "manage_notifications_morning_title": "⏰ Morning check-ins ",
-  "manage_notifications_morning_desc": "- Track your progress and mood,",
+  "manage_notifications_morning_title": "🎯 Daily check-ins ",
+  "manage_notifications_morning_desc": "- Track your progress and mood every day,",
   "manage_notifications_motivation_title": "💪 Motivation boosts ",
   "manage_notifications_motivation_desc": "- Encouraging messages when you need them most,",
-  "manage_notifications_evening_title": "🎯 Evening reminders ",
-  "manage_notifications_evening_desc": "- Celebrate your smoke-free achievements.",
   "manage_notifications_allow_button": "Allow notifications",
   "manage_notifications_skip_button": "Skip for now",
 

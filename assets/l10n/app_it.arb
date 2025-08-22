@@ -12,8 +12,8 @@
   "stay_motivated_title": "Rimani motivato e connesso",
   "stay_motivated_description": "Non sei solo. Celebra ogni traguardo con i badge di successo e connettiti con altri che stanno smettendo.",
   "quit_plan_title": "Il tuo piano personalizzato per smettere",
-  "quit_plan_feature_1": "⚡ Scegli il tuo metodo per smettere – Smettere subito o approccio graduale",
-  "quit_plan_feature_2": "🔗 Sincronizza con Apple Health – Monitora i miglioramenti nella respirazione, frequenza cardiaca e altro",
+  "quit_plan_feature_1": "🚨 Supporto di Emergenza per le Voglie – Accesso istantaneo a tecniche provate quando le voglie colpiscono più duramente",
+  "quit_plan_feature_2": "🧘 Biblioteca di Attività Guidate – Esercizi basati sulla scienza per gestire lo stress e superare i trigger",
   
   "enter_name_subtitle": "Un ultimo passo, 😅",
   "enter_name_title": "Come possiamo chiamarti?",
@@ -1038,12 +1038,10 @@
   "clear_data_button": "Cancella Tutti i Dati",
 
   "manage_notifications_title": "🔔 Rimani in carreggiata con promemoria tempestivi",
-  "manage_notifications_morning_title": "⏰ Check-in mattutini ",
-  "manage_notifications_morning_desc": "- Tieni traccia dei tuoi progressi e del tuo umore,",
+  "manage_notifications_morning_title": "🎯 Check-in giornalieri ",
+  "manage_notifications_morning_desc": "- Tieni traccia dei tuoi progressi e del tuo umore ogni giorno,",
   "manage_notifications_motivation_title": "💪 Spinte motivazionali ",
   "manage_notifications_motivation_desc": "- Messaggi incoraggianti quando ne hai più bisogno,",
-  "manage_notifications_evening_title": "🎯 Promemoria serali ",
-  "manage_notifications_evening_desc": "- Celebra i tuoi traguardi senza fumo.",
   "manage_notifications_allow_button": "Consenti notifiche",
   "manage_notifications_skip_button": "Salta per ora",
 

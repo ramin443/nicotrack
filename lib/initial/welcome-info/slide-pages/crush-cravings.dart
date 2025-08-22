@@ -34,7 +34,7 @@ class CrushCravings extends StatelessWidget {
           width: 312.w,
         ),
         SizedBox(
-          height: 18.h,
+          height: 36.w,
         ),
         SizedBox(
           width: 315.w,
@@ -42,7 +42,8 @@ class CrushCravings extends StatelessWidget {
             context.l10n.crush_cravings_description,
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 18.sp,
+                fontSize: 16.sp,
+                height: 1.2,
                 fontFamily: circularBook,
                 color: nicotrackBlack1),
           ),

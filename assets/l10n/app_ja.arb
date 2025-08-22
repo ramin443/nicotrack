@@ -12,8 +12,8 @@
   "stay_motivated_title": "モチベーションを保ち、つながる",
   "stay_motivated_description": "あなたは一人ではありません。達成バッジでマイルストーンを祝い、禁煙する他の人とつながりましょう。",
   "quit_plan_title": "あなただけの禁煙プラン",
-  "quit_plan_feature_1": "⚡ 禁煙方法を選択 – 即座に禁煙または段階的アプローチ",
-  "quit_plan_feature_2": "🔗 Apple Healthと同期 – 呼吸、心拍数などの改善を追跡",
+  "quit_plan_feature_1": "🚨 緊急時の欲求サポート – 欲求が最も強い時に実証済みのテクニックに瞬時アクセス",
+  "quit_plan_feature_2": "🧘 ガイド付きアクティビティライブラリ – ストレス管理とトリガー克服のための科学的根拠に基づいたエクササイズ",
   
   "enter_name_subtitle": "最後のステップです、😅",
   "enter_name_title": "お名前を教えてください",
@@ -1038,12 +1038,10 @@
   "clear_data_button": "すべてのデータを消去",
 
   "manage_notifications_title": "🔔 タイムリーなリマインダーで軌道を保ちましょう",
-  "manage_notifications_morning_title": "⏰ 朝のチェックイン ",
-  "manage_notifications_morning_desc": "- 進歩と気分を追跡し、",
+  "manage_notifications_morning_title": "🎯 毎日のチェックイン ",
+  "manage_notifications_morning_desc": "- 毎日進歩と気分を追跡し、",
   "manage_notifications_motivation_title": "💪 モチベーションブースト ",
   "manage_notifications_motivation_desc": "- 最も必要な時に励ましのメッセージを、",
-  "manage_notifications_evening_title": "🎯 夜のリマインダー ",
-  "manage_notifications_evening_desc": "- 禁煙の成果を祝いましょう。",
   "manage_notifications_allow_button": "通知を許可",
   "manage_notifications_skip_button": "今はスキップ",
 

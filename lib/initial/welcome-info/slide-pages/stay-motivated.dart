@@ -30,14 +30,14 @@ class StayMotivated extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 18.h,
+          height: 18.w,
         ),
         SvgPicture.asset(
           illustration4,
           width: 312.w,
         ),
         SizedBox(
-          height: 18.h,
+          height: 18.w,
         ),
         SizedBox(
           width: 305.w,
@@ -45,7 +45,8 @@ class StayMotivated extends StatelessWidget {
             context.l10n.stay_motivated_description,
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 18.sp,
+                fontSize: 16.sp,
+                height: 1.2,
                 fontFamily: circularBook,
                 color: nicotrackBlack1),
           ),

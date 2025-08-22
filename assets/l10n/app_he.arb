@@ -12,8 +12,8 @@
   "stay_motivated_title": "הישארו מוטיבציה ומחוברים",
   "stay_motivated_description": "אתם לא לבד. חגגו כל אבן דרך עם תגי הישגים והתחברו לאחרים הפורשים מעישון.",
   "quit_plan_title": "התוכנית האישית שלכם להפסקת עישון",
-  "quit_plan_feature_1": "⚡ בחרו את שיטת ההפסקה שלכם – הפסקה מיידית או גישה הדרגתית",
-  "quit_plan_feature_2": "🔗 סנכרנו עם Apple Health – עקבו אחר שיפורים בנשימה, קצב הלב ועוד",
+  "quit_plan_feature_1": "🚨 תמיכה חירום בכמיהות – גישה מיידית לטכניקות מוכחות כשהכמיהות בשיאן",
+  "quit_plan_feature_2": "🧘 ספריית פעילויות מודרכות – תרגילים מבוססי מדע לניהול סטרס והתמודדות עם מפעילים",
   
   "enter_name_subtitle": "צעד אחרון, 😅",
   "enter_name_title": "איך לקרוא לכם?",
@@ -1043,12 +1043,10 @@
   "clear_data_button": "נקה את כל הנתונים",
 
   "manage_notifications_title": "🔔 הישאר על המסלול עם תזכורות בזמן הנכון",
-  "manage_notifications_morning_title": "⏰ בדיקות בוקר ",
-  "manage_notifications_morning_desc": "- עקב אחר ההתקדמות והמצב רוח שלךש",
+  "manage_notifications_morning_title": "🎯 בדיקות יומיות ",
+  "manage_notifications_morning_desc": "- עקב אחר ההתקדמות והמצב רוח שלך כל יוםש",
   "manage_notifications_motivation_title": "💪 דחיפות מוטיבציה ",
   "manage_notifications_motivation_desc": "- מסרים מעודדים כשאתה זקוק להם ביותרש",
-  "manage_notifications_evening_title": "🎯 תזכורות ערב ",
-  "manage_notifications_evening_desc": "- חגג את ההצלחות חסרות העישון שלך.",
   "manage_notifications_allow_button": "אפשר התראות",
   "manage_notifications_skip_button": "דלג לעכשיו",
 

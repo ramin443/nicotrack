@@ -12,8 +12,8 @@
   "stay_motivated_title": "Pozostań zmotywowany i połączony",
   "stay_motivated_description": "Nie jesteś sam. Świętuj każdy kamień milowy odznakami osiągnięć i połącz się z innymi, którzy rzucają palenie.",
   "quit_plan_title": "Twój spersonalizowany plan rzucania palenia",
-  "quit_plan_feature_1": "⚡ Wybierz metodę rzucania – natychmiastowe rzucenie lub stopniowe ograniczanie",
-  "quit_plan_feature_2": "🔗 Synchronizacja z Apple Health – śledź poprawę oddychania, tętna i więcej",
+  "quit_plan_feature_1": "🚨 Wsparcie w nagłych pragnieniach – natychmiastowy dostęp do sprawdzonych technik, gdy pragnienia są najsilniejsze",
+  "quit_plan_feature_2": "🧘 Biblioteka prowadzonych aktywności – ćwiczenia oparte na nauce do radzenia sobie ze stresem i pokonywania wyzwalaczy",
   
   "enter_name_subtitle": "Ostatni krok, 😅",
   "enter_name_title": "Jak mamy się do Ciebie zwracać?",
@@ -1042,12 +1042,10 @@
   "clear_data_button": "Wyczyść Wszystkie Dane",
 
   "manage_notifications_title": "🔔 Pozostań na właściwej ścieżce dzięki terminowym przypomnieniom",
-  "manage_notifications_morning_title": "⏰ Poranne sprawdzenia ",
-  "manage_notifications_morning_desc": "- Śledź swój postęp i nastrój,",
+  "manage_notifications_morning_title": "🎯 Codzienne sprawdzenia ",
+  "manage_notifications_morning_desc": "- Śledź swój postęp i nastrój codziennie,",
   "manage_notifications_motivation_title": "💪 Dawki motywacji ",
   "manage_notifications_motivation_desc": "- Zachęcające wiadomości, gdy najbardziej ich potrzebujesz,",
-  "manage_notifications_evening_title": "🎯 Wieczorne przypomnienia ",
-  "manage_notifications_evening_desc": "- Świętuj swoje osiągnięcia bez papierosów.",
   "manage_notifications_allow_button": "Zezwól na powiadomienia",
   "manage_notifications_skip_button": "Pomiń na razie",
 

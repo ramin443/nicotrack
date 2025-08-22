@@ -39,7 +39,7 @@ class ManageNotifications extends StatelessWidget {
           width: 312.w,
         ),
         SizedBox(
-          height: 36.w,
+          height: 56.w,
         ),
         SizedBox(
           width: 325.w,
@@ -75,17 +75,6 @@ class ManageNotifications extends StatelessWidget {
                         ),
                         TextSpan(
                             text: context.l10n.manage_notifications_motivation_desc + '\n\n'
-                        ),
-                        TextSpan(
-                          text: context.l10n.manage_notifications_evening_title,
-                          style: TextStyle(
-                              fontSize: 16.sp,
-                              height: 1.2,
-                              fontFamily: circularBold,
-                              color: nicotrackBlack1),
-                        ),
-                        TextSpan(
-                            text: context.l10n.manage_notifications_evening_desc + '\n\n'
                         ),
 
                       ])),

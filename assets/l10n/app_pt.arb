@@ -12,8 +12,8 @@
   "stay_motivated_title": "Mantenha-se motivado e conectado",
   "stay_motivated_description": "Você não está sozinho. Celebre cada marco com emblemas de conquista e conecte-se com outros que estão parando.",
   "quit_plan_title": "Seu plano personalizado para parar",
-  "quit_plan_feature_1": "⚡ Escolha seu método para parar – Parada imediata ou abordagem gradual",
-  "quit_plan_feature_2": "🔗 Sincronize com Apple Health – Acompanhe melhorias na respiração, frequência cardíaca e mais",
+  "quit_plan_feature_1": "🚨 Suporte de Emergência para Desejos – Acesso instantâneo a técnicas comprovadas quando os desejos são mais intensos",
+  "quit_plan_feature_2": "🧘 Biblioteca de Atividades Guiadas – Exercícios baseados na ciência para gerenciar o estresse e superar gatilhos",
   
   "enter_name_subtitle": "Um último passo, 😅",
   "enter_name_title": "Como devemos te chamar?",
@@ -1038,12 +1038,10 @@
   "clear_data_button": "Limpar Todos os Dados",
 
   "manage_notifications_title": "🔔 Mantenha-se no caminho certo com lembretes oportunos",
-  "manage_notifications_morning_title": "⏰ Check-ins matinais ",
-  "manage_notifications_morning_desc": "- Acompanhe seu progresso e humor,",
+  "manage_notifications_morning_title": "🎯 Check-ins diários ",
+  "manage_notifications_morning_desc": "- Acompanhe seu progresso e humor todos os dias,",
   "manage_notifications_motivation_title": "💪 Impulsos de motivação ",
   "manage_notifications_motivation_desc": "- Mensagens encorajadoras quando você mais precisa,",
-  "manage_notifications_evening_title": "🎯 Lembretes noturnos ",
-  "manage_notifications_evening_desc": "- Comemore suas conquistas livre do cigarro.",
   "manage_notifications_allow_button": "Permitir notificações",
   "manage_notifications_skip_button": "Pular por enquanto",
 

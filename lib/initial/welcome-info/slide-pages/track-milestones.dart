@@ -42,7 +42,8 @@ class TrackMilestones extends StatelessWidget {
             context.l10n.track_milestones_description,
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 18.sp,
+                fontSize: 16.sp,
+                height: 1.2,
                 fontFamily: circularBook,
                 color: nicotrackBlack1),
           ),

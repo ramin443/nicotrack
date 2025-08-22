@@ -12,8 +12,8 @@
   "stay_motivated_title": "Restez motivé et connecté",
   "stay_motivated_description": "Vous n'êtes pas seul. Célébrez chaque étape avec des badges de réussite et connectez-vous avec d'autres qui arrêtent.",
   "quit_plan_title": "Votre plan personnalisé pour arrêter",
-  "quit_plan_feature_1": "⚡ Choisissez votre méthode d'arrêt - Arrêt immédiat ou approche progressive",
-  "quit_plan_feature_2": "🔗 Synchronisation avec Apple Health - Suivez les améliorations de respiration, rythme cardiaque et plus",
+  "quit_plan_feature_1": "🚨 Soutien d'Urgence pour les Envies – Accès instantané à des techniques éprouvées lors des envies les plus fortes",
+  "quit_plan_feature_2": "🧘 Bibliothèque d'Activités Guidées – Exercices scientifiquement prouvés pour gérer le stress et surmonter les déclencheurs",
   
   "enter_name_subtitle": "Une dernière étape, 😅",
   "enter_name_title": "Comment devons-nous vous appeler ?",
@@ -1012,12 +1012,10 @@
   "clear_data_button": "Effacer Toutes les Données",
 
   "manage_notifications_title": "🔔 Restez sur la bonne voie avec des rappels opportuns",
-  "manage_notifications_morning_title": "⏰ Vérifications matinales ",
-  "manage_notifications_morning_desc": "- Suivez votre progrès et votre humeur,",
+  "manage_notifications_morning_title": "🎯 Vérifications quotidiennes ",
+  "manage_notifications_morning_desc": "- Suivez votre progrès et votre humeur chaque jour,",
   "manage_notifications_motivation_title": "💪 Boosts de motivation ",
   "manage_notifications_motivation_desc": "- Messages encourageants quand vous en avez le plus besoin,",
-  "manage_notifications_evening_title": "🎯 Rappels du soir ",
-  "manage_notifications_evening_desc": "- Célébrez vos réussites sans tabac.",
   "manage_notifications_allow_button": "Autoriser les notifications",
   "manage_notifications_skip_button": "Passer pour maintenant",
 

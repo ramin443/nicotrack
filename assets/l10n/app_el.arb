@@ -12,8 +12,8 @@
   "stay_motivated_title": "Μείνετε παρακινημένοι και συνδεδεμένοι",
   "stay_motivated_description": "Δεν είστε μόνοι. Γιορτάστε κάθε ορόσημο με διακριτικά επιτευγμάτων και συνδεθείτε με άλλους που σταματούν.",
   "quit_plan_title": "Το εξατομικευμένο σας πρόγραμμα διακοπής",
-  "quit_plan_feature_1": "⚡ Επιλέξτε τη μέθοδο διακοπής σας – Άμεση διακοπή ή σταδιακή προσέγγιση",
-  "quit_plan_feature_2": "🔗 Συγχρονισμός με το Apple Health – Παρακολουθήστε βελτιώσεις στην αναπνοή, τον καρδιακό ритм και άλλα",
+  "quit_plan_feature_1": "🚨 Επείγουσα υποστήριξη επιθυμιών – Άμεση πρόσβαση σε αποδεδειγμένες τεχνικές όταν οι επιθυμίες χτυπούν δυνατότερα",
+  "quit_plan_feature_2": "🧘 Βιβλιοθήκη καθοδηγούμενων δραστηριοτήτων – Επιστημονικά υποστηριζόμενες ασκήσεις για τη διαχείριση του άγχους και την υπέρβαση των τριγκερς",
   
   "enter_name_subtitle": "Ένα τελευταίο βήμα, 😅",
   "enter_name_title": "Πώς να σας αποκαλούμε;",
@@ -1043,12 +1043,10 @@
   "clear_data_button": "Εκκαθάριση Όλων των Δεδομένων",
 
   "manage_notifications_title": "🔔 Μείνετε στη σωστή πορεία με έγκαιρες υπενθυμίσεις",
-  "manage_notifications_morning_title": "⏰ Πρωινοί έλεγχοι ",
-  "manage_notifications_morning_desc": "- Παρακολουθήστε την πρόοδο και τη διάθεσή σας,",
+  "manage_notifications_morning_title": "🎯 Καθημερινοί έλεγχοι ",
+  "manage_notifications_morning_desc": "- Παρακολουθήστε την πρόοδο και τη διάθεσή σας κάθε μέρα,",
   "manage_notifications_motivation_title": "💪 Κίνητρα μοτιβάρισμα ",
   "manage_notifications_motivation_desc": "- Ενθαρρυντικά μηνύματα όταν τα χρειάζεστε περισσότερο,",
-  "manage_notifications_evening_title": "🎯 Βραδινές υπενθυμίσεις ",
-  "manage_notifications_evening_desc": "- Γιορτάστε τα επιτεύγματά σας χωρίς κάπνισμα.",
   "manage_notifications_allow_button": "Επιτρέψτε ειδοποιήσεις",
   "manage_notifications_skip_button": "Παράλειψη για τώρα",
 

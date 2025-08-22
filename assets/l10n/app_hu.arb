@@ -12,8 +12,8 @@
   "stay_motivated_title": "Maradjon motivált és kapcsolatban",
   "stay_motivated_description": "Nem egyedül van. Ünneplje minden mérföldkövet teljesítményjelvényekkel, és kapcsolódjon másokhoz, akik leszoknak.",
   "quit_plan_title": "Az Ön személyre szabott leszokási terve",
-  "quit_plan_feature_1": "⚡ Válassza ki a leszokási módszerét – Azonnali leszokás vagy fokozatos csökkentés",
-  "quit_plan_feature_2": "🔗 Szinkronizálás az Apple Health-szel – Kövesse nyomon a légzés, pulzus és egyéb javulásokat",
+  "quit_plan_feature_1": "🚨 Sürgősségi sóvárgás támogatás – Azonnali hozzáférés bizonyított technikákhoz, amikor a sóvárgás legerősebb",
+  "quit_plan_feature_2": "🧘 Úirányított tevékenység könyvtár – Tudományosan alátámasztott gyakorlatok a stressz kezelésére és a kiváltó okok leőzésére",
   
   "enter_name_subtitle": "Egy utolsó lépés, 😅",
   "enter_name_title": "Hogyan szólítsuk Önt?",
@@ -1043,12 +1043,10 @@
   "clear_data_button": "Összes Adat Törlése",
 
   "manage_notifications_title": "🔔 Maradjon a helyes úton időszerű emlékeztetőkkel",
-  "manage_notifications_morning_title": "⏰ Reggeli ellenőrzések ",
-  "manage_notifications_morning_desc": "- Kövesse nyomon előrehaladását és hangulatát,",
+  "manage_notifications_morning_title": "🎯 Napi ellenőrzések ",
+  "manage_notifications_morning_desc": "- Kövesse nyomon előrehaladását és hangulatát minden nap,",
   "manage_notifications_motivation_title": "💪 Motivációs lökések ",
   "manage_notifications_motivation_desc": "- Biztató üzenetek, amikor a legnagyobb szüksége van rájuk,",
-  "manage_notifications_evening_title": "🎯 Esti emlékeztetők ",
-  "manage_notifications_evening_desc": "- Ünnepelje dohányzásmentes eredményeit.",
   "manage_notifications_allow_button": "Értesítések engedélyezése",
   "manage_notifications_skip_button": "Kihagyás egylőre",
 

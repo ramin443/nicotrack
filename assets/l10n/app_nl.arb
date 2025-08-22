@@ -12,8 +12,8 @@
   "stay_motivated_title": "Blijf gemotiveerd en verbonden",
   "stay_motivated_description": "Je bent niet alleen. Vier elke mijlpaal met prestatiebadges en maak contact met anderen die stoppen.",
   "quit_plan_title": "Je gepersonaliseerde stopplan",
-  "quit_plan_feature_1": "⚡ Kies je stopmethode – Direct stoppen of geleidelijke aanpak",
-  "quit_plan_feature_2": "🔗 Synchroniseer met Apple Health – Volg verbeteringen in ademhaling, hartslag en meer",
+  "quit_plan_feature_1": "🚨 Noodondersteuning voor verlangen – Directe toegang tot bewezen technieken wanneer het verlangen het hardst toeslaat",
+  "quit_plan_feature_2": "🧘 Begeleide activiteitenbibliotheek – Wetenschappelijk onderbouwde oefeningen om stress te beheersen en triggers te overwinnen",
   
   "enter_name_subtitle": "Nog één laatste stap, 😅",
   "enter_name_title": "Hoe mogen we je noemen?",
@@ -1042,12 +1042,10 @@
   "clear_data_button": "Alle Gegevens Wissen",
 
   "manage_notifications_title": "🔔 Blijf op koers met tijdige herinneringen",
-  "manage_notifications_morning_title": "⏰ Ochtend check-ins ",
-  "manage_notifications_morning_desc": "- Volg je voortgang en stemming,",
+  "manage_notifications_morning_title": "🎯 Dagelijkse check-ins ",
+  "manage_notifications_morning_desc": "- Volg je voortgang en stemming elke dag,",
   "manage_notifications_motivation_title": "💪 Motivatie boosts ",
   "manage_notifications_motivation_desc": "- Aanmoedigende berichten wanneer je ze het meest nodig hebt,",
-  "manage_notifications_evening_title": "🎯 Avond herinneringen ",
-  "manage_notifications_evening_desc": "- Vier je rookvrije prestaties.",
   "manage_notifications_allow_button": "Meldingen toestaan",
   "manage_notifications_skip_button": "Voor nu overslaan",
 

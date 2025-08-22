@@ -12,8 +12,8 @@
   "stay_motivated_title": "Mantente motivado y conectado",
   "stay_motivated_description": "No estás solo. Celebra cada hito con insignias de logros y conéctate con otros que están dejando de fumar.",
   "quit_plan_title": "Tu plan personalizado para dejar de fumar",
-  "quit_plan_feature_1": "⚡ Elige tu método para dejar de fumar: dejar instantáneamente o reducción gradual",
-  "quit_plan_feature_2": "🔗 Sincronizar con Apple Health: rastrea mejoras en respiración, ritmo cardíaco y más",
+  "quit_plan_feature_1": "🚨 Apoyo para Antojos de Emergencia – Acceso instantáneo a técnicas probadas cuando los antojos golpean más fuerte",
+  "quit_plan_feature_2": "🧘 Biblioteca de Actividades Guiadas – Ejercicios respaldados por la ciencia para manejar el estrés y superar los desencadenantes",
   
   "enter_name_subtitle": "Un último paso, 😅",
   "enter_name_title": "¿Cómo deberíamos llamarte?",
@@ -1013,12 +1013,10 @@
   "clear_data_button": "Borrar Todos los Datos",
 
   "manage_notifications_title": "🔔 Mantente al día con recordatorios oportunos",
-  "manage_notifications_morning_title": "⏰ Revisiones matutinas ",
-  "manage_notifications_morning_desc": "- Rastrea tu progreso y estado de ánimo,",
+  "manage_notifications_morning_title": "🎯 Revisiones diarias ",
+  "manage_notifications_morning_desc": "- Rastrea tu progreso y estado de ánimo todos los días,",
   "manage_notifications_motivation_title": "💪 Impulsos de motivación ",
   "manage_notifications_motivation_desc": "- Mensajes alentadores cuando más los necesites,",
-  "manage_notifications_evening_title": "🎯 Recordatorios vespertinos ",
-  "manage_notifications_evening_desc": "- Celebra tus logros sin humo.",
   "manage_notifications_allow_button": "Permitir notificaciones",
   "manage_notifications_skip_button": "Omitir por ahora",
 

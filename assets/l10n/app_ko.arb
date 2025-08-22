@@ -12,8 +12,8 @@
   "stay_motivated_title": "동기부여를 유지하고 연결하세요",
   "stay_motivated_description": "당신은 혼자가 아닙니다. 성취 배지로 마일스톤을 축하하고 금연하는 다른 사람들과 연결하세요.",
   "quit_plan_title": "당신만의 맞춤형 금연 계획",
-  "quit_plan_feature_1": "⚡ 금연 방법 선택 – 즉시 금연 또는 단계적 접근",
-  "quit_plan_feature_2": "🔗 Apple Health와 동기화 – 호흡, 심박수 등의 개선 추적",
+  "quit_plan_feature_1": "🚨 응급 갈망 지원 – 갈망이 가장 강할 때 입증된 기법에 즉시 액세스",
+  "quit_plan_feature_2": "🧘 가이드 액티비티 라이브러리 – 스트레스 관리와 트리거 극복을 위한 과학적 근거 기반 운동",
   
   "enter_name_subtitle": "마지막 단계입니다, 😅",
   "enter_name_title": "어떻게 불러드릴까요?",
@@ -1043,12 +1043,10 @@
   "clear_data_button": "모든 데이터 삭제",
 
   "manage_notifications_title": "🔔 시기적절한 알림으로 궤도를 유지하세요",
-  "manage_notifications_morning_title": "⏰ 아침 체크인 ",
-  "manage_notifications_morning_desc": "- 진행 상황과 기분을 추적하고,",
+  "manage_notifications_morning_title": "🎯 매일 체크인 ",
+  "manage_notifications_morning_desc": "- 매일 진행 상황과 기분을 추적하고,",
   "manage_notifications_motivation_title": "💪 동기부여 부스터 ",
   "manage_notifications_motivation_desc": "- 가장 필요할 때 격려 메시지를,",
-  "manage_notifications_evening_title": "🎯 저녁 알림 ",
-  "manage_notifications_evening_desc": "- 금연 성취를 축하하세요.",
   "manage_notifications_allow_button": "알림 허용",
   "manage_notifications_skip_button": "지금은 건너뛰기",
 

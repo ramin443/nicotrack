@@ -12,8 +12,8 @@
   "stay_motivated_title": "保持动力并保持联系",
   "stay_motivated_description": "您并不孤单。用成就徽章庆祝每个里程碑，并与其他戒烟者建立联系。",
   "quit_plan_title": "您的个性化戒烟计划",
-  "quit_plan_feature_1": "⚡ 选择您的戒烟方法 – 立即戒烟或逐步减少方法",
-  "quit_plan_feature_2": "🔗 与Apple Health同步 – 追踪呼吸、心率等方面的改善",
+  "quit_plan_feature_1": "🚨 紧急烟瘾支持 – 在烟瘾最强烈时立即获得经证实的技巧",
+  "quit_plan_feature_2": "🧘 指导活动库 – 科学支持的锻炼，管理压力并克服诱因",
   
   "enter_name_subtitle": "最后一步，😅",
   "enter_name_title": "我们应该怎么称呼您？",
@@ -1038,12 +1038,10 @@
   "clear_data_button": "清除所有数据",
 
   "manage_notifications_title": "🔔 通过及时提醒保持正轨",
-  "manage_notifications_morning_title": "⏰ 晨间检查 ",
-  "manage_notifications_morning_desc": "- 追踪您的进度和心情，",
+  "manage_notifications_morning_title": "🎯 每日检查 ",
+  "manage_notifications_morning_desc": "- 每天追踪您的进度和心情，",
   "manage_notifications_motivation_title": "💪 动力提升 ",
   "manage_notifications_motivation_desc": "- 在您最需要的时候给予鼓励信息，",
-  "manage_notifications_evening_title": "🎯 晚间提醒 ",
-  "manage_notifications_evening_desc": "- 庆祝您的无烟成就。",
   "manage_notifications_allow_button": "允许通知",
   "manage_notifications_skip_button": "暂时跳过",
 

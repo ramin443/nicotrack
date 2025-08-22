@@ -12,8 +12,8 @@
   "stay_motivated_title": "Motive olun ve bağlantıda kalın",
   "stay_motivated_description": "Yalnız değilsiniz. Her mil taşını başarı rozetleriyle kutlayın ve bırakmaya çalışan diğerleriyle bağlantı kurun.",
   "quit_plan_title": "Kişiselleştirilmiş bırakma planınız",
-  "quit_plan_feature_1": "⚡ Bırakma Yönteminizi Seçin – Anında bırakma veya kademeli azaltma yaklaşımı",
-  "quit_plan_feature_2": "🔗 Apple Health ile senkronize edin – Nefes alma, kalp hızı ve daha fazlasındaki iyileşmeleri takip edin",
+  "quit_plan_feature_1": "🚨 Acil Durum İstek Desteği – İstekler en şiddetli vurduğunda kanıtlanmış tekniklere anında erişim",
+  "quit_plan_feature_2": "🧘 Rehberli Etkinlik Kütüphanesi – Stresi yönetmek ve tetikleyicileri aşmak için bilimsel destek alan egzersizler",
   
   "enter_name_subtitle": "Son bir adım, 😅",
   "enter_name_title": "Size nasıl hitap edelim?",
@@ -1042,12 +1042,10 @@
   "clear_data_button": "Tüm Verileri Temizle",
 
   "manage_notifications_title": "🔔 Zamanında hatırlatmalarla yolda kalın",
-  "manage_notifications_morning_title": "⏰ Sabah kontrolleri ",
-  "manage_notifications_morning_desc": "- İlerlemenizi ve ruh halinizi takip edin,",
+  "manage_notifications_morning_title": "🎯 Günlük kontroller ",
+  "manage_notifications_morning_desc": "- İlerlemenizi ve ruh halinizi her gün takip edin,",
   "manage_notifications_motivation_title": "💪 Motivasyon artışı ",
   "manage_notifications_motivation_desc": "- En çok ihtiyacınız olduğunda cesaretlendirici mesajlar,",
-  "manage_notifications_evening_title": "🎯 Akşam hatırlatmaları ",
-  "manage_notifications_evening_desc": "- Sigarasız başarılarınızı kutlayın.",
   "manage_notifications_allow_button": "Bildirimlere izin ver",
   "manage_notifications_skip_button": "Şimdilik atla",
 

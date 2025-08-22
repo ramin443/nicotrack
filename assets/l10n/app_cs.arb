@@ -12,8 +12,8 @@
   "stay_motivated_title": "Zůstaňte motivovaní a propojení",
   "stay_motivated_description": "Nejste sami. Oslavte každý milník s odznakem za úspěch a spojte se s ostatními, kteří přestávají kouřit.",
   "quit_plan_title": "Váš personalizovaný plán odvykání",
-  "quit_plan_feature_1": "⚡ Vyberte si způsob odvykání – okamžité přestání nebo postupné snižování",
-  "quit_plan_feature_2": "🔗 Synchronizace s Apple Health – sledujte zlepšení dýchání, tepové frekvence a další",
+  "quit_plan_feature_1": "🚨 Náhlná podpora při chuť na cigaretu – okamžitý přístup k osvědčeným technikám, když je chuť nejsilnější",
+  "quit_plan_feature_2": "🧘 Knihovna řízených aktivit – vědecký podložené cvičení pro zvládání stresu a překonání spouštěčů",
   
   "enter_name_subtitle": "Poslední krok, 😅",
   "enter_name_title": "Jak vám máme říkat?",
@@ -1043,12 +1043,10 @@
   "clear_data_button": "Vymazat Všechna Data",
 
   "manage_notifications_title": "🔔 Zůstaněte na správné cestě s včasnými připomínkami",
-  "manage_notifications_morning_title": "⏰ Ranní kontroly ",
-  "manage_notifications_morning_desc": "- Sledujte svůj pokrok a náladu,",
+  "manage_notifications_morning_title": "🎯 Denní kontroly ",
+  "manage_notifications_morning_desc": "- Sledujte svůj pokrok a náladu každý den,",
   "manage_notifications_motivation_title": "💪 Motivační impulsy ",
   "manage_notifications_motivation_desc": "- Povzbuzující zprávy, když je potřebujete nejvíce,",
-  "manage_notifications_evening_title": "🎯 Večerní připomínky ",
-  "manage_notifications_evening_desc": "- Oslavte své úspěchy bez kouření.",
   "manage_notifications_allow_button": "Povolit upozornění",
   "manage_notifications_skip_button": "Pro teď přeskočit",
 

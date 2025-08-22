@@ -12,8 +12,8 @@
   "stay_motivated_title": "Bleib motiviert und verbunden",
   "stay_motivated_description": "Du bist nicht allein. Feiere jeden Meilenstein mit Erfolgsabzeichen und verbinde dich mit anderen, die aufhören.",
   "quit_plan_title": "Dein personalisierter Aufhörplan",
-  "quit_plan_feature_1": "⚡ Wähle deine Aufhörmethode – Sofortiger Stopp oder schrittweiser Ansatz",
-  "quit_plan_feature_2": "🔗 Synchronisation mit Apple Health – Verfolge Verbesserungen bei Atmung, Herzfrequenz und mehr",
+  "quit_plan_feature_1": "🚨 Notfall-Verlangen-Unterstützung – Sofortiger Zugang zu bewährten Techniken bei starkem Verlangen",
+  "quit_plan_feature_2": "🧘 Geführte Aktivitätsbibliothek – Wissenschaftlich fundierte Übungen gegen Stress und Auslöser",
   
   "enter_name_subtitle": "Ein letzter Schritt, 😅",
   "enter_name_title": "Wie sollen wir dich nennen?",
@@ -1013,12 +1013,10 @@
   "clear_data_button": "Alle Daten Löschen",
 
   "manage_notifications_title": "🔔 Bleiben Sie mit rechtzeitigen Erinnerungen auf Kurs",
-  "manage_notifications_morning_title": "⏰ Morgendliche Check-ins ",
-  "manage_notifications_morning_desc": "- Verfolgen Sie Ihren Fortschritt und Ihre Stimmung,",
+  "manage_notifications_morning_title": "🎯 Tägliche Check-ins ",
+  "manage_notifications_morning_desc": "- Verfolgen Sie Ihren Fortschritt und Ihre Stimmung jeden Tag,",
   "manage_notifications_motivation_title": "💪 Motivationsschübe ",
   "manage_notifications_motivation_desc": "- Ermutigende Nachrichten, wenn Sie sie am meisten brauchen,",
-  "manage_notifications_evening_title": "🎯 Abenderinnerungen ",
-  "manage_notifications_evening_desc": "- Feiern Sie Ihre rauchfreien Erfolge.",
   "manage_notifications_allow_button": "Benachrichtigungen erlauben",
   "manage_notifications_skip_button": "Vorerst überspringen",
 

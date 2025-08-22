@@ -28,12 +28,16 @@ class PersonalizedQuitPlan extends StatelessWidget {
                 color: nicotrackBlack1),
           ),
         ),
-        SizedBox(height: 30.h,),
+        SizedBox(
+          height: 30.h,
+        ),
         Image.asset(
           illustration3,
           width: 312.w,
         ),
-        SizedBox(height: 36.h,),
+        SizedBox(
+          height: 56.w,
+        ),
         SizedBox(
           width: 325.w,
           child: Column(
@@ -43,7 +47,8 @@ class PersonalizedQuitPlan extends StatelessWidget {
                 context.l10n.quit_plan_feature_1,
                 textAlign: TextAlign.left,
                 style: TextStyle(
-                    fontSize: 18.sp,
+                    fontSize: 16.sp,
+                    height: 1.2,
                     fontFamily: circularBook,
                     color: nicotrackBlack1),
               ),
@@ -52,7 +57,8 @@ class PersonalizedQuitPlan extends StatelessWidget {
                 context.l10n.quit_plan_feature_2,
                 textAlign: TextAlign.left,
                 style: TextStyle(
-                    fontSize: 18.sp,
+                    fontSize: 16.sp,
+                    height: 1.2,
                     fontFamily: circularBook,
                     color: nicotrackBlack1),
               ),

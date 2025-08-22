@@ -12,8 +12,8 @@
   "stay_motivated_title": "Tetap termotivasi dan terhubung",
   "stay_motivated_description": "Anda tidak sendirian. Rayakan setiap pencapaian dengan lencana prestasi dan terhubung dengan orang lain yang berhenti merokok.",
   "quit_plan_title": "Rencana berhenti merokok personal Anda",
-  "quit_plan_feature_1": "⚡ Pilih Metode Berhenti Anda – Berhenti instan atau pendekatan bertahap",
-  "quit_plan_feature_2": "🔗 Sinkronkan dengan Apple Health – Lacak perbaikan pernapasan, detak jantung, dan lainnya",
+  "quit_plan_feature_1": "🚨 Dukungan Darurat untuk Hasrat – Akses instan ke teknik yang terbukti saat hasrat menyerang paling keras",
+  "quit_plan_feature_2": "🧘 Perpustakaan Aktivitas Terpandu – Latihan berbasis sains untuk mengelola stres dan mengatasi pemicu",
   
   "enter_name_subtitle": "Satu langkah terakhir, 😅",
   "enter_name_title": "Apa yang harus kami panggil Anda?",
@@ -1043,12 +1043,10 @@
   "clear_data_button": "Hapus Semua Data",
 
   "manage_notifications_title": "🔔 Tetap di jalur dengan pengingat tepat waktu",
-  "manage_notifications_morning_title": "⏰ Pemeriksaan pagi ",
-  "manage_notifications_morning_desc": "- Lacak kemajuan dan suasana hati Anda,",
+  "manage_notifications_morning_title": "🎯 Pemeriksaan harian ",
+  "manage_notifications_morning_desc": "- Lacak kemajuan dan suasana hati Anda setiap hari,",
   "manage_notifications_motivation_title": "💪 Dorongan motivasi ",
   "manage_notifications_motivation_desc": "- Pesan penyemangat saat Anda paling membutuhkannya,",
-  "manage_notifications_evening_title": "🎯 Pengingat malam ",
-  "manage_notifications_evening_desc": "- Rayakan pencapaian bebas rokok Anda.",
   "manage_notifications_allow_button": "Izinkan notifikasi",
   "manage_notifications_skip_button": "Lewati untuk sekarang",
 

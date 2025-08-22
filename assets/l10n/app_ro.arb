@@ -12,8 +12,8 @@
   "stay_motivated_title": "Rămâneți motivați și conectați",
   "stay_motivated_description": "Nu sunteți singuri. Sărbătoriți fiecare reper cu insigne de realizare și conectați-vă cu alții care se lasă.",
   "quit_plan_title": "Planul vostru personalizat de renunțare",
-  "quit_plan_feature_1": "⚡ Alegeți metoda de renunțare – Renunțare instantanee sau abordare treptată",
-  "quit_plan_feature_2": "🔗 Sincronizați cu Apple Health – Urmăriți îmbunătățirile în respirație, ritmul cardiac și multe altele",
+  "quit_plan_feature_1": "🚨 Sprijin de urgență pentru pofte – Acces instantaneu la tehnici dovedite când poftele lovesc cel mai puternic",
+  "quit_plan_feature_2": "🧘 Biblioteca de activități ghidate – Exerciții susținute științific pentru gestionarea stresului și depășirea declanșatorilor",
   
   "enter_name_subtitle": "Un ultim pas, 😅",
   "enter_name_title": "Cum să vă spunem?",
@@ -1043,12 +1043,10 @@
   "clear_data_button": "Șterge Toate Datele",
 
   "manage_notifications_title": "🔔 Rămâneți pe drumul cel bun cu memento-uri la timp",
-  "manage_notifications_morning_title": "⏰ Verificări matinale ",
-  "manage_notifications_morning_desc": "- Urmăriți progresul și starea de spirit,",
+  "manage_notifications_morning_title": "🎯 Verificări zilnice ",
+  "manage_notifications_morning_desc": "- Urmăriți progresul și starea de spirit în fiecare zi,",
   "manage_notifications_motivation_title": "💪 Impulsuri de motivație ",
   "manage_notifications_motivation_desc": "- Mesaje încurajatoare când aveți cea mai mare nevoie de ele,",
-  "manage_notifications_evening_title": "🎯 Memento-uri de seară ",
-  "manage_notifications_evening_desc": "- Sărbătoriți realizările fără fumat.",
   "manage_notifications_allow_button": "Permite notificările",
   "manage_notifications_skip_button": "Sari pentru moment",
 
