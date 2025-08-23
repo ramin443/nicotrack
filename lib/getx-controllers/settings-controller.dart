@@ -3015,25 +3015,46 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
       // If box is not open yet, set default model (same as home controller)
       currentDateOnboardingData = OnboardingData();
     }
+    // Always set the name from the loaded data
     nameController.text = currentDateOnboardingData.name;
-    // Initialize quit date
+    
+    // Initialize quit date - use the stored date or keep current default
     if (currentDateOnboardingData.lastSmokedDate.isNotEmpty) {
       selectedQuitDate =
           DateTime.parse(currentDateOnboardingData.lastSmokedDate);
+    } else {
+      // Keep today's date as default if no date is stored
+      selectedQuitDate = DateTime.now();
     }
 
-    // Initialize cigarettes per day
-    if (currentDateOnboardingData.cigarettesPerDay != -1) {
+    // Initialize cigarettes per day - always use the stored value
+    if (currentDateOnboardingData.cigarettesPerDay != -1 && 
+        currentDateOnboardingData.cigarettesPerDay > 0) {
       selectedFreq = currentDateOnboardingData.cigarettesPerDay;
+    } else {
+      // Only use default if no data was stored (-1 means not set)
+      selectedFreq = 8;
     }
 
-    // Initialize cost per pack
+    // Initialize cost per pack - always parse the stored value
     if (currentDateOnboardingData.costOfAPack.isNotEmpty) {
       List<String> costParts = currentDateOnboardingData.costOfAPack.split('.');
       if (costParts.length == 2) {
         selectedDollar = int.tryParse(costParts[0]) ?? 8;
         selectedCent = int.tryParse(costParts[1]) ?? 0;
+      } else if (costParts.length == 1) {
+        // Handle case where there's no decimal point (e.g., "8")
+        selectedDollar = int.tryParse(costParts[0]) ?? 8;
+        selectedCent = 0;
+      } else {
+        // Fallback to defaults if parsing fails
+        selectedDollar = 8;
+        selectedCent = 0;
       }
+    } else {
+      // Only use defaults if no cost was stored
+      selectedDollar = 8;
+      selectedCent = 0;
     }
 
     // Initialize notification preferences - just load, don't set enablePushNotification here

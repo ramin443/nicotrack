@@ -61,6 +61,16 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SettingsController>(
+        init: SettingsController(),
+        initState: (state) {
+          // Refresh data when the widget is initialized
+          WidgetsBinding.instance.addPostFrameCallback((_) async {
+            final controller = Get.find<SettingsController>();
+            // Wait a bit for Hive boxes to be opened, then refresh data
+            await Future.delayed(Duration(milliseconds: 500));
+            await controller.setCurrentFilledData();
+          });
+        },
         builder: (settingsController) {
           return GetBuilder<PremiumController>(
               init: PremiumController(),
