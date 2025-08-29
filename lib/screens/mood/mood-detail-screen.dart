@@ -10,6 +10,7 @@ import 'package:nicotrack/models/mood-model/mood-model.dart';
 import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import 'package:nicotrack/screens/base/base.dart';
 import 'package:nicotrack/extensions/app_localizations_extension.dart';
+import 'package:nicotrack/screens/elements/loading_indicator.dart';
 
 enum MoodDetailRouteSource {
   fromHome,
@@ -89,11 +90,7 @@ class _MoodDetailScreenState extends State<MoodDetailScreen> {
               if (isLoading)
                 Container(
                   height: MediaQuery.of(context).size.height,
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      color: nicotrackGreen,
-                    ),
-                  ),
+                  child: const StandardLoadingIndicator(),
                 )
               else if (moodData == null)
                 _buildNoDataSection()

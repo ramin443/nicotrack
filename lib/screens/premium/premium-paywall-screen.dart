@@ -9,7 +9,10 @@ import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/getx-controllers/premium-controller.dart';
 import 'package:nicotrack/extensions/app_localizations_extension.dart';
 import 'package:nicotrack/screens/base/base.dart';
+import 'package:nicotrack/services/purchase-service.dart';
 import 'dart:ui'; // Required for ImageFilter
+import 'package:url_launcher/url_launcher.dart';
+import 'package:nicotrack/screens/elements/loading_indicator.dart';
 
 class PremiumPaywallScreen extends StatefulWidget {
   final bool isFromOnboarding;
@@ -147,7 +150,7 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
             onTap: () {
@@ -642,7 +645,8 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
           ),
           GestureDetector(
             onTap: () {
-              // Handle terms of use
+              HapticFeedback.lightImpact();
+              _openTermsOfUse();
             },
             child: SizedBox(
                 width: 90.w,
@@ -659,7 +663,8 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
           ),
           GestureDetector(
             onTap: () {
-              // Handle privacy policy
+              HapticFeedback.lightImpact();
+              _openPrivacyPolicy();
             },
             child: SizedBox(
                 width: 90.w,
@@ -682,5 +687,45 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
   void _handleSubscribe() {
     // Use the premium controller to handle subscription
     _premiumController.subscribeToPremium(selectedPlan, context);
+  }
+
+  Future<void> _openPrivacyPolicy() async {
+    final Uri url = Uri.parse('https://aged-jewel-b95.notion.site/Nicotrack-Privacy-Policy-24818258f0c080199a49c27c50efd55a?source=copy_link');
+    try {
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url, mode: LaunchMode.externalApplication);
+      } else {
+        _showLinkError('Could not open Privacy Policy');
+      }
+    } catch (e) {
+      _showLinkError('Could not open Privacy Policy');
+    }
+  }
+
+  Future<void> _openTermsOfUse() async {
+    final Uri url = Uri.parse('https://aged-jewel-b95.notion.site/Nicotrack-Terms-of-Use-24818258f0c080fdac85ccca299d576a?source=copy_link');
+    try {
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url, mode: LaunchMode.externalApplication);
+      } else {
+        _showLinkError('Could not open Terms of Use');
+      }
+    } catch (e) {
+      _showLinkError('Could not open Terms of Use');
+    }
+  }
+
+  void _showLinkError(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.red.withOpacity(0.9),
+        behavior: SnackBarBehavior.floating,
+        margin: EdgeInsets.all(16.w),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+      ),
+    );
   }
 }

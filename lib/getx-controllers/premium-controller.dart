@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../config/app-mode.dart';
 import 'package:nicotrack/services/firebase-service.dart';
 import 'package:nicotrack/services/premium-persistence-service.dart';
+import '../screens/elements/loading_indicator.dart';
 
 class PremiumController extends GetxController {
   // Premium status
@@ -242,19 +244,11 @@ class PremiumController extends GetxController {
     // Use PurchaseService to handle the actual purchase
     final purchaseService = PurchaseService();
     
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return Center(
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-            strokeWidth: 2.w,
-            backgroundColor: Colors.black,
-          ),
-        );
-      },
-    );
+    _proceedWithPurchase(planIndex, context, purchaseService);
+  }
+  
+  void _proceedWithPurchase(int planIndex, BuildContext context, PurchaseService purchaseService) async {
+    showStandardLoadingDialog(context);
     
     // Log purchase attempt
     final planData = subscriptionPlans[planIndex];
@@ -267,29 +261,52 @@ class PremiumController extends GetxController {
     
     try {
       bool success = await purchaseService.purchaseProduct(planIndex);
-      HapticFeedback.lightImpact();
-      Navigator.pop(context); // Close loading dialog
       
       if (!success) {
-        print("Purchase failed for plan: ${subscriptionPlans[planIndex]?["title"]}");
+        // Only close loading dialog if purchase initiation failed
+        HapticFeedback.lightImpact();
+        Navigator.pop(context); // Close loading dialog
+        
         FirebaseService().logEvent(
           name: 'premium_purchase_failed',
           parameters: {
             'plan_type': planData?['title'] ?? 'unknown',
             'plan_index': planIndex,
-            'error_type': 'purchase_failed',
+            'error_type': 'purchase_initiation_failed',
           },
         );
+        
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Purchase failed to start. Please try again."),
+            backgroundColor: Colors.red,
+          ),
+        );
       } else {
+        // Purchase initiated successfully - DO NOT close loading dialog yet
+        // The purchase stream will handle the completion and show success dialog
+        
+        // Set a timeout in case the purchase stream doesn't respond
+        Timer(Duration(seconds: 15), () {
+          // If loading dialog is still open after 15 seconds, close it
+          if (context.mounted && Navigator.of(context).canPop()) {
+            try {
+              Navigator.pop(context);
+            } catch (e) {
+              // Timeout closing failed - not critical
+            }
+          }
+        });
+        
         FirebaseService().logEvent(
-          name: 'premium_purchase_completed',
+          name: 'premium_purchase_initiated',
           parameters: {
             'plan_type': planData?['title'] ?? 'unknown',
             'plan_index': planIndex,
           },
         );
       }
-      // The purchase service will handle success/error messages and update isPremium
+      // The purchase service will handle actual completion, success dialog, and updating isPremium
     } catch (e) {
       HapticFeedback.lightImpact();
       Navigator.pop(context); // Close loading dialog
@@ -306,15 +323,7 @@ class PremiumController extends GetxController {
     // Use PurchaseService to restore purchases
     final purchaseService = PurchaseService();
     
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    );
+    showStandardLoadingDialog(context, message: 'Restoring purchases...');
     
     FirebaseService().logEvent(
       name: 'premium_restore_attempted',

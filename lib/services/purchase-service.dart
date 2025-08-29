@@ -3,9 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../getx-controllers/premium-controller.dart';
 import 'premium-persistence-service.dart';
 import '../screens/premium/purchase-success-dialog.dart';
+import '../constants/color-constants.dart';
+import '../constants/font-constants.dart';
 
 class PurchaseService {
   static final PurchaseService _instance = PurchaseService._internal();
@@ -135,6 +138,14 @@ class PurchaseService {
         print('     Price: ${product.price}');
         print('     Title: ${product.title}');
         print('     Description: ${product.description}');
+        
+        // Special logging for lifetime product
+        if (product.id == lifetimeProductId) {
+          print('  🏆 LIFETIME PRODUCT DETAILS:');
+          print('     Raw price: ${product.rawPrice}');
+          print('     Currency code: ${product.currencyCode}');
+          print('     Currency symbol: ${product.currencySymbol}');
+        }
       }
       
       // Check specifically for lifetime product
@@ -236,23 +247,39 @@ class PurchaseService {
     );
 
     if (productDetails == null) {
-      // Product not found - this is likely the issue
-      print('❌ Product not found: $productId');
-      print('❌ This is likely because:');
-      print('   1. Product ID mismatch between code and App Store Connect');
-      print('   2. Product not approved/available in TestFlight');
-      print('   3. Product type mismatch (consumable vs non-consumable)');
-      
       purchasePending = false;
       
       // Show detailed error dialog for debugging
+      _showDebugDialog(
+        'Product Not Found',
+        'Product ID: $productId\n\n'
+        'Available products: ${products.map((p) => p.id).join(", ")}\n\n'
+        'Possible causes:\n'
+        '1. Product ID mismatch\n'
+        '2. Not approved in TestFlight\n'
+        '3. Wrong product type\n'
+        '4. Network/store issue',
+        autoClose: false,
+      );
+      
       _showProductNotFoundError(productId);
       return false;
     }
     
-    print('✅ Found product: ${productDetails.id}');
-    print('   Title: ${productDetails.title}');
-    print('   Price: ${productDetails.price}');
+    // Extra debugging for lifetime product
+    if (productId == lifetimeProductId) {
+      _showDebugDialog(
+        'Lifetime Product Found',
+        'ID: ${productDetails.id}\n'
+        'Title: ${productDetails.title}\n'
+        'Price: ${productDetails.price}\n'
+        'Raw price: ${productDetails.rawPrice}\n'
+        'Currency: ${productDetails.currencyCode}\n'
+        'Attempting purchase...',
+        autoClose: true,
+        duration: 3,
+      );
+    }
 
     // Create purchase parameter
     final PurchaseParam purchaseParam = PurchaseParam(
@@ -262,19 +289,22 @@ class PurchaseService {
 
     try {
       purchasePending = true;
-      print('🚀 Initiating purchase for: $productId');
       
       // Special handling for lifetime product
       if (productId == lifetimeProductId) {
-        print('🏆 Processing LIFETIME product purchase...');
-        print('🏆 This is a non-consumable product');
-        
         // Check if user already owns this product
         final controller = Get.find<PremiumController>();
         final premiumInfo = PremiumPersistenceService.getPremiumInfo();
         if (premiumInfo['productId'] == lifetimeProductId && controller.isPremium.value) {
-          print('⚠️ User already owns lifetime access');
           purchasePending = false;
+          
+          _showDebugDialog(
+            'Already Owned',
+            'User already owns lifetime access!\n'
+            'Premium status: ${controller.isPremium.value}',
+            autoClose: true,
+            duration: 3,
+          );
           
           // Show a message that they already own it
           Get.snackbar(
@@ -288,27 +318,37 @@ class PurchaseService {
         }
       }
       
-      // For iOS, all products (subscriptions and non-consumables) use buyNonConsumable
-      // The App Store knows the difference and handles them appropriately
+      // For iOS, both subscriptions and non-consumables use buyNonConsumable
+      // The difference is handled by the App Store based on product configuration
       bool success = await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
       
-      print('📦 Purchase initiated successfully: $success');
+      _showDebugDialog(
+        'Purchase Initiated',
+        'Product: $productId\n'
+        'Success: $success\n'
+        'Waiting for App Store response...',
+        autoClose: true,
+        duration: 3,
+      );
       
       if (!success) {
         purchasePending = false;
-        print('⚠️ Purchase initiation returned false');
-        print('⚠️ This might mean:');
-        print('   - User cancelled the purchase');
-        print('   - Product already owned (for non-consumables)');
-        print('   - Store error occurred');
+        
+        
       }
       
       return success;
       
     } catch (e) {
       purchasePending = false;
-      print('❌ Purchase exception: $e');
-      print('❌ Exception type: ${e.runtimeType}');
+      
+      _showDebugDialog(
+        'Purchase Exception',
+        'Product: $productId\n'
+        'Error: $e\n'
+        'Type: ${e.runtimeType}',
+        autoClose: false,
+      );
       
       // Show error dialog for TestFlight debugging
       _showPurchaseError(productId, e.toString());
@@ -318,81 +358,63 @@ class PurchaseService {
 
   // Handle purchase updates
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) async {
-    print('🔔 Purchase stream received ${purchaseDetailsList.length} updates');
-    print('🔔 Purchase details: ${purchaseDetailsList.map((p) => '${p.productID}:${p.status}:${p.purchaseID}').join(', ')}');
     
     for (final PurchaseDetails purchaseDetails in purchaseDetailsList) {
-      print('📦 ========== PROCESSING PURCHASE ==========');
-      print('📦 Product ID: ${purchaseDetails.productID}');
-      print('📦 Status: ${purchaseDetails.status}');
-      print('📦 Purchase ID: ${purchaseDetails.purchaseID}');
-      print('📦 Transaction date: ${purchaseDetails.transactionDate}');
-      print('📦 Pending complete: ${purchaseDetails.pendingCompletePurchase}');
       
       if (purchaseDetails.status == PurchaseStatus.pending) {
-        // Show pending UI
-        print('⏳ Purchase pending for: ${purchaseDetails.productID}');
         purchasePending = true;
       } else {
         if (purchaseDetails.status == PurchaseStatus.error) {
           // Handle error
-          print('❌ Purchase error: ${purchaseDetails.error}');
-          print('❌ Error details: ${purchaseDetails.error?.message}');
-          print('Purchase Failed: Something went wrong. Please try again.');
         } else if (purchaseDetails.status == PurchaseStatus.purchased ||
                    purchaseDetails.status == PurchaseStatus.restored) {
-          print('✅ Processing ${purchaseDetails.status == PurchaseStatus.purchased ? "PURCHASE" : "RESTORE"} for: ${purchaseDetails.productID}');
           
-          // Special logging for lifetime purchases
-          if (purchaseDetails.productID == lifetimeProductId) {
-            print('🏆 LIFETIME PURCHASE DETECTED!');
-            print('🏆 Product ID: ${purchaseDetails.productID}');
-            print('🏆 Status: ${purchaseDetails.status}');
-            print('🏆 Purchase ID: ${purchaseDetails.purchaseID}');
-          }
-          
-          // Verify purchase with detailed logging
-          print('🔐 Starting verification process...');
+          // Verify purchase
           bool valid = await _verifyPurchase(purchaseDetails);
-          print('🔐 Purchase verification result: $valid');
           
           if (valid) {
-            // Update premium status with detailed logging
-            print('🎉 Verification passed! Delivering product...');
-            
-            // For purchased status (not restored), we know this is a fresh purchase
-            // that needs the success dialog shown
+            // Determine if this is a new purchase vs restored purchase
             bool isNewPurchase = purchaseDetails.status == PurchaseStatus.purchased;
             
             await _deliverProduct(purchaseDetails, showDialog: isNewPurchase);
-            print('🎉 Product delivery completed!');
-          } else {
-            print('❌ Purchase verification failed for: ${purchaseDetails.productID}');
-            print('❌ Skipping product delivery due to verification failure');
           }
         } else {
-          print('⚠️ Unknown purchase status: ${purchaseDetails.status}');
+          _showDebugDialog(
+            'Unknown Status',
+            'Product: ${purchaseDetails.productID}\n'
+            'Unknown status: ${purchaseDetails.status}',
+            autoClose: true,
+            duration: 3,
+          );
         }
         
         // Complete the purchase
         if (purchaseDetails.pendingCompletePurchase) {
-          print('✔️ Completing purchase transaction for: ${purchaseDetails.productID}');
           try {
             await _inAppPurchase.completePurchase(purchaseDetails);
-            print('✔️ Purchase transaction completed successfully');
           } catch (e) {
-            print('❌ Error completing purchase: $e');
+            _showDebugDialog(
+              'Completion Error',
+              'Product: ${purchaseDetails.productID}\n'
+              'Error completing purchase: $e',
+              autoClose: true,
+              duration: 4,
+            );
           }
         }
         
         purchasePending = false;
       }
-      print('📦 ========================================');
     }
     
     // After processing all purchases, verify the current premium status
     final controller = Get.find<PremiumController>();
-    print('📊 Final status after purchase processing: ${controller.isPremium.value}');
+    _showDebugDialog(
+      'Purchase Processing Complete',
+      'Final premium status: ${controller.isPremium.value}',
+      autoClose: true,
+      duration: 2,
+    );
   }
 
   // Verify purchase (implement server-side verification in production)  
@@ -470,14 +492,10 @@ class PurchaseService {
       
       // Show success dialog only for new purchases (not restored ones)
       if (showDialog) {
-        print('🎊 Showing purchase success dialog: $planType');
-        
-        // Add a small delay to ensure UI is ready, especially for TestFlight
-        Future.delayed(Duration(milliseconds: 500), () {
-          _showPurchaseSuccessDialog(planType);
+        // Show immediately but ensure UI thread is ready
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _showPurchaseSuccessDialogSafe(planType);
         });
-      } else {
-        print('ℹ️ Skipping dialog for restored purchase');
       }
       
     } catch (e) {
@@ -494,59 +512,220 @@ class PurchaseService {
 
   // Show purchase success dialog
   void _showPurchaseSuccessDialog(String planType) {
-    // Try multiple methods to show the success dialog
-    print('🎊 Attempting to show purchase success dialog...');
-    
-    // Method 1: Try using Get.context first
-    if (Get.context != null) {
-      print('✅ Using Get.context to show dialog');
-      Navigator.of(Get.context!).push(
-        MaterialPageRoute(
-          builder: (context) => PurchaseSuccessDialog(
-            planType: planType,
-          ),
-          fullscreenDialog: true,
-        ),
-      );
-      return;
-    }
-    
-    // Method 2: Try using overlayContext if available
-    final overlayContext = Get.overlayContext;
-    if (overlayContext != null) {
-      print('✅ Using Get.overlayContext to show dialog');
-      Navigator.of(overlayContext).push(
-        MaterialPageRoute(
-          builder: (context) => PurchaseSuccessDialog(
-            planType: planType,
-          ),
-          fullscreenDialog: true,
-        ),
-      );
-      return;
-    }
-    
-    // Method 3: Use Get.to for navigation (works without specific context)
-    print('✅ Using Get.to() to show dialog');
-    Get.to(
-      () => PurchaseSuccessDialog(planType: planType),
-      fullscreenDialog: true,
-      transition: Transition.fadeIn,
-      duration: Duration(milliseconds: 300),
+    _showDebugDialog(
+      'Success Dialog Check',
+      'Starting success dialog...\n'
+      'Plan: $planType\n'
+      'Get.context: ${Get.context != null}\n'
+      'Get.overlayContext: ${Get.overlayContext != null}',
+      autoClose: true,
+      duration: 2,
     );
     
-    // If all methods fail, at least show a snackbar
-    if (Get.isSnackbarOpen == false) {
-      Get.snackbar(
-        '🎉 Purchase Successful',
-        planType,
-        backgroundColor: Color(0xFFFFB800),
-        colorText: Colors.black,
-        duration: Duration(seconds: 3),
-        margin: EdgeInsets.all(16),
-        borderRadius: 12,
-        icon: Icon(Icons.check_circle, color: Colors.black),
+    // Get the most reliable context available
+    BuildContext? context = Get.context ?? Get.overlayContext;
+    
+    if (context != null && context.mounted) {
+      _showDebugDialog(
+        'Context Found',
+        'Valid context found, proceeding with dialog...',
+        autoClose: true,
+        duration: 1,
       );
+      
+      // First, try to close any existing loading dialogs
+      try {
+        if (Navigator.of(context).canPop()) {
+          Navigator.of(context).pop(); // Close loading dialog
+        }
+      } catch (e) {
+        _showDebugDialog(
+          'Loading Dialog Error',
+          'Could not close loading dialog: $e',
+          autoClose: true,
+          duration: 3,
+        );
+      }
+      
+      // Small delay to ensure UI is ready after closing loading dialog
+      Future.delayed(Duration(milliseconds: 100), () {
+        if (context.mounted) {
+          _showDebugDialog(
+            'Showing Success Dialog',
+            'About to call showDialog...\n'
+            'Context still mounted: ${context.mounted}',
+            autoClose: true,
+            duration: 1,
+          );
+          
+          // Show as a proper dialog, not a route
+          try {
+            showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (dialogContext) => AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              backgroundColor: Colors.white,
+              title: Row(
+                children: [
+                  Icon(
+                    Icons.check_circle,
+                    color: Colors.green,
+                    size: 28,
+                  ),
+                  SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      'Purchase Successful!',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    planType,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFFFFB800),
+                    ),
+                  ),
+                  SizedBox(height: 12),
+                  Text(
+                    'Thank you for your purchase! You now have access to all premium features.',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(dialogContext).pop();
+                
+                // Also close any loading dialogs or premium screens
+                _closeLoadingDialogsAndNavigateToHome(context);
+              },
+              style: TextButton.styleFrom(
+                backgroundColor: Color(0xFFFFB800),
+                foregroundColor: Colors.black,
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: Text(
+                'Get Started',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+                ),
+              ],
+            ),
+          );
+          } catch (e) {
+            _showDebugDialog(
+              'ShowDialog Failed',
+              'Error showing success dialog: $e\n'
+              'Type: ${e.runtimeType}',
+              autoClose: false,
+            );
+          }
+        } else {
+          _showDebugDialog(
+            'Context Lost',
+            'Context no longer mounted after delay',
+            autoClose: true,
+            duration: 3,
+          );
+        }
+      });
+    } else {
+      _showDebugDialog(
+        'Context Error',
+        'No valid context for success dialog\n'
+        'Get.context: ${Get.context != null ? "available" : "null"}\n'
+        'Get.overlayContext: ${Get.overlayContext != null ? "available" : "null"}\n'
+        'Falling back to snackbar...',
+        autoClose: true,
+        duration: 4,
+      );
+      
+      // Fallback to snackbar if no context available
+      _showPurchaseSuccessSnackbar(planType);
+    }
+  }
+  
+  void _showPurchaseSuccessSnackbar(String planType) {
+    // Use regular ScaffoldMessenger instead of Get.snackbar to avoid null errors
+    if (Get.context != null) {
+      ScaffoldMessenger.of(Get.context!).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              Icon(Icons.check_circle, color: Colors.black),
+              SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '🎉 Purchase Successful',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      planType,
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          backgroundColor: Color(0xFFFFB800),
+          duration: Duration(seconds: 4),
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.all(16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      );
+    }
+  }
+  
+  void _closeLoadingDialogsAndNavigateToHome(BuildContext context) {
+    try {
+      // Try to pop any existing loading dialogs
+      if (Navigator.of(context).canPop()) {
+        Navigator.of(context).pop();
+      }
+      
+      // Navigate to home/base screen if we're in the premium paywall
+      // This helps ensure user sees their premium features activated
+      final currentRoute = ModalRoute.of(context);
+      if (currentRoute != null && currentRoute.settings.name?.contains('premium') == true) {
+        Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
+      }
+    } catch (e) {
+      print('⚠️ Error closing dialogs/navigating: $e');
     }
   }
 
@@ -782,30 +961,138 @@ class PurchaseService {
           ? 'No products loaded' 
           : products.map((p) => '${p.id}: ${p.price}').join('\n');
       
+      // Check specifically if lifetime product was requested
+      bool isLifetimeRequest = productId == lifetimeProductId;
+      String lifetimeStatus = '';
+      
+      if (isLifetimeRequest) {
+        bool lifetimeFound = products.any((p) => p.id == lifetimeProductId);
+        lifetimeStatus = '\n🏆 LIFETIME DEBUG:\n'
+                        '• Lifetime product found: $lifetimeFound\n'
+                        '• Store available: $isAvailable\n'
+                        '• Total products loaded: ${products.length}\n'
+                        '• Product IDs searched: $_productIds';
+      }
+      
       showDialog(
         context: Get.context!,
         builder: (context) => AlertDialog(
-          title: Text('Product Not Available'),
+          title: Text('DEBUG: Product Not Available'),
           content: SingleChildScrollView(
             child: Text(
-              'Requested: $productId\n\n'
-              'Loaded products:\n$loadedProducts\n\n'
-              'Possible issues:\n'
+              'REQUESTED: $productId\n\n'
+              'LOADED PRODUCTS:\n$loadedProducts\n'
+              '$lifetimeStatus\n\n'
+              'POSSIBLE ISSUES:\n'
               '• Product not configured in App Store Connect\n'
               '• Product ID mismatch\n'
               '• Product not approved for TestFlight\n'
-              '• For Lifetime: Ensure it\'s set as Non-Consumable',
-              style: TextStyle(fontSize: 12),
+              '• For Lifetime: Must be Non-Consumable type\n'
+              '• Network/Store connection issue',
+              style: TextStyle(fontSize: 10, fontFamily: 'monospace'),
             ),
           ),
           actions: [
             TextButton(
               onPressed: () async {
                 Navigator.of(context).pop();
-                // Try to reload products
+                // Try to reload products and show result
                 await loadProducts();
+                _showProductLoadDebug();
               },
-              child: Text('Reload Products'),
+              child: Text('Reload & Debug'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+  
+  void _showProductLoadDebug() {
+    if (Get.context != null) {
+      String debugInfo = 'STORE CONNECTION:\n'
+                        '• Store available: $isAvailable\n'
+                        '• Products loaded: ${products.length}\n'
+                        '• Purchase pending: $purchasePending\n\n';
+      
+      // Add detailed lifetime product analysis
+      final hasLifetime = products.any((p) => p.id == lifetimeProductId);
+      debugInfo += 'LIFETIME PRODUCT ANALYSIS:\n'
+                  '• Expected ID: $lifetimeProductId\n'
+                  '• Found in store: $hasLifetime\n';
+      
+      if (hasLifetime) {
+        final lifetimeProduct = products.firstWhere((p) => p.id == lifetimeProductId);
+        debugInfo += '• Price: ${lifetimeProduct.price}\n'
+                    '• Raw price: ${lifetimeProduct.rawPrice}\n'
+                    '• Currency: ${lifetimeProduct.currencyCode}\n'
+                    '• Title: ${lifetimeProduct.title}\n'
+                    '• ✅ LIFETIME PRODUCT IS LOADED!\n\n';
+      } else {
+        debugInfo += '• ❌ LIFETIME PRODUCT NOT FOUND!\n'
+                    '• This is likely the main issue\n\n';
+      }
+      
+      debugInfo += 'ALL PRODUCTS:\n';
+      if (products.isEmpty) {
+        debugInfo += '• NO PRODUCTS LOADED\n\n'
+                    'POSSIBLE CAUSES:\n'
+                    '• App Store Connect configuration\n'
+                    '• Internet connection issue\n'
+                    '• Products not approved for TestFlight\n'
+                    '• Product IDs don\'t match exactly\n'
+                    '• Lifetime product not set as Non-Consumable';
+      } else {
+        for (int i = 0; i < products.length; i++) {
+          final product = products[i];
+          debugInfo += '${i + 1}. ${product.id}\n'
+                      '   Price: ${product.price}\n'
+                      '   Title: ${product.title.length > 40 ? product.title.substring(0, 40) + "..." : product.title}\n';
+          
+          if (product.id == lifetimeProductId) {
+            debugInfo += '   🏆 << THIS IS THE LIFETIME PRODUCT\n';
+          }
+          debugInfo += '\n';
+        }
+      }
+      
+      // Add specific lifetime troubleshooting steps
+      if (!hasLifetime) {
+        debugInfo += '\n🔧 LIFETIME TROUBLESHOOTING:\n'
+                    '1. Check App Store Connect:\n'
+                    '   • Product ID: nicotrack_lifetime_premium\n'
+                    '   • Type: Non-Consumable\n'
+                    '   • Status: Approved\n'
+                    '2. Verify TestFlight access\n'
+                    '3. Check internet connection\n'
+                    '4. Try "Retry & Debug" button';
+      }
+      
+      showDialog(
+        context: Get.context!,
+        builder: (context) => AlertDialog(
+          title: Text('DEBUG: Purchase System Status'),
+          content: SingleChildScrollView(
+            child: Text(
+              debugInfo,
+              style: TextStyle(fontSize: 9, fontFamily: 'monospace'),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+                // Try to reload products and show updated status
+                await loadProducts();
+                Future.delayed(Duration(milliseconds: 500), () {
+                  _showProductLoadDebug();
+                });
+              },
+              child: Text('Retry & Debug'),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
@@ -839,40 +1126,46 @@ class PurchaseService {
     if (Get.context != null) {
       String productList = products.isEmpty 
           ? 'None' 
-          : products.map((p) => p.id).join(', ');
+          : products.map((p) => '${p.id}:${p.price}').join(', ');
+      
+      // Check if lifetime product is specifically missing
+      bool lifetimeFound = products.any((p) => p.id == lifetimeProductId);
+      String lifetimeCheck = lifetimeFound ? '✅ Found' : '❌ Missing';
           
       showDialog(
         context: Get.context!,
         builder: (context) => AlertDialog(
-          title: Text('Store Connection Issue'),
+          title: Text('DEBUG: Store/Products Issue'),
           content: SingleChildScrollView(
             child: Text(
-              'Store Status:\n'
-              '• Available: $isAvailable\n'
-              '• Products loaded: ${products.length}\n'
-              '• Product IDs: $productList\n\n'
-              'Please check:\n'
-              '• Internet connection\n'
-              '• TestFlight app is signed in\n'
-              '• Products are configured in App Store Connect\n\n'
-              'For Lifetime plan:\n'
-              '• Must be Non-Consumable type\n'
-              '• Product ID: nicotrack_lifetime_premium',
-              style: TextStyle(fontSize: 12),
+              'STORE STATUS:\n'
+              '• Store available: $isAvailable\n'
+              '• Products loaded: ${products.length}\n\n'
+              'PRODUCTS FOUND:\n$productList\n\n'
+              'LIFETIME STATUS: $lifetimeCheck\n'
+              '• Expected ID: $lifetimeProductId\n\n'
+              'CHECKLIST:\n'
+              '• Internet connection OK?\n'
+              '• Signed into TestFlight?\n'
+              '• Lifetime product approved in App Store Connect?\n'
+              '• Product configured as Non-Consumable?\n'
+              '• Product ID matches exactly?',
+              style: TextStyle(fontSize: 10, fontFamily: 'monospace'),
             ),
           ),
           actions: [
             TextButton(
               onPressed: () async {
                 Navigator.of(context).pop();
-                // Try to reinitialize
+                // Try to reinitialize and show debug
                 await initialize();
+                _showProductLoadDebug();
               },
-              child: Text('Retry'),
+              child: Text('Retry & Debug'),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('Cancel'),
+              child: Text('OK'),
             ),
           ],
         ),
@@ -880,8 +1173,250 @@ class PurchaseService {
     }
   }
 
+  // Public method to show debug dialog from other screens
+  void showDebugDialog() {
+    _showProductLoadDebug();
+  }
+  
+  void testSuccessDialog() {
+    _showDebugDialog(
+      'Testing Success Dialog',
+      'About to test success dialog...\n'
+      'Context available: ${Get.context != null}\n'
+      'Overlay context: ${Get.overlayContext != null}',
+      autoClose: false,
+    );
+    
+    // Show success dialog after a short delay
+    Future.delayed(Duration(milliseconds: 500), () {
+      _showPurchaseSuccessDialog('Monthly Plan Activated (TEST)');
+    });
+  }
+  
+  // Reusable debug dialog method for TestFlight
+  void _showDebugDialog(String title, String message, {bool autoClose = false, int duration = 0}) {
+    if (Get.context != null) {
+      showDialog(
+        context: Get.context!,
+        barrierDismissible: !autoClose,
+        builder: (context) {
+          if (autoClose && duration > 0) {
+            Timer(Duration(seconds: duration), () {
+              if (Navigator.of(context).canPop()) {
+                Navigator.of(context).pop();
+              }
+            });
+          }
+          
+          return AlertDialog(
+            title: Text('DEBUG: $title'),
+            content: Text(
+              message,
+              style: TextStyle(fontSize: 10, fontFamily: 'monospace'),
+            ),
+            actions: autoClose ? null : [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+  
+  // Monitor lifetime purchase progress
+  Timer? _lifetimeMonitorTimer;
+  
+  void _startLifetimePurchaseMonitoring() {
+    print('🏆 Starting lifetime purchase monitoring...');
+    
+    // Cancel any existing timer
+    _lifetimeMonitorTimer?.cancel();
+    
+    // Start 10-second timer to check if purchase stream responds
+    _lifetimeMonitorTimer = Timer(Duration(seconds: 10), () {
+      print('🏆 LIFETIME PURCHASE TIMEOUT: No purchase stream response in 10 seconds');
+      
+      // Check current premium status
+      final controller = Get.find<PremiumController>();
+      if (!controller.isPremium.value && purchasePending) {
+        print('🏆 Purchase still pending after 10 seconds - likely stuck');
+        
+        _showLifetimePurchaseFailureDebug(
+          success: true, 
+          error: 'Purchase initiated but no response from App Store after 10 seconds'
+        );
+      }
+    });
+  }
+  
+  void _showLifetimePurchaseFailureDebug({required bool success, required String error}) {
+    if (Get.context != null) {
+      final controller = Get.find<PremiumController>();
+      final hasLifetimeProduct = products.any((p) => p.id == lifetimeProductId);
+      
+      showDialog(
+        context: Get.context!,
+        builder: (context) => AlertDialog(
+          title: Text('🏆 LIFETIME Purchase Debug'),
+          content: SingleChildScrollView(
+            child: Text(
+              'LIFETIME PURCHASE STATUS:\n'
+              '• Product found: $hasLifetimeProduct\n'
+              '• Purchase initiated: $success\n'
+              '• Purchase pending: $purchasePending\n'
+              '• Premium status: ${controller.isPremium.value}\n\n'
+              'ERROR: $error\n\n'
+              'ANALYSIS:\n'
+              '${hasLifetimeProduct ? "✅ Product is loaded correctly" : "❌ Product not found - main issue"}\n'
+              '${success ? "✅ Purchase call succeeded" : "❌ Purchase call failed"}\n'
+              '${purchasePending ? "⏳ Waiting for App Store" : "❌ No purchase in progress"}\n\n'
+              'NEXT STEPS:\n'
+              '1. If product not found: Check App Store Connect\n'
+              '2. If purchase fails: Check TestFlight permissions\n'
+              '3. If timeout: Check internet/store connection\n'
+              '4. Try manual restore purchases',
+              style: TextStyle(fontSize: 9, fontFamily: 'monospace'),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+                await restorePurchases();
+              },
+              child: Text('Restore Purchases'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+  
+  // Safe success dialog method that handles context issues
+  void _showPurchaseSuccessDialogSafe(String planType) {
+    // Try to find a valid context
+    BuildContext? context = Get.context ?? Get.overlayContext;
+    
+    if (context != null && context.mounted) {
+      _showPurchaseSuccessDialogWithContext(context, planType);
+    } else {
+      // Fallback to snackbar if no valid context
+      _showPurchaseSuccessSnackbar(planType);
+    }
+  }
+
+  // Context-aware success dialog method
+  void _showPurchaseSuccessDialogWithContext(BuildContext context, String planType) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.r),
+        ),
+        backgroundColor: nicotrackBlack1,
+        contentPadding: EdgeInsets.all(24.w),
+        title: Column(
+          children: [
+            Container(
+              width: 60.w,
+              height: 60.w,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: nicotrackGreen,
+              ),
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+                size: 32.sp,
+              ),
+            ),
+            SizedBox(height: 16.h),
+            Text(
+              'Purchase Successful!',
+              style: TextStyle(
+                fontSize: 20.sp,
+                fontFamily: circularBold,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+              decoration: BoxDecoration(
+                color: nicotrackGreen.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(12.r),
+                border: Border.all(color: nicotrackGreen.withOpacity(0.3)),
+              ),
+              child: Text(
+                planType,
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontFamily: circularMedium,
+                  color: nicotrackGreen,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            SizedBox(height: 20.h),
+            Text(
+              'Thank you for your purchase! You now have access to all premium features and can start your enhanced quit journey.',
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontFamily: circularBook,
+                color: Colors.white.withOpacity(0.8),
+                height: 1.4,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+        actions: [
+          Container(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: nicotrackGreen,
+                foregroundColor: Colors.white,
+                padding: EdgeInsets.symmetric(vertical: 16.h),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                elevation: 0,
+              ),
+              child: Text(
+                'Get Started',
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontFamily: circularMedium,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   // Dispose resources
   void dispose() {
     _subscription.cancel();
+    _lifetimeMonitorTimer?.cancel();
   }
 }

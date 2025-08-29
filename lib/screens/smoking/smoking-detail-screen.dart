@@ -13,6 +13,7 @@ import 'package:nicotrack/screens/base/base.dart';
 import 'package:nicotrack/constants/image-constants.dart';
 import 'package:nicotrack/screens/elements/gradient-text.dart';
 import 'package:nicotrack/screens/elements/linear-progress-bar.dart';
+import 'package:nicotrack/screens/elements/loading_indicator.dart';
 import 'package:nicotrack/models/financial-goals-model/financialGoals-model.dart';
 import 'package:nicotrack/models/onboarding-data/onboardingData-model.dart';
 import 'package:animated_flip_counter/animated_flip_counter.dart';
@@ -160,11 +161,7 @@ class _SmokingDetailScreenState extends State<SmokingDetailScreen> {
     if (isLoading) {
       return Scaffold(
         backgroundColor: Colors.white,
-        body: Center(
-          child: CircularProgressIndicator(
-            color: nicotrackGreen,
-          ),
-        ),
+        body: const StandardLoadingIndicator(),
       );
     }
     
