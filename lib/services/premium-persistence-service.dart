@@ -136,7 +136,14 @@ class PremiumPersistenceService {
     if (productId == null) return false;
     
     // Only subscriptions need regular verification (not lifetime purchases)
-    return productId.contains('monthly') || productId.contains('yearly') || productId.contains('annual');
+    bool isSubscription = productId.contains('monthly') || productId.contains('yearly') || productId.contains('annual');
+    
+    // Special logging for lifetime purchases
+    if (productId == 'nicotrack_lifetime_premium') {
+      print('🏆 LIFETIME PURCHASE VERIFICATION CHECK: hasSubscriptionToVerify = $isSubscription (should be false)');
+    }
+    
+    return isSubscription;
   }
   
   // Update subscription verification timestamp

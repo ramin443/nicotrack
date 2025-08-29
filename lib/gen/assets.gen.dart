@@ -124,6 +124,9 @@ class $AssetsL10nGen {
   /// File path: assets/l10n/app_zh.arb
   String get appZh => 'assets/l10n/app_zh.arb';
 
+  /// File path: assets/l10n/untranslated_messages.txt
+  String get untranslatedMessages => 'assets/l10n/untranslated_messages.txt';
+
   /// List of all assets
   List<String> get values => [
         appAr,
@@ -146,7 +149,8 @@ class $AssetsL10nGen {
         appRo,
         appRu,
         appTr,
-        appZh
+        appZh,
+        untranslatedMessages
       ];
 }
 
@@ -319,6 +323,10 @@ class $AssetsImagesIllustrationGen {
   /// File path: assets/images/Illustration/Painter.svg
   String get painter => 'assets/images/Illustration/Painter.svg';
 
+  /// File path: assets/images/Illustration/Polygon 4.png
+  AssetGenImage get polygon4 =>
+      const AssetGenImage('assets/images/Illustration/Polygon 4.png');
+
   /// File path: assets/images/Illustration/Run - Health.svg
   String get runHealth => 'assets/images/Illustration/Run - Health.svg';
 
@@ -332,6 +340,7 @@ class $AssetsImagesIllustrationGen {
         financesSvg,
         healthSports,
         painter,
+        polygon4,
         runHealth,
         neuPremiumBg3
       ];
@@ -495,9 +504,21 @@ class $AssetsImagesBrandingGen {
 class $AssetsImagesButtonBgGen {
   const $AssetsImagesButtonBgGen();
 
+  /// File path: assets/images/button-bg/activitybgbtn.png
+  AssetGenImage get activitybgbtn =>
+      const AssetGenImage('assets/images/button-bg/activitybgbtn.png');
+
   /// File path: assets/images/button-bg/awardbg2.png
   AssetGenImage get awardbg2 =>
       const AssetGenImage('assets/images/button-bg/awardbg2.png');
+
+  /// File path: assets/images/button-bg/emergencyCravingBtn.png
+  AssetGenImage get emergencyCravingBtn =>
+      const AssetGenImage('assets/images/button-bg/emergencyCravingBtn.png');
+
+  /// File path: assets/images/button-bg/emergencycravingBtnBg.png
+  AssetGenImage get emergencycravingBtnBg =>
+      const AssetGenImage('assets/images/button-bg/emergencycravingBtnBg.png');
 
   /// File path: assets/images/button-bg/fullsized button.png
   AssetGenImage get fullsizedButton =>
@@ -535,7 +556,10 @@ class $AssetsImagesButtonBgGen {
 
   /// List of all assets
   List<dynamic> get values => [
+        activitybgbtn,
         awardbg2,
+        emergencyCravingBtn,
+        emergencycravingBtnBg,
         fullsizedButton,
         hexapolygon,
         homeMainBG,

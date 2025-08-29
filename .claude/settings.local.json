@@ -72,7 +72,8 @@
       "Bash(do echo \"=== Processing $file ===\")",
       "Bash(head:*)",
       "Bash(if ! grep -q \"flutter/services\" \"$file\")",
-      "Bash(if ! grep -q \"HapticFeedback.lightImpact\" \"$file\")"
+      "Bash(if ! grep -q \"HapticFeedback.lightImpact\" \"$file\")",
+      "Bash(dart format:*)"
     ],
     "deny": []
   }

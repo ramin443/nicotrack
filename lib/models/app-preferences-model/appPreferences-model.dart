@@ -14,6 +14,7 @@ class AppPreferencesModel with _$AppPreferencesModel {
     @HiveField(2) @Default("en_US") String locale,
     @HiveField(3) @Default("English") String languageName,
     @HiveField(4) DateTime? lastUpdated,
+    @HiveField(5) @Default(true) bool isQuickActionsExpanded, // Default to expanded for new users
   }) = _AppPreferencesModel;
 
   // Add a factory constructor for JSON serialization

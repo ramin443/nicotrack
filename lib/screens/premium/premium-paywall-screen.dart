@@ -8,10 +8,16 @@ import 'package:nicotrack/screens/elements/textAutoSize.dart';
 import 'package:nicotrack/constants/color-constants.dart';
 import 'package:nicotrack/getx-controllers/premium-controller.dart';
 import 'package:nicotrack/extensions/app_localizations_extension.dart';
+import 'package:nicotrack/screens/base/base.dart';
 import 'dart:ui'; // Required for ImageFilter
 
 class PremiumPaywallScreen extends StatefulWidget {
-  const PremiumPaywallScreen({super.key});
+  final bool isFromOnboarding;
+  
+  const PremiumPaywallScreen({
+    super.key,
+    this.isFromOnboarding = false,
+  });
 
   @override
   State<PremiumPaywallScreen> createState() => _PremiumPaywallScreenState();
@@ -146,7 +152,18 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
           GestureDetector(
             onTap: () {
               HapticFeedback.lightImpact();
-              Navigator.pop(context);
+              if (widget.isFromOnboarding) {
+                // If from onboarding, navigate to home and clear navigation stack
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => const Base(),
+                  ),
+                  (route) => false,
+                );
+              } else {
+                // Otherwise, just pop back
+                Navigator.pop(context);
+              }
             },
             child: Container(
               width: 40.w,

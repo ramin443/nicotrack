@@ -563,10 +563,11 @@ class SettingsController extends GetxController with WidgetsBindingObserver {
               SizedBox(
                 height: 24.w,
               ),
-              quitTipsSection(context),
-              SizedBox(
-                height: 8.w,
-              ),
+              // Commented out quit tips section
+              // quitTipsSection(context),
+              // SizedBox(
+              //   height: 8.w,
+              // ),
               normalInfoBox(
                   fieldValue: context.l10n.contact_support,
                   action: () {

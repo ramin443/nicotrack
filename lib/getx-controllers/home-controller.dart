@@ -40,7 +40,7 @@ class HomeController extends GetxController {
   int selectedDateIndex = 6;
   late List<DateTime> last7Days;
   final int initialIndex = 6; // Today is the last item
-  bool isQuickActionsExpanded = false;
+  bool isQuickActionsExpanded = true; // Default to expanded for new users
   int daysSinceLastSmoked = 0;
   int totalMoneySaved = 0;
   int hoursRegainedinLife = 0;
@@ -71,7 +71,25 @@ class HomeController extends GetxController {
     resetHomeGridValues();
     setCurrentFilledData();
     setQuickActionsData();
+    _loadQuickActionsExpandedState();
     HapticFeedback.mediumImpact();
+  }
+  
+  void _loadQuickActionsExpandedState() {
+    // Load the expanded state from preferences
+    try {
+      final appPrefsController = Get.find<AppPreferencesController>();
+      if (appPrefsController.isInitialized) {
+        isQuickActionsExpanded = appPrefsController.isQuickActionsExpanded;
+      } else {
+        // Default to true (expanded) for new users
+        isQuickActionsExpanded = true;
+      }
+    } catch (e) {
+      // If controller not found, default to expanded
+      print('AppPreferencesController not found, defaulting to expanded');
+      isQuickActionsExpanded = true;
+    }
   }
 
   void initializeQuickActions(BuildContext context) {
@@ -730,12 +748,21 @@ class HomeController extends GetxController {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(21.r)),
           backgroundColor: Colors.white,
           collapsedBackgroundColor: Colors.white,
-          initiallyExpanded: true,
+          initiallyExpanded: isQuickActionsExpanded,
           tilePadding: EdgeInsets.only(right: 19.w, top: 6.h, bottom: 6.h),
           childrenPadding: EdgeInsets.only(bottom: 14.h),
-          onExpansionChanged: (expanded) {
+          onExpansionChanged: (expanded) async {
             HapticFeedback.lightImpact();
             isQuickActionsExpanded = expanded;
+            
+            // Save the state to preferences
+            try {
+              final appPrefsController = Get.find<AppPreferencesController>();
+              await appPrefsController.updateQuickActionsExpanded(expanded);
+            } catch (e) {
+              print('Error saving quick actions expanded state: $e');
+            }
+            
             update();
           },
           title: Row(

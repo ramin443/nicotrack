@@ -30,6 +30,8 @@ mixin _$AppPreferencesModel {
   String get languageName => throw _privateConstructorUsedError;
   @HiveField(4)
   DateTime? get lastUpdated => throw _privateConstructorUsedError;
+  @HiveField(5)
+  bool get isQuickActionsExpanded => throw _privateConstructorUsedError;
 
   /// Serializes this AppPreferencesModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,7 +54,8 @@ abstract class $AppPreferencesModelCopyWith<$Res> {
       @HiveField(1) String currencySymbol,
       @HiveField(2) String locale,
       @HiveField(3) String languageName,
-      @HiveField(4) DateTime? lastUpdated});
+      @HiveField(4) DateTime? lastUpdated,
+      @HiveField(5) bool isQuickActionsExpanded});
 }
 
 /// @nodoc
@@ -75,6 +78,7 @@ class _$AppPreferencesModelCopyWithImpl<$Res, $Val extends AppPreferencesModel>
     Object? locale = null,
     Object? languageName = null,
     Object? lastUpdated = freezed,
+    Object? isQuickActionsExpanded = null,
   }) {
     return _then(_value.copyWith(
       currencyCode: null == currencyCode
@@ -97,6 +101,10 @@ class _$AppPreferencesModelCopyWithImpl<$Res, $Val extends AppPreferencesModel>
           ? _value.lastUpdated
           : lastUpdated // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      isQuickActionsExpanded: null == isQuickActionsExpanded
+          ? _value.isQuickActionsExpanded
+          : isQuickActionsExpanded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -114,7 +122,8 @@ abstract class _$$AppPreferencesModelImplCopyWith<$Res>
       @HiveField(1) String currencySymbol,
       @HiveField(2) String locale,
       @HiveField(3) String languageName,
-      @HiveField(4) DateTime? lastUpdated});
+      @HiveField(4) DateTime? lastUpdated,
+      @HiveField(5) bool isQuickActionsExpanded});
 }
 
 /// @nodoc
@@ -135,6 +144,7 @@ class __$$AppPreferencesModelImplCopyWithImpl<$Res>
     Object? locale = null,
     Object? languageName = null,
     Object? lastUpdated = freezed,
+    Object? isQuickActionsExpanded = null,
   }) {
     return _then(_$AppPreferencesModelImpl(
       currencyCode: null == currencyCode
@@ -157,6 +167,10 @@ class __$$AppPreferencesModelImplCopyWithImpl<$Res>
           ? _value.lastUpdated
           : lastUpdated // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      isQuickActionsExpanded: null == isQuickActionsExpanded
+          ? _value.isQuickActionsExpanded
+          : isQuickActionsExpanded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -169,7 +183,8 @@ class _$AppPreferencesModelImpl implements _AppPreferencesModel {
       @HiveField(1) this.currencySymbol = "\$",
       @HiveField(2) this.locale = "en_US",
       @HiveField(3) this.languageName = "English",
-      @HiveField(4) this.lastUpdated});
+      @HiveField(4) this.lastUpdated,
+      @HiveField(5) this.isQuickActionsExpanded = true});
 
   factory _$AppPreferencesModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$AppPreferencesModelImplFromJson(json);
@@ -193,10 +208,14 @@ class _$AppPreferencesModelImpl implements _AppPreferencesModel {
   @override
   @HiveField(4)
   final DateTime? lastUpdated;
+  @override
+  @JsonKey()
+  @HiveField(5)
+  final bool isQuickActionsExpanded;
 
   @override
   String toString() {
-    return 'AppPreferencesModel(currencyCode: $currencyCode, currencySymbol: $currencySymbol, locale: $locale, languageName: $languageName, lastUpdated: $lastUpdated)';
+    return 'AppPreferencesModel(currencyCode: $currencyCode, currencySymbol: $currencySymbol, locale: $locale, languageName: $languageName, lastUpdated: $lastUpdated, isQuickActionsExpanded: $isQuickActionsExpanded)';
   }
 
   @override
@@ -212,13 +231,15 @@ class _$AppPreferencesModelImpl implements _AppPreferencesModel {
             (identical(other.languageName, languageName) ||
                 other.languageName == languageName) &&
             (identical(other.lastUpdated, lastUpdated) ||
-                other.lastUpdated == lastUpdated));
+                other.lastUpdated == lastUpdated) &&
+            (identical(other.isQuickActionsExpanded, isQuickActionsExpanded) ||
+                other.isQuickActionsExpanded == isQuickActionsExpanded));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, currencyCode, currencySymbol,
-      locale, languageName, lastUpdated);
+      locale, languageName, lastUpdated, isQuickActionsExpanded);
 
   /// Create a copy of AppPreferencesModel
   /// with the given fields replaced by the non-null parameter values.
@@ -239,11 +260,13 @@ class _$AppPreferencesModelImpl implements _AppPreferencesModel {
 
 abstract class _AppPreferencesModel implements AppPreferencesModel {
   factory _AppPreferencesModel(
-      {@HiveField(0) final String currencyCode,
-      @HiveField(1) final String currencySymbol,
-      @HiveField(2) final String locale,
-      @HiveField(3) final String languageName,
-      @HiveField(4) final DateTime? lastUpdated}) = _$AppPreferencesModelImpl;
+          {@HiveField(0) final String currencyCode,
+          @HiveField(1) final String currencySymbol,
+          @HiveField(2) final String locale,
+          @HiveField(3) final String languageName,
+          @HiveField(4) final DateTime? lastUpdated,
+          @HiveField(5) final bool isQuickActionsExpanded}) =
+      _$AppPreferencesModelImpl;
 
   factory _AppPreferencesModel.fromJson(Map<String, dynamic> json) =
       _$AppPreferencesModelImpl.fromJson;
@@ -263,6 +286,9 @@ abstract class _AppPreferencesModel implements AppPreferencesModel {
   @override
   @HiveField(4)
   DateTime? get lastUpdated;
+  @override
+  @HiveField(5)
+  bool get isQuickActionsExpanded;
 
   /// Create a copy of AppPreferencesModel
   /// with the given fields replaced by the non-null parameter values.

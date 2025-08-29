@@ -14,6 +14,7 @@ class AppPreferencesController extends GetxController {
   String get locale => _preferences.locale;
   String get languageName => _preferences.languageName;
   bool get isInitialized => _isInitialized;
+  bool get isQuickActionsExpanded => _preferences.isQuickActionsExpanded;
 
   @override
   void onInit() {
@@ -67,6 +68,19 @@ class AppPreferencesController extends GetxController {
       Get.forceAppUpdate();
     } catch (e) {
       print('Error updating language: $e');
+    }
+  }
+  
+  // Update quick actions expanded state
+  Future<void> updateQuickActionsExpanded(bool isExpanded) async {
+    try {
+      _preferences = _preferences.copyWith(
+        isQuickActionsExpanded: isExpanded,
+      );
+      await AppPreferencesService.updatePreferences(_preferences);
+      update();
+    } catch (e) {
+      print('Error updating quick actions expanded state: $e');
     }
   }
 

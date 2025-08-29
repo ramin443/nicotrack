@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:get/get.dart';
@@ -14,10 +15,10 @@ class PurchaseService {
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   late StreamSubscription<List<PurchaseDetails>> _subscription;
   
-  // Product IDs - Update these with your actual App Store Connect IDs
+  // Product IDs - Must match EXACTLY with App Store Connect configuration
   static const String monthlyProductId = 'nicotrack_monthly_plan';
   static const String yearlyProductId = 'nicotrack_yearly_plan';
-  static const String lifetimeProductId = 'nicotrack_lifetime_premium';
+  static const String lifetimeProductId = 'nicotrack_lifetime_premium'; // Non-consumable in App Store Connect
   
   // All product IDs
   static const Set<String> _productIds = {
@@ -38,14 +39,17 @@ class PurchaseService {
   // Initialize the purchase service
   Future<void> initialize() async {
     try {
+      print('🚀 Initializing purchase service...');
+      
       // Check if the store is available
       isAvailable = await _inAppPurchase.isAvailable();
 
-
       if (!isAvailable) {
-        print('Store is not available');
+        print('❌ Store is not available');
         return;
       }
+      
+      print('✅ Store is available');
 
       // Listen to purchase updates
       final Stream<List<PurchaseDetails>> purchaseUpdated = _inAppPurchase.purchaseStream;
@@ -54,11 +58,26 @@ class PurchaseService {
       }, onDone: () {
         _subscription.cancel();
       }, onError: (error) {
-        print('Purchase stream error: $error');
+        print('❌ Purchase stream error: $error');
       });
 
-      // Load products
+      // Load products with retry logic
       await loadProducts();
+      
+      // If products didn't load, try once more after a delay
+      if (products.isEmpty) {
+        print('⚠️ No products loaded on first attempt, retrying...');
+        await Future.delayed(Duration(seconds: 2));
+        await loadProducts();
+      }
+      
+      // Log final product load status
+      if (products.isEmpty) {
+        print('❌ WARNING: No products loaded after retries!');
+        print('❌ Users will not be able to make purchases');
+      } else {
+        print('✅ Products loaded successfully: ${products.map((p) => p.id).toList()}');
+      }
       
       // Critical: Check for previous purchases and validate current subscription status
       // This is essential for TestFlight subscriptions to be recognized
@@ -88,20 +107,43 @@ class PurchaseService {
   // Load available products from the store
   Future<void> loadProducts() async {
     try {
+      print('🔍 Loading products from store...');
+      print('🔍 Product IDs to query: $_productIds');
+      
       final ProductDetailsResponse response = await _inAppPurchase.queryProductDetails(_productIds);
       
       if (response.error != null) {
-        print('Error loading products: ${response.error}');
+        print('❌ Error loading products: ${response.error}');
+        print('❌ Error code: ${response.error?.code}');
+        print('❌ Error message: ${response.error?.message}');
         return;
       }
 
       if (response.productDetails.isEmpty) {
-        print('No products found');
+        print('⚠️ No products found from store');
+        print('⚠️ Not found product IDs: ${response.notFoundIDs}');
         return;
       }
 
       products.clear();
       products.addAll(response.productDetails);
+      
+      // Log each loaded product
+      print('✅ Successfully loaded ${products.length} products:');
+      for (final product in response.productDetails) {
+        print('  📦 Product ID: ${product.id}');
+        print('     Price: ${product.price}');
+        print('     Title: ${product.title}');
+        print('     Description: ${product.description}');
+      }
+      
+      // Check specifically for lifetime product
+      final hasLifetime = products.any((p) => p.id == lifetimeProductId);
+      print('🔍 Lifetime product loaded: $hasLifetime');
+      if (!hasLifetime && response.notFoundIDs.contains(lifetimeProductId)) {
+        print('❌ LIFETIME PRODUCT NOT FOUND IN STORE!');
+        print('❌ Make sure nicotrack_lifetime_premium is configured in App Store Connect');
+      }
       
       // Sort products by type (monthly, yearly, lifetime)
       products.sort((a, b) {
@@ -109,7 +151,7 @@ class PurchaseService {
         return (order[a.id] ?? 3).compareTo(order[b.id] ?? 3);
       });
 
-      print('Loaded ${products.length} products');
+      print('📊 Final product count: ${products.length}');
       
       // Update prices in PremiumController
       _updatePricesInController();
@@ -147,9 +189,25 @@ class PurchaseService {
 
   // Purchase a product
   Future<bool> purchaseProduct(int planIndex) async {
-    if (!isAvailable || products.isEmpty) {
-      print('Error: Store is not available');
+    print('🛒 Starting purchase for plan index: $planIndex');
+    
+    if (!isAvailable) {
+      print('❌ Store is not available');
+      _showStoreNotAvailableError();
       return false;
+    }
+    
+    if (products.isEmpty) {
+      print('❌ No products loaded yet');
+      // Try to reload products once
+      print('🔄 Attempting to reload products...');
+      await loadProducts();
+      
+      if (products.isEmpty) {
+        print('❌ Still no products after reload');
+        _showStoreNotAvailableError();
+        return false;
+      }
     }
 
     // Get the product ID based on plan index
@@ -165,8 +223,12 @@ class PurchaseService {
         productId = lifetimeProductId;
         break;
       default:
+        print('❌ Invalid plan index: $planIndex');
         return false;
     }
+    
+    print('🔍 Looking for product: $productId');
+    print('🔍 Available products: ${products.map((p) => p.id).toList()}');
 
     // Find the product
     final ProductDetails? productDetails = products.firstWhereOrNull(
@@ -174,36 +236,82 @@ class PurchaseService {
     );
 
     if (productDetails == null) {
-      print('Error: Product not found. Please try again.');
+      // Product not found - this is likely the issue
+      print('❌ Product not found: $productId');
+      print('❌ This is likely because:');
+      print('   1. Product ID mismatch between code and App Store Connect');
+      print('   2. Product not approved/available in TestFlight');
+      print('   3. Product type mismatch (consumable vs non-consumable)');
+      
+      purchasePending = false;
+      
+      // Show detailed error dialog for debugging
+      _showProductNotFoundError(productId);
       return false;
     }
+    
+    print('✅ Found product: ${productDetails.id}');
+    print('   Title: ${productDetails.title}');
+    print('   Price: ${productDetails.price}');
 
     // Create purchase parameter
     final PurchaseParam purchaseParam = PurchaseParam(
       productDetails: productDetails,
+      applicationUserName: null, // Optional: can be used for server-side validation
     );
 
     try {
       purchasePending = true;
+      print('🚀 Initiating purchase for: $productId');
       
-      // Buy non-consumable (lifetime) or subscription (monthly/yearly)
-      bool success;
-      if (planIndex == 2) {
-        // Lifetime is non-consumable
-        success = await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
-      } else {
-        // Monthly and yearly are subscriptions - use buyNonConsumable for iOS
-        // (iOS handles both subscriptions and non-consumables through buyNonConsumable)
-        // But we need to properly handle the subscription validation differently
-        success = await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
+      // Special handling for lifetime product
+      if (productId == lifetimeProductId) {
+        print('🏆 Processing LIFETIME product purchase...');
+        print('🏆 This is a non-consumable product');
+        
+        // Check if user already owns this product
+        final controller = Get.find<PremiumController>();
+        final premiumInfo = PremiumPersistenceService.getPremiumInfo();
+        if (premiumInfo['productId'] == lifetimeProductId && controller.isPremium.value) {
+          print('⚠️ User already owns lifetime access');
+          purchasePending = false;
+          
+          // Show a message that they already own it
+          Get.snackbar(
+            'Already Purchased',
+            'You already have lifetime access!',
+            backgroundColor: Color(0xFFFFB800),
+            colorText: Colors.black,
+            duration: Duration(seconds: 3),
+          );
+          return false;
+        }
+      }
+      
+      // For iOS, all products (subscriptions and non-consumables) use buyNonConsumable
+      // The App Store knows the difference and handles them appropriately
+      bool success = await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
+      
+      print('📦 Purchase initiated successfully: $success');
+      
+      if (!success) {
+        purchasePending = false;
+        print('⚠️ Purchase initiation returned false');
+        print('⚠️ This might mean:');
+        print('   - User cancelled the purchase');
+        print('   - Product already owned (for non-consumables)');
+        print('   - Store error occurred');
       }
       
       return success;
       
     } catch (e) {
-      print('Purchase error: $e');
       purchasePending = false;
-      print('Error: Purchase failed. Please try again.');
+      print('❌ Purchase exception: $e');
+      print('❌ Exception type: ${e.runtimeType}');
+      
+      // Show error dialog for TestFlight debugging
+      _showPurchaseError(productId, e.toString());
       return false;
     }
   }
@@ -235,6 +343,14 @@ class PurchaseService {
                    purchaseDetails.status == PurchaseStatus.restored) {
           print('✅ Processing ${purchaseDetails.status == PurchaseStatus.purchased ? "PURCHASE" : "RESTORE"} for: ${purchaseDetails.productID}');
           
+          // Special logging for lifetime purchases
+          if (purchaseDetails.productID == lifetimeProductId) {
+            print('🏆 LIFETIME PURCHASE DETECTED!');
+            print('🏆 Product ID: ${purchaseDetails.productID}');
+            print('🏆 Status: ${purchaseDetails.status}');
+            print('🏆 Purchase ID: ${purchaseDetails.purchaseID}');
+          }
+          
           // Verify purchase with detailed logging
           print('🔐 Starting verification process...');
           bool valid = await _verifyPurchase(purchaseDetails);
@@ -243,7 +359,12 @@ class PurchaseService {
           if (valid) {
             // Update premium status with detailed logging
             print('🎉 Verification passed! Delivering product...');
-            await _deliverProduct(purchaseDetails);
+            
+            // For purchased status (not restored), we know this is a fresh purchase
+            // that needs the success dialog shown
+            bool isNewPurchase = purchaseDetails.status == PurchaseStatus.purchased;
+            
+            await _deliverProduct(purchaseDetails, showDialog: isNewPurchase);
             print('🎉 Product delivery completed!');
           } else {
             print('❌ Purchase verification failed for: ${purchaseDetails.productID}');
@@ -309,7 +430,7 @@ class PurchaseService {
   }
 
   // Deliver the product (update user's premium status)
-  Future<void> _deliverProduct(PurchaseDetails purchaseDetails) async {
+  Future<void> _deliverProduct(PurchaseDetails purchaseDetails, {bool showDialog = true}) async {
     print('🎉 Delivering premium product: ${purchaseDetails.productID}');
     print('🎉 Purchase ID: ${purchaseDetails.purchaseID}');
     print('🎉 Transaction date: ${purchaseDetails.transactionDate}');
@@ -347,9 +468,17 @@ class PurchaseService {
           break;
       }
       
-      // Show success dialog with proper navigation
-      print('🎊 Showing purchase success dialog: $planType');
-      _showPurchaseSuccessDialog(planType);
+      // Show success dialog only for new purchases (not restored ones)
+      if (showDialog) {
+        print('🎊 Showing purchase success dialog: $planType');
+        
+        // Add a small delay to ensure UI is ready, especially for TestFlight
+        Future.delayed(Duration(milliseconds: 500), () {
+          _showPurchaseSuccessDialog(planType);
+        });
+      } else {
+        print('ℹ️ Skipping dialog for restored purchase');
+      }
       
     } catch (e) {
       print('❌ Error delivering premium product: $e');
@@ -365,7 +494,12 @@ class PurchaseService {
 
   // Show purchase success dialog
   void _showPurchaseSuccessDialog(String planType) {
+    // Try multiple methods to show the success dialog
+    print('🎊 Attempting to show purchase success dialog...');
+    
+    // Method 1: Try using Get.context first
     if (Get.context != null) {
+      print('✅ Using Get.context to show dialog');
       Navigator.of(Get.context!).push(
         MaterialPageRoute(
           builder: (context) => PurchaseSuccessDialog(
@@ -374,8 +508,45 @@ class PurchaseService {
           fullscreenDialog: true,
         ),
       );
-    } else {
-      print('❌ Cannot show success dialog - no context available');
+      return;
+    }
+    
+    // Method 2: Try using overlayContext if available
+    final overlayContext = Get.overlayContext;
+    if (overlayContext != null) {
+      print('✅ Using Get.overlayContext to show dialog');
+      Navigator.of(overlayContext).push(
+        MaterialPageRoute(
+          builder: (context) => PurchaseSuccessDialog(
+            planType: planType,
+          ),
+          fullscreenDialog: true,
+        ),
+      );
+      return;
+    }
+    
+    // Method 3: Use Get.to for navigation (works without specific context)
+    print('✅ Using Get.to() to show dialog');
+    Get.to(
+      () => PurchaseSuccessDialog(planType: planType),
+      fullscreenDialog: true,
+      transition: Transition.fadeIn,
+      duration: Duration(milliseconds: 300),
+    );
+    
+    // If all methods fail, at least show a snackbar
+    if (Get.isSnackbarOpen == false) {
+      Get.snackbar(
+        '🎉 Purchase Successful',
+        planType,
+        backgroundColor: Color(0xFFFFB800),
+        colorText: Colors.black,
+        duration: Duration(seconds: 3),
+        margin: EdgeInsets.all(16),
+        borderRadius: 12,
+        icon: Icon(Icons.check_circle, color: Colors.black),
+      );
     }
   }
 
@@ -385,6 +556,10 @@ class PurchaseService {
     print('💾 Purchase ID: ${purchaseDetails.purchaseID}');
     print('💾 Transaction date: ${purchaseDetails.transactionDate}');
     
+    // Determine if this is a subscription or lifetime purchase
+    bool isSubscription = purchaseDetails.productID != lifetimeProductId;
+    print('💾 Product type: ${isSubscription ? "Subscription" : "Lifetime Purchase"}');
+    
     // Save purchase info using persistence service
     await PremiumPersistenceService.savePremiumStatus(
       isPremium: true,
@@ -393,10 +568,22 @@ class PurchaseService {
       purchaseDate: purchaseDetails.transactionDate != null 
           ? DateTime.fromMillisecondsSinceEpoch(int.parse(purchaseDetails.transactionDate!))
           : DateTime.now(),
-      subscriptionActive: true,
+      subscriptionActive: isSubscription, // Only true for subscription products
     );
     
-    print('💾 Purchase info saved successfully');
+    print('💾 Purchase info saved successfully (subscriptionActive: $isSubscription)');
+    
+    // Special logging for lifetime purchases
+    if (purchaseDetails.productID == lifetimeProductId) {
+      print('🏆 LIFETIME PURCHASE PERSISTENCE COMPLETE!');
+      print('🏆 Saved with subscriptionActive: $isSubscription (should be false)');
+      
+      // Verify it was saved correctly
+      final savedInfo = PremiumPersistenceService.getPremiumInfo();
+      print('🏆 Verification - isPremium: ${savedInfo['isPremium']}');
+      print('🏆 Verification - productId: ${savedInfo['productId']}');
+      print('🏆 Verification - subscriptionActive: ${savedInfo['subscriptionActive']}');
+    }
   }
 
   // Restore previous purchases
@@ -586,6 +773,111 @@ class PurchaseService {
     }
     
     return products.firstWhereOrNull((product) => product.id == productId);
+  }
+
+  // Show error dialog for debugging TestFlight issues
+  void _showProductNotFoundError(String productId) {
+    if (Get.context != null) {
+      String loadedProducts = products.isEmpty 
+          ? 'No products loaded' 
+          : products.map((p) => '${p.id}: ${p.price}').join('\n');
+      
+      showDialog(
+        context: Get.context!,
+        builder: (context) => AlertDialog(
+          title: Text('Product Not Available'),
+          content: SingleChildScrollView(
+            child: Text(
+              'Requested: $productId\n\n'
+              'Loaded products:\n$loadedProducts\n\n'
+              'Possible issues:\n'
+              '• Product not configured in App Store Connect\n'
+              '• Product ID mismatch\n'
+              '• Product not approved for TestFlight\n'
+              '• For Lifetime: Ensure it\'s set as Non-Consumable',
+              style: TextStyle(fontSize: 12),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+                // Try to reload products
+                await loadProducts();
+              },
+              child: Text('Reload Products'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+  
+  void _showPurchaseError(String productId, String error) {
+    if (Get.context != null) {
+      showDialog(
+        context: Get.context!,
+        builder: (context) => AlertDialog(
+          title: Text('Debug: Purchase Error'),
+          content: Text('Purchase failed for: $productId\n\nError: $error'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+  
+  void _showStoreNotAvailableError() {
+    if (Get.context != null) {
+      String productList = products.isEmpty 
+          ? 'None' 
+          : products.map((p) => p.id).join(', ');
+          
+      showDialog(
+        context: Get.context!,
+        builder: (context) => AlertDialog(
+          title: Text('Store Connection Issue'),
+          content: SingleChildScrollView(
+            child: Text(
+              'Store Status:\n'
+              '• Available: $isAvailable\n'
+              '• Products loaded: ${products.length}\n'
+              '• Product IDs: $productList\n\n'
+              'Please check:\n'
+              '• Internet connection\n'
+              '• TestFlight app is signed in\n'
+              '• Products are configured in App Store Connect\n\n'
+              'For Lifetime plan:\n'
+              '• Must be Non-Consumable type\n'
+              '• Product ID: nicotrack_lifetime_premium',
+              style: TextStyle(fontSize: 12),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+                // Try to reinitialize
+                await initialize();
+              },
+              child: Text('Retry'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('Cancel'),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   // Dispose resources

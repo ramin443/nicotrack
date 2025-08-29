@@ -22,13 +22,14 @@ class AppPreferencesModelAdapter extends TypeAdapter<AppPreferencesModel> {
       locale: fields[2] as String,
       languageName: fields[3] as String,
       lastUpdated: fields[4] as DateTime?,
+      isQuickActionsExpanded: fields[5] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, AppPreferencesModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.currencyCode)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class AppPreferencesModelAdapter extends TypeAdapter<AppPreferencesModel> {
       ..writeByte(3)
       ..write(obj.languageName)
       ..writeByte(4)
-      ..write(obj.lastUpdated);
+      ..write(obj.lastUpdated)
+      ..writeByte(5)
+      ..write(obj.isQuickActionsExpanded);
   }
 
   @override
@@ -66,6 +69,7 @@ _$AppPreferencesModelImpl _$$AppPreferencesModelImplFromJson(
       lastUpdated: json['lastUpdated'] == null
           ? null
           : DateTime.parse(json['lastUpdated'] as String),
+      isQuickActionsExpanded: json['isQuickActionsExpanded'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$$AppPreferencesModelImplToJson(
@@ -76,4 +80,5 @@ Map<String, dynamic> _$$AppPreferencesModelImplToJson(
       'locale': instance.locale,
       'languageName': instance.languageName,
       'lastUpdated': instance.lastUpdated?.toIso8601String(),
+      'isQuickActionsExpanded': instance.isQuickActionsExpanded,
     };

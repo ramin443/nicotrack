@@ -29,6 +29,7 @@ import '../services/firebase-service.dart';
 import '../screens/base/base.dart';
 import 'package:hive/hive.dart';
 import '../getx-controllers/settings-controller.dart';
+import '../screens/premium/premium-paywall-screen.dart';
 
 class OnboardingController extends GetxController {
   List<Widget> pages = [
@@ -166,7 +167,7 @@ class OnboardingController extends GetxController {
     update();
   }
 
-  void nextPage() {
+  void nextPage(BuildContext context) async {
     // Handle language selection on page 0
     if (currentPage == 0) {
       // Remember the user's selection for when they come back
@@ -1211,14 +1212,62 @@ class OnboardingController extends GetxController {
         ),
         (route) => false);
   }
+  
+  // Method to finish onboarding flow (when data is already saved)
+  Future<void> finishOnboardingFlow(BuildContext context) async {
+    // Just navigate to Base without saving data again
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => const Base(),
+        ),
+        (route) => false);
+  }
+  
+  // Method to navigate to premium paywall after completing onboarding and notifications
+  Future<void> navigateToPaywallAfterOnboarding(BuildContext context) async {
+    // Save all onboarding data first
+    try {
+      // Log onboarding completion analytics
+      FirebaseService().logOnboardingCompleted(
+        lastSmokedDate: onboardingFilledData.lastSmokedDate,
+        cigarettesPerDay: onboardingFilledData.cigarettesPerDay,
+        costPerPack: onboardingFilledData.costOfAPack,
+        motivations: onboardingFilledData.biggestMotivation,
+        craveSituations: onboardingFilledData.craveSituations,
+        helpNeeded: onboardingFilledData.helpNeeded,
+        userName: onboardingFilledData.name,
+      );
+      
+      // Save the onboarding data to local storage
+      final box = Hive.box<OnboardingData>('onboardingCompletedData');
+      await box.put('currentUserOnboarding', onboardingFilledData);
+      
+      // Now navigate to premium paywall screen
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => PremiumPaywallScreen(isFromOnboarding: true),
+          fullscreenDialog: true,
+        ),
+      );
+    } catch (e) {
+      print('Error saving onboarding data: $e');
+      // Still navigate to paywall even if saving fails
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => PremiumPaywallScreen(isFromOnboarding: true),
+          fullscreenDialog: true,
+        ),
+      );
+    }
+  }
 
   // Method to complete onboarding without notifications (skip case)
   Future<void> completeOnboardingSkipNotifications(BuildContext context) async {
     // Save preferences indicating user skipped notifications
     await saveNotificationPreferences(false);
     
-    // Complete normal onboarding flow
-    await completeOnboarding(context);
+    // Navigate to premium paywall after notifications
+    await navigateToPaywallAfterOnboarding(context);
     
     // Notify settings controller to refresh its state after a delay
     Future.delayed(Duration(milliseconds: 500), () {
@@ -1257,8 +1306,8 @@ class OnboardingController extends GetxController {
         await saveNotificationPreferences(false);
       }
       
-      // Complete onboarding regardless of permission result
-      await completeOnboarding(context);
+      // Navigate to premium paywall after notifications
+      await navigateToPaywallAfterOnboarding(context);
       
       // Notify settings controller to refresh its state after a delay
       Future.delayed(Duration(milliseconds: 500), () {
@@ -1274,8 +1323,8 @@ class OnboardingController extends GetxController {
       print('🔔 Error requesting notification permission: $e');
       // Save preferences indicating there was an error (assume denied)
       await saveNotificationPreferences(false);
-      // Still complete onboarding even if there's an error
-      await completeOnboarding(context);
+      // Still navigate to paywall even if there's an error
+      await navigateToPaywallAfterOnboarding(context);
     }
   }
 
@@ -1385,7 +1434,7 @@ class OnboardingController extends GetxController {
 
         if (currentPageDoneStatus) {
           HapticFeedback.mediumImpact();
-          nextPage();
+          nextPage(context);
         }
       },
       child: Container(
